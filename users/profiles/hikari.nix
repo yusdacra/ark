@@ -1,7 +1,6 @@
 { lib, config, pkgs, ... }:
 with lib;
-let
-  cfg = config.wayland.windowManager.hikari;
+let cfg = config.wayland.windowManager.hikari;
 in {
   options.wayland.windowManager.hikari = {
     enable = mkEnableOption "hikari window manager";
@@ -10,10 +9,10 @@ in {
       default = "Iosevka";
     };
   };
-  
+
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ hikari ];
-    
+
     xdg = {
       enable = true;
       configFile = {
@@ -197,11 +196,13 @@ in {
             }
           }
         '';
-        "hikari/autostart".source = pkgs.writeScriptBin "hikari-autostart" ''
-          #!${pkgs.stdenv.shell}
-          ${pkgs.waybar} &
-        '';
+        "hikari/autostart".source = "${
+            pkgs.writeScriptBin "hikari-autostart" ''
+              #!${pkgs.stdenv.shell}
+              ${pkgs.waybar}/bin/waybar &
+            ''
+          }/bin/hikari-autostart";
       };
     };
-  }; 
+  };
 }

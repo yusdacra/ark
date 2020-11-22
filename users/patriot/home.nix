@@ -14,12 +14,6 @@ let
   fontComb = "${font} ${toString fontSize}";
   fontPackage = pkgs.iosevka;
 
-  wallpaper = pkgs.fetchurl {
-    url = "https://static.zerochan.net/Mayer.%28Arknights%29.full.2724381.jpg";
-    hash = "sha256-W/nr3Ukm1pNoMWfebYiQ3v3i9OSH98PVV3tqTwRVbSU=";
-    name = "wallpaper";
-  };
-
   kideSrc = pkgs.fetchgit {
     url = "https://gitlab.com/yusdacra/kide.git";
     rev = "c4116d433add520d8e18382e0bfee9c49bf67fd0";
@@ -158,38 +152,38 @@ in {
     fonts.fontconfig.enable = true;
     home = {
       homeDirectory = nixosConfig.users.users.patriot.home;
-      packages =
-      with pkgs;
+      packages = with pkgs;
         [
-            discord
-            fontPackage
-            bitwarden
-            pfetch
-            neofetch
-            gnupg
-            imv
-            mpv
-            youtube-dl
-            ffmpeg
-            mupdf
-            steam-run
-            lutris
-            xdg_utils
-            # xdg-user-dirs
-            # gnome3.zenity
-            # x11 docker stuff
-            # x11docker
-            # weston
-            # xwayland
-            # xpra
-            # xdotool
-            # xorg.setxkbmap
-            # xorg.xkbcomp
-            # xorg.xauth
+          darcs
+          discord
+          fontPackage
+          noto-fonts-cjk
+          font-awesome
+          nerdfonts
+          bitwarden
+          pfetch
+          neofetch
+          gnupg
+          imv
+          mpv
+          youtube-dl
+          ffmpeg
+          mupdf
+          steam-run
+          lutris
+          xdg_utils
+          # xdg-user-dirs
+          # gnome3.zenity
+          # x11 docker stuff
+          # x11docker
+          # weston
+          xwayland
+          # xpra
+          # xdotool
+          # xorg.setxkbmap
+          # xorg.xkbcomp
+          # xorg.xauth
         ] ++ kideDeps;
-      file = {
-        "wallpaper.png".source = ${wallpaper};
-      };
     };
 
     wayland.windowManager = {
@@ -232,7 +226,8 @@ in {
             wf-recorder = pkgBin "wf-recorder";
             wl-copy = pkgs.wl-clipboard + "/bin/wl-copy";
             wl-paste = pkgs.wl-clipboard + "/bin/wl-paste";
-            shotFile = homeDir + "/shots/shot_$(date '+%Y_%m_%d_%H_%M')";
+            shotFile = config.home.homeDirectory
+              + "/shots/shot_$(date '+%Y_%m_%d_%H_%M')";
           in lib.mkOptionDefault {
             "${mod}+q" = "kill";
             # Screenshot and copy it to clipboard
@@ -264,7 +259,11 @@ in {
               accel_profile = "flat";
             };
           };
-          output = { "*" = { bg = wallpaper + " fill"; }; };
+          output = {
+            "*" = {
+              bg = config.home.homeDirectory + "wallpaper.png" + " fill";
+            };
+          };
         };
       };
     };
@@ -299,11 +298,7 @@ in {
         settings = {
           content.javascript.enabled = false;
           colors.webpage.darkmode.enabled = true;
-          tabs = {
-            tabs_are_windows = true;
-            show = "never";
-          };
-          statusbar.show = "in-mode";
+          tabs = { show = "multiple"; };
         };
         extraConfig = let
           domains = [
@@ -393,13 +388,21 @@ in {
         dotDir = ".config/zsh";
         history.path = ".local/share/zsh/history";
         loginExtra = ''
+          export SDL_VIDEODRIVER=wayland
+          # needs qt5.qtwayland in systemPackages
+          export QT_QPA_PLATFORM=wayland
+          export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+          # Fix for some Java AWT applications (e.g. Android Studio),
+          # use this if they aren't displayed properly:
+          export _JAVA_AWT_WM_NONREPARENTING=1
+
           if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
               exec ${pkgBin "hikari"}
           fi
         '';
         shellAliases = nixosConfig.environment.shellAliases // {
           rember = ''
-            ${pkgs.kakoune-unwrapped}/bin/kak -e "try %(gtd-jump-today)" "${homeDir}/rember/stuff$(date '+_%m_%Y').gtd"
+            ${pkgs.kakoune-unwrapped}/bin/kak -e "try %(gtd-jump-today)" "${config.home.homeDirectory}/rember/stuff$(date '+_%m_%Y').gtd"
           '';
         };
       };
@@ -449,45 +452,38 @@ in {
       };
       waybar = {
         enable = true;
-        settings = [
-          {
-            layer = "top";
-            position = "top";
-            modules-left = [ ];
-            modules-center = [ ];
-            modules-right = [ "pulseaudio" "cpu" "memory" "temperature" "clock" "tray" ];
-            modules = {
-              "tray" = {
-                spacing = 8;
-              };
-              "cpu" = {
-                format = "/cpu {usage}/";
-              };
-              "memory" = {
-                format = "/mem {}/";
-              };
-              "temperature" = {
-                hwmon-path = "/sys/class/hwmon/hwmon2/temp2_input";
-                format = "/tmp {temperatureC}C/";
-              };
-              "pulseaudio" = {
-                  format = "/vol {volume}/ {format_source}";
-                  format-bluetooth = "/volb {volume}/ {format_source}";
-                  format-bluetooth-muted = "/volb/ {format_source}";
-                  format-muted = "/vol/ {format_source}";
-                  format-source = "/mic {volume}/";
-                  format-source-muted = "/mic/";
-              };
+        settings = [{
+          layer = "top";
+          position = "top";
+          modules-left = [ ];
+          modules-center = [ ];
+          modules-right =
+            [ "pulseaudio" "cpu" "memory" "temperature" "clock" "tray" ];
+          modules = {
+            "tray" = { spacing = 8; };
+            "cpu" = { format = "/cpu {usage}/"; };
+            "memory" = { format = "/mem {}/"; };
+            "temperature" = {
+              hwmon-path = "/sys/class/hwmon/hwmon1/temp2_input";
+              format = "/tmp {temperatureC}C/";
             };
-          }
-        ];
+            "pulseaudio" = {
+              format = "/vol {volume}/ {format_source}";
+              format-bluetooth = "/volb {volume}/ {format_source}";
+              format-bluetooth-muted = "/volb/ {format_source}";
+              format-muted = "/vol/ {format_source}";
+              format-source = "/mic {volume}/";
+              format-source-muted = "/mic/";
+            };
+          };
+        }];
         style = ''
           * {
               border: none;
               border-radius: 0;
               /* `otf-font-awesome` is required to be installed for icons */
               font-family: ${font};
-              font-size: ${toString fontSize}px;
+              font-size: 13px;
               min-height: 0;
           }
 

@@ -1,6 +1,6 @@
 { config, lib, pkgs, modulesPath, nixosPersistence, ... }:
 let
-  btrfsPartPath = "/dev/disk/by-uuid/9a2ac687-7937-4ffa-9b59-8b5c13026466";
+  btrfsPartPath = "/dev/disk/by-label/NIXOS";
   btrfsOptions = [ "compress-force=zstd" "noatime" ];
 
   btrfsDiff = pkgs.writeScriptBin "btrfs-diff" ''
@@ -83,6 +83,12 @@ in {
     options = [ "subvol=home" ] ++ btrfsOptions;
   };
 
+  fileSystems."/media/archive" = {
+    device = "/dev/disk/by-uuid/f9b5f7f3-51e8-4357-8518-986b16311c71";
+    fsType = "btrfs";
+    options = btrfsOptions;
+  };
+
   fileSystems."/nix" = {
     device = btrfsPartPath;
     fsType = "btrfs";
@@ -93,13 +99,6 @@ in {
     device = btrfsPartPath;
     fsType = "btrfs";
     options = [ "subvol=persist" ] ++ btrfsOptions;
-    neededForBoot = true;
-  };
-
-  fileSystems."/var/log" = {
-    device = btrfsPartPath;
-    fsType = "btrfs";
-    options = [ "subvol=log" ] ++ btrfsOptions;
     neededForBoot = true;
   };
 
@@ -147,23 +146,20 @@ in {
       support32Bit = true;
     };
   };
-  # virtualisation.docker.enable = true;
 
   environment = {
     systemPackages = [ btrfsDiff ];
     persistence."/persist" = {
-      directories = [ "/etc/nixos" "/var/lib/docker/" ];
+      directories = [ "/etc/nixos" ];
       files = [ "/etc/machine-id" ];
     };
   };
   networking.interfaces.enp6s0.useDHCP = true;
 
-  services.xserver = {
-    enable = true;
-    # displayManager.gdm.enable = true;
-    # desktopManager.gnome3.enable = true;
-    videoDrivers = [ "amdgpu" ];
-  };
+  # services.xserver = {
+  #   enable = true;
+  #   videoDrivers = [ "amdgpu" ];
+  # };
 
   system.stateVersion = "20.09";
 }
