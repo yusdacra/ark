@@ -192,7 +192,7 @@ in {
         inherit font;
       };
       sway = {
-        enable = false;
+        enable = true;
         extraSessionCommands = ''
           export SDL_VIDEODRIVER=wayland
           # needs qt5.qtwayland in systemPackages
@@ -261,7 +261,7 @@ in {
           };
           output = {
             "*" = {
-              bg = config.home.homeDirectory + "wallpaper.png" + " fill";
+              bg = config.home.homeDirectory + "/wallpaper.png" + " fill";
             };
           };
         };
@@ -387,7 +387,7 @@ in {
         # xdg compliant
         dotDir = ".config/zsh";
         history.path = ".local/share/zsh/history";
-        loginExtra = ''
+        envExtra = ''
           export SDL_VIDEODRIVER=wayland
           # needs qt5.qtwayland in systemPackages
           export QT_QPA_PLATFORM=wayland
@@ -395,10 +395,16 @@ in {
           # Fix for some Java AWT applications (e.g. Android Studio),
           # use this if they aren't displayed properly:
           export _JAVA_AWT_WM_NONREPARENTING=1
-
+        '';
+        loginExtra = ''
           if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
               exec ${pkgBin "hikari"}
           fi
+        '';
+        initExtra = ''
+          bindkey "$terminfo[kRIT5]" forward-word
+          bindkey "$terminfo[kLFT5]" backward-word
+          zstyle ':completion:*' menu select
         '';
         shellAliases = nixosConfig.environment.shellAliases // {
           rember = ''

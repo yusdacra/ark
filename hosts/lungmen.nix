@@ -149,6 +149,7 @@ in {
 
   environment = {
     systemPackages = [ btrfsDiff ];
+    pathsToLink = [ "/share/zsh" ];
     persistence."/persist" = {
       directories = [ "/etc/nixos" ];
       files = [ "/etc/machine-id" ];
