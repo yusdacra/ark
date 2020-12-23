@@ -16,13 +16,13 @@ let
 
   kideSrc = pkgs.fetchgit {
     url = "https://gitlab.com/yusdacra/kide.git";
-    rev = "c4116d433add520d8e18382e0bfee9c49bf67fd0";
-    sha256 = "sha256-RTYl0rFR7Tv5UisQXL4Wucrlw3NZeTKIqrXTdx095y0=";
+    rev = "40cb21c7e553fcc0fed99ed93dabbc1ffca0dbd0";
+    sha256 = "sha256-MLHyQWFs7/I12dzXGKJAIlyO3tw3y4otVeVjeXxrqY4=";
     fetchSubmodules = true;
   };
   kideFiles =
     mapAttrs' (n: _: nameValuePair "kak/${n}" { source = "${kideSrc}/${n}"; })
-    (readDir kideSrc);
+      (readDir kideSrc);
   kideDeps = with pkgs; [
     fzf
     bat
@@ -46,6 +46,7 @@ let
     };
     normal = {
       black = "ece3cc";
+      gray = "5b5b5b";
       red = "d2212d";
       green = "489100";
       yellow = "ad8900";
@@ -56,6 +57,7 @@ let
     };
     bright = {
       black = "d5cdb6";
+      gray = "7b7b7b";
       red = "cc1729";
       green = "428b00";
       yellow = "a78300";
@@ -66,19 +68,20 @@ let
     };
   };
 
-  colorSchemeDark = {
+  colorSchemeDark = rec {
     primary = {
       normal = {
         background = "181818";
         foreground = "b9b9b9";
       };
       bright = {
-        background = "3b3b3b";
-        foreground = "dedede";
+        background = bright.black;
+        foreground = bright.white;
       };
     };
     normal = {
       black = "252525";
+      gray = "5b5b5b";
       red = "ed4a46";
       green = "70b433";
       yellow = "dbb32d";
@@ -89,6 +92,7 @@ let
     };
     bright = {
       black = "3b3b3b";
+      gray = "7b7b7b";
       red = "ff5e56";
       green = "83c746";
       yellow = "efc541";
@@ -100,7 +104,8 @@ let
   };
 
   colorScheme =
-    if builtins.pathExists ./light then colorSchemeLight else colorSchemeDark;
+    # if builtins.pathExists ./light then colorSchemeLight else colorSchemeDark;
+    colorSchemeDark;
 
   bgColor = colorScheme.primary.normal.background;
   fgColor = colorScheme.primary.bright.foreground;
@@ -145,21 +150,45 @@ let
     indicator = "#111111"; # don't care
   };
   fonts = [ fontComb ];
-in {
+in
+{
   home-manager.users.patriot = { config, pkgs, ... }: {
     imports = [ ../profiles/hikari.nix ];
+
+    gtk = {
+      # enable = true;
+      font = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans 12";
+      };
+      iconTheme = {
+        package = pkgs.papirus-icon-theme;
+        name = "Papirus Dark";
+      };
+      theme = {
+        package = pkgs.numix-gtk-theme;
+        name = "Numix Dark";
+      };
+    };
+
+    qt = {
+      # enable = true;
+      platformTheme = "gtk";
+    };
 
     fonts.fontconfig.enable = true;
     home = {
       homeDirectory = nixosConfig.users.users.patriot.home;
       packages = with pkgs;
         [
-          darcs
-          discord
+          # Font stuff
           fontPackage
           noto-fonts-cjk
+          noto-fonts-emoji-blob-bin
           font-awesome
-          nerdfonts
+          (nerdfonts.override { fonts = [ "Iosevka" ]; })
+          # Programs
+          appimage-run
           bitwarden
           pfetch
           neofetch
@@ -169,15 +198,17 @@ in {
           youtube-dl
           ffmpeg
           mupdf
+          transmission-gtk
+          gitAndTools.gh
           steam-run
           lutris
           xdg_utils
           # xdg-user-dirs
+          tagref
           # gnome3.zenity
           # x11 docker stuff
           # x11docker
           # weston
-          xwayland
           # xpra
           # xdotool
           # xorg.setxkbmap
@@ -202,9 +233,12 @@ in {
           # use this if they aren't displayed properly:
           export _JAVA_AWT_WM_NONREPARENTING=1
         '';
+        wrapperFeatures.gtk = true;
         config = {
           inherit fonts;
-          bars = [ ]; # no
+          bars = [{
+            command = "${pkgBin "waybar"}";
+          }];
           colors = {
             background = "#${bgColor}";
             focused = addIndSway focusedWorkspace;
@@ -216,43 +250,47 @@ in {
           menu = "${pkgBin "rofi"} -show drun | ${pkgs.sway}/bin/swaymsg --";
           modifier = "Mod4";
           terminal = pkgBin "alacritty";
-          keybindings = let
-            mod = config.wayland.windowManager.sway.config.modifier;
-            cat = pkgs.coreutils + "/bin/cat";
-            grim = pkgBin "grim";
-            slurp = pkgBin "slurp";
-            pactl = pkgs.pulseaudio + "/bin/pactl";
-            playerctl = pkgBin "playerctl";
-            wf-recorder = pkgBin "wf-recorder";
-            wl-copy = pkgs.wl-clipboard + "/bin/wl-copy";
-            wl-paste = pkgs.wl-clipboard + "/bin/wl-paste";
-            shotFile = config.home.homeDirectory
-              + "/shots/shot_$(date '+%Y_%m_%d_%H_%M')";
-          in lib.mkOptionDefault {
-            "${mod}+q" = "kill";
-            # Screenshot and copy it to clipboard
-            "Mod1+s" = ''
-              exec export SFILE="${shotFile}.png" && ${grim} "$SFILE" && ${cat} "$SFILE" | ${wl-copy} -t image/png
-            '';
-            # Save selected area as a picture and copy it to clipboard
-            "Mod1+Shift+s" = ''
-              exec export SFILE="${shotFile}.png" && ${grim} -g "$(${slurp})" "$SFILE" && ${cat} "$SFILE" | ${wl-copy} -t image/png
-            '';
-            # Record screen
-            "Mod1+r" = ''exec ${wf-recorder} -f "${shotFile}.mp4"'';
-            # Record an area
-            "Mod1+Shift+r" =
-              ''exec ${wf-recorder} -g "$(${slurp})" -f "${shotFile}.mp4"'';
-            # Stop recording
-            "Mod1+c" = "exec pkill -INT wf-recorder";
-            "XF86AudioRaiseVolume" = "exec ${pactl} set-sink-volume 0 +5%";
-            "XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume 0 -5%";
-            "XF86AudioMute" = "exec ${pactl} set-sink-mute 0 toggle";
-            "XF86AudioPlay" = "exec ${playerctl} play-pause";
-            "XF86AudioPrev" = "exec ${playerctl} previous";
-            "XF86AudioNext" = "exec ${playerctl} next";
-            "XF86AudioStop" = "exec ${playerctl} stop";
-          };
+          keybindings =
+            let
+              mod = config.wayland.windowManager.sway.config.modifier;
+              cat = pkgs.coreutils + "/bin/cat";
+              grim = pkgBin "grim";
+              slurp = pkgBin "slurp";
+              pactl = pkgs.pulseaudio + "/bin/pactl";
+              playerctl = pkgBin "playerctl";
+              wf-recorder = pkgBin "wf-recorder";
+              wl-copy = pkgs.wl-clipboard + "/bin/wl-copy";
+              wl-paste = pkgs.wl-clipboard + "/bin/wl-paste";
+              shotFile = config.home.homeDirectory
+                + "/shots/shot_$(date '+%Y_%m_%d_%H_%M')";
+            in
+            lib.mkOptionDefault {
+              "${mod}+q" = "kill";
+              "${mod}+Shift+e" = "exit";
+              "${mod}+Shift+r" = "reload";
+              # Screenshot and copy it to clipboard
+              "Mod1+s" = ''
+                exec export SFILE="${shotFile}.png" && ${grim} "$SFILE" && ${cat} "$SFILE" | ${wl-copy} -t image/png
+              '';
+              # Save selected area as a picture and copy it to clipboard
+              "Mod1+Shift+s" = ''
+                exec export SFILE="${shotFile}.png" && ${grim} -g "$(${slurp})" "$SFILE" && ${cat} "$SFILE" | ${wl-copy} -t image/png
+              '';
+              # Record screen
+              "Mod1+r" = ''exec ${wf-recorder} -f "${shotFile}.mp4"'';
+              # Record an area
+              "Mod1+Shift+r" =
+                ''exec ${wf-recorder} -g "$(${slurp})" -f "${shotFile}.mp4"'';
+              # Stop recording
+              "Mod1+c" = "exec pkill -INT wf-recorder";
+              "XF86AudioRaiseVolume" = "exec ${pactl} set-sink-volume 0 +5%";
+              "XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume 0 -5%";
+              "XF86AudioMute" = "exec ${pactl} set-sink-mute 0 toggle";
+              "XF86AudioPlay" = "exec ${playerctl} play-pause";
+              "XF86AudioPrev" = "exec ${playerctl} previous";
+              "XF86AudioNext" = "exec ${playerctl} next";
+              "XF86AudioStop" = "exec ${playerctl} stop";
+            };
           input = {
             "*" = {
               xkb_layout = nixosConfig.services.xserver.layout;
@@ -293,28 +331,43 @@ in {
           set -g status off
         '';
       };
-      qutebrowser = {
+      chromium = {
         enable = true;
+        # package = pkgs.ungoogled-chromium;
+        extensions = [
+          "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
+          "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock
+          "nngceckbapebfimnlniiiahkandclblb" # bitwarden
+          "ldpochfccmkkmhdbclfhpagapcfdljkj" # decentraleyes
+          "annfbnbieaamhaimclajlajpijgkdblo" # dark theme
+          "eimadpbcbfnmbkopoojfekhnkhdbieeh" # dark reader
+          "hlepfoohegkhhmjieoechaddaejaokhf" # github refined
+        ];
+      };
+      qutebrowser = {
+        # enable = true;
         settings = {
           content.javascript.enabled = false;
           colors.webpage.darkmode.enabled = true;
           tabs = { show = "multiple"; };
         };
-        extraConfig = let
-          domains = [
-            "github.com"
-            "gitlab.com"
-            "nixos.org"
-            "protonmail.com"
-            "bitwarden.com"
-            "duckduckgo.com"
-            "youtube.com"
-            "docker.com"
-          ];
-          enableJsForDomain = d: ''
-            config.set('content.javascript.enabled', True, 'https://*.${d}')
-          '';
-        in lib.concatStrings (map enableJsForDomain domains);
+        extraConfig =
+          let
+            domains = [
+              "github.com"
+              "gitlab.com"
+              "nixos.org"
+              "protonmail.com"
+              "bitwarden.com"
+              "duckduckgo.com"
+              "youtube.com"
+              "docker.com"
+            ];
+            enableJsForDomain = d: ''
+              config.set('content.javascript.enabled', True, 'https://*.${d}')
+            '';
+          in
+          lib.concatStrings (map enableJsForDomain domains);
       };
       git = {
         enable = true;
@@ -354,14 +407,15 @@ in {
         compression = true;
         hashKnownHosts = true;
         userKnownHostsFile = "~/.local/share/ssh/known-hosts";
-        extraConfig = ''
-          Host hub.darcs.net
-             ControlMaster no
-             ForwardAgent no
-             ForwardX11 no
-             Ciphers +aes256-cbc
-             MACs +hmac-sha1
-        '';
+        # Only needed for darcs
+        # extraConfig = ''
+        #   Host hub.darcs.net
+        #      ControlMaster no
+        #      ForwardAgent no
+        #      ForwardX11 no
+        #      Ciphers +aes256-cbc
+        #      MACs +hmac-sha1
+        # '';
       };
       zsh = {
         enable = true;
@@ -369,21 +423,23 @@ in {
         enableVteIntegration = true;
         enableAutosuggestions = true;
         enableCompletion = true;
-        plugins = let
-          fast-syntax-highlighting = {
-            name = "fast-syntax-highlighting";
-            src = "${pkgs.zsh-fast-syntax-highlighting}";
-          };
-          per-directory-history = {
-            name = "per-directory-history";
-            src = pkgs.fetchFromGitHub {
-              owner = "jimhester";
-              repo = "per-directory-history";
-              rev = "d2e291dd6434e340d9be0e15e1f5b94f32771c06";
-              hash = "sha256-VHRgrVCqzILqOes8VXGjSgLek38BFs9eijmp0JHtD5Q=";
+        plugins =
+          let
+            fast-syntax-highlighting = rec {
+              name = "fast-syntax-highlighting";
+              src = pkgs."zsh-${name}".out;
             };
-          };
-        in [ fast-syntax-highlighting per-directory-history ];
+            per-directory-history = {
+              name = "per-directory-history";
+              src = pkgs.fetchFromGitHub {
+                owner = "jimhester";
+                repo = "per-directory-history";
+                rev = "d2e291dd6434e340d9be0e15e1f5b94f32771c06";
+                hash = "sha256-VHRgrVCqzILqOes8VXGjSgLek38BFs9eijmp0JHtD5Q=";
+              };
+            };
+          in
+          [ fast-syntax-highlighting per-directory-history ];
         # xdg compliant
         dotDir = ".config/zsh";
         history.path = ".local/share/zsh/history";
@@ -396,11 +452,15 @@ in {
           # use this if they aren't displayed properly:
           export _JAVA_AWT_WM_NONREPARENTING=1
         '';
-        loginExtra = ''
-          if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
-              exec ${pkgBin "hikari"}
-          fi
-        '';
+        loginExtra =
+          let
+            deCmd = if config.wayland.windowManager.sway.enable then "sway" else (if config.wayland.windowManager.hikari.enable then "hikari" else throw "Need a window manager to start!");
+          in
+          ''
+            if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
+                exec ${pkgBin deCmd}
+            fi
+          '';
         initExtra = ''
           bindkey "$terminfo[kRIT5]" forward-word
           bindkey "$terminfo[kLFT5]" backward-word
@@ -428,180 +488,196 @@ in {
         enableNixDirenvIntegration = true;
       };
       fzf.enable = true;
-      rofi = let
-        bgc = "#${bgColor}";
-        fgc = "#${fgColor}";
-        acc = "#${acColor}";
-      in {
-        enable = true;
-        colors = {
-          window = {
-            background = bgc;
-            border = bgc;
-            separator = bgc;
-          };
-          rows = {
-            normal = {
+      rofi =
+        let
+          bgc = "#${bgColor}";
+          fgc = "#${fgColor}";
+          acc = "#${acColor}";
+        in
+        {
+          enable = true;
+          colors = {
+            window = {
               background = bgc;
-              foreground = fgc;
-              backgroundAlt = bgc;
-              highlight = {
+              border = bgc;
+              separator = bgc;
+            };
+            rows = {
+              normal = {
                 background = bgc;
-                foreground = acc;
+                foreground = fgc;
+                backgroundAlt = bgc;
+                highlight = {
+                  background = bgc;
+                  foreground = acc;
+                };
               };
             };
           };
+          font = fontComb;
+          separator = "none";
+          terminal = pkgBin "alacritty";
         };
-        font = fontComb;
-        separator = "none";
-        terminal = pkgBin "alacritty";
-      };
-      waybar = {
-        enable = true;
-        settings = [{
-          layer = "top";
-          position = "top";
-          modules-left = [ ];
-          modules-center = [ ];
-          modules-right =
-            [ "pulseaudio" "cpu" "memory" "temperature" "clock" "tray" ];
-          modules = {
-            "tray" = { spacing = 8; };
-            "cpu" = { format = "/cpu {usage}/"; };
-            "memory" = { format = "/mem {}/"; };
-            "temperature" = {
-              hwmon-path = "/sys/class/hwmon/hwmon1/temp2_input";
-              format = "/tmp {temperatureC}C/";
+      waybar =
+        let
+          swayEnabled = config.wayland.windowManager.sway.enable;
+        in
+        {
+          enable = true;
+          settings = [{
+            layer = "top";
+            position = "top";
+            modules-left = if swayEnabled then [ "sway/workspaces" ] else [ ];
+            modules-center = if swayEnabled then [ "sway/window" ] else [ ];
+            modules-right =
+              [ "pulseaudio" "cpu" "memory" "temperature" "clock" "tray" ];
+            modules = {
+              "tray" = { spacing = 8; };
+              "cpu" = { format = "/cpu {usage}/"; };
+              "memory" = { format = "/mem {}/"; };
+              "temperature" = {
+                hwmon-path = "/sys/class/hwmon/hwmon1/temp2_input";
+                format = "/tmp {temperatureC}C/";
+              };
+              "pulseaudio" = {
+                format = "/vol {volume}/ {format_source}";
+                format-bluetooth = "/volb {volume}/ {format_source}";
+                format-bluetooth-muted = "/volb/ {format_source}";
+                format-muted = "/vol/ {format_source}";
+                format-source = "/mic {volume}/";
+                format-source-muted = "/mic/";
+              };
             };
-            "pulseaudio" = {
-              format = "/vol {volume}/ {format_source}";
-              format-bluetooth = "/volb {volume}/ {format_source}";
-              format-bluetooth-muted = "/volb/ {format_source}";
-              format-muted = "/vol/ {format_source}";
-              format-source = "/mic {volume}/";
-              format-source-muted = "/mic/";
-            };
-          };
-        }];
-        style = ''
-          * {
-              border: none;
-              border-radius: 0;
-              /* `otf-font-awesome` is required to be installed for icons */
-              font-family: ${font};
-              font-size: 13px;
-              min-height: 0;
-          }
+          }];
+          style =
+            let
+              makeBorder = color: "border-bottom: 3px solid #${color};";
+              makeInfo = color: ''
+                color: #${color};
+                ${makeBorder color}
+              '';
 
-          window#waybar {
-              background-color: #222222;
-              border-bottom: 0px solid rgba(100, 114, 125, 0.5);
-              color: #ffffff;
-              transition-property: background-color;
-              transition-duration: .5s;
-          }
+              clockColor = colorScheme.bright.magenta;
+              cpuColor = colorScheme.bright.green;
+              memColor = colorScheme.bright.blue;
+              pulseColor = {
+                normal = colorScheme.bright.cyan;
+                muted = colorScheme.bright.gray;
+              };
+              tmpColor = {
+                normal = colorScheme.bright.yellow;
+                critical = colorScheme.bright.red;
+              };
+            in
+            ''
+              * {
+                  border: none;
+                  border-radius: 0;
+                  /* `otf-font-awesome` is required to be installed for icons */
+                  font-family: ${font};
+                  font-size: 13px;
+                  min-height: 0;
+              }
 
-          #workspaces button {
-              padding: 0 5px;
-              background-color: transparent;
-              color: #ffffff;
-              border-bottom: 3px solid transparent;
-          }
+              window#waybar {
+                  background-color: #${bgColor};
+                  /* border-bottom: 0px solid rgba(100, 114, 125, 0.5); */
+                  color: #${fgColor};
+                  transition-property: background-color;
+                  transition-duration: .5s;
+              }
 
-          /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-          #workspaces button:hover {
-              background: rgba(0, 0, 0, 0.2);
-              box-shadow: inherit;
-              border-bottom: 3px solid #ffffff;
-          }
+              #workspaces button {
+                  padding: 0 5px;
+                  background-color: transparent;
+                  color: #${fgColor};
+                  border-bottom: 3px solid transparent;
+              }
 
-          #workspaces button.focused {
-              background-color: #64727D;
-              border-bottom: 3px solid #ffffff;
-          }
+              /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+              #workspaces button:hover {
+                  background: rgba(0, 0, 0, 0.2);
+                  box-shadow: inherit;
+                  border-bottom: 3px solid #ffffff;
+              }
 
-          #workspaces button.urgent {
-              background-color: #eb4d4b;
-          }
+              #workspaces button.focused {
+                  border-bottom: 3px solid #${acColor};
+              }
 
-          #mode {
-              background-color: #64727D;
-              border-bottom: 3px solid #ffffff;
-          }
+              #workspaces button.urgent {
+                  background-color: #${acColor};
+                  color: #${bgColor};
+              }
 
-          #clock,
-          #battery,
-          #cpu,
-          #memory,
-          #temperature,
-          #backlight,
-          #network,
-          #pulseaudio,
-          #custom-media,
-          #tray,
-          #mode,
-          #idle_inhibitor,
-          #mpd {
-              padding: 0 10px;
-              margin: 0 4px;
-              color: #ffffff;
-          }
+              #mode {
+                  background-color: #64727D;
+                  border-bottom: 3px solid #ffffff;
+              }
 
-          #clock {
-              background-color: #64727D;
-              color: #000000;
-          }
+              #clock,
+              #battery,
+              #cpu,
+              #memory,
+              #temperature,
+              #backlight,
+              #network,
+              #pulseaudio,
+              #custom-media,
+              #tray,
+              #mode,
+              #idle_inhibitor,
+              #mpd {
+                  padding: 0 10px;
+                  margin: 0 4px;
+                  background-color: transparent;
+                  ${makeInfo fgColor}
+              }
 
-          label:focus {
-              background-color: #000000;
-          }
+              label:focus {
+                  color: #000000;
+              }
 
-          #cpu {
-              background-color: #2ecc71;
-              color: #000000;
-          }
+              #clock {
+                  ${makeInfo clockColor}
+              }
 
-          #memory {
-              background-color: #9b59b6;
-              color: #000000;
-          }
+              #cpu {
+                  ${makeInfo cpuColor}
+              }
 
-          #pulseaudio {
-              background-color: #f1c40f;
-              color: #000000;
-          }
+              #memory {
+                  ${makeInfo memColor}
+              }
 
-          #pulseaudio.muted {
-              background-color: #90b1b1;
-              color: #2a5c45;
-          }
+              #pulseaudio {
+                  ${makeInfo pulseColor.normal}
+              }
 
-          #temperature {
-              background-color: #f0932b;
-              color: #000000;
-          }
+              #pulseaudio.muted {
+                  ${makeInfo pulseColor.muted}
+              }
 
-          #temperature.critical {
-              background-color: #eb4d4b;
-              color: #000000;
-          }
+              #temperature {
+                  ${makeInfo tmpColor.normal}
+              }
 
-          #tray {
-              background-color: #2980b9;
-          }
-        '';
-      };
+              #temperature.critical {
+                  ${makeInfo tmpColor.critical}
+              }
+            '';
+        };
     };
 
     services = {
-      gpg-agent = {
+      gpg-agent = rec {
         enable = true;
         enableSshSupport = true;
         sshKeys = [ "8369D9CA26C3EAAAB8302A88CEE6FD14B58AA965" ];
         defaultCacheTtl = 3600 * 6;
-        defaultCacheTtlSsh = 3600 * 6;
+        defaultCacheTtlSsh = defaultCacheTtl;
         maxCacheTtl = 3600 * 24;
-        maxCacheTtlSsh = 3600 * 24;
+        maxCacheTtlSsh = maxCacheTtl;
         grabKeyboardAndMouse = false;
         pinentryFlavor = "gtk2";
       };

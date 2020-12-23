@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports = [ ./kakoune.nix ];
 
-  environment.systemPackages = with pkgs; [ nixfmt ];
-  environment.shellAliases = { nixf-all = "nixfmt **/**.nix"; };
+  environment.systemPackages = with pkgs; [ nixpkgs-fmt ];
+  environment.shellAliases = { nixf-all = "nixpkgs-fmt **/**.nix"; };
 }

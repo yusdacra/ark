@@ -30,11 +30,13 @@ let
 
     sudo umount /mnt
   '';
-in {
+in
+{
   imports = [
     ../users/patriot
     ../users/root
     ../profiles/network
+    # ../profiles/network/nginx.nix
     ../profiles/develop
     (modulesPath + "/installer/scan/not-detected.nix")
     nixosPersistence
@@ -148,7 +150,7 @@ in {
   };
 
   environment = {
-    systemPackages = [ btrfsDiff ];
+    systemPackages = [ btrfsDiff pkgs.docker-compose ];
     pathsToLink = [ "/share/zsh" ];
     persistence."/persist" = {
       directories = [ "/etc/nixos" ];
@@ -161,6 +163,23 @@ in {
   #   enable = true;
   #   videoDrivers = [ "amdgpu" ];
   # };
+  virtualisation.docker.enable = true;
+  services.postgresql = {
+    enable = true;
+    enableTCPIP = true;
+    authentication = pkgs.lib.mkOverride 10 ''
+      local all all trust
+      host  all all 0.0.0.0/0 md5
+    '';
+    settings = {
+      listen_addresses = "*";
+    };
+    initialScript = pkgs.writeText "backend-initScript" ''
+      CREATE ROLE harmony WITH LOGIN PASSWORD 'harmony' CREATEDB;
+      CREATE DATABASE harmony;
+      GRANT ALL PRIVILEGES ON DATABASE harmony TO harmony;
+    '';
+  };
 
   system.stateVersion = "20.09";
 }

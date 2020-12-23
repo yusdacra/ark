@@ -1,9 +1,14 @@
 { lib, config, pkgs, ... }:
 with lib;
 let cfg = config.wayland.windowManager.hikari;
-in {
+in
+{
   options.wayland.windowManager.hikari = {
     enable = mkEnableOption "hikari window manager";
+    xwayland = mkOption {
+      type = types.bool;
+      default = true;
+    };
     font = mkOption {
       type = types.str;
       default = "Iosevka";
@@ -11,7 +16,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ hikari ];
+    home.packages = with pkgs; [ hikari ] ++ (optional cfg.xwayland xwayland);
 
     xdg = {
       enable = true;
@@ -48,6 +53,11 @@ in {
                 xkb = {
                   layout = "tr"
                 }      
+              }
+            }
+            pointers {
+              "*" {
+                accel-profile = "flat"
               }
             }
           }

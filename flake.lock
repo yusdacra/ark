@@ -1,0 +1,85 @@
+{
+  "nodes": {
+    "home": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1608681543,
+        "narHash": "sha256-6YNP8GBG0nhqLMQVkCBxRirTYaaGhI8gKCwgcJ5+sLc=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "3627ec4de58d7fbda13c82dfec94eace10198f23",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "impermanence": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1607963610,
+        "narHash": "sha256-GbThFdlYfh9ujQjXX6Ngn88s2ALd1aepKsbxj0lgm28=",
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "rev": "2cda5cd30bc7c56240a1a91ec8d44c6d5222ee17",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "type": "github"
+      }
+    },
+    "mynex": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1607689647,
+        "narHash": "sha256-pUpUCcp8usppbByFveRrV2NNS5sFrlvMndZt7xYOQL4=",
+        "owner": "yusdacra",
+        "repo": "nix-exprs",
+        "rev": "e9c16b956180d23c3cb8ec3e2843b2be662d43ef",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "yusdacra",
+        "repo": "nix-exprs",
+        "type": "gitlab"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1608700021,
+        "narHash": "sha256-timIYNV0uwrbjg5L3zloUbPeFpBXnEtosbUaWdqR72U=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "2ae527c50e049570dd25132f9325527aa2320e32",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-unstable-small",
+        "type": "indirect"
+      }
+    },
+    "root": {
+      "inputs": {
+        "home": "home",
+        "impermanence": "impermanence",
+        "mynex": "mynex",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
