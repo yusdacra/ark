@@ -1,10 +1,14 @@
-{ pkgs, ... }: {
-  environment.systemPackages = with pkgs; [ kakoune ];
+{ pkgs, ... }:
+let
+  pkg = pkgs.kakoune-unwrapped;
+in
+{
+  environment.systemPackages = [ pkg ];
 
   environment.sessionVariables = {
-    EDITOR = "${pkgs.kakoune}/bin/kak";
-    VISUAL = "${pkgs.kakoune}/bin/kak";
+    EDITOR = "${pkg}/bin/kak";
+    VISUAL = "${pkg}/bin/kak";
   };
 
-  environment.shellAliases = { k = "${pkgs.kakoune}/bin/kak"; };
+  environment.shellAliases = { k = "${pkg}/bin/kak"; };
 }

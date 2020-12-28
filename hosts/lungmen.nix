@@ -175,9 +175,9 @@ in
       listen_addresses = "*";
     };
     initialScript = pkgs.writeText "backend-initScript" ''
-      CREATE ROLE harmony WITH LOGIN PASSWORD 'harmony' CREATEDB;
+      CREATE ROLE patriot WITH LOGIN PASSWORD 'patriot' CREATEDB;
       CREATE DATABASE harmony;
-      GRANT ALL PRIVILEGES ON DATABASE harmony TO harmony;
+      GRANT ALL PRIVILEGES ON DATABASE harmony TO patriot;
     '';
   };
 

@@ -1,1 +1,5 @@
-{ imports = [ ./nextdns.nix ]; }
+{
+  imports = [ ./nextdns.nix ];
+
+  networking.resolvconf.useLocalResolver = true;
+}

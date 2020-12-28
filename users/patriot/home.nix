@@ -16,8 +16,8 @@ let
 
   kideSrc = pkgs.fetchgit {
     url = "https://gitlab.com/yusdacra/kide.git";
-    rev = "40cb21c7e553fcc0fed99ed93dabbc1ffca0dbd0";
-    sha256 = "sha256-MLHyQWFs7/I12dzXGKJAIlyO3tw3y4otVeVjeXxrqY4=";
+    rev = "cfb159181291a3322cfbc5f12f0046330105b7a0";
+    sha256 = "sha256-O3afZnJCTL/cuefmhwLw9gBPIBNuLk3ifqF726J9faE=";
     fetchSubmodules = true;
   };
   kideFiles =
