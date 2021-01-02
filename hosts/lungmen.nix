@@ -71,6 +71,9 @@ in
       btrfs subvolume snapshot /mnt/root-blank /mnt/root
       umount /mnt
     '';
+    kernel.sysctl = {
+      "fs.inotify.max_user_watches" = 524288;
+    };
   };
 
   fileSystems."/" = {

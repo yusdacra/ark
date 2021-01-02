@@ -16,8 +16,8 @@ let
 
   kideSrc = pkgs.fetchgit {
     url = "https://gitlab.com/yusdacra/kide.git";
-    rev = "cfb159181291a3322cfbc5f12f0046330105b7a0";
-    sha256 = "sha256-O3afZnJCTL/cuefmhwLw9gBPIBNuLk3ifqF726J9faE=";
+    rev = "2d76f8b668e7ff12fd686a101f0d26d50b6c0ece";
+    sha256 = "sha256-ONQmrJvNnmQ9W350od46VECW6Ir3KOMUJRnEMeVIsgg=";
     fetchSubmodules = true;
   };
   kideFiles =
@@ -219,7 +219,7 @@ in
 
     wayland.windowManager = {
       hikari = {
-        enable = true;
+        # enable = true;
         inherit font;
       };
       sway = {
@@ -667,6 +667,33 @@ in
               }
             '';
         };
+      vscode = {
+        enable = true;
+        package = pkgs.vscodium;
+        extensions =
+          let
+            mkExt = n: v: p: s: { name = n; version = v; publisher = p; sha256 = s; };
+          in
+          pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+            # Rust
+            (mkExt "rust-analyzer" "0.2.432" "matklad" "sha256-XsJlfbvxVzI0wdwIvswLUWnmczCrpT+MtedmjxVOvso=")
+            (mkExt "even-better-toml" "0.10.0" "tamasfe" "sha256-miJ7gXYavLyJneKOSs+4GaFG4v6ocem2YOWyAUrOfs8=")
+            (mkExt "vscode-ron" "0.9.0" "a5huynh" "sha256-J30hxEYCkr4xhaJ+DfffjwRJZx9NGCOrA6VcDCsodzQ=")
+            (mkExt "crates" "0.5.3" "serayuzgur" "sha256-TpzeEPBE75Ov2qDPa22k7e0pTDLQX8z0qBqCVLZXZ/Y=")
+            # Nix
+            (mkExt "nix-env-selector" "0.1.2" "arrterian" "sha256-aTNxr1saUaN9I82UYCDsQvH9UBWjue/BSnUmMQOnsdg=")
+            (mkExt "nix-ide" "0.1.7" "jnoortheen" "sha256-NXMwd1Yi6kVxXLhWgzFOXQm580Mv4UPh6jUulbDnhK8=")
+            # Go
+            (mkExt "Go" "0.20.1" "golang" "sha256-UjGaePjYceLdkf2yrxkVy6ht2aStJ5wklguKe/Z8HUI=")
+            # Flutter and dart
+            (mkExt "flutter" "3.18.0" "Dart-Code" "sha256-nvKBPSe0+WQ8m88WrQqhzVrqYBjcBhiz6EuJ38gTFhQ=")
+            (mkExt "dart-code" "3.18.0" "Dart-Code" "sha256-E+qrY7wOvengOs2yKqhh+5dRLu3dUu6yWxGcwD7QHuI=")
+            # Customization
+            (mkExt "dance" "0.3.2" "gregoire" "sha256-+g8EXeCkPOPvZ60JoXkGTeSXYWrXmKrcbUaEfDppdgA=")
+            (mkExt "material-icon-theme" "4.4.0" "PKief" "sha256-yiM+jtc7UW8PQTwmHmXHSSmvYC73GLh/cLYnmYqONdU=")
+            (mkExt "noctis" "10.39.1" "liviuschera" "sha256-Ak1DcfyK0RdPx81flWBXJxtDsZmulQXeOWFH0b2AoCQ=")
+          ];
+      };
     };
 
     services = {
