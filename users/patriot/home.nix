@@ -33,6 +33,31 @@ let
     xclip
   ];
 
+  chromiumWayland = pkgs.writeScriptBin "chromium-wayland" ''
+    #!${pkgs.stdenv.shell}
+    chromium --enable-features=UseOzonePlatform --ozone-platform=wayland
+  '';
+  chromiumWaylandPkg = with pkgs; stdenv.mkDerivation {
+    name = "chromium-wayland";
+    version = chromium.version;
+
+    nativeBuildInputs = [ copyDesktopItems ];
+    desktopItems = [
+      (makeDesktopItem rec {
+        name = "chromium-wayland";
+        exec = name;
+        desktopName = "Chromium Wayland";
+        genericName = "Web Browser";
+      })
+    ];
+
+    phases = [ "installPhase" ];
+    installPhase = ''
+      mkdir -p $out/bin
+      ln -s ${chromiumWayland}/bin/chromium-wayland $out/bin/chromium-wayland
+    '';
+  };
+
   colorSchemeLight = {
     primary = {
       normal = {
@@ -155,26 +180,26 @@ in
   home-manager.users.patriot = { config, pkgs, ... }: {
     imports = [ ../profiles/hikari.nix ];
 
-    gtk = {
-      # enable = true;
-      font = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Sans 12";
-      };
-      iconTheme = {
-        package = pkgs.papirus-icon-theme;
-        name = "Papirus Dark";
-      };
-      theme = {
-        package = pkgs.numix-gtk-theme;
-        name = "Numix Dark";
-      };
-    };
+    # gtk = {
+    #   # enable = true;
+    #   font = {
+    #     package = pkgs.dejavu_fonts;
+    #     name = "DejaVu Sans 12";
+    #   };
+    #   iconTheme = {
+    #     package = pkgs.papirus-icon-theme;
+    #     name = "Papirus Dark";
+    #   };
+    #   theme = {
+    #     package = pkgs.numix-gtk-theme;
+    #     name = "Numix Dark";
+    #   };
+    # };
 
-    qt = {
-      # enable = true;
-      platformTheme = "gtk";
-    };
+    # qt = {
+    #   # enable = true;
+    #   platformTheme = "gtk";
+    # };
 
     fonts.fontconfig.enable = true;
     home = {
@@ -188,6 +213,10 @@ in
           font-awesome
           (nerdfonts.override { fonts = [ "Iosevka" ]; })
           # Programs
+          wine-staging
+          cachix
+          plasma5.plasma-browser-integration
+          chromiumWaylandPkg
           appimage-run
           bitwarden
           pfetch
@@ -203,6 +232,7 @@ in
           steam-run
           lutris
           xdg_utils
+          discord
           # xdg-user-dirs
           tagref
           # gnome3.zenity
@@ -219,7 +249,7 @@ in
 
     wayland.windowManager = {
       hikari = {
-        # enable = true;
+        enable = false;
         inherit font;
       };
       sway = {
@@ -297,11 +327,11 @@ in
               accel_profile = "flat";
             };
           };
-          output = {
-            "*" = {
-              bg = config.home.homeDirectory + "/wallpaper.png" + " fill";
-            };
-          };
+          # output = {
+          #   "*" = {
+          #     bg = config.home.homeDirectory + "/wallpaper.png" + " fill";
+          #   };
+          # };
         };
       };
     };
@@ -318,7 +348,7 @@ in
         };
       };
       tmux = {
-        enable = true;
+        enable = false;
         newSession = true;
         secureSocket = true;
         baseIndex = 1;
@@ -333,7 +363,6 @@ in
       };
       chromium = {
         enable = true;
-        # package = pkgs.ungoogled-chromium;
         extensions = [
           "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
           "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock
@@ -345,7 +374,7 @@ in
         ];
       };
       qutebrowser = {
-        # enable = true;
+        enable = false;
         settings = {
           content.javascript.enabled = false;
           colors.webpage.darkmode.enabled = true;
@@ -407,7 +436,7 @@ in
         compression = true;
         hashKnownHosts = true;
         userKnownHostsFile = "~/.local/share/ssh/known-hosts";
-        # Only needed for darcs
+        # Only needed for darcs hub
         # extraConfig = ''
         #   Host hub.darcs.net
         #      ControlMaster no
@@ -465,6 +494,10 @@ in
           bindkey "$terminfo[kRIT5]" forward-word
           bindkey "$terminfo[kLFT5]" backward-word
           zstyle ':completion:*' menu select
+
+          function project() {
+            cd "$HOME/Belgeler/projects/$1"
+          }
         '';
         shellAliases = nixosConfig.environment.shellAliases // {
           rember = ''
@@ -523,7 +556,7 @@ in
           swayEnabled = config.wayland.windowManager.sway.enable;
         in
         {
-          enable = true;
+          enable = config.wayland.windowManager.sway.enable || config.wayland.windowManager.hikari.enable;
           settings = [{
             layer = "top";
             position = "top";
@@ -676,7 +709,7 @@ in
           in
           pkgs.vscode-utils.extensionsFromVscodeMarketplace [
             # Rust
-            (mkExt "rust-analyzer" "0.2.432" "matklad" "sha256-XsJlfbvxVzI0wdwIvswLUWnmczCrpT+MtedmjxVOvso=")
+            (mkExt "rust-analyzer" "0.2.441" "matklad" "sha256-aUX2HMMhS9bgTOmGgqZIgs0GBxmbJdr7J6loqwQTZeM=")
             (mkExt "even-better-toml" "0.10.0" "tamasfe" "sha256-miJ7gXYavLyJneKOSs+4GaFG4v6ocem2YOWyAUrOfs8=")
             (mkExt "vscode-ron" "0.9.0" "a5huynh" "sha256-J30hxEYCkr4xhaJ+DfffjwRJZx9NGCOrA6VcDCsodzQ=")
             (mkExt "crates" "0.5.3" "serayuzgur" "sha256-TpzeEPBE75Ov2qDPa22k7e0pTDLQX8z0qBqCVLZXZ/Y=")
@@ -688,10 +721,15 @@ in
             # Flutter and dart
             (mkExt "flutter" "3.18.0" "Dart-Code" "sha256-nvKBPSe0+WQ8m88WrQqhzVrqYBjcBhiz6EuJ38gTFhQ=")
             (mkExt "dart-code" "3.18.0" "Dart-Code" "sha256-E+qrY7wOvengOs2yKqhh+5dRLu3dUu6yWxGcwD7QHuI=")
+            # protobuf
+            (mkExt "vscode-proto3" "0.5.3" "zxh404" "sha256-oUSih+YdAXYkTNejZBJjcXewQewgQFMGhAFdJ/CBMd4=")
+            # git
+            (mkExt "gitlens" "11.1.3" "eamodio" "sha256-hqJg3jP4bbXU4qSJOjeKfjkPx61yPDMsQdSUVZObK/U=")
+            (mkExt "vscode-commitizen" "0.9.3" "KnisterPeter" "sha256-q9u3oSwFjDHwLsIUwMZ8huv9uXc1GWFfEOEMXWx3w/o=")
             # Customization
-            (mkExt "dance" "0.3.2" "gregoire" "sha256-+g8EXeCkPOPvZ60JoXkGTeSXYWrXmKrcbUaEfDppdgA=")
+            # (mkExt "dance" "0.3.2" "gregoire" "sha256-+g8EXeCkPOPvZ60JoXkGTeSXYWrXmKrcbUaEfDppdgA=")
             (mkExt "material-icon-theme" "4.4.0" "PKief" "sha256-yiM+jtc7UW8PQTwmHmXHSSmvYC73GLh/cLYnmYqONdU=")
-            (mkExt "noctis" "10.39.1" "liviuschera" "sha256-Ak1DcfyK0RdPx81flWBXJxtDsZmulQXeOWFH0b2AoCQ=")
+            (mkExt "github-vscode-theme" "1.1.5" "github" "sha256-EPAJjM4CbR8MhV+3pm6mC12KzSt2Em6pT+c2HknNntI=")
           ];
       };
     };
@@ -713,6 +751,13 @@ in
     xdg = {
       enable = true;
       configFile = {
+        # "oguri/config".text = ''
+        #   [output *]
+        #   image=/home/patriot/wallpaper.gif
+        #   filter=nearest
+        #   scaling-mode=fill
+        #   anchor=center
+        # '';
         "kak/user/kakrc".text = ''
           source "%val{config}/user/color/colorscheme.kak"
         '';

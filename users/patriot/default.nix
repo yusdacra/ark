@@ -29,4 +29,19 @@
       package = pkgs.jre8;
     };
   };
+
+  /*services = {
+    xserver = {
+      enable = true;
+      desktopManager.plasma5.enable = true;
+      displayManager = {
+        autoLogin = {
+          enable = true;
+          user = "patriot";
+        };
+        sddm.enable = true;
+      };
+    };
+  };
+  environment.systemPackages = [ pkgs.kde-gtk-config ];*/
 }

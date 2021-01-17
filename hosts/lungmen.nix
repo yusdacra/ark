@@ -42,6 +42,7 @@ in
     nixosPersistence
   ];
 
+  systemd.additionalUpstreamSystemUnits = [ "tmp.mount" ];
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;
@@ -153,7 +154,7 @@ in
   };
 
   environment = {
-    systemPackages = [ btrfsDiff pkgs.docker-compose ];
+    systemPackages = [ btrfsDiff ];
     pathsToLink = [ "/share/zsh" ];
     persistence."/persist" = {
       directories = [ "/etc/nixos" ];
@@ -162,13 +163,12 @@ in
   };
   networking.interfaces.enp6s0.useDHCP = true;
 
-  # services.xserver = {
-  #   enable = true;
-  #   videoDrivers = [ "amdgpu" ];
-  # };
+  services.xserver = {
+    videoDrivers = [ "amdgpu" ];
+  };
   virtualisation.docker.enable = true;
   services.postgresql = {
-    enable = true;
+    enable = false;
     enableTCPIP = true;
     authentication = pkgs.lib.mkOverride 10 ''
       local all all trust

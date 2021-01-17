@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "cachix": {
+      "locked": {
+        "lastModified": 1610779893,
+        "narHash": "sha256-dAKlewu9L3C4ZCWgS1UVtk2gYJI42ZeUdcezfbXvSdw=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "1eff582e7ea6dcb208127ad369e231eaaf6fa378",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-20.09",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "home": {
       "inputs": {
         "nixpkgs": [
@@ -7,11 +23,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1609573857,
-        "narHash": "sha256-AlCR2ffY5ZOwwazzhM3BuQ5Z82JiNV4mur6p7RMoR6g=",
+        "lastModified": 1610791052,
+        "narHash": "sha256-2sqrLo1O0OmutNyPZTg5lXDNPDgjcrlvAkQbo7pFUUY=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "73506f947c3a2f63306233358231b069865d1d56",
+        "rev": "8127799f79ee96129b295d78294f40a54078131f",
         "type": "github"
       },
       "original": {
@@ -58,17 +74,42 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1609337051,
-        "narHash": "sha256-Rzo2IFMZKuMJ6waaGgIRMpbt2eHUjx3iByFdjG23buA=",
+        "lastModified": 1610839077,
+        "narHash": "sha256-iM6M2IBHJjCScOLCAfrPPQ4855J3sn8teXmShJuPjH0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ac02f26980ffc6a84844943cb2c303662225543a",
+        "rev": "aa4a14b7ad268ad423e2a4bac065fa9acd02d652",
         "type": "github"
       },
       "original": {
-        "id": "nixpkgs",
+        "owner": "NixOS",
         "ref": "nixos-unstable-small",
-        "type": "indirect"
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgsWayland": {
+      "inputs": {
+        "cachix": "cachix",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "unstableSmall": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1610885247,
+        "narHash": "sha256-DHdp0ROpthzwzADUvKG9fwOhMHdESF2g9hSnNwyTf2Q=",
+        "owner": "colemickens",
+        "repo": "nixpkgs-wayland",
+        "rev": "b93d657098161d7b9335330139d7148c578a41b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "colemickens",
+        "repo": "nixpkgs-wayland",
+        "type": "github"
       }
     },
     "root": {
@@ -76,7 +117,8 @@
         "home": "home",
         "impermanence": "impermanence",
         "mynex": "mynex",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "nixpkgsWayland": "nixpkgsWayland"
       }
     }
   },

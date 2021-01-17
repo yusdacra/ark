@@ -24,14 +24,24 @@ let
 
           global = {
             networking.hostName = hostName;
-            nix.nixPath = [
-              "nixpkgs=${nixpkgs}"
-              "nixos-config=/etc/nixos/configuration.nix"
-              "nixpkgs-overlays=/etc/nixos/overlays"
-            ];
+            nix = {
+              nixPath = [
+                "nixpkgs=${nixpkgs}"
+                "nixos-config=/etc/nixos/configuration.nix"
+                "nixpkgs-overlays=/etc/nixos/overlays"
+              ];
+
+              binaryCachePublicKeys = [
+                "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+                "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+              ];
+              binaryCaches = [
+                "https://cache.nixos.org"
+                "https://nixpkgs-wayland.cachix.org"
+              ];
+            };
 
             nixpkgs = { inherit pkgs; };
-            nixpkgs.overlays = [ mynex.overlay ];
           };
 
           local = import "${toString ./.}/${hostName}.nix";
