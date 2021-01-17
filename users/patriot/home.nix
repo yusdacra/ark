@@ -213,6 +213,8 @@ in
           font-awesome
           (nerdfonts.override { fonts = [ "Iosevka" ]; })
           # Programs
+          gnome3.gnome-tweaks
+          gnome3.seahorse
           wine-staging
           cachix
           plasma5.plasma-browser-integration
@@ -253,7 +255,7 @@ in
         inherit font;
       };
       sway = {
-        enable = true;
+        enable = false;
         extraSessionCommands = ''
           export SDL_VIDEODRIVER=wayland
           # needs qt5.qtwayland in systemPackages
@@ -338,7 +340,7 @@ in
 
     programs = {
       alacritty = {
-        enable = true;
+        enable = false;
         settings = {
           font = {
             normal = { family = font; };
@@ -481,15 +483,15 @@ in
           # use this if they aren't displayed properly:
           export _JAVA_AWT_WM_NONREPARENTING=1
         '';
-        loginExtra =
-          let
-            deCmd = if config.wayland.windowManager.sway.enable then "sway" else (if config.wayland.windowManager.hikari.enable then "hikari" else throw "Need a window manager to start!");
-          in
-          ''
-            if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
-                exec ${pkgBin deCmd}
-            fi
-          '';
+        # loginExtra =
+        #   let
+        #     deCmd = if config.wayland.windowManager.sway.enable then "sway" else (if config.wayland.windowManager.hikari.enable then "hikari" else throw "Need a window manager to start!");
+        #   in
+        #   ''
+        #     if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
+        #         exec ${pkgBin deCmd}
+        #     fi
+        #   '';
         initExtra = ''
           bindkey "$terminfo[kRIT5]" forward-word
           bindkey "$terminfo[kLFT5]" backward-word
@@ -528,7 +530,7 @@ in
           acc = "#${acColor}";
         in
         {
-          enable = true;
+          enable = false;
           colors = {
             window = {
               background = bgc;

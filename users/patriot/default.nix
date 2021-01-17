@@ -30,18 +30,15 @@
     };
   };
 
-  /*services = {
+  security.pam.services.patriot.enableGnomeKeyring = true;
+  services = {
+    gnome3 = {
+      gnome-keyring.enable = true;
+    };
     xserver = {
       enable = true;
-      desktopManager.plasma5.enable = true;
-      displayManager = {
-        autoLogin = {
-          enable = true;
-          user = "patriot";
-        };
-        sddm.enable = true;
-      };
+      desktopManager.gnome3.enable = true;
+      displayManager.gdm.enable = true;
     };
   };
-  environment.systemPackages = [ pkgs.kde-gtk-config ];*/
 }
