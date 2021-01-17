@@ -731,6 +731,19 @@ in
             (mkExt "material-icon-theme" "4.4.0" "PKief" "sha256-yiM+jtc7UW8PQTwmHmXHSSmvYC73GLh/cLYnmYqONdU=")
             (mkExt "github-vscode-theme" "1.1.5" "github" "sha256-EPAJjM4CbR8MhV+3pm6mC12KzSt2Em6pT+c2HknNntI=")
           ];
+        userSettings = {
+          "workbench.iconTheme" = "material-icon-theme";
+          "workbench.colorTheme" = "GitHub Dark";
+          "rust-analyzer.cargo.allFeatures" = true;
+          "rust-analyzer.cargo.loadOutDirsFromCheck" = true;
+          "rust-analyzer.procMacro.enable" = true;
+          "editor.fontFamily" = "'Iosevka'";
+          "debug.console.fontFamily" = "Iosevka";
+          "debug.console.fontSize" = 12;
+          "terminal.integrated.fontSize" = 12;
+          "go.useLanguageServer" = true;
+          "rust-analyzer.checkOnSave.command" = "clippy";
+        };
       };
     };
 
