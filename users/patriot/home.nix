@@ -759,7 +759,7 @@ in
         maxCacheTtl = 3600 * 24;
         maxCacheTtlSsh = maxCacheTtl;
         grabKeyboardAndMouse = false;
-        pinentryFlavor = "gtk2";
+        pinentryFlavor = "gnome3";
       };
     };
 
