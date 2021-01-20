@@ -217,7 +217,6 @@ in
           gnome3.seahorse
           wine-staging
           cachix
-          plasma5.plasma-browser-integration
           chromiumWaylandPkg
           appimage-run
           bitwarden
@@ -235,17 +234,7 @@ in
           lutris
           xdg_utils
           discord
-          # xdg-user-dirs
           tagref
-          # gnome3.zenity
-          # x11 docker stuff
-          # x11docker
-          # weston
-          # xpra
-          # xdotool
-          # xorg.setxkbmap
-          # xorg.xkbcomp
-          # xorg.xauth
         ] ++ kideDeps;
     };
 
@@ -329,11 +318,11 @@ in
               accel_profile = "flat";
             };
           };
-          # output = {
-          #   "*" = {
-          #     bg = config.home.homeDirectory + "/wallpaper.png" + " fill";
-          #   };
-          # };
+          output = {
+            "*" = {
+              bg = config.home.homeDirectory + "/wallpaper.png" + " fill";
+            };
+          };
         };
       };
     };
