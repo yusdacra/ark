@@ -1,4 +1,4 @@
-inputs@{ home, impermanence, mynex, nixpkgs, self, pkgs, system, ... }:
+inputs@{ home, impermanence, mynex, nixpkgs, self, pkgs, lldbPkgs, system, ... }:
 let
   utils = import ../lib/utils.nix { inherit lib pkgs; };
 
@@ -10,6 +10,7 @@ let
       inherit system;
 
       specialArgs = {
+        inherit lldbPkgs;
         usr = { inherit utils; };
         util = utils;
         nixosPersistence = "${impermanence}/nixos.nix";

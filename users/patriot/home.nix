@@ -1,4 +1,4 @@
-{ config, lib, pkgs, util, ... }:
+{ config, lib, pkgs, lldbPkgs, util, ... }:
 let
   inherit (lib) mapAttrs' nameValuePair;
   inherit (builtins) readDir;
@@ -698,7 +698,7 @@ in
           let
             mkExt = n: v: p: s: { name = n; version = v; publisher = p; sha256 = s; };
           in
-          pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          (pkgs.vscode-utils.extensionsFromVscodeMarketplace [
             # Rust
             (mkExt "rust-analyzer" "0.2.441" "matklad" "sha256-aUX2HMMhS9bgTOmGgqZIgs0GBxmbJdr7J6loqwQTZeM=")
             (mkExt "even-better-toml" "0.10.0" "tamasfe" "sha256-miJ7gXYavLyJneKOSs+4GaFG4v6ocem2YOWyAUrOfs8=")
@@ -721,7 +721,7 @@ in
             # (mkExt "dance" "0.3.2" "gregoire" "sha256-+g8EXeCkPOPvZ60JoXkGTeSXYWrXmKrcbUaEfDppdgA=")
             (mkExt "material-icon-theme" "4.4.0" "PKief" "sha256-yiM+jtc7UW8PQTwmHmXHSSmvYC73GLh/cLYnmYqONdU=")
             (mkExt "github-vscode-theme" "1.1.5" "github" "sha256-EPAJjM4CbR8MhV+3pm6mC12KzSt2Em6pT+c2HknNntI=")
-          ];
+          ]) ++ [ lldbPkgs.vscode-extensions.vadimcn.vscode-lldb ];
         userSettings = {
           "workbench.iconTheme" = "material-icon-theme";
           "workbench.colorTheme" = "GitHub Dark";
