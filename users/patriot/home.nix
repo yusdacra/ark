@@ -213,7 +213,7 @@ in
           font-awesome
           (nerdfonts.override { fonts = [ "Iosevka" ]; })
           # Programs
-          gnome3.gnome-tweaks
+          latte-dock
           gnome3.seahorse
           wine-staging
           cachix
@@ -228,7 +228,7 @@ in
           youtube-dl
           ffmpeg
           mupdf
-          transmission-gtk
+          transmission-qt
           gitAndTools.gh
           steam-run
           lutris
@@ -464,23 +464,23 @@ in
         dotDir = ".config/zsh";
         history.path = ".local/share/zsh/history";
         envExtra = ''
-          export SDL_VIDEODRIVER=wayland
+          #export SDL_VIDEODRIVER=wayland
           # needs qt5.qtwayland in systemPackages
-          export QT_QPA_PLATFORM=wayland
-          export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+          #export QT_QPA_PLATFORM=wayland
+          #export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
           # Fix for some Java AWT applications (e.g. Android Studio),
           # use this if they aren't displayed properly:
-          export _JAVA_AWT_WM_NONREPARENTING=1
+          #export _JAVA_AWT_WM_NONREPARENTING=1
         '';
-        # loginExtra =
-        #   let
-        #     deCmd = if config.wayland.windowManager.sway.enable then "sway" else (if config.wayland.windowManager.hikari.enable then "hikari" else throw "Need a window manager to start!");
-        #   in
-        #   ''
-        #     if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
-        #         exec ${pkgBin deCmd}
-        #     fi
-        #   '';
+        /*loginExtra =
+          let
+            #deCmd = if config.wayland.windowManager.sway.enable then "sway" else (if config.wayland.windowManager.hikari.enable then "hikari" else throw "Need a window manager to start!");
+          in
+          ''
+            if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
+                exec startplasma-x11
+            fi
+          '';*/
         initExtra = ''
           bindkey "$terminfo[kRIT5]" forward-word
           bindkey "$terminfo[kLFT5]" backward-word
@@ -748,7 +748,7 @@ in
         maxCacheTtl = 3600 * 24;
         maxCacheTtlSsh = maxCacheTtl;
         grabKeyboardAndMouse = false;
-        pinentryFlavor = "gnome3";
+        pinentryFlavor = "qt";
       };
     };
 

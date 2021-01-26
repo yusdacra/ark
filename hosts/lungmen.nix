@@ -166,7 +166,7 @@ in
   services.xserver = {
     videoDrivers = [ "amdgpu" ];
   };
-  virtualisation.docker.enable = true;
+  virtualisation.podman.enable = true;
   services.postgresql = {
     enable = false;
     enableTCPIP = true;
