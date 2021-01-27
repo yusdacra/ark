@@ -1,8 +1,7 @@
 {
   imports = [ ./dns ];
 
-  networking.networkmanager.enable = false;
-  networking.dhcpcd.enable = true;
+  networking.dhcpcd.enable = false;
   networking.useDHCP = false;
   networking.dhcpcd.extraConfig = ''
     noarp

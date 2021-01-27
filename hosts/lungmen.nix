@@ -35,7 +35,7 @@ in
   imports = [
     ../users/patriot
     ../users/root
-    ../profiles/network
+    ../profiles/network/networkmanager.nix
     # ../profiles/network/nginx.nix
     ../profiles/develop
     (modulesPath + "/installer/scan/not-detected.nix")
