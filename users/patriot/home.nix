@@ -235,6 +235,7 @@ in
           xdg_utils
           discord
           tagref
+          pcsx2
         ] ++ kideDeps;
     };
 
