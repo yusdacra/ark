@@ -168,7 +168,7 @@ in
   };
   virtualisation.podman.enable = true;
   services.postgresql = {
-    enable = false;
+    enable = true;
     enableTCPIP = true;
     authentication = pkgs.lib.mkOverride 10 ''
       local all all trust

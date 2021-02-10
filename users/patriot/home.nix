@@ -1,4 +1,4 @@
-{ config, lib, pkgs, lldbPkgs, util, ... }:
+{ config, lib, pkgs, util, ... }:
 let
   inherit (lib) mapAttrs' nameValuePair;
   inherit (builtins) readDir;
@@ -213,7 +213,8 @@ in
           font-awesome
           (nerdfonts.override { fonts = [ "Iosevka" ]; })
           # Programs
-          latte-dock
+          audacity
+          kdenlive
           gnome3.seahorse
           wine-staging
           cachix
@@ -722,7 +723,7 @@ in
             # (mkExt "dance" "0.3.2" "gregoire" "sha256-+g8EXeCkPOPvZ60JoXkGTeSXYWrXmKrcbUaEfDppdgA=")
             (mkExt "material-icon-theme" "4.4.0" "PKief" "sha256-yiM+jtc7UW8PQTwmHmXHSSmvYC73GLh/cLYnmYqONdU=")
             (mkExt "github-vscode-theme" "1.1.5" "github" "sha256-EPAJjM4CbR8MhV+3pm6mC12KzSt2Em6pT+c2HknNntI=")
-          ]) ++ [ lldbPkgs.vscode-extensions.vadimcn.vscode-lldb ];
+          ]) ++ [ pkgs.vscode-extensions.vadimcn.vscode-lldb ];
         userSettings = {
           "workbench.iconTheme" = "material-icon-theme";
           "workbench.colorTheme" = "GitHub Dark";
