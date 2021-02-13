@@ -163,26 +163,29 @@ in
   };
   networking.interfaces.enp6s0.useDHCP = true;
 
-  services.xserver = {
-    videoDrivers = [ "amdgpu" ];
+  services = {
+    flatpak.enable = true;
+    xserver = {
+      videoDrivers = [ "amdgpu" ];
+    };
+    postgresql = {
+      enable = true;
+      enableTCPIP = true;
+      authentication = pkgs.lib.mkOverride 10 ''
+        local all all trust
+        host  all all 0.0.0.0/0 md5
+      '';
+      settings = {
+        listen_addresses = "*";
+      };
+      initialScript = pkgs.writeText "backend-initScript" ''
+        CREATE ROLE patriot WITH LOGIN PASSWORD 'patriot' CREATEDB;
+        CREATE DATABASE harmony;
+        GRANT ALL PRIVILEGES ON DATABASE harmony TO patriot;
+      '';
+    };
   };
   virtualisation.podman.enable = true;
-  services.postgresql = {
-    enable = true;
-    enableTCPIP = true;
-    authentication = pkgs.lib.mkOverride 10 ''
-      local all all trust
-      host  all all 0.0.0.0/0 md5
-    '';
-    settings = {
-      listen_addresses = "*";
-    };
-    initialScript = pkgs.writeText "backend-initScript" ''
-      CREATE ROLE patriot WITH LOGIN PASSWORD 'patriot' CREATEDB;
-      CREATE DATABASE harmony;
-      GRANT ALL PRIVILEGES ON DATABASE harmony TO patriot;
-    '';
-  };
 
   system.stateVersion = "20.09";
 }
