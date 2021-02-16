@@ -230,13 +230,11 @@ in
           ffmpeg
           mupdf
           transmission-qt
-          gitAndTools.gh
           steam-run
           lutris
           xdg_utils
           discord
           tagref
-          pcsx2
         ] ++ kideDeps;
     };
 

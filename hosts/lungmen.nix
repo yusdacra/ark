@@ -160,6 +160,9 @@ in
       directories = [ "/etc/nixos" ];
       files = [ "/etc/machine-id" ];
     };
+    variables = {
+      VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/amd_icd64.json";
+    };
   };
   networking.interfaces.enp6s0.useDHCP = true;
 
