@@ -215,6 +215,7 @@ in
           # Programs
           audacity
           kdenlive
+          krita
           gnome3.seahorse
           wine-staging
           cachix
@@ -234,6 +235,7 @@ in
           lutris
           xdg_utils
           discord
+          ripcord
           tagref
         ] ++ kideDeps;
     };
