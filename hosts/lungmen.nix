@@ -171,6 +171,13 @@ in
     xserver = {
       videoDrivers = [ "amdgpu" ];
     };
+    pipewire = {
+      enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+    };
     postgresql = {
       enable = true;
       enableTCPIP = true;
