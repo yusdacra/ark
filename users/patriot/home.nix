@@ -237,6 +237,7 @@ in
           discord
           ripcord
           tagref
+          libreoffice-fresh
         ] ++ kideDeps;
     };
 
@@ -488,9 +489,7 @@ in
           bindkey "$terminfo[kLFT5]" backward-word
           zstyle ':completion:*' menu select
 
-          function project() {
-            cd "$HOME/Belgeler/projects/$1"
-          }
+          eval "$(zoxide init zsh)"
         '';
         shellAliases = nixosConfig.environment.shellAliases // {
           rember = ''

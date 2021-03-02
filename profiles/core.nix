@@ -26,12 +26,14 @@ in
         ripgrep
         curl
         git
-        gotop
         gptfdisk
         iputils
         lm_sensors
         mkpasswd
         ntfs3g
+        zoxide
+        bottom
+        tealdeer
       ];
 
       shellAliases =
@@ -74,7 +76,7 @@ in
           ncg = ifSudo "sudo nix-collect-garbage";
           ncgdo = ifSudo "sudo nix-collect-garbage --delete-old";
 
-          top = pkgBin "gotop";
+          top = "${pkgs.bottom}/bin/btm";
 
           myip =
             "${pkgs.dnsutils}/bin/dig +short myip.opendns.com @208.67.222.222 2>&1";
