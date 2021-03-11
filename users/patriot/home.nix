@@ -247,7 +247,7 @@ in
         inherit font;
       };
       sway = {
-        enable = false;
+        enable = true;
         extraSessionCommands = ''
           export SDL_VIDEODRIVER=wayland
           # needs qt5.qtwayland in systemPackages
@@ -332,7 +332,7 @@ in
 
     programs = {
       alacritty = {
-        enable = false;
+        enable = true;
         settings = {
           font = {
             normal = { family = font; };
@@ -467,15 +467,15 @@ in
         dotDir = ".config/zsh";
         history.path = ".local/share/zsh/history";
         envExtra = ''
-          #export SDL_VIDEODRIVER=wayland
+          export SDL_VIDEODRIVER=wayland
           # needs qt5.qtwayland in systemPackages
-          #export QT_QPA_PLATFORM=wayland
-          #export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+          export QT_QPA_PLATFORM=wayland
+          export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
           # Fix for some Java AWT applications (e.g. Android Studio),
           # use this if they aren't displayed properly:
-          #export _JAVA_AWT_WM_NONREPARENTING=1
+          export _JAVA_AWT_WM_NONREPARENTING=1
         '';
-        /*loginExtra =
+        loginExtra =
           let
             #deCmd = if config.wayland.windowManager.sway.enable then "sway" else (if config.wayland.windowManager.hikari.enable then "hikari" else throw "Need a window manager to start!");
           in
@@ -483,7 +483,7 @@ in
             if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
                 exec startplasma-x11
             fi
-          '';*/
+          '';
         initExtra = ''
           bindkey "$terminfo[kRIT5]" forward-word
           bindkey "$terminfo[kLFT5]" backward-word
@@ -520,7 +520,7 @@ in
           acc = "#${acColor}";
         in
         {
-          enable = false;
+          enable = true;
           colors = {
             window = {
               background = bgc;
@@ -701,27 +701,28 @@ in
           in
           (pkgs.vscode-utils.extensionsFromVscodeMarketplace [
             # Rust
-            (mkExt "rust-analyzer" "0.2.441" "matklad" "sha256-aUX2HMMhS9bgTOmGgqZIgs0GBxmbJdr7J6loqwQTZeM=")
-            (mkExt "even-better-toml" "0.10.0" "tamasfe" "sha256-miJ7gXYavLyJneKOSs+4GaFG4v6ocem2YOWyAUrOfs8=")
+            (mkExt "rust-analyzer" "0.2.513" "matklad" "sha256-aUX2HMMhS9bgTOmGgqZIgs0GBxmbJdr7J6loqwQTZeM=")
+            (mkExt "even-better-toml" "0.11.1" "tamasfe" "sha256-miJ7gXYavLyJneKOSs+4GaFG4v6ocem2YOWyAUrOfs8=")
             (mkExt "vscode-ron" "0.9.0" "a5huynh" "sha256-J30hxEYCkr4xhaJ+DfffjwRJZx9NGCOrA6VcDCsodzQ=")
-            (mkExt "crates" "0.5.3" "serayuzgur" "sha256-TpzeEPBE75Ov2qDPa22k7e0pTDLQX8z0qBqCVLZXZ/Y=")
+            (mkExt "crates" "0.5.7" "serayuzgur" "sha256-TpzeEPBE75Ov2qDPa22k7e0pTDLQX8z0qBqCVLZXZ/Y=")
             # Nix
-            (mkExt "nix-env-selector" "0.1.2" "arrterian" "sha256-aTNxr1saUaN9I82UYCDsQvH9UBWjue/BSnUmMQOnsdg=")
+            (mkExt "nix-env-selector" "1.0.4" "arrterian" "sha256-aTNxr1saUaN9I82UYCDsQvH9UBWjue/BSnUmMQOnsdg=")
             (mkExt "nix-ide" "0.1.7" "jnoortheen" "sha256-NXMwd1Yi6kVxXLhWgzFOXQm580Mv4UPh6jUulbDnhK8=")
             # Go
-            (mkExt "Go" "0.20.1" "golang" "sha256-UjGaePjYceLdkf2yrxkVy6ht2aStJ5wklguKe/Z8HUI=")
+            (mkExt "Go" "0.23.1" "golang" "sha256-UjGaePjYceLdkf2yrxkVy6ht2aStJ5wklguKe/Z8HUI=")
             # Flutter and dart
-            (mkExt "flutter" "3.18.0" "Dart-Code" "sha256-nvKBPSe0+WQ8m88WrQqhzVrqYBjcBhiz6EuJ38gTFhQ=")
-            (mkExt "dart-code" "3.18.0" "Dart-Code" "sha256-E+qrY7wOvengOs2yKqhh+5dRLu3dUu6yWxGcwD7QHuI=")
+            (mkExt "flutter" "3.20.0" "Dart-Code" "sha256-nvKBPSe0+WQ8m88WrQqhzVrqYBjcBhiz6EuJ38gTFhQ=")
+            (mkExt "dart-code" "3.20.0" "Dart-Code" "sha256-E+qrY7wOvengOs2yKqhh+5dRLu3dUu6yWxGcwD7QHuI=")
             # protobuf
             (mkExt "vscode-proto3" "0.5.3" "zxh404" "sha256-oUSih+YdAXYkTNejZBJjcXewQewgQFMGhAFdJ/CBMd4=")
             # git
-            (mkExt "gitlens" "11.1.3" "eamodio" "sha256-hqJg3jP4bbXU4qSJOjeKfjkPx61yPDMsQdSUVZObK/U=")
-            (mkExt "vscode-commitizen" "0.9.3" "KnisterPeter" "sha256-q9u3oSwFjDHwLsIUwMZ8huv9uXc1GWFfEOEMXWx3w/o=")
+            (mkExt "gitlens" "11.3.0" "eamodio" "sha256-hqJg3jP4bbXU4qSJOjeKfjkPx61yPDMsQdSUVZObK/U=")
+            (mkExt "vscode-commitizen" "0.12.1" "KnisterPeter" "sha256-q9u3oSwFjDHwLsIUwMZ8huv9uXc1GWFfEOEMXWx3w/o=")
             # Customization
             # (mkExt "dance" "0.3.2" "gregoire" "sha256-+g8EXeCkPOPvZ60JoXkGTeSXYWrXmKrcbUaEfDppdgA=")
             (mkExt "material-icon-theme" "4.4.0" "PKief" "sha256-yiM+jtc7UW8PQTwmHmXHSSmvYC73GLh/cLYnmYqONdU=")
             (mkExt "github-vscode-theme" "1.1.5" "github" "sha256-EPAJjM4CbR8MhV+3pm6mC12KzSt2Em6pT+c2HknNntI=")
+            (mkExt "koka" "0.0.1" "maelvalais" "sha256-ty8Mql19HgUWForggeZuHQpzTbmmB/eBFHqof5ZMKr0=")
           ]) ++ [ pkgs.vscode-extensions.vadimcn.vscode-lldb ];
         userSettings = {
           "workbench.iconTheme" = "material-icon-theme";
@@ -729,8 +730,8 @@ in
           "rust-analyzer.cargo.allFeatures" = true;
           "rust-analyzer.cargo.loadOutDirsFromCheck" = true;
           "rust-analyzer.procMacro.enable" = true;
-          "editor.fontFamily" = "'Iosevka'";
-          "debug.console.fontFamily" = "Iosevka";
+          "editor.fontFamily" = "'${font}'";
+          "debug.console.fontFamily" = "${font}";
           "debug.console.fontSize" = 12;
           "terminal.integrated.fontSize" = 12;
           "go.useLanguageServer" = true;

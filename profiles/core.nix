@@ -34,6 +34,8 @@ in
         zoxide
         bottom
         tealdeer
+        amber
+        unzip
       ];
 
       shellAliases =
