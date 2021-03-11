@@ -701,29 +701,27 @@ in
           in
           (pkgs.vscode-utils.extensionsFromVscodeMarketplace [
             # Rust
-            (mkExt "rust-analyzer" "0.2.513" "matklad" "sha256-aUX2HMMhS9bgTOmGgqZIgs0GBxmbJdr7J6loqwQTZeM=")
-            (mkExt "even-better-toml" "0.11.1" "tamasfe" "sha256-miJ7gXYavLyJneKOSs+4GaFG4v6ocem2YOWyAUrOfs8=")
-            (mkExt "vscode-ron" "0.9.0" "a5huynh" "sha256-J30hxEYCkr4xhaJ+DfffjwRJZx9NGCOrA6VcDCsodzQ=")
-            (mkExt "crates" "0.5.7" "serayuzgur" "sha256-TpzeEPBE75Ov2qDPa22k7e0pTDLQX8z0qBqCVLZXZ/Y=")
+            (mkExt "rust-analyzer" "0.2.513" "matklad" "sha256-95B5AZkw4MigZ1XsnALzy9Th9U59SDLrGCpA1FYy6vQ=")
+            (mkExt "even-better-toml" "0.11.1" "tamasfe" "sha256-0JpOydgcEs9PR2wUiVT9cmp9OnLX01idt0/d9UE+VI4=")
+            (mkExt "crates" "0.5.7" "serayuzgur" "sha256-g0eobd8QlBgWOOhqQdJX1rsplBECryRC3+9Wg8yqKeA=")
             # Nix
-            (mkExt "nix-env-selector" "1.0.4" "arrterian" "sha256-aTNxr1saUaN9I82UYCDsQvH9UBWjue/BSnUmMQOnsdg=")
-            (mkExt "nix-ide" "0.1.7" "jnoortheen" "sha256-NXMwd1Yi6kVxXLhWgzFOXQm580Mv4UPh6jUulbDnhK8=")
+            (mkExt "nix-env-selector" "1.0.4" "arrterian" "sha256-qsz8Gj9s68BIaia80p5lw3J0OFLU3/om4XPNwn69oDY=")
             # Go
-            (mkExt "Go" "0.23.1" "golang" "sha256-UjGaePjYceLdkf2yrxkVy6ht2aStJ5wklguKe/Z8HUI=")
+            (mkExt "Go" "0.23.1" "golang" "sha256-+WGWGzCBNktZFyaupiUi9DwgTTfI3uUy9UmOiS8Js6k=")
             # Flutter and dart
-            (mkExt "flutter" "3.20.0" "Dart-Code" "sha256-nvKBPSe0+WQ8m88WrQqhzVrqYBjcBhiz6EuJ38gTFhQ=")
-            (mkExt "dart-code" "3.20.0" "Dart-Code" "sha256-E+qrY7wOvengOs2yKqhh+5dRLu3dUu6yWxGcwD7QHuI=")
+            (mkExt "flutter" "3.20.0" "Dart-Code" "sha256-egnfhJrTn6JG0jxvwyQiXIcyfpdGs0IGVor1LKf6+wI=")
+            (mkExt "dart-code" "3.20.0" "Dart-Code" "sha256-HeTJHH22ltrlSQkxsw+3ktO2Zvt1n+LKHeHx3rAHEL0=")
             # protobuf
             (mkExt "vscode-proto3" "0.5.3" "zxh404" "sha256-oUSih+YdAXYkTNejZBJjcXewQewgQFMGhAFdJ/CBMd4=")
             # git
-            (mkExt "gitlens" "11.3.0" "eamodio" "sha256-hqJg3jP4bbXU4qSJOjeKfjkPx61yPDMsQdSUVZObK/U=")
-            (mkExt "vscode-commitizen" "0.12.1" "KnisterPeter" "sha256-q9u3oSwFjDHwLsIUwMZ8huv9uXc1GWFfEOEMXWx3w/o=")
+            (mkExt "gitlens" "11.3.0" "eamodio" "sha256-m2Zn+e6hj59SujcW5ptdrYDrc4CviZ4wyCndO2BhyF8=")
+            (mkExt "vscode-commitizen" "0.12.1" "KnisterPeter" "sha256-TpfRzePDeXQlSMmjRhphN3XXTc+pp92JySZoe6ltxZg=")
             # Customization
             # (mkExt "dance" "0.3.2" "gregoire" "sha256-+g8EXeCkPOPvZ60JoXkGTeSXYWrXmKrcbUaEfDppdgA=")
             (mkExt "material-icon-theme" "4.4.0" "PKief" "sha256-yiM+jtc7UW8PQTwmHmXHSSmvYC73GLh/cLYnmYqONdU=")
             (mkExt "github-vscode-theme" "1.1.5" "github" "sha256-EPAJjM4CbR8MhV+3pm6mC12KzSt2Em6pT+c2HknNntI=")
             (mkExt "koka" "0.0.1" "maelvalais" "sha256-ty8Mql19HgUWForggeZuHQpzTbmmB/eBFHqof5ZMKr0=")
-          ]) ++ [ pkgs.vscode-extensions.vadimcn.vscode-lldb ];
+          ]) ++ (with pkgs.vscode-extensions; [ a5huynh.vscode-ron vadimcn.vscode-lldb jnoortheen.nix-ide ]);
         userSettings = {
           "workbench.iconTheme" = "material-icon-theme";
           "workbench.colorTheme" = "GitHub Dark";
