@@ -38,7 +38,7 @@
     gnome3 = {
       gnome-keyring.enable = true;
     };
-    /*xserver = {
+    xserver = {
       enable = true;
       desktopManager = {
         plasma5.enable = true;
@@ -58,7 +58,7 @@
         sddm.enable = true;
         startx.enable = false;
       };
-    };*/
+    };
   };
 
   systemd.user.services.gnome-session-restart-dbus.serviceConfig = {
