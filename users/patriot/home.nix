@@ -180,26 +180,29 @@ in
   home-manager.users.patriot = { config, pkgs, ... }: {
     imports = [ ../profiles/hikari.nix ];
 
-    # gtk = {
-    #   # enable = true;
-    #   font = {
-    #     package = pkgs.dejavu_fonts;
-    #     name = "DejaVu Sans 12";
-    #   };
-    #   iconTheme = {
-    #     package = pkgs.papirus-icon-theme;
-    #     name = "Papirus Dark";
-    #   };
-    #   theme = {
-    #     package = pkgs.numix-gtk-theme;
-    #     name = "Numix Dark";
-    #   };
-    # };
+    /*gtk = {
+      enable = false;
+      font = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans 12";
+      };
+      iconTheme = {
+        package = pkgs.papirus-icon-theme;
+        name = "Papirus Dark";
+      };
+      theme = {
+        package = pkgs.numix-gtk-theme;
+        name = "Numix Dark";
+      };
+    };
 
-    # qt = {
-    #   # enable = true;
-    #   platformTheme = "gtk";
-    # };
+    qt = {
+      enable = false;
+      style = {
+        package = pkgs.adwaita-qt;
+        name = "adwaita-dark";
+      };
+    };*/
 
     fonts.fontconfig.enable = true;
     home = {
@@ -215,7 +218,9 @@ in
           # Programs
           audacity
           krita
+          kdenlive
           gnome3.seahorse
+          gnome3.gnome-boxes
           wine-staging
           cachix
           chromiumWaylandPkg
@@ -236,6 +241,10 @@ in
           tagref
           libreoffice-fresh
           mako
+          hydrus
+          musikcube
+          qt5ct
+          phantomstyle
         ] ++ kideDeps;
     };
 
@@ -245,7 +254,7 @@ in
         inherit font;
       };
       sway = {
-        enable = false;
+        enable = true;
         extraSessionCommands = ''
           export SDL_VIDEODRIVER=wayland
           # needs qt5.qtwayland in systemPackages
@@ -254,6 +263,7 @@ in
           # Fix for some Java AWT applications (e.g. Android Studio),
           # use this if they aren't displayed properly:
           export _JAVA_AWT_WM_NONREPARENTING=1
+          export QT_QPA_PLATFORMTHEME=qt5ct
         '';
         wrapperFeatures.gtk = true;
         config = {
@@ -472,16 +482,14 @@ in
           # Fix for some Java AWT applications (e.g. Android Studio),
           # use this if they aren't displayed properly:
           export _JAVA_AWT_WM_NONREPARENTING=1
+          export QT_QPA_PLATFORMTHEME=qt5ct
         '';
-        # loginExtra =
-        #   let
-        #     deCmd = if config.wayland.windowManager.sway.enable then "sway" else (if config.wayland.windowManager.hikari.enable then "hikari" else throw "Need a window manager to start!");
-        #   in
-        #   ''
-        #     if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
-        #         exec ${deCmd}
-        #     fi
-        #   '';
+        loginExtra =
+          ''
+            if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
+                exec sway
+            fi
+          '';
         initExtra = ''
           bindkey "$terminfo[kRIT5]" forward-word
           bindkey "$terminfo[kLFT5]" backward-word
@@ -518,7 +526,7 @@ in
           acc = "#${acColor}";
         in
         {
-          enable = false;
+          enable = true;
           colors = {
             window = {
               background = bgc;
@@ -546,7 +554,7 @@ in
           swayEnabled = config.wayland.windowManager.sway.enable;
         in
         {
-          enable = config.wayland.windowManager.sway.enable || config.wayland.windowManager.hikari.enable;
+          enable = swayEnabled || config.wayland.windowManager.hikari.enable;
           settings = [{
             layer = "top";
             position = "top";

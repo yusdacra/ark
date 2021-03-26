@@ -41,13 +41,13 @@
     xserver = {
       enable = true;
       desktopManager = {
-        plasma5.enable = true;
+        plasma5.enable = false;
         gnome3.enable = false;
         xterm.enable = false;
       };
       displayManager = {
         autoLogin = {
-          enable = true;
+          enable = false;
           user = "patriot";
         };
         lightdm.enable = false;
@@ -55,8 +55,8 @@
           enable = false;
           wayland = true;
         };
-        sddm.enable = true;
-        startx.enable = false;
+        sddm.enable = false;
+        startx.enable = true;
       };
     };
   };

@@ -42,7 +42,7 @@ in
     nixosPersistence
   ];
 
-  systemd.additionalUpstreamSystemUnits = [ "tmp.mount" ];
+  #systemd.additionalUpstreamSystemUnits = [ "tmp.mount" ];
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;
@@ -195,7 +195,10 @@ in
       '';
     };
   };
-  virtualisation.podman.enable = true;
+  virtualisation = {
+    podman.enable = true;
+    libvirtd.enable = true;
+  };
 
   system.stateVersion = "20.09";
 }
