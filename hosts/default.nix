@@ -13,6 +13,7 @@ let
         usr = { inherit utils; };
         util = utils;
         nixosPersistence = "${impermanence}/nixos.nix";
+        nixpkgsFlake = nixpkgs;
       };
 
       modules =

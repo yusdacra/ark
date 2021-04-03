@@ -183,26 +183,26 @@ in
     /*gtk = {
       enable = false;
       font = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Sans 12";
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Sans 12";
       };
       iconTheme = {
-        package = pkgs.papirus-icon-theme;
-        name = "Papirus Dark";
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus Dark";
       };
       theme = {
-        package = pkgs.numix-gtk-theme;
-        name = "Numix Dark";
+      package = pkgs.numix-gtk-theme;
+      name = "Numix Dark";
       };
-    };
+      };
 
-    qt = {
+      qt = {
       enable = false;
       style = {
-        package = pkgs.adwaita-qt;
-        name = "adwaita-dark";
+      package = pkgs.adwaita-qt;
+      name = "adwaita-dark";
       };
-    };*/
+      };*/
 
     fonts.fontconfig.enable = true;
     home = {
@@ -245,6 +245,8 @@ in
           musikcube
           qt5ct
           phantomstyle
+          papirus-icon-theme
+          pcmanfm-qt
         ] ++ kideDeps;
     };
 

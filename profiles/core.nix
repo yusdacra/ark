@@ -1,4 +1,4 @@
-{ config, lib, pkgs, util, ... }:
+{ config, lib, pkgs, util, nixpkgsFlake, ... }:
 let
   inherit (util) pkgBin;
   inherit (lib) fileContents mkIf;
@@ -94,6 +94,7 @@ in
     extraOptions = ''
       experimental-features = nix-command flakes ca-references
     '';
+    registry.nixpkgs.flake = nixpkgsFlake;
   };
 
   # security = {

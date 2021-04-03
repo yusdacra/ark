@@ -167,6 +167,11 @@ in
   networking.interfaces.enp6s0.useDHCP = true;
 
   services = {
+    ipfs = {
+      enable = true;
+      enableGC = true;
+      autoMount = true;
+    };
     flatpak.enable = true;
     xserver = {
       videoDrivers = [ "amdgpu" ];
