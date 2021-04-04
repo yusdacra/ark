@@ -172,19 +172,19 @@ in
       enableGC = true;
       autoMount = true;
     };
-    flatpak.enable = true;
+    flatpak.enable = false;
     xserver = {
       videoDrivers = [ "amdgpu" ];
     };
     pipewire = {
-      enable = true;
+      enable = false;
       alsa = {
         enable = true;
         support32Bit = true;
       };
     };
     postgresql = {
-      enable = true;
+      enable = false;
       enableTCPIP = true;
       authentication = pkgs.lib.mkOverride 10 ''
         local all all trust
