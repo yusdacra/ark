@@ -209,6 +209,7 @@ in
       homeDirectory = nixosConfig.users.users.patriot.home;
       packages = with pkgs;
         [
+          discord
           # Font stuff
           fontPackage
           noto-fonts-cjk
