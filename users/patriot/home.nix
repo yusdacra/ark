@@ -134,8 +134,8 @@ let
 
   bgColor = colorScheme.primary.normal.background;
   fgColor = colorScheme.primary.bright.foreground;
-  acColor = colorScheme.normal.blue;
-  acColor2 = colorScheme.bright.cyan;
+  acColor = colorScheme.normal.yellow;
+  acColor2 = colorScheme.normal.magenta;
 
   alacrittyColors = {
     primary = {
