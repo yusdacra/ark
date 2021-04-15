@@ -1,11 +1,12 @@
 final: prev: {
   hydrus = prev.hydrus.overrideAttrs (old: rec {
-    pname = "hydrus";
-    version = "434";
+    version = "435";
 
-    src = builtins.fetchGit {
-      url = "https://github.com/hydrusnetwork/hydrus.git";
-      rev = "71bedccaeabf411307edeac3b03a0903d2c23ec8";
+    src = prev.fetchFromGitHub {
+      owner = "hydrusnetwork";
+      repo = old.pname;
+      rev = "v${version}";
+      sha256 = "sha256-+YOFqRgyNtdVBBCb6MWb+PqUoGvt8M0/ygiHrvxdWWg=";
     };
 
     postPatch = ''

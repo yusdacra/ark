@@ -36,6 +36,7 @@ in
         tealdeer
         amber
         unzip
+        grit
       ];
 
       shellAliases =
