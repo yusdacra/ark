@@ -43,6 +43,9 @@ in
         let ifSudo = string: mkIf config.security.sudo.enable string;
         in
         {
+          gtw = "${pkgBin "grit"} tree wnv";
+          gt = pkgBin "grit";
+
           g = pkgBin "git";
 
           grep = "${pkgs.ripgrep}/bin/rg";
