@@ -168,7 +168,7 @@ in
 
   services = {
     ipfs = {
-      enable = true;
+      enable = false;
       enableGC = true;
       autoMount = true;
     };
