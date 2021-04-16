@@ -1,4 +1,4 @@
-{ config, lib, pkgs, util, nixpkgsFlake, ... }:
+{ config, lib, pkgs, util, inputs, ... }:
 let
   inherit (util) pkgBin;
   inherit (lib) fileContents mkIf;
@@ -86,20 +86,36 @@ in
 
           myip =
             "${pkgs.dnsutils}/bin/dig +short myip.opendns.com @208.67.222.222 2>&1";
+
+          sys-repl =
+            "source /etc/set-environment && ${nixBin} repl ${./..}/repl.nix";
         };
     };
 
-  nix = {
-    package = pkgs.nixFlakes;
-    autoOptimiseStore = true;
-    optimise.automatic = true;
-    allowedUsers = [ "@wheel" ];
-    trustedUsers = [ "root" "@wheel" ];
-    extraOptions = ''
-      experimental-features = nix-command flakes ca-references
-    '';
-    registry.nixpkgs.flake = nixpkgsFlake;
-  };
+  nix =
+    let
+      flakes = lib.filterAttrs (name: value: value ? outputs) inputs;
+
+      nixPath = lib.mapAttrsToList
+        (name: _: "${name}=${inputs.${name}}")
+        flakes;
+
+      registry = builtins.mapAttrs
+        (name: v: { flake = v; })
+        flakes;
+    in
+    {
+      package = pkgs.nixFlakes;
+      autoOptimiseStore = true;
+      optimise.automatic = true;
+      allowedUsers = [ "@wheel" ];
+      trustedUsers = [ "root" "@wheel" ];
+      extraOptions = ''
+        experimental-features = nix-command flakes ca-references
+      '';
+      nixPath = nixPath ++ [ "repl=${./..}/repl.nix" ];
+      inherit registry;
+    };
 
   # security = {
   #   hideProcessInformation = true;
