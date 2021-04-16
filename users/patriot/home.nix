@@ -389,7 +389,7 @@ in
         enable = true;
         settings = {
           content.javascript.enabled = false;
-          colors.webpage.darkmode.enabled = true;
+          colors.webpage.darkmode.enabled = false;
           tabs = {
             show = "multiple";
             tabs_are_windows = true;
@@ -411,7 +411,9 @@ in
               config.set('content.javascript.enabled', True, 'https://*.${d}')
             '';
           in
-          lib.concatStrings (map enableJsForDomain domains);
+          ''
+            ${lib.concatStrings (map enableJsForDomain domains)}
+          '';
       };
       git = {
         enable = true;
