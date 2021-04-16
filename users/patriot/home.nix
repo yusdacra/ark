@@ -14,11 +14,10 @@ let
   fontComb = "${font} ${toString fontSize}";
   fontPackage = pkgs.iosevka;
 
-  kideSrc = pkgs.fetchgit {
+  kideSrc = builtins.fetchGit {
     url = "https://gitlab.com/yusdacra/kide.git";
-    rev = "2d76f8b668e7ff12fd686a101f0d26d50b6c0ece";
-    sha256 = "sha256-ONQmrJvNnmQ9W350od46VECW6Ir3KOMUJRnEMeVIsgg=";
-    fetchSubmodules = true;
+    rev = "778d68df0cfcb96d6113bfe6a59e5dfc71ee7d82";
+    submodules = true;
   };
   kideFiles =
     mapAttrs' (n: _: nameValuePair "kak/${n}" { source = "${kideSrc}/${n}"; })
@@ -31,6 +30,13 @@ let
     kak-lsp
     wl-clipboard
     xclip
+    shellcheck
+    perl
+    socat
+    gdb
+    kcr
+    jq
+    file
   ];
 
   chromiumWayland = pkgs.writeScriptBin "chromium-wayland" ''
