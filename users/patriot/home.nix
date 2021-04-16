@@ -360,7 +360,7 @@ in
         };
       };
       tmux = {
-        enable = false;
+        enable = true;
         newSession = true;
         secureSocket = true;
         baseIndex = 1;
@@ -374,7 +374,7 @@ in
         '';
       };
       chromium = {
-        enable = true;
+        enable = false;
         extensions = [
           "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
           "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock
@@ -386,11 +386,14 @@ in
         ];
       };
       qutebrowser = {
-        enable = false;
+        enable = true;
         settings = {
           content.javascript.enabled = false;
           colors.webpage.darkmode.enabled = true;
-          tabs = { show = "multiple"; };
+          tabs = {
+            show = "multiple";
+            tabs_are_windows = true;
+          };
         };
         extraConfig =
           let
