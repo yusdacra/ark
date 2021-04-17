@@ -378,7 +378,7 @@ in
         '';
       };
       chromium = {
-        enable = false;
+        enable = true;
         extensions = [
           "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
           "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock
@@ -390,7 +390,7 @@ in
         ];
       };
       qutebrowser = {
-        enable = true;
+        enable = false;
         settings = {
           content.javascript.enabled = false;
           colors.webpage.darkmode.enabled = false;
