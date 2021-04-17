@@ -352,6 +352,10 @@ in
       alacritty = {
         enable = true;
         settings = {
+          shell = {
+            program = "${pkgs.tmux}/bin/tmux";
+            args = [ "attach" ];
+          };
           font = {
             normal = { family = font; };
             size = fontSize;
@@ -508,6 +512,8 @@ in
             fi
           '';
         initExtra = ''
+          export TERM=alacritty
+        
           function tomp4 () {
             ${pkgs.ffmpeg}/bin/ffmpeg -i $1 -c:v libx264 -preset slow -crf 30 -c:a aac -b:a 128k $2
           }
