@@ -366,10 +366,10 @@ in
         baseIndex = 1;
         escapeTime = 0;
         keyMode = "vi";
-        terminal = "tmux-256color";
         shortcut = "a";
         extraConfig = ''
-          set -ga terminal-overrides ',*256col*:Tc'
+          set -g default-terminal "alacritty"
+          set -ga terminal-overrides ",alacritty:Tc"
           set -g status off
         '';
       };
