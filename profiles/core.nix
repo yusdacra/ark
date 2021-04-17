@@ -25,6 +25,7 @@ in
         exa
         ripgrep
         curl
+        jq
         git
         gptfdisk
         iputils
@@ -37,6 +38,7 @@ in
         amber
         unzip
         grit
+        hydra-check
       ];
 
       shellAliases =
