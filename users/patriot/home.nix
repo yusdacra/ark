@@ -398,6 +398,7 @@ in
         extraConfig =
           let
             domains = [
+              "discord.com"
               "github.com"
               "gitlab.com"
               "nixos.org"
