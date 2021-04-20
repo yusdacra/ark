@@ -216,6 +216,7 @@ in
       packages = with pkgs;
         [
           discord
+          ripcord
           # Font stuff
           fontPackage
           noto-fonts-cjk
