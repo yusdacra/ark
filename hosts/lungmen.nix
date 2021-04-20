@@ -36,13 +36,11 @@ in
     ../users/patriot
     ../users/root
     ../profiles/network/networkmanager.nix
-    # ../profiles/network/nginx.nix
     ../profiles/develop
     (modulesPath + "/installer/scan/not-detected.nix")
     nixosPersistence
   ];
 
-  #systemd.additionalUpstreamSystemUnits = [ "tmp.mount" ];
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;
