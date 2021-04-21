@@ -43,26 +43,28 @@ let
     #!${pkgs.stdenv.shell}
     chromium --enable-features=UseOzonePlatform --ozone-platform=wayland
   '';
-  chromiumWaylandPkg = with pkgs; stdenv.mkDerivation {
-    name = "chromium-wayland";
-    version = chromium.version;
+  chromiumWaylandPkg = with pkgs;
+    let name = "chromium-wayland"; in
+    stdenv.mkDerivation {
+      pname = name;
+      version = chromium.version;
 
-    nativeBuildInputs = [ copyDesktopItems ];
-    desktopItems = [
-      (makeDesktopItem rec {
-        name = "chromium-wayland";
-        exec = name;
-        desktopName = "Chromium Wayland";
-        genericName = "Web Browser";
-      })
-    ];
+      nativeBuildInputs = [ copyDesktopItems ];
+      desktopItems = [
+        (makeDesktopItem {
+          inherit name;
+          exec = name;
+          desktopName = "Chromium Wayland";
+          genericName = "Web Browser";
+        })
+      ];
 
-    phases = [ "installPhase" ];
-    installPhase = ''
-      mkdir -p $out/bin
-      ln -s ${chromiumWayland}/bin/chromium-wayland $out/bin/chromium-wayland
-    '';
-  };
+      phases = [ "installPhase" ];
+      installPhase = ''
+        mkdir -p $out/bin
+        ln -s ${chromiumWayland}/bin/chromium-wayland $out/bin/chromium-wayland
+      '';
+    };
 
   colorSchemeLight = {
     primary = {
@@ -99,40 +101,45 @@ let
     };
   };
 
-  colorSchemeDark = rec {
-    primary = {
+  colorSchemeDark =
+    let
       normal = {
-        background = "181818";
-        foreground = "b9b9b9";
+        black = "252525";
+        gray = "5b5b5b";
+        red = "ed4a46";
+        green = "70b433";
+        yellow = "dbb32d";
+        blue = "368aeb";
+        magenta = "eb6eb7";
+        cyan = "3fc5b7";
+        white = "777777";
       };
       bright = {
-        background = bright.black;
-        foreground = bright.white;
+        black = "3b3b3b";
+        gray = "7b7b7b";
+        red = "ff5e56";
+        green = "83c746";
+        yellow = "efc541";
+        blue = "4f9cfe";
+        magenta = "ff81ca";
+        cyan = "56d8c9";
+        white = "dedede";
+      };
+    in
+    {
+      inherit normal bright;
+
+      primary = {
+        normal = {
+          background = "181818";
+          foreground = "b9b9b9";
+        };
+        bright = {
+          background = bright.black;
+          foreground = bright.white;
+        };
       };
     };
-    normal = {
-      black = "252525";
-      gray = "5b5b5b";
-      red = "ed4a46";
-      green = "70b433";
-      yellow = "dbb32d";
-      blue = "368aeb";
-      magenta = "eb6eb7";
-      cyan = "3fc5b7";
-      white = "777777";
-    };
-    bright = {
-      black = "3b3b3b";
-      gray = "7b7b7b";
-      red = "ff5e56";
-      green = "83c746";
-      yellow = "efc541";
-      blue = "4f9cfe";
-      magenta = "ff81ca";
-      cyan = "56d8c9";
-      white = "dedede";
-    };
-  };
 
   colorScheme =
     # if builtins.pathExists ./light then colorSchemeLight else colorSchemeDark;
@@ -181,11 +188,24 @@ let
     indicator = "#111111"; # don't care
   };
   fonts = [ fontComb ];
+
+  extraEnv = ''
+    export SDL_VIDEODRIVER=wayland
+    # needs qt5.qtwayland in systemPackages
+    export QT_QPA_PLATFORM=wayland
+    export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+    # Fix for some Java AWT applications (e.g. Android Studio),
+    # use this if they aren't displayed properly:
+    export _JAVA_AWT_WM_NONREPARENTING=1
+    export QT_QPA_PLATFORMTHEME=qt5ct
+    export QT_PLATFORM_PLUGIN=qt5ct
+  '';
 in
 {
   home-manager.users.patriot = { config, pkgs, ... }: {
     imports = [ ../profiles/hikari.nix ];
 
+    # needs to be fixed to use nix profile???
     /*gtk = {
       enable = false;
       font = {
@@ -215,8 +235,6 @@ in
       homeDirectory = nixosConfig.users.users.patriot.home;
       packages = with pkgs;
         [
-          discord
-          ripcord
           # Font stuff
           fontPackage
           noto-fonts-cjk
@@ -224,6 +242,8 @@ in
           font-awesome
           (nerdfonts.override { fonts = [ "Iosevka" ]; })
           # Programs
+          discord
+          ripcord
           audacity
           krita
           kdenlive
@@ -265,17 +285,7 @@ in
       };
       sway = {
         enable = true;
-        extraSessionCommands = ''
-          #export SDL_VIDEODRIVER=wayland
-          # needs qt5.qtwayland in systemPackages
-          #export QT_QPA_PLATFORM=wayland
-          #export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-          # Fix for some Java AWT applications (e.g. Android Studio),
-          # use this if they aren't displayed properly:
-          export _JAVA_AWT_WM_NONREPARENTING=1
-          export QT_QPA_PLATFORMTHEME=qt5ct
-          export QT_PLATFORM_PLUGIN=qt5ct
-        '';
+        extraSessionCommands = extraEnv;
         wrapperFeatures.gtk = true;
         config = {
           inherit fonts;
@@ -477,10 +487,12 @@ in
         enableCompletion = true;
         plugins =
           let
-            fast-syntax-highlighting = rec {
-              name = "fast-syntax-highlighting";
-              src = pkgs."zsh-${name}".out;
-            };
+            fast-syntax-highlighting =
+              let name = "fast-syntax-highlighting"; in
+              {
+                inherit name;
+                src = pkgs."zsh-${name}".out;
+              };
             per-directory-history = {
               name = "per-directory-history";
               src = pkgs.fetchFromGitHub {
@@ -495,17 +507,7 @@ in
         # xdg compliant
         dotDir = ".config/zsh";
         history.path = ".local/share/zsh/history";
-        envExtra = ''
-          #export SDL_VIDEODRIVER=wayland
-          # needs qt5.qtwayland in systemPackages
-          #export QT_QPA_PLATFORM=wayland
-          #export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-          # Fix for some Java AWT applications (e.g. Android Studio),
-          # use this if they aren't displayed properly:
-          export _JAVA_AWT_WM_NONREPARENTING=1
-          export QT_QPA_PLATFORMTHEME=qt5ct
-          export QT_PLATFORM_PLUGIN=qt5ct
-        '';
+        envExtra = extraEnv;
         loginExtra =
           ''
             if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
@@ -516,7 +518,7 @@ in
           export TERM=alacritty
         
           function tomp4 () {
-            ${pkgs.ffmpeg}/bin/ffmpeg -i $1 -c:v libx264 -preset slow -crf 30 -c:a aac -b:a 128k $2
+            ${pkgs.ffmpeg}/bin/ffmpeg -i $1 -c:v libx264 -preset slow -crf 30 -c:a aac -b:a 128k "$1.mp4"
           }
         
           bindkey "$terminfo[kRIT5]" forward-word
@@ -727,7 +729,7 @@ in
             '';
         };
       vscode = {
-        enable = true;
+        enable = false;
         package = pkgs.vscodium;
         extensions =
           let
@@ -773,29 +775,27 @@ in
     };
 
     services = {
-      gpg-agent = rec {
-        enable = true;
-        enableSshSupport = true;
-        sshKeys = [ "8369D9CA26C3EAAAB8302A88CEE6FD14B58AA965" ];
-        defaultCacheTtl = 3600 * 6;
-        defaultCacheTtlSsh = defaultCacheTtl;
-        maxCacheTtl = 3600 * 24;
-        maxCacheTtlSsh = maxCacheTtl;
-        grabKeyboardAndMouse = false;
-        pinentryFlavor = "qt";
-      };
+      gpg-agent =
+        let
+          defaultCacheTtl = 3600 * 6;
+          maxCacheTtl = 3600 * 24;
+        in
+        {
+          inherit defaultCacheTtl maxCacheTtl;
+
+          enable = true;
+          enableSshSupport = true;
+          sshKeys = [ "8369D9CA26C3EAAAB8302A88CEE6FD14B58AA965" ];
+          defaultCacheTtlSsh = defaultCacheTtl;
+          maxCacheTtlSsh = maxCacheTtl;
+          grabKeyboardAndMouse = false;
+          pinentryFlavor = "qt";
+        };
     };
 
     xdg = {
       enable = true;
       configFile = {
-        # "oguri/config".text = ''
-        #   [output *]
-        #   image=/home/patriot/wallpaper.gif
-        #   filter=nearest
-        #   scaling-mode=fill
-        #   anchor=center
-        # '';
         "kak/user/kakrc".text = ''
           source "%val{config}/user/color/colorscheme.kak"
         '';

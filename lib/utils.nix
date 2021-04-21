@@ -3,13 +3,15 @@ let
   inherit (builtins) attrNames isAttrs isInt readDir toJSON;
 
   inherit (lib) filterAttrs hasSuffix mapAttrs' nameValuePair removeSuffix;
-in
-rec {
+
   # mapFilterAttrs ::
   #   (name -> value -> bool )
   #   (name -> value -> { name = any; value = any; })
   #   attrs
   mapFilterAttrs = seive: f: attrs: filterAttrs seive (mapAttrs' f attrs);
+in
+{
+  inherit mapFilterAttrs;
 
   recImport = { dir, _import ? base: import "${dir}/${base}.nix" }:
     mapFilterAttrs (_: v: v != null)

@@ -1,4 +1,4 @@
-final: prev: rec {
+final: prev: {
   kakoune-unwrapped = prev.kakoune-unwrapped.overrideAttrs (old: {
     version = "5696ed02";
     src = builtins.fetchGit {
