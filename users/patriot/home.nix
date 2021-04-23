@@ -39,10 +39,23 @@ let
     file
   ];
 
-  chromiumWayland = pkgs.writeScriptBin "chromium-wayland" ''
-    #!${pkgs.stdenv.shell}
-    chromium --enable-features=UseOzonePlatform --ozone-platform=wayland
-  '';
+  chromiumWayland =
+    let
+      flags = [
+        "--enable-features=UseOzonePlatform"
+        "--ozone-platform=wayland"
+        "--enable-vulkan"
+        "--enable-webrtc-pipewire-capturer"
+        "--ignore-gpu-blocklist"
+        "--enable-gpu-rasterization"
+        "--enable-zero-copy"
+        "--disable-gpu-driver-bug-workarounds"
+      ];
+    in
+    pkgs.writeScriptBin "chromium-wayland" ''
+      #!${pkgs.stdenv.shell}
+      chromium ${lib.concatStringsSep " " flags}
+    '';
   chromiumWaylandPkg = with pkgs;
     let name = "chromium-wayland"; in
     stdenv.mkDerivation {
@@ -246,6 +259,7 @@ in
           ripcord
           audacity
           krita
+          gimp
           kdenlive
           gnome3.seahorse
           gnome3.gnome-boxes
@@ -398,6 +412,7 @@ in
           "annfbnbieaamhaimclajlajpijgkdblo" # dark theme
           "eimadpbcbfnmbkopoojfekhnkhdbieeh" # dark reader
           "hlepfoohegkhhmjieoechaddaejaokhf" # github refined
+          "pmcmeagblkinmogikoikkdjiligflglb" # privacy redirect
         ];
       };
       qutebrowser = {
