@@ -536,6 +536,10 @@ in
             ${pkgs.ffmpeg}/bin/ffmpeg -i $1 -c:v libx264 -preset slow -crf 30 -c:a aac -b:a 128k "$1.mp4"
           }
         
+          function topng () {
+            ${pkgs.ffmpeg}/bin/ffmpeg -i $1 "$1.png"
+          }
+        
           bindkey "$terminfo[kRIT5]" forward-word
           bindkey "$terminfo[kLFT5]" backward-word
           zstyle ':completion:*' menu select

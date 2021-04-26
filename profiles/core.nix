@@ -46,6 +46,7 @@ in
         in
         {
           gtw = "${pkgBin "grit"} tree wnv";
+          gtwa = "${pkgBin "grit"} add -p wnv";
           gt = pkgBin "grit";
 
           g = pkgBin "git";
