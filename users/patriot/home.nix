@@ -9,7 +9,7 @@ let
   name = "Yusuf Bera Ertan";
   email = "y.bera003.06@protonmail.com";
 
-  font = "Iosevka";
+  font = "Iosevka Term";
   fontSize = 10;
   fontComb = "${font} ${toString fontSize}";
   fontPackage = pkgs.iosevka;
