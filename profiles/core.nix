@@ -37,8 +37,10 @@ in
         tealdeer
         amber
         unzip
+        unrar
         grit
         hydra-check
+        nix-index
       ];
 
       shellAliases =
@@ -75,6 +77,8 @@ in
           npi = "${nixBin} profile install";
           npr = "${nixBin} profile remove";
           nsh = "${nixBin} shell";
+          nsr = "${nixBin} search";
+          nsrp = "${nixBin} search nixpkgs";
           ndev = "${nixBin} develop";
 
           nosce = "cd /etc/nixos";
