@@ -56,6 +56,7 @@ in
       grit
       hydra-check
       nix-index
+      du-dust
     ];
 
     shellAliases =
@@ -67,11 +68,13 @@ in
         gt = pkgBin "grit";
 
         g = pkgBin "git";
+        git-optimize = "${pkgBin "git"} gc --aggressive --prune=now";
 
         grep = "${pkgs.ripgrep}/bin/rg";
         cat = "${pkgBin "bat"} -pp --theme=base16";
         c = "${pkgBin "bat"} -pp --theme=base16";
 
+        du = "${pkgs.du-dust}/bin/dust";
         df = "${coreBin "df"} -h";
         free = "${pkgs.procps}/bin/free -h";
 
