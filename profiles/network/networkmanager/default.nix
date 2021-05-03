@@ -1,5 +1,5 @@
 {
-  imports = [ ./dns ];
+  imports = [ ../dns ];
 
   networking.networkmanager.enable = true;
 }

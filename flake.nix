@@ -21,6 +21,11 @@
 
       pkgs.url = "path:./pkgs";
       pkgs.inputs.nixpkgs.follows = "nixos";
+      mynex = {
+        url = "gitlab:yusdacra/nix-exprs";
+        inputs.nixpkgs.follows = "nixos";
+      };
+      nixosPersistence.url = "github:nix-community/impermanence";
     };
 
   outputs = inputs@{ self, pkgs, digga, nixos, ci-agent, home, nixos-hardware, nur, ... }:

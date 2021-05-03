@@ -1,13 +1,24 @@
-{ self, config, lib, pkgs, ... }:
-let inherit (lib) fileContents;
+{ self, config, pkgs, ... }:
+let
+  lib = pkgs.lib;
+
+  inherit (lib) fileContents mkIf;
+  pkgBin = lib.dev.pkgBinNoDep pkgs;
+
+  coreBin = v: "${pkgs.coreutils}/bin/${v}";
+  nixBin = "${config.nix.package}/bin/nix";
 in
 {
-  imports = [ ../cachix ];
+  imports = [ ../cachix ../../locale ];
 
-  nix.systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+  boot = {
+    tmpOnTmpfs = true;
+    loader.systemd-boot.configurationLimit = 10;
+  };
+
+  console.font = "7x14";
 
   environment = {
-
     systemPackages = with pkgs; [
       binutils
       coreutils
@@ -31,46 +42,72 @@ in
       usbutils
       utillinux
       whois
+      bat
+      exa
+      git
+      lm_sensors
+      mkpasswd
+      ntfs3g
+      zoxide
+      bottom
+      amber
+      unzip
+      unrar
+      grit
+      hydra-check
+      nix-index
     ];
 
-    shellInit = ''
-      export STARSHIP_CONFIG=${
-        pkgs.writeText "starship.toml"
-        (fileContents ./starship.toml)
-      }
-    '';
-
     shellAliases =
-      let ifSudo = lib.mkIf config.security.sudo.enable;
+      let ifSudo = string: mkIf config.security.sudo.enable string;
       in
       {
-        # quick cd
-        ".." = "cd ..";
-        "..." = "cd ../..";
-        "...." = "cd ../../..";
-        "....." = "cd ../../../..";
+        gtw = "${pkgBin "grit"} tree wnv";
+        gtwa = "${pkgBin "grit"} add -p wnv";
+        gt = pkgBin "grit";
 
-        # git
-        g = "git";
+        g = pkgBin "git";
 
-        # grep
-        grep = "rg";
-        gi = "grep -i";
+        grep = "${pkgs.ripgrep}/bin/rg";
+        cat = "${pkgBin "bat"} -pp --theme=base16";
+        c = "${pkgBin "bat"} -pp --theme=base16";
 
-        # internet ip
-        myip = "dig +short myip.opendns.com @208.67.222.222 2>&1";
+        df = "${coreBin "df"} -h";
+        free = "${pkgs.procps}/bin/free -h";
 
-        # nix
-        n = "nix";
-        np = "n profile";
-        ni = "np install";
-        nr = "np remove";
-        ns = "n search --no-update-lock-file";
-        nf = "n flake";
-        nepl = "n repl '<nixpkgs>'";
-        srch = "ns nixos";
-        orch = "ns override";
-        nrb = ifSudo "sudo nixos-rebuild";
+        ls = pkgBin "exa";
+        l = "${pkgBin "exa"} -lhg --git";
+        la = "${pkgBin "exa"} -lhg --git -a";
+        t = "${pkgBin "exa"} -lhg --git -T";
+        ta = "${pkgBin "exa"} -lhg --git -a -T";
+
+        n = nixBin;
+        nf = "${nixBin} flake";
+        nfc = "${nixBin} flake check";
+        nfu = "${nixBin} flake update";
+        nfua = "${nixBin} flake update --recreate-lock-file";
+        nfs = "${nixBin} flake show";
+        np = "${nixBin} profile";
+        npl = "${nixBin} profile info";
+        npi = "${nixBin} profile install";
+        npr = "${nixBin} profile remove";
+        nsh = "${nixBin} shell";
+        nsr = "${nixBin} search";
+        nsrp = "${nixBin} search nixpkgs";
+        ndev = "${nixBin} develop";
+
+        nosce = "cd /etc/nixos";
+        nosr = ifSudo "sudo nixos-rebuild --fast";
+        nosrs = ifSudo "sudo nixos-rebuild switch";
+        nosrb = ifSudo "sudo nixos-rebuild boot";
+        nosrt = ifSudo "sudo nixos-rebuild test";
+        ncg = ifSudo "sudo nix-collect-garbage";
+        ncgdo = ifSudo "sudo nix-collect-garbage --delete-old";
+
+        top = "${pkgs.bottom}/bin/btm";
+
+        myip =
+          "${pkgs.dnsutils}/bin/dig +short myip.opendns.com @208.67.222.222 2>&1";
         mn = ''
           manix "" | grep '^# ' | sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | sk --preview="manix '{}'" | xargs manix
         '';
@@ -95,54 +132,33 @@ in
         up = ifSudo "s systemctl start";
         dn = ifSudo "s systemctl stop";
         jtl = "journalctl";
-
       };
   };
 
-  fonts = {
-    fonts = with pkgs; [ powerline-fonts dejavu_fonts ];
-
-    fontconfig.defaultFonts = {
-
-      monospace = [ "DejaVu Sans Mono for Powerline" ];
-
-      sansSerif = [ "DejaVu Sans" ];
-
-    };
-  };
+  system.activationScripts.diff = ''
+    ${pkgs.nixUnstable}/bin/nix store \
+        --experimental-features 'nix-command' \
+        diff-closures /run/current-system "$systemConfig"
+  '';
 
   nix = {
-
     autoOptimiseStore = true;
-
     gc.automatic = true;
-
     optimise.automatic = true;
-
     useSandbox = true;
-
     allowedUsers = [ "@wheel" ];
-
     trustedUsers = [ "root" "@wheel" ];
-
     extraOptions = ''
       min-free = 536870912
       keep-outputs = true
       keep-derivations = true
       fallback = true
     '';
-
   };
 
-  programs.bash = {
-    promptInit = ''
-      eval "$(${pkgs.starship}/bin/starship init bash)"
-    '';
-    interactiveShellInit = ''
-      eval "$(${pkgs.direnv}/bin/direnv hook bash)"
-    '';
-  };
+  programs.command-not-found.enable = false;
+  home-manager.useGlobalPkgs = true;
+  users.mutableUsers = false;
 
   services.earlyoom.enable = true;
-
 }

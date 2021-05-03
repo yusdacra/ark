@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, nixosPersistence, ... }:
+{ config, lib, pkgs, modulesPath, suites, ... }:
 let
   btrfsPartPath = "/dev/disk/by-label/NIXOS";
   btrfsOptions = [ "compress-force=zstd" "noatime" ];
@@ -32,13 +32,9 @@ let
   '';
 in
 {
-  imports = [
-    ../users/patriot
-    ../users/root
-    ../profiles/network/networkmanager.nix
-    ../profiles/develop
+  imports = suites.work ++ [
+    ../profiles/network/networkmanager
     (modulesPath + "/installer/scan/not-detected.nix")
-    nixosPersistence
   ];
 
   boot = {
@@ -184,7 +180,7 @@ in
     postgresql = {
       enable = false;
       enableTCPIP = true;
-      authentication = pkgs.lib.mkOverride 10 ''
+      authentication = lib.mkOverride 10 ''
         local all all trust
         host  all all 0.0.0.0/0 md5
       '';
