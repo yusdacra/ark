@@ -124,6 +124,12 @@ in
       inherit registry;
     };
 
+  system.activationScripts.diff = ''
+    ${pkgs.nixUnstable}/bin/nix store \
+        --experimental-features 'nix-command' \
+        diff-closures /run/current-system "$systemConfig"
+  '';
+
   # security = {
   #   hideProcessInformation = true;
   #   protectKernelImage = true;
