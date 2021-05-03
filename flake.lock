@@ -131,26 +131,6 @@
         "type": "github"
       }
     },
-    "mynex": {
-      "inputs": {
-        "nixpkgs": [
-          "nixos"
-        ]
-      },
-      "locked": {
-        "lastModified": 1614175572,
-        "narHash": "sha256-SyEZ0ic75KpvUr7VO3oqoMeyhQzgH8em0/oknG6b4y8=",
-        "owner": "yusdacra",
-        "repo": "nix-exprs",
-        "rev": "c6c61fe656f6afa69ee4e7fdbc79289e42b857d6",
-        "type": "gitlab"
-      },
-      "original": {
-        "owner": "yusdacra",
-        "repo": "nix-exprs",
-        "type": "gitlab"
-      }
-    },
     "naersk": {
       "inputs": {
         "nixpkgs": [
@@ -283,7 +263,6 @@
         "devshell": "devshell",
         "flake-compat": "flake-compat",
         "home": "home",
-        "mynex": "mynex",
         "naersk": "naersk",
         "nixos": "nixos",
         "nixos-hardware": "nixos-hardware",

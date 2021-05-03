@@ -1,9 +1,10 @@
-{ lib, config, pkgs, ... }:
-with lib;
-let cfg = config.wayland.windowManager.hikari;
+{ config, lib, ... }@args:
+let
+  pkgs = args.pkgs;
+  cfg = config.wayland.windowManager.hikari;
 in
 {
-  options.wayland.windowManager.hikari = {
+  options.wayland.windowManager.hikari = with lib; {
     enable = mkEnableOption "hikari window manager";
     xwayland = mkOption {
       type = types.bool;
@@ -15,8 +16,8 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
-    home.packages = with pkgs; [ hikari ] ++ (optional cfg.xwayland xwayland);
+  config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [ hikari ] ++ (lib.optional cfg.xwayland xwayland);
 
     xdg = {
       enable = true;
@@ -52,7 +53,7 @@ in
               "*" {
                 xkb = {
                   layout = "tr"
-                }      
+                }
               }
             }
             pointers {

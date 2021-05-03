@@ -84,7 +84,7 @@ in
   };
 
   home-manager.users.patriot =
-    { config, pkgs, ... }:
+    { config, pkgs, suites, ... }:
     let
       name = "Yusuf Bera Ertan";
       email = "y.bera003.06@protonmail.com";
@@ -295,7 +295,7 @@ in
       '';
     in
     {
-      imports = [ ../profiles/hikari.nix ];
+      imports = suites.base;
 
       # needs to be fixed to use nix profile???
       /*gtk = {
