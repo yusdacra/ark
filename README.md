@@ -1,1 +1,1 @@
-Based on <https://github.com/nrdxp/nixflk>, with my own configs. Changes directory structure a bit.
+NixOS / home manager configs, packages and modules. Based on <https://github.com/divnix/devos>.
