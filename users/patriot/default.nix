@@ -86,8 +86,9 @@ in
   home-manager.users.patriot =
     { config, pkgs, suites, ... }:
     let
-      name = "Yusuf Bera Ertan";
-      email = "y.bera003.06@protonmail.com";
+      personal = import ../../personal.nix;
+      name = personal.name;
+      email = personal.emails.primary;
 
       font = "Iosevka Term";
       fontSize = 10;
