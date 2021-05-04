@@ -1008,6 +1008,11 @@ in
             filetypes = ["nix"]
             roots = ["flake.nix", "shell.nix", ".git"]
             command = "${pkgBin "rnix-lsp"}"
+
+            [language.haskell]
+            filetypes = ["haskell"]
+            roots = ["Setup.hs", "stack.yaml", "*.cabal"]
+            command = "${pkgBin "haskell-language-server"}"
           '';
           "nixpkgs/config.nix".text = ''
             {
