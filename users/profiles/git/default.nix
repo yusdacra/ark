@@ -1,33 +1,36 @@
 {
   programs.git = {
     enable = true;
-
-    extraConfig = {
-      pull.rebase = false;
-    };
-
+    extraConfig = { pull.rebase = true; };
+    lfs.enable = true;
     aliases = {
       a = "add -p";
       co = "checkout";
       cob = "checkout -b";
       f = "fetch -p";
       c = "commit";
-      p = "push";
+      ps = "push";
+      pl = "pull";
+      rb = "rebase";
       ba = "branch -a";
       bd = "branch -d";
       bD = "branch -D";
       d = "diff";
       dc = "diff --cached";
       ds = "diff --staged";
-      r = "restore";
-      rs = "restore --staged";
-      st = "status -sb";
+      rs = "restore";
+      rss = "restore --staged";
+      s = "status -sb";
+      ss = "stash";
+      ssp = "stash pop";
+      ssl = "stash list";
+      ssd = "stash drop";
 
       # reset
-      soft = "reset --soft";
-      hard = "reset --hard";
-      s1ft = "soft HEAD~1";
-      h1rd = "hard HEAD~1";
+      rsoft = "reset --soft";
+      rhard = "reset --hard";
+      rs1ft = "soft HEAD~1";
+      rh1rd = "hard HEAD~1";
 
       # logging
       lg =

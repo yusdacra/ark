@@ -527,31 +527,6 @@ in
             '';
         };
         git = {
-          enable = true;
-          aliases = {
-            a = "add";
-            b = "branch";
-            c = "commit";
-            d = "diff";
-            l = "log";
-            s = "status";
-            co = "checkout";
-            dc = "diff --cached";
-            qc = "commit -am";
-            pl = "pull";
-            ps = "push";
-            rb = "rebase";
-            rs = "restore";
-            rv = "revert";
-            ss = "stash";
-            rst = "reset";
-            rss = "restore --staged";
-            ssp = "stash pop";
-            ssl = "stash list";
-            ssd = "stash drop";
-          };
-          extraConfig = { pull.rebase = true; };
-          lfs.enable = true;
           signing = {
             key = "E1C119F91F4CAE53E8445CAFBB57FCE7E35984F6";
             signByDefault = true;
@@ -631,24 +606,6 @@ in
               ${pkgs.kakoune-unwrapped}/bin/kak -e "try %(gtd-jump-today)" "${config.home.homeDirectory}/rember/stuff$(date '+_%m_%Y').gtd"
             '';
           };
-        };
-        starship = {
-          enable = true;
-          settings = {
-            add_newline = false;
-            character = {
-              success_symbol = "[>](bold green)";
-              error_symbol = "[>](bold red)";
-            };
-            directory = {
-              truncation_length = 2;
-              truncate_to_repo = false;
-            };
-          };
-        };
-        direnv = {
-          enable = true;
-          enableNixDirenvIntegration = true;
         };
         fzf.enable = true;
         rofi =
