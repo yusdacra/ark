@@ -373,10 +373,6 @@ in
       };
 
       wayland.windowManager = {
-        hikari = {
-          enable = false;
-          inherit font;
-        };
         sway = {
           enable = true;
           extraSessionCommands = extraEnv;
