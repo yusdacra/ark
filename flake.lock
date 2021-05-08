@@ -118,11 +118,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1620337456,
-        "narHash": "sha256-w4Z6NYNYI3v++Pmqs4j1pPGdWJEyjGQat5rYxkhncMI=",
+        "lastModified": 1620423550,
+        "narHash": "sha256-sCUnGE28hagq2nVvypGqxMRz7AiW7ewEQ8j7WTlpm7c=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "86944b0fb15f89bc1173efabbce556260a410154",
+        "rev": "b2dec35b86e8488831734ff7936589d710b47420",
         "type": "github"
       },
       "original": {
@@ -148,6 +148,29 @@
       "original": {
         "owner": "nmattia",
         "repo": "naersk",
+        "type": "github"
+      }
+    },
+    "nixEvalLsp": {
+      "inputs": {
+        "flake-utils": [
+          "utils"
+        ],
+        "nixpkgs": [
+          "nixos"
+        ]
+      },
+      "locked": {
+        "lastModified": 1620425733,
+        "narHash": "sha256-j9kxjjvpIyetyDDgamMolKpEShyPU7dsioBUbTXQeRU=",
+        "owner": "aaronjanse",
+        "repo": "nix-eval-lsp",
+        "rev": "9251960d255044d59204e73b3051b06d3f746f67",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aaronjanse",
+        "repo": "nix-eval-lsp",
         "type": "github"
       }
     },
@@ -198,11 +221,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1620381151,
-        "narHash": "sha256-hAF1h1EdK8CvWxRISoJe8B1OnqSjAmNbbkwy72YVaoc=",
+        "lastModified": 1620447594,
+        "narHash": "sha256-2p/gl5ivKUzqxzq2LYCG50oU32fdjX/F4evTB0kkWuM=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "a9f9fc6250811b5f66e2edea4155c0a1b51461d5",
+        "rev": "0f4c0edeab78c9c164218c9394a62a76f4a48474",
         "type": "github"
       },
       "original": {
@@ -212,11 +235,11 @@
     },
     "override": {
       "locked": {
-        "lastModified": 1620381554,
-        "narHash": "sha256-ju8UcSZyY2/jLg4f0eSwb2NefCLBWeFQCem2tmaiKKc=",
+        "lastModified": 1620447662,
+        "narHash": "sha256-PP6AsJuRUKPfCoIkG5hvaSnZtkJuQSggMayLkRHSHD4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "eb4372d68fc3df484d4858ad8b0b59e09415c3b9",
+        "rev": "f06e5060a58b33edc703ee6ddb9073860549e21b",
         "type": "github"
       },
       "original": {
@@ -265,6 +288,7 @@
         "flake-compat": "flake-compat",
         "home": "home",
         "naersk": "naersk",
+        "nixEvalLsp": "nixEvalLsp",
         "nixos": "nixos",
         "nixos-hardware": "nixos-hardware",
         "nixosPersistence": "nixosPersistence",

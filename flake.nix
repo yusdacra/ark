@@ -22,6 +22,11 @@
       pkgs.url = "path:./pkgs";
       pkgs.inputs.nixpkgs.follows = "nixos";
       nixosPersistence.url = "github:nix-community/impermanence";
+      nixEvalLsp = {
+        url = "github:aaronjanse/nix-eval-lsp";
+        inputs.nixpkgs.follows = "nixos";
+        inputs.flake-utils.follows = "utils";
+      };
     };
 
   outputs = inputs@{ self, pkgs, digga, nixos, ci-agent, home, nixos-hardware, nur, ... }:
