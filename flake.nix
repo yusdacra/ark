@@ -25,7 +25,6 @@
       nixEvalLsp = {
         url = "github:aaronjanse/nix-eval-lsp";
         inputs.nixpkgs.follows = "nixos";
-        inputs.flake-utils.follows = "utils";
       };
     };
 
