@@ -32,7 +32,7 @@ let
   '';
 in
 {
-  imports = suites.work ++ [
+  imports = suites.base ++ suites.work ++ [
     ../profiles/network/networkmanager
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
