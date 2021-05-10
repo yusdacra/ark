@@ -1,10 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
-  lib = pkgs.lib;
-
   inherit (lib) mapAttrs' nameValuePair;
   inherit (builtins) readDir fetchGit;
-  pkgBin = lib.dev.pkgBinNoDep pkgs;
+  pkgBin = pkgs.ourlib.pkgBinNoDep pkgs;
 
   nixosConfig = config;
 in

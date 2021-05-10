@@ -28,7 +28,7 @@
       };
     };
 
-  outputs = inputs@{ self, pkgs, digga, nixos, ci-agent, home, nixos-hardware, nur, ... }:
+  outputs = inputs@{ self, pkgs, digga, nixos, ci-agent, home, nixos-hardware, nur, nixosPersistence, ... }:
     digga.lib.mkFlake {
       inherit self inputs;
 
@@ -65,6 +65,7 @@
             { _module.args.ourLib = self.lib; }
             ci-agent.nixosModules.agent-profile
             home.nixosModules.home-manager
+            nixosPersistence.nixosModules.impermanence
             ./modules/customBuilds.nix
           ];
         };
@@ -75,8 +76,9 @@
           NixOS = { };
         };
         profiles = [ ./profiles ./users ];
-        suites = { profiles, users, ... }: with profiles; rec {
-          base = [ core users.nixos users.root ];
+        suites = { profiles, users, ... }: with profiles; {
+          base = [ cachix core users.root ];
+          work = [ users.patriot develop ];
         };
       };
 
@@ -84,8 +86,8 @@
         modules = ./users/modules/module-list.nix;
         externalModules = [ ];
         profiles = [ ./users/profiles ];
-        suites = { profiles, ... }: with profiles; rec {
-          base = [ direnv git ];
+        suites = { profiles, ... }: with profiles; {
+          base = [ direnv git starship ];
         };
       };
 

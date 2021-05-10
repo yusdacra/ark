@@ -1,9 +1,7 @@
-{ self, config, pkgs, ... }:
+{ self, config, pkgs, lib, ... }:
 let
-  lib = pkgs.lib;
-
   inherit (lib) fileContents mkIf;
-  pkgBin = lib.dev.pkgBinNoDep pkgs;
+  pkgBin = pkgs.ourlib.pkgBinNoDep pkgs;
 
   coreBin = v: "${pkgs.coreutils}/bin/${v}";
   nixBin = "${config.nix.package}/bin/nix";
