@@ -121,9 +121,6 @@ in
         si = ifSudo "sudo -i";
         se = ifSudo "sudoedit";
 
-        # top
-        top = "gotop";
-
         # systemd
         ctl = "systemctl";
         stl = ifSudo "s systemctl";
