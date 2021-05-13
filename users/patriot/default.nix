@@ -42,14 +42,14 @@ in
     enableKwallet = false;
   };
   services = {
-    gnome3 = {
+    gnome = {
       gnome-keyring.enable = true;
     };
     xserver = {
       enable = true;
       desktopManager = {
         plasma5.enable = false;
-        gnome3.enable = false;
+        gnome.enable = false;
         xterm.enable = false;
       };
       displayManager = {
@@ -376,7 +376,10 @@ in
           extraSessionCommands = extraEnv;
           wrapperFeatures.gtk = true;
           config = {
-            inherit fonts;
+            fonts = {
+              names = [ font ];
+              size = fontSize + 0.0;
+            };
             bars = [{
               command = "${pkgBin "waybar"}";
             }];
