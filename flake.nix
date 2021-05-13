@@ -26,9 +26,13 @@
         url = "github:aaronjanse/nix-eval-lsp";
         inputs.nixpkgs.follows = "nixos";
       };
+      nixpkgsWayland = {
+        url = "github:colemickens/nixpkgs-wayland";
+        inputs.nixpkgs.follows = "nixos";
+      };
     };
 
-  outputs = inputs@{ self, pkgs, digga, nixos, ci-agent, home, nixos-hardware, nur, nixosPersistence, ... }:
+  outputs = inputs@{ self, pkgs, digga, nixos, ci-agent, home, nixos-hardware, nur, nixosPersistence, nixpkgsWayland, ... }:
     digga.lib.mkFlake {
       inherit self inputs;
 
@@ -41,6 +45,7 @@
             ./pkgs/default.nix
             pkgs.overlay # for `srcs`
             nur.overlay
+            nixpkgsWayland.overlay
           ];
         };
         latest = { };

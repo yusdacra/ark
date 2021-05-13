@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "cachix": {
+      "locked": {
+        "lastModified": 1620847774,
+        "narHash": "sha256-bnzWt++wIpYQElhT0trrI/Mu/O7u9ms6idmnfWKSU9s=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "c5429e84111c9e90f3f58029d92bd6c24c5f8e45",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-20.09",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "ci-agent": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -191,11 +207,11 @@
     },
     "latest": {
       "locked": {
-        "lastModified": 1620942579,
-        "narHash": "sha256-Mg+liMXvZ5pKpexvM8c4DNpLAt1NwgTfaqtoPIPk1ig=",
+        "lastModified": 1620948329,
+        "narHash": "sha256-xt/7eMkEPTJ3RN6LAb4mQnZ1IDoslU1N1ZENtSOugRc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "98352e54399b576d783ccfca595919e5ad1ae2b8",
+        "rev": "a083de02b6eaffdfe7e63b981feb80746b3cc54d",
         "type": "github"
       },
       "original": {
@@ -326,13 +342,34 @@
         "type": "github"
       }
     },
+    "nixpkgsWayland": {
+      "inputs": {
+        "cachix": "cachix",
+        "nixpkgs": [
+          "nixos"
+        ]
+      },
+      "locked": {
+        "lastModified": 1620943092,
+        "narHash": "sha256-UBIBe7UN+gW+Y9ysh3EDD95axOWXOGkQU9jzupo+UBw=",
+        "owner": "colemickens",
+        "repo": "nixpkgs-wayland",
+        "rev": "5e8785b3e986f19d21828b423800b9d68b0e355e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "colemickens",
+        "repo": "nixpkgs-wayland",
+        "type": "github"
+      }
+    },
     "nur": {
       "locked": {
-        "lastModified": 1620943888,
-        "narHash": "sha256-PEsFurhY+6sW4Q5jAvzRAA3TKhPo/H7dEAWu8iiZUPs=",
+        "lastModified": 1620948952,
+        "narHash": "sha256-w0XuYRVxJ1iCim4Lt/YlDqgbSUEdvIv26mOh4IzNu6U=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "58b1ff81fdc33aeab73db785f86670ccd235beab",
+        "rev": "fbd5801897cca51b5cb57f7a1a938b2ec9288b52",
         "type": "github"
       },
       "original": {
@@ -384,6 +421,7 @@
         "nixos": "nixos",
         "nixos-hardware": "nixos-hardware",
         "nixosPersistence": "nixosPersistence",
+        "nixpkgsWayland": "nixpkgsWayland",
         "nur": "nur",
         "pkgs": "pkgs"
       }
