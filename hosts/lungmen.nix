@@ -122,9 +122,16 @@ in
     sudo.extraConfig = ''
       Defaults lecture = never
     '';
+    rtkit.enable = true;
   };
 
-  sound.enable = true;
+  sound.enable = false;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
   hardware = {
     opengl = {
       driSupport = true;
@@ -142,10 +149,11 @@ in
         ++ [ pkgs.driversi686Linux.amdvlk ];
     };
     pulseaudio = {
-      enable = true;
+      enable = false;
       support32Bit = true;
     };
   };
+
 
   environment = {
     systemPackages = [ btrfsDiff ];
@@ -169,13 +177,6 @@ in
     flatpak.enable = false;
     xserver = {
       videoDrivers = [ "amdgpu" ];
-    };
-    pipewire = {
-      enable = false;
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
     };
     postgresql = {
       enable = false;

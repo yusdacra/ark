@@ -128,7 +128,9 @@ in
             "--ignore-gpu-blocklist"
             "--enable-gpu-rasterization"
             "--enable-zero-copy"
-            "--disable-gpu-driver-bug-workarounds"
+            # "--enable-features=VaapiVideoDecoder"
+            # "--use-gl=egl"
+            # "--disable-gpu-driver-bug-workarounds"
           ];
         in
         pkgs.writeScriptBin "chromium-wayland" ''
