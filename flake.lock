@@ -85,30 +85,6 @@
         "type": "github"
       }
     },
-    "devlib": {
-      "inputs": {
-        "deploy": "deploy",
-        "devshell": "devshell",
-        "nixlib": "nixlib",
-        "nixpkgs": [
-          "nixos"
-        ],
-        "utils": "utils_2"
-      },
-      "locked": {
-        "lastModified": 1621012625,
-        "narHash": "sha256-xRBbDpQDUz3mSwL2WoePz6c3zIUtZ2ML3qW0B9CVspU=",
-        "owner": "divnix",
-        "repo": "devlib",
-        "rev": "b0de71f4924e513e21d21a0ec60a2cb180f2187c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "divnix",
-        "repo": "devlib",
-        "type": "github"
-      }
-    },
     "devshell": {
       "locked": {
         "lastModified": 1618523768,
@@ -121,6 +97,28 @@
       "original": {
         "owner": "numtide",
         "repo": "devshell",
+        "type": "github"
+      }
+    },
+    "digga": {
+      "inputs": {
+        "deploy": "deploy",
+        "devshell": "devshell",
+        "nixlib": "nixlib",
+        "nixpkgs": "nixpkgs_2",
+        "utils": "utils_2"
+      },
+      "locked": {
+        "lastModified": 1621012625,
+        "narHash": "sha256-xRBbDpQDUz3mSwL2WoePz6c3zIUtZ2ML3qW0B9CVspU=",
+        "owner": "divnix",
+        "repo": "digga",
+        "rev": "b0de71f4924e513e21d21a0ec60a2cb180f2187c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "divnix",
+        "repo": "digga",
         "type": "github"
       }
     },
@@ -379,6 +377,21 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1620962350,
+        "narHash": "sha256-9ASW4d4/Z8HmRvuJI8rxbEOTbXTBpQ8y+CmFYBwtXzE=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "5d4a430472cafada97888cc80672fab255231f57",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nur": {
       "locked": {
         "lastModified": 1621012357,
@@ -429,7 +442,7 @@
       "inputs": {
         "ci-agent": "ci-agent",
         "darwin": "darwin",
-        "devlib": "devlib",
+        "digga": "digga",
         "home": "home",
         "latest": "latest",
         "naersk": "naersk_2",
