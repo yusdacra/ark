@@ -32,7 +32,7 @@
       };
     };
 
-  outputs = inputs@{ self, pkgs, digga, nixos, ci-agent, home, nixos-hardware, nur, nixosPersistence, nixpkgsWayland, ... }:
+  outputs = inputs@{ self, pkgs, digga, nixos, ci-agent, home, nixos-hardware, nur, nixosPersistence, nixpkgsWayland, nixEvalLsp, ... }:
     digga.lib.mkFlake {
       inherit self inputs;
 
@@ -46,6 +46,9 @@
             pkgs.overlay # for `srcs`
             nur.overlay
             nixpkgsWayland.overlay
+            (final: prev: {
+              inherit (nixEvalLsp.packages.${prev.system}) nix-eval-lsp;
+            })
           ];
         };
         latest = { };

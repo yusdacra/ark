@@ -828,6 +828,8 @@ in
             "terminal.integrated.fontSize" = 12;
             "go.useLanguageServer" = true;
             "rust-analyzer.checkOnSave.command" = "clippy";
+            "nix.enableLanguageServer" = true;
+            "nix.serverPath" = pkgBin "rnix-lsp";
           };
         };
       };
