@@ -36,7 +36,12 @@
     digga.lib.mkFlake {
       inherit self inputs;
 
-      channelsConfig = { allowUnfree = true; };
+      channelsConfig = {
+        allowUnfree = true;
+        permittedInsecurePackages = [
+          "swftools-0.9.2"
+        ];
+      };
 
       channels = {
         nixos = {
