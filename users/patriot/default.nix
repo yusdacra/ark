@@ -335,6 +335,7 @@ in
             font-awesome
             (nerdfonts.override { fonts = [ "Iosevka" ]; })
             # Programs
+            betterdiscord-installer
             discord
             ripcord
             audacity
