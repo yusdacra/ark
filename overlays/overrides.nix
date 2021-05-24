@@ -1,5 +1,4 @@
 channels: final: prev: {
-
   __dontExport = true; # overrides clutter up actual creations
 
   inherit (channels.latest)
@@ -13,7 +12,6 @@ channels: final: prev: {
     signal-desktop
     starship;
 
-
   haskellPackages = prev.haskellPackages.override {
     overrides = hfinal: hprev:
       let version = prev.lib.replaceChars [ "." ] [ "" ] prev.ghc.version;
@@ -24,5 +22,4 @@ channels: final: prev: {
           haskell-language-server;
       };
   };
-
 }

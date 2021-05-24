@@ -336,7 +336,6 @@ in
             (nerdfonts.override { fonts = [ "Iosevka" ]; })
             # Programs
             discord-canary
-            ripcord
             audacity
             krita
             gimp
@@ -966,12 +965,11 @@ in
             filetypes = ["nix"]
             roots = ["flake.nix", "shell.nix", ".git"]
             command = "${pkgBin "rnix-lsp"}"
-
-            [language.haskell]
-            filetypes = ["haskell"]
-            roots = ["Setup.hs", "stack.yaml", "*.cabal"]
-            command = "${pkgBin "haskell-language-server"}"
           '';
+          # [language.haskell]
+          # filetypes = ["haskell"]
+          # roots = ["Setup.hs", "stack.yaml", "*.cabal"]
+          # command = "${pkgBin "haskell-language-server"}"
           "nixpkgs/config.nix".text = ''
             {
               android_sdk.accept_license = true;
