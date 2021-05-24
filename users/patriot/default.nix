@@ -335,7 +335,7 @@ in
             font-awesome
             (nerdfonts.override { fonts = [ "Iosevka" ]; })
             # Programs
-            discord-canary
+            discord-canary-system
             audacity
             krita
             gimp
