@@ -336,6 +336,8 @@ in
             (nerdfonts.override { fonts = [ "Iosevka" ]; })
             # Programs
             discord-canary-system
+            # lightcord
+            # discord-canary
             audacity
             krita
             gimp
