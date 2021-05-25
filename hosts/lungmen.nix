@@ -197,7 +197,7 @@ in
   };
   virtualisation = {
     podman.enable = true;
-    libvirtd.enable = true;
+    libvirtd.enable = false;
   };
 
   system.stateVersion = "20.09";
