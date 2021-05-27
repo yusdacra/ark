@@ -8,13 +8,12 @@ final: prev: rec {
       url = "https://dl-canary.discordapp.net/apps/linux/${version}/discord-canary-${version}.tar.gz";
       sha256 = "0bijwfsd9s4awqkgxd9c2cxh7y5r06vix98qjp0dkv63r6jig8ch";
     };
-    isWayland = false;
+    isWayland = true;
     extraOptions = [
       "--enable-vulkan"
       "--ignore-gpu-blocklist"
       "--enable-gpu-rasterization"
       "--enable-zero-copy"
-      "--enable-gpu"
     ];
   });
   mkDiscord =
