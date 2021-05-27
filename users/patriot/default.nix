@@ -48,7 +48,7 @@ in
     xserver = {
       enable = true;
       desktopManager = {
-        plasma5.enable = false;
+        plasma5.enable = true;
         gnome.enable = false;
         xterm.enable = false;
       };
@@ -121,16 +121,16 @@ in
       chromiumWayland =
         let
           flags = [
-            "--enable-features=UseOzonePlatform"
-            "--ozone-platform=wayland"
-            "--enable-vulkan"
-            "--enable-webrtc-pipewire-capturer"
+            # "--enable-features=UseOzonePlatform"
+            # "--ozone-platform=wayland"
+            # "--enable-vulkan"
+            # "--enable-webrtc-pipewire-capturer"
             "--ignore-gpu-blocklist"
             "--enable-gpu-rasterization"
             "--enable-zero-copy"
-            # "--enable-features=VaapiVideoDecoder"
-            # "--use-gl=egl"
-            # "--disable-gpu-driver-bug-workarounds"
+            "--enable-features=VaapiVideoDecoder"
+            "--use-gl=egl"
+            "--disable-gpu-driver-bug-workarounds"
           ];
         in
         pkgs.writeScriptBin "chromium-wayland" ''
@@ -148,7 +148,8 @@ in
             (makeDesktopItem {
               inherit name;
               exec = name;
-              desktopName = "Chromium Wayland";
+              icon = "chromium";
+              desktopName = "Chromium";
               genericName = "Web Browser";
             })
           ];
@@ -286,13 +287,13 @@ in
       extraEnv = ''
         # export SDL_VIDEODRIVER=wayland
         # needs qt5.qtwayland in systemPackages
-        export QT_QPA_PLATFORM=wayland
-        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+        # export QT_QPA_PLATFORM=wayland
+        # export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
         # Fix for some Java AWT applications (e.g. Android Studio),
         # use this if they aren't displayed properly:
-        export _JAVA_AWT_WM_NONREPARENTING=1
-        export QT_QPA_PLATFORMTHEME=qt5ct
-        export QT_PLATFORM_PLUGIN=qt5ct
+        # export _JAVA_AWT_WM_NONREPARENTING=1
+        # export QT_QPA_PLATFORMTHEME=qt5ct
+        # export QT_PLATFORM_PLUGIN=qt5ct
       '';
     in
     {
@@ -375,7 +376,7 @@ in
 
       wayland.windowManager = {
         sway = {
-          enable = true;
+          # enable = true;
           extraSessionCommands = extraEnv;
           wrapperFeatures.gtk = true;
           config = {
@@ -457,10 +458,10 @@ in
         alacritty = {
           enable = true;
           settings = {
-            shell = {
-              program = "${pkgs.tmux}/bin/tmux";
-              args = [ "attach" ];
-            };
+            # shell = {
+            #   program = "${pkgs.tmux}/bin/tmux";
+            #   args = [ "attach" ];
+            # };
             font = {
               normal = { family = font; };
               size = fontSize;
@@ -469,7 +470,7 @@ in
           };
         };
         tmux = {
-          enable = true;
+          # enable = true;
           newSession = true;
           secureSocket = true;
           baseIndex = 1;
@@ -496,7 +497,7 @@ in
           ];
         };
         qutebrowser = {
-          enable = false;
+          # enable = true;
           settings = {
             content.javascript.enabled = false;
             colors.webpage.darkmode.enabled = false;
@@ -581,7 +582,7 @@ in
           loginExtra =
             ''
               if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
-                  exec sway
+                  startx
               fi
             '';
           initExtra = ''
@@ -615,7 +616,7 @@ in
             acc = "#${acColor}";
           in
           {
-            enable = true;
+            # enable = true;
             colors = {
               window = {
                 background = bgc;
@@ -643,7 +644,7 @@ in
             swayEnabled = config.wayland.windowManager.sway.enable;
           in
           {
-            enable = swayEnabled || config.wayland.windowManager.hikari.enable;
+            enable = swayEnabled;
             settings = [{
               layer = "top";
               position = "top";
