@@ -18,6 +18,8 @@ in
       "$6$spzqhAyJfhHy$iHgLBlhjGn1l8PnbjJdWTn1GPvcjMqYNKUzdCe/7IrX6sHNgETSr/Nfpdmq9FCXLhrAfwHOd/q/8SvfeIeNX4/";
   };
 
+  environment.systemPackages = [ pkgs.qt5.qtwayland ];
+
   xdg.portal = {
     enable = true;
     gtkUsePortal = true;

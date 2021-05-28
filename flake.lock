@@ -450,6 +450,9 @@
         "nixos": "nixos",
         "nixos-hardware": "nixos-hardware",
         "nixosPersistence": "nixosPersistence",
+        "nixpkgs": [
+          "nixos"
+        ],
         "nixpkgsWayland": "nixpkgsWayland",
         "nur": "nur",
         "pkgs": "pkgs"

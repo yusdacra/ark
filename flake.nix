@@ -4,6 +4,7 @@
   inputs =
     {
       nixos.url = "nixpkgs/nixos-unstable";
+      nixpkgs.follows = "nixos";
       latest.url = "nixpkgs";
       digga.url = "github:divnix/digga";
 

@@ -1,4 +1,4 @@
-{ self, config, pkgs, lib, ourLib, ... }:
+{ self, inputs, config, pkgs, lib, ourLib, ... }:
 let
   inherit (lib) fileContents mkIf;
   pkgBin = ourLib.pkgBinNoDep pkgs;
@@ -139,20 +139,28 @@ in
         diff-closures /run/current-system "$systemConfig"
   '';
 
-  nix = {
-    autoOptimiseStore = true;
-    gc.automatic = true;
-    optimise.automatic = true;
-    useSandbox = true;
-    allowedUsers = [ "@wheel" ];
-    trustedUsers = [ "root" "@wheel" ];
-    extraOptions = ''
-      min-free = 536870912
-      keep-outputs = true
-      keep-derivations = true
-      fallback = true
-    '';
-  };
+  nix =
+    let
+      registry =
+        builtins.mapAttrs
+          (_: v: { flake = v; })
+          (lib.filterAttrs (_: v: v ? outputs) inputs);
+    in
+    {
+      autoOptimiseStore = true;
+      gc.automatic = true;
+      optimise.automatic = true;
+      useSandbox = true;
+      allowedUsers = [ "@wheel" ];
+      trustedUsers = [ "root" "@wheel" ];
+      extraOptions = ''
+        min-free = 536870912
+        keep-outputs = true
+        keep-derivations = true
+        fallback = true
+      '';
+      inherit registry;
+    };
 
   programs.command-not-found.enable = false;
   home-manager.useGlobalPkgs = true;
