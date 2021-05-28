@@ -14,6 +14,7 @@ final: prev: rec {
       "--ignore-gpu-blocklist"
       "--enable-gpu-rasterization"
       "--enable-zero-copy"
+      "--disable-gpu-driver-bug-workarounds"
     ];
   });
   mkDiscord =
@@ -132,7 +133,9 @@ final: prev: rec {
       ];
 
       flags = (lib.optionals isWayland [
-        "--enable-features=UseOzonePlatform"
+        "--flag-switches-begin"
+        "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer"
+        "--flag-switches-end"
         "--ozone-platform=wayland"
         "--enable-webrtc-pipewire-capturer"
       ]) ++ extraOptions;

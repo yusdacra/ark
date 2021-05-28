@@ -121,42 +121,43 @@ in
       chromiumWayland =
         let
           flags = [
-            "--enable-features=UseOzonePlatform"
-            "--ozone-platform=wayland"
             "--enable-vulkan"
+            "--flag-switches-begin"
+            "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer,IgnoreGPUBlocklist"
+            "--flag-switches-end"
+            "--ozone-platform=wayland"
             "--enable-webrtc-pipewire-capturer"
             "--ignore-gpu-blocklist"
             "--enable-gpu-rasterization"
             "--enable-zero-copy"
+            "--disable-gpu-driver-bug-workarounds"
             # "--enable-features=VaapiVideoDecoder"
             # "--use-gl=egl"
-            # "--disable-gpu-driver-bug-workarounds"
           ];
         in
         pkgs.writeScriptBin "chromium-wayland" ''
           #!${pkgs.stdenv.shell}
           chromium ${lib.concatStringsSep " " flags}
         '';
-      chromiumWaylandPkg = with pkgs;
-        let name = "chromium-wayland"; in
-        stdenv.mkDerivation {
-          pname = name;
-          version = chromium.version;
-
-          nativeBuildInputs = [ copyDesktopItems ];
-          desktopItems = [
-            (makeDesktopItem {
-              inherit name;
-              exec = name;
-              desktopName = "Chromium Wayland";
-              genericName = "Web Browser";
-            })
-          ];
+      chromiumWaylandPkg =
+        let
+          name = "chromium-wayland";
+          desktop = pkgs.makeDesktopItem {
+            inherit name;
+            exec = name;
+            icon = "chromium-browser";
+            desktopName = "Chromium Wayland";
+            genericName = "Web Browser";
+          };
+        in
+        pkgs.stdenv.mkDerivation {
+          name = name;
 
           phases = [ "installPhase" ];
           installPhase = ''
-            mkdir -p $out/bin
-            ln -s ${chromiumWayland}/bin/chromium-wayland $out/bin/chromium-wayland
+            mkdir $out
+            ln -s ${chromiumWayland}/bin $out/bin
+            ln -s ${desktop}/share $out/share
           '';
         };
 
