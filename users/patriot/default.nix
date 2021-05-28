@@ -18,8 +18,6 @@ in
       "$6$spzqhAyJfhHy$iHgLBlhjGn1l8PnbjJdWTn1GPvcjMqYNKUzdCe/7IrX6sHNgETSr/Nfpdmq9FCXLhrAfwHOd/q/8SvfeIeNX4/";
   };
 
-  environment.systemPackages = [ pkgs.qt5.qtwayland ];
-
   xdg.portal = {
     enable = true;
     gtkUsePortal = true;
@@ -51,7 +49,7 @@ in
       enable = true;
       desktopManager = {
         plasma5.enable = false;
-        gnome.enable = true;
+        gnome.enable = false;
         xterm.enable = false;
       };
       displayManager = {
@@ -61,11 +59,11 @@ in
         };
         lightdm.enable = false;
         gdm = {
-          enable = true;
+          enable = false;
           wayland = true;
         };
         sddm.enable = false;
-        startx.enable = false;
+        startx.enable = true;
       };
     };
   };
@@ -293,9 +291,9 @@ in
         export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
         # Fix for some Java AWT applications (e.g. Android Studio),
         # use this if they aren't displayed properly:
-        # export _JAVA_AWT_WM_NONREPARENTING=1
-        # export QT_QPA_PLATFORMTHEME=qt5ct
-        # export QT_PLATFORM_PLUGIN=qt5ct
+        export _JAVA_AWT_WM_NONREPARENTING=1
+        export QT_QPA_PLATFORMTHEME=qt5ct
+        export QT_PLATFORM_PLUGIN=qt5ct
       '';
     in
     {
@@ -378,7 +376,7 @@ in
 
       wayland.windowManager = {
         sway = {
-          enable = false;
+          enable = true;
           extraSessionCommands = extraEnv;
           wrapperFeatures.gtk = true;
           config = {
@@ -460,10 +458,10 @@ in
         alacritty = {
           enable = true;
           settings = {
-            # shell = {
-            #   program = "${pkgs.tmux}/bin/tmux";
-            #   args = [ "attach" ];
-            # };
+            shell = {
+              program = "${pkgs.tmux}/bin/tmux";
+              args = [ "attach" ];
+            };
             font = {
               normal = { family = font; };
               size = fontSize;
@@ -472,7 +470,7 @@ in
           };
         };
         tmux = {
-          enable = false;
+          enable = true;
           newSession = true;
           secureSocket = true;
           baseIndex = 1;
@@ -581,12 +579,12 @@ in
           dotDir = ".config/zsh";
           history.path = ".local/share/zsh/history";
           envExtra = extraEnv;
-          # loginExtra =
-          #   ''
-          #     if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
-          #         exec sway
-          #     fi
-          #   '';
+          loginExtra =
+            ''
+              if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
+                  exec sway
+              fi
+            '';
           initExtra = ''
             export TERM=alacritty
 
@@ -618,7 +616,7 @@ in
             acc = "#${acColor}";
           in
           {
-            enable = false;
+            enable = true;
             colors = {
               window = {
                 background = bgc;
@@ -646,7 +644,7 @@ in
             swayEnabled = config.wayland.windowManager.sway.enable;
           in
           {
-            enable = swayEnabled;
+            enable = swayEnabled || config.wayland.windowManager.hikari.enable;
             settings = [{
               layer = "top";
               position = "top";
