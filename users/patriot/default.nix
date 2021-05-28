@@ -361,7 +361,6 @@ in
             ffmpeg
             mupdf
             transmission-qt
-            steam-run
             lutris
             xdg_utils
             tagref
