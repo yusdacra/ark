@@ -152,7 +152,6 @@ in
       keep-derivations = true
       fallback = true
     '';
-    sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh" ];
   };
 
   programs.command-not-found.enable = false;
