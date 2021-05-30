@@ -141,6 +141,47 @@ in
           #!${pkgs.stdenv.shell}
           chromium ${lib.concatStringsSep " " flags}
         '';
+      vscodiumWayland =
+        let
+          flags = [
+            "--enable-vulkan"
+            "--flag-switches-begin"
+            "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer,IgnoreGPUBlocklist"
+            "--flag-switches-end"
+            "--ozone-platform=wayland"
+            "--enable-webrtc-pipewire-capturer"
+            "--ignore-gpu-blocklist"
+            "--enable-gpu-rasterization"
+            "--enable-zero-copy"
+            "--disable-gpu-driver-bug-workarounds"
+            # "--enable-features=VaapiVideoDecoder"
+            # "--use-gl=egl"
+          ];
+        in
+        pkgs.writeScriptBin "vscodium-wayland" ''
+          #!${pkgs.stdenv.shell}
+          codium ${lib.concatStringsSep " " flags}
+        '';
+      vscodiumWaylandPkg =
+        let
+          name = "vscodium-wayland";
+          desktop = pkgs.makeDesktopItem {
+            inherit name;
+            exec = name;
+            icon = "vscodium";
+            desktopName = "VSCodium Wayland";
+          };
+        in
+        pkgs.stdenv.mkDerivation {
+          name = name;
+
+          phases = [ "installPhase" ];
+          installPhase = ''
+            mkdir $out
+            ln -s ${vscodiumWayland}/bin $out/bin
+            ln -s ${desktop}/share $out/share
+          '';
+        };
       chromiumWaylandPkg =
         let
           name = "chromium-wayland";
@@ -350,6 +391,7 @@ in
             wine-staging
             cachix
             chromiumWaylandPkg
+            vscodiumWaylandPkg
             appimage-run
             bitwarden
             pfetch
