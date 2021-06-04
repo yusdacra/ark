@@ -1,12 +1,12 @@
 final: prev: rec {
   discord-canary-system = prev.callPackage mkDiscord (rec {
     pname = "discord-canary";
-    version = "0.0.123";
+    version = "0.0.124";
     binaryName = "DiscordCanary";
     desktopName = "Discord Canary";
     src = prev.fetchurl {
       url = "https://dl-canary.discordapp.net/apps/linux/${version}/discord-canary-${version}.tar.gz";
-      sha256 = "0bijwfsd9s4awqkgxd9c2cxh7y5r06vix98qjp0dkv63r6jig8ch";
+      sha256 = "sha256-Ie37ju2eg6oPwaB0LQ5WPoBiduhqbAJ5RNQXm1O+Hhg=";
     };
     isWayland = true;
     extraOptions = [

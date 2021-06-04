@@ -840,13 +840,13 @@ in
             in
             (pkgs.vscode-utils.extensionsFromVscodeMarketplace [
               # Rust
-              (mkExt "rust-analyzer" "0.2.591" "matklad" "sha256-6Kix740Y3thDbOtQGFrUU4l6e1+Ojl0TbyqobQiZltc=")
-              (mkExt "even-better-toml" "0.12.1" "tamasfe" "sha256-Gho9egc2DK02d6kzYs1fT4M6PxeUL2PeqcSEX/vyQZA=")
+              (mkExt "rust-analyzer" "0.2.612" "matklad" "sha256-XxmuI9JQlUq8fn+5ajNCOWIQXZy6wTEWipb++6GlByk=")
+              (mkExt "even-better-toml" "0.12.2" "tamasfe" "sha256-etPWeshSDbw9u92Ecl1gGYZ7ic9Nfu4+sRoS8WbX4e8=")
               (mkExt "crates" "0.5.9" "serayuzgur" "sha256-YHIbnl2R7lqwJHi8qUQImClx9MWm+5Pc12vYw7e/RlA=")
               # Nix
               (mkExt "nix-env-selector" "1.0.7" "arrterian" "sha256-DnaIXJ27bcpOrIp1hm7DcrlIzGSjo4RTJ9fD72ukKlc=")
               # Go
-              (mkExt "Go" "0.24.2" "golang" "sha256-R34n3TRvIKGfG7x+OVVBDd3JlolPwyWZ7EEWih9xI0Y=")
+              (mkExt "Go" "0.25.1" "golang" "sha256-ZDUWN9lzDnR77W7xcMFQaaFl/6Lf/x1jgaBkwZPqGGw=")
               # Flutter and dart
               (mkExt "flutter" "3.22.0" "Dart-Code" "sha256-woygN6hOWlP2UayqwDhJh9KcZk1GzH7mDF5IueDRxs4=")
               (mkExt "dart-code" "3.22.0" "Dart-Code" "sha256-1nTewVmlrxbXdRR1EPts46u24LHdnP5BblFsMaGlNYg=")
