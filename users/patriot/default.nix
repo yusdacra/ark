@@ -649,6 +649,9 @@ in
             rember = ''
               ${pkgs.kakoune-unwrapped}/bin/kak -e "try %(gtd-jump-today)" "${config.home.homeDirectory}/rember/stuff$(date '+_%m_%Y').gtd"
             '';
+            harmony-ssh = ''
+              ${pkgs.mosh}/bin/mosh yusuf@chat.harmonyapp.io
+            '';
           };
         };
         fzf.enable = true;

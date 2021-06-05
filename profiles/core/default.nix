@@ -55,6 +55,7 @@ in
       hydra-check
       nix-index
       du-dust
+      mosh
     ];
 
     shellAliases =
