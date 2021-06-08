@@ -133,8 +133,6 @@ in
             "--enable-gpu-rasterization"
             "--enable-zero-copy"
             "--disable-gpu-driver-bug-workarounds"
-            # "--enable-features=VaapiVideoDecoder"
-            # "--use-gl=egl"
           ];
         in
         pkgs.writeScriptBin "chromium-wayland" ''
@@ -154,8 +152,6 @@ in
             "--enable-gpu-rasterization"
             "--enable-zero-copy"
             "--disable-gpu-driver-bug-workarounds"
-            # "--enable-features=VaapiVideoDecoder"
-            # "--use-gl=egl"
           ];
         in
         pkgs.writeScriptBin "vscodium-wayland" ''
@@ -175,11 +171,16 @@ in
         pkgs.stdenv.mkDerivation {
           name = name;
 
-          phases = [ "installPhase" ];
+          nativeBuildInputs = [ pkgs.makeWrapper ];
+          phases = [ "installPhase" "fixupPhase" ];
           installPhase = ''
-            mkdir $out
-            ln -s ${vscodiumWayland}/bin $out/bin
+            mkdir -p $out/bin
+            ln -s ${vscodiumWayland}/bin/${name} $out/bin
             ln -s ${desktop}/share $out/share
+          '';
+          fixupPhase = ''
+            wrapProgram $out/bin/${name} \
+              --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath (with pkgs; [ vulkan-loader vulkan-validation-layers vulkan-extension-layer libGL ])}
           '';
         };
       chromiumWaylandPkg =
@@ -196,11 +197,16 @@ in
         pkgs.stdenv.mkDerivation {
           name = name;
 
-          phases = [ "installPhase" ];
+          nativeBuildInputs = [ pkgs.makeWrapper ];
+          phases = [ "installPhase" "fixupPhase" ];
           installPhase = ''
-            mkdir $out
-            ln -s ${chromiumWayland}/bin $out/bin
+            mkdir -p $out/bin
+            ln -s ${chromiumWayland}/bin/${name} $out/bin
             ln -s ${desktop}/share $out/share
+          '';
+          fixupPhase = ''
+            wrapProgram $out/bin/${name} \
+              --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath (with pkgs; [ vulkan-loader vulkan-validation-layers vulkan-extension-layer libGL ])}
           '';
         };
 

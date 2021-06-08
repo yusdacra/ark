@@ -69,6 +69,10 @@ final: prev: rec {
     , libappindicator-gtk3
     , libdbusmenu
     , nodePackages
+    , vulkan-loader
+    , vulkan-validation-layers
+    , vulkan-extension-layer
+    , libGL
     }:
     stdenv.mkDerivation rec {
       inherit pname version src;
@@ -130,6 +134,10 @@ final: prev: rec {
         libXScrnSaver
         libappindicator-gtk3
         libdbusmenu
+        vulkan-loader
+        vulkan-validation-layers
+        vulkan-extension-layer
+        libGL
       ];
 
       flags = (lib.optionals isWayland [

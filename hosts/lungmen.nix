@@ -143,9 +143,18 @@ in
         vaapiVdpau
         libva
         vulkan-loader
+        vulkan-validation-layers
+        vulkan-extension-layer
       ];
       extraPackages32 = with pkgs.pkgsi686Linux;
-        [ libvdpau-va-gl vaapiVdpau libva vulkan-loader ]
+        [
+          libvdpau-va-gl
+          vaapiVdpau
+          libva
+          vulkan-loader
+          vulkan-validation-layers
+          vulkan-extension-layer
+        ]
         ++ [ pkgs.driversi686Linux.amdvlk ];
     };
     pulseaudio = {
@@ -162,8 +171,9 @@ in
       directories = [ "/etc/nixos" ];
       files = [ "/etc/machine-id" ];
     };
-    variables = {
+    sessionVariables = {
       VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/amd_icd64.json";
+      LD_LIBRARY_PATH = lib.mkForce "${lib.makeLibraryPath (config.hardware.opengl.extraPackages ++ config.hardware.opengl.extraPackages32)}";
     };
   };
   networking.interfaces.enp6s0.useDHCP = true;
