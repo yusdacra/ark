@@ -145,6 +145,7 @@ in
         vulkan-loader
         vulkan-validation-layers
         vulkan-extension-layer
+        pipewire
       ];
       extraPackages32 = with pkgs.pkgsi686Linux;
         [
@@ -154,6 +155,7 @@ in
           vulkan-loader
           vulkan-validation-layers
           vulkan-extension-layer
+          pipewire
         ]
         ++ [ pkgs.driversi686Linux.amdvlk ];
     };

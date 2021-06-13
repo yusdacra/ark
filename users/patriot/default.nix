@@ -388,6 +388,7 @@ in
             discord-canary-system
             # lightcord
             # discord-canary
+            element-desktop
             audacity
             krita
             gimp
