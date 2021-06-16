@@ -870,6 +870,7 @@ in
               (mkExt "material-icon-theme" "4.6.0" "PKief" "sha256-i+3lrw3mDqK2vTMDhJYTACW5JleA+lN1XAC2imgQLUo=")
               (mkExt "github-vscode-theme" "4.1.1" "GitHub" "sha256-yLySHOx6pe7w2cyi95pQlKkn/o4VMCTkrTYHu8ASn5M=")
               (mkExt "koka" "0.0.1" "maelvalais" "sha256-ty8Mql19HgUWForggeZuHQpzTbmmB/eBFHqof5ZMKr0=")
+              (mkExt "vscode-rhai" "0.6.3" "rhaiscript" "sha256-gEdpM/TkkiZ50bG9qDU6BH04AJLRDcHLquniRs6m0mg=")
             ]) ++ (with pkgs.vscode-extensions; [ a5huynh.vscode-ron vadimcn.vscode-lldb jnoortheen.nix-ide ]);
           userSettings = {
             "workbench.iconTheme" = "material-icon-theme";

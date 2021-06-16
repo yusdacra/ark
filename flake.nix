@@ -37,6 +37,8 @@
     digga.lib.mkFlake {
       inherit self inputs;
 
+      lib = import ./lib { lib = digga.lib // nixos.lib; };
+
       channelsConfig = {
         allowUnfree = true;
         permittedInsecurePackages = [
@@ -59,8 +61,6 @@
         };
         latest = { };
       };
-
-      lib = import ./lib { lib = digga.lib // nixos.lib; };
 
       sharedOverlays = [
         (final: prev: {
@@ -89,19 +89,23 @@
           /* set host specific properties here */
           NixOS = { };
         };
-        profiles = [ ./profiles ./users ];
-        suites = { profiles, users, ... }: with profiles; {
-          base = [ cachix core users.root ];
-          work = [ users.patriot develop ];
+        importables = rec {
+          profiles = (digga.lib.importers.rakeLeaves ./profiles) // { users = digga.lib.importers.rakeLeaves ./users; };
+          suites = with profiles; {
+            base = [ cachix core users.root ];
+            work = [ users.patriot develop ];
+          };
         };
       };
 
       home = {
         modules = ./users/modules/module-list.nix;
         externalModules = [ ];
-        profiles = [ ./users/profiles ];
-        suites = { profiles, ... }: with profiles; {
-          base = [ direnv git starship ];
+        importables = rec {
+          profiles = digga.lib.importers.rakeLeaves ./users/profiles;
+          suites = with profiles; {
+            base = [ direnv git starship ];
+          };
         };
       };
 
