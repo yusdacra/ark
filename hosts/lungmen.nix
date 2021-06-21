@@ -143,7 +143,6 @@ in
         vaapiVdpau
         libva
         vulkan-loader
-        vulkan-validation-layers
         vulkan-extension-layer
         pipewire
       ];
@@ -153,7 +152,6 @@ in
           vaapiVdpau
           libva
           vulkan-loader
-          vulkan-validation-layers
           vulkan-extension-layer
           pipewire
         ]

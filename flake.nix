@@ -27,13 +27,17 @@
         url = "github:aaronjanse/nix-eval-lsp";
         inputs.nixpkgs.follows = "nixos";
       };
+      helix = {
+        url = "github:yusdacra/helix/build/nix/lazy-submodules";
+        inputs.nixpkgs.follows = "nixos";
+      };
       nixpkgsWayland = {
         url = "github:colemickens/nixpkgs-wayland";
         inputs.nixpkgs.follows = "nixos";
       };
     };
 
-  outputs = inputs@{ self, pkgs, digga, nixos, ci-agent, home, nixos-hardware, nur, nixosPersistence, nixpkgsWayland, nixEvalLsp, ... }:
+  outputs = inputs@{ self, pkgs, digga, nixos, ci-agent, home, nixos-hardware, nur, nixosPersistence, nixpkgsWayland, nixEvalLsp, helix, ... }:
     digga.lib.mkFlake {
       inherit self inputs;
 
@@ -56,6 +60,7 @@
             nixpkgsWayland.overlay
             (final: prev: {
               inherit (nixEvalLsp.packages.${prev.system}) nix-eval-lsp;
+              inherit (helix.packages.${prev.system}) helix;
             })
           ];
         };

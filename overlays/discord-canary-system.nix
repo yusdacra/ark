@@ -70,7 +70,6 @@ final: prev: rec {
     , libdbusmenu
     , nodePackages
     , vulkan-loader
-    , vulkan-validation-layers
     , vulkan-extension-layer
     , libGL
     }:
@@ -135,7 +134,6 @@ final: prev: rec {
         libappindicator-gtk3
         libdbusmenu
         vulkan-loader
-        vulkan-validation-layers
         vulkan-extension-layer
         libGL
       ];

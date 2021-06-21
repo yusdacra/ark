@@ -95,31 +95,6 @@ in
       fontComb = "${font} ${toString fontSize}";
       fontPackage = pkgs.iosevka;
 
-      kideSrc = fetchGit {
-        url = "https://gitlab.com/yusdacra/kide.git";
-        rev = "778d68df0cfcb96d6113bfe6a59e5dfc71ee7d82";
-        submodules = true;
-      };
-      kideFiles =
-        mapAttrs' (n: _: nameValuePair "kak/${n}" { source = "${kideSrc}/${n}"; })
-          (readDir kideSrc);
-      kideDeps = with pkgs; [
-        fzf
-        bat
-        ripgrep
-        universal-ctags
-        kak-lsp
-        wl-clipboard
-        xclip
-        shellcheck
-        perl
-        socat
-        gdb
-        kcr
-        jq
-        file
-      ];
-
       chromiumWayland =
         let
           flags = [
@@ -180,7 +155,7 @@ in
           '';
           fixupPhase = ''
             wrapProgram $out/bin/${name} \
-              --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath (with pkgs; [ vulkan-loader vulkan-validation-layers vulkan-extension-layer libGL ])}
+              --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath (with pkgs; [ vulkan-loader vulkan-extension-layer libGL ])}
           '';
         };
       chromiumWaylandPkg =
@@ -206,7 +181,7 @@ in
           '';
           fixupPhase = ''
             wrapProgram $out/bin/${name} \
-              --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath (with pkgs; [ vulkan-loader vulkan-validation-layers vulkan-extension-layer libGL ])}
+              --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath (with pkgs; [ vulkan-loader vulkan-extension-layer libGL ])}
           '';
         };
 
@@ -421,7 +396,7 @@ in
             phantomstyle
             papirus-icon-theme
             pcmanfm-qt
-          ] ++ kideDeps;
+          ];
       };
 
       wayland.windowManager = {
@@ -907,133 +882,6 @@ in
             grabKeyboardAndMouse = false;
             pinentryFlavor = "qt";
           };
-      };
-
-      xdg = {
-        enable = true;
-        configFile = {
-          "kak/user/kakrc".text = ''
-            source "%val{config}/user/color/colorscheme.kak"
-          '';
-          "kak/user/color/colorscheme.kak".text = ''
-            evaluate-commands %sh{
-              fg="rgb:${colorScheme.primary.normal.foreground}"
-              bg="rgb:${colorScheme.primary.normal.background}"
-              br_fg="rgb:${colorScheme.primary.bright.foreground}"
-              br_bg="rgb:${colorScheme.primary.bright.background}"
-
-              red="rgb:${colorScheme.normal.red}"
-              green="rgb:${colorScheme.normal.green}"
-              yellow="rgb:${colorScheme.normal.yellow}"
-              blue="rgb:${colorScheme.normal.blue}"
-              magenta="rgb:${colorScheme.normal.magenta}"
-              cyan="rgb:${colorScheme.normal.cyan}"
-
-              br_red="rgb:${colorScheme.bright.red}"
-              br_green="rgb:${colorScheme.bright.green}"
-              br_yellow="rgb:${colorScheme.bright.yellow}"
-              br_blue="rgb:${colorScheme.bright.blue}"
-              br_magenta="rgb:${colorScheme.bright.magenta}"
-              br_cyan="rgb:${colorScheme.bright.cyan}"
-
-              echo "
-                set-face global value $yellow+b
-                set-face global type $br_yellow
-                set-face global variable $magenta
-                set-face global module $blue
-                set-face global function $br_cyan
-                set-face global string $br_green
-                set-face global keyword $br_red+b
-                set-face global operator $br_cyan
-                set-face global attribute $yellow
-                set-face global comment $fg
-                set-face global meta $br_yellow
-                set-face global builtin $br_fg+b
-
-                set-face global title $blue+u
-                set-face global header $br_cyan+u
-                set-face global bold $br_fg+b
-                set-face global italic $br_fg+i
-                set-face global mono $br_green
-                set-face global block $yellow
-                set-face global link $blue
-                set-face global bullet $br_magenta
-                set-face global list $magenta
-
-                set-face global Default $br_fg,$bg
-                set-face global PrimarySelection $bg,$br_fg
-                set-face global SecondarySelection $br_fg,$br_bg+i
-                set-face global PrimaryCursor $bg,$red+b
-                set-face global SecondaryCursor $bg,$br_cyan+i
-                set-face global MatchingChar $bg,$blue
-                set-face global Search $br_fg,$green
-                set-face global CurrentWord $br_fg,$blue
-
-                set-face global MenuForeground $cyan,$br_bg+b
-                set-face global MenuBackground $br_fg,$bg
-
-                set-face global Information $br_yellow,$bg
-                set-face global Error $br_bg,$br_red
-
-                set-face global BufferPadding $bg,$bg
-                set-face global Whitespace $bg
-                set-face global StatusLine $br_fg,$bg
-                set-face global StatusLineInfo $yellow,$bg
-
-                set-face global LineNumbers default
-                set-face global LineNumberCursor default,default+r
-              "
-            }
-          '';
-          "kak-lsp/kak-lsp.toml".text = ''
-            snippet_support = true
-            verbosity = 2
-
-            [semantic_scopes]
-            variable = "variable"
-            entity_name_function = "function"
-            entity_name_type = "type"
-            variable_other_enummember = "variable"
-            entity_name_namespace = "module"
-
-            [semantic_tokens]
-            type = "type"
-            variable = "variable"
-            namespace = "module"
-            function = "function"
-            string = "string"
-            keyword = "keyword"
-            operator = "operator"
-            comment = "comment"
-
-            [semantic_modifiers]
-            documentation = "documentation"
-            readonly = "default+d"
-
-            [server]
-            timeout = 1800
-
-            [language.rust]
-            filetypes = ["rust"]
-            roots = ["Cargo.toml"]
-            command = "${pkgBin "rust-analyzer"}"
-
-            [language.nix]
-            filetypes = ["nix"]
-            roots = ["flake.nix", "shell.nix", ".git"]
-            command = "${pkgBin "rnix-lsp"}"
-          '';
-          # [language.haskell]
-          # filetypes = ["haskell"]
-          # roots = ["Setup.hs", "stack.yaml", "*.cabal"]
-          # command = "${pkgBin "haskell-language-server"}"
-          "nixpkgs/config.nix".text = ''
-            {
-              android_sdk.accept_license = true;
-              allowUnfree = true;
-            }
-          '';
-        } // kideFiles;
       };
     };
 }
