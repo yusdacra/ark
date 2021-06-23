@@ -28,7 +28,7 @@
         inputs.nixpkgs.follows = "nixos";
       };
       helix = {
-        url = "github:yusdacra/helix/build/nix/lazy-submodules";
+        url = "github:helix-editor/helix";
         inputs.nixpkgs.follows = "nixos";
       };
       nixpkgsWayland = {

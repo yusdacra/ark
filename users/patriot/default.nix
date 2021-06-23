@@ -91,7 +91,7 @@ in
       email = personal.emails.primary;
 
       font = "Iosevka Term";
-      fontSize = 10;
+      fontSize = 12;
       fontComb = "${font} ${toString fontSize}";
       fontPackage = pkgs.iosevka;
 
@@ -396,6 +396,7 @@ in
             phantomstyle
             papirus-icon-theme
             pcmanfm-qt
+            wl-clipboard
           ];
       };
 
@@ -628,9 +629,6 @@ in
             eval "$(zoxide init zsh)"
           '';
           shellAliases = nixosConfig.environment.shellAliases // {
-            rember = ''
-              ${pkgs.kakoune-unwrapped}/bin/kak -e "try %(gtd-jump-today)" "${config.home.homeDirectory}/rember/stuff$(date '+_%m_%Y').gtd"
-            '';
             harmony-ssh = ''
               ${pkgs.mosh}/bin/mosh yusuf@chat.harmonyapp.io
             '';
@@ -724,7 +722,7 @@ in
                     border-radius: 0;
                     /* `otf-font-awesome` is required to be installed for icons */
                     font-family: ${font};
-                    font-size: 13px;
+                    font-size: ${toString fontSize}px;
                     min-height: 0;
                 }
 
@@ -825,8 +823,8 @@ in
             in
             (pkgs.vscode-utils.extensionsFromVscodeMarketplace [
               # Rust
-              (mkExt "rust-analyzer" "0.2.612" "matklad" "sha256-XxmuI9JQlUq8fn+5ajNCOWIQXZy6wTEWipb++6GlByk=")
-              (mkExt "even-better-toml" "0.12.2" "tamasfe" "sha256-etPWeshSDbw9u92Ecl1gGYZ7ic9Nfu4+sRoS8WbX4e8=")
+              (mkExt "rust-analyzer" "0.2.646" "matklad" "sha256-GL+0R2KuycvHs/+yKVfK1H89sKA+H41DLUsJwy4ngyc=")
+              (mkExt "even-better-toml" "0.12.3" "tamasfe" "sha256-nDmmzVuADieNX9bcS3YQiemg27S4O02Pjj+rthkBAZw=")
               (mkExt "crates" "0.5.9" "serayuzgur" "sha256-YHIbnl2R7lqwJHi8qUQImClx9MWm+5Pc12vYw7e/RlA=")
               # Nix
               (mkExt "nix-env-selector" "1.0.7" "arrterian" "sha256-DnaIXJ27bcpOrIp1hm7DcrlIzGSjo4RTJ9fD72ukKlc=")
@@ -850,13 +848,12 @@ in
           userSettings = {
             "workbench.iconTheme" = "material-icon-theme";
             "workbench.colorTheme" = "GitHub Dark";
-            "rust-analyzer.cargo.allFeatures" = true;
             "rust-analyzer.cargo.loadOutDirsFromCheck" = true;
             "rust-analyzer.procMacro.enable" = true;
             "editor.fontFamily" = "'${font}'";
             "debug.console.fontFamily" = "${font}";
-            "debug.console.fontSize" = 12;
-            "terminal.integrated.fontSize" = 12;
+            "debug.console.fontSize" = toString fontSize;
+            "terminal.integrated.fontSize" = toString fontSize;
             "go.useLanguageServer" = true;
             "rust-analyzer.checkOnSave.command" = "clippy";
             "nix.enableLanguageServer" = true;
