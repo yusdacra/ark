@@ -397,6 +397,7 @@ in
             papirus-icon-theme
             pcmanfm-qt
             wl-clipboard
+            rust-analyzer
           ];
       };
 
