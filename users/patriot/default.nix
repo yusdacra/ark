@@ -360,10 +360,8 @@ in
             font-awesome
             (nerdfonts.override { fonts = [ "Iosevka" ]; })
             # Programs
-            discord-canary-system
-            # lightcord
-            # discord-canary
-            element-desktop
+            # discord-canary-system
+            # element-desktop
             audacity
             krita
             gimp
@@ -666,155 +664,6 @@ in
             separator = "none";
             terminal = pkgBin "alacritty";
           };
-        waybar =
-          let
-            swayEnabled = config.wayland.windowManager.sway.enable;
-          in
-          {
-            enable = swayEnabled || config.wayland.windowManager.hikari.enable;
-            settings = [{
-              layer = "top";
-              position = "top";
-              modules-left = if swayEnabled then [ "sway/workspaces" ] else [ ];
-              modules-center = if swayEnabled then [ "sway/window" ] else [ ];
-              modules-right =
-                [ "pulseaudio" "cpu" "memory" "temperature" "clock" "tray" ];
-              modules = {
-                "tray" = { spacing = 8; };
-                "cpu" = { format = "/cpu {usage}/"; };
-                "memory" = { format = "/mem {}/"; };
-                "temperature" = {
-                  hwmon-path = "/sys/class/hwmon/hwmon1/temp2_input";
-                  format = "/tmp {temperatureC}C/";
-                };
-                "pulseaudio" = {
-                  format = "/vol {volume}/ {format_source}";
-                  format-bluetooth = "/volb {volume}/ {format_source}";
-                  format-bluetooth-muted = "/volb/ {format_source}";
-                  format-muted = "/vol/ {format_source}";
-                  format-source = "/mic {volume}/";
-                  format-source-muted = "/mic/";
-                };
-              };
-            }];
-            style =
-              let
-                makeBorder = color: "border-bottom: 3px solid #${color};";
-                makeInfo = color: ''
-                  color: #${color};
-                  ${makeBorder color}
-                '';
-
-                clockColor = colorScheme.bright.magenta;
-                cpuColor = colorScheme.bright.green;
-                memColor = colorScheme.bright.blue;
-                pulseColor = {
-                  normal = colorScheme.bright.cyan;
-                  muted = colorScheme.bright.gray;
-                };
-                tmpColor = {
-                  normal = colorScheme.bright.yellow;
-                  critical = colorScheme.bright.red;
-                };
-              in
-              ''
-                * {
-                    border: none;
-                    border-radius: 0;
-                    /* `otf-font-awesome` is required to be installed for icons */
-                    font-family: ${font};
-                    font-size: ${toString fontSize}px;
-                    min-height: 0;
-                }
-
-                window#waybar {
-                    background-color: #${bgColor};
-                    /* border-bottom: 0px solid rgba(100, 114, 125, 0.5); */
-                    color: #${fgColor};
-                    transition-property: background-color;
-                    transition-duration: .5s;
-                }
-
-                #workspaces button {
-                    padding: 0 5px;
-                    background-color: transparent;
-                    color: #${fgColor};
-                    border-bottom: 3px solid transparent;
-                }
-
-                /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-                #workspaces button:hover {
-                    background: rgba(0, 0, 0, 0.2);
-                    box-shadow: inherit;
-                    border-bottom: 3px solid #ffffff;
-                }
-
-                #workspaces button.focused {
-                    border-bottom: 3px solid #${acColor};
-                }
-
-                #workspaces button.urgent {
-                    background-color: #${acColor};
-                    color: #${bgColor};
-                }
-
-                #mode {
-                    background-color: #64727D;
-                    border-bottom: 3px solid #ffffff;
-                }
-
-                #clock,
-                #battery,
-                #cpu,
-                #memory,
-                #temperature,
-                #backlight,
-                #network,
-                #pulseaudio,
-                #custom-media,
-                #tray,
-                #mode,
-                #idle_inhibitor,
-                #mpd {
-                    padding: 0 10px;
-                    margin: 0 4px;
-                    background-color: transparent;
-                    ${makeInfo fgColor}
-                }
-
-                label:focus {
-                    color: #000000;
-                }
-
-                #clock {
-                    ${makeInfo clockColor}
-                }
-
-                #cpu {
-                    ${makeInfo cpuColor}
-                }
-
-                #memory {
-                    ${makeInfo memColor}
-                }
-
-                #pulseaudio {
-                    ${makeInfo pulseColor.normal}
-                }
-
-                #pulseaudio.muted {
-                    ${makeInfo pulseColor.muted}
-                }
-
-                #temperature {
-                    ${makeInfo tmpColor.normal}
-                }
-
-                #temperature.critical {
-                    ${makeInfo tmpColor.critical}
-                }
-              '';
-          };
         vscode = {
           enable = true;
           package = pkgs.vscodium;
@@ -824,7 +673,7 @@ in
             in
             (pkgs.vscode-utils.extensionsFromVscodeMarketplace [
               # Rust
-              (mkExt "rust-analyzer" "0.2.646" "matklad" "sha256-GL+0R2KuycvHs/+yKVfK1H89sKA+H41DLUsJwy4ngyc=")
+              (mkExt "rust-analyzer" "0.2.654" "matklad" "sha256-WTwk71/A2RDEY0X+h5lwujL/OmYtf6FAQTJy6PB9ZzM=")
               (mkExt "even-better-toml" "0.12.3" "tamasfe" "sha256-nDmmzVuADieNX9bcS3YQiemg27S4O02Pjj+rthkBAZw=")
               (mkExt "crates" "0.5.9" "serayuzgur" "sha256-YHIbnl2R7lqwJHi8qUQImClx9MWm+5Pc12vYw7e/RlA=")
               # Nix
@@ -880,6 +729,154 @@ in
             grabKeyboardAndMouse = false;
             pinentryFlavor = "qt";
           };
+      };
+
+      xdg = {
+        enable = true;
+        configFile = {
+          "waybar/config".text =
+            let swayEnabled = config.wayland.windowManager.sway.enable; in
+            builtins.toJSON {
+              layer = "top";
+              position = "top";
+              modules-left = if swayEnabled then [ "sway/workspaces" ] else [ ];
+              modules-center = if swayEnabled then [ "sway/window" ] else [ ];
+              modules-right =
+                [ "pulseaudio" "cpu" "memory" "temperature" "clock" "tray" ];
+              tray = { spacing = 8; };
+              cpu = { format = "/cpu {usage}/"; };
+              memory = { format = "/mem {}/"; };
+              temperature = {
+                hwmon-path = "/sys/class/hwmon/hwmon1/temp2_input";
+                format = "/tmp {temperatureC}C/";
+              };
+              pulseaudio = {
+                format = "/vol {volume}/ {format_source}";
+                format-bluetooth = "/volb {volume}/ {format_source}";
+                format-bluetooth-muted = "/volb/ {format_source}";
+                format-muted = "/vol/ {format_source}";
+                format-source = "/mic {volume}/";
+                format-source-muted = "/mic/";
+              };
+            };
+          "waybar/style.css".text =
+            let
+              makeBorder = color: "border-bottom: 3px solid #${color};";
+              makeInfo = color: ''
+                color: #${color};
+                ${makeBorder color}
+              '';
+
+              clockColor = colorScheme.bright.magenta;
+              cpuColor = colorScheme.bright.green;
+              memColor = colorScheme.bright.blue;
+              pulseColor = {
+                normal = colorScheme.bright.cyan;
+                muted = colorScheme.bright.gray;
+              };
+              tmpColor = {
+                normal = colorScheme.bright.yellow;
+                critical = colorScheme.bright.red;
+              };
+            in
+            ''
+              * {
+                  border: none;
+                  border-radius: 0;
+                  /* `otf-font-awesome` is required to be installed for icons */
+                  font-family: ${font};
+                  font-size: ${toString fontSize}px;
+                  min-height: 0;
+              }
+
+              window#waybar {
+                  background-color: #${bgColor};
+                  /* border-bottom: 0px solid rgba(100, 114, 125, 0.5); */
+                  color: #${fgColor};
+                  transition-property: background-color;
+                  transition-duration: .5s;
+              }
+
+              #workspaces button {
+                  padding: 0 5px;
+                  background-color: transparent;
+                  color: #${fgColor};
+                  border-bottom: 3px solid transparent;
+              }
+
+              /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+              #workspaces button:hover {
+                  background: rgba(0, 0, 0, 0.2);
+                  box-shadow: inherit;
+                  border-bottom: 3px solid #ffffff;
+              }
+
+              #workspaces button.focused {
+                  border-bottom: 3px solid #${acColor};
+              }
+
+              #workspaces button.urgent {
+                  background-color: #${acColor};
+                  color: #${bgColor};
+              }
+
+              #mode {
+                  background-color: #64727D;
+                  border-bottom: 3px solid #ffffff;
+              }
+
+              #clock,
+              #battery,
+              #cpu,
+              #memory,
+              #temperature,
+              #backlight,
+              #network,
+              #pulseaudio,
+              #custom-media,
+              #tray,
+              #mode,
+              #idle_inhibitor,
+              #mpd {
+                  padding: 0 10px;
+                  margin: 0 4px;
+                  background-color: transparent;
+                  ${makeInfo fgColor}
+              }
+
+              label:focus {
+                  color: #000000;
+              }
+
+              #clock {
+                  ${makeInfo clockColor}
+              }
+
+              #cpu {
+                  ${makeInfo cpuColor}
+              }
+
+              #memory {
+                  ${makeInfo memColor}
+              }
+
+              #pulseaudio {
+                  ${makeInfo pulseColor.normal}
+              }
+
+              #pulseaudio.muted {
+                  ${makeInfo pulseColor.muted}
+              }
+
+              #temperature {
+                  ${makeInfo tmpColor.normal}
+              }
+
+              #temperature.critical {
+                  ${makeInfo tmpColor.critical}
+              }
+            '';
+        };
       };
     };
 }

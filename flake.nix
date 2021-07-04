@@ -27,17 +27,13 @@
         url = "github:aaronjanse/nix-eval-lsp";
         inputs.nixpkgs.follows = "nixos";
       };
-      helix = {
-        url = "github:helix-editor/helix";
-        inputs.nixpkgs.follows = "nixos";
-      };
       nixpkgsWayland = {
         url = "github:colemickens/nixpkgs-wayland";
         inputs.nixpkgs.follows = "nixos";
       };
     };
 
-  outputs = inputs@{ self, pkgs, digga, nixos, ci-agent, home, nixos-hardware, nur, nixosPersistence, nixpkgsWayland, nixEvalLsp, helix, ... }:
+  outputs = inputs@{ self, pkgs, digga, nixos, ci-agent, home, nixos-hardware, nur, nixosPersistence, nixpkgsWayland, nixEvalLsp, ... }:
     digga.lib.mkFlake {
       inherit self inputs;
 
@@ -45,9 +41,6 @@
 
       channelsConfig = {
         allowUnfree = true;
-        permittedInsecurePackages = [
-          "swftools-0.9.2"
-        ];
       };
 
       channels = {
@@ -60,7 +53,6 @@
             nixpkgsWayland.overlay
             (final: prev: {
               inherit (nixEvalLsp.packages.${prev.system}) nix-eval-lsp;
-              inherit (helix.packages.${prev.system}) helix;
             })
           ];
         };
