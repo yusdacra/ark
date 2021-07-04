@@ -734,6 +734,52 @@ in
       xdg = {
         enable = true;
         configFile = {
+          "helix/themes/mytheme.toml".text = ''
+            "attribute" = { fg = "#${colorScheme.bright.yellow}]" }
+            "comment" = { fg = "#${colorScheme.normal.gray}", modifiers = ['italic'] }
+            "constant" = { fg = "#${colorScheme.normal.blue}" }
+            "constant.builtin" = { fg = "#${colorScheme.bright.blue}" }
+            "constructor" = { fg = "#${colorScheme.bright.blue}" }
+            "escape" = { fg = "#${colorScheme.bright.yellow}" }
+            "function" = { fg = "#${colorScheme.bright.blue}" }
+            "function.builtin" = { fg = "#${colorScheme.bright.blue}" }
+            "function.macro" = { fg = "#${colorScheme.bright.magenta}" }
+            "keyword" = { fg = "#${colorScheme.normal.magenta}", modifiers = ['italic'] }
+            "keyword.directive" = { fg = "#${colorScheme.normal.magenta}" }
+            "label" = { fg = "#${colorScheme.bright.magenta}" }
+            "namespace" = { fg = "#${colorScheme.bright.blue}" }
+            "number" = { fg = "#${colorScheme.normal.cyan}" }
+            "operator" = { fg = "#${colorScheme.bright.magenta}", modifiers = ['italic'] }
+            "property" = { fg = "#${colorScheme.normal.red}" }
+            "special" = { fg = "#${colorScheme.bright.blue}" }
+            "string" = { fg = "#${colorScheme.normal.green}" }
+            "type" = { fg = "#${colorScheme.normal.cyan}", modifers = ['bold'] }
+            "type.builtin" = { fg = "#${colorScheme.normal.cyan}", modifers = ['bold'] }
+            "variable" = { fg = "#${colorScheme.bright.blue}", modifiers = ['italic'] }
+            "variable.builtin" = { fg = "#${colorScheme.bright.blue}", modifiers = ['italic'] }
+            "variable.parameter" = { fg = "#${colorScheme.bright.red}", modifiers = ['italic'] }
+            "info" = { fg = "#${colorScheme.normal.blue}", modifiers = ['bold'] }
+            "hint" = { fg = "#${colorScheme.bright.green}", modifiers = ['bold'] }
+            "warning" = { fg = "#${colorScheme.normal.yellow}", modifiers = ['bold'] }
+            "error" = { fg = "#${colorScheme.bright.red}", modifiers = ['bold'] }
+            "ui.menu.selected" = { fg = "#${bgColor}", bg = "#${acColor}" }
+            "ui.background" = { fg = "#${fgColor}", bg = "#${bgColor}" }
+            "ui.help" = { bg = "#${colorScheme.normal.black}" }
+            "ui.linenr" = { fg = "#${colorScheme.primary.bright.background}", modifiers = ['bold'] }
+            "ui.linenr.selected" = { fg = "#${fgColor}", modifiers = ['bold'] }
+            "ui.popup" = { bg = "#${colorScheme.normal.black}" }
+            "ui.statusline" = { fg = "#${fgColor}", bg = "#${bgColor}" }
+            "ui.statusline.inactive" = { fg = "#${fgColor}", bg = "#${bgColor}" }
+            "ui.selection" = { bg = "#${colorScheme.primary.bright.background}" }
+            "ui.text" = { fg = "#${fgColor}", bg = "#${bgColor}" }
+            "ui.text.focus" = { fg = "#${fgColor}", bg = "#${bgColor}", modifiers = ['bold'] }
+            "ui.window" = { bg = "#${bgColor}" }
+          '';
+          "helix/config.toml".text = ''
+            theme = "mytheme"
+            [lsp]
+            display-messages = true
+          '';
           "waybar/config".text =
             let swayEnabled = config.wayland.windowManager.sway.enable; in
             builtins.toJSON {
