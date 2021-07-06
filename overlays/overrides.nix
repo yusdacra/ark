@@ -7,6 +7,7 @@ channels: final: prev: {
     discord
     element-desktop
     manix
+    rage
     nixpkgs-fmt
     qutebrowser
     signal-desktop

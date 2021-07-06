@@ -6,7 +6,7 @@
       nixos.url = "nixpkgs/nixos-unstable";
       nixpkgs.follows = "nixos";
       latest.url = "nixpkgs";
-      digga.url = "github:divnix/digga";
+      digga.url = "github:divnix/digga/master";
 
       ci-agent = {
         url = "github:hercules-ci/hercules-ci-agent";
@@ -18,6 +18,8 @@
       home.inputs.nixpkgs.follows = "nixos";
       naersk.url = "github:nmattia/naersk";
       naersk.inputs.nixpkgs.follows = "latest";
+      agenix.url = "github:ryantm/agenix";
+      agenix.inputs.nixpkgs.follows = "latest";
       nixos-hardware.url = "github:nixos/nixos-hardware";
 
       pkgs.url = "path:./pkgs";
@@ -33,7 +35,19 @@
       };
     };
 
-  outputs = inputs@{ self, pkgs, digga, nixos, ci-agent, home, nixos-hardware, nur, nixosPersistence, nixpkgsWayland, nixEvalLsp, ... }:
+  outputs =
+    { self
+    , pkgs
+    , digga
+    , nixos
+    , ci-agent
+    , home
+    , nixos-hardware
+    , nur
+    , agenix
+    , nixosPersistence, nixpkgsWayland, nixEvalLsp
+    , ...
+    } @ inputs:
     digga.lib.mkFlake {
       inherit self inputs;
 
@@ -54,6 +68,7 @@
             (final: prev: {
               inherit (nixEvalLsp.packages.${prev.system}) nix-eval-lsp;
             })
+            agenix.overlay
           ];
         };
         latest = { };
@@ -77,6 +92,7 @@
             ci-agent.nixosModules.agent-profile
             home.nixosModules.home-manager
             nixosPersistence.nixosModules.impermanence
+            agenix.nixosModules.age
             ./modules/customBuilds.nix
           ];
         };
@@ -106,6 +122,10 @@
         };
       };
 
+      devshell.externalModules = { pkgs, ... }: {
+        packages = [ pkgs.agenix ];
+      };
+
       homeConfigurations = digga.lib.mkHomeConfigurations self.nixosConfigurations;
 
       deploy.nodes = digga.lib.mkDeployNodes self.nixosConfigurations { };
@@ -113,7 +133,6 @@
       defaultTemplate = self.templates.flk;
       templates.flk.path = ./.;
       templates.flk.description = "flk template";
-
     }
   ;
 }
