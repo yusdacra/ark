@@ -171,7 +171,7 @@ in
       directories = [ "/etc/nixos" ];
       files = [ "/etc/machine-id" ];
     };
-    sessionVariables = {
+    variables = {
       VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/amd_icd64.json";
       LD_LIBRARY_PATH = lib.mkForce "${lib.makeLibraryPath (config.hardware.opengl.extraPackages ++ config.hardware.opengl.extraPackages32)}";
     };
