@@ -71,6 +71,21 @@ in
     };
   };
 
+  security.pam.loginLimits = [
+    {
+      domain = "*";
+      type = "soft";
+      item = "nofile";
+      value = "524288";
+    }
+    {
+      domain = "*";
+      type = "hard";
+      item = "nofile";
+      value = "524288";
+    }
+  ];
+
   fileSystems."/" = {
     device = btrfsPartPath;
     fsType = "btrfs";

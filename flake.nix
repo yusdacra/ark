@@ -45,7 +45,9 @@
     , nixos-hardware
     , nur
     , agenix
-    , nixosPersistence, nixpkgsWayland, nixEvalLsp
+    , nixosPersistence
+    , nixpkgsWayland
+    , nixEvalLsp
     , ...
     } @ inputs:
     digga.lib.mkFlake {
