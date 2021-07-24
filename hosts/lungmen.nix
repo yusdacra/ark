@@ -192,8 +192,10 @@ in
       files = [ "/etc/machine-id" ];
     };
     variables = {
-      VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/amd_icd64.json";
-      LD_LIBRARY_PATH = lib.mkForce "${lib.makeLibraryPath (config.hardware.opengl.extraPackages ++ config.hardware.opengl.extraPackages32)}";
+      VK_ICD_FILENAMES = lib.mkForce "${pkgs.amdvlk}/share/vulkan/icd.d/amd_icd64.json:${pkgs.driversi686Linux.amdvlk}/share/vulkan/icd.d/amd_icd32.json";
+    };
+    sessionVariables = {
+      VK_ICD_FILENAMES = lib.mkForce "${pkgs.amdvlk}/share/vulkan/icd.d/amd_icd64.json:${pkgs.driversi686Linux.amdvlk}/share/vulkan/icd.d/amd_icd32.json";
     };
   };
   networking.interfaces.enp6s0.useDHCP = true;

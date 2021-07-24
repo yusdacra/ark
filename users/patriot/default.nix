@@ -23,10 +23,11 @@ in
   xdg.portal = {
     enable = true;
     gtkUsePortal = true;
+    wlr.enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal
       xdg-desktop-portal-gtk
-      # xdg-desktop-portal-wlr
+      xdg-desktop-portal-wlr
     ];
   };
 
@@ -112,7 +113,7 @@ in
         in
         pkgs.writeScriptBin "chromium-wayland" ''
           #!${pkgs.stdenv.shell}
-          chromium ${lib.concatStringsSep " " flags}
+          VK_ICD_FILENAMES="${pkgs.amdvlk}/share/vulkan/icd.d/amd_icd64.json:${pkgs.driversi686Linux.amdvlk}/share/vulkan/icd.d/amd_icd32.json" chromium ${lib.concatStringsSep " " flags}
         '';
       vscodiumWayland =
         let
