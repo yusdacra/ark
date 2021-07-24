@@ -131,7 +131,7 @@ in
         in
         pkgs.writeScriptBin "vscodium-wayland" ''
           #!${pkgs.stdenv.shell}
-          codium ${lib.concatStringsSep " " flags}
+          code ${lib.concatStringsSep " " flags}
         '';
       vscodiumWaylandPkg =
         let
@@ -667,7 +667,6 @@ in
           };
         vscode = {
           enable = true;
-          package = pkgs.vscodium;
           extensions =
             let
               mkExt = n: v: p: s: { name = n; version = v; publisher = p; sha256 = s; };
