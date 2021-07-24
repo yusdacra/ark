@@ -19,7 +19,7 @@
       bud.inputs.nixpkgs.follows = "nixos";
       bud.inputs.devshell.follows = "digga/devshell";
 
-      home.url = "github:nix-community/home-manager/release-21.05";
+      home.url = "github:nix-community/home-manager/master";
       home.inputs.nixpkgs.follows = "nixos";
 
       darwin.url = "github:LnL7/nix-darwin";
@@ -41,10 +41,6 @@
       nixos-hardware.url = "github:nixos/nixos-hardware";
 
       nixosPersistence.url = "github:nix-community/impermanence";
-      nixEvalLsp = {
-        url = "github:aaronjanse/nix-eval-lsp";
-        inputs.nixpkgs.follows = "nixos";
-      };
       nixpkgsWayland = {
         url = "github:colemickens/nixpkgs-wayland";
         inputs.nixpkgs.follows = "nixos";
@@ -70,7 +66,6 @@
     , agenix
     , nixosPersistence
     , nixpkgsWayland
-    , nixEvalLsp
     , nvfetcher
     , deploy
     , ...
@@ -90,6 +85,7 @@
               #agenix.overlay
               #nvfetcher.overlay
               #deploy.overlay
+              nixpkgsWayland.overlay
               ./pkgs/default.nix
             ];
           };
@@ -99,9 +95,9 @@
         lib = import ./lib { lib = digga.lib // nixos.lib; };
 
         sharedOverlays = [
-          (final: prev: {
+          (_: prev: {
             __dontExport = true;
-            lib = prev.lib.extend (lfinal: lprev: {
+            lib = prev.lib.extend (_: _: {
               our = self.lib;
             });
           })
@@ -129,7 +125,7 @@
             NixOS = { };
           };
           importables = rec {
-            profiles = digga.lib.rakeLeaves ./profiles // {
+            profiles = (digga.lib.rakeLeaves ./profiles) // {
               users = digga.lib.rakeLeaves ./users;
             };
             suites = with profiles; {
@@ -159,11 +155,6 @@
         defaultTemplate = self.templates.bud;
         templates.bud.path = ./.;
         templates.bud.description = "bud template";
-
-      }
-    //
-    {
-      budModules = { devos = import ./pkgs/bud; };
-    }
-  ;
+        budModules = { devos = import ./pkgs/bud; };
+      };
 }
