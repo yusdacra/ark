@@ -166,7 +166,7 @@ in
   programs.command-not-found.enable = false;
   home-manager.useGlobalPkgs = true;
   users.mutableUsers = false;
-      
+
   # For rage encryption, all hosts need a ssh key pair
   services.openssh = {
     enable = true;

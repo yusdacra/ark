@@ -12,18 +12,6 @@ channels: final: prev: {
     signal-desktop
     starship;
 
-<<<<<<< HEAD
-  haskellPackages = prev.haskellPackages.override {
-    overrides = hfinal: hprev:
-      let version = prev.lib.replaceChars [ "." ] [ "" ] prev.ghc.version;
-      in
-      {
-        # same for haskell packages, matching ghc versions
-        inherit (channels.latest.haskell.packages."ghc${version}")
-          haskell-language-server;
-      };
-  };
-=======
 
   haskellPackages = prev.haskellPackages.override
     (old: {
@@ -36,5 +24,4 @@ channels: final: prev: {
             haskell-language-server;
         });
     });
->>>>>>> upstream/develop
 }

@@ -180,7 +180,7 @@ in
 
   fonts = {
     enableDefaultFonts = true;
-    fontconfig.enable = true;    
+    fontconfig.enable = true;
     fonts = [ pkgs.dejavu_fonts ];
   };
 
