@@ -1,7 +1,7 @@
-{ self, inputs, config, pkgs, lib, ourLib, ... }:
+{ self, inputs, config, pkgs, lib, ... }:
 let
   inherit (lib) fileContents mkIf;
-  pkgBin = ourLib.pkgBinNoDep pkgs;
+  pkgBin = lib.our.pkgBinNoDep pkgs;
 
   coreBin = v: "${pkgs.coreutils}/bin/${v}";
   nixBin = "${config.nix.package}/bin/nix";
@@ -143,9 +143,11 @@ in
   nix =
     let
       registry =
-        builtins.mapAttrs
-          (_: v: { flake = v; })
-          (lib.filterAttrs (_: v: v ? outputs) inputs);
+        builtins.removeAttrs
+          (builtins.mapAttrs
+            (_: v: { flake = v; })
+            (lib.filterAttrs (_: v: v ? outputs) inputs))
+          [ "bud" ];
     in
     {
       autoOptimiseStore = true;

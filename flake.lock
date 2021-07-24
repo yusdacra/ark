@@ -100,9 +100,11 @@
         "flake-compat": "flake-compat",
         "naersk": "naersk",
         "nixpkgs": [
+          "digga",
           "nixpkgs"
         ],
         "utils": [
+          "digga",
           "flake-utils"
         ]
       },
@@ -163,6 +165,7 @@
       },
       "original": {
         "owner": "divnix",
+        "ref": "main",
         "repo": "digga",
         "type": "github"
       }
@@ -201,6 +204,7 @@
     "flake-utils-plus": {
       "inputs": {
         "flake-utils": [
+          "digga",
           "flake-utils"
         ]
       },
@@ -312,9 +316,11 @@
     "nixos-generators": {
       "inputs": {
         "nixlib": [
+          "digga",
           "nixlib"
         ],
         "nixpkgs": [
+          "digga",
           "blank"
         ]
       },
