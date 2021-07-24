@@ -178,6 +178,11 @@ in
     };
   };
 
+  fonts = {
+    enableDefaultFonts = true;
+    fontconfig.enable = true;    
+    fonts = [ pkgs.dejavu_fonts ];
+  };
 
   environment = {
     systemPackages = [ btrfsDiff ];

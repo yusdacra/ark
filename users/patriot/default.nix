@@ -358,6 +358,7 @@ in
             noto-fonts-cjk
             noto-fonts-emoji-blob-bin
             font-awesome
+            dejavu_fonts
             (nerdfonts.override { fonts = [ "Iosevka" ]; })
             # Programs
             # discord-canary-system
