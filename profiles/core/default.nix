@@ -26,7 +26,7 @@ in
       dosfstools
       fd
       git
-      gotop
+      bottom
       gptfdisk
       iputils
       jq
