@@ -98,12 +98,12 @@ in
       chromiumWayland =
         let
           flags = [
-            #"--enable-vulkan"
+            "--enable-vulkan"
             #"--flag-switches-begin"
             "--enable-features=UseOzonePlatform"
             #"--flag-switches-end"
             "--ozone-platform=wayland"
-            #"--enable-webrtc-pipewire-capturer"
+            "--enable-webrtc-pipewire-capturer"
             "--ignore-gpu-blocklist"
             "--enable-gpu-rasterization"
             "--enable-zero-copy"
@@ -359,6 +359,7 @@ in
             # Programs
             # discord-canary-system
             # element-desktop
+            vulkan-tools
             audacity
             krita
             gimp
