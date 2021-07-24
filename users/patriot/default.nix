@@ -98,12 +98,12 @@ in
       chromiumWayland =
         let
           flags = [
-            "--enable-vulkan"
-            "--flag-switches-begin"
-            "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer,IgnoreGPUBlocklist"
-            "--flag-switches-end"
+            #"--enable-vulkan"
+            #"--flag-switches-begin"
+            "--enable-features=UseOzonePlatform"
+            #"--flag-switches-end"
             "--ozone-platform=wayland"
-            "--enable-webrtc-pipewire-capturer"
+            #"--enable-webrtc-pipewire-capturer"
             "--ignore-gpu-blocklist"
             "--enable-gpu-rasterization"
             "--enable-zero-copy"
@@ -178,10 +178,6 @@ in
             mkdir -p $out/bin
             ln -s ${chromiumWayland}/bin/${name} $out/bin
             ln -s ${desktop}/share $out/share
-          '';
-          fixupPhase = ''
-            wrapProgram $out/bin/${name} \
-              --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath (with pkgs; [ vulkan-loader vulkan-extension-layer libGL ])}
           '';
         };
 
