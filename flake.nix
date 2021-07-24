@@ -87,9 +87,9 @@
             overlays = [
               digga.overlays.patchedNix
               nur.overlay
-              agenix.overlay
-              nvfetcher.overlay
-              deploy.overlay
+              #agenix.overlay
+              #nvfetcher.overlay
+              #deploy.overlay
               ./pkgs/default.nix
             ];
           };
@@ -117,7 +117,7 @@
               digga.nixosModules.bootstrapIso
               digga.nixosModules.nixConfig
               home.nixosModules.home-manager
-              agenix.nixosModules.age
+              #agenix.nixosModules.age
               bud.nixosModules.bud
               nixosPersistence.nixosModules.impermanence
             ];
