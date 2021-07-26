@@ -36,6 +36,16 @@
 
       nixos-hardware.url = "github:nixos/nixos-hardware";
 
+      rnixLsp = {
+        url = "github:nix-community/rnix-lsp";
+        inputs.naersk.follows = "naersk";
+        inputs.nixpkgs.follows = "nixpkgs";
+        inputs.utils.follows = "flake-utils";
+      };
+      helix = {
+        url = "github:helix-editor/helix";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
       nixosPersistence.url = "github:nix-community/impermanence";
       nixpkgsWayland = {
         url = "github:colemickens/nixpkgs-wayland";
@@ -60,10 +70,12 @@
     , nixos-hardware
     , nur
     , agenix
-    , nixosPersistence
-    , nixpkgsWayland
     , nvfetcher
     , deploy
+    , nixosPersistence
+    , nixpkgsWayland
+    , rnixLsp
+    , helix
     , ...
     } @ inputs:
     digga.lib.mkFlake
@@ -82,6 +94,10 @@
               #nvfetcher.overlay
               #deploy.overlay
               nixpkgsWayland.overlay
+              (_: prev: {
+                helix = helix.packages.${prev.system}.helix;
+                rnix-lsp = rnixLsp.packages.${prev.system}.rnix-lsp;
+              })
               ./pkgs/default.nix
             ];
           };
