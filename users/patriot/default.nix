@@ -7,7 +7,6 @@ let
   nixosConfig = config;
 in
 {
-
   users.users.patriot = {
     isNormalUser = true;
     createHome = true;
@@ -23,7 +22,6 @@ in
   xdg.portal = {
     enable = true;
     gtkUsePortal = true;
-    wlr.enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal
       xdg-desktop-portal-gtk
@@ -353,7 +351,6 @@ in
             # Font stuff
             fontPackage
             noto-fonts-cjk
-            noto-fonts-emoji-blob-bin
             font-awesome
             dejavu_fonts
             (nerdfonts.override { fonts = [ "Iosevka" ]; })

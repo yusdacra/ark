@@ -10,7 +10,14 @@ channels: final: prev: {
     nixpkgs-fmt
     qutebrowser
     signal-desktop
-    starship;
+    starship
+    hydrus
+    steam
+    steam-run
+    lutris
+    rust-analyzer
+    vscodium
+    vscode;
 
 
   haskellPackages = prev.haskellPackages.override
