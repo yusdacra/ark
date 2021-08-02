@@ -56,6 +56,16 @@ in
       nix-index
       du-dust
       mosh
+      (
+        pkgs.runCommand "0x0.sh" { } ''
+          mkdir -p $out/bin
+          cp ${pkgs.fetchurl {
+            url = "https://raw.githubusercontent.com/Calinou/0x0/master/bin/0x0";
+            sha256 = "sha256-Fad+AKBuA49qtRQfnroqjaNWeuRaCekXZG9sS9JVeaM=";
+          }} $out/bin/0x0
+          chmod +x $out/bin/0x0
+        ''
+      )
     ];
 
     shellAliases =
@@ -136,8 +146,8 @@ in
 
   system.activationScripts.diff = ''
     ${pkgs.nixUnstable}/bin/nix store \
-        --experimental-features 'nix-command' \
-        diff-closures /run/current-system "$systemConfig"
+    --experimental-features 'nix-command' \
+    diff-closures /run/current-system "$systemConfig"
   '';
 
   nix =
@@ -177,3 +187,4 @@ in
 
   services.earlyoom.enable = true;
 }
+
