@@ -17,8 +17,8 @@ channels: final: prev: {
     lutris
     rust-analyzer
     vscodium
-    vscode;
-
+    vscode
+    gh;
 
   haskellPackages = prev.haskellPackages.override
     (old: {

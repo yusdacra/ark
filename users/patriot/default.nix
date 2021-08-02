@@ -357,6 +357,7 @@ in
             # Programs
             # discord-canary-system
             # element-desktop
+            gh
             vulkan-tools
             audacity
             krita
