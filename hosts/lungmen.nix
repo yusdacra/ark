@@ -158,7 +158,6 @@ in
         vaapiVdpau
         libva
         vulkan-loader
-        vulkan-extension-layer
         pipewire
       ];
       extraPackages32 = with pkgs.pkgsi686Linux;
@@ -167,7 +166,6 @@ in
           vaapiVdpau
           libva
           vulkan-loader
-          vulkan-extension-layer
           pipewire
         ]
         ++ [ pkgs.driversi686Linux.amdvlk ];

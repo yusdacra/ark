@@ -18,7 +18,9 @@ channels: final: prev: {
     rust-analyzer
     vscodium
     vscode
-    gh;
+    gh
+    chromium-unwrapped
+    chromium;
 
   haskellPackages = prev.haskellPackages.override
     (old: {
