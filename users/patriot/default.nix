@@ -355,7 +355,7 @@ in
             dejavu_fonts
             (nerdfonts.override { fonts = [ "Iosevka" ]; })
             # Programs
-            # discord-canary-system
+            discord-canary-system
             # element-desktop
             gh
             vulkan-tools
