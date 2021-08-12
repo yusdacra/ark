@@ -348,6 +348,7 @@ in
         homeDirectory = nixosConfig.users.users.patriot.home;
         packages = with pkgs;
           [
+            libnotify-latest
             # Font stuff
             fontPackage
             noto-fonts-cjk

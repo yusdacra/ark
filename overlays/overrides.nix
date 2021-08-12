@@ -22,6 +22,8 @@ channels: final: prev: {
     chromium-unwrapped
     chromium;
 
+  libnotify-latest = channels.latest.libnotify;
+
   haskellPackages = prev.haskellPackages.override
     (old: {
       overrides = prev.lib.composeExtensions (old.overrides or (_: _: { })) (hfinal: hprev:
