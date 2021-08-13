@@ -18,18 +18,18 @@
       home.url = "github:nix-community/home-manager/release-21.05";
       home.inputs.nixpkgs.follows = "nixos";
 
-      darwin.url = "github:LnL7/nix-darwin";
-      darwin.inputs.nixpkgs.follows = "latest";
+      /*darwin.url = "github:LnL7/nix-darwin";
+        darwin.inputs.nixpkgs.follows = "latest";*/
 
-      deploy.follows = "digga/deploy";
+      #deploy.follows = "digga/deploy";
 
-      agenix.url = "github:ryantm/agenix";
-      agenix.inputs.nixpkgs.follows = "latest";
+      /*agenix.url = "github:ryantm/agenix";
+        agenix.inputs.nixpkgs.follows = "latest";*/
 
-      nvfetcher.url = "github:berberman/nvfetcher";
-      nvfetcher.inputs.nixpkgs.follows = "latest";
-      nvfetcher.inputs.flake-compat.follows = "digga/deploy/flake-compat";
-      nvfetcher.inputs.flake-utils.follows = "digga/flake-utils-plus/flake-utils";
+      /*nvfetcher.url = "github:berberman/nvfetcher";
+        nvfetcher.inputs.nixpkgs.follows = "latest";
+        nvfetcher.inputs.flake-compat.follows = "digga/deploy/flake-compat";
+        nvfetcher.inputs.flake-utils.follows = "digga/flake-utils-plus/flake-utils";*/
 
       naersk.url = "github:nmattia/naersk";
       naersk.inputs.nixpkgs.follows = "latest";
@@ -67,11 +67,11 @@
       #, bud
     , nixos
     , home
-    , nixos-hardware
-    , nur
-    , agenix
-    , nvfetcher
-    , deploy
+      #, nixos-hardware
+      #, nur
+      #, agenix
+      #, nvfetcher
+      #, deploy
     , nixosPersistence
     , nixpkgsWayland
     , rnixLsp
@@ -89,7 +89,7 @@
             imports = [ (digga.lib.importOverlays ./overlays) ];
             overlays = [
               #digga.overlays.patchedNix
-              nur.overlay
+              #nur.overlay
               #agenix.overlay
               #nvfetcher.overlay
               #deploy.overlay

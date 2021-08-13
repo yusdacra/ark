@@ -1,25 +1,5 @@
 {
   "nodes": {
-    "agenix": {
-      "inputs": {
-        "nixpkgs": [
-          "latest"
-        ]
-      },
-      "locked": {
-        "lastModified": 1627822587,
-        "narHash": "sha256-AAFgsVe/ahLh1Ij2o98x6IMxz3Z+Tr97bFwa4nthB1w=",
-        "owner": "ryantm",
-        "repo": "agenix",
-        "rev": "e6752e7b8592502df42066f156165471e62d902d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ryantm",
-        "repo": "agenix",
-        "type": "github"
-      }
-    },
     "blank": {
       "locked": {
         "lastModified": 1625557891,
@@ -48,26 +28,6 @@
         "owner": "nixos",
         "ref": "nixos-20.09",
         "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "darwin": {
-      "inputs": {
-        "nixpkgs": [
-          "latest"
-        ]
-      },
-      "locked": {
-        "lastModified": 1622060422,
-        "narHash": "sha256-hPVlvrAyf6zL7tTx0lpK+tMxEfZeMiIZ/A2xaJ41WOY=",
-        "owner": "LnL7",
-        "repo": "nix-darwin",
-        "rev": "007d700e644ac588ad6668e6439950a5b6e2ff64",
-        "type": "github"
-      },
-      "original": {
-        "owner": "LnL7",
-        "repo": "nix-darwin",
         "type": "github"
       }
     },
@@ -439,49 +399,6 @@
         "type": "github"
       }
     },
-    "nur": {
-      "locked": {
-        "lastModified": 1622199699,
-        "narHash": "sha256-3FPsM3tpQAN2VUVJEfEPEPAWrWVIfYno7RAmgh/MXIo=",
-        "path": "/nix/store/j8g6j3zglzyx3bvwcws38pxdv5azxjgl-source",
-        "rev": "51b84ce842189a4f3b615b727b9683068a2cb540",
-        "type": "path"
-      },
-      "original": {
-        "id": "nur",
-        "type": "indirect"
-      }
-    },
-    "nvfetcher": {
-      "inputs": {
-        "flake-compat": [
-          "digga",
-          "deploy",
-          "flake-compat"
-        ],
-        "flake-utils": [
-          "digga",
-          "flake-utils-plus",
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "latest"
-        ]
-      },
-      "locked": {
-        "lastModified": 1628690139,
-        "narHash": "sha256-9bk59V0YjZnMfSQMCHuYVPA/Bc3enjTtoyTWt1B3/zE=",
-        "owner": "berberman",
-        "repo": "nvfetcher",
-        "rev": "e9600782adbf6fb8217087bd2f05335cad96e542",
-        "type": "github"
-      },
-      "original": {
-        "owner": "berberman",
-        "repo": "nvfetcher",
-        "type": "github"
-      }
-    },
     "rnixLsp": {
       "inputs": {
         "naersk": [
@@ -510,15 +427,9 @@
     },
     "root": {
       "inputs": {
-        "agenix": "agenix",
         "blank": [
           "digga",
           "blank"
-        ],
-        "darwin": "darwin",
-        "deploy": [
-          "digga",
-          "deploy"
         ],
         "digga": "digga",
         "flake-utils": [
@@ -544,8 +455,6 @@
           "nixos"
         ],
         "nixpkgsWayland": "nixpkgsWayland",
-        "nur": "nur",
-        "nvfetcher": "nvfetcher",
         "rnixLsp": "rnixLsp"
       }
     },
