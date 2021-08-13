@@ -11,9 +11,9 @@
       digga.inputs.nixlib.follows = "nixos";
       digga.inputs.home-manager.follows = "home";
 
-      bud.url = "github:divnix/bud";
-      bud.inputs.nixpkgs.follows = "nixos";
-      bud.inputs.devshell.follows = "digga/devshell";
+      /*bud.url = "github:divnix/bud";
+        bud.inputs.nixpkgs.follows = "nixos";
+        bud.inputs.devshell.follows = "digga/devshell";*/
 
       home.url = "github:nix-community/home-manager/release-21.05";
       home.inputs.nixpkgs.follows = "nixos";
@@ -64,7 +64,7 @@
   outputs =
     { self
     , digga
-    , bud
+      #, bud
     , nixos
     , home
     , nixos-hardware
@@ -126,7 +126,7 @@
               digga.nixosModules.nixConfig
               home.nixosModules.home-manager
               #agenix.nixosModules.age
-              bud.nixosModules.bud
+              #bud.nixosModules.bud
               nixosPersistence.nixosModules.impermanence
             ];
           };
@@ -164,13 +164,13 @@
 
         deploy.nodes = digga.lib.mkDeployNodes self.nixosConfigurations { };
 
-        defaultTemplate = self.templates.bud;
-        templates.bud.path = ./.;
-        templates.bud.description = "bud template";
+        /*defaultTemplate = self.templates.bud;
+          templates.bud.path = ./.;
+          templates.bud.description = "bud template";*/
       }
     //
     {
-      budModules = { devos = import ./bud; };
+      # budModules = { devos = import ./bud; };
     }
   ;
 }
