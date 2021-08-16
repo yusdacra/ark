@@ -37,7 +37,7 @@
       nixos-hardware.url = "github:nixos/nixos-hardware";
 
       rnixLsp = {
-        url = "github:nix-community/rnix-lsp";
+        url = "github:kreisys/rnix-lsp";
         inputs.naersk.follows = "naersk";
         inputs.nixpkgs.follows = "nixpkgs";
         inputs.utils.follows = "flake-utils";
