@@ -37,7 +37,7 @@
       nixos-hardware.url = "github:nixos/nixos-hardware";
 
       rnixLsp = {
-        url = "github:kreisys/rnix-lsp";
+        url = "github:nix-community/rnix-lsp";
         inputs.naersk.follows = "naersk";
         inputs.nixpkgs.follows = "nixpkgs";
         inputs.utils.follows = "flake-utils";
@@ -96,6 +96,7 @@
               nixpkgsWayland.overlay
               (_: prev: {
                 helix = helix.packages.${prev.system}.helix;
+                helix-src = helix;
                 rnix-lsp = rnixLsp.packages.${prev.system}.rnix-lsp;
               })
               ./pkgs/default.nix

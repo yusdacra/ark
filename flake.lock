@@ -412,15 +412,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1627598485,
-        "narHash": "sha256-jH60VPMHgByO9tjk6y9m3DJolpl6JFYXwvcervWRcaE=",
-        "owner": "kreisys",
+        "lastModified": 1626644818,
+        "narHash": "sha256-w0hpyFXxltmOpbBKNQ2tfKRWELQzStc/ho1EcNyYaWc=",
+        "owner": "nix-community",
         "repo": "rnix-lsp",
-        "rev": "ea5d8bbf13eb1c7ebad2670d941e8a7d6594de5c",
+        "rev": "1fdd7cf9bf56b8ad2dddcfd27354dae8aef2b453",
         "type": "github"
       },
       "original": {
-        "owner": "kreisys",
+        "owner": "nix-community",
         "repo": "rnix-lsp",
         "type": "github"
       }

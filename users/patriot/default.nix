@@ -778,6 +778,18 @@ in
             [lsp]
             display-messages = true
           '';
+          "helix/languages.toml".text = ''
+            ${builtins.readFile "${pkgs.helix-src}/languages.toml"}
+            [[language]]
+            name = "nix"
+            scope = "source.nix"
+            injection-regex = "nix"
+            file-types = ["nix"]
+            roots = []
+            comment-token = "#"
+            language-server = { command = "${pkgBin "rnix-lsp"}" }
+            indent = { tab-width = 2, unit = "  " }
+          '';
           "waybar/config".text =
             let swayEnabled = config.wayland.windowManager.sway.enable; in
             builtins.toJSON {
