@@ -698,6 +698,7 @@ in
             "workbench.colorTheme" = "GitHub Dark";
             "rust-analyzer.cargo.loadOutDirsFromCheck" = true;
             "rust-analyzer.procMacro.enable" = true;
+            "rust-analyzer.updates.channel" = "nightly";
             "editor.fontFamily" = "'${font}'";
             "debug.console.fontFamily" = "${font}";
             "debug.console.fontSize" = toString fontSize;
