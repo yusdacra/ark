@@ -79,9 +79,8 @@ in
         g = pkgBin "git";
         git-optimize = "${pkgBin "git"} gc --aggressive --prune=now";
 
-        grep = "${pkgs.ripgrep}/bin/rg";
         cat = "${pkgBin "bat"} -pp --theme=base16";
-        c = "${pkgBin "bat"} -pp --theme=base16";
+        c = "cat";
 
         du = "${pkgs.du-dust}/bin/dust";
         df = "${coreBin "df"} -h";
@@ -100,6 +99,7 @@ in
         nfui = "${nixBin} flake lock --update-input";
         nfs = "${nixBin} flake show";
         np = "${nixBin} profile";
+        nb = "${nixBin} build";
         npl = "${nixBin} profile info";
         npi = "${nixBin} profile install";
         npr = "${nixBin} profile remove";
@@ -109,11 +109,12 @@ in
         ndev = "${nixBin} develop";
         nrun = "${nixBin} run";
 
+        nrefs = "nix-store -qR";
+
         noscd = "cd /etc/nixos";
-        nosr = ifSudo "sudo nixos-rebuild --fast";
-        nosrs = ifSudo "sudo nixos-rebuild switch";
-        nosrb = ifSudo "sudo nixos-rebuild boot";
-        nosrt = ifSudo "sudo nixos-rebuild test";
+        nosrs = ifSudo "sudo nixos-rebuild --fast switch";
+        nosrb = ifSudo "sudo nixos-rebuild --fast boot";
+        nosrt = ifSudo "sudo nixos-rebuild --fast test";
         ngc = ifSudo "sudo nix-collect-garbage";
         ngcdo = ifSudo "sudo nix-collect-garbage --delete-old";
 
@@ -129,7 +130,7 @@ in
         nixos-option = "nixos-option -I nixpkgs=${self}/lib/compat";
 
         # sudo
-        s = ifSudo "sudo -E ";
+        s = ifSudo "sudo -E";
         si = ifSudo "sudo -i";
         se = ifSudo "sudoedit";
 
