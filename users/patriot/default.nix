@@ -305,6 +305,12 @@ in
             pcmanfm-qt
             wl-clipboard
             rust-analyzer
+            (lib.hiPrio (steam.override {
+              extraLibraries = pkgs: [ pkgs.pipewire ];
+              extraProfile = ''
+                unset VK_ICD_FILENAMES
+                export VK_ICD_FILENAMES=${nixosConfig.environment.variables.VK_ICD_FILENAMES}'';
+            }))
           ];
       };
 

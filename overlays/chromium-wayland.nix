@@ -5,9 +5,8 @@ let
   chromiumWayland =
     let
       flags = [
-        "--enable-vulkan"
         "--flag-switches-begin"
-        "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer,IgnoreGPUBlocklist,Vulkan"
+        "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer,IgnoreGPUBlocklist"
         "--flag-switches-end"
         "--ozone-platform=wayland"
         "--enable-webrtc-pipewire-capturer"
@@ -46,8 +45,9 @@ in
         cp -r ${desktop}/share $out/share
       '';
       /*fixupPhase = ''
-        wrapProgram $out/bin/${name} \
-        --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath (with pkgs; [ vulkan-loader libGL ])}
+        wrapProgram $out/bin/${pname} \
+        --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath (with pkgs; [ vulkan-loader libGL ])} \
+        --prefix VK_ICD_FILENAMES : "${pkgs.amdvlk}/share/vulkan/icd.d/amd_icd64.json:${pkgs.driversi686Linux.amdvlk}/share/vulkan/icd.d/amd_icd32.json"
         '';*/
     });
 }
