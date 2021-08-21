@@ -97,7 +97,7 @@ in
         nf = "${nixBin} flake";
         nfc = "${nixBin} flake check";
         nfu = "${nixBin} flake update";
-        nfua = "${nixBin} flake update --recreate-lock-file";
+        nfui = "${nixBin} flake lock --update-input";
         nfs = "${nixBin} flake show";
         np = "${nixBin} profile";
         npl = "${nixBin} profile info";
@@ -107,14 +107,15 @@ in
         nsr = "${nixBin} search";
         nsrp = "${nixBin} search nixpkgs";
         ndev = "${nixBin} develop";
+        nrun = "${nixBin} run";
 
-        nosce = "cd /etc/nixos";
+        noscd = "cd /etc/nixos";
         nosr = ifSudo "sudo nixos-rebuild --fast";
         nosrs = ifSudo "sudo nixos-rebuild switch";
         nosrb = ifSudo "sudo nixos-rebuild boot";
         nosrt = ifSudo "sudo nixos-rebuild test";
-        ncg = ifSudo "sudo nix-collect-garbage";
-        ncgdo = ifSudo "sudo nix-collect-garbage --delete-old";
+        ngc = ifSudo "sudo nix-collect-garbage";
+        ngcdo = ifSudo "sudo nix-collect-garbage --delete-old";
 
         top = "${pkgs.bottom}/bin/btm";
 
