@@ -98,9 +98,9 @@ in
         let
           flags = [
             "--enable-vulkan"
-            #"--flag-switches-begin"
-            "--enable-features=UseOzonePlatform"
-            #"--flag-switches-end"
+            "--flag-switches-begin"
+            "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer,IgnoreGPUBlocklis"
+            "--flag-switches-end"
             "--ozone-platform=wayland"
             "--enable-webrtc-pipewire-capturer"
             "--ignore-gpu-blocklist"
@@ -402,6 +402,9 @@ in
           enable = true;
           extraSessionCommands = extraEnv;
           wrapperFeatures.gtk = true;
+          extraConfig = ''
+            exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+          '';
           config = {
             fonts = {
               names = [ font ];
