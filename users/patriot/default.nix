@@ -94,92 +94,6 @@ in
       fontComb = "${font} ${toString fontSize}";
       fontPackage = pkgs.iosevka;
 
-      chromiumWayland =
-        let
-          flags = [
-            "--enable-vulkan"
-            "--flag-switches-begin"
-            "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer,IgnoreGPUBlocklis"
-            "--flag-switches-end"
-            "--ozone-platform=wayland"
-            "--enable-webrtc-pipewire-capturer"
-            "--ignore-gpu-blocklist"
-            "--enable-gpu-rasterization"
-            "--enable-zero-copy"
-            "--disable-gpu-driver-bug-workarounds"
-          ];
-        in
-        pkgs.writeScriptBin "chromium-wayland" ''
-          #!${pkgs.stdenv.shell}
-          VK_ICD_FILENAMES="${pkgs.amdvlk}/share/vulkan/icd.d/amd_icd64.json:${pkgs.driversi686Linux.amdvlk}/share/vulkan/icd.d/amd_icd32.json" chromium ${lib.concatStringsSep " " flags}
-        '';
-      vscodiumWayland =
-        let
-          flags = [
-            "--enable-vulkan"
-            "--flag-switches-begin"
-            "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer,IgnoreGPUBlocklist"
-            "--flag-switches-end"
-            "--ozone-platform=wayland"
-            "--enable-webrtc-pipewire-capturer"
-            "--ignore-gpu-blocklist"
-            "--enable-gpu-rasterization"
-            "--enable-zero-copy"
-            "--disable-gpu-driver-bug-workarounds"
-          ];
-        in
-        pkgs.writeScriptBin "vscodium-wayland" ''
-          #!${pkgs.stdenv.shell}
-          code ${lib.concatStringsSep " " flags}
-        '';
-      vscodiumWaylandPkg =
-        let
-          name = "vscodium-wayland";
-          desktop = pkgs.makeDesktopItem {
-            inherit name;
-            exec = name;
-            icon = "vscodium";
-            desktopName = "VSCodium Wayland";
-          };
-        in
-        pkgs.stdenv.mkDerivation {
-          name = name;
-
-          nativeBuildInputs = [ pkgs.makeWrapper ];
-          phases = [ "installPhase" "fixupPhase" ];
-          installPhase = ''
-            mkdir -p $out/bin
-            ln -s ${vscodiumWayland}/bin/${name} $out/bin
-            ln -s ${desktop}/share $out/share
-          '';
-          fixupPhase = ''
-            wrapProgram $out/bin/${name} \
-              --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath (with pkgs; [ vulkan-loader vulkan-extension-layer libGL ])}
-          '';
-        };
-      chromiumWaylandPkg =
-        let
-          name = "chromium-wayland";
-          desktop = pkgs.makeDesktopItem {
-            inherit name;
-            exec = name;
-            icon = "chromium-browser";
-            desktopName = "Chromium Wayland";
-            genericName = "Web Browser";
-          };
-        in
-        pkgs.stdenv.mkDerivation {
-          name = name;
-
-          nativeBuildInputs = [ pkgs.makeWrapper ];
-          phases = [ "installPhase" "fixupPhase" ];
-          installPhase = ''
-            mkdir -p $out/bin
-            ln -s ${chromiumWayland}/bin/${name} $out/bin
-            ln -s ${desktop}/share $out/share
-          '';
-        };
-
       colorSchemeLight = {
         primary = {
           normal = {
@@ -348,7 +262,6 @@ in
         homeDirectory = nixosConfig.users.users.patriot.home;
         packages = with pkgs;
           [
-            libnotify-latest
             # Font stuff
             fontPackage
             noto-fonts-cjk
@@ -356,9 +269,9 @@ in
             dejavu_fonts
             (nerdfonts.override { fonts = [ "Iosevka" ]; })
             # Programs
-            discord-canary-system
+            # discord-canary-system
             # element-desktop
-            gh
+            # gh
             vulkan-tools
             audacity
             krita
@@ -368,8 +281,6 @@ in
             gnome3.gnome-boxes
             wine-staging
             cachix
-            chromiumWaylandPkg
-            vscodiumWaylandPkg
             appimage-run
             bitwarden
             pfetch
@@ -511,6 +422,7 @@ in
         };
         chromium = {
           enable = true;
+          package = pkgs.chromiumWayland;
           extensions = [
             "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
             "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock
@@ -667,6 +579,7 @@ in
           };
         vscode = {
           enable = true;
+          package = pkgs.vscodeWayland;
           extensions =
             let
               mkExt = n: v: p: s: { name = n; version = v; publisher = p; sha256 = s; };

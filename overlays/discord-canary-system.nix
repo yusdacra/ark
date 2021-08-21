@@ -9,6 +9,7 @@ final: prev: rec {
       sha256 = "sha256-EraTDRKd6t0c9U68tSRdGkeB1hfqNS4KUewEXwkL8io=";
     };
     isWayland = true;
+    enableVulkan = true;
     extraOptions = [
       "--enable-vulkan"
       "--ignore-gpu-blocklist"
@@ -24,6 +25,7 @@ final: prev: rec {
     , binaryName
     , desktopName
     , isWayland ? false
+    , enableVulkan ? false
     , extraOptions ? [ ]
     , autoPatchelfHook
     , makeDesktopItem
@@ -140,7 +142,7 @@ final: prev: rec {
 
       flags = (lib.optionals isWayland [
         "--flag-switches-begin"
-        "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer"
+        "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer${lib.optionalString enableVulkan ",Vulkan"}"
         "--flag-switches-end"
         "--ozone-platform=wayland"
         "--enable-webrtc-pipewire-capturer"
