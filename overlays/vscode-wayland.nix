@@ -6,7 +6,7 @@ let
     let
       flags = [
         "--flag-switches-begin"
-        "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer,IgnoreGPUBlocklist,Vulkan"
+        "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer,IgnoreGPUBlocklist"
         "--flag-switches-end"
         "--ozone-platform=wayland"
         "--enable-webrtc-pipewire-capturer"
@@ -37,15 +37,15 @@ in
       version = pkgs.vscode.version;
 
       nativeBuildInputs = [ pkgs.makeWrapper ];
-      phases = [ "installPhase" "fixupPhase" ];
+      phases = [ "installPhase" /*"fixupPhase"*/ ];
       installPhase = ''
         mkdir -p $out/bin
         install -m755 ${vscodeWayland}/bin/${pname}-wayland $out/bin/${pname}
         cp -r ${desktop}/share $out/share
       '';
-      fixupPhase = ''
+      /*fixupPhase = ''
         wrapProgram $out/bin/${pname} \
-          --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath (with pkgs; [ vulkan-loader vulkan-extension-layer libGL ])}
-      '';
+        --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath (with pkgs; [ vulkan-loader vulkan-extension-layer libGL ])}
+        '';*/
     });
 }

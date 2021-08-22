@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, suites, ... }:
+{ config, lib, pkgs, modulesPath, suites, profiles, ... }:
 let
   btrfsPartPath = "/dev/disk/by-label/NIXOS";
   btrfsOptions = [ "compress-force=zstd" "noatime" ];
@@ -35,7 +35,7 @@ in
   imports = suites.base ++ suites.work ++ [
     ../profiles/network/networkmanager
     (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+  ] ++ (with profiles.nixos-hardware; [ common-pc-ssd common-pc common-gpu-amd common-cpu-amd ]);
 
   boot = {
     loader = {

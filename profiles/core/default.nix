@@ -41,6 +41,7 @@ in
       utillinux
       whois
       bat
+      fzf
       exa
       git
       lm_sensors
@@ -122,9 +123,11 @@ in
 
         myip =
           "${pkgs.dnsutils}/bin/dig +short myip.opendns.com @208.67.222.222 2>&1";
-        mn = ''
-          manix "" | grep '^# ' | sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | sk --preview="manix '{}'" | xargs manix
-        '';
+
+        mn =
+          let manix_preview = "manix '{}' | sed 's/type: /> type: /g' | bat -l Markdown --color=always --plain"; in
+          ''manix "" | rg '^# ' | sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | sk --preview="${manix_preview}" | xargs manix'';
+
 
         # fix nixos-option
         nixos-option = "nixos-option -I nixpkgs=${self}/lib/compat";
@@ -182,10 +185,10 @@ in
   users.mutableUsers = false;
 
   # For rage encryption, all hosts need a ssh key pair
-  services.openssh = {
+  /*services.openssh = {
     enable = true;
     openFirewall = lib.mkDefault false;
-  };
+    };*/
 
   services.earlyoom.enable = true;
 }

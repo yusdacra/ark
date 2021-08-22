@@ -67,7 +67,7 @@
       #, bud
     , nixos
     , home
-      #, nixos-hardware
+    , nixos-hardware
       #, nur
       #, agenix
       #, nvfetcher
@@ -133,13 +133,11 @@
           };
 
           imports = [ (digga.lib.importHosts ./hosts) ];
-          hosts = {
-            /* set host specific properties here */
-            NixOS = { };
-          };
+          hosts = { };
           importables = rec {
             profiles = (digga.lib.rakeLeaves ./profiles) // {
               users = digga.lib.rakeLeaves ./users;
+              nixos-hardware = nixos-hardware.nixosModules;
             };
             suites = with profiles; {
               base = [ cachix core users.root ];
