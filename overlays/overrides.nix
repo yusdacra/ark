@@ -20,7 +20,8 @@ channels: final: prev: {
     vscode
     gh
     chromium-unwrapped
-    chromium;
+    chromium
+    sublime4;
 
   libnotify-latest = channels.latest.libnotify;
 

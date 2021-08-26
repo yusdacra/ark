@@ -275,6 +275,9 @@ in
             # discord-canary-system
             # element-desktop
             # gh
+            openbox
+            openbox-menu
+            sublime4
             vulkan-tools
             audacity
             krita
@@ -295,7 +298,12 @@ in
             ffmpeg
             mupdf
             transmission-qt
-            lutris
+            (lib.hiPrio (lutris.overrideAttrs (old: {
+              profile = ''
+                ${old.profile or ""}
+                unset VK_ICD_FILENAMES
+                export VK_ICD_FILENAMES=${nixosConfig.environment.variables.VK_ICD_FILENAMES}'';
+            })))
             xdg_utils
             tagref
             libreoffice-fresh
@@ -677,8 +685,8 @@ in
             "property" = { fg = "#${colorScheme.normal.red}" }
             "special" = { fg = "#${colorScheme.bright.blue}" }
             "string" = { fg = "#${colorScheme.normal.green}" }
-            "type" = { fg = "#${colorScheme.normal.cyan}", modifers = ['bold'] }
-            "type.builtin" = { fg = "#${colorScheme.normal.cyan}", modifers = ['bold'] }
+            "type" = { fg = "#${colorScheme.normal.cyan}", modifiers = ['bold'] }
+            "type.builtin" = { fg = "#${colorScheme.normal.cyan}", modifiers = ['bold'] }
             "variable" = { fg = "#${colorScheme.bright.blue}", modifiers = ['italic'] }
             "variable.builtin" = { fg = "#${colorScheme.bright.blue}", modifiers = ['italic'] }
             "variable.parameter" = { fg = "#${colorScheme.bright.red}", modifiers = ['italic'] }
@@ -698,9 +706,13 @@ in
             "ui.text" = { fg = "#${fgColor}", bg = "#${bgColor}" }
             "ui.text.focus" = { fg = "#${fgColor}", bg = "#${bgColor}", modifiers = ['bold'] }
             "ui.window" = { bg = "#${bgColor}" }
+            "ui.cursor" = { modifiers = ["reversed"] }
+            "ui.cursor.select" = { modifiers = ["reversed"] }
           '';
           "helix/config.toml".text = ''
             theme = "mytheme"
+            [editor]
+            line-number = "relative"
             [lsp]
             display-messages = true
           '';
