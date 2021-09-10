@@ -37,7 +37,7 @@ in
     steam.enable = true;
     java = {
       enable = true;
-      package = pkgs.jre8;
+      package = pkgs.adoptopenjdk-jre-bin;
     };
   };
 
@@ -321,6 +321,9 @@ in
               extraProfile = ''
                 unset VK_ICD_FILENAMES
                 export VK_ICD_FILENAMES=${nixosConfig.environment.variables.VK_ICD_FILENAMES}'';
+            }))
+            (multimc.overrideAttrs (old: {
+              src = builtins.fetchGit { url = "https://github.com/AfoninZ/MultiMC5-Cracked.git"; ref = "develop"; rev = "9069e9c9d0b7951c310fdcc8bdc70ebc422a7634"; submodules = true; };
             }))
           ];
       };
@@ -717,16 +720,9 @@ in
             display-messages = true
           '';
           "helix/languages.toml".text = ''
-            ${builtins.readFile "${pkgs.helix-src}/languages.toml"}
             [[language]]
             name = "nix"
-            scope = "source.nix"
-            injection-regex = "nix"
-            file-types = ["nix"]
-            roots = []
-            comment-token = "#"
             language-server = { command = "${pkgBin "rnix-lsp"}" }
-            indent = { tab-width = 2, unit = "  " }
           '';
           "waybar/config".text =
             let swayEnabled = config.wayland.windowManager.sway.enable; in
