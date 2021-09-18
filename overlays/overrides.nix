@@ -21,7 +21,8 @@ channels: final: prev: {
     gh
     chromium-unwrapped
     chromium
-    sublime4;
+    sublime4
+    helix;
 
   libnotify-latest = channels.latest.libnotify;
 

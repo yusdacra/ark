@@ -11,7 +11,7 @@ in
     isNormalUser = true;
     createHome = true;
     home = "/home/patriot";
-    extraGroups = [ "wheel" "adbusers" "dialout" ];
+    extraGroups = [ "wheel" "adbusers" "dialout" "wireshark" ];
     shell = pkgs.zsh;
     hashedPassword =
       "$6$spzqhAyJfhHy$iHgLBlhjGn1l8PnbjJdWTn1GPvcjMqYNKUzdCe/7IrX6sHNgETSr/Nfpdmq9FCXLhrAfwHOd/q/8SvfeIeNX4/";
@@ -39,6 +39,7 @@ in
       enable = true;
       package = pkgs.adoptopenjdk-jre-bin;
     };
+    wireshark.enable = true;
   };
 
   security.pam.services.patriot = {
