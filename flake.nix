@@ -95,9 +95,9 @@
               #deploy.overlay
               #nixpkgsWayland.overlay
               (_: prev: {
-                #helix = helix.packages.${prev.system}.helix;
-                #helix-src = helix;
-                #rnix-lsp = rnixLsp.packages.${prev.system}.rnix-lsp;
+                helix = helix.packages.${prev.system}.helix;
+                helix-src = helix;
+                rnix-lsp = rnixLsp.packages.${prev.system}.rnix-lsp;
               })
               ./pkgs/default.nix
             ];
