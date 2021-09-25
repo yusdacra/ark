@@ -43,7 +43,9 @@
         inputs.utils.follows = "flake-utils";
       };
       helix = {
-        url = "github:helix-editor/helix";
+        url = "https://github.com/helix-editor/helix.git";
+        type = "git";
+        submodules = true;
         inputs.nixpkgs.follows = "nixpkgs";
       };
       nixosPersistence.url = "github:nix-community/impermanence";

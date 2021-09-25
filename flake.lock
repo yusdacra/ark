@@ -196,17 +196,19 @@
         ]
       },
       "locked": {
-        "lastModified": 1631926766,
-        "narHash": "sha256-aDukfKZ8+Ss8KsHPFlUlKc+fMDGWvvYxhDfzPYQ/Ti0=",
-        "owner": "helix-editor",
-        "repo": "helix",
-        "rev": "ae4d37de28abab23651aa6a239e6d9d90674f039",
-        "type": "github"
+        "lastModified": 1632450064,
+        "narHash": "sha256-aeI1iaCYd35MTgQcCELVFk05XXmhwpXP81mofVZgmjU=",
+        "ref": "master",
+        "rev": "df55eaae69d0388de26448e82f9ded483fca2f44",
+        "revCount": 1488,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/helix-editor/helix.git"
       },
       "original": {
-        "owner": "helix-editor",
-        "repo": "helix",
-        "type": "github"
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/helix-editor/helix.git"
       }
     },
     "home": {
@@ -329,6 +331,7 @@
       "inputs": {
         "devshell": "devshell_2",
         "nixpkgs": [
+          "helix",
           "nixpkgs"
         ],
         "rustOverlay": "rustOverlay"
@@ -450,11 +453,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1631531304,
-        "narHash": "sha256-hlJ0FYaxUGpFqAuhB+Fde7ydxJQXV3NIwKQ8rW85gc8=",
+        "lastModified": 1632521018,
+        "narHash": "sha256-worJcyb+s+bUFCpMQx12W8ZLUlVqArWaN9ijxFzOiV8=",
         "owner": "nix-community",
         "repo": "rnix-lsp",
-        "rev": "ab9c26a903846fc6712b811bdb32a2539ed3a42d",
+        "rev": "f383249f3c6ea24164be5cddbe269626cd3d981e",
         "type": "github"
       },
       "original": {

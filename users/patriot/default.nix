@@ -694,10 +694,6 @@ in
             "variable" = { fg = "#${colorScheme.bright.blue}", modifiers = ['italic'] }
             "variable.builtin" = { fg = "#${colorScheme.bright.blue}", modifiers = ['italic'] }
             "variable.parameter" = { fg = "#${colorScheme.bright.red}", modifiers = ['italic'] }
-            "info" = { fg = "#${colorScheme.normal.blue}", modifiers = ['bold'] }
-            "hint" = { fg = "#${colorScheme.bright.green}", modifiers = ['bold'] }
-            "warning" = { fg = "#${colorScheme.normal.yellow}", modifiers = ['bold'] }
-            "error" = { fg = "#${colorScheme.bright.red}", modifiers = ['bold'] }
             "ui.menu.selected" = { fg = "#${bgColor}", bg = "#${acColor}" }
             "ui.background" = { fg = "#${fgColor}", bg = "#${bgColor}" }
             "ui.help" = { bg = "#${colorScheme.normal.black}" }
@@ -710,8 +706,12 @@ in
             "ui.text" = { fg = "#${fgColor}", bg = "#${bgColor}" }
             "ui.text.focus" = { fg = "#${fgColor}", bg = "#${bgColor}", modifiers = ['bold'] }
             "ui.window" = { bg = "#${bgColor}" }
-            "ui.cursor" = { modifiers = ["reversed"] }
-            "ui.cursor.select" = { modifiers = ["reversed"] }
+            "ui.cursor.primary" = { fg = "#${fgColor}", modifiers = ["reversed"] }
+
+            "info" = { fg = "#${colorScheme.normal.blue}", modifiers = ['bold'] }
+            "hint" = { fg = "#${colorScheme.bright.green}", modifiers = ['bold'] }
+            "warning" = { fg = "#${colorScheme.normal.yellow}", modifiers = ['bold'] }
+            "error" = { fg = "#${colorScheme.bright.red}", modifiers = ['bold'] }
           '';
           "helix/config.toml".text = ''
             theme = "mytheme"
