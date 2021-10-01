@@ -21,8 +21,6 @@
       /*darwin.url = "github:LnL7/nix-darwin";
         darwin.inputs.nixpkgs.follows = "latest";*/
 
-      #deploy.follows = "digga/deploy";
-
       /*agenix.url = "github:ryantm/agenix";
         agenix.inputs.nixpkgs.follows = "latest";*/
 
@@ -73,7 +71,6 @@
       #, nur
       #, agenix
       #, nvfetcher
-      #, deploy
     , nixosPersistence
     , nixpkgsWayland
     , rnixLsp
@@ -104,7 +101,6 @@
               ./pkgs/default.nix
             ];
           };
-          latest = { };
         };
 
         lib = import ./lib { lib = digga.lib // nixos.lib; };
