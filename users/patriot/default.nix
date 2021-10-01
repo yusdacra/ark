@@ -607,8 +607,8 @@ in
             in
             (pkgs.vscode-utils.extensionsFromVscodeMarketplace [
               # Rust
-              (mkExt "rust-analyzer" "0.2.654" "matklad" "sha256-WTwk71/A2RDEY0X+h5lwujL/OmYtf6FAQTJy6PB9ZzM=")
-              (mkExt "even-better-toml" "0.12.3" "tamasfe" "sha256-nDmmzVuADieNX9bcS3YQiemg27S4O02Pjj+rthkBAZw=")
+              (mkExt "rust-analyzer" "0.2.760" "matklad" "sha256-M+eFqIFwiKkiwqFRwkX5h6mc/W+NBqkXcNUdTewwkCI=")
+              (mkExt "even-better-toml" "0.14.2" "tamasfe" "sha256-lE2t+KUfClD/xjpvexTJlEr7Kufo+22DUM9Ju4Tisp0=")
               (mkExt "crates" "0.5.9" "serayuzgur" "sha256-YHIbnl2R7lqwJHi8qUQImClx9MWm+5Pc12vYw7e/RlA=")
               # Nix
               (mkExt "nix-env-selector" "1.0.7" "arrterian" "sha256-DnaIXJ27bcpOrIp1hm7DcrlIzGSjo4RTJ9fD72ukKlc=")
@@ -619,8 +619,9 @@ in
               (mkExt "dart-code" "3.22.0" "Dart-Code" "sha256-1nTewVmlrxbXdRR1EPts46u24LHdnP5BblFsMaGlNYg=")
               # protobuf
               (mkExt "vscode-proto3" "0.5.4" "zxh404" "sha256-S89qRRlfiTsJ+fJuwdNkZywe6mei48KxIEWbGWChriE=")
+              (mkExt "vscode-buf" "0.3.1" "bufbuild" "sha256-KjU6WlDxYPPJjh45mCq6Kczi6odYwnLaGj4RHe3fc2w=")
               # git
-              (mkExt "gitlens" "11.4.1" "eamodio" "sha256-OjMozzOjwZDAexVfKlu3XTDxJPf8acx7LqlAEMRmE78=")
+              (mkExt "gitlens" "11.6.0" "eamodio" "sha256-JxCNE/IL/v94xWmhebsRZo1Gw+nSSpDgZ41ZGongGVI=")
               (mkExt "vscode-commitizen" "0.14.1" "KnisterPeter" "sha256-yw8XKGL7Ul9wV+C0yL1LFJCE3+E8u/sR9s3TjkGJPZM=")
               # Customization
               # (mkExt "dance" "0.3.2" "gregoire" "sha256-+g8EXeCkPOPvZ60JoXkGTeSXYWrXmKrcbUaEfDppdgA=")
@@ -644,6 +645,7 @@ in
             "rust-analyzer.checkOnSave.command" = "clippy";
             "nix.enableLanguageServer" = true;
             "nix.serverPath" = pkgBin "rnix-lsp";
+            "editor.bracketPairColorization.enabled" = true;
           };
         };
       };
