@@ -101,6 +101,7 @@
               ./pkgs/default.nix
             ];
           };
+          latest = { };
         };
 
         lib = import ./lib { lib = digga.lib // nixos.lib; };
