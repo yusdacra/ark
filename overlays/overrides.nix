@@ -24,6 +24,8 @@ channels: final: prev: {
     sublime4
     git
     git-lfs
+    helix
+    rnix-lsp
     ;
 
   libnotify-latest = channels.latest.libnotify;

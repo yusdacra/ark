@@ -6,6 +6,11 @@
       nixos.url = "github:nixos/nixpkgs/nixos-21.05";
       latest.url = "github:nixos/nixpkgs/nixos-unstable";
 
+      nix = {
+        url = "github:nixos/nix/master";
+        inputs.nixpkgs.follows = "latest";
+      };
+
       digga.url = "github:divnix/digga/main";
       digga.inputs.nixpkgs.follows = "nixos";
       digga.inputs.nixlib.follows = "nixos";
@@ -37,28 +42,20 @@
       rnixLsp = {
         url = "github:nix-community/rnix-lsp";
         inputs.naersk.follows = "naersk";
-        inputs.nixpkgs.follows = "nixpkgs";
-        inputs.utils.follows = "flake-utils";
+        inputs.nixpkgs.follows = "latest";
+        inputs.utils.follows = "digga/flake-utils";
       };
       helix = {
         url = "https://github.com/helix-editor/helix.git";
         type = "git";
         submodules = true;
-        inputs.nixpkgs.follows = "nixpkgs";
+        inputs.nixpkgs.follows = "latest";
       };
       nixosPersistence.url = "github:nix-community/impermanence";
       nixpkgsWayland = {
         url = "github:colemickens/nixpkgs-wayland";
-        inputs.nixpkgs.follows = "nixos";
+        inputs.nixpkgs.follows = "latest";
       };
-      # start ANTI CORRUPTION LAYER
-      # remove after https://github.com/NixOS/nix/pull/4641
-      nixpkgs.follows = "nixos";
-      nixlib.follows = "digga/nixlib";
-      blank.follows = "digga/blank";
-      flake-utils-plus.follows = "digga/flake-utils-plus";
-      flake-utils.follows = "digga/flake-utils";
-      # end ANTI CORRUPTION LAYER
     };
 
   outputs =
@@ -71,6 +68,7 @@
       #, nur
       #, agenix
       #, nvfetcher
+    , nix
     , nixosPersistence
     , nixpkgsWayland
     , rnixLsp
@@ -93,15 +91,19 @@
               #nvfetcher.overlay
               #deploy.overlay
               #nixpkgsWayland.overlay
-              (_: prev: {
-                helix = helix.packages.${prev.system}.helix;
-                helix-src = helix;
-                rnix-lsp = rnixLsp.packages.${prev.system}.rnix-lsp;
-              })
+              nix.overlay
               ./pkgs/default.nix
             ];
           };
-          latest = { };
+          latest = {
+            overlays = [
+              (_: prev: {
+                #helix = helix.packages.${prev.system}.helix;
+                #helix-src = prev.helix.src;
+                #rnix-lsp = rnixLsp.packages.${prev.system}.rnix-lsp;
+              })
+            ];
+          };
         };
 
         lib = import ./lib { lib = digga.lib // nixos.lib; };

@@ -195,15 +195,15 @@
         "flakeCompat": "flakeCompat",
         "nixCargoIntegration": "nixCargoIntegration",
         "nixpkgs": [
-          "nixpkgs"
+          "latest"
         ]
       },
       "locked": {
-        "lastModified": 1632917236,
-        "narHash": "sha256-ieAp53SlK8d7RinZSueJHBes8l9jssKIYBeBXjRf5LY=",
+        "lastModified": 1634392661,
+        "narHash": "sha256-3ez+Ts5dOXKq+nuDrEUBrDWqKqD+0GTTySdssZl4duY=",
         "ref": "master",
-        "rev": "e47632114a92dbabc2f9d41bedb455e13996924e",
-        "revCount": 1491,
+        "rev": "89707a858f593c99d44af173e9fb2c0d72b8697e",
+        "revCount": 1529,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/helix-editor/helix.git"
@@ -284,6 +284,22 @@
         "type": "github"
       }
     },
+    "lowdown-src_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1633514407,
+        "narHash": "sha256-Dw32tiMjdK9t3ETl5fzGrutQTzh2rufgZV4A/BbxuD4=",
+        "owner": "kristapsdz",
+        "repo": "lowdown",
+        "rev": "d2c2b44ff6c27b936ec27358a2653caaef8f73b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kristapsdz",
+        "repo": "lowdown",
+        "type": "github"
+      }
+    },
     "naersk": {
       "inputs": {
         "nixpkgs": [
@@ -346,6 +362,28 @@
       "original": {
         "owner": "yusdacra",
         "repo": "nix-cargo-integration",
+        "type": "github"
+      }
+    },
+    "nix_2": {
+      "inputs": {
+        "lowdown-src": "lowdown-src_2",
+        "nixpkgs": [
+          "latest"
+        ]
+      },
+      "locked": {
+        "lastModified": 1634305820,
+        "narHash": "sha256-IEDfqsWNI7ZbU8xmFg4B+nthpcCIE7mr9WYJ2oyYJhA=",
+        "owner": "nixos",
+        "repo": "nix",
+        "rev": "130284b8508dad3c70e8160b15f3d62042fc730a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "master",
+        "repo": "nix",
         "type": "github"
       }
     },
@@ -424,7 +462,7 @@
       "inputs": {
         "cachix": "cachix",
         "nixpkgs": [
-          "nixos"
+          "latest"
         ]
       },
       "locked": {
@@ -447,9 +485,10 @@
           "naersk"
         ],
         "nixpkgs": [
-          "nixpkgs"
+          "latest"
         ],
         "utils": [
+          "digga",
           "flake-utils"
         ]
       },
@@ -469,33 +508,15 @@
     },
     "root": {
       "inputs": {
-        "blank": [
-          "digga",
-          "blank"
-        ],
         "digga": "digga",
-        "flake-utils": [
-          "digga",
-          "flake-utils"
-        ],
-        "flake-utils-plus": [
-          "digga",
-          "flake-utils-plus"
-        ],
         "helix": "helix",
         "home": "home",
         "latest": "latest_2",
         "naersk": "naersk",
-        "nixlib": [
-          "digga",
-          "nixlib"
-        ],
+        "nix": "nix_2",
         "nixos": "nixos",
         "nixos-hardware": "nixos-hardware",
         "nixosPersistence": "nixosPersistence",
-        "nixpkgs": [
-          "nixos"
-        ],
         "nixpkgsWayland": "nixpkgsWayland",
         "rnixLsp": "rnixLsp"
       }
