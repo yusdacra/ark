@@ -22,7 +22,8 @@ channels: final: prev: {
     chromium-unwrapped
     chromium
     sublime4
-    deploy-rs
+    git
+    git-lfs
     ;
 
   libnotify-latest = channels.latest.libnotify;

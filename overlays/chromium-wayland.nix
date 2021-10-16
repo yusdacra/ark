@@ -14,6 +14,7 @@ let
         "--enable-gpu-rasterization"
         "--enable-zero-copy"
         "--disable-gpu-driver-bug-workarounds"
+        "--force-dark-mode"
       ];
     in
     pkgs.writeScriptBin "chromium-wayland" ''
