@@ -46,7 +46,7 @@ in
     (linter nixpkgs-fmt)
     (linter editorconfig-checker)
     # (docs python3Packages.grip) too many deps
-    (docs mdbook)
+    # (docs mdbook)
   ]
 
   ++ lib.optional

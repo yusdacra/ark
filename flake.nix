@@ -4,12 +4,7 @@
   inputs =
     {
       nixos.url = "github:nixos/nixpkgs/nixos-21.05";
-      latest.url = "github:nixos/nixpkgs/nixos-unstable";
-
-      nix = {
-        url = "github:nixos/nix/master";
-        inputs.nixpkgs.follows = "latest";
-      };
+      latest.url = "github:nixos/nixpkgs/70088dc29994c32f8520150e34c6e57e8453f895";
 
       digga.url = "github:divnix/digga/main";
       digga.inputs.nixpkgs.follows = "nixos";
@@ -68,7 +63,6 @@
       #, nur
       #, agenix
       #, nvfetcher
-    , nix
     , nixosPersistence
     , nixpkgsWayland
     , rnixLsp
@@ -90,17 +84,16 @@
               #agenix.overlay
               #nvfetcher.overlay
               #deploy.overlay
-              #nixpkgsWayland.overlay
-              nix.overlay
+              nixpkgsWayland.overlay
               ./pkgs/default.nix
             ];
           };
           latest = {
             overlays = [
               (_: prev: {
-                #helix = helix.packages.${prev.system}.helix;
-                #helix-src = prev.helix.src;
-                #rnix-lsp = rnixLsp.packages.${prev.system}.rnix-lsp;
+                helix = helix.packages.${prev.system}.helix;
+                helix-src = prev.helix.src;
+                rnix-lsp = rnixLsp.packages.${prev.system}.rnix-lsp;
               })
             ];
           };

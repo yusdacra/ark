@@ -165,6 +165,7 @@ in
           [ "bud" ];
     in
     {
+      package = pkgs.nixUnstable;
       autoOptimiseStore = true;
       gc.automatic = true;
       optimise.automatic = true;

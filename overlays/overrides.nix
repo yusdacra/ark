@@ -26,6 +26,13 @@ channels: final: prev: {
     git-lfs
     helix
     rnix-lsp
+    vscode-extensions
+    vscode-utils
+    nixUnstable
+    bottom
+    bat
+    ripgrep
+    alacritty
     ;
 
   libnotify-latest = channels.latest.libnotify;
