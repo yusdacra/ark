@@ -1,68 +1,52 @@
 {
   description = "A highly structured configuration database.";
 
+  nixConfig.extra-experimental-features = "nix-command flakes ca-references";
+  nixConfig.extra-substituters = "https://nrdxp.cachix.org https://nix-community.cachix.org";
+  nixConfig.extra-trusted-public-keys = "nrdxp.cachix.org-1:Fc5PSqY2Jm1TrWfm88l6cvGWwz3s93c6IOifQWnhNW4= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
+
   inputs =
     {
-      nixos.url = "github:nixos/nixpkgs/nixos-21.05";
-      latest.url = "github:nixos/nixpkgs/70088dc29994c32f8520150e34c6e57e8453f895";
+      nixos.url = "github:nixos/nixpkgs/nixos-unstable";
 
       digga.url = "github:divnix/digga/main";
       digga.inputs.nixpkgs.follows = "nixos";
       digga.inputs.nixlib.follows = "nixos";
       digga.inputs.home-manager.follows = "home";
 
-      /*bud.url = "github:divnix/bud";
-        bud.inputs.nixpkgs.follows = "nixos";
-        bud.inputs.devshell.follows = "digga/devshell";*/
-
-      home.url = "github:nix-community/home-manager/release-21.05";
+      home.url = "github:nix-community/home-manager/master";
       home.inputs.nixpkgs.follows = "nixos";
 
-      /*darwin.url = "github:LnL7/nix-darwin";
-        darwin.inputs.nixpkgs.follows = "latest";*/
-
-      /*agenix.url = "github:ryantm/agenix";
-        agenix.inputs.nixpkgs.follows = "latest";*/
-
-      /*nvfetcher.url = "github:berberman/nvfetcher";
-        nvfetcher.inputs.nixpkgs.follows = "latest";
-        nvfetcher.inputs.flake-compat.follows = "digga/deploy/flake-compat";
-        nvfetcher.inputs.flake-utils.follows = "digga/flake-utils-plus/flake-utils";*/
-
       naersk.url = "github:nmattia/naersk";
-      naersk.inputs.nixpkgs.follows = "latest";
+      naersk.inputs.nixpkgs.follows = "nixos";
 
       nixos-hardware.url = "github:nixos/nixos-hardware";
 
       rnixLsp = {
         url = "github:nix-community/rnix-lsp";
         inputs.naersk.follows = "naersk";
-        inputs.nixpkgs.follows = "latest";
+        inputs.nixpkgs.follows = "nixos";
         inputs.utils.follows = "digga/flake-utils";
       };
       helix = {
         url = "https://github.com/helix-editor/helix.git";
         type = "git";
         submodules = true;
-        inputs.nixpkgs.follows = "latest";
+        inputs.nixpkgs.follows = "nixos";
       };
       nixosPersistence.url = "github:nix-community/impermanence";
       nixpkgsWayland = {
         url = "github:colemickens/nixpkgs-wayland";
-        inputs.nixpkgs.follows = "latest";
+        inputs.nixpkgs.follows = "nixos";
       };
     };
 
   outputs =
     { self
     , digga
-      #, bud
     , nixos
     , home
     , nixos-hardware
-      #, nur
-      #, agenix
-      #, nvfetcher
     , nixosPersistence
     , nixpkgsWayland
     , rnixLsp
@@ -79,22 +63,13 @@
           nixos = {
             imports = [ (digga.lib.importOverlays ./overlays) ];
             overlays = [
-              #digga.overlays.patchedNix
-              #nur.overlay
-              #agenix.overlay
-              #nvfetcher.overlay
-              #deploy.overlay
-              nixpkgsWayland.overlay
-              ./pkgs/default.nix
-            ];
-          };
-          latest = {
-            overlays = [
+              #nixpkgsWayland.overlay
               (_: prev: {
                 helix = helix.packages.${prev.system}.helix;
                 helix-src = prev.helix.src;
                 rnix-lsp = rnixLsp.packages.${prev.system}.rnix-lsp;
               })
+              ./pkgs/default.nix
             ];
           };
         };
@@ -120,8 +95,6 @@
               digga.nixosModules.bootstrapIso
               digga.nixosModules.nixConfig
               home.nixosModules.home-manager
-              #agenix.nixosModules.age
-              #bud.nixosModules.bud
               nixosPersistence.nixosModules.impermanence
             ];
           };
@@ -156,14 +129,6 @@
         homeConfigurations = digga.lib.mkHomeConfigurations self.nixosConfigurations;
 
         deploy.nodes = digga.lib.mkDeployNodes self.nixosConfigurations { };
-
-        /*defaultTemplate = self.templates.bud;
-          templates.bud.path = ./.;
-          templates.bud.description = "bud template";*/
       }
-    //
-    {
-      # budModules = { devos = import ./bud; };
-    }
   ;
 }

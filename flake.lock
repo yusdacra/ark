@@ -210,16 +210,16 @@
         "flakeCompat": "flakeCompat",
         "nixCargoIntegration": "nixCargoIntegration",
         "nixpkgs": [
-          "latest"
+          "nixos"
         ],
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1634956879,
-        "narHash": "sha256-i0BFwMPjafzKxZ074iMuIl3mr+VaeYfBGh85At+Jttg=",
+        "lastModified": 1634993538,
+        "narHash": "sha256-4UBBfkxDanL4OL6xeB6BkiWNCXj6gFLp3/b+MB9Hos4=",
         "ref": "master",
-        "rev": "4ee92cad19cc94f0751f91fa9391d1899353d740",
-        "revCount": 1563,
+        "rev": "0cb5e0b2caba61bbcf6f57ce58506882766d5eea",
+        "revCount": 1565,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/helix-editor/helix.git"
@@ -237,16 +237,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1634544068,
-        "narHash": "sha256-RlRQBaAHfdWqfRyHdWuDPMkplBTYwuyDQqDcNbP/Sog=",
+        "lastModified": 1634939539,
+        "narHash": "sha256-m+RC6it1doMjq5U5e1B36thzOOBc1GF4tVLK2SNMvzg=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "ff2bed9dac84fb202bbb3c49fdcfe30c29d0b12f",
+        "rev": "8278c14f5f8725e1b5936d6f54e63d4626aae98c",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "release-21.05",
+        "ref": "master",
         "repo": "home-manager",
         "type": "github"
       }
@@ -264,22 +264,6 @@
         "owner": "nixos",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "latest_2": {
-      "locked": {
-        "lastModified": 1633617995,
-        "narHash": "sha256-+RfYXTAXtULLSAMFDHWaA20NhNg3YQ9GcntVJqDDjSI=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "70088dc29994c32f8520150e34c6e57e8453f895",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "70088dc29994c32f8520150e34c6e57e8453f895",
         "type": "github"
       }
     },
@@ -303,7 +287,7 @@
     "naersk": {
       "inputs": {
         "nixpkgs": [
-          "latest"
+          "nixos"
         ]
       },
       "locked": {
@@ -370,16 +354,16 @@
     },
     "nixos": {
       "locked": {
-        "lastModified": 1634883236,
-        "narHash": "sha256-Z9ofgNzSmYVhs+STOAvk6QNy5KVsUmADOE+UIfur2ug=",
+        "lastModified": 1634782485,
+        "narHash": "sha256-psfh4OQSokGXG0lpq3zKFbhOo3QfoeudRcaUnwMRkQo=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b0274abf85097e9a2da868b28a5532918dc14380",
+        "rev": "34ad3ffe08adfca17fcb4e4a47bb5f3b113687be",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-21.05",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -458,7 +442,7 @@
       "inputs": {
         "cachix": "cachix",
         "nixpkgs": [
-          "latest"
+          "nixos"
         ]
       },
       "locked": {
@@ -481,7 +465,7 @@
           "naersk"
         ],
         "nixpkgs": [
-          "latest"
+          "nixos"
         ],
         "utils": [
           "digga",
@@ -507,7 +491,6 @@
         "digga": "digga",
         "helix": "helix",
         "home": "home",
-        "latest": "latest_2",
         "naersk": "naersk",
         "nixos": "nixos",
         "nixos-hardware": "nixos-hardware",

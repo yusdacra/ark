@@ -11,7 +11,7 @@ in
     isNormalUser = true;
     createHome = true;
     home = "/home/patriot";
-    extraGroups = [ "wheel" "adbusers" "dialout" "wireshark" ];
+    extraGroups = [ "wheel" "adbusers" "dialout" /* "wireshark" */ ];
     shell = pkgs.zsh;
     hashedPassword =
       "$6$spzqhAyJfhHy$iHgLBlhjGn1l8PnbjJdWTn1GPvcjMqYNKUzdCe/7IrX6sHNgETSr/Nfpdmq9FCXLhrAfwHOd/q/8SvfeIeNX4/";
@@ -36,10 +36,10 @@ in
     adb.enable = true;
     steam.enable = true;
     java = {
-      enable = true;
+      enable = false;
       package = pkgs.adoptopenjdk-jre-bin;
     };
-    wireshark.enable = true;
+    wireshark.enable = false;
   };
 
   security.pam.services.patriot = {
@@ -286,7 +286,7 @@ in
             kdenlive
             gnome3.seahorse
             gnome3.gnome-boxes
-            wine-staging
+            #wine-staging
             cachix
             appimage-run
             bitwarden
@@ -323,9 +323,9 @@ in
                 unset VK_ICD_FILENAMES
                 export VK_ICD_FILENAMES=${nixosConfig.environment.variables.VK_ICD_FILENAMES}'';
             }))
-            (multimc.overrideAttrs (old: {
+            /*(multimc.overrideAttrs (old: {
               src = builtins.fetchGit { url = "https://github.com/AfoninZ/MultiMC5-Cracked.git"; ref = "develop"; rev = "9069e9c9d0b7951c310fdcc8bdc70ebc422a7634"; submodules = true; };
-            }))
+              }))*/
           ];
       };
 
@@ -576,26 +576,8 @@ in
           in
           {
             enable = true;
-            colors = {
-              window = {
-                background = bgc;
-                border = bgc;
-                separator = bgc;
-              };
-              rows = {
-                normal = {
-                  background = bgc;
-                  foreground = fgc;
-                  backgroundAlt = bgc;
-                  highlight = {
-                    background = bgc;
-                    foreground = acc;
-                  };
-                };
-              };
-            };
+            cycle = true;
             font = fontComb;
-            separator = "none";
             terminal = pkgBin "alacritty";
           };
         vscode = {
