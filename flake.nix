@@ -1,10 +1,6 @@
 {
   description = "A highly structured configuration database.";
 
-  nixConfig.extra-experimental-features = "nix-command flakes ca-references";
-  nixConfig.extra-substituters = "https://nrdxp.cachix.org https://nix-community.cachix.org";
-  nixConfig.extra-trusted-public-keys = "nrdxp.cachix.org-1:Fc5PSqY2Jm1TrWfm88l6cvGWwz3s93c6IOifQWnhNW4= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
-
   inputs =
     {
       nixos.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -28,12 +24,12 @@
         inputs.nixpkgs.follows = "nixos";
         inputs.utils.follows = "digga/flake-utils";
       };
-      helix = {
+      /*helix = {
         url = "https://github.com/helix-editor/helix.git";
         type = "git";
         submodules = true;
         inputs.nixpkgs.follows = "nixos";
-      };
+      };*/
       nixosPersistence.url = "github:nix-community/impermanence";
       nixpkgsWayland = {
         url = "github:colemickens/nixpkgs-wayland";
@@ -50,7 +46,7 @@
     , nixosPersistence
     , nixpkgsWayland
     , rnixLsp
-    , helix
+    #, helix
     , ...
     } @ inputs:
     digga.lib.mkFlake
@@ -65,9 +61,9 @@
             overlays = [
               #nixpkgsWayland.overlay
               (_: prev: {
-                helix = helix.packages.${prev.system}.helix;
-                helix-src = prev.helix.src;
-                rnix-lsp = rnixLsp.packages.${prev.system}.rnix-lsp;
+                #helix = helix.packages.${prev.system}.helix;
+                #helix-src = prev.helix.src;
+                #rnix-lsp = rnixLsp.packages.${prev.system}.rnix-lsp;
               })
               ./pkgs/default.nix
             ];

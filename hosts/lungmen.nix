@@ -227,7 +227,7 @@ in
     };
   };
   virtualisation = {
-    podman.enable = false;
+    podman.enable = true;
     libvirtd.enable = false;
   };
 

@@ -563,7 +563,7 @@ in
           '';
           shellAliases = nixosConfig.environment.shellAliases // {
             harmony-ssh = ''
-              ${pkgs.mosh}/bin/mosh yusuf@chat.harmonyapp.io
+              ${pkgs.mosh}/bin/mosh root@chat.harmonyapp.io
             '';
           };
         };
