@@ -27,7 +27,6 @@ in
     gtkUsePortal = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal
-      xdg-desktop-portal-gtk
       xdg-desktop-portal-wlr
     ];
   };
@@ -42,19 +41,34 @@ in
     wireshark.enable = false;
   };
 
-  security.pam.services.patriot = {
-    enableGnomeKeyring = true;
-    enableKwallet = false;
+  security = {
+    pam.services.patriot = {
+      enableGnomeKeyring = true;
+      enableKwallet = false;
+    };
+    sudo.extraRules = [
+      {
+        users = [ "patriot" ];
+        commands = [{
+          command = "${pkgs.profile-sync-daemon}/bin/psd-overlay-helper";
+          options = [ "SETENV" "NOPASSWD" ];
+        }];
+      }
+    ];
   };
   services = {
+    psd.enable = true;
     gnome = {
       gnome-keyring.enable = true;
+      core-utilities.enable = false;
+      tracker-miners.enable = false;
+      tracker.enable = false;
     };
     xserver = {
       enable = true;
       desktopManager = {
         plasma5.enable = false;
-        gnome.enable = false;
+        gnome.enable = true;
         xterm.enable = false;
       };
       displayManager = {
@@ -64,11 +78,11 @@ in
         };
         lightdm.enable = false;
         gdm = {
-          enable = false;
+          enable = true;
           wayland = true;
         };
         sddm.enable = false;
-        startx.enable = true;
+        startx.enable = false;
       };
     };
   };
@@ -222,15 +236,15 @@ in
       fonts = [ fontComb ];
 
       extraEnv = ''
-        # export SDL_VIDEODRIVER=wayland
+        export SDL_VIDEODRIVER=wayland
         # needs qt5.qtwayland in systemPackages
         export QT_QPA_PLATFORM=wayland
-        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+        #export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
         # Fix for some Java AWT applications (e.g. Android Studio),
         # use this if they aren't displayed properly:
         export _JAVA_AWT_WM_NONREPARENTING=1
-        export QT_QPA_PLATFORMTHEME=qt5ct
-        export QT_PLATFORM_PLUGIN=qt5ct
+        #export QT_QPA_PLATFORMTHEME=qt5ct
+        #export QT_PLATFORM_PLUGIN=qt5ct
       '';
     in
     {
@@ -273,12 +287,7 @@ in
             dejavu_fonts
             (nerdfonts.override { fonts = [ "Iosevka" ]; })
             # Programs
-            # discord-canary-system
-            # element-desktop
-            # gh
-            openbox
-            openbox-menu
-            sublime4
+            discord-canary-system
             vulkan-tools
             audacity
             krita
@@ -286,12 +295,10 @@ in
             kdenlive
             gnome3.seahorse
             gnome3.gnome-boxes
-            #wine-staging
             cachix
             appimage-run
             bitwarden
             pfetch
-            neofetch
             gnupg
             imv
             mpv
@@ -308,13 +315,8 @@ in
             xdg_utils
             tagref
             libreoffice-fresh
-            mako
             hydrus
-            musikcube
-            qt5ct
-            phantomstyle
             papirus-icon-theme
-            pcmanfm-qt
             wl-clipboard
             rust-analyzer
             (lib.hiPrio (steam.override {
@@ -331,7 +333,7 @@ in
 
       wayland.windowManager = {
         sway = {
-          enable = true;
+          enable = false;
           extraSessionCommands = extraEnv;
           wrapperFeatures.gtk = true;
           extraConfig = ''
@@ -443,7 +445,7 @@ in
         };
         chromium = {
           enable = true;
-          package = pkgs.chromiumWayland;
+          package = pkgs.chromium;
           extensions = [
             "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
             "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock
@@ -538,12 +540,12 @@ in
           dotDir = ".config/zsh";
           history.path = ".local/share/zsh/history";
           envExtra = extraEnv;
-          loginExtra =
+          /*loginExtra =
             ''
-              if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
-                  exec sway
-              fi
-            '';
+            if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
+            exec sway
+            fi
+            '';*/
           initExtra = ''
             export TERM=alacritty
 
@@ -575,7 +577,7 @@ in
             acc = "#${acColor}";
           in
           {
-            enable = true;
+            enable = false;
             cycle = true;
             font = fontComb;
             terminal = pkgBin "alacritty";

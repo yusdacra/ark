@@ -1,17 +1,16 @@
 final: prev: rec {
   discord-canary-system = prev.callPackage mkDiscord (rec {
     pname = "discord-canary";
-    version = "0.0.126";
+    version = "0.0.131";
     binaryName = "DiscordCanary";
     desktopName = "Discord Canary";
     src = prev.fetchurl {
       url = "https://dl-canary.discordapp.net/apps/linux/${version}/discord-canary-${version}.tar.gz";
-      sha256 = "sha256-EraTDRKd6t0c9U68tSRdGkeB1hfqNS4KUewEXwkL8io=";
+      sha256 = "sha256-ZYPdE02Jq79LmvXu7KIJFugJX++Nnj0Og/mBuaP/+SA=";
     };
     isWayland = true;
-    enableVulkan = true;
+    enableVulkan = false;
     extraOptions = [
-      "--enable-vulkan"
       "--ignore-gpu-blocklist"
       "--enable-gpu-rasterization"
       "--enable-zero-copy"
@@ -74,6 +73,7 @@ final: prev: rec {
     , vulkan-loader
     , vulkan-extension-layer
     , libGL
+    , pipewire
     }:
     stdenv.mkDerivation rec {
       inherit pname version src;
@@ -138,6 +138,7 @@ final: prev: rec {
         vulkan-loader
         vulkan-extension-layer
         libGL
+        pipewire
       ];
 
       flags = (lib.optionals isWayland [

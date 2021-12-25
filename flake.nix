@@ -29,7 +29,7 @@
         type = "git";
         submodules = true;
         inputs.nixpkgs.follows = "nixos";
-      };*/
+        };*/
       nixosPersistence.url = "github:nix-community/impermanence";
       nixpkgsWayland = {
         url = "github:colemickens/nixpkgs-wayland";
@@ -46,7 +46,7 @@
     , nixosPersistence
     , nixpkgsWayland
     , rnixLsp
-    #, helix
+      #, helix
     , ...
     } @ inputs:
     digga.lib.mkFlake
