@@ -287,7 +287,7 @@ in
             dejavu_fonts
             (nerdfonts.override { fonts = [ "Iosevka" ]; })
             # Programs
-            discord-canary-system
+            #discord-canary-system
             vulkan-tools
             audacity
             krita
@@ -548,6 +548,7 @@ in
             '';*/
           initExtra = ''
             export TERM=alacritty
+            export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
             function tomp4 () {
               ${pkgs.ffmpeg}/bin/ffmpeg -i $1 -c:v libx264 -preset slow -crf 30 -c:a aac -b:a 128k "$1.mp4"
