@@ -691,6 +691,11 @@ in {
             grabKeyboardAndMouse = false;
             pinentryFlavor = "qt";
           };
+        gammastep = {
+          enable = true;
+          latitude = 36.9;
+          longitude = 30.7;
+        };
       };
       xdg = {
         enable = true;
