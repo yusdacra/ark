@@ -1,5 +1,4 @@
-_: prev:
-let
+_: prev: let
   cliArgs =
     let
       flags = [
@@ -16,10 +15,5 @@ let
         "--process-per-site"
       ];
     in
-    prev.lib.concatStringsSep " " flags;
-in
-{
-  chromium = prev.chromium.override {
-    commandLineArgs = cliArgs;
-  };
-}
+      prev.lib.concatStringsSep " " flags;
+in { chromium = prev.chromium.override { commandLineArgs = cliArgs; }; }

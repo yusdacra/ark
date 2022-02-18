@@ -1,6 +1,7 @@
-{ ... }: {
+{ ... }:
+{
   services.nextdns = {
     enable = true;
-    arguments = [ "-config" "75e43d" ];
+    arguments = ["-config" "75e43d"];
   };
 }

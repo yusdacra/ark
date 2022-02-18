@@ -1,4 +1,7 @@
-{ profiles, ... }:
+{
+  profiles,
+  ...
+}:
 {
   # build with: `bud build bootstrap bootstrapIso`
   # reachable on the local link via ssh root@fe80::47%eno1
@@ -7,12 +10,11 @@
   imports = [
     # profiles.networking
     profiles.core
-    profiles.users.root # make sure to configure ssh keys
+    profiles.users.root
+    # make sure to configure ssh keys
     profiles.users.nixos
   ];
-
   boot.loader.systemd-boot.enable = true;
-
   # will be overridden by the bootstrapIso instrumentation
   fileSystems."/" = { device = "/dev/disk/by-label/nixos"; };
 }

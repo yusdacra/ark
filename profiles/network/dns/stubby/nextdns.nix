@@ -2,9 +2,9 @@
   services.stubby = {
     roundRobinUpstreams = false;
     upstreamServers =
-      let nextDnsId = "75e43d";
-      in
-      ''
+      let
+        nextDnsId = "75e43d";
+      in ''
         - address_data: 45.90.28.0
           tls_auth_name: "${nextDnsId}.dns1.nextdns.io"
         - address_data: 2a07:a8c0::0

@@ -1,36 +1,40 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   inherit (lib) mapAttrs' nameValuePair;
   inherit (builtins) readDir fetchGit;
   pkgBin = lib.our.pkgBinNoDep pkgs;
-
   nixosConfig = config;
-in
-{
+in {
   users.users.patriot = {
     isNormalUser = true;
     createHome = true;
     home = "/home/patriot";
-    extraGroups = [ "wheel" "adbusers" "dialout" /* "wireshark" */ ];
+    extraGroups = [
+      "wheel"
+      "adbusers"
+      "dialout"
+      /*
+       "wireshark"
+       */
+    ];
     shell = pkgs.zsh;
     hashedPassword =
       "$6$spzqhAyJfhHy$iHgLBlhjGn1l8PnbjJdWTn1GPvcjMqYNKUzdCe/7IrX6sHNgETSr/Nfpdmq9FCXLhrAfwHOd/q/8SvfeIeNX4/";
   };
-
   environment = {
-    systemPackages = [ pkgs.qt5.qtwayland ];
-    shells = with pkgs; [ bashInteractive zsh ];
+    systemPackages = [pkgs.qt5.qtwayland];
+    shells = with pkgs; [bashInteractive zsh];
   };
-
   xdg.portal = {
     enable = true;
     gtkUsePortal = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal
-      xdg-desktop-portal-wlr
-    ];
+    extraPortals = with pkgs; [xdg-desktop-portal xdg-desktop-portal-wlr];
   };
-
   programs = {
     adb.enable = true;
     steam.enable = true;
@@ -40,7 +44,6 @@ in
     };
     wireshark.enable = false;
   };
-
   security = {
     pam.services.patriot = {
       enableGnomeKeyring = true;
@@ -48,11 +51,13 @@ in
     };
     sudo.extraRules = [
       {
-        users = [ "patriot" ];
-        commands = [{
-          command = "${pkgs.profile-sync-daemon}/bin/psd-overlay-helper";
-          options = [ "SETENV" "NOPASSWD" ];
-        }];
+        users = ["patriot"];
+        commands = [
+          {
+            command = "${pkgs.profile-sync-daemon}/bin/psd-overlay-helper";
+            options = ["SETENV" "NOPASSWD"];
+          }
+        ];
       }
     ];
   };
@@ -86,32 +91,29 @@ in
       };
     };
   };
-
-  systemd.user.services.gnome-session-restart-dbus.serviceConfig = {
-    Slice = "-.slice";
-  };
+  systemd.user.services.gnome-session-restart-dbus.serviceConfig = { Slice = "-.slice"; };
   systemd = {
-    targets = {
-      network-online.enable = false;
-    };
+    targets = { network-online.enable = false; };
     services = {
       systemd-networkd-wait-online.enable = false;
       NetworkManager-wait-online.enable = false;
     };
   };
-
   home-manager.users.patriot =
-    { config, pkgs, suites, ... }:
+    {
+      config,
+      pkgs,
+      suites,
+      ...
+    }:
     let
       personal = import ../../personal.nix;
       name = personal.name;
       email = personal.emails.primary;
-
-      font = "Iosevka Term";
-      fontSize = 12;
+      font = "Monoid";
+      fontSize = 10;
       fontComb = "${font} ${toString fontSize}";
-      fontPackage = pkgs.iosevka;
-
+      fontPackage = pkgs.monoid;
       colorSchemeLight = {
         primary = {
           normal = {
@@ -146,7 +148,6 @@ in
           white = "3a4d53";
         };
       };
-
       colorSchemeDark =
         let
           normal = {
@@ -171,10 +172,8 @@ in
             cyan = "56d8c9";
             white = "dedede";
           };
-        in
-        {
+        in {
           inherit normal bright;
-
           primary = {
             normal = {
               background = "181818";
@@ -186,16 +185,13 @@ in
             };
           };
         };
-
       colorScheme =
         # if builtins.pathExists ./light then colorSchemeLight else colorSchemeDark;
         colorSchemeDark;
-
       bgColor = colorScheme.primary.normal.background;
       fgColor = colorScheme.primary.bright.foreground;
       acColor = colorScheme.normal.yellow;
       acColor2 = colorScheme.normal.magenta;
-
       alacrittyColors = {
         primary = {
           background = "0x${bgColor}";
@@ -204,7 +200,6 @@ in
         normal = lib.mapAttrs (_: v: "0x${v}") colorScheme.normal;
         bright = lib.mapAttrs (_: v: "0x${v}") colorScheme.bright;
       };
-
       # sway attrs reused
       focusedWorkspace = {
         background = "#${bgColor}";
@@ -226,78 +221,73 @@ in
         border = "#${acColor2}";
         text = "#${acColor2}";
       };
-      addIndSway = x: {
-        background = x.background;
-        border = x.border;
-        childBorder = x.border;
-        text = x.text;
-        indicator = "#111111"; # don't care
-      };
-      fonts = [ fontComb ];
-
-      extraEnv = ''
-        export SDL_VIDEODRIVER=wayland
-        # needs qt5.qtwayland in systemPackages
-        export QT_QPA_PLATFORM=wayland
-        #export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-        # Fix for some Java AWT applications (e.g. Android Studio),
-        # use this if they aren't displayed properly:
-        export _JAVA_AWT_WM_NONREPARENTING=1
-        #export QT_QPA_PLATFORMTHEME=qt5ct
-        #export QT_PLATFORM_PLUGIN=qt5ct
-      '';
-    in
-    {
+      addIndSway =
+        x: {
+          background = x.background;
+          border = x.border;
+          childBorder = x.border;
+          text = x.text;
+          indicator = "#111111";
+          # don't care
+        };
+      fonts = [fontComb];
+      extraEnv =
+        ''
+          export SDL_VIDEODRIVER=wayland
+          # needs qt5.qtwayland in systemPackages
+          export QT_QPA_PLATFORM=wayland
+          #export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+          # Fix for some Java AWT applications (e.g. Android Studio),
+          # use this if they aren't displayed properly:
+          export _JAVA_AWT_WM_NONREPARENTING=1
+          #export QT_QPA_PLATFORMTHEME=qt5ct
+          #export QT_PLATFORM_PLUGIN=qt5ct
+        '';
+    in {
       imports = suites.base;
-
       # needs to be fixed to use nix profile???
-      /*gtk = {
-        enable = false;
-        font = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Sans 12";
-        };
-        iconTheme = {
-        package = pkgs.papirus-icon-theme;
-        name = "Papirus Dark";
-        };
-        theme = {
-        package = pkgs.numix-gtk-theme;
-        name = "Numix Dark";
-        };
-        };
-
-        qt = {
-        enable = false;
-        style = {
-        package = pkgs.adwaita-qt;
-        name = "adwaita-dark";
-        };
-        };*/
-
+      /*
+       gtk = {
+       enable = false;
+       font = {
+       package = pkgs.dejavu_fonts;
+       name = "DejaVu Sans 12";
+       };
+       iconTheme = {
+       package = pkgs.papirus-icon-theme;
+       name = "Papirus Dark";
+       };
+       theme = {
+       package = pkgs.numix-gtk-theme;
+       name = "Numix Dark";
+       };
+       };
+       
+       qt = {
+       enable = false;
+       style = {
+       package = pkgs.adwaita-qt;
+       name = "adwaita-dark";
+       };
+       };
+       */
       fonts.fontconfig.enable = true;
       home = {
         homeDirectory = nixosConfig.users.users.patriot.home;
-        packages = with pkgs;
-          [
+        packages =
+          with pkgs; [
             # Font stuff
             fontPackage
             noto-fonts-cjk
             font-awesome
             dejavu_fonts
-            (nerdfonts.override { fonts = [ "Iosevka" ]; })
+            (nerdfonts.override { fonts = ["Monoid"]; })
             # Programs
-            #discord-canary-system
             vulkan-tools
-            audacity
             krita
-            gimp
-            kdenlive
             gnome3.seahorse
-            gnome3.gnome-boxes
             cachix
             appimage-run
-            bitwarden
             pfetch
             gnupg
             imv
@@ -306,47 +296,63 @@ in
             ffmpeg
             mupdf
             transmission-qt
-            (lib.hiPrio (lutris.overrideAttrs (old: {
-              profile = ''
-                ${old.profile or ""}
-                unset VK_ICD_FILENAMES
-                export VK_ICD_FILENAMES=${nixosConfig.environment.variables.VK_ICD_FILENAMES}'';
-            })))
+            (
+              lib.hiPrio
+              (
+                lutris.overrideAttrs
+                (
+                  old: {
+                    profile =
+                      ''
+                        ${old.profile or ""}
+                        unset VK_ICD_FILENAMES
+                        export VK_ICD_FILENAMES=${nixosConfig.environment.variables.VK_ICD_FILENAMES}'';
+                  }
+                )
+              )
+            )
             xdg_utils
             tagref
-            libreoffice-fresh
             hydrus
             papirus-icon-theme
             wl-clipboard
             rust-analyzer
-            (lib.hiPrio (steam.override {
-              extraLibraries = pkgs: [ pkgs.pipewire ];
-              extraProfile = ''
-                unset VK_ICD_FILENAMES
-                export VK_ICD_FILENAMES=${nixosConfig.environment.variables.VK_ICD_FILENAMES}'';
-            }))
-            /*(multimc.overrideAttrs (old: {
-              src = builtins.fetchGit { url = "https://github.com/AfoninZ/MultiMC5-Cracked.git"; ref = "develop"; rev = "9069e9c9d0b7951c310fdcc8bdc70ebc422a7634"; submodules = true; };
-              }))*/
+            (
+              lib.hiPrio
+              (
+                steam.override
+                {
+                  extraLibraries = pkgs: [pkgs.pipewire];
+                  extraProfile =
+                    ''
+                      unset VK_ICD_FILENAMES
+                      export VK_ICD_FILENAMES=${nixosConfig.environment.variables.VK_ICD_FILENAMES}'';
+                }
+              )
+            )
+            /*
+             (multimc.overrideAttrs (old: {
+             src = builtins.fetchGit { url = "https://github.com/AfoninZ/MultiMC5-Cracked.git"; ref = "develop"; rev = "9069e9c9d0b7951c310fdcc8bdc70ebc422a7634"; submodules = true; };
+             }))
+             */
+            standardnotes
           ];
       };
-
       wayland.windowManager = {
         sway = {
           enable = false;
           extraSessionCommands = extraEnv;
           wrapperFeatures.gtk = true;
-          extraConfig = ''
-            exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-          '';
+          extraConfig =
+            ''
+              exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+            '';
           config = {
             fonts = {
-              names = [ font ];
+              names = [font];
               size = fontSize + 0.0;
             };
-            bars = [{
-              command = "${pkgBin "waybar"}";
-            }];
+            bars = [{ command = "${pkgBin "waybar"}"; }];
             colors = {
               background = "#${bgColor}";
               focused = addIndSway focusedWorkspace;
@@ -369,58 +375,54 @@ in
                 wf-recorder = pkgBin "wf-recorder";
                 wl-copy = pkgs.wl-clipboard + "/bin/wl-copy";
                 wl-paste = pkgs.wl-clipboard + "/bin/wl-paste";
-                shotFile = config.home.homeDirectory
-                  + "/shots/shot_$(date '+%Y_%m_%d_%H_%M')";
+                shotFile = config.home.homeDirectory + "/shots/shot_$(date '+%Y_%m_%d_%H_%M')";
               in
-              lib.mkOptionDefault {
-                "${mod}+q" = "kill";
-                "${mod}+Shift+e" = "exit";
-                "${mod}+Shift+r" = "reload";
-                # Screenshot and copy it to clipboard
-                "Mod1+s" = ''
-                  exec export SFILE="${shotFile}.png" && ${grim} "$SFILE" && ${cat} "$SFILE" | ${wl-copy} -t image/png
-                '';
-                # Save selected area as a picture and copy it to clipboard
-                "Mod1+Shift+s" = ''
-                  exec export SFILE="${shotFile}.png" && ${grim} -g "$(${slurp})" "$SFILE" && ${cat} "$SFILE" | ${wl-copy} -t image/png
-                '';
-                # Record screen
-                "Mod1+r" = ''exec ${wf-recorder} -f "${shotFile}.mp4"'';
-                # Record an area
-                "Mod1+Shift+r" =
-                  ''exec ${wf-recorder} -g "$(${slurp})" -f "${shotFile}.mp4"'';
-                # Stop recording
-                "Mod1+c" = "exec pkill -INT wf-recorder";
-                "XF86AudioRaiseVolume" = "exec ${pactl} set-sink-volume 0 +5%";
-                "XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume 0 -5%";
-                "XF86AudioMute" = "exec ${pactl} set-sink-mute 0 toggle";
-                "XF86AudioPlay" = "exec ${playerctl} play-pause";
-                "XF86AudioPrev" = "exec ${playerctl} previous";
-                "XF86AudioNext" = "exec ${playerctl} next";
-                "XF86AudioStop" = "exec ${playerctl} stop";
-              };
+                lib.mkOptionDefault
+                {
+                  "${mod}+q" = "kill";
+                  "${mod}+Shift+e" = "exit";
+                  "${mod}+Shift+r" = "reload";
+                  # Screenshot and copy it to clipboard
+                  "Mod1+s" =
+                    ''
+                      exec export SFILE="${shotFile}.png" && ${grim} "$SFILE" && ${cat} "$SFILE" | ${wl-copy} -t image/png
+                    '';
+                  # Save selected area as a picture and copy it to clipboard
+                  "Mod1+Shift+s" =
+                    ''
+                      exec export SFILE="${shotFile}.png" && ${grim} -g "$(${slurp})" "$SFILE" && ${cat} "$SFILE" | ${wl-copy} -t image/png
+                    '';
+                  # Record screen
+                  "Mod1+r" = ''exec ${wf-recorder} -f "${shotFile}.mp4"'';
+                  # Record an area
+                  "Mod1+Shift+r" = ''exec ${wf-recorder} -g "$(${slurp})" -f "${shotFile}.mp4"'';
+                  # Stop recording
+                  "Mod1+c" = "exec pkill -INT wf-recorder";
+                  "XF86AudioRaiseVolume" = "exec ${pactl} set-sink-volume 0 +5%";
+                  "XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume 0 -5%";
+                  "XF86AudioMute" = "exec ${pactl} set-sink-mute 0 toggle";
+                  "XF86AudioPlay" = "exec ${playerctl} play-pause";
+                  "XF86AudioPrev" = "exec ${playerctl} previous";
+                  "XF86AudioNext" = "exec ${playerctl} next";
+                  "XF86AudioStop" = "exec ${playerctl} stop";
+                };
             input = {
               "*" = {
                 xkb_layout = nixosConfig.services.xserver.layout;
                 accel_profile = "flat";
               };
             };
-            output = {
-              "*" = {
-                bg = config.home.homeDirectory + "/wallpaper.png" + " fill";
-              };
-            };
+            output = { "*" = { bg = config.home.homeDirectory + "/wallpaper.png" + " fill"; }; };
           };
         };
       };
-
       programs = {
         alacritty = {
           enable = true;
           settings = {
             shell = {
               program = "${pkgs.tmux}/bin/tmux";
-              args = [ "attach" ];
+              args = ["attach"];
             };
             font = {
               normal = { family = font; };
@@ -437,24 +439,33 @@ in
           escapeTime = 0;
           keyMode = "vi";
           shortcut = "a";
-          extraConfig = ''
-            set -g default-terminal "alacritty"
-            set -ga terminal-overrides ",alacritty:Tc"
-            set -g status off
-          '';
+          extraConfig =
+            ''
+              set -g default-terminal "alacritty"
+              set -ga terminal-overrides ",alacritty:Tc"
+              set -g status off
+            '';
         };
         chromium = {
           enable = true;
           package = pkgs.chromium;
           extensions = [
-            "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
-            "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock
-            "nngceckbapebfimnlniiiahkandclblb" # bitwarden
-            "ldpochfccmkkmhdbclfhpagapcfdljkj" # decentraleyes
-            "annfbnbieaamhaimclajlajpijgkdblo" # dark theme
-            "eimadpbcbfnmbkopoojfekhnkhdbieeh" # dark reader
-            "hlepfoohegkhhmjieoechaddaejaokhf" # github refined
-            "pmcmeagblkinmogikoikkdjiligflglb" # privacy redirect
+            "gcbommkclmclpchllfjekcdonpmejbdp"
+            # https everywhere
+            "cjpalhdlnbpafiamejdnhcphjbkeiagm"
+            # ublock
+            "nngceckbapebfimnlniiiahkandclblb"
+            # bitwarden
+            "ldpochfccmkkmhdbclfhpagapcfdljkj"
+            # decentraleyes
+            "annfbnbieaamhaimclajlajpijgkdblo"
+            # dark theme
+            "eimadpbcbfnmbkopoojfekhnkhdbieeh"
+            # dark reader
+            "hlepfoohegkhhmjieoechaddaejaokhf"
+            # github refined
+            "pmcmeagblkinmogikoikkdjiligflglb"
+            # privacy redirect
           ];
         };
         qutebrowser = {
@@ -480,11 +491,11 @@ in
                 "youtube.com"
                 "docker.com"
               ];
-              enableJsForDomain = d: ''
-                config.set('content.javascript.enabled', True, 'https://*.${d}')
-              '';
-            in
-            ''
+              enableJsForDomain =
+                d: ''
+                  config.set('content.javascript.enabled', True, 'https://*.${d}')
+                '';
+            in ''
               ${lib.concatStrings (map enableJsForDomain domains)}
             '';
         };
@@ -520,55 +531,63 @@ in
           plugins =
             let
               fast-syntax-highlighting =
-                let name = "fast-syntax-highlighting"; in
-                {
+                let
+                  name = "fast-syntax-highlighting";
+                in {
                   inherit name;
                   src = pkgs."zsh-${name}".out;
                 };
               per-directory-history = {
                 name = "per-directory-history";
-                src = pkgs.fetchFromGitHub {
-                  owner = "jimhester";
-                  repo = "per-directory-history";
-                  rev = "d2e291dd6434e340d9be0e15e1f5b94f32771c06";
-                  hash = "sha256-VHRgrVCqzILqOes8VXGjSgLek38BFs9eijmp0JHtD5Q=";
-                };
+                src =
+                  pkgs.fetchFromGitHub
+                  {
+                    owner = "jimhester";
+                    repo = "per-directory-history";
+                    rev = "d2e291dd6434e340d9be0e15e1f5b94f32771c06";
+                    hash = "sha256-VHRgrVCqzILqOes8VXGjSgLek38BFs9eijmp0JHtD5Q=";
+                  };
               };
-            in
-            [ fast-syntax-highlighting per-directory-history ];
+            in [fast-syntax-highlighting per-directory-history];
           # xdg compliant
           dotDir = ".config/zsh";
           history.path = ".local/share/zsh/history";
           envExtra = extraEnv;
-          /*loginExtra =
+          /*
+           loginExtra =
+           ''
+           if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
+           exec sway
+           fi
+           '';
+           */
+          initExtra =
             ''
-            if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
-            exec sway
-            fi
-            '';*/
-          initExtra = ''
-            export TERM=alacritty
-            export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+              export TERM=alacritty
+              export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
-            function tomp4 () {
-              ${pkgs.ffmpeg}/bin/ffmpeg -i $1 -c:v libx264 -preset slow -crf 30 -c:a aac -b:a 128k "$1.mp4"
-            }
+              function tomp4 () {
+                ${pkgs.ffmpeg}/bin/ffmpeg -i $1 -c:v libx264 -preset slow -crf 30 -c:a aac -b:a 128k "$1.mp4"
+              }
 
-            function topng () {
-              ${pkgs.ffmpeg}/bin/ffmpeg -i $1 "$1.png"
-            }
+              function topng () {
+                ${pkgs.ffmpeg}/bin/ffmpeg -i $1 "$1.png"
+              }
 
-            bindkey "$terminfo[kRIT5]" forward-word
-            bindkey "$terminfo[kLFT5]" backward-word
-            zstyle ':completion:*' menu select
+              bindkey "$terminfo[kRIT5]" forward-word
+              bindkey "$terminfo[kLFT5]" backward-word
+              zstyle ':completion:*' menu select
 
-            eval "$(zoxide init zsh)"
-          '';
-          shellAliases = nixosConfig.environment.shellAliases // {
-            harmony-ssh = ''
-              ${pkgs.mosh}/bin/mosh root@chat.harmonyapp.io
+              eval "$(zoxide init zsh)"
             '';
-          };
+          shellAliases =
+            nixosConfig.environment.shellAliases
+            // {
+              harmony-ssh =
+                ''
+                  ${pkgs.mosh}/bin/mosh root@chat.harmonyapp.io
+                '';
+            };
         };
         fzf.enable = true;
         rofi =
@@ -576,8 +595,7 @@ in
             bgc = "#${bgColor}";
             fgc = "#${fgColor}";
             acc = "#${acColor}";
-          in
-          {
+          in {
             enable = false;
             cycle = true;
             font = fontComb;
@@ -588,39 +606,68 @@ in
           package = pkgs.vscodeWayland;
           extensions =
             let
-              mkExt = n: v: p: s: { name = n; version = v; publisher = p; sha256 = s; };
+              mkExt =
+                n: v: p: s: {
+                  name = n;
+                  version = v;
+                  publisher = p;
+                  sha256 = s;
+                };
             in
-            (pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-              # Rust
-              (mkExt "rust-analyzer" "0.2.760" "matklad" "sha256-M+eFqIFwiKkiwqFRwkX5h6mc/W+NBqkXcNUdTewwkCI=")
-              (mkExt "even-better-toml" "0.14.2" "tamasfe" "sha256-lE2t+KUfClD/xjpvexTJlEr7Kufo+22DUM9Ju4Tisp0=")
-              (mkExt "crates" "0.5.9" "serayuzgur" "sha256-YHIbnl2R7lqwJHi8qUQImClx9MWm+5Pc12vYw7e/RlA=")
-              # Nix
-              (mkExt "nix-env-selector" "1.0.7" "arrterian" "sha256-DnaIXJ27bcpOrIp1hm7DcrlIzGSjo4RTJ9fD72ukKlc=")
-              # Go
-              (mkExt "Go" "0.25.1" "golang" "sha256-ZDUWN9lzDnR77W7xcMFQaaFl/6Lf/x1jgaBkwZPqGGw=")
-              # Flutter and dart
-              (mkExt "flutter" "3.22.0" "Dart-Code" "sha256-woygN6hOWlP2UayqwDhJh9KcZk1GzH7mDF5IueDRxs4=")
-              (mkExt "dart-code" "3.22.0" "Dart-Code" "sha256-1nTewVmlrxbXdRR1EPts46u24LHdnP5BblFsMaGlNYg=")
-              # protobuf
-              (mkExt "vscode-proto3" "0.5.4" "zxh404" "sha256-S89qRRlfiTsJ+fJuwdNkZywe6mei48KxIEWbGWChriE=")
-              (mkExt "vscode-buf" "0.3.1" "bufbuild" "sha256-KjU6WlDxYPPJjh45mCq6Kczi6odYwnLaGj4RHe3fc2w=")
-              # git
-              (mkExt "gitlens" "11.6.0" "eamodio" "sha256-JxCNE/IL/v94xWmhebsRZo1Gw+nSSpDgZ41ZGongGVI=")
-              (mkExt "vscode-commitizen" "0.14.1" "KnisterPeter" "sha256-yw8XKGL7Ul9wV+C0yL1LFJCE3+E8u/sR9s3TjkGJPZM=")
-              # Customization
-              # (mkExt "dance" "0.3.2" "gregoire" "sha256-+g8EXeCkPOPvZ60JoXkGTeSXYWrXmKrcbUaEfDppdgA=")
-              (mkExt "material-icon-theme" "4.6.0" "PKief" "sha256-i+3lrw3mDqK2vTMDhJYTACW5JleA+lN1XAC2imgQLUo=")
-              (mkExt "github-vscode-theme" "4.1.1" "GitHub" "sha256-yLySHOx6pe7w2cyi95pQlKkn/o4VMCTkrTYHu8ASn5M=")
-              (mkExt "koka" "0.0.1" "maelvalais" "sha256-ty8Mql19HgUWForggeZuHQpzTbmmB/eBFHqof5ZMKr0=")
-              (mkExt "vscode-rhai" "0.6.3" "rhaiscript" "sha256-gEdpM/TkkiZ50bG9qDU6BH04AJLRDcHLquniRs6m0mg=")
-              (mkExt "copilot" "1.2.1991" "GitHub" "sha256-pGb5xfjuy+g646doZEuKhQalkOte5dH+I+1op+vZY48=")
-            ]) ++ (with pkgs.vscode-extensions; [ a5huynh.vscode-ron /* vadimcn.vscode-lldb */ jnoortheen.nix-ide ]);
+              (
+                pkgs.vscode-utils.extensionsFromVscodeMarketplace
+                [
+                  # Rust
+                  (mkExt "rust-analyzer" "0.2.760" "matklad" "sha256-M+eFqIFwiKkiwqFRwkX5h6mc/W+NBqkXcNUdTewwkCI=")
+                  (mkExt "even-better-toml" "0.14.2" "tamasfe" "sha256-lE2t+KUfClD/xjpvexTJlEr7Kufo+22DUM9Ju4Tisp0=")
+                  (mkExt "crates" "0.5.9" "serayuzgur" "sha256-YHIbnl2R7lqwJHi8qUQImClx9MWm+5Pc12vYw7e/RlA=")
+                  # Nix
+                  (
+                    mkExt "nix-env-selector" "1.0.7" "arrterian" "sha256-DnaIXJ27bcpOrIp1hm7DcrlIzGSjo4RTJ9fD72ukKlc="
+                  )
+                  # Go
+                  (mkExt "Go" "0.25.1" "golang" "sha256-ZDUWN9lzDnR77W7xcMFQaaFl/6Lf/x1jgaBkwZPqGGw=")
+                  # Flutter and dart
+                  (mkExt "flutter" "3.22.0" "Dart-Code" "sha256-woygN6hOWlP2UayqwDhJh9KcZk1GzH7mDF5IueDRxs4=")
+                  (mkExt "dart-code" "3.22.0" "Dart-Code" "sha256-1nTewVmlrxbXdRR1EPts46u24LHdnP5BblFsMaGlNYg=")
+                  # protobuf
+                  (mkExt "vscode-proto3" "0.5.4" "zxh404" "sha256-S89qRRlfiTsJ+fJuwdNkZywe6mei48KxIEWbGWChriE=")
+                  (mkExt "vscode-buf" "0.3.1" "bufbuild" "sha256-KjU6WlDxYPPJjh45mCq6Kczi6odYwnLaGj4RHe3fc2w=")
+                  # git
+                  (mkExt "gitlens" "11.6.0" "eamodio" "sha256-JxCNE/IL/v94xWmhebsRZo1Gw+nSSpDgZ41ZGongGVI=")
+                  (
+                    mkExt
+                    "vscode-commitizen"
+                    "0.14.1"
+                    "KnisterPeter"
+                    "sha256-yw8XKGL7Ul9wV+C0yL1LFJCE3+E8u/sR9s3TjkGJPZM="
+                  )
+                  # Customization
+                  # (mkExt "dance" "0.3.2" "gregoire" "sha256-+g8EXeCkPOPvZ60JoXkGTeSXYWrXmKrcbUaEfDppdgA=")
+                  (mkExt "material-icon-theme" "4.6.0" "PKief" "sha256-i+3lrw3mDqK2vTMDhJYTACW5JleA+lN1XAC2imgQLUo=")
+                  (
+                    mkExt "github-vscode-theme" "4.1.1" "GitHub" "sha256-yLySHOx6pe7w2cyi95pQlKkn/o4VMCTkrTYHu8ASn5M="
+                  )
+                  (mkExt "koka" "0.0.1" "maelvalais" "sha256-ty8Mql19HgUWForggeZuHQpzTbmmB/eBFHqof5ZMKr0=")
+                  (mkExt "vscode-rhai" "0.6.3" "rhaiscript" "sha256-gEdpM/TkkiZ50bG9qDU6BH04AJLRDcHLquniRs6m0mg=")
+                  (mkExt "copilot" "1.2.1991" "GitHub" "sha256-pGb5xfjuy+g646doZEuKhQalkOte5dH+I+1op+vZY48=")
+                ]
+              )
+              ++ (
+                with pkgs.vscode-extensions; [
+                  a5huynh.vscode-ron
+                  /*
+                   vadimcn.vscode-lldb
+                   */
+                  jnoortheen.nix-ide
+                ]
+              );
           userSettings = {
             "workbench.iconTheme" = "material-icon-theme";
             "workbench.colorTheme" = "GitHub Dark";
             "rust-analyzer.cargo.loadOutDirsFromCheck" = true;
             "rust-analyzer.procMacro.enable" = true;
+            "rust-analyzer.server.path" = "${pkgs.rust-analyzer}/bin/rust-analyzer";
             "rust-analyzer.updates.channel" = "nightly";
             "editor.fontFamily" = "'${font}'";
             "debug.console.fontFamily" = "${font}";
@@ -634,117 +681,124 @@ in
           };
         };
       };
-
       services = {
         gpg-agent =
           let
             defaultCacheTtl = 3600 * 6;
             maxCacheTtl = 3600 * 24;
-          in
-          {
+          in {
             inherit defaultCacheTtl maxCacheTtl;
-
             enable = true;
             enableSshSupport = true;
-            sshKeys = [ "8369D9CA26C3EAAAB8302A88CEE6FD14B58AA965" ];
+            sshKeys = ["8369D9CA26C3EAAAB8302A88CEE6FD14B58AA965"];
             defaultCacheTtlSsh = defaultCacheTtl;
             maxCacheTtlSsh = maxCacheTtl;
             grabKeyboardAndMouse = false;
             pinentryFlavor = "qt";
           };
       };
-
       xdg = {
         enable = true;
         configFile = {
-          "helix/themes/mytheme.toml".text = ''
-            "attribute" = { fg = "#${colorScheme.bright.yellow}]" }
-            "comment" = { fg = "#${colorScheme.normal.gray}", modifiers = ['italic'] }
-            "constant" = { fg = "#${colorScheme.normal.blue}" }
-            "constant.builtin" = { fg = "#${colorScheme.bright.blue}" }
-            "constructor" = { fg = "#${colorScheme.bright.blue}" }
-            "escape" = { fg = "#${colorScheme.bright.yellow}" }
-            "function" = { fg = "#${colorScheme.bright.blue}" }
-            "function.builtin" = { fg = "#${colorScheme.bright.blue}" }
-            "function.macro" = { fg = "#${colorScheme.bright.magenta}" }
-            "keyword" = { fg = "#${colorScheme.normal.magenta}", modifiers = ['italic'] }
-            "keyword.directive" = { fg = "#${colorScheme.normal.magenta}" }
-            "label" = { fg = "#${colorScheme.bright.magenta}" }
-            "namespace" = { fg = "#${colorScheme.bright.blue}" }
-            "number" = { fg = "#${colorScheme.normal.cyan}" }
-            "operator" = { fg = "#${colorScheme.bright.magenta}", modifiers = ['italic'] }
-            "property" = { fg = "#${colorScheme.normal.red}" }
-            "special" = { fg = "#${colorScheme.bright.blue}" }
-            "string" = { fg = "#${colorScheme.normal.green}" }
-            "type" = { fg = "#${colorScheme.normal.cyan}", modifiers = ['bold'] }
-            "type.builtin" = { fg = "#${colorScheme.normal.cyan}", modifiers = ['bold'] }
-            "variable" = { fg = "#${colorScheme.bright.blue}", modifiers = ['italic'] }
-            "variable.builtin" = { fg = "#${colorScheme.bright.blue}", modifiers = ['italic'] }
-            "variable.parameter" = { fg = "#${colorScheme.bright.red}", modifiers = ['italic'] }
-            "ui.menu.selected" = { fg = "#${bgColor}", bg = "#${acColor}" }
-            "ui.background" = { fg = "#${fgColor}", bg = "#${bgColor}" }
-            "ui.help" = { bg = "#${colorScheme.normal.black}" }
-            "ui.linenr" = { fg = "#${colorScheme.primary.bright.background}", modifiers = ['bold'] }
-            "ui.linenr.selected" = { fg = "#${fgColor}", modifiers = ['bold'] }
-            "ui.popup" = { bg = "#${colorScheme.normal.black}" }
-            "ui.statusline" = { fg = "#${fgColor}", bg = "#${bgColor}" }
-            "ui.statusline.inactive" = { fg = "#${fgColor}", bg = "#${bgColor}" }
-            "ui.selection" = { bg = "#${colorScheme.primary.bright.background}" }
-            "ui.text" = { fg = "#${fgColor}", bg = "#${bgColor}" }
-            "ui.text.focus" = { fg = "#${fgColor}", bg = "#${bgColor}", modifiers = ['bold'] }
-            "ui.window" = { bg = "#${bgColor}" }
-            "ui.cursor.primary" = { fg = "#${fgColor}", modifiers = ["reversed"] }
+          "helix/themes/mytheme.toml".text =
+            ''
+              "attribute" = { fg = "#${colorScheme.bright.yellow}]" }
+              "comment" = { fg = "#${colorScheme.normal.gray}", modifiers = ['italic'] }
+              "constant" = { fg = "#${colorScheme.normal.blue}" }
+              "constant.builtin" = { fg = "#${colorScheme.bright.blue}" }
+              "constructor" = { fg = "#${colorScheme.bright.blue}" }
+              "escape" = { fg = "#${colorScheme.bright.yellow}" }
+              "function" = { fg = "#${colorScheme.bright.blue}" }
+              "function.builtin" = { fg = "#${colorScheme.bright.blue}" }
+              "function.macro" = { fg = "#${colorScheme.bright.magenta}" }
+              "keyword" = { fg = "#${colorScheme.normal.magenta}", modifiers = ['italic'] }
+              "keyword.directive" = { fg = "#${colorScheme.normal.magenta}" }
+              "label" = { fg = "#${colorScheme.bright.magenta}" }
+              "namespace" = { fg = "#${colorScheme.bright.blue}" }
+              "number" = { fg = "#${colorScheme.normal.cyan}" }
+              "operator" = { fg = "#${colorScheme.bright.magenta}", modifiers = ['italic'] }
+              "property" = { fg = "#${colorScheme.normal.red}" }
+              "special" = { fg = "#${colorScheme.bright.blue}" }
+              "string" = { fg = "#${colorScheme.normal.green}" }
+              "type" = { fg = "#${colorScheme.normal.cyan}", modifiers = ['bold'] }
+              "type.builtin" = { fg = "#${colorScheme.normal.cyan}", modifiers = ['bold'] }
+              "variable" = { fg = "#${colorScheme.bright.blue}", modifiers = ['italic'] }
+              "variable.builtin" = { fg = "#${colorScheme.bright.blue}", modifiers = ['italic'] }
+              "variable.parameter" = { fg = "#${colorScheme.bright.red}", modifiers = ['italic'] }
+              "ui.menu.selected" = { fg = "#${bgColor}", bg = "#${acColor}" }
+              "ui.background" = { fg = "#${fgColor}", bg = "#${bgColor}" }
+              "ui.help" = { bg = "#${colorScheme.normal.black}" }
+              "ui.linenr" = { fg = "#${colorScheme.primary.bright.background}", modifiers = ['bold'] }
+              "ui.linenr.selected" = { fg = "#${fgColor}", modifiers = ['bold'] }
+              "ui.popup" = { bg = "#${colorScheme.normal.black}" }
+              "ui.statusline" = { fg = "#${fgColor}", bg = "#${bgColor}" }
+              "ui.statusline.inactive" = { fg = "#${fgColor}", bg = "#${bgColor}" }
+              "ui.selection" = { bg = "#${colorScheme.primary.bright.background}" }
+              "ui.text" = { fg = "#${fgColor}", bg = "#${bgColor}" }
+              "ui.text.focus" = { fg = "#${fgColor}", bg = "#${bgColor}", modifiers = ['bold'] }
+              "ui.window" = { bg = "#${bgColor}" }
+              "ui.cursor.primary" = { fg = "#${fgColor}", modifiers = ["reversed"] }
 
-            "info" = { fg = "#${colorScheme.normal.blue}", modifiers = ['bold'] }
-            "hint" = { fg = "#${colorScheme.bright.green}", modifiers = ['bold'] }
-            "warning" = { fg = "#${colorScheme.normal.yellow}", modifiers = ['bold'] }
-            "error" = { fg = "#${colorScheme.bright.red}", modifiers = ['bold'] }
-          '';
-          "helix/config.toml".text = ''
-            theme = "mytheme"
-            [editor]
-            line-number = "relative"
-            [lsp]
-            display-messages = true
-          '';
-          "helix/languages.toml".text = ''
-            [[language]]
-            name = "nix"
-            language-server = { command = "${pkgBin "rnix-lsp"}" }
-          '';
+              "info" = { fg = "#${colorScheme.normal.blue}", modifiers = ['bold'] }
+              "hint" = { fg = "#${colorScheme.bright.green}", modifiers = ['bold'] }
+              "warning" = { fg = "#${colorScheme.normal.yellow}", modifiers = ['bold'] }
+              "error" = { fg = "#${colorScheme.bright.red}", modifiers = ['bold'] }
+            '';
+          "helix/config.toml".text =
+            ''
+              theme = "mytheme"
+              [editor]
+              line-number = "relative"
+              [lsp]
+              display-messages = true
+            '';
+          "helix/languages.toml".text =
+            ''
+              [[language]]
+              name = "nix"
+              language-server = { command = "${pkgBin "rnix-lsp"}" }
+            '';
           "waybar/config".text =
-            let swayEnabled = config.wayland.windowManager.sway.enable; in
-            builtins.toJSON {
-              layer = "top";
-              position = "top";
-              modules-left = if swayEnabled then [ "sway/workspaces" ] else [ ];
-              modules-center = if swayEnabled then [ "sway/window" ] else [ ];
-              modules-right =
-                [ "pulseaudio" "cpu" "memory" "temperature" "clock" "tray" ];
-              tray = { spacing = 8; };
-              cpu = { format = "/cpu {usage}/"; };
-              memory = { format = "/mem {}/"; };
-              temperature = {
-                hwmon-path = "/sys/class/hwmon/hwmon1/temp2_input";
-                format = "/tmp {temperatureC}C/";
+            let
+              swayEnabled = config.wayland.windowManager.sway.enable;
+            in
+              builtins.toJSON
+              {
+                layer = "top";
+                position = "top";
+                modules-left =
+                  if swayEnabled
+                  then ["sway/workspaces"]
+                  else [];
+                modules-center =
+                  if swayEnabled
+                  then ["sway/window"]
+                  else [];
+                modules-right = ["pulseaudio" "cpu" "memory" "temperature" "clock" "tray"];
+                tray = { spacing = 8; };
+                cpu = { format = "/cpu {usage}/"; };
+                memory = { format = "/mem {}/"; };
+                temperature = {
+                  hwmon-path = "/sys/class/hwmon/hwmon1/temp2_input";
+                  format = "/tmp {temperatureC}C/";
+                };
+                pulseaudio = {
+                  format = "/vol {volume}/ {format_source}";
+                  format-bluetooth = "/volb {volume}/ {format_source}";
+                  format-bluetooth-muted = "/volb/ {format_source}";
+                  format-muted = "/vol/ {format_source}";
+                  format-source = "/mic {volume}/";
+                  format-source-muted = "/mic/";
+                };
               };
-              pulseaudio = {
-                format = "/vol {volume}/ {format_source}";
-                format-bluetooth = "/volb {volume}/ {format_source}";
-                format-bluetooth-muted = "/volb/ {format_source}";
-                format-muted = "/vol/ {format_source}";
-                format-source = "/mic {volume}/";
-                format-source-muted = "/mic/";
-              };
-            };
           "waybar/style.css".text =
             let
               makeBorder = color: "border-bottom: 3px solid #${color};";
-              makeInfo = color: ''
-                color: #${color};
-                ${makeBorder color}
-              '';
-
+              makeInfo =
+                color: ''
+                  color: #${color};
+                  ${makeBorder color}
+                '';
               clockColor = colorScheme.bright.magenta;
               cpuColor = colorScheme.bright.green;
               memColor = colorScheme.bright.blue;
@@ -756,8 +810,7 @@ in
                 normal = colorScheme.bright.yellow;
                 critical = colorScheme.bright.red;
               };
-            in
-            ''
+            in ''
               * {
                   border: none;
                   border-radius: 0;

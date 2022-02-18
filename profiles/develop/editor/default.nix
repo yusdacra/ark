@@ -1,6 +1,9 @@
-{ pkgs, ... }: {
-  imports = [ ./helix.nix ];
-
-  environment.systemPackages = with pkgs; [ nixpkgs-fmt ];
-  environment.shellAliases = { nixf-all = "nixpkgs-fmt **/**.nix"; };
+{
+  pkgs,
+  ...
+}:
+{
+  imports = [./helix.nix];
+  environment.systemPackages = with pkgs; [alejandra];
+  environment.shellAliases = { nixf-all = "alejandra **/**.nix"; };
 }

@@ -1,6 +1,5 @@
 {
-  imports = [ ./nextdns.nix ];
-
+  imports = [./nextdns.nix];
   networking.networkmanager.dns = "none";
   services.stubby.enable = true;
 }
