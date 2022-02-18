@@ -18,9 +18,6 @@ in {
       "wheel"
       "adbusers"
       "dialout"
-      /*
-       "wireshark"
-       */
     ];
     shell = pkgs.zsh;
     hashedPassword =
@@ -73,7 +70,7 @@ in {
       enable = true;
       desktopManager = {
         plasma5.enable = false;
-        gnome.enable = true;
+        gnome.enable = false;
         xterm.enable = false;
       };
       displayManager = {
@@ -83,11 +80,11 @@ in {
         };
         lightdm.enable = false;
         gdm = {
-          enable = true;
+          enable = false;
           wayland = true;
         };
         sddm.enable = false;
-        startx.enable = false;
+        startx.enable = true;
       };
     };
   };
@@ -340,7 +337,7 @@ in {
       };
       wayland.windowManager = {
         sway = {
-          enable = false;
+          enable = true;
           extraSessionCommands = extraEnv;
           wrapperFeatures.gtk = true;
           extraConfig =
@@ -553,14 +550,12 @@ in {
           dotDir = ".config/zsh";
           history.path = ".local/share/zsh/history";
           envExtra = extraEnv;
-          /*
-           loginExtra =
-           ''
-           if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
-           exec sway
-           fi
-           '';
-           */
+          loginExtra =
+            ''
+              if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
+              exec sway
+              fi
+            '';
           initExtra =
             ''
               export TERM=alacritty
@@ -596,7 +591,7 @@ in {
             fgc = "#${fgColor}";
             acc = "#${acColor}";
           in {
-            enable = false;
+            enable = true;
             cycle = true;
             font = fontComb;
             terminal = pkgBin "alacritty";
