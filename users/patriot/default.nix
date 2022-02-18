@@ -110,8 +110,8 @@ in {
       personal = import ../../personal.nix;
       name = personal.name;
       email = personal.emails.primary;
-      font = "Monoid";
-      fontSize = 10;
+      font = "Monoid HalfTight";
+      fontSize = 11;
       fontComb = "${font} ${toString fontSize}";
       fontPackage = pkgs.monoid;
       colorSchemeLight = {
