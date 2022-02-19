@@ -358,7 +358,7 @@ in {
               urgent = addIndSway urgentWorkspace;
             };
             gaps.smartBorders = "on";
-            menu = "${pkgBin "rofi"} -show drun | ${pkgs.sway}/bin/swaymsg --";
+            menu = "${pkgs.rofi-wayland}/bin/rofi -show drun | ${pkgs.sway}/bin/swaymsg --";
             modifier = "Mod4";
             terminal = pkgBin "alacritty";
             keybindings =
@@ -592,6 +592,7 @@ in {
             acc = "#${acColor}";
           in {
             enable = true;
+            package = pkgs.rofi-wayland;
             cycle = true;
             font = fontComb;
             terminal = pkgBin "alacritty";
