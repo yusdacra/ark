@@ -336,82 +336,86 @@ in {
           ];
       };
       wayland.windowManager = {
-        sway = {
-          enable = true;
-          extraSessionCommands = extraEnv;
-          wrapperFeatures.gtk = true;
-          extraConfig =
-            ''
-              exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-            '';
-          config = {
-            fonts = {
-              names = [font];
-              size = fontSize + 0.0;
-            };
-            bars = [{ command = "${pkgBin "waybar"}"; }];
-            colors = {
-              background = "#${bgColor}";
-              focused = addIndSway focusedWorkspace;
-              focusedInactive = addIndSway inactiveWorkspace;
-              unfocused = addIndSway activeWorkspace;
-              urgent = addIndSway urgentWorkspace;
-            };
-            gaps.smartBorders = "on";
-            menu = "${pkgs.rofi-wayland}/bin/rofi -show drun | ${pkgs.sway}/bin/swaymsg --";
-            modifier = "Mod4";
-            terminal = pkgBin "alacritty";
-            keybindings =
-              let
-                mod = config.wayland.windowManager.sway.config.modifier;
-                cat = pkgs.coreutils + "/bin/cat";
-                grim = pkgBin "grim";
-                slurp = pkgBin "slurp";
-                pactl = pkgs.pulseaudio + "/bin/pactl";
-                playerctl = pkgBin "playerctl";
-                wf-recorder = pkgBin "wf-recorder";
-                wl-copy = pkgs.wl-clipboard + "/bin/wl-copy";
-                wl-paste = pkgs.wl-clipboard + "/bin/wl-paste";
-                shotFile = config.home.homeDirectory + "/shots/shot_$(date '+%Y_%m_%d_%H_%M')";
-              in
-                lib.mkOptionDefault
-                {
-                  "${mod}+q" = "kill";
-                  "${mod}+Shift+e" = "exit";
-                  "${mod}+Shift+r" = "reload";
-                  # Screenshot and copy it to clipboard
-                  "Mod1+s" =
-                    ''
-                      exec export SFILE="${shotFile}.png" && ${grim} "$SFILE" && ${cat} "$SFILE" | ${wl-copy} -t image/png
-                    '';
-                  # Save selected area as a picture and copy it to clipboard
-                  "Mod1+Shift+s" =
-                    ''
-                      exec export SFILE="${shotFile}.png" && ${grim} -g "$(${slurp})" "$SFILE" && ${cat} "$SFILE" | ${wl-copy} -t image/png
-                    '';
-                  # Record screen
-                  "Mod1+r" = ''exec ${wf-recorder} -f "${shotFile}.mp4"'';
-                  # Record an area
-                  "Mod1+Shift+r" = ''exec ${wf-recorder} -g "$(${slurp})" -f "${shotFile}.mp4"'';
-                  # Stop recording
-                  "Mod1+c" = "exec pkill -INT wf-recorder";
-                  "XF86AudioRaiseVolume" = "exec ${pactl} set-sink-volume 0 +5%";
-                  "XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume 0 -5%";
-                  "XF86AudioMute" = "exec ${pactl} set-sink-mute 0 toggle";
-                  "XF86AudioPlay" = "exec ${playerctl} play-pause";
-                  "XF86AudioPrev" = "exec ${playerctl} previous";
-                  "XF86AudioNext" = "exec ${playerctl} next";
-                  "XF86AudioStop" = "exec ${playerctl} stop";
-                };
-            input = {
-              "*" = {
-                xkb_layout = nixosConfig.services.xserver.layout;
-                accel_profile = "flat";
+        sway =
+          let
+            mkRofiCmd = args: "${config.programs.rofi.finalPackage}/bin/rofi ${lib.concatStringsSep " " args} | ${pkgs.sway}/bin/swaymsg --";
+          in {
+            enable = true;
+            extraSessionCommands = extraEnv;
+            wrapperFeatures.gtk = true;
+            extraConfig =
+              ''
+                exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+              '';
+            config = {
+              fonts = {
+                names = [font];
+                size = fontSize + 0.0;
               };
+              bars = [{ command = "${pkgBin "waybar"}"; }];
+              colors = {
+                background = "#${bgColor}";
+                focused = addIndSway focusedWorkspace;
+                focusedInactive = addIndSway inactiveWorkspace;
+                unfocused = addIndSway activeWorkspace;
+                urgent = addIndSway urgentWorkspace;
+              };
+              gaps.smartBorders = "on";
+              menu = mkRofiCmd ["-show" "drun"];
+              modifier = "Mod4";
+              terminal = pkgBin "alacritty";
+              keybindings =
+                let
+                  mod = config.wayland.windowManager.sway.config.modifier;
+                  cat = pkgs.coreutils + "/bin/cat";
+                  grim = pkgBin "grim";
+                  slurp = pkgBin "slurp";
+                  pactl = pkgs.pulseaudio + "/bin/pactl";
+                  playerctl = pkgBin "playerctl";
+                  wf-recorder = pkgBin "wf-recorder";
+                  wl-copy = pkgs.wl-clipboard + "/bin/wl-copy";
+                  wl-paste = pkgs.wl-clipboard + "/bin/wl-paste";
+                  shotFile = config.home.homeDirectory + "/shots/shot_$(date '+%Y_%m_%d_%H_%M')";
+                in
+                  lib.mkOptionDefault
+                  {
+                    "${mod}+q" = "kill";
+                    "${mod}+Shift+e" = "exit";
+                    "${mod}+Shift+r" = "reload";
+                    "${mod}+c" = mkRofiCmd ["-show" "calc"];
+                    # Screenshot and copy it to clipboard
+                    "Mod1+s" =
+                      ''
+                        exec export SFILE="${shotFile}.png" && ${grim} "$SFILE" && ${cat} "$SFILE" | ${wl-copy} -t image/png
+                      '';
+                    # Save selected area as a picture and copy it to clipboard
+                    "Mod1+Shift+s" =
+                      ''
+                        exec export SFILE="${shotFile}.png" && ${grim} -g "$(${slurp})" "$SFILE" && ${cat} "$SFILE" | ${wl-copy} -t image/png
+                      '';
+                    # Record screen
+                    "Mod1+r" = ''exec ${wf-recorder} -f "${shotFile}.mp4"'';
+                    # Record an area
+                    "Mod1+Shift+r" = ''exec ${wf-recorder} -g "$(${slurp})" -f "${shotFile}.mp4"'';
+                    # Stop recording
+                    "Mod1+c" = "exec pkill -INT wf-recorder";
+                    "XF86AudioRaiseVolume" = "exec ${pactl} set-sink-volume 0 +5%";
+                    "XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume 0 -5%";
+                    "XF86AudioMute" = "exec ${pactl} set-sink-mute 0 toggle";
+                    "XF86AudioPlay" = "exec ${playerctl} play-pause";
+                    "XF86AudioPrev" = "exec ${playerctl} previous";
+                    "XF86AudioNext" = "exec ${playerctl} next";
+                    "XF86AudioStop" = "exec ${playerctl} stop";
+                  };
+              input = {
+                "*" = {
+                  xkb_layout = nixosConfig.services.xserver.layout;
+                  accel_profile = "flat";
+                };
+              };
+              output = { "*" = { bg = config.home.homeDirectory + "/wallpaper.png" + " fill"; }; };
             };
-            output = { "*" = { bg = config.home.homeDirectory + "/wallpaper.png" + " fill"; }; };
           };
-        };
       };
       programs = {
         alacritty = {
@@ -585,18 +589,22 @@ in {
             };
         };
         fzf.enable = true;
-        rofi =
-          let
-            bgc = "#${bgColor}";
-            fgc = "#${fgColor}";
-            acc = "#${acColor}";
-          in {
-            enable = true;
-            package = pkgs.rofi-wayland;
-            cycle = true;
-            font = fontComb;
-            terminal = pkgBin "alacritty";
+        rofi = {
+          enable = true;
+          package = pkgs.rofi-wayland;
+          cycle = true;
+          font = fontComb;
+          terminal = pkgBin "alacritty";
+          plugins = with pkgs; [
+            rofi-calc
+            rofi-systemd
+            rofi-file-browser
+            rofi-power-menu
+          ];
+          extraConfig = {
+            modi = "drun,calc,file-browser-extended,ssh,keys";
           };
+        };
         vscode = {
           enable = true;
           package = pkgs.vscodeWayland;
