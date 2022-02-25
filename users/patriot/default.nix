@@ -280,6 +280,9 @@ in {
             dejavu_fonts
             (nerdfonts.override { fonts = ["Monoid"]; })
             # Programs
+            cargo-outdated
+            cargo-release
+            cargo-udeps
             vulkan-tools
             krita
             gnome3.seahorse
@@ -607,7 +610,7 @@ in {
         };
         vscode = {
           enable = true;
-          package = pkgs.vscodeWayland;
+          package = pkgs.vscodium;
           extensions =
             let
               mkExt =

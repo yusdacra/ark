@@ -56,7 +56,7 @@
           nixos = {
             imports = [(digga.lib.importOverlays ./overlays)];
             overlays = [
-              #nixpkgsWayland.overlay
+              nixpkgsWayland.overlay
               (
                 _: prev: {
                   #helix = helix.packages.${prev.system}.helix;
