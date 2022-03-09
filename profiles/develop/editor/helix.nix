@@ -1,8 +1,4 @@
-{
-  pkgs,
-  ...
-}:
-let
+{pkgs, ...}: let
   pkg = pkgs.helix;
   bin = "${pkg}/bin/hx";
 in {
@@ -11,5 +7,5 @@ in {
     EDITOR = bin;
     VISUAL = bin;
   };
-  environment.shellAliases = { e = bin; };
+  environment.shellAliases = {e = bin;};
 }

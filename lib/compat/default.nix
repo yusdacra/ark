@@ -9,7 +9,7 @@ let
         sha256 = "0zd3x46fswh5n6faq4x2kkpy6p3c6j593xbdlbsl40ppkclwc80x";
       }
     )
-    { src = ../../.; }
+    {src = ../../.;}
   );
 in
   flake

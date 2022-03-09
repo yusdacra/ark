@@ -6,8 +6,7 @@
   suites,
   profiles,
   ...
-}:
-let
+}: let
   btrfsPartPath = "/dev/disk/by-label/NIXOS";
   btrfsOptions = ["compress-force=zstd" "noatime"];
   btrfsDiff =
@@ -76,7 +75,7 @@ in {
         btrfs subvolume snapshot /mnt/root-blank /mnt/root
         umount /mnt
       '';
-    kernel.sysctl = { "fs.inotify.max_user_watches" = 524288; };
+    kernel.sysctl = {"fs.inotify.max_user_watches" = 524288;};
   };
   security.pam.loginLimits = [
     {
@@ -132,10 +131,9 @@ in {
     mitigations.disable = true;
     allowSimultaneousMultithreading = false;
     # Deleting root subvolume makes sudo show lecture every boot
-    sudo.extraConfig =
-      ''
-        Defaults lecture = never
-      '';
+    sudo.extraConfig = ''
+      Defaults lecture = never
+    '';
     rtkit.enable = true;
   };
   sound.enable = false;
@@ -152,8 +150,7 @@ in {
       driSupport32Bit = true;
       enable = true;
       extraPackages = with pkgs; [amdvlk libvdpau-va-gl vaapiVdpau libva vulkan-loader pipewire];
-      extraPackages32 =
-        with pkgs.pkgsi686Linux;
+      extraPackages32 = with pkgs.pkgsi686Linux;
         [libvdpau-va-gl vaapiVdpau libva vulkan-loader pipewire] ++ [pkgs.driversi686Linux.amdvlk];
     };
     pulseaudio = {
@@ -186,13 +183,19 @@ in {
   };
   networking.interfaces.enp6s0.useDHCP = true;
   services = {
+    code-server = {
+      enable = false;
+      auth = "none";
+      user = "patriot";
+      group = "users";
+    };
     ipfs = {
       enable = false;
       enableGC = true;
       autoMount = true;
     };
     flatpak.enable = false;
-    xserver = { videoDrivers = ["amdgpu"]; };
+    xserver = {videoDrivers = ["amdgpu"];};
     postgresql = {
       enable = false;
       enableTCPIP = true;
@@ -203,7 +206,7 @@ in {
           local all all trust
           host  all all 0.0.0.0/0 md5
         '';
-      settings = { listen_addresses = "*"; };
+      settings = {listen_addresses = "*";};
       initialScript =
         pkgs.writeText
         "backend-initScript"
@@ -215,7 +218,7 @@ in {
     };
   };
   virtualisation = {
-    podman.enable = false;
+    podman.enable = true;
     libvirtd.enable = false;
   };
   system.stateVersion = "20.09";

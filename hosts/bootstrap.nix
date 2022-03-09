@@ -1,8 +1,4 @@
-{
-  profiles,
-  ...
-}:
-{
+{profiles, ...}: {
   # build with: `bud build bootstrap bootstrapIso`
   # reachable on the local link via ssh root@fe80::47%eno1
   # where 'eno1' is replaced by your own machine's network
@@ -16,5 +12,5 @@
   ];
   boot.loader.systemd-boot.enable = true;
   # will be overridden by the bootstrapIso instrumentation
-  fileSystems."/" = { device = "/dev/disk/by-label/nixos"; };
+  fileSystems."/" = {device = "/dev/disk/by-label/nixos";};
 }

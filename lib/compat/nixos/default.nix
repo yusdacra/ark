@@ -1,5 +1,4 @@
-{ ... }:
-let
+{...}: let
   inherit (default.inputs.nixos) lib;
   host = configs.${hostname} or configs.NixOS;
   configs = default.nixosConfigurations;

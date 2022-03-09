@@ -12,15 +12,13 @@ final: prev: {
         };
       dontWrapQtApps = true;
       buildInputs = [prev.libsForQt5.qt5.qtbase];
-      buildPhase =
-        ''
-          cd src/styleplugin
-          qmake && make
-        '';
-      installPhase =
-        ''
-          mkdir -p $out/$qtPluginPrefix/styles
-          mv libphantomstyleplugin.so $out/$qtPluginPrefix/styles
-        '';
+      buildPhase = ''
+        cd src/styleplugin
+        qmake && make
+      '';
+      installPhase = ''
+        mkdir -p $out/$qtPluginPrefix/styles
+        mv libphantomstyleplugin.so $out/$qtPluginPrefix/styles
+      '';
     };
 }

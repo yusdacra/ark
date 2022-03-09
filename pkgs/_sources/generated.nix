@@ -2,8 +2,7 @@
 {
   fetchgit,
   fetchurl,
-}:
-{
+}: {
   manix = {
     pname = "manix";
     version = "d08e7ca185445b929f097f8bfb1243a8ef3e10e4";
