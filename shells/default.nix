@@ -4,6 +4,6 @@ lib.genPkgs (pkgs: {
     mkShell {
       name = "prts";
       buildInputs = [git git-crypt];
-      shellHook = "echo welcome to PRTS, $USER";
+      shellHook = "echo \"$(tput bold)welcome to PRTS, $USER$(tput sgr0)\"";
     };
 })
