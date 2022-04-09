@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  modulesPath,
+  inputs,
   ...
 }: let
   btrfsPartPath = "/dev/disk/by-label/NIXOS";
@@ -38,10 +38,25 @@
       sudo umount /mnt
     '';
 in {
+  imports = with inputs;
+  with nixos-hardware.nixosModules; [
+    nixos.nixosModules.notDetected
+    nixos-persistence.nixosModule
+    common-pc-ssd
+    common-pc
+    common-gpu-amd
+    common-cpu-amd
+    ../../modules/network/dns
+    ../../users/root
+    ../../users/patriot
+  ];
+
   boot = {
+    tmpOnTmpfs = true;
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
+      systemd-boot.configurationLimit = 10;
     };
     kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = ["btrfs"];
@@ -70,20 +85,7 @@ in {
       '';
     kernel.sysctl = {"fs.inotify.max_user_watches" = 524288;};
   };
-  security.pam.loginLimits = [
-    {
-      domain = "*";
-      type = "soft";
-      item = "nofile";
-      value = "524288";
-    }
-    {
-      domain = "*";
-      type = "hard";
-      item = "nofile";
-      value = "524288";
-    }
-  ];
+
   fileSystems."/" = {
     device = btrfsPartPath;
     fsType = "btrfs";
@@ -114,13 +116,29 @@ in {
     device = "/dev/disk/by-uuid/5784-BBB1";
     fsType = "vfat";
   };
+
   swapDevices = [];
   zramSwap = {
     enable = true;
     algorithm = "zstd";
   };
-  nix.settings.max-jobs = lib.mkDefault 4;
+
+  nix.maxJobs = lib.mkDefault 4;
   security = {
+    pam.loginLimits = [
+      {
+        domain = "*";
+        type = "soft";
+        item = "nofile";
+        value = "524288";
+      }
+      {
+        domain = "*";
+        type = "hard";
+        item = "nofile";
+        value = "524288";
+      }
+    ];
     allowSimultaneousMultithreading = false;
     # Deleting root subvolume makes sudo show lecture every boot
     sudo.extraConfig = ''
@@ -128,6 +146,7 @@ in {
     '';
     rtkit.enable = true;
   };
+
   sound.enable = false;
   services.pipewire = {
     enable = true;
@@ -149,11 +168,13 @@ in {
       support32Bit = true;
     };
   };
+
   fonts = {
     enableDefaultFonts = true;
     fontconfig.enable = true;
     fonts = [pkgs.dejavu_fonts];
   };
+
   environment = {
     systemPackages = [btrfsDiff];
     pathsToLink = ["/share/zsh"];
@@ -172,45 +193,23 @@ in {
         "${pkgs.amdvlk}/share/vulkan/icd.d/amd_icd64.json:${pkgs.driversi686Linux.amdvlk}/share/vulkan/icd.d/amd_icd32.json";
     };
   };
+
   networking.interfaces.enp6s0.useDHCP = true;
   services = {
-    code-server = {
-      enable = false;
-      auth = "none";
-      user = "patriot";
-      group = "users";
-    };
+    earlyoom.enable = true;
     ipfs = {
       enable = false;
       enableGC = true;
       autoMount = true;
     };
     flatpak.enable = false;
-    xserver = {videoDrivers = ["amdgpu"];};
-    postgresql = {
-      enable = false;
-      enableTCPIP = true;
-      authentication =
-        lib.mkOverride
-        10
-        ''
-          local all all trust
-          host  all all 0.0.0.0/0 md5
-        '';
-      settings = {listen_addresses = "*";};
-      initialScript =
-        pkgs.writeText
-        "backend-initScript"
-        ''
-          CREATE ROLE patriot WITH LOGIN PASSWORD 'patriot' CREATEDB;
-          CREATE DATABASE harmony;
-          GRANT ALL PRIVILEGES ON DATABASE harmony TO patriot;
-        '';
-    };
+    xserver.videoDrivers = ["amdgpu"];
   };
+
   virtualisation = {
     podman.enable = true;
     libvirtd.enable = false;
   };
+
   system.stateVersion = "20.09";
 }

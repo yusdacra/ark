@@ -1,5 +1,7 @@
 {
   imports = [
-    ./hm-system-defaults.nix
+    ./base
+    ./develop
+    ./cachix
   ];
 }

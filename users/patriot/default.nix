@@ -1,13 +1,13 @@
 {
-  config,
   pkgs,
   lib,
   ...
-}: let
+} @ globalAttrs: let
   inherit (lib) mapAttrs' nameValuePair;
   inherit (builtins) readDir fetchGit;
-  pkgBin = lib.our.pkgBinNoDep pkgs;
-  nixosConfig = config;
+
+  pkgBin = lib.pkgBin pkgs;
+  nixosConfig = globalAttrs.config;
 in {
   users.users.patriot = {
     isNormalUser = true;
@@ -234,9 +234,9 @@ in {
     '';
   in {
     imports = [
-      ../profiles/direnv
-      ../profiles/git
-      ../profiles/starship
+      ../modules/direnv
+      ../modules/git
+      ../modules/starship
     ];
     fonts.fontconfig.enable = true;
     home = {

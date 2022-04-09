@@ -2,18 +2,19 @@
   inputs,
   config,
   pkgs,
+  lib,
   ...
 }: let
-  inherit (pkgs) lib;
   inherit (lib) fileContents mkIf pkgBin;
+
   coreBin = v: "${pkgs.coreutils}/bin/${v}";
   nixBin = "${config.nix.package}/bin/nix";
 in {
-  imports = [./cachix];
-  boot = {
-    tmpOnTmpfs = true;
-    loader.systemd-boot.configurationLimit = 10;
-  };
+  imports = [
+    ./nix.nix
+    ./hm-system-defaults.nix
+  ];
+
   console.font = "7x14";
   environment = {
     systemPackages = with pkgs; [
@@ -139,38 +140,6 @@ in {
     --experimental-features 'nix-command' \
     diff-closures /run/current-system "$systemConfig"
   '';
-  nix = let
-    registry =
-      builtins.removeAttrs
-      (builtins.mapAttrs (_: v: {flake = v;}) (lib.filterAttrs (_: v: v ? outputs) inputs))
-      ["bud"];
-  in {
-    package = pkgs.nixUnstable;
-    gc.automatic = true;
-    optimise.automatic = true;
-    extraOptions = ''
-      min-free = 536870912
-      keep-outputs = true
-      keep-derivations = true
-      fallback = true
-    '';
-    inherit registry;
-    settings = {
-      sandbox = true;
-      allowed-users = ["@wheel"];
-      trusted-users = ["root" "@wheel"];
-      auto-optimise-store = true;
-    };
-  };
-  programs.command-not-found.enable = false;
-  home-manager.useGlobalPkgs = true;
   users.mutableUsers = false;
-  # For rage encryption, all hosts need a ssh key pair
-  /*
-   services.openssh = {
-   enable = true;
-   openFirewall = lib.mkDefault false;
-   };
-   */
-  services.earlyoom.enable = true;
+  programs.command-not-found.enable = false;
 }
