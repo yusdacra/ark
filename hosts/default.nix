@@ -14,8 +14,16 @@
   in
     lib.nixosSystem {
       inherit system;
-      modules = baseModules ++ [(import (./. + "/${name}/default.nix"))];
-      specialArgs = {inherit inputs lib pkgs;};
+      modules =
+        baseModules
+        ++ [
+          {nixpkgs.pkgs = pkgs;}
+          (import (./. + "/${name}/default.nix"))
+        ];
+      specialArgs = {
+        inherit inputs;
+        tlib = lib;
+      };
     };
 in {
   lungmen = mkSystem "lungmen" "x86_64-linux";

@@ -3,9 +3,11 @@
   config,
   pkgs,
   lib,
+  tlib,
   ...
 }: let
-  inherit (lib) fileContents mkIf pkgBin;
+  inherit (lib) fileContents mkIf;
+  inherit (tlib) pkgBin;
 
   coreBin = v: "${pkgs.coreutils}/bin/${v}";
   nixBin = "${config.nix.package}/bin/nix";

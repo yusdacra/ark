@@ -1,12 +1,13 @@
 {
   pkgs,
   lib,
+  tlib,
   ...
 } @ globalAttrs: let
   inherit (lib) mapAttrs' nameValuePair;
   inherit (builtins) readDir fetchGit;
 
-  pkgBin = lib.pkgBin pkgs;
+  pkgBin = tlib.pkgBin pkgs;
   nixosConfig = globalAttrs.config;
 in {
   users.users.patriot = {
@@ -238,7 +239,7 @@ in {
       ../modules/git
       ../modules/starship
     ];
-    fonts.fontconfig.enable = true;
+    fonts.fontconfig.enable = lib.mkForce true;
     home = {
       homeDirectory = nixosConfig.users.users.patriot.home;
       packages = with pkgs; [
