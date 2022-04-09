@@ -17,7 +17,11 @@
       modules =
         baseModules
         ++ [
-          {nixpkgs.pkgs = pkgs;}
+          {
+            nixpkgs = {
+              inherit pkgs;
+            };
+          }
           (import (./. + "/${name}/default.nix"))
         ];
       specialArgs = {

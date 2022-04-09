@@ -308,7 +308,7 @@ in {
     };
     wayland.windowManager = {
       sway = let
-        mkRofiCmd = args: "${config.programs.rofi.finalPackage}/bin/rofi ${lib.concatStringsSep " " args} | ${pkgs.sway}/bin/swaymsg --";
+        mkRofiCmd = args: "${config.programs.rofi.package}/bin/rofi ${lib.concatStringsSep " " args} | ${pkgs.sway}/bin/swaymsg --";
       in {
         enable = true;
         extraSessionCommands = extraEnv;

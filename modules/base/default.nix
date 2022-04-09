@@ -7,10 +7,10 @@
   ...
 }: let
   inherit (lib) fileContents mkIf;
-  inherit (tlib) pkgBin;
 
   coreBin = v: "${pkgs.coreutils}/bin/${v}";
   nixBin = "${config.nix.package}/bin/nix";
+  pkgBin = tlib.pkgBin pkgs;
 in {
   imports = [
     ./nix.nix
@@ -144,4 +144,5 @@ in {
   '';
   users.mutableUsers = false;
   programs.command-not-found.enable = false;
+  nixpkgs.config.allowUnfree = true;
 }

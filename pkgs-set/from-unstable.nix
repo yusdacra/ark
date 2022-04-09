@@ -5,5 +5,7 @@ pkgs: {
     alejandra
     rnix-lsp
     chromium
+    rofi-wayland
+    vscode
     ;
 }
