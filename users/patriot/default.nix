@@ -97,7 +97,6 @@ in {
   home-manager.users.patriot = {
     config,
     pkgs,
-    suites,
     ...
   }: let
     personal = import ../../personal.nix;
@@ -234,33 +233,11 @@ in {
       #export QT_PLATFORM_PLUGIN=qt5ct
     '';
   in {
-    imports = suites.base;
-    # needs to be fixed to use nix profile???
-    /*
-     gtk = {
-     enable = false;
-     font = {
-     package = pkgs.dejavu_fonts;
-     name = "DejaVu Sans 12";
-     };
-     iconTheme = {
-     package = pkgs.papirus-icon-theme;
-     name = "Papirus Dark";
-     };
-     theme = {
-     package = pkgs.numix-gtk-theme;
-     name = "Numix Dark";
-     };
-     };
-     
-     qt = {
-     enable = false;
-     style = {
-     package = pkgs.adwaita-qt;
-     name = "adwaita-dark";
-     };
-     };
-     */
+    imports = [
+      ../profiles/direnv
+      ../profiles/git
+      ../profiles/starship
+    ];
     fonts.fontconfig.enable = true;
     home = {
       homeDirectory = nixosConfig.users.users.patriot.home;
@@ -652,6 +629,9 @@ in {
           "nix.serverPath" = pkgBin "rnix-lsp";
           "editor.bracketPairColorization.enabled" = true;
           "editor.semanticHighlighting.enabled" = true;
+          "remote.SSH.defaultExtensions" = [
+            "gitpod.gitpod-remote-ssh"
+          ];
         };
       };
     };

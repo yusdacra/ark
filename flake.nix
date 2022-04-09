@@ -2,15 +2,25 @@
   description = "A highly structured configuration database.";
   inputs = {
     nixos.url = "github:nixos/nixpkgs/nixos-unstable";
-    digga.url = "github:divnix/digga/main";
-    digga.inputs.nixpkgs.follows = "nixos";
-    digga.inputs.nixlib.follows = "nixos";
-    digga.inputs.home-manager.follows = "home";
-    home.url = "github:nix-community/home-manager/master";
+
+    fup.url = "github:gytis-ivaskevicius/flake-utils-plus";
+
+    home.url = "github:nix-community/home-manager/release-21.11";
     home.inputs.nixpkgs.follows = "nixos";
+
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixos";
+    };
     naersk.url = "github:nmattia/naersk";
     naersk.inputs.nixpkgs.follows = "nixos";
-    nixos-hardware.url = "github:nixos/nixos-hardware";
+    nixCargoIntegration.url = "github:yusdacra/nix-cargo-integration";
+    nixCargoIntegration.inputs.nixpkgs.follows = "nixos";
+    nixCargoIntegration.inputs.rustOverlay.follows = "rust-overlay";
+
+    nixosHardware.url = "github:nixos/nixos-hardware";
+    nixosPersistence.url = "github:nix-community/impermanence";
+
     rnixLsp = {
       url = "github:nix-community/rnix-lsp";
       inputs.naersk.follows = "naersk";
@@ -20,116 +30,96 @@
       url = "github:kamadorueda/alejandra";
       inputs.nixpkgs.follows = "nixos";
     };
-    /*
-     helix = {
-     url = "https://github.com/helix-editor/helix.git";
-     type = "git";
-     submodules = true;
-     inputs.nixpkgs.follows = "nixos";
-     };
-     */
-    nixosPersistence.url = "github:nix-community/impermanence";
-    nixpkgsWayland = {
-      url = "github:colemickens/nixpkgs-wayland";
+    helix = {
+      url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixos";
+      inputs.rust-overlay.follows = "rust-overlay";
+      inputs.nixCargoIntegration.follows = "nixCargoIntegration";
     };
   };
   outputs = {
     self,
-    digga,
-    nixos,
+    fup,
     home,
-    nixos-hardware,
+    nixosHardware,
     nixosPersistence,
     nixpkgsWayland,
     rnixLsp,
     alejandra,
+    helix,
+    nixos,
     ...
   } @ inputs:
-    digga.lib.mkFlake
+    fup.lib.mkFlake
     {
       inherit self inputs;
-      channelsConfig = {allowUnfree = true;};
-      channels = {
-        nixos = {
-          imports = [(digga.lib.importOverlays ./overlays)];
-          overlays = [
-            nixpkgsWayland.overlay
-            (
-              _: prev: {
-                #helix = helix.packages.${prev.system}.helix;
-                #helix-src = prev.helix.src;
-                #rnix-lsp = rnixLsp.packages.${prev.system}.rnix-lsp;
-              }
-            )
-            (
-              _: prev: {
-                alejandra = alejandra.defaultPackage.${prev.system};
-                remarshal =
-                  prev.remarshal.overrideAttrs
-                  (
-                    old: {
-                      postPatch = ''
-                        substituteInPlace pyproject.toml \
-                          --replace "poetry.masonry.api" "poetry.core.masonry.api" \
-                          --replace 'PyYAML = "^5.3"' 'PyYAML = "*"' \
-                          --replace 'tomlkit = "^0.7"' 'tomlkit = "*"'
-                      '';
-                    }
-                  );
-              }
-            )
-            ./pkgs/default.nix
-          ];
-        };
-      };
-      lib = import ./lib {lib = digga.lib // nixos.lib;};
+
+      supportedSystems = ["x86_64-linux"];
+      channelsConfig.allowUnfree = true;
+      nix.generateRegistryFromInputs = true;
+      nix.generateNixPathFromInputs = true;
+      nix.linkInputs = true;
+
       sharedOverlays = [
-        (
-          _: prev: {
-            __dontExport = true;
-            lib = prev.lib.extend (_: _: {our = self.lib;});
-          }
-        )
+        (_: prev: {
+          lib = prev.lib.extend (_: _: builtins);
+        })
+        (_: prev: {
+          lib = prev.lib.extend (_: l: {
+            pkgBin = id:
+              if l.isString id
+              then "${prev.${id}}/bin/${id}"
+              else "${prev.${id.name}}/bin/${id.bin}";
+          });
+        })
       ];
-      nixos = {
-        hostDefaults = {
-          system = "x86_64-linux";
-          channelName = "nixos";
-          imports = [(digga.lib.importExportableModules ./modules)];
-          modules = [
-            {lib.our = self.lib;}
-            digga.nixosModules.bootstrapIso
-            digga.nixosModules.nixConfig
-            home.nixosModules.home-manager
-            nixosPersistence.nixosModules.impermanence
-          ];
-        };
-        imports = [(digga.lib.importHosts ./hosts)];
-        hosts = {};
-        importables = rec {
-          profiles =
-            (digga.lib.rakeLeaves ./profiles)
-            // {
-              users = digga.lib.rakeLeaves ./users;
-              nixos-hardware = nixos-hardware.nixosModules;
-            };
-          suites = with profiles; {
-            base = [cachix core users.root];
-            work = [users.patriot develop];
+
+      channels.nixos = {
+        overlays = [
+          ./overlays/chromium-wayland.nix
+          ./overlays/phantom.nix
+          (
+            _: prev: {
+              helix = helix.packages.${prev.system}.helix;
+              rnix-lsp = rnixLsp.packages.${prev.system}.rnix-lsp;
+              alejandra = alejandra.defaultPackage.${prev.system};
+            }
+          )
+        ];
+      };
+
+      hostDefaults = {
+        channelName = "nixos";
+        modules = [
+          home.nixosModules.home-manager
+          ./profiles
+          ./modules
+          ./locale
+          ./secrets
+        ];
+      };
+
+      hosts.lungmen = {
+        modules = with nixosHardware.nixosModules; [
+          nixos.nixosModules.notDetected
+          nixosPersistence.nixosModules.impermanence
+          common-pc-ssd
+          common-pc
+          common-gpu-amd
+          common-cpu-amd
+          ./profiles/network/networkmanager
+          ./users/root
+          ./users/patriot
+          ./hosts/lungmen
+        ];
+      };
+
+      outputsBuilder = channels:
+        with channels.nixos; {
+          devShell = mkShell {
+            name = "prts";
+            buildInputs = [git git-crypt];
           };
         };
-      };
-      home = {
-        imports = [(digga.lib.importExportableModules ./users/modules)];
-        modules = [];
-        importables = rec {
-          profiles = digga.lib.rakeLeaves ./users/profiles;
-          suites = with profiles; rec {base = [direnv git starship];};
-        };
-      };
-      devshell = ./shell;
-      homeConfigurations = digga.lib.mkHomeConfigurations self.nixosConfigurations;
-      deploy.nodes = digga.lib.mkDeployNodes self.nixosConfigurations {};
     };
 }

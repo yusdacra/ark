@@ -3,8 +3,6 @@
   lib,
   pkgs,
   modulesPath,
-  suites,
-  profiles,
   ...
 }: let
   btrfsPartPath = "/dev/disk/by-label/NIXOS";
@@ -40,11 +38,6 @@
       sudo umount /mnt
     '';
 in {
-  imports =
-    suites.base
-    ++ suites.work
-    ++ [../profiles/network/networkmanager (modulesPath + "/installer/scan/not-detected.nix")]
-    ++ (with profiles.nixos-hardware; [common-pc-ssd common-pc common-gpu-amd common-cpu-amd]);
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;
@@ -128,7 +121,6 @@ in {
   };
   nix.settings.max-jobs = lib.mkDefault 4;
   security = {
-    mitigations.disable = true;
     allowSimultaneousMultithreading = false;
     # Deleting root subvolume makes sudo show lecture every boot
     sudo.extraConfig = ''
@@ -142,7 +134,6 @@ in {
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    media-session.enable = true;
   };
   hardware = {
     opengl = {

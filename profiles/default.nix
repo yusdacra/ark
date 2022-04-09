@@ -1,17 +1,15 @@
 {
-  self,
   inputs,
   config,
   pkgs,
-  lib,
   ...
 }: let
-  inherit (lib) fileContents mkIf;
-  pkgBin = lib.our.pkgBinNoDep pkgs;
+  inherit (pkgs) lib;
+  inherit (lib) fileContents mkIf pkgBin;
   coreBin = v: "${pkgs.coreutils}/bin/${v}";
   nixBin = "${config.nix.package}/bin/nix";
 in {
-  imports = [../cachix ../../locale ../../secrets/secrets.nix];
+  imports = [./cachix];
   boot = {
     tmpOnTmpfs = true;
     loader.systemd-boot.configurationLimit = 10;
@@ -121,8 +119,6 @@ in {
       mn = let
         manix_preview = "manix '{}' | sed 's/type: /> type: /g' | bat -l Markdown --color=always --plain";
       in ''manix "" | rg '^# ' | sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | sk --preview="${manix_preview}" | xargs manix'';
-      # fix nixos-option
-      nixos-option = "nixos-option -I nixpkgs=${self}/lib/compat";
       # sudo
       s = ifSudo "sudo -E";
       si = ifSudo "sudo -i";
