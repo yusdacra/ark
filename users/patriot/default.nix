@@ -353,7 +353,6 @@ in {
               "${mod}+q" = "kill";
               "${mod}+Shift+e" = "exit";
               "${mod}+Shift+r" = "reload";
-              "${mod}+c" = mkRofiCmd ["-show" "calc"];
               # Screenshot and copy it to clipboard
               "Mod1+s" = ''
                 exec export SFILE="${shotFile}.png" && ${grim} "$SFILE" && ${cat} "$SFILE" | ${wl-copy} -t image/png
@@ -556,15 +555,6 @@ in {
         cycle = true;
         font = fontComb;
         terminal = pkgBin "alacritty";
-        plugins = with pkgs; [
-          rofi-calc
-          rofi-systemd
-          rofi-file-browser
-          rofi-power-menu
-        ];
-        extraConfig = {
-          modi = "drun,calc,file-browser-extended,ssh,keys";
-        };
       };
       vscode = {
         enable = true;
@@ -705,8 +695,6 @@ in {
           theme = "mytheme"
           [editor]
           line-number = "relative"
-          [lsp]
-          display-messages = true
         '';
         "helix/languages.toml".text = ''
           [[language]]

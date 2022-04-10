@@ -5,7 +5,11 @@ pkgs: {
     alejandra
     rnix-lsp
     chromium
+    rofi
     rofi-wayland
     vscode
+    nixUnstable
+    nix-direnv
+    direnv
     ;
 }

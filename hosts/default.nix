@@ -19,6 +19,7 @@
       modules =
         baseModules
         ++ [
+          {networking.hostName = name;}
           {nixpkgs.pkgs = pkgs;}
           (import (./. + "/${name}/default.nix"))
         ];

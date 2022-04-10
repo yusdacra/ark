@@ -2,7 +2,7 @@
   description = "config!!!";
 
   inputs = {
-    nixos.url = "github:nixos/nixpkgs/release-21.11";
+    nixos.url = "github:nixos/nixpkgs/nixos-21.11";
     latest.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home.url = "github:nix-community/home-manager/release-21.11";

@@ -14,10 +14,12 @@
       keep-outputs = true
       keep-derivations = true
       fallback = true
+      extra-experimental-features = nix-command flakes
     '';
     useSandbox = true;
     allowedUsers = ["@wheel"];
     trustedUsers = ["root" "@wheel"];
     autoOptimiseStore = true;
+    nixPath = ["nixpkgs=${inputs.latest}" "home-manager=${inputs.home}"];
   };
 }
