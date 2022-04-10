@@ -13,18 +13,23 @@
   };
 
   outputs = inputs: let
-    lib = (import ./lib inputs.nixos.lib).extend (_: lib: rec {
+    lib = inputs.nixos.lib.extend (_: _: builtins);
+    tlib = (import ./lib lib).extend (_: prev: rec {
       makePkgs = system:
         import ./pkgs-set {
           inherit system lib;
+          tlib = prev;
           stable = inputs.nixos;
           unstable = inputs.latest;
         };
-      genPkgs = f: lib.genSystems (system: f (makePkgs system));
+      genPkgs = f: prev.genSystems (system: f (makePkgs system));
     });
   in rec {
-    nixosConfigurations = import ./hosts {inherit lib inputs;};
-    devShells = import ./shells {inherit lib inputs;};
+    nixosConfigurations = import ./hosts {inherit lib tlib inputs;};
+
+    packages = tlib.genPkgs (pkgs: pkgs._exported);
+
+    devShells = import ./shells {inherit lib tlib inputs;};
     devShell = lib.mapAttrs (_: value: value.default) devShells;
   };
 }

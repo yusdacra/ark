@@ -176,7 +176,7 @@ in {
   };
 
   environment = {
-    systemPackages = [btrfsDiff];
+    systemPackages = [btrfsDiff pkgs.ntfs3g];
     pathsToLink = ["/share/zsh"];
     persistence."/persist" = {
       directories = ["/etc/nixos"];

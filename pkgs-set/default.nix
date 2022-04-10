@@ -3,6 +3,7 @@
   unstable,
   system,
   lib,
+  ...
 }: let
   overlays =
     lib.mapAttrsToList
@@ -17,5 +18,9 @@
     config.allowUnfree = true;
     overlays = [(_: _: import ./from-unstable.nix unstablePkgs)] ++ overlays;
   };
+  pkgsToExport = import ./pkgs-to-export.nix;
 in
   pkgs
+  // {
+    _exported = lib.getAttrs pkgsToExport pkgs;
+  }

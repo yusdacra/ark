@@ -1,6 +1,8 @@
 {
   inputs,
   lib,
+  tlib,
+  ...
 }: let
   baseModules = [
     ../modules
@@ -10,25 +12,21 @@
   ];
 
   mkSystem = name: system: let
-    pkgs = lib.makePkgs system;
+    pkgs = tlib.makePkgs system;
   in
     lib.nixosSystem {
       inherit system;
       modules =
         baseModules
         ++ [
-          {
-            nixpkgs = {
-              inherit pkgs;
-            };
-          }
+          {nixpkgs.pkgs = pkgs;}
           (import (./. + "/${name}/default.nix"))
         ];
-      specialArgs = {
-        inherit inputs;
-        tlib = lib;
-      };
+      specialArgs = {inherit inputs tlib;};
     };
-in {
-  lungmen = mkSystem "lungmen" "x86_64-linux";
-}
+
+  systems = {
+    lungmen = "x86_64-linux";
+  };
+in
+  lib.mapAttrs mkSystem systems

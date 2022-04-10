@@ -87,9 +87,8 @@ in {
       };
     };
   };
-  systemd.user.services.gnome-session-restart-dbus.serviceConfig = {Slice = "-.slice";};
   systemd = {
-    targets = {network-online.enable = false;};
+    targets.network-online.enable = false;
     services = {
       systemd-networkd-wait-online.enable = false;
       NetworkManager-wait-online.enable = false;
@@ -223,7 +222,7 @@ in {
     };
     fonts = [fontComb];
     extraEnv = ''
-      export SDL_VIDEODRIVER=wayland
+      # export SDL_VIDEODRIVER=wayland
       # needs qt5.qtwayland in systemPackages
       export QT_QPA_PLATFORM=wayland
       #export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
@@ -521,7 +520,7 @@ in {
         envExtra = extraEnv;
         loginExtra = ''
           if [ "$(${pkgs.coreutils}/bin/tty)" = "/dev/tty1" ]; then
-          exec sway
+            exec sway
           fi
         '';
         initExtra = ''
@@ -529,11 +528,11 @@ in {
           export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
           function tomp4 () {
-            ${pkgs.ffmpeg}/bin/ffmpeg -i $1 -c:v libx264 -preset slow -crf 30 -c:a aac -b:a 128k "$1.mp4"
+            ${pkgBin "ffmpeg"} -i $1 -c:v libx264 -preset slow -crf 30 -c:a aac -b:a 128k "$1.mp4"
           }
 
           function topng () {
-            ${pkgs.ffmpeg}/bin/ffmpeg -i $1 "$1.png"
+            ${pkgBin "ffmpeg"} -i $1 "$1.png"
           }
 
           bindkey "$terminfo[kRIT5]" forward-word
@@ -546,7 +545,7 @@ in {
           nixosConfig.environment.shellAliases
           // {
             harmony-ssh = ''
-              ${pkgs.mosh}/bin/mosh root@chat.harmonyapp.io
+              ${pkgBin "mosh"} root@chat.harmonyapp.io
             '';
           };
       };

@@ -48,7 +48,6 @@ in {
       git
       lm_sensors
       mkpasswd
-      ntfs3g
       zoxide
       bottom
       amber
