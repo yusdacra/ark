@@ -1,17 +1,17 @@
 final: prev: rec {
-  discord-canary-system =
+  discord-system-electron =
     prev.callPackage
     mkDiscord
     rec {
-      pname = "discord-canary";
-      version = "0.0.131";
-      binaryName = "DiscordCanary";
-      desktopName = "Discord Canary";
+      pname = "discord";
+      version = "0.0.17";
+      binaryName = "Discord";
+      desktopName = "Discord";
       src =
         prev.fetchurl
         {
-          url = "https://dl-canary.discordapp.net/apps/linux/${version}/discord-canary-${version}.tar.gz";
-          sha256 = "sha256-ZYPdE02Jq79LmvXu7KIJFugJX++Nnj0Og/mBuaP/+SA=";
+          url = "https://dl.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
+          sha256 = "sha256-NGJzLl1dm7dfkB98pQR3gv4vlldrII6lOMWTuioDExU=";
         };
       isWayland = true;
       enableVulkan = false;
@@ -21,6 +21,7 @@ final: prev: rec {
         "--enable-zero-copy"
         "--disable-gpu-driver-bug-workarounds"
       ];
+      electron = prev.electron_13;
     };
   mkDiscord = {
     pname,

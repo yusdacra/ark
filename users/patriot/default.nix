@@ -303,6 +303,7 @@ in {
          }))
          */
         standardnotes
+        discord-system-electron
       ];
     };
     wayland.windowManager = {
