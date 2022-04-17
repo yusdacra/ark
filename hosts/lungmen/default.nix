@@ -40,7 +40,7 @@
 in {
   imports = with inputs;
   with nixos-hardware.nixosModules; [
-    nixos.nixosModules.notDetected
+    nixpkgs.nixosModules.notDetected
     nixos-persistence.nixosModule
     common-pc-ssd
     common-pc

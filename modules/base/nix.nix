@@ -20,6 +20,6 @@
     allowedUsers = ["@wheel"];
     trustedUsers = ["root" "@wheel"];
     autoOptimiseStore = true;
-    nixPath = ["nixpkgs=${inputs.latest}" "home-manager=${inputs.home}"];
+    nixPath = ["nixpkgs=${inputs.nixpkgs}" "home-manager=${inputs.home}"];
   };
 }

@@ -1,22 +1,16 @@
 {
-  stable,
-  unstable,
+  channel,
   system,
   lib,
   ...
 }: let
-  overlays =
-    lib.mapAttrsToList
-    (name: _: import "${./overlays}/${name}")
-    (lib.readDir ./overlays);
-  unstablePkgs = import unstable {
+  pkgs = import channel {
     inherit system;
     config.allowUnfree = true;
-  };
-  pkgs = import stable {
-    inherit system;
-    config.allowUnfree = true;
-    overlays = [(_: _: import ./from-unstable.nix unstablePkgs)] ++ overlays;
+    overlays =
+      lib.mapAttrsToList
+      (name: _: import "${./overlays}/${name}")
+      (lib.readDir ./overlays);
   };
   pkgsToExport = import ./pkgs-to-export.nix;
 in

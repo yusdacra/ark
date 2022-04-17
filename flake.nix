@@ -2,25 +2,23 @@
   description = "config!!!";
 
   inputs = {
-    nixos.url = "github:nixos/nixpkgs/nixos-21.11";
-    latest.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    home.url = "github:nix-community/home-manager/release-21.11";
-    home.inputs.nixpkgs.follows = "nixos";
+    home.url = "github:nix-community/home-manager/master";
+    home.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixos-persistence.url = "github:nix-community/impermanence";
   };
 
   outputs = inputs: let
-    lib = inputs.nixos.lib.extend (_: _: builtins);
+    lib = inputs.nixpkgs.lib.extend (_: _: builtins);
     tlib = (import ./lib lib).extend (_: prev: rec {
       makePkgs = system:
         import ./pkgs-set {
           inherit system lib;
           tlib = prev;
-          stable = inputs.nixos;
-          unstable = inputs.latest;
+          channel = inputs.nixpkgs;
         };
       genPkgs = f: prev.genSystems (system: f (makePkgs system));
     });

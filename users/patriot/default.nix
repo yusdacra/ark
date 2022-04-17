@@ -290,7 +290,7 @@ in {
           (
             steam.override
             {
-              extraLibraries = pkgs: [pkgs.pipewire];
+              extraLibraries = pkgs: with pkgs; [mimalloc pipewire vulkan-loader wayland wayland-protocols];
               extraProfile = ''
                 unset VK_ICD_FILENAMES
                 export VK_ICD_FILENAMES=${nixosConfig.environment.variables.VK_ICD_FILENAMES}'';
@@ -303,7 +303,7 @@ in {
          }))
          */
         standardnotes
-        discord-system-electron
+        #discord-system-electron
       ];
     };
     wayland.windowManager = {
@@ -414,6 +414,9 @@ in {
           set -ga terminal-overrides ",alacritty:Tc"
           set -g status off
         '';
+      };
+      firefox = {
+        enable = true;
       };
       chromium = {
         enable = true;
