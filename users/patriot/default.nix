@@ -390,10 +390,10 @@ in {
       alacritty = {
         enable = true;
         settings = {
-          shell = {
+          /*shell = {
             program = "${pkgs.tmux}/bin/tmux";
             args = ["attach"];
-          };
+          };*/
           font = {
             normal = {family = font;};
             size = fontSize;
@@ -402,7 +402,7 @@ in {
         };
       };
       tmux = {
-        enable = true;
+        enable = false;
         newSession = true;
         secureSocket = true;
         baseIndex = 1;
