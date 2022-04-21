@@ -69,7 +69,7 @@ in {
       enable = true;
       desktopManager = {
         plasma5.enable = false;
-        gnome.enable = false;
+        gnome.enable = true;
         xterm.enable = false;
       };
       displayManager = {
@@ -79,11 +79,11 @@ in {
         };
         lightdm.enable = false;
         gdm = {
-          enable = false;
+          enable = true;
           wayland = true;
         };
         sddm.enable = false;
-        startx.enable = true;
+        startx.enable = false;
       };
     };
   };
@@ -310,7 +310,7 @@ in {
       sway = let
         mkRofiCmd = args: "${config.programs.rofi.package}/bin/rofi ${lib.concatStringsSep " " args} | ${pkgs.sway}/bin/swaymsg --";
       in {
-        enable = true;
+        enable = false;
         extraSessionCommands = extraEnv;
         wrapperFeatures.gtk = true;
         extraConfig = ''
@@ -554,7 +554,7 @@ in {
       };
       fzf.enable = true;
       rofi = {
-        enable = true;
+        enable = false;
         package = pkgs.rofi-wayland;
         cycle = true;
         font = fontComb;
