@@ -68,7 +68,7 @@ in {
       };
       displayManager = {
         autoLogin = {
-          enable = true;
+          enable = false;
           user = "patriot";
         };
         gdm = {
@@ -142,20 +142,7 @@ in {
         ffmpeg
         mupdf
         transmission-qt
-        (
-          lib.hiPrio
-          (
-            lutris.overrideAttrs
-            (
-              old: {
-                profile = ''
-                  ${old.profile or ""}
-                  unset VK_ICD_FILENAMES
-                  export VK_ICD_FILENAMES=${nixosConfig.environment.variables.VK_ICD_FILENAMES}'';
-              }
-            )
-          )
-        )
+        lutris
         xdg_utils
         tagref
         hydrus
@@ -168,9 +155,6 @@ in {
             steam.override
             {
               extraLibraries = pkgs: with pkgs; [mimalloc pipewire vulkan-loader wayland wayland-protocols];
-              extraProfile = ''
-                unset VK_ICD_FILENAMES
-                export VK_ICD_FILENAMES=${nixosConfig.environment.variables.VK_ICD_FILENAMES}'';
             }
           )
         )
@@ -380,7 +364,6 @@ in {
       enable = true;
       configFile = {
         "wezterm/wezterm.lua".text = import ./config/wezterm/cfg.nix {inherit font;};
-        "wezterm/colors/mytheme.toml".text = import ./config/wezterm/mytheme.nix {};
         "helix/themes/mytheme.toml".text = import ./config/helix/mytheme.nix {};
         "helix/config.toml".text = import ./config/helix/cfg.nix {};
         "helix/languages.toml".text = import ./config/helix/languages.nix {inherit pkgBin;};

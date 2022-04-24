@@ -182,16 +182,6 @@ in {
       directories = ["/etc/nixos"];
       files = ["/etc/machine-id"];
     };
-    variables = {
-      VK_ICD_FILENAMES =
-        lib.mkForce
-        "${pkgs.amdvlk}/share/vulkan/icd.d/amd_icd64.json:${pkgs.driversi686Linux.amdvlk}/share/vulkan/icd.d/amd_icd32.json";
-    };
-    sessionVariables = {
-      VK_ICD_FILENAMES =
-        lib.mkForce
-        "${pkgs.amdvlk}/share/vulkan/icd.d/amd_icd64.json:${pkgs.driversi686Linux.amdvlk}/share/vulkan/icd.d/amd_icd32.json";
-    };
   };
 
   networking.interfaces.enp6s0.useDHCP = true;

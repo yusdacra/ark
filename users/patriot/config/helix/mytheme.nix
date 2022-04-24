@@ -7,7 +7,7 @@
   "ui.linenr" = {fg = "subtle" }
   "ui.liner.selected" = "highlightOverlay"
   "ui.selection" = { bg = "highlight" }
-  "comment" = { fg = "subtle", modifiers = ["italic"] }
+  "comment" = { fg = "subtle" }
   "ui.statusline" = {fg = "foam", bg = "surface" }
   "ui.statusline.inactive" = { fg = "iris", bg = "surface" }
   "ui.help" = { fg = "foam", bg = "surface" }
