@@ -1,6 +1,4 @@
 {...}: ''
-  # rose pine
-
   "ui.background" = { bg = "base" }
   "ui.menu" = { fg = "text", bg = "overlay" }
   "ui.menu.selected" = { fg = "iris", bg = "surface" }
@@ -65,19 +63,18 @@
   "markup.raw" = { fg = "foam" }
 
   [palette]
-  base     = "#191724"
-  surface  = "#1f1d2e"
+  base     = "#171423"
+  surface  = "#2d283f"
   overlay  = "#26233a"
   inactive = "#555169"
   subtle   = "#6e6a86"
-  text     = "#e0def4"
+  text     = "#9f9fa1"
   love     = "#eb6f92"
   gold     = "#f6c177"
   rose     = "#ebbcba"
   pine     = "#31748f"
   foam     = "#9ccfd8"
   iris     = "#c4a7e7"
-  highlight = "#2a2837"
-  highlightInactive = "#211f2d"
+  highlight = "#493d70"
   highlightOverlay = "#3a384a"
 ''
