@@ -123,7 +123,7 @@ in {
         noto-fonts-cjk
         font-awesome
         dejavu_fonts
-        (nerdfonts.override {fonts = ["Monoid"];})
+        #(nerdfonts.override {fonts = [font.name];})
         # Programs
         wezterm
         cargo-outdated
@@ -151,12 +151,9 @@ in {
         rust-analyzer
         (
           lib.hiPrio
-          (
-            steam.override
-            {
-              extraLibraries = pkgs: with pkgs; [mimalloc pipewire vulkan-loader wayland wayland-protocols];
-            }
-          )
+          (steam.override {
+            extraLibraries = pkgs: with pkgs; [mimalloc pipewire vulkan-loader wayland wayland-protocols];
+          })
         )
         /*
          (multimc.overrideAttrs (old: {
@@ -164,7 +161,6 @@ in {
          }))
          */
         standardnotes
-        #discord-system-electron
         gh
         cloudflared
         ripcord

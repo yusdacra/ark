@@ -15,6 +15,7 @@
       keep-derivations = true
       fallback = true
       extra-experimental-features = nix-command flakes
+      builders-use-substitutes = true
     '';
     useSandbox = true;
     allowedUsers = ["@wheel"];

@@ -1,6 +1,7 @@
 result
 .direnv
 doc/index.html
+keys
 
 # Result of bud commands
 vm
