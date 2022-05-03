@@ -165,6 +165,9 @@ in {
          */
         standardnotes
         #discord-system-electron
+        gh
+        cloudflared
+        ripcord
       ];
     };
     programs = {
