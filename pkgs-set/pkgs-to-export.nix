@@ -1,1 +1,1 @@
-["discord-system-electron"]
+["discord-system-electron" "fractal-next"]

@@ -2,7 +2,7 @@
   programs.starship = {
     enable = true;
     settings = {
-      format = "$shell$shlvl$nix_shell@ $directory> ";
+      format = "$shell$shlvl$nix_shell@ $directory$character";
       add_newline = false;
       character = {
         success_symbol = "[>](bold green)";

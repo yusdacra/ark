@@ -193,7 +193,7 @@ in {
       enableGC = true;
       autoMount = true;
     };
-    flatpak.enable = false;
+    flatpak.enable = true;
     xserver.videoDrivers = ["amdgpu"];
   };
 
