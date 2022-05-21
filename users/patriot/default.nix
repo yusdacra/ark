@@ -28,12 +28,20 @@ in {
   };
   xdg.portal = {
     enable = true;
-    gtkUsePortal = true;
-    extraPortals = with pkgs; [xdg-desktop-portal xdg-desktop-portal-wlr];
+    wlr.enable = true;
+    gtkUsePortal = false;
+    extraPortals = with pkgs; [xdg-desktop-portal-wlr];
   };
   programs = {
     adb.enable = true;
     steam.enable = true;
+    kdeconnect = {
+      enable = true;
+      package = pkgs.gnomeExtensions.gsconnect;
+    };
+    gnome-disks.enable = true;
+    file-roller.enable = true;
+    seahorse.enable = true;
   };
   security = {
     pam.services.patriot = {
@@ -55,7 +63,16 @@ in {
   services = {
     psd.enable = true;
     gnome = {
+      gnome-settings-daemon.enable = true;
+      sushi.enable = true;
       gnome-keyring.enable = true;
+      core-shell.enable = true;
+      core-os-services.enable = true;
+      chrome-gnome-shell.enable = true;
+      at-spi2-core.enable = true;
+      gnome-online-accounts.enable = false;
+      gnome-online-miners.enable = lib.mkForce false;
+      gnome-remote-desktop.enable = false;
       core-utilities.enable = false;
       tracker-miners.enable = false;
       tracker.enable = false;
@@ -68,7 +85,7 @@ in {
       };
       displayManager = {
         autoLogin = {
-          enable = false;
+          enable = true;
           user = "patriot";
         };
         gdm = {
@@ -82,6 +99,8 @@ in {
   systemd = {
     targets.network-online.enable = false;
     services = {
+      "getty@tty1".enable = false;
+      "autovt@tty1".enable = false;
       systemd-networkd-wait-online.enable = false;
       NetworkManager-wait-online.enable = false;
     };
@@ -131,7 +150,7 @@ in {
         cargo-udeps
         vulkan-tools
         krita
-        gnome3.seahorse
+        gnome.nautilus
         cachix
         appimage-run
         pfetch
@@ -145,7 +164,6 @@ in {
         lutris
         xdg_utils
         tagref
-        hydrus
         papirus-icon-theme
         wl-clipboard
         rust-analyzer
@@ -164,6 +182,7 @@ in {
         gh
         cloudflared
         ripcord
+        fractal-next
       ];
     };
     programs = {

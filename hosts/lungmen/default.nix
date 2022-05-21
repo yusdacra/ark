@@ -97,11 +97,13 @@ in {
     fsType = "btrfs";
     options = ["subvol=home"] ++ btrfsOptions;
   };
-  #fileSystems."/media/archive" = {
-  #  device = "/dev/disk/by-uuid/f9b5f7f3-51e8-4357-8518-986b16311c71";
-  #  fsType = "btrfs";
-  #  options = btrfsOptions;
-  #};
+  /*
+     fileSystems."/media/archive" = {
+     device = "/dev/disk/by-uuid/f9b5f7f3-51e8-4357-8518-986b16311c71";
+     fsType = "btrfs";
+     options = btrfsOptions;
+   };
+   */
   fileSystems."/nix" = {
     device = btrfsPartPath;
     fsType = "btrfs";
@@ -185,15 +187,18 @@ in {
     };
   };
 
+  networking.firewall.checkReversePath = "loose";
   networking.interfaces.enp6s0.useDHCP = true;
   services = {
+    haveged.enable = true;
+    tailscale.enable = true;
     earlyoom.enable = true;
     ipfs = {
       enable = false;
       enableGC = true;
       autoMount = true;
     };
-    flatpak.enable = true;
+    flatpak.enable = false;
     xserver.videoDrivers = ["amdgpu"];
   };
 

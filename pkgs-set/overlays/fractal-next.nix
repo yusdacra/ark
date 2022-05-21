@@ -97,6 +97,8 @@ let
       # <spa-0.2/spa/utils/defs.h> included by libspa-sys requires <stdbool.h>
       BINDGEN_EXTRA_CLANG_ARGS = "-I${llvmPackages.libclang.lib}/lib/clang/${lib.getVersion llvmPackages.clang}/include -I${glibc.dev}/include";
 
+      doCheck = false;
+
       postPatch = ''
         patchShebangs build-aux/meson_post_install.py
       '';
