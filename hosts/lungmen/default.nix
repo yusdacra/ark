@@ -46,7 +46,7 @@ in {
     common-pc
     common-gpu-amd
     common-cpu-amd
-    ../../modules/network/dns
+    ../../modules/network
     ../../modules/develop/nixbuild
     ../../users/root
     ../../users/patriot

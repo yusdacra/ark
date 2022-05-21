@@ -182,7 +182,6 @@ in {
         gh
         cloudflared
         ripcord
-        fractal-next
       ];
     };
     programs = {

@@ -21,7 +21,7 @@ final: prev: rec {
         "--enable-zero-copy"
         "--disable-gpu-driver-bug-workarounds"
       ];
-      electron = prev.electron_13;
+      electron = prev.electron_15;
     };
   mkDiscord = {
     pname,
@@ -195,8 +195,8 @@ final: prev: rec {
           icon = pname;
           inherit desktopName;
           genericName = meta.description;
-          categories = "Network;InstantMessaging;";
-          mimeType = "x-scheme-handler/discord";
+          categories = ["Network" "InstantMessaging"];
+          mimeTypes = ["x-scheme-handler/discord"];
         };
       meta = with lib; {
         description = "All-in-one cross-platform voice and text chat for gamers";
