@@ -142,6 +142,6 @@ in {
     diff-closures /run/current-system "$systemConfig"
   '';
   users.mutableUsers = false;
-  programs.command-not-found.enable = false;
+  programs.command-not-found.enable = true;
   nixpkgs.config.allowUnfree = true;
 }

@@ -183,8 +183,19 @@ in {
         cloudflared
         ripcord
       ];
+      shellAliases =
+        nixosConfig.environment.shellAliases
+        // {
+          harmony-ssh = ''
+            ${pkgBin "mosh"} root@chat.harmonyapp.io
+          '';
+        };
+      sessionVariables = {
+        NIX_AUTO_RUN = 1;
+      };
     };
     programs = {
+      command-not-found.enable = nixosConfig.programs.command-not-found.enable;
       firefox = {
         enable = true;
       };
@@ -192,22 +203,24 @@ in {
         enable = true;
         package = pkgs.chromium;
         extensions = [
-          "gcbommkclmclpchllfjekcdonpmejbdp"
           # https everywhere
-          "cjpalhdlnbpafiamejdnhcphjbkeiagm"
+          "gcbommkclmclpchllfjekcdonpmejbdp"
           # ublock
-          "nngceckbapebfimnlniiiahkandclblb"
+          "cjpalhdlnbpafiamejdnhcphjbkeiagm"
           # bitwarden
-          "ldpochfccmkkmhdbclfhpagapcfdljkj"
+          "nngceckbapebfimnlniiiahkandclblb"
           # decentraleyes
-          "annfbnbieaamhaimclajlajpijgkdblo"
+          "ldpochfccmkkmhdbclfhpagapcfdljkj"
           # dark theme
-          "eimadpbcbfnmbkopoojfekhnkhdbieeh"
+          "annfbnbieaamhaimclajlajpijgkdblo"
           # dark reader
-          "hlepfoohegkhhmjieoechaddaejaokhf"
+          "eimadpbcbfnmbkopoojfekhnkhdbieeh"
           # github refined
-          "pmcmeagblkinmogikoikkdjiligflglb"
+          "hlepfoohegkhhmjieoechaddaejaokhf"
           # privacy redirect
+          "pmcmeagblkinmogikoikkdjiligflglb"
+          # pronoundb
+          "nblkbiljcjfemkfjnhoobnojjgjdmknf"
         ];
       };
       git = {
@@ -279,13 +292,6 @@ in {
 
           eval "$(zoxide init zsh)"
         '';
-        shellAliases =
-          nixosConfig.environment.shellAliases
-          // {
-            harmony-ssh = ''
-              ${pkgBin "mosh"} root@chat.harmonyapp.io
-            '';
-          };
       };
       fzf.enable = true;
       vscode = {

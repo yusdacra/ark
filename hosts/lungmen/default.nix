@@ -203,6 +203,7 @@ in {
   };
 
   virtualisation = {
+    waydroid.enable = false;
     podman.enable = true;
     libvirtd.enable = false;
   };
