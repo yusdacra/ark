@@ -5,8 +5,11 @@
   ...
 }: {
   nix = {
-    registry = builtins.mapAttrs (_: v: {flake = v;}) (lib.filterAttrs (_: v: v ? outputs) inputs);
-    package = pkgs.nixUnstable;
+    registry =
+      builtins.mapAttrs
+      (_: v: {flake = v;})
+      (lib.filterAttrs (_: v: v ? outputs) inputs);
+    package = pkgs.nix;
     gc.automatic = true;
     optimise.automatic = true;
     extraOptions = ''

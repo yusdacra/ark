@@ -9,6 +9,9 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixos-persistence.url = "github:nix-community/impermanence";
+
+    nix.url = "github:nixos/nix";
+    nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs: let
@@ -16,9 +19,8 @@
     tlib = (import ./lib lib).extend (_: prev: rec {
       makePkgs = system:
         import ./pkgs-set {
-          inherit system lib;
+          inherit system lib inputs;
           tlib = prev;
-          channel = inputs.nixpkgs;
         };
       genPkgs = f: prev.genSystems (system: f (makePkgs system));
     });
