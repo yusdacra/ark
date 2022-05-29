@@ -144,6 +144,7 @@ in {
         dejavu_fonts
         #(nerdfonts.override {fonts = [font.name];})
         # Programs
+        gamescope
         wezterm
         cargo-outdated
         cargo-release
@@ -162,6 +163,7 @@ in {
         mupdf
         transmission-qt
         lutris
+        bottles
         xdg_utils
         tagref
         papirus-icon-theme
