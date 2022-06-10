@@ -1,7 +1,10 @@
 {
   programs.git = {
     enable = true;
-    extraConfig = {pull.rebase = true;};
+    extraConfig = {
+      pull.rebase = true;
+      safe.directory = "/etc/nixos";
+    };
     lfs.enable = true;
     aliases = {
       a = "add -p";

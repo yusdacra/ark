@@ -7,36 +7,6 @@
 }: let
   btrfsPartPath = "/dev/disk/by-label/NIXOS";
   btrfsOptions = ["compress-force=zstd" "noatime"];
-  btrfsDiff =
-    pkgs.writeScriptBin
-    "btrfs-diff"
-    ''
-      #!${pkgs.bash}/bin/bash
-      set -euo pipefail
-
-      sudo mkdir -p /mnt
-      sudo mount -o subvol=/ ${btrfsPartPath} /mnt
-
-      OLD_TRANSID=$(sudo btrfs subvolume find-new /mnt/root-blank 9999999)
-
-      sudo btrfs subvolume find-new "/mnt/root" "$OLD_TRANSID" |
-      sed '$d' |
-      cut -f17- -d' ' |
-      sort |
-      uniq |
-      while read path; do
-        path="/$path"
-        if [ -L "$path" ]; then
-          : # The path is a symbolic link, so is probably handled by NixOS already
-        elif [ -d "$path" ]; then
-          : # The path is a directory, ignore
-        else
-          echo "$path"
-        fi
-      done
-
-      sudo umount /mnt
-    '';
 in {
   imports = with inputs;
   with nixos-hardware.nixosModules; [
@@ -67,43 +37,14 @@ in {
     };
     kernelModules = ["kvm-amd"];
     extraModulePackages = [];
-    initrd.postDeviceCommands =
-      pkgs.lib.mkBefore
-      ''
-        mkdir -p /mnt
-        mount -o subvol=/ ${btrfsPartPath} /mnt
-        btrfs subvolume list -o /mnt/root |
-        cut -f9 -d' ' |
-        while read subvolume; do
-          echo "deleting /$subvolume subvolume..."
-          btrfs subvolume delete "/mnt/$subvolume"
-        done &&
-        echo "deleting /root subvolume..." &&
-        btrfs subvolume delete /mnt/root
-        echo "restoring blank /root subvolume"
-        btrfs subvolume snapshot /mnt/root-blank /mnt/root
-        umount /mnt
-      '';
     kernel.sysctl = {"fs.inotify.max_user_watches" = 524288;};
   };
 
   fileSystems."/" = {
-    device = btrfsPartPath;
-    fsType = "btrfs";
-    options = ["subvol=root"] ++ btrfsOptions;
+    device = "none";
+    fsType = "tmpfs";
+    options = ["defaults" "size=2G" "mode=755"];
   };
-  fileSystems."/home" = {
-    device = btrfsPartPath;
-    fsType = "btrfs";
-    options = ["subvol=home"] ++ btrfsOptions;
-  };
-  /*
-     fileSystems."/media/archive" = {
-     device = "/dev/disk/by-uuid/f9b5f7f3-51e8-4357-8518-986b16311c71";
-     fsType = "btrfs";
-     options = btrfsOptions;
-   };
-   */
   fileSystems."/nix" = {
     device = btrfsPartPath;
     fsType = "btrfs";
@@ -116,9 +57,16 @@ in {
     neededForBoot = true;
   };
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/5784-BBB1";
+    device = "/dev/disk/by-label/BOOT";
     fsType = "vfat";
   };
+  /*
+     fileSystems."/media/archive" = {
+     device = "/dev/disk/by-uuid/f9b5f7f3-51e8-4357-8518-986b16311c71";
+     fsType = "btrfs";
+     options = btrfsOptions;
+   };
+   */
 
   swapDevices = [];
   zramSwap = {
@@ -162,9 +110,11 @@ in {
       driSupport = true;
       driSupport32Bit = true;
       enable = true;
-      extraPackages = with pkgs; [amdvlk libvdpau-va-gl vaapiVdpau libva vulkan-loader pipewire];
-      extraPackages32 = with pkgs.pkgsi686Linux;
-        [libvdpau-va-gl vaapiVdpau libva vulkan-loader pipewire] ++ [pkgs.driversi686Linux.amdvlk];
+      /*
+         extraPackages = with pkgs; [amdvlk libvdpau-va-gl vaapiVdpau libva vulkan-loader pipewire];
+       extraPackages32 = with pkgs.pkgsi686Linux;
+         [libvdpau-va-gl vaapiVdpau libva vulkan-loader pipewire] ++ [pkgs.driversi686Linux.amdvlk];
+       */
     };
     pulseaudio = {
       enable = false;
@@ -179,7 +129,7 @@ in {
   };
 
   environment = {
-    systemPackages = [btrfsDiff pkgs.ntfs3g];
+    systemPackages = [pkgs.ntfs3g];
     pathsToLink = ["/share/zsh"];
     persistence."/persist" = {
       directories = ["/etc/nixos"];
@@ -190,9 +140,8 @@ in {
   networking.firewall.checkReversePath = "loose";
   networking.interfaces.enp6s0.useDHCP = true;
   services = {
-    haveged.enable = true;
-    tailscale.enable = true;
     earlyoom.enable = true;
+    tailscale.enable = false;
     ipfs = {
       enable = false;
       enableGC = true;
@@ -204,9 +153,9 @@ in {
 
   virtualisation = {
     waydroid.enable = false;
-    podman.enable = true;
+    podman.enable = false;
     libvirtd.enable = false;
   };
 
-  system.stateVersion = "20.09";
+  system.stateVersion = "22.05";
 }

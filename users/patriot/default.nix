@@ -33,14 +33,15 @@ in {
     extraPortals = with pkgs; [xdg-desktop-portal-wlr];
   };
   programs = {
+    fuse.userAllowOther = true;
     adb.enable = true;
-    steam.enable = true;
+    #steam.enable = true;
     kdeconnect = {
       enable = true;
       package = pkgs.gnomeExtensions.gsconnect;
     };
-    gnome-disks.enable = true;
-    file-roller.enable = true;
+    gnome-disks.enable = false;
+    file-roller.enable = false;
     seahorse.enable = true;
   };
   security = {
@@ -63,8 +64,6 @@ in {
   services = {
     psd.enable = true;
     gnome = {
-      gnome-settings-daemon.enable = true;
-      sushi.enable = true;
       gnome-keyring.enable = true;
       core-shell.enable = true;
       core-os-services.enable = true;
@@ -76,6 +75,8 @@ in {
       core-utilities.enable = false;
       tracker-miners.enable = false;
       tracker.enable = false;
+      gnome-settings-daemon.enable = lib.mkForce false;
+      sushi.enable = false;
     };
     xserver = {
       enable = true;
@@ -108,6 +109,7 @@ in {
   home-manager.users.patriot = {
     config,
     pkgs,
+    inputs,
     ...
   }: let
     personal = import ../../personal.nix;
@@ -132,7 +134,43 @@ in {
       ../modules/direnv
       ../modules/git
       ../modules/starship
+      ../modules/smos
+      inputs.nixos-persistence.nixosModules.home-manager.impermanence
     ];
+
+    home.persistence."/persist/home/patriot" = let
+      mkPaths = prefix: paths:
+        builtins.map (n: "${prefix}/${n}") paths;
+    in {
+      directories =
+        [
+          "Downloads"
+          "proj"
+          "smos"
+          # ssh / gpg / keys
+          ".ssh"
+          ".gnupg"
+          "keys"
+          # caches / history stuff
+          ".directory_history"
+          ".cargo"
+          ".cache"
+        ]
+        ++ mkPaths ".local/share" [
+          "zoxide"
+          "direnv"
+        ]
+        ++ mkPaths ".config" [
+          "dconf"
+          "chromium"
+        ];
+      files = [
+        ".config/gnome-initial-setup-done"
+        ".local/share/zsh/history"
+      ];
+      allowOther = true;
+    };
+
     fonts.fontconfig.enable = lib.mkForce true;
     home = {
       homeDirectory = nixosConfig.users.users.patriot.home;
@@ -144,16 +182,14 @@ in {
         dejavu_fonts
         #(nerdfonts.override {fonts = [font.name];})
         # Programs
-        gamescope
         wezterm
         cargo-outdated
         cargo-release
         cargo-udeps
         vulkan-tools
         krita
-        gnome.nautilus
         cachix
-        appimage-run
+        #appimage-run
         pfetch
         gnupg
         imv
@@ -162,28 +198,26 @@ in {
         ffmpeg
         mupdf
         transmission-qt
-        lutris
-        bottles
+        #lutris
         xdg_utils
         tagref
         papirus-icon-theme
         wl-clipboard
         rust-analyzer
-        (
-          lib.hiPrio
-          (steam.override {
-            extraLibraries = pkgs: with pkgs; [mimalloc pipewire vulkan-loader wayland wayland-protocols];
-          })
-        )
+        /*
+           (
+           lib.hiPrio
+           (steam.override {
+             extraLibraries = pkgs: with pkgs; [mimalloc pipewire vulkan-loader wayland wayland-protocols];
+           })
+         )
+         */
         /*
          (multimc.overrideAttrs (old: {
          src = builtins.fetchGit { url = "https://github.com/AfoninZ/MultiMC5-Cracked.git"; ref = "develop"; rev = "9069e9c9d0b7951c310fdcc8bdc70ebc422a7634"; submodules = true; };
          }))
          */
-        standardnotes
-        gh
         cloudflared
-        ripcord
       ];
       shellAliases =
         nixosConfig.environment.shellAliases
@@ -192,14 +226,11 @@ in {
             ${pkgBin "mosh"} root@chat.harmonyapp.io
           '';
         };
-      sessionVariables = {
-        NIX_AUTO_RUN = 1;
-      };
     };
     programs = {
       command-not-found.enable = nixosConfig.programs.command-not-found.enable;
       firefox = {
-        enable = true;
+        enable = false;
       };
       chromium = {
         enable = true;
@@ -297,7 +328,7 @@ in {
       };
       fzf.enable = true;
       vscode = {
-        enable = true;
+        enable = false;
         package = pkgs.vscode;
         extensions = let
           mkExt = n: v: p: s: {
@@ -377,12 +408,7 @@ in {
         defaultCacheTtlSsh = defaultCacheTtl;
         maxCacheTtlSsh = maxCacheTtl;
         grabKeyboardAndMouse = false;
-        pinentryFlavor = "qt";
-      };
-      gammastep = {
-        enable = false;
-        latitude = 36.9;
-        longitude = 30.7;
+        pinentryFlavor = "gnome3";
       };
     };
     xdg = {

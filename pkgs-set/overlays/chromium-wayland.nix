@@ -2,7 +2,8 @@ _: prev: let
   cliArgs = let
     flags = [
       "--flag-switches-begin"
-      "--enable-features=WebUIDarkMode,UseOzonePlatform,WebRTCPipeWireCapturer,IgnoreGPUBlocklist"
+      "--enable-features=WebUIDarkMode,UseOzonePlatform,WebRTCPipeWireCapturer"
+      "--disable-features=IgnoreGPUBlocklist"
       "--flag-switches-end"
       "--ozone-platform=wayland"
       "--enable-webrtc-pipewire-capturer"

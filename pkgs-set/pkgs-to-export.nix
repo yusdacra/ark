@@ -1,1 +1,6 @@
-["discord-system-electron" "fractal-next" "gamescope"]
+[
+  "discord-system-electron"
+  "fractal-next"
+  "gamescope"
+  "gaudible"
+]

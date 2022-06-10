@@ -10,8 +10,8 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixos-persistence.url = "github:nix-community/impermanence";
 
-    nix.url = "github:nixos/nix";
-    nix.inputs.nixpkgs.follows = "nixpkgs";
+    smos.url = "github:yusdacra/smos/chore/fix-nix-flakes";
+    smos.flake = false;
   };
 
   outputs = inputs: let

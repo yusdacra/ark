@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  inputs,
+  ...
+}: {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.sharedModules = [
@@ -8,4 +12,5 @@
       xdg.configFile."nix/nix.conf".source = config.environment.etc."nix/nix.conf".source;
     }
   ];
+  home-manager.extraSpecialArgs = {inherit inputs;};
 }
