@@ -12,9 +12,6 @@ in {
     notify.enable = true;
     config = {
       workflow-dir = smosDir + "/workflows";
-      projects-dir = smosDir + "/projects";
-      archive-dir = smosDir + "/archive";
-      archived-projects-dir = smosDir + "/archived-projects";
       github.oauth-token = secrets.githubToken;
     };
   };

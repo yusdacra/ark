@@ -159,14 +159,17 @@ in {
         ++ mkPaths ".local/share" [
           "zoxide"
           "direnv"
+          "bottles"
         ]
         ++ mkPaths ".config" [
           "dconf"
           "chromium"
+          "gsconnect"
         ];
       files = [
         ".config/gnome-initial-setup-done"
-        ".local/share/zsh/history"
+        config.programs.zsh.history.path
+        (lib.removePrefix "~/" config.programs.ssh.userKnownHostsFile)
       ];
       allowOther = true;
     };
@@ -180,7 +183,6 @@ in {
         noto-fonts-cjk
         font-awesome
         dejavu_fonts
-        #(nerdfonts.override {fonts = [font.name];})
         # Programs
         wezterm
         cargo-outdated
@@ -189,18 +191,13 @@ in {
         vulkan-tools
         krita
         cachix
-        #appimage-run
-        pfetch
         gnupg
         imv
         mpv
         youtube-dl
         ffmpeg
         mupdf
-        transmission-qt
-        #lutris
         xdg_utils
-        tagref
         papirus-icon-theme
         wl-clipboard
         rust-analyzer
@@ -217,6 +214,7 @@ in {
          src = builtins.fetchGit { url = "https://github.com/AfoninZ/MultiMC5-Cracked.git"; ref = "develop"; rev = "9069e9c9d0b7951c310fdcc8bdc70ebc422a7634"; submodules = true; };
          }))
          */
+        bottles
         cloudflared
       ];
       shellAliases =
