@@ -30,6 +30,5 @@
     packages = tlib.genPkgs (pkgs: pkgs._exported);
 
     devShells = import ./shells {inherit lib tlib inputs;};
-    devShell = lib.mapAttrs (_: value: value.default) devShells;
   };
 }

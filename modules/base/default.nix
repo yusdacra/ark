@@ -68,10 +68,10 @@ in {
       df = "${coreBin "df"} -h";
       free = "${pkgs.procps}/bin/free -h";
       ls = pkgBin "exa";
-      l = "${pkgBin "exa"} -lhg --git";
-      la = "${pkgBin "exa"} -lhg --git -a";
-      t = "${pkgBin "exa"} -lhg --git -T";
-      ta = "${pkgBin "exa"} -lhg --git -a -T";
+      l = "${pkgBin "exa"} -lhg";
+      la = "${pkgBin "exa"} -lhg -a";
+      t = "${pkgBin "exa"} -lhg -T";
+      ta = "${pkgBin "exa"} -lhg -a -T";
       n = nixBin;
       nf = "${nixBin} flake";
       nfu = "${nixBin} flake update";

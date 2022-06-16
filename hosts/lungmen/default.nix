@@ -17,7 +17,7 @@ in {
     common-gpu-amd
     common-cpu-amd
     ../../modules/network
-    ../../modules/develop/nixbuild
+    #../../modules/develop/nixbuild
     ../../users/root
     ../../users/patriot
   ];

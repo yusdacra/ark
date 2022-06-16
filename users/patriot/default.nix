@@ -35,7 +35,7 @@ in {
   programs = {
     fuse.userAllowOther = true;
     adb.enable = true;
-    #steam.enable = true;
+    steam.enable = true;
     kdeconnect = {
       enable = true;
       package = pkgs.gnomeExtensions.gsconnect;
@@ -49,20 +49,8 @@ in {
       enableGnomeKeyring = true;
       enableKwallet = false;
     };
-    sudo.extraRules = [
-      {
-        users = ["patriot"];
-        commands = [
-          {
-            command = "${pkgs.profile-sync-daemon}/bin/psd-overlay-helper";
-            options = ["SETENV" "NOPASSWD"];
-          }
-        ];
-      }
-    ];
   };
   services = {
-    psd.enable = true;
     gnome = {
       gnome-keyring.enable = true;
       core-shell.enable = true;
@@ -134,7 +122,7 @@ in {
       ../modules/direnv
       ../modules/git
       ../modules/starship
-      ../modules/smos
+      # ../modules/smos
       inputs.nixos-persistence.nixosModules.home-manager.impermanence
     ];
 
@@ -146,7 +134,8 @@ in {
         [
           "Downloads"
           "proj"
-          "smos"
+          # "smos"
+          ".steam"
           # ssh / gpg / keys
           ".ssh"
           ".gnupg"
@@ -160,6 +149,8 @@ in {
           "zoxide"
           "direnv"
           "bottles"
+          "zsh"
+          "Steam"
         ]
         ++ mkPaths ".config" [
           "dconf"
@@ -168,7 +159,6 @@ in {
         ];
       files = [
         ".config/gnome-initial-setup-done"
-        config.programs.zsh.history.path
         (lib.removePrefix "~/" config.programs.ssh.userKnownHostsFile)
       ];
       allowOther = true;
@@ -184,6 +174,7 @@ in {
         font-awesome
         dejavu_fonts
         # Programs
+        bitwarden
         wezterm
         cargo-outdated
         cargo-release
@@ -194,21 +185,11 @@ in {
         gnupg
         imv
         mpv
-        youtube-dl
         ffmpeg
         mupdf
         xdg_utils
-        papirus-icon-theme
         wl-clipboard
         rust-analyzer
-        /*
-           (
-           lib.hiPrio
-           (steam.override {
-             extraLibraries = pkgs: with pkgs; [mimalloc pipewire vulkan-loader wayland wayland-protocols];
-           })
-         )
-         */
         /*
          (multimc.overrideAttrs (old: {
          src = builtins.fetchGit { url = "https://github.com/AfoninZ/MultiMC5-Cracked.git"; ref = "develop"; rev = "9069e9c9d0b7951c310fdcc8bdc70ebc422a7634"; submodules = true; };
@@ -226,10 +207,8 @@ in {
         };
     };
     programs = {
-      command-not-found.enable = nixosConfig.programs.command-not-found.enable;
-      firefox = {
-        enable = false;
-      };
+      command-not-found.enable =
+        nixosConfig.programs.command-not-found.enable;
       chromium = {
         enable = true;
         package = pkgs.chromium;
@@ -325,74 +304,6 @@ in {
         '';
       };
       fzf.enable = true;
-      vscode = {
-        enable = false;
-        package = pkgs.vscode;
-        extensions = let
-          mkExt = n: v: p: s: {
-            name = n;
-            version = v;
-            publisher = p;
-            sha256 = s;
-          };
-        in
-          (
-            pkgs.vscode-utils.extensionsFromVscodeMarketplace
-            [
-              # Rust
-              (mkExt "rust-analyzer" "0.3.968" "matklad" "sha256-wuNdmUYburGjgri8gFJl1FSryJbz1aXjJy4NQ+/Wbk4=")
-              (mkExt "even-better-toml" "0.14.2" "tamasfe" "sha256-lE2t+KUfClD/xjpvexTJlEr7Kufo+22DUM9Ju4Tisp0=")
-              (mkExt "crates" "0.5.10" "serayuzgur" "sha256-bY/dphiEPPgTg1zMjvxx4b0Ska2XggRucnZxtbppcLU=")
-              # Nix
-              (
-                mkExt "nix-env-selector" "1.0.7" "arrterian" "sha256-DnaIXJ27bcpOrIp1hm7DcrlIzGSjo4RTJ9fD72ukKlc="
-              )
-              # Go
-              (mkExt "Go" "0.32.0" "golang" "sha256-OsKeZrG157l1HUCDvymJ3ovLxlEEJf7RBe2hXOutdyg=")
-              # Flutter and dart
-              (mkExt "flutter" "3.37.20220301" "Dart-Code" "sha256-PS24pbqKNZ/myNcTqgjosG0Pq58yMoATKDgy3k23JlE=")
-              (mkExt "dart-code" "3.37.20220303" "Dart-Code" "sha256-hS+V4kLe+eGIqj/1mZdgbhxWWxqSr2ZUsc2V0HI6tN8=")
-              # protobuf
-              (mkExt "vscode-proto3" "0.5.5" "zxh404" "sha256-Em+w3FyJLXrpVAe9N7zsHRoMcpvl+psmG1new7nA8iE=")
-              (mkExt "vscode-buf" "0.4.0" "bufbuild" "sha256-VM6LYYak1rB4AdpVYfKpOfizGaFI/R+iUsf6UT50vdw=")
-              # git
-              (mkExt "gitlens" "12.0.2" "eamodio" "sha256-et2uam4hOQkxxT+r0fwZhpWGjHk45NAOriFA/43ngpo=")
-              # Customization
-              (mkExt "material-icon-theme" "4.14.1" "PKief" "sha256-OHXi0EfeyKMeFiMU5yg0aDoWds4ED0lb+l6T12XZ3LQ=")
-              (mkExt "horizon-theme-vscode" "1.0.0" "alexandernanberg" "sha256-M7SmOYPkAVi5jQLynZqTjmFo9UcQ6W4dU4euP6ua9Z8=")
-            ]
-          )
-          ++ (
-            with pkgs.vscode-extensions; [
-              a5huynh.vscode-ron
-              /*
-               vadimcn.vscode-lldb
-               */
-              jnoortheen.nix-ide
-            ]
-          );
-        userSettings = {
-          "workbench.iconTheme" = "material-icon-theme";
-          "workbench.colorTheme" = "Horizon Bold";
-          "rust-analyzer.cargo.loadOutDirsFromCheck" = true;
-          "rust-analyzer.procMacro.enable" = true;
-          "rust-analyzer.server.path" = "${pkgs.rust-analyzer}/bin/rust-analyzer";
-          "rust-analyzer.updates.channel" = "nightly";
-          "editor.fontFamily" = "'${font.name}'";
-          "debug.console.fontFamily" = "${font.name}";
-          "debug.console.fontSize" = toString font.size;
-          "terminal.integrated.fontSize" = toString font.size;
-          "go.useLanguageServer" = true;
-          "rust-analyzer.checkOnSave.command" = "clippy";
-          "nix.enableLanguageServer" = true;
-          "nix.serverPath" = pkgBin "rnix-lsp";
-          "editor.bracketPairColorization.enabled" = true;
-          "editor.semanticHighlighting.enabled" = true;
-          "remote.SSH.defaultExtensions" = [
-            "gitpod.gitpod-remote-ssh"
-          ];
-        };
-      };
     };
     services = {
       gpg-agent = let
