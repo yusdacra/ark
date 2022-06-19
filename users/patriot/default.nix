@@ -148,14 +148,16 @@ in {
         ++ mkPaths ".local/share" [
           "zoxide"
           "direnv"
-          "bottles"
           "zsh"
           "Steam"
+          "backgrounds"
+          "seahorse"
         ]
         ++ mkPaths ".config" [
           "dconf"
           "chromium"
           "gsconnect"
+          "seahorse"
         ];
       files = [
         ".config/gnome-initial-setup-done"
@@ -195,7 +197,6 @@ in {
          src = builtins.fetchGit { url = "https://github.com/AfoninZ/MultiMC5-Cracked.git"; ref = "develop"; rev = "9069e9c9d0b7951c310fdcc8bdc70ebc422a7634"; submodules = true; };
          }))
          */
-        bottles
         cloudflared
       ];
       shellAliases =
