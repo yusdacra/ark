@@ -12,6 +12,9 @@
 
     smos.url = "github:yusdacra/smos/chore/fix-nix-flakes";
     smos.flake = false;
+
+    helix.url = "github:helix-editor/helix";
+    helix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs: let

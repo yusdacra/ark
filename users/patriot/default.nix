@@ -136,6 +136,7 @@ in {
           "proj"
           # "smos"
           ".steam"
+          ".wine"
           # ssh / gpg / keys
           ".ssh"
           ".gnupg"
@@ -151,13 +152,14 @@ in {
           "zsh"
           "Steam"
           "backgrounds"
-          "seahorse"
+          "keyrings"
+          "lutris"
         ]
         ++ mkPaths ".config" [
           "dconf"
           "chromium"
           "gsconnect"
-          "seahorse"
+          "lutris"
         ];
       files = [
         ".config/gnome-initial-setup-done"
@@ -192,12 +194,9 @@ in {
         xdg_utils
         wl-clipboard
         rust-analyzer
-        /*
-         (multimc.overrideAttrs (old: {
-         src = builtins.fetchGit { url = "https://github.com/AfoninZ/MultiMC5-Cracked.git"; ref = "develop"; rev = "9069e9c9d0b7951c310fdcc8bdc70ebc422a7634"; submodules = true; };
-         }))
-         */
+        # polymc
         cloudflared
+        lutris
       ];
       shellAliases =
         nixosConfig.environment.shellAliases
