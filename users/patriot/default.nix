@@ -170,6 +170,7 @@ in {
 
     fonts.fontconfig.enable = lib.mkForce true;
     home = {
+      stateVersion = nixosConfig.system.stateVersion;
       homeDirectory = nixosConfig.users.users.patriot.home;
       packages = with pkgs; [
         # Font stuff
@@ -283,7 +284,7 @@ in {
         in [fast-syntax-highlighting per-directory-history];
         # xdg compliant
         dotDir = ".config/zsh";
-        history.path = ".local/share/zsh/history";
+        history.path = "${config.home.homeDirectory}/.local/share/zsh/history";
         initExtra = ''
           export TERM=alacritty
           export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
