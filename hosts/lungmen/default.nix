@@ -110,9 +110,23 @@ in {
       driSupport = true;
       driSupport32Bit = true;
       enable = true;
-      extraPackages = with pkgs; [amdvlk libvdpau-va-gl vaapiVdpau libva vulkan-loader];
+      extraPackages = with pkgs; [
+        libvdpau-va-gl
+        vaapiVdpau
+        libva
+        vulkan-loader
+        amdvlk
+      ];
       extraPackages32 = with pkgs.pkgsi686Linux;
-        [libvdpau-va-gl vaapiVdpau libva vulkan-loader] ++ [pkgs.driversi686Linux.amdvlk];
+        [
+          libvdpau-va-gl
+          vaapiVdpau
+          libva
+          vulkan-loader
+        ]
+        ++ [
+          pkgs.driversi686Linux.amdvlk
+        ];
     };
     pulseaudio = {
       enable = false;

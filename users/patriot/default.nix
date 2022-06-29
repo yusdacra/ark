@@ -9,6 +9,7 @@
 
   pkgBin = tlib.pkgBin pkgs;
   nixosConfig = globalAttrs.config;
+  useWayland = false;
 in {
   users.users.patriot = {
     isNormalUser = true;
@@ -23,14 +24,14 @@ in {
     hashedPassword = "$6$spzqhAyJfhHy$iHgLBlhjGn1l8PnbjJdWTn1GPvcjMqYNKUzdCe/7IrX6sHNgETSr/Nfpdmq9FCXLhrAfwHOd/q/8SvfeIeNX4/";
   };
   environment = {
-    systemPackages = [pkgs.qt5.qtwayland];
+    systemPackages = lib.optional useWayland pkgs.qt5.qtwayland;
     shells = with pkgs; [bashInteractive zsh];
   };
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
+    wlr.enable = useWayland;
     gtkUsePortal = false;
-    extraPortals = with pkgs; [xdg-desktop-portal-wlr];
+    extraPortals = lib.optional useWayland pkgs.xdg-desktop-portal-wlr;
   };
   programs = {
     fuse.userAllowOther = true;
@@ -79,7 +80,7 @@ in {
         };
         gdm = {
           enable = true;
-          wayland = true;
+          wayland = useWayland;
         };
         startx.enable = false;
       };
@@ -122,6 +123,7 @@ in {
       ../modules/direnv
       ../modules/git
       ../modules/starship
+      ../modules/helix
       # ../modules/smos
       inputs.nixos-persistence.nixosModules.home-manager.impermanence
     ];
@@ -154,6 +156,7 @@ in {
           "backgrounds"
           "keyrings"
           "lutris"
+          "PolyMC"
         ]
         ++ mkPaths ".config" [
           "dconf"
@@ -194,6 +197,7 @@ in {
         mupdf
         xdg_utils
         wl-clipboard
+        xclip
         rust-analyzer
         # polymc
         cloudflared
@@ -212,7 +216,10 @@ in {
         nixosConfig.programs.command-not-found.enable;
       chromium = {
         enable = true;
-        package = pkgs.chromium;
+        package =
+          if useWayland
+          then pkgs.chromium-wayland
+          else pkgs.chromium;
         extensions = [
           # https everywhere
           "gcbommkclmclpchllfjekcdonpmejbdp"
@@ -325,9 +332,10 @@ in {
       enable = true;
       configFile = {
         "wezterm/wezterm.lua".text = import ./config/wezterm/cfg.nix {inherit font;};
-        "helix/themes/mytheme.toml".text = import ./config/helix/mytheme.nix {};
-        "helix/config.toml".text = import ./config/helix/cfg.nix {};
-        "helix/languages.toml".text = import ./config/helix/languages.nix {inherit pkgBin;};
+        "wezterm/colors/catppuccin.lua".source = builtins.fetchurl {
+          url = "https://raw.githubusercontent.com/catppuccin/wezterm/65078e846c8751e9b4837a575deb0745f0c0512f/catppuccin.lua";
+          sha256 = "sha256:0cm8kjjga9k1fzgb7nqjwd1jdjqjrkkqaxcavfxdkl3mw7qiy1ib";
+        };
       };
     };
   };
