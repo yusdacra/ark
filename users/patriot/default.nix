@@ -128,6 +128,14 @@ in {
       inputs.nixos-persistence.nixosModules.home-manager.impermanence
     ];
 
+    gtk = {
+      enable = true;
+      theme = {
+        name = "Catppuccin";
+        package = pkgs.catppuccin-gtk;
+      };
+    };
+
     home.persistence."/persist/home/patriot" = let
       mkPaths = prefix: paths:
         builtins.map (n: "${prefix}/${n}") paths;
@@ -202,6 +210,8 @@ in {
         # polymc
         cloudflared
         lutris
+        gnome.gnome-themes-extra
+        gnome.gnome-tweaks
       ];
       shellAliases =
         nixosConfig.environment.shellAliases
@@ -209,6 +219,11 @@ in {
           harmony-ssh = ''
             ${pkgBin "mosh"} root@chat.harmonyapp.io
           '';
+        };
+      sessionVariables =
+        nixosConfig.environment.sessionVariables
+        // {
+          FZF_DEFAULT_OPTS = "--color=bg+:#302D41,bg:#1E1E2E,spinner:#F8BD96,hl:#F28FAD --color=fg:#D9E0EE,header:#F28FAD,info:#DDB6F2,pointer:#F8BD96 --color=marker:#F8BD96,fg+:#F2CDCD,prompt:#DDB6F2,hl+:#F28FAD";
         };
     };
     programs = {
