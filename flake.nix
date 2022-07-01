@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nur.url = "github:nix-community/NUR";
 
     home.url = "github:nix-community/home-manager/master";
     home.inputs.nixpkgs.follows = "nixpkgs";
@@ -15,6 +16,8 @@
 
     helix.url = "github:helix-editor/helix";
     helix.inputs.nixpkgs.follows = "nixpkgs";
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs: let
@@ -27,10 +30,22 @@
         };
       genPkgs = f: prev.genSystems (system: f (makePkgs system));
     });
+    allPkgs = tlib.genPkgs (x: x);
   in rec {
     nixosConfigurations = import ./hosts {inherit lib tlib inputs;};
 
-    packages = tlib.genPkgs (pkgs: pkgs._exported);
+    packages = lib.mapAttrs (_: pkgs: pkgs._exported) allPkgs;
+    apps =
+      lib.mapAttrs
+      (
+        _: pkgs: {
+          generate-firefox-addons = {
+            type = "app";
+            program = toString "${pkgs.generate-firefox-addons}/bin/generate-firefox-addons";
+          };
+        }
+      )
+      allPkgs;
 
     devShells = import ./shells {inherit lib tlib inputs;};
   };

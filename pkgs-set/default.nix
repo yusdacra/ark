@@ -32,9 +32,9 @@
     config.allowUnfree = true;
     overlays = overlays ++ newPkgs;
   };
-  pkgsToExport = import ./pkgs-to-export.nix;
+  pkgsToExport = import ./pkgs-to-export.nix pkgs;
 in
   pkgs
   // {
-    _exported = l.getAttrs pkgsToExport pkgs;
+    _exported = pkgsToExport;
   }

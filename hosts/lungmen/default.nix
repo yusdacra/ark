@@ -16,11 +16,14 @@ in {
     common-pc
     common-gpu-amd
     common-cpu-amd
+    ../../modules/persist
     ../../modules/network
     #../../modules/develop/nixbuild
     ../../users/root
     ../../users/patriot
   ];
+
+  system.persistDir = "/persist";
 
   boot = {
     tmpOnTmpfs = true;
@@ -50,7 +53,7 @@ in {
     fsType = "btrfs";
     options = ["subvol=nix"] ++ btrfsOptions;
   };
-  fileSystems."/persist" = {
+  fileSystems."${config.system.persistDir}" = {
     device = btrfsPartPath;
     fsType = "btrfs";
     options = ["subvol=persist"] ++ btrfsOptions;
@@ -60,13 +63,6 @@ in {
     device = "/dev/disk/by-label/BOOT";
     fsType = "vfat";
   };
-  /*
-     fileSystems."/media/archive" = {
-     device = "/dev/disk/by-uuid/f9b5f7f3-51e8-4357-8518-986b16311c71";
-     fsType = "btrfs";
-     options = btrfsOptions;
-   };
-   */
 
   swapDevices = [];
   zramSwap = {
@@ -143,7 +139,7 @@ in {
   environment = {
     systemPackages = [pkgs.ntfs3g];
     pathsToLink = ["/share/zsh"];
-    persistence."/persist" = {
+    persistence."${config.system.persistDir}" = {
       directories = ["/etc/nixos"];
       files = ["/etc/machine-id"];
     };

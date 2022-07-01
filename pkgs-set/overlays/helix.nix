@@ -1,3 +1,3 @@
 {inputs}: final: prev: {
-  helix = inputs.helix.defaultPackage.${prev.system};
+  helix = inputs.helix.packages.${prev.system}.default;
 }

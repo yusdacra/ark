@@ -46,7 +46,6 @@ in {
       exa
       lm_sensors
       mkpasswd
-      zoxide
       bottom
       amber
       unzip
