@@ -15,4 +15,16 @@
       platforms = platforms.all;
     };
   };
+  "youtube-disable-number-seek" = buildFirefoxXpiAddon {
+    pname = "youtube-disable-number-seek";
+    version = "1.1";
+    addonId = "{963aa3d4-c342-4dfe-872e-76be742d1bea}";
+    url = "https://addons.mozilla.org/firefox/downloads/file/3592479/youtube_disable_number_seek-1.1.xpi";
+    sha256 = "28075f68438242615cbe857e52c3ae1f661447c7d066d4ef4e5076b44efad07a";
+    meta = with lib; {
+      description = "Disables 0-9 keyboard shortcuts on YouTube which seek to different times on a video.";
+      license = licenses.mpl20;
+      platforms = platforms.all;
+    };
+  };
 }

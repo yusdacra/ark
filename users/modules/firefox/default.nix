@@ -17,6 +17,7 @@
         lockPref("privacy.clearOnShutdown.history", false);
         lockPref("privacy.clearOnShutdown.offlineApps", false);
         lockPref("privacy.clearOnShutdown.sessions", false);
+        lockPref("privacy.clearOnShutdown.cookies", false);
         lockPref("services.sync.engine.passwords", false);
       '';
       extraPolicies = {
@@ -48,6 +49,7 @@
       ]
       ++ (with myExtensions; [
         catppuccin-mocha-sky
+        youtube-disable-number-seek
       ]);
     profiles = {
       default = {

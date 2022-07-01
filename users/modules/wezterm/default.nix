@@ -21,7 +21,8 @@
         default_cursor_style = "BlinkingBar",
         enable_wayland = true,
         enable_tab_bar = false,
-        colors = catppuccin
+        colors = catppuccin,
+        window_background_opacity = 0.85
       }
     '';
     "wezterm/colors/catppuccin.lua".source = builtins.fetchurl {

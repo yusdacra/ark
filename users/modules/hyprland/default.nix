@@ -24,7 +24,7 @@
     wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
     notify-date = with pkgs;
       writers.writeBash "notify-date" ''
-        ${libnotify}/bin/notify-send "       $(${coreutils}/bin/date +'%H:%M %d/%m/%Y')"
+        ${libnotify}/bin/notify-send -t 1000 "       $(${coreutils}/bin/date +'%H:%M %d/%m/%Y')"
       '';
   in ''
     # should be configured per-profile
