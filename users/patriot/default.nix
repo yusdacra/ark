@@ -118,6 +118,7 @@ in {
         ]
         ++ mkPaths ".config" [
           "lutris"
+          "discord"
         ];
       files = l.flatten [
         ".config/wallpaper"
@@ -171,6 +172,7 @@ in {
           # polymc
           cloudflared
           lutris
+          (pkgs.callPackage pkgs.discord.override {withOpenASAR = true;})
         ];
       shellAliases =
         nixosConfig.environment.shellAliases
