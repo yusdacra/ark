@@ -20,10 +20,12 @@
       extra-experimental-features = nix-command flakes
       builders-use-substitutes = true
     '';
-    useSandbox = true;
-    allowedUsers = ["@wheel"];
-    trustedUsers = ["root" "@wheel"];
-    autoOptimiseStore = true;
     nixPath = ["nixpkgs=${inputs.nixpkgs}" "home-manager=${inputs.home}"];
+  };
+  nix.settings = {
+    sandbox = true;
+    allowed-users = ["@wheel"];
+    trusted-users = ["root" "@wheel"];
+    auto-optimise-store = true;
   };
 }

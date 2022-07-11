@@ -41,7 +41,8 @@ in {
     # this is needed for impermanence
     fuse.userAllowOther = true;
     adb.enable = true;
-    steam.enable = true;
+    steam.enable = false;
+    kdeconnect.enable = true;
     # gnome stuffs
     seahorse.enable = true;
     hyprland.enable = true;
@@ -97,7 +98,7 @@ in {
           "Downloads"
           "proj"
           # "smos"
-          ".steam"
+          # ".steam"
           ".wine"
           # ssh / gpg / keys
           ".ssh"
@@ -111,7 +112,7 @@ in {
         ++ mkPaths ".local/share" [
           "direnv"
           "zsh"
-          "Steam"
+          # "Steam"
           "keyrings"
           "lutris"
           "PolyMC"
@@ -119,6 +120,7 @@ in {
         ++ mkPaths ".config" [
           "lutris"
           "discord"
+          "kdeconnect"
         ];
       files = l.flatten [
         ".config/wallpaper"
@@ -172,7 +174,9 @@ in {
           # polymc
           cloudflared
           lutris
-          (pkgs.callPackage pkgs.discord.override {withOpenASAR = true;})
+          (pkgs.discord.override {
+            withOpenASAR = true;
+          })
         ];
       shellAliases =
         nixosConfig.environment.shellAliases
