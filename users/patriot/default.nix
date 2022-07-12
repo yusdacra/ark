@@ -13,7 +13,9 @@
   pkgBin = tlib.pkgBin pkgs;
   nixosConfig = globalAttrs.config;
 in {
-  imports = [inputs.hyprland.nixosModules.default];
+  imports = [
+    inputs.hyprland.nixosModules.default
+  ];
 
   users.users.patriot = {
     isNormalUser = true;
@@ -28,6 +30,7 @@ in {
     hashedPassword = "$6$spzqhAyJfhHy$iHgLBlhjGn1l8PnbjJdWTn1GPvcjMqYNKUzdCe/7IrX6sHNgETSr/Nfpdmq9FCXLhrAfwHOd/q/8SvfeIeNX4/";
   };
   environment = {
+    persistence.${config.system.persistDir}.directories = ["/home/patriot/.local/share/Steam"];
     systemPackages = [pkgs.qt5.qtwayland];
     shells = with pkgs; [bashInteractive zsh];
   };
@@ -41,7 +44,7 @@ in {
     # this is needed for impermanence
     fuse.userAllowOther = true;
     adb.enable = true;
-    steam.enable = false;
+    steam.enable = true;
     kdeconnect.enable = true;
     # gnome stuffs
     seahorse.enable = true;
@@ -94,11 +97,10 @@ in {
         builtins.map (n: "${prefix}/${n}") (l.flatten paths);
     in {
       directories =
-        [
+        l.flatten [
           "Downloads"
           "proj"
           # "smos"
-          # ".steam"
           ".wine"
           # ssh / gpg / keys
           ".ssh"
@@ -112,7 +114,6 @@ in {
         ++ mkPaths ".local/share" [
           "direnv"
           "zsh"
-          # "Steam"
           "keyrings"
           "lutris"
           "PolyMC"
