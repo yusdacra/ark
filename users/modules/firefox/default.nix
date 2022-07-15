@@ -19,6 +19,7 @@
         lockPref("privacy.clearOnShutdown.sessions", false);
         lockPref("privacy.clearOnShutdown.cookies", false);
         lockPref("services.sync.engine.passwords", false);
+        lockPref("network.cookie.lifetimePolicy", 0);
       '';
       extraPolicies = {
         CaptivePortal = false;
