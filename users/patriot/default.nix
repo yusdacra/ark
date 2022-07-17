@@ -254,6 +254,7 @@ in {
           bindkey "$terminfo[kLFT5]" backward-word
           # makes completions pog
           zstyle ':completion:*' menu select
+          ${pkgBin "any-nix-shell"} zsh --info-right | source /dev/stdin
         '';
         loginExtra = ''
           if [[ "$(tty)" == "/dev/tty1" ]]; then

@@ -5,6 +5,7 @@ pkgs: (
     "fractal-next"
     "gamescope"
     "gaudible"
+    "abaddon"
   ]
   pkgs
 )
