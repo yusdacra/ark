@@ -18,6 +18,8 @@
     helix.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
+    fufexan.url = "github:fufexan/dotfiles";
+    fufexan.flake = false;
   };
 
   outputs = inputs: let

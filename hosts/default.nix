@@ -28,6 +28,7 @@
 
   systems = {
     lungmen = "x86_64-linux";
+    tkaronto = "x86_64-linux";
   };
 in
   lib.mapAttrs mkSystem systems

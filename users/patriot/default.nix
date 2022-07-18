@@ -175,9 +175,7 @@ in {
           # polymc
           cloudflared
           lutris
-          (pkgs.discord.override {
-            withOpenASAR = true;
-          })
+          discord-open-asar
         ];
       shellAliases =
         nixosConfig.environment.shellAliases

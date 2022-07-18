@@ -110,6 +110,22 @@
         "type": "github"
       }
     },
+    "fufexan": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1657711492,
+        "narHash": "sha256-t7WLSMPXWs+TR8/ZWvyoUR5h0nrSWQryNmpS/+00DtM=",
+        "owner": "fufexan",
+        "repo": "dotfiles",
+        "rev": "90b4e7452b41aaf18026b5ad46601597e8ec8dcd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fufexan",
+        "repo": "dotfiles",
+        "type": "github"
+      }
+    },
     "helix": {
       "inputs": {
         "nixCargoIntegration": "nixCargoIntegration",
@@ -265,6 +281,7 @@
     },
     "root": {
       "inputs": {
+        "fufexan": "fufexan",
         "helix": "helix",
         "home": "home",
         "hyprland": "hyprland",

@@ -28,8 +28,8 @@
       '';
   in ''
     # should be configured per-profile
-    monitor=HDMI-A-1,1920x1080@60,0x0,1
-    workspace=HDMI-A-1,1
+    monitor=,2560x1600@120,0x0,1.6
+    workspace=,1
     exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY HYPRLAND_INSTANCE_SIGNATURE
     exec-once=systemctl --user start graphical-session-pre.target
     exec-once=systemctl --user start graphical-session.target
