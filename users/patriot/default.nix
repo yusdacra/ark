@@ -25,6 +25,7 @@ in {
       "wheel"
       "adbusers"
       "dialout"
+      "video"
     ];
     shell = pkgs.zsh;
     hashedPassword = "$6$spzqhAyJfhHy$iHgLBlhjGn1l8PnbjJdWTn1GPvcjMqYNKUzdCe/7IrX6sHNgETSr/Nfpdmq9FCXLhrAfwHOd/q/8SvfeIeNX4/";
@@ -176,6 +177,8 @@ in {
           cloudflared
           lutris
           discord-open-asar
+          gamescope
+          protontricks
         ];
       shellAliases =
         nixosConfig.environment.shellAliases

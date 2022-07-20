@@ -77,7 +77,7 @@ in
     algorithm = "zstd";
   };
 
-  nix.settings.max-jobs = lib.mkDefault 8;
+  nix.settings.max-jobs = lib.mkForce 16;
   security = {
     pam.loginLimits = [
       {
@@ -108,7 +108,12 @@ in
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+  services.xserver.videoDrivers = ["nvidia" "amdgpu"];
   hardware = {
+    nvidia.prime = {
+      amdgpuBusId = "PCI:5:0:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
     opengl = {
       driSupport = true;
       driSupport32Bit = true;
@@ -132,6 +137,8 @@ in
       support32Bit = true;
     };
   };
+  
+  programs.light.enable = true;
 
   fonts = {
     enableDefaultFonts = true;
