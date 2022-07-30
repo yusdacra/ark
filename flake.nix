@@ -20,6 +20,8 @@
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
     fufexan.url = "github:fufexan/dotfiles";
     fufexan.flake = false;
+    blog.url = "gitlab:yusdacra/yusdacra.gitlab.io";
+    blog.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs: let
