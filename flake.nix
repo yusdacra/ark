@@ -11,8 +11,7 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixos-persistence.url = "github:nix-community/impermanence";
 
-    smos.url = "github:yusdacra/smos/chore/fix-nix-flakes";
-    smos.flake = false;
+    nixinate.url = "github:matthewcroughan/nixinate";
 
     helix.url = "github:helix-editor/helix";
     helix.inputs.nixpkgs.follows = "nixpkgs";
@@ -32,22 +31,27 @@
         };
       genPkgs = f: prev.genSystems (system: f (makePkgs system));
     });
-    allPkgs = tlib.genPkgs (x: x);
-  in rec {
-    nixosConfigurations = import ./hosts {inherit lib tlib inputs;};
 
-    packages = lib.mapAttrs (_: pkgs: pkgs._exported) allPkgs;
-    apps =
+    allPkgs = tlib.genPkgs (x: x);
+
+    miscApps =
       lib.mapAttrs
       (
         _: pkgs: {
           generate-firefox-addons = {
             type = "app";
-            program = toString "${pkgs.generate-firefox-addons}/bin/generate-firefox-addons";
+            program =
+              toString
+              "${pkgs.generate-firefox-addons}/bin/generate-firefox-addons";
           };
         }
       )
       allPkgs;
+  in rec {
+    nixosConfigurations = import ./hosts {inherit lib tlib inputs;};
+
+    packages = lib.mapAttrs (_: pkgs: pkgs._exported) allPkgs;
+    apps = miscApps // (inputs.nixinate.nixinate.x86_64-linux inputs.self);
 
     devShells = import ./shells {inherit lib tlib inputs;};
   };
