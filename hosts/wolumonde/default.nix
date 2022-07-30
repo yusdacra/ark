@@ -10,6 +10,7 @@
 in {
   imports = [
     ./hardware-configuration.nix
+    ./bernbot.nix
   ];
 
   boot.cleanTmpDir = true;

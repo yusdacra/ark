@@ -1,5 +1,26 @@
 {
   "nodes": {
+    "bernbot": {
+      "inputs": {
+        "nci": "nci",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1659166662,
+        "narHash": "sha256-k0tQyUnvRhp1znEe9Kbc40hv3MEKtPczZn62MAH/bQ0=",
+        "owner": "yusdacra",
+        "repo": "bernbot",
+        "rev": "21784b31c90001ad2ff480f148ad4bd487862648",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yusdacra",
+        "repo": "bernbot",
+        "type": "github"
+      }
+    },
     "blog": {
       "inputs": {
         "flakeUtils": "flakeUtils",
@@ -38,7 +59,39 @@
         "type": "github"
       }
     },
+    "crane_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1654444508,
+        "narHash": "sha256-4OBvQ4V7jyt7afs6iKUvRzJ1u/9eYnKzVQbeQdiamuY=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "db5482bf225acc3160899124a1df5a617cfa27b5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
+        "type": "github"
+      }
+    },
     "devshell": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1658746384,
+        "narHash": "sha256-CCJcoMOcXyZFrV1ag4XMTpAPjLWb4Anbv+ktXFI1ry0=",
+        "owner": "numtide",
+        "repo": "devshell",
+        "rev": "0ffc7937bb5e8141af03d462b468bd071eb18e1b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "devshell",
+        "type": "github"
+      }
+    },
+    "devshell_2": {
       "flake": false,
       "locked": {
         "lastModified": 1655976588,
@@ -57,11 +110,74 @@
     "dream2nix": {
       "inputs": {
         "alejandra": [
+          "bernbot",
+          "nci",
+          "nixpkgs"
+        ],
+        "crane": "crane",
+        "devshell": [
+          "bernbot",
+          "nci",
+          "devshell"
+        ],
+        "flake-utils-pre-commit": [
+          "bernbot",
+          "nci",
+          "nixpkgs"
+        ],
+        "gomod2nix": [
+          "bernbot",
+          "nci",
+          "nixpkgs"
+        ],
+        "mach-nix": [
+          "bernbot",
+          "nci",
+          "nixpkgs"
+        ],
+        "nixpkgs": [
+          "bernbot",
+          "nci",
+          "nixpkgs"
+        ],
+        "node2nix": [
+          "bernbot",
+          "nci",
+          "nixpkgs"
+        ],
+        "poetry2nix": [
+          "bernbot",
+          "nci",
+          "nixpkgs"
+        ],
+        "pre-commit-hooks": [
+          "bernbot",
+          "nci",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1659134520,
+        "narHash": "sha256-qg94ijLoS+jbb4w/ww8AqXqjGKN3V0loLzQM+0ry/IE=",
+        "owner": "nix-community",
+        "repo": "dream2nix",
+        "rev": "26dce978b1b60800910e874e92be01f7a1fd5839",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "dream2nix",
+        "type": "github"
+      }
+    },
+    "dream2nix_2": {
+      "inputs": {
+        "alejandra": [
           "helix",
           "nixCargoIntegration",
           "nixpkgs"
         ],
-        "crane": "crane",
+        "crane": "crane_2",
         "devshell": [
           "helix",
           "nixCargoIntegration",
@@ -169,7 +285,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "rust-overlay": "rust-overlay"
+        "rust-overlay": "rust-overlay_2"
       },
       "locked": {
         "lastModified": 1659072681,
@@ -253,10 +369,34 @@
         "type": "github"
       }
     },
-    "nixCargoIntegration": {
+    "nci": {
       "inputs": {
         "devshell": "devshell",
         "dream2nix": "dream2nix",
+        "nixpkgs": [
+          "bernbot",
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "lastModified": 1659161498,
+        "narHash": "sha256-q6fFrdt/SfbaOQMCJtI5Q7wKP79DJTM6Isfx62Vn/vk=",
+        "owner": "yusdacra",
+        "repo": "nix-cargo-integration",
+        "rev": "790ec04bc74ad051ca6971bdff01e1c2be18aa01",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yusdacra",
+        "repo": "nix-cargo-integration",
+        "type": "github"
+      }
+    },
+    "nixCargoIntegration": {
+      "inputs": {
+        "devshell": "devshell_2",
+        "dream2nix": "dream2nix_2",
         "nixpkgs": [
           "helix",
           "nixpkgs"
@@ -363,6 +503,7 @@
     },
     "root": {
       "inputs": {
+        "bernbot": "bernbot",
         "blog": "blog",
         "fufexan": "fufexan",
         "helix": "helix",
@@ -376,6 +517,22 @@
       }
     },
     "rust-overlay": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1659149515,
+        "narHash": "sha256-Kf/0PgVbs4v8L8plR+j00jrDrA4DdoS32osgnXXVc7w=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "96ec48e9d52eba3537629a0bf2eb0fb645314e40",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": [
