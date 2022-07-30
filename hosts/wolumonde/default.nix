@@ -45,7 +45,7 @@
 
   # nixinate for deployment
   _module.args.nixinate = {
-    host = builtins.readFile "${inputs.self}/secrets/wolumonde-ip";
+    host = "gaze.systems";
     sshUser = "root";
     buildOn = "local"; # valid args are "local" or "remote"
     substituteOnTarget = true; # if buildOn is "local" then it will substitute on the target, "-s"
