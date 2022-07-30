@@ -12,6 +12,7 @@
     nixos-persistence.url = "github:nix-community/impermanence";
 
     nixinate.url = "github:matthewcroughan/nixinate";
+    nixinate.inputs.nixpkgs.follows = "nixpkgs";
 
     helix.url = "github:helix-editor/helix";
     helix.inputs.nixpkgs.follows = "nixpkgs";

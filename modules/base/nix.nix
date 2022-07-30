@@ -30,7 +30,4 @@
     trusted-users = ["root" "@wheel"];
     auto-optimise-store = true;
   };
-  environment.etc."nix/netrc".text = ''
-    machine private-ardanalabs.cachix.org password ${config.environment.sessionVariables.CACHIX_AUTH_TOKEN}
-  '';
 }

@@ -22,4 +22,6 @@
     substituteOnTarget = true; # if buildOn is "local" then it will substitute on the target, "-s"
     hermetic = true;
   };
+
+  system.stateVersion = "22.05";
 }
