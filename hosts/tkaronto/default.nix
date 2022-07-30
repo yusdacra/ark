@@ -4,11 +4,9 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   byLabel = label: "/dev/disk/by-label/${label}";
-in
-{
+in {
   imports = with inputs;
   with nixos-hardware.nixosModules; [
     nixpkgs.nixosModules.notDetected
@@ -124,20 +122,19 @@ in
         libva
         vulkan-loader
       ];
-      extraPackages32 = with pkgs.pkgsi686Linux;
-        [
-          libvdpau-va-gl
-          vaapiVdpau
-          libva
-          vulkan-loader
-        ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [
+        libvdpau-va-gl
+        vaapiVdpau
+        libva
+        vulkan-loader
+      ];
     };
     pulseaudio = {
       enable = false;
       support32Bit = true;
     };
   };
-  
+
   programs.light.enable = true;
 
   fonts = {
@@ -150,7 +147,14 @@ in
     systemPackages = [pkgs.ntfs3g];
     pathsToLink = ["/share/zsh"];
     persistence."${config.system.persistDir}" = {
-      directories = ["/etc/nixos"];
+      directories = lib.flatten [
+        "/etc/nixos"
+        (
+          lib.optional
+          config.virtualisation.docker.enable
+          ["/var/lib/docker" "/var/lib/containers"]
+        )
+      ];
       files = ["/etc/machine-id"];
     };
   };
@@ -170,6 +174,7 @@ in
   virtualisation = {
     waydroid.enable = false;
     podman.enable = false;
+    docker.enable = true;
     libvirtd.enable = false;
   };
 

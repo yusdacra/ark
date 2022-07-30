@@ -2,6 +2,7 @@
   pkgs,
   lib,
   inputs,
+  config,
   ...
 }: {
   nix = {
@@ -19,6 +20,7 @@
       fallback = true
       extra-experimental-features = nix-command flakes
       builders-use-substitutes = true
+      netrc-file = /etc/nix/netrc
     '';
     nixPath = ["nixpkgs=${inputs.nixpkgs}" "home-manager=${inputs.home}"];
   };
@@ -28,4 +30,7 @@
     trusted-users = ["root" "@wheel"];
     auto-optimise-store = true;
   };
+  environment.etc."nix/netrc".text = ''
+    machine private-ardanalabs.cachix.org password ${config.environment.sessionVariables.CACHIX_AUTH_TOKEN}
+  '';
 }

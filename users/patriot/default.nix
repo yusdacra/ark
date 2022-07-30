@@ -21,17 +21,23 @@ in {
     isNormalUser = true;
     createHome = true;
     home = "/home/patriot";
-    extraGroups = [
+    extraGroups = l.flatten [
       "wheel"
       "adbusers"
       "dialout"
       "video"
+      (l.optional nixosConfig.virtualisation.docker.enable "docker")
     ];
     shell = pkgs.zsh;
     hashedPassword = "$6$spzqhAyJfhHy$iHgLBlhjGn1l8PnbjJdWTn1GPvcjMqYNKUzdCe/7IrX6sHNgETSr/Nfpdmq9FCXLhrAfwHOd/q/8SvfeIeNX4/";
   };
   environment = {
-    persistence.${config.system.persistDir}.directories = ["/home/patriot/.local/share/Steam"];
+    persistence.${config.system.persistDir}.directories = l.flatten [
+      (lib.optional nixosConfig.programs.steam.enable "/home/patriot/.local/share/Steam")
+      "/home/patriot/.cargo"
+      "/home/patriot/proj"
+      "/home/patriot/games"
+    ];
     systemPackages = [pkgs.qt5.qtwayland];
     shells = with pkgs; [bashInteractive zsh];
   };
@@ -100,7 +106,6 @@ in {
       directories =
         l.flatten [
           "Downloads"
-          "proj"
           # "smos"
           ".wine"
           # ssh / gpg / keys
@@ -109,7 +114,6 @@ in {
           "keys"
           # caches / history stuff
           ".directory_history"
-          ".cargo"
           ".cache"
         ]
         ++ mkPaths ".local/share" [
@@ -179,6 +183,7 @@ in {
           discord-open-asar
           gamescope
           protontricks
+          genymotion
         ];
       shellAliases =
         nixosConfig.environment.shellAliases
