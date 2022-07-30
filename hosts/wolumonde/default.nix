@@ -10,6 +10,7 @@
     enable = true;
     passwordAuthentication = false;
   };
+  services.fail2ban.enable = true;
 
   users.users.root.openssh.authorizedKeys.keys = [
     (builtins.readFile "${inputs.self}/secrets/ssh-key.pub")
