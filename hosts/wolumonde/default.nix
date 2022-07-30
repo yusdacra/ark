@@ -23,6 +23,10 @@
   # nginx
   services.nginx = {
     enable = true;
+    recommendedTlsSettings = true;
+    recommendedOptimisation = true;
+    recommendedGzipSettings = true;
+    recommendedProxySettings = true;
     virtualHosts."gaze.systems" = {
       enableACME = true;
       forceSSL = true;
@@ -35,6 +39,8 @@
       "gaze.systems".email = "y.bera003.06@pm.me";
     };
   };
+
+  # sourcehut
 
   # firewall stuffs
   networking.firewall = {
