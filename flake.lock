@@ -9,11 +9,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1659152758,
-        "narHash": "sha256-nbCRaXMAXfNvrqtWT2WtcYsf2Rym0Zv2WFJDmXk5sgY=",
+        "lastModified": 1659159653,
+        "narHash": "sha256-zWjN3LqgMMaVBM8g0KcDwdpiwbShWHRKWR0XcSVfBBA=",
         "owner": "yusdacra",
         "repo": "yusdacra.gitlab.io",
-        "rev": "420e525b8b8210e997748e500f55690fd89a8fca",
+        "rev": "3f0caa133aa557acc008fc3819203db813092cf2",
         "type": "gitlab"
       },
       "original": {
@@ -219,11 +219,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1645050947,
-        "narHash": "sha256-BHPdruYD+6VAyfgsZ33jn00okHQZuxY6Veg4EUei85o=",
+        "lastModified": 1659159625,
+        "narHash": "sha256-TElL1iaIY/xrIX+JYsppKWa510R8aJDXWQJxjpyCVxo=",
         "owner": "yusdacra",
         "repo": "html.nix",
-        "rev": "18fa28319f4cdca933da8f413a3e3bcfb36d37b0",
+        "rev": "5bca7064e4de141f85b14a2c5262f204ac5f56bd",
         "type": "github"
       },
       "original": {
