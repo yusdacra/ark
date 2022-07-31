@@ -46,7 +46,7 @@
         ]
       },
       "locked": {
-        "narHash": "sha256-9vMKixtpbkIB0agk6RMPHOBI+dTYPdxMuL9gpuRyKwU=",
+        "narHash": "sha256-ekldeSxRI7awA74X1VWnjgrk4BWbth31LlNKszFRM8U=",
         "type": "tarball",
         "url": "https://git.gaze.systems/dusk/website/archive/master.zip"
       },
@@ -761,7 +761,7 @@
         ]
       },
       "locked": {
-        "narHash": "sha256-lQtjjkKu6EOqkT6jJRvzCBBWmOdtLACL//ETRAAxRQI=",
+        "narHash": "sha256-3PHw4aioOmhAPAL7PGbf/At0E+1rrENtRbLVkjLctxA=",
         "type": "tarball",
         "url": "https://git.gaze.systems/dusk/html.nix/archive/master.zip"
       },
