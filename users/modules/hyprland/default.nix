@@ -34,6 +34,7 @@
     exec-once=systemctl --user start graphical-session-pre.target
     exec-once=systemctl --user start graphical-session.target
     exec-once=${swaybg} -i ~/.config/wallpaper
+    exec-once=xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 1.6
     input {
         kb_layout=tr
         kb_variant=

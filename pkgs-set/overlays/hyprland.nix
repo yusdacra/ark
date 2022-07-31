@@ -1,3 +1,3 @@
 {inputs}: final: prev: {
-  hyprland = inputs.hyprland.packages.${prev.system}.default;
+  hyprland = inputs.fufexan.packages.${prev.system}.hyprland;
 }

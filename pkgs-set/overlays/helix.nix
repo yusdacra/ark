@@ -3,6 +3,6 @@
     includeGrammarIf = grammar:
       prev.lib.any
       (name: grammar.name == name)
-      ["toml" "rust" "nix" "protobuf" "yaml" "json" "markdown"];
+      ["toml" "rust" "nix" "protobuf" "yaml" "json" "markdown" "html" "css"];
   };
 }

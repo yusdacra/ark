@@ -19,8 +19,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
     fufexan.url = "github:fufexan/dotfiles";
-    fufexan.flake = false;
-    blog.url = "gitlab:yusdacra/yusdacra.gitlab.io";
+    blog.url = "https://git.gaze.systems/dusk/website/archive/master.zip";
     blog.inputs.nixpkgs.follows = "nixpkgs";
     bernbot.url = "github:yusdacra/bernbot";
     bernbot.inputs.nixpkgs.follows = "nixpkgs";

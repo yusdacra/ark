@@ -6,7 +6,6 @@
     binaryName = "Discord";
     desktopName = "Discord";
 
-    isWayland = false;
     enableVulkan = false;
     extraOptions = [
       "--disable-gpu-memory-buffer-video-frames"
