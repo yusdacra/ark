@@ -46,7 +46,7 @@
         ]
       },
       "locked": {
-        "narHash": "sha256-ekldeSxRI7awA74X1VWnjgrk4BWbth31LlNKszFRM8U=",
+        "narHash": "sha256-s54wF24xA0vSjoEJ5/duD5XGr55JUtH4R71WiWgPyBk=",
         "type": "tarball",
         "url": "https://git.gaze.systems/dusk/website/archive/master.zip"
       },

@@ -108,6 +108,8 @@ in {
   };
   services.xserver.videoDrivers = ["nvidia" "amdgpu"];
   hardware = {
+    bluetooth.enable = true;
+    xpadneo.enable = true;
     nvidia.prime = {
       amdgpuBusId = "PCI:5:0:0";
       nvidiaBusId = "PCI:1:0:0";
@@ -169,6 +171,7 @@ in {
       autoMount = true;
     };
     flatpak.enable = false;
+    hardware.xow.enable = true;
   };
 
   virtualisation = {
