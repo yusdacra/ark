@@ -46,13 +46,17 @@
         ]
       },
       "locked": {
-        "narHash": "sha256-s54wF24xA0vSjoEJ5/duD5XGr55JUtH4R71WiWgPyBk=",
-        "type": "tarball",
-        "url": "https://git.gaze.systems/dusk/website/archive/master.zip"
+        "lastModified": 1660175414,
+        "narHash": "sha256-x/Biv9kkFq4qHaxi9hU0Nl7E/3IlEVBJnxIge/ltgvA=",
+        "ref": "refs/heads/master",
+        "rev": "dc1b24e7521b1329f8f5ac93703e18649716cc70",
+        "revCount": 58,
+        "type": "git",
+        "url": "https://git.gaze.systems/dusk/website.git"
       },
       "original": {
-        "type": "tarball",
-        "url": "https://git.gaze.systems/dusk/website/archive/master.zip"
+        "type": "git",
+        "url": "https://git.gaze.systems/dusk/website.git"
       }
     },
     "crane": {
@@ -761,13 +765,17 @@
         ]
       },
       "locked": {
-        "narHash": "sha256-3PHw4aioOmhAPAL7PGbf/At0E+1rrENtRbLVkjLctxA=",
-        "type": "tarball",
-        "url": "https://git.gaze.systems/dusk/html.nix/archive/master.zip"
+        "lastModified": 1659251276,
+        "narHash": "sha256-rHhaPtyH1hBcZxd6nXxyg59wL6ilqJqsfuHh8Ebd+rA=",
+        "ref": "refs/heads/master",
+        "rev": "d30b07841100278a1d7901001ecec038c5448be2",
+        "revCount": 50,
+        "type": "git",
+        "url": "https://git.gaze.systems/dusk/html.nix.git"
       },
       "original": {
-        "type": "tarball",
-        "url": "https://git.gaze.systems/dusk/html.nix/archive/master.zip"
+        "type": "git",
+        "url": "https://git.gaze.systems/dusk/html.nix.git"
       }
     },
     "hyprland": {
