@@ -2,11 +2,12 @@
   nur,
   treefmt,
   writers,
+  tlib,
   ...
 }:
 writers.writeBashBin "generate-firefox-addons" ''
-  ${nur.repos.rycee.firefox-addons-generator}/bin/nixpkgs-firefox-addons \
+  ${tlib.pkgBin nur.repos.rycee.mozilla-addons-to-nix} \
     users/modules/firefox/extensions.json \
     users/modules/firefox/extensions.nix
-  ${treefmt}/bin/treefmt
+  ${tlib.pkgBin treefmt}
 ''

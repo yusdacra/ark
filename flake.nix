@@ -23,6 +23,8 @@
     blog.inputs.nixpkgs.follows = "nixpkgs";
     bernbot.url = "github:yusdacra/bernbot";
     bernbot.inputs.nixpkgs.follows = "nixpkgs";
+    discocss.url = "github:fufexan/discocss/flake";
+    discocss.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs: let

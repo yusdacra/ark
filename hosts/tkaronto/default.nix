@@ -17,8 +17,8 @@ in {
     common-gpu-amd
     common-cpu-amd
     ../../modules/persist
+    ../../modules/gamemode
     ../../modules/network/iwd.nix
-    #../../modules/develop/nixbuild
     ../../users/root
     ../../users/patriot
   ];
@@ -171,7 +171,6 @@ in {
       autoMount = true;
     };
     flatpak.enable = false;
-    hardware.xow.enable = true;
   };
 
   virtualisation = {

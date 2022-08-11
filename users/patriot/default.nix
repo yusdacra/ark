@@ -6,17 +6,10 @@
   inputs,
   ...
 } @ globalAttrs: let
-  inherit (lib) mapAttrs' nameValuePair;
-  inherit (builtins) readDir fetchGit;
   l = lib // builtins;
 
-  pkgBin = tlib.pkgBin pkgs;
   nixosConfig = globalAttrs.config;
 in {
-  imports = [
-    inputs.hyprland.nixosModules.default
-  ];
-
   users.users.patriot = {
     isNormalUser = true;
     createHome = true;
@@ -33,7 +26,7 @@ in {
   };
   environment = {
     persistence.${config.system.persistDir}.directories = l.flatten [
-      (lib.optional nixosConfig.programs.steam.enable "/home/patriot/.local/share/Steam")
+      (l.optional nixosConfig.programs.steam.enable "/home/patriot/.local/share/Steam")
       "/home/patriot/.cargo"
       "/home/patriot/proj"
       "/home/patriot/games"
@@ -44,8 +37,10 @@ in {
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    gtkUsePortal = true;
-    extraPortals = with pkgs; [xdg-desktop-portal-gtk xdg-desktop-portal-wlr];
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
+    ];
   };
   programs = {
     # this is needed for impermanence
@@ -55,8 +50,6 @@ in {
     kdeconnect.enable = true;
     # gnome stuffs
     seahorse.enable = true;
-    hyprland.enable = true;
-    hyprland.extraPackages = [];
   };
   # gnome keyring better fr fr
   security.pam.services.patriot = {
@@ -80,28 +73,26 @@ in {
     name = personal.name;
     email = personal.emails.primary;
   in {
-    imports = [
-      ../modules/direnv
-      ../modules/git
-      ../modules/starship
-      ../modules/helix
-      ../modules/zoxide
-      ../modules/wezterm
-      ../modules/hyprland
-      ../modules/rofi
-      ../modules/mako
-      ../modules/font
-      ../modules/firefox
-      ../../modules/persist
-      # ../modules/smos
-      inputs.nixos-persistence.nixosModules.home-manager.impermanence
-    ];
+    imports = let
+      modulesToEnable = l.flatten [
+        # desktop stuff
+        ["firefox" "hyprland" "wezterm" "font" "rofi" "mako" "discord"]
+        # cli stuff
+        ["zoxide" "zsh" "fzf" "starship" "direnv"]
+        # dev stuff
+        ["helix" "git" "ssh"]
+      ];
+    in
+      l.flatten [
+        ../../modules/persist
+        inputs.nixos-persistence.nixosModules.home-manager.impermanence
+        (tlib.prefixStrings "${inputs.self}/users/modules/" modulesToEnable)
+      ];
 
     system.persistDir = nixosConfig.system.persistDir;
 
     home.persistence."${config.system.persistDir}${config.home.homeDirectory}" = let
-      mkPaths = prefix: paths:
-        builtins.map (n: "${prefix}/${n}") (l.flatten paths);
+      mkPaths = pfx: paths: tlib.prefixStrings "${pfx}/" (l.flatten paths);
     in {
       directories =
         l.flatten [
@@ -135,68 +126,40 @@ in {
       allowOther = true;
     };
 
-    fonts.fontconfig.enable = lib.mkForce true;
+    fonts.fontconfig.enable = l.mkForce true;
     fonts.settings = {
       enable = true;
       name = "Comic Mono";
       size = 13;
-      package = let
-        ttf = pkgs.fetchurl {
-          url = "https://dtinth.github.io/comic-mono-font/ComicMono.ttf";
-          sha256 = "sha256-O8FCXpIqFqvw7HZ+/+TQJoQ5tMDc6YQy4H0V9drVcZY=";
-        };
-      in
-        pkgs.runCommandNoCC "comic-mono" {} ''
-          mkdir -p $out/share/fonts/truetype
-          ln -s ${ttf} $out/share/fonts/truetype
-        '';
+      package = pkgs.comic-mono;
     };
     home = {
-      stateVersion = nixosConfig.system.stateVersion;
       homeDirectory = nixosConfig.users.users.patriot.home;
-      packages = with pkgs;
-        l.flatten [
-          # Font stuff
-          noto-fonts-cjk
-          font-awesome
-          dejavu_fonts
-          # Programs
-          bitwarden
-          cargo-outdated
-          cargo-release
-          cargo-udeps
-          vulkan-tools
-          krita
-          cachix
-          gnupg
-          imv
-          mpv
-          ffmpeg
-          mupdf
-          xdg_utils
-          wl-clipboard
-          xclip
-          rust-analyzer
-          # polymc
-          cloudflared
-          lutris
-          discord-open-asar
-          gamescope
-          protontricks
-          genymotion
-        ];
-      shellAliases =
-        nixosConfig.environment.shellAliases
-        // {
-          harmony-ssh = ''
-            ${pkgBin "mosh"} root@chat.harmonyapp.io
-          '';
-        };
-      sessionVariables =
-        nixosConfig.environment.sessionVariables
-        // l.optionalAttrs config.programs.fzf.enable {
-          FZF_DEFAULT_OPTS = "--color=spinner:#F8BD96,hl:#F28FAD --color=fg:#D9E0EE,header:#F28FAD,info:#DDB6F2,pointer:#F8BD96 --color=marker:#F8BD96,fg+:#F2CDCD,prompt:#DDB6F2,hl+:#F28FAD";
-        };
+      packages = with pkgs; [
+        # Font stuff
+        noto-fonts-cjk
+        font-awesome
+        dejavu_fonts
+        # Programs
+        bitwarden
+        cargo-outdated
+        cargo-release
+        cargo-udeps
+        vulkan-tools
+        krita
+        cachix
+        gnupg
+        imv
+        mpv
+        ffmpeg
+        mupdf
+        xdg_utils
+        rust-analyzer
+        # polymc
+        cloudflared
+        lutris
+        protontricks
+      ];
     };
     programs = {
       command-not-found.enable =
@@ -209,66 +172,11 @@ in {
         userName = name;
         userEmail = email;
       };
-      ssh = {
-        enable = true;
-        compression = true;
-        hashKnownHosts = true;
-        userKnownHostsFile = "~/.local/share/ssh/known-hosts";
-        # Only needed for darcs hub
-        # extraConfig = ''
-        #   Host hub.darcs.net
-        #      ControlMaster no
-        #      ForwardAgent no
-        #      ForwardX11 no
-        #      Ciphers +aes256-cbc
-        #      MACs +hmac-sha1
-        # '';
-      };
-      zsh = {
-        enable = true;
-        autocd = true;
-        enableVteIntegration = true;
-        enableAutosuggestions = true;
-        enableCompletion = true;
-        plugins = [
-          {
-            name = "per-directory-history";
-            src = pkgs.fetchFromGitHub {
-              owner = "jimhester";
-              repo = "per-directory-history";
-              rev = "d2e291dd6434e340d9be0e15e1f5b94f32771c06";
-              hash = "sha256-VHRgrVCqzILqOes8VXGjSgLek38BFs9eijmp0JHtD5Q=";
-            };
-          }
-        ];
-        # xdg compliant
-        dotDir = ".config/zsh";
-        history.path = "${config.home.homeDirectory}/.local/share/zsh/history";
-        initExtra = ''
-          export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-
-          function tomp4 () {
-            ${pkgBin "ffmpeg"} -i $1 -c:v libx264 -preset slow -crf 30 -c:a aac -b:a 128k "$1.mp4"
-          }
-
-          function topng () {
-            ${pkgBin "ffmpeg"} -i $1 "$1.png"
-          }
-
-          # fix some key stuff
-          bindkey "$terminfo[kRIT5]" forward-word
-          bindkey "$terminfo[kLFT5]" backward-word
-          # makes completions pog
-          zstyle ':completion:*' menu select
-          ${pkgBin "any-nix-shell"} zsh --info-right | source /dev/stdin
-        '';
-        loginExtra = ''
-          if [[ "$(tty)" == "/dev/tty1" ]]; then
-            exec Hyprland
-          fi
-        '';
-      };
-      fzf.enable = true;
+      zsh.loginExtra = ''
+        if [[ "$(tty)" == "/dev/tty1" ]]; then
+          exec Hyprland
+        fi
+      '';
     };
     services = {
       gpg-agent = let

@@ -2,6 +2,7 @@
   inputs,
   system,
   lib,
+  tlib,
   ...
 }: let
   l = lib;
@@ -23,7 +24,7 @@
         ${l.removeSuffix ".nix" name} =
           prev.callPackage
           "${./pkgs}/${name}"
-          {inherit inputs;};
+          {inherit inputs tlib;};
       }
     )
     (l.readDir ./pkgs);

@@ -10,7 +10,7 @@
 
   coreBin = v: "${pkgs.coreutils}/bin/${v}";
   nixBin = "${config.nix.package}/bin/nix";
-  pkgBin = tlib.pkgBin pkgs;
+  pkgBin = tlib.pkgBin;
 in {
   imports = [
     ./nix.nix
@@ -58,19 +58,20 @@ in {
     ];
     shellAliases = let
       ifSudo = string: mkIf config.security.sudo.enable string;
+      inherit (pkgs) git bat exa du-dust;
     in {
-      g = pkgBin "git";
-      git-optimize = "${pkgBin "git"} gc --aggressive --prune=now";
-      cat = "${pkgBin "bat"} -pp --theme=base16";
+      g = pkgBin git;
+      git-optimize = "${pkgBin git} gc --aggressive --prune=now";
+      cat = "${pkgBin bat} -pp --theme=base16";
       c = "cat";
-      du = "${pkgs.du-dust}/bin/dust";
+      du = "${pkgBin du-dust}";
       df = "${coreBin "df"} -h";
       free = "${pkgs.procps}/bin/free -h";
-      ls = pkgBin "exa";
-      l = "${pkgBin "exa"} -lhg";
-      la = "${pkgBin "exa"} -lhg -a";
-      t = "${pkgBin "exa"} -lhg -T";
-      ta = "${pkgBin "exa"} -lhg -a -T";
+      ls = pkgBin exa;
+      l = "${pkgBin exa} -lhg";
+      la = "${pkgBin exa} -lhg -a";
+      t = "${pkgBin exa} -lhg -T";
+      ta = "${pkgBin exa} -lhg -a -T";
       n = nixBin;
       nf = "${nixBin} flake";
       nfu = "${nixBin} flake update";
