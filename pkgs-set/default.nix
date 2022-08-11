@@ -22,7 +22,7 @@
     (
       name: _: final: prev: {
         ${l.removeSuffix ".nix" name} =
-          prev.callPackage
+          final.callPackage
           "${./pkgs}/${name}"
           {inherit inputs tlib;};
       }
