@@ -37,10 +37,13 @@ in {
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-wlr
-    ];
+    wlr.settings.screencast = {
+      output_name = "eDP-1";
+      max_fps = 60;
+      exec_before = "pkill mako";
+      exec_after = "mako";
+      chooser_type = "default";
+    };
   };
   programs = {
     # this is needed for impermanence
@@ -50,6 +53,16 @@ in {
     kdeconnect.enable = true;
     # gnome stuffs
     seahorse.enable = true;
+  };
+  services = {
+    # provide location
+    geoclue2 = {
+      enable = true;
+      appConfig.gammastep = {
+        isAllowed = true;
+        isSystem = false;
+      };
+    };
   };
   # gnome keyring better fr fr
   security.pam.services.patriot = {
@@ -159,6 +172,7 @@ in {
         cloudflared
         lutris
         protontricks
+        inputs.fufexan.packages.${system}.gamescope
       ];
     };
     programs = {
