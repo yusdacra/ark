@@ -3,16 +3,10 @@
   pkgs,
   config,
   lib,
+  tlib,
   ...
 }: {
-  imports = let
-    b = builtins;
-    modules = toString ./modules;
-    files = b.readDir modules;
-    filesToImport =
-      b.map (name: "${modules}/${name}") (b.attrNames files);
-  in
-    filesToImport;
+  imports = tlib.importFolder (toString ./modules);
 
   boot.cleanTmpDir = true;
   zramSwap.enable = true;

@@ -1,12 +1,11 @@
 {
   config,
   lib,
+  tlib,
   pkgs,
   inputs,
   ...
-}: let
-  byLabel = label: "/dev/disk/by-label/${label}";
-in {
+}: {
   imports = with inputs;
   with nixos-hardware.nixosModules; [
     nixpkgs.nixosModules.notDetected
@@ -21,59 +20,10 @@ in {
     ../../modules/network/iwd.nix
     ../../users/root
     ../../users/patriot
-  ];
+  ]
+  ++ (tlib.importFolder (toString ./modules));
 
   system.persistDir = "/persist";
-
-  boot = {
-    tmpOnTmpfs = true;
-    loader = {
-      efi.canTouchEfiVariables = true;
-      systemd-boot.enable = true;
-      systemd-boot.configurationLimit = 10;
-    };
-    kernelPackages = pkgs.linuxPackages_latest;
-    supportedFilesystems = ["f2fs"];
-    initrd = {
-      availableKernelModules = [
-        "nvme"
-        "xhci_pci"
-        "ahci"
-        "usb_storage"
-        "usbhid"
-        "sd_mod"
-      ];
-      kernelModules = ["amdgpu"];
-    };
-    kernelModules = ["kvm-amd"];
-    extraModulePackages = [];
-    kernel.sysctl = {"fs.inotify.max_user_watches" = 524288;};
-  };
-
-  fileSystems."/" = {
-    device = "none";
-    fsType = "tmpfs";
-    options = ["defaults" "size=2G" "mode=755"];
-  };
-  fileSystems."/nix" = {
-    device = byLabel "NIX";
-    fsType = "f2fs";
-  };
-  fileSystems."${config.system.persistDir}" = {
-    device = byLabel "PERSIST";
-    fsType = "f2fs";
-    neededForBoot = true;
-  };
-  fileSystems."/boot" = {
-    device = byLabel "BOOT";
-    fsType = "vfat";
-  };
-
-  swapDevices = [];
-  zramSwap = {
-    enable = true;
-    algorithm = "zstd";
-  };
 
   nix.settings.max-jobs = lib.mkForce 16;
   security = {
