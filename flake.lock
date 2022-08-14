@@ -75,11 +75,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1660474935,
-        "narHash": "sha256-obHtSN2x4r5OOfZDqg5tLTJgr68pwGIH7UjY+ngk7TA=",
+        "lastModified": 1660475253,
+        "narHash": "sha256-51v6qCnv6tpCh5k3f026W7QuQ49ERYSK9jRwx099byI=",
         "ref": "refs/heads/master",
-        "rev": "afc38adf95e312f465d86312f46b509376712f2e",
-        "revCount": 64,
+        "rev": "9c828c7c1e42015fd433bee74829181c3cd94879",
+        "revCount": 65,
         "type": "git",
         "url": "https://git.gaze.systems/dusk/website.git"
       },
