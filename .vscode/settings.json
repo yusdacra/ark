@@ -1,4 +1,0 @@
-{
-    "nixEnvSelector.nixShellConfig": "${workspaceRoot}/shell.nix",
-    "discord.enabled": false
-}
