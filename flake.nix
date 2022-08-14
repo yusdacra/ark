@@ -60,6 +60,7 @@
     nixosConfigurations = import ./hosts {inherit lib tlib inputs;};
 
     packages = lib.mapAttrs (_: pkgs: pkgs._exported) allPkgs;
+    legacyPackages = allPkgs;
     apps = miscApps // (inputs.nixinate.nixinate.x86_64-linux inputs.self);
 
     devShells = import ./shells {inherit lib tlib inputs;};
