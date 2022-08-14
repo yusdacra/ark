@@ -6,20 +6,11 @@
   ...
 }: {
   imports = let
-    files =
-      lib.filterAttrs
-      (name: type: type == "regular" && name != "default.nix")
-      (builtins.readDir (toString ./.));
+    b = builtins;
+    modules = toString ./modules;
+    files = b.readDir modules;
     filesToImport =
-      builtins.map
-      (
-        name:
-          builtins.path {
-            inherit name;
-            path = "${toString ./.}/${name}";
-          }
-      )
-      (builtins.attrNames files);
+      b.map (name: "${modules}/${name}") (b.attrNames files);
   in
     filesToImport;
 

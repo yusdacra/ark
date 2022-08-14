@@ -56,7 +56,7 @@
         }
       )
       allPkgs;
-  in rec {
+  in {
     nixosConfigurations = import ./hosts {inherit lib tlib inputs;};
 
     packages = lib.mapAttrs (_: pkgs: pkgs._exported) allPkgs;
