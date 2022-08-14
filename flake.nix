@@ -26,6 +26,8 @@
     bernbot.inputs.nixpkgs.follows = "nixpkgs";
     discocss.url = "github:fufexan/discocss/flake";
     discocss.inputs.nixpkgs.follows = "nixpkgs";
+    nil.url = "github:oxalica/nil";
+    nil.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs: let

@@ -13,7 +13,7 @@
       }
       {
         name = "nix";
-        language-server = {command = "${pkgs.rnix-lsp}/bin/rnix-lsp";};
+        language-server = {command = "${inputs.nil.packages.${pkgs.system}.default}/bin/nil";};
       }
       {
         name = "rust";
