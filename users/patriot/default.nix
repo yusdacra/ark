@@ -172,7 +172,7 @@ in {
         cloudflared
         lutris
         protontricks
-        inputs.fufexan.packages.${system}.gamescope
+        obsidian
       ];
     };
     programs = {
