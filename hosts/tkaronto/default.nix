@@ -18,6 +18,7 @@
     ../../modules/persist
     ../../modules/gamemode
     ../../modules/network/iwd.nix
+    ../../modules/syncthing
     ../../users/root
     ../../users/patriot
   ]

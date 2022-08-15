@@ -63,6 +63,14 @@ in {
         isSystem = false;
       };
     };
+    syncthing.folders = {
+      notes = {
+        enable = true;
+        path = "${config.users.users.patriot.home}/notes";
+        devices = ["redmi-phone"];
+        ignorePerms = true;
+      };
+    };
   };
   # gnome keyring better fr fr
   security.pam.services.patriot = {
@@ -93,7 +101,7 @@ in {
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
-        ["helix" "git" "ssh"]
+        ["helix" "git" "ssh" "obsidian"]
       ];
     in
       l.flatten [
@@ -119,6 +127,7 @@ in {
           # caches / history stuff
           ".directory_history"
           ".cache"
+          "notes"
         ]
         ++ mkPaths ".local/share" [
           "direnv"
@@ -172,7 +181,6 @@ in {
         cloudflared
         lutris
         protontricks
-        obsidian
       ];
     };
     programs = {
