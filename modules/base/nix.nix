@@ -11,7 +11,7 @@
       (_: v: {flake = v;})
       (lib.filterAttrs (_: v: v ? outputs) inputs);
     package = pkgs.nix;
-    gc.automatic = true;
+    gc.automatic = false;
     optimise.automatic = true;
     extraOptions = ''
       min-free = 536870912
