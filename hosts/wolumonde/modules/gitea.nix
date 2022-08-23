@@ -1,11 +1,13 @@
 {config, ...}: {
   services.gitea = {
     enable = true;
-    cookieSecure = true;
-    disableRegistration = true;
     domain = "git.gaze.systems";
     rootUrl = "https://git.gaze.systems/";
     httpPort = 3001;
+    settings = {
+      service.DISABLE_REGISTRATION = true;
+      session.COOKIE_SECURE = true;
+    };
   };
 
   services.nginx.virtualHosts."git.gaze.systems" = {
