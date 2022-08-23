@@ -1,8 +1,6 @@
-{config, ...}:
-let
+{config, ...}: let
   byLabel = label: "/dev/disk/by-label/${label}";
-in
-{
+in {
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";

@@ -7,22 +7,19 @@
   ...
 }: {
   imports = with inputs;
-  with nixos-hardware.nixosModules; [
-    nixpkgs.nixosModules.notDetected
-    nixos-persistence.nixosModule
-    common-pc-ssd
-    common-pc-laptop
-    common-gpu-nvidia
-    common-gpu-amd
-    common-cpu-amd
-    ../../modules/persist
-    ../../modules/gamemode
-    ../../modules/network/iwd.nix
-    ../../modules/syncthing
-    ../../users/root
-    ../../users/patriot
-  ]
-  ++ (tlib.importFolder (toString ./modules));
+  with nixos-hardware.nixosModules;
+    [
+      nixpkgs.nixosModules.notDetected
+      nixos-persistence.nixosModule
+      common-pc-ssd
+      common-pc-laptop
+      common-gpu-nvidia
+      common-gpu-amd
+      common-cpu-amd
+      ../../users/root
+      ../../users/patriot
+    ]
+    ++ (tlib.importFolder (toString ./modules));
 
   system.persistDir = "/persist";
 
@@ -121,7 +118,6 @@
       enableGC = true;
       autoMount = true;
     };
-    flatpak.enable = false;
   };
 
   virtualisation = {

@@ -11,12 +11,11 @@ lib.makeExtensible (self: {
   prefixStrings = prefix: strings:
     lib.forEach strings (string: "${prefix}${string}");
 
-  importFolder = modules:
-    let
-      b = builtins;
-      files = b.readDir modules;
-      filesToImport =
-        b.map (name: "${modules}/${name}") (b.attrNames files);
-    in
-      filesToImport;
+  importFolder = modules: let
+    b = builtins;
+    files = b.readDir modules;
+    filesToImport =
+      b.map (name: "${modules}/${name}") (b.attrNames files);
+  in
+    filesToImport;
 })

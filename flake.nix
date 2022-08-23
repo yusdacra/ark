@@ -28,6 +28,8 @@
     discocss.inputs.nixpkgs.follows = "nixpkgs";
     nil.url = "github:oxalica/nil";
     nil.inputs.nixpkgs.follows = "nixpkgs";
+    webcord-flake.url = "github:fufexan/webcord-flake";
+    webcord-flake.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs: let

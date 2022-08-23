@@ -1,4 +1,8 @@
-{config, inputs, ...}: {
+{
+  config,
+  inputs,
+  ...
+}: {
   users.users.syncthing.extraGroups = ["users"];
   services.syncthing = {
     enable = true;

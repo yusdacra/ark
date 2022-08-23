@@ -30,6 +30,7 @@ in {
       "/home/patriot/.cargo"
       "/home/patriot/proj"
       "/home/patriot/games"
+      "/home/patriot/.var"
     ];
     systemPackages = [pkgs.qt5.qtwayland];
     shells = with pkgs; [bashInteractive zsh];
@@ -135,10 +136,10 @@ in {
           "keyrings"
           "lutris"
           "PolyMC"
+          "Terraria"
         ]
         ++ mkPaths ".config" [
           "lutris"
-          "discord"
           "kdeconnect"
         ];
       files = l.flatten [

@@ -1,0 +1,1 @@
+../../../modules/syncthing/default.nix
