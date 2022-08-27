@@ -15,9 +15,7 @@
     nixinate.inputs.nixpkgs.follows = "nixpkgs";
 
     helix.url = "github:helix-editor/helix";
-    helix.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.url = "github:hyprwm/Hyprland";
-    hyprland.inputs.nixpkgs.follows = "nixpkgs";
     fufexan.url = "github:fufexan/dotfiles";
     fufexan.inputs.hyprland.follows = "hyprland";
     blog.url = "git+https://git.gaze.systems/dusk/website.git";
@@ -28,8 +26,6 @@
     discocss.inputs.nixpkgs.follows = "nixpkgs";
     nil.url = "github:oxalica/nil";
     nil.inputs.nixpkgs.follows = "nixpkgs";
-    webcord-flake.url = "github:fufexan/webcord-flake";
-    webcord-flake.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs: let

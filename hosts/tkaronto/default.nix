@@ -118,6 +118,7 @@
       enableGC = true;
       autoMount = true;
     };
+    gvfs.enable = true;
   };
 
   virtualisation = {

@@ -43,15 +43,5 @@
         };
       };
     };
-    themes = {
-      catppuccin_mocha = builtins.fromTOML (
-        builtins.readFile (
-          builtins.fetchurl {
-            url = "https://raw.githubusercontent.com/catppuccin/helix/47710cbb38a5462973a484283a749543914c73e9/italics/catppuccin_mocha.toml";
-            sha256 = "sha256:1bv07mmi6hz7igd2pz7brcgs154989hnq8jmxy8px9d1jpx753di";
-          }
-        )
-      );
-    };
   };
 }
