@@ -21,7 +21,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.fufexan.packages.${pkgs.system}.hyprland;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     extraConfig = let
       rofi = "${pkgs.rofi-wayland}/bin/rofi";
       launcher = "${rofi} -show drun";

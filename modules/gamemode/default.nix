@@ -3,7 +3,7 @@
   inputs,
   ...
 }: let
-  hyprland = inputs.fufexan.packages.${pkgs.system}.hyprland;
+  hyprland = inputs.hyprland.packages.${pkgs.system}.hyprland;
 
   startscript = pkgs.writeShellScript "gamemode-start" ''
     export HYPRLAND_INSTANCE_SIGNATURE=$(ls /tmp/hypr | sort | tail -n 1)
