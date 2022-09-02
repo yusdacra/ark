@@ -31,10 +31,10 @@ in
   };
   services.nginx.virtualHosts."gaze.systems" = {
     locations."/.well-known/matrix/client".extraConfig = ''
-      alias ${wellKnownFileClient}
+      alias ${wellKnownFileClient};
     '';
     locations."/.well-known/matrix/server".extraConfig = ''
-      alias ${wellKnownFileServer}
+      alias ${wellKnownFileServer};
     '';
   };
 }
