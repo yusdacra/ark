@@ -47,6 +47,7 @@ in {
   services.nginx.virtualHosts."gaze.systems" = {
     locations."/.well-known/matrix/".extraConfig = ''
       add_header content-type application/json;
+      add_header access-control-allow-origin *;
       alias ${wellKnownFiles}/;
     '';
   };
