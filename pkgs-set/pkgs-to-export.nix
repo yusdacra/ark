@@ -4,6 +4,7 @@ pkgs: (
     "fractal-next"
     "obsidian"
     "comic-mono"
+    "chromium"
   ]
   pkgs
 )

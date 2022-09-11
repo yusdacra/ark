@@ -14,19 +14,26 @@
     nixinate.url = "github:matthewcroughan/nixinate";
     nixinate.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+    nixpkgs-wayland.flake = false;
+
     helix.url = "github:helix-editor/helix";
+
     hyprland.url = "github:hyprwm/Hyprland";
-    fufexan.url = "github:fufexan/dotfiles";
-    fufexan.inputs.hyprland.follows = "hyprland";
+    hyprland.inputs.nixpkgs.follows = "nixpkgs";
+    hyprland-contrib.url = "github:hyprwm/contrib";
+    hyprland-contrib.inputs.nixpkgs.follows = "nixpkgs";
+
     blog.url = "git+https://git.gaze.systems/dusk/website.git";
     blog.inputs.nixpkgs.follows = "nixpkgs";
+
     bernbot.url = "github:yusdacra/bernbot";
     bernbot.inputs.nixpkgs.follows = "nixpkgs";
-    discocss.url = "github:fufexan/discocss/flake";
-    discocss.inputs.nixpkgs.follows = "nixpkgs";
+
     nil.url = "github:oxalica/nil";
     nil.inputs.nixpkgs.follows = "nixpkgs";
-    webcord.url = "github:fufexan/webcord-flake/system-electron";
+
+    webcord.url = "github:fufexan/webcord-flake";
     webcord.inputs.nixpkgs.follows = "nixpkgs";
   };
 

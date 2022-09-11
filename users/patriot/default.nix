@@ -56,14 +56,6 @@ in {
     seahorse.enable = true;
   };
   services = {
-    # provide location
-    geoclue2 = {
-      enable = true;
-      appConfig.gammastep = {
-        isAllowed = true;
-        isSystem = false;
-      };
-    };
     syncthing.folders = {
       notes = {
         enable = true;
@@ -72,11 +64,17 @@ in {
         ignorePerms = true;
       };
     };
+    gnome.gnome-keyring.enable = true;
   };
   # gnome keyring better fr fr
   security.pam.services.patriot = {
     enableGnomeKeyring = true;
     enableKwallet = false;
+  };
+  security.pam.services.swaylock = {
+    text = ''
+      auth include login
+    '';
   };
   systemd = {
     targets.network-online.enable = false;
@@ -135,7 +133,6 @@ in {
           "zsh"
           "keyrings"
           "lutris"
-          "PolyMC"
           "Terraria"
         ]
         ++ mkPaths ".config" [
@@ -178,10 +175,10 @@ in {
         mupdf
         xdg_utils
         rust-analyzer
-        # polymc
         cloudflared
         lutris
         protontricks
+        fractal-next
       ];
     };
     programs = {

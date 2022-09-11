@@ -5,45 +5,41 @@
 }: {
   imports = [
     ../wayland
+    ../swaylock
+    ../wlsunset
+    ./swayidle.nix
     inputs.hyprland.homeManagerModules.default
   ];
 
-  home.packages =
-    [
-      (import "${inputs.fufexan}/home/wayland/screenshot.nix" {inherit pkgs;})
-    ]
-    ++ (
-      with pkgs; [
-        wf-recorder
-        xorg.xprop
-      ]
-    );
+  home.packages = with pkgs; [
+    wf-recorder
+    xorg.xprop
+    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
+    light
+    playerctl
+    wlogout
+  ];
 
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     extraConfig = let
-      rofi = "${pkgs.rofi-wayland}/bin/rofi";
-      launcher = "${rofi} -show drun";
-      term = "${pkgs.wezterm}/bin/wezterm";
+      launcher = "rofi -show drun";
+      term = "wezterm";
 
-      swaybg = "${pkgs.swaybg}/bin/swaybg";
-      light = "${pkgs.light}/bin/light";
-      playerctl = "${pkgs.playerctl}/bin/playerctl";
-      pulsemixer = "${pkgs.pulsemixer}/bin/pulsemixer";
-      wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
       notify-date = with pkgs;
         writers.writeBash "notify-date" ''
           ${libnotify}/bin/notify-send -t 1000 "       $(${coreutils}/bin/date +'%H:%M %d/%m/%Y')"
         '';
     in ''
       # should be configured per-profile
-      monitor=,preferred,auto,1.6
-      workspace=,1
+      monitor=eDP-1,preferred,auto,1.6
+      monitor=HDMI-A-1,1920x1080@75,auto,1
+      workspace=eDP-1,1
+      workspace=HDMI-A-1,2
 
-      exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY HYPRLAND_INSTANCE_SIGNATURE
-      exec-once=systemctl --user start hyprland-session.target
-      exec-once=${swaybg} -i ~/.config/wallpaper
+      exec-once=xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
+      exec-once=swaybg -i ~/.config/wallpaper
 
       input {
           kb_layout=tr
@@ -54,12 +50,10 @@
           }
       }
       general {
-          sensitivity=1
           main_mod=SUPER
           gaps_in=5
           gaps_out=5
           border_size=0
-          damage_tracking=full
       }
       decoration {
           rounding=16
@@ -67,12 +61,8 @@
           blur_size=3
           blur_passes=3
           blur_new_optimizations=1
-          drop_shadow=1
+          drop_shadow=0
           shadow_ignore_window=1
-          shadow_offset=2 2
-          shadow_range=2
-          shadow_render_power=1
-          col.shadow=0x55000000
       }
       animations {
           enabled=1
@@ -84,7 +74,18 @@
       dwindle {
           pseudotile=0 # enable pseudotiling on dwindle
       }
+      misc {
+        no_vfr=0
+      }
 
+      windowrule=float,title:^(Media viewer)$
+      windowrule=float,title:^(Picture-in-Picture)$
+      windowrule=float,title:^(Firefox — Sharing Indicator)$
+      windowrule=move 0 0,title:^(Firefox — Sharing Indicator)$
+
+
+      bind=SUPER,Escape,exec,wlogout -p layer-shell
+      bind=SUPER,L,exec,swaylock
       bind=SUPER,RETURN,exec,${term}
       bind=SUPER,D,exec,${launcher}
       bind=SUPER,Q,killactive,
@@ -93,14 +94,18 @@
       bind=SUPER,P,pseudo,
       bind=SUPER,T,exec,${notify-date}
       bind=SUPERSHIFT,T,togglefloating,
-      bind=,XF86AudioPlay,exec,${playerctl} play-pause
-      bind=,XF86AudioPrev,exec,${playerctl} previous
-      bind=,XF86AudioNext,exec,${playerctl} next
-      bind=,XF86AudioRaiseVolume,exec,${pulsemixer} --change-volume +6
-      bind=,XF86AudioLowerVolume,exec,${pulsemixer} --change-volume -6
-      bind=,XF86AudioMute,exec,${pulsemixer} --toggle-mute
-      bind=,XF86MonBrightnessUp,exec,${light} -A 5
-      bind=,XF86MonBrightnessDown,exec,${light} -U 5
+
+      bind=,XF86AudioPlay,exec,playerctl play-pause
+      bind=,XF86AudioPrev,exec,playerctl previous
+      bind=,XF86AudioNext,exec,playerctl next
+
+      bindle=,XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%+
+      bindle=,XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%-
+      bind=,XF86AudioMute,exec,wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+      bind=,XF86AudioMicMute,exec,wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+
+      bind=,XF86MonBrightnessUp,exec,light -A 5
+      bind=,XF86MonBrightnessDown,exec,light -U 5
 
       # move focus
       bind=SUPER,left,movefocus,l
@@ -139,21 +144,13 @@
       bind=SUPERSHIFT,8,movetoworkspace,8
       bind=SUPERSHIFT,9,movetoworkspace,9
 
-      ## screenshot ##
-      bind=,Print,exec,screenshot area
-      bind=SUPERSHIFT,R,exec,screenshot area
-
-      # monitor
-      bind=CTRL,Print,exec,screenshot monitor
-      bind=SUPERSHIFTCTRL,R,exec,screenshot monitor
-
-      # all-monitors
-      bind=ALT,Print,exec,screenshot all
-      bind=SUPERSHIFTALT,R,exec,screenshot all
-
-      # screenrec
-      bind=ALT,Print,exec,screenshot rec area
-      bind=SUPERSHIFTALT,R,exec,screenshot rec area
+      # screenshot
+      bind=,Print,exec,grimblast --notify copysave area
+      bind=SUPERSHIFT,R,exec,grimblast --notify copysave area
+      bind=CTRL,Print,exec,grimblast --notify --cursor copysave output
+      bind=SUPERSHIFTCTRL,R,exec,grimblast --notify --cursor copysave output
+      bind=ALT,Print,exec,grimblast --notify --cursor copysave screen
+      bind=SUPERSHIFTALT,R,exec,grimblast --notify --cursor copysave screen
     '';
   };
 }
