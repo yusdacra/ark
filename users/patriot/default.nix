@@ -210,7 +210,7 @@ in {
         defaultCacheTtlSsh = defaultCacheTtl;
         maxCacheTtlSsh = maxCacheTtl;
         grabKeyboardAndMouse = false;
-        pinentryFlavor = "gtk2";
+        pinentryFlavor = "gnome3";
       };
     };
   };
