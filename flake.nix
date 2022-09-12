@@ -35,6 +35,12 @@
 
     webcord.url = "github:fufexan/webcord-flake";
     webcord.inputs.nixpkgs.follows = "nixpkgs";
+
+    eww.url = "github:elkowar/eww";
+    eww.inputs.nixpkgs.follows = "nixpkgs";
+
+    fufexan.url = "github:fufexan/dotfiles";
+    fufexan.flake = false;
   };
 
   outputs = inputs: let

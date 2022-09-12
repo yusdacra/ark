@@ -5,6 +5,7 @@ pkgs: (
     "obsidian"
     "comic-mono"
     "chromium"
+    "discordo"
   ]
   pkgs
 )

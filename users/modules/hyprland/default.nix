@@ -9,6 +9,7 @@
     ../swaylock
     ../wlsunset
     ./swayidle.nix
+    "${inputs.fufexan}/home/graphical/eww"
     inputs.hyprland.homeManagerModules.default
   ];
 
@@ -41,6 +42,8 @@
 
       exec-once=xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
       exec-once=swaybg -i ~/.config/wallpaper
+      exec-once=eww daemon
+      exec-once=eww open bar
 
       input {
           kb_layout=tr
