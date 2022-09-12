@@ -3,6 +3,7 @@
   config,
   ...
 }: {
+  settings.terminal.name = "wezterm";
   home.packages = [pkgs.wezterm];
   xdg.enable = true;
   xdg.configFile = {
@@ -16,8 +17,8 @@
       }
 
       return {
-        font = wezterm.font("${config.fonts.settings.name}"),
-        font_size = ${builtins.toJSON config.fonts.settings.size},
+        font = wezterm.font("${config.settings.font.name}"),
+        font_size = ${builtins.toJSON config.settings.font.size},
         default_cursor_style = "BlinkingBar",
         enable_wayland = true,
         enable_tab_bar = false,

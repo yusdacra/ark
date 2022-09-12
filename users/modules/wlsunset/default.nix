@@ -1,8 +1,6 @@
-{inputs, ...}:
-let
+{inputs, ...}: let
   geo = import "${inputs.self}/locale/geo.nix";
-in
-{
+in {
   services.wlsunset = {
     enable = true;
     latitude = geo.lat;

@@ -1,12 +1,23 @@
 {
-  lib,
   config,
+  lib,
   ...
 }: let
-  cfg = config.fonts.settings;
-in
-  with lib; {
-    options.fonts.settings = {
+  cfg = config.settings;
+  inherit
+    (lib)
+    types
+    mkOption
+    mkIf
+    ;
+in {
+  options = {
+    settings.terminal = {
+      name = mkOption {
+        type = types.str;
+      };
+    };
+    settings.font = {
       enable = mkOption {
         type = types.bool;
         default = false;
@@ -21,8 +32,9 @@ in
         type = types.ints.unsigned;
       };
     };
+  };
 
-    config = mkIf cfg.enable {
-      home.packages = [cfg.package];
-    };
-  }
+  config = mkIf cfg.font.enable {
+    home.packages = [cfg.font.package];
+  };
+}

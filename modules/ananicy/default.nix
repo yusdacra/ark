@@ -1,11 +1,14 @@
-{pkgs, lib, ...}:
-let
-  l = lib // builtins;
-  mkRule = name: type: l.toJSON {
-    inherit name type;
-  };
-in
 {
+  pkgs,
+  lib,
+  ...
+}: let
+  l = lib // builtins;
+  mkRule = name: type:
+    l.toJSON {
+      inherit name type;
+    };
+in {
   services.ananicy = {
     enable = true;
     package = pkgs.ananicy-cpp;
@@ -36,6 +39,7 @@ in
       (mkRule "swayidle" "BG_CPUIO")
       # term
       (mkRule "wezterm-gui" "Doc-View")
+      (mkRule "foot" "Doc-View")
       # other
       (mkRule "syncthing" "BG_CPUIO")
     ];

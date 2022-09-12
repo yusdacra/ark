@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   inputs,
   ...
@@ -25,7 +26,7 @@
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     extraConfig = let
       launcher = "rofi -show drun";
-      term = "wezterm";
+      term = config.settings.terminal.name;
 
       notify-date = with pkgs;
         writers.writeBash "notify-date" ''

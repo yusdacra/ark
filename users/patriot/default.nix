@@ -96,7 +96,7 @@ in {
     imports = let
       modulesToEnable = l.flatten [
         # desktop stuff
-        ["firefox" "hyprland" "wezterm" "font" "rofi" "mako" "discord"]
+        ["firefox" "hyprland" "foot" "rofi" "mako" "discord"]
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
@@ -147,7 +147,7 @@ in {
     };
 
     fonts.fontconfig.enable = l.mkForce true;
-    fonts.settings = {
+    settings.font = {
       enable = true;
       name = "Comic Mono";
       size = 13;

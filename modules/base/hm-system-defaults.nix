@@ -7,6 +7,7 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.sharedModules = [
+    "${inputs.self}/users/modules/settings"
     {
       home = {
         inherit (config.environment) shellAliases sessionVariables;
