@@ -31,5 +31,5 @@ while true; do
 
   echo '{ "icon": "'"$icon"'", "text": "'"$text"'", "color": "'"$color"'" }'
 
-  sleep 3
+  sleep 10
 done

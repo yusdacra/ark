@@ -54,6 +54,7 @@ in {
     kdeconnect.enable = true;
     # gnome stuffs
     seahorse.enable = true;
+    dconf.enable = true;
   };
   services = {
     syncthing.folders = {
@@ -153,6 +154,35 @@ in {
       size = 13;
       package = pkgs.comic-mono;
     };
+
+    home.pointerCursor = {
+      package = pkgs.quintom-cursor-theme;
+      name = "Quintom_Ink";
+      size = 24;
+      gtk.enable = true;
+      x11.enable = true;
+    };
+
+    gtk = {
+      enable = true;
+
+      font = {
+        inherit (config.settings.font) name package;
+      };
+
+      gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
+
+      iconTheme = {
+        name = "Papirus-Dark";
+        package = pkgs.papirus-icon-theme;
+      };
+
+      theme = {
+        name = "Catppuccin-Orange-Dark-Compact";
+        package = pkgs.catppuccin-gtk.override {size = "compact";};
+      };
+    };
+
     home = {
       homeDirectory = nixosConfig.users.users.patriot.home;
       packages = with pkgs; [

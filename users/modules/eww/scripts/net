@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 while true; do
-  status=$(nmcli g | tail -n 1 | awk '{print $1}')
-  signal=$(nmcli dev wifi | rg "\*" | awk '{ print $8 }')
-  essid=$(nmcli -t -f NAME connection show --active | head -n1)
+  info="$(iwctl station wlan0 show)"
+  status=$(echo "$info" | awk 'FNR == 6 {print $2}')
+  _signal=$(echo "$info" | awk 'FNR == 13 {print $2}')
+  signal=${_signal#"-"}
+  essid=$(echo "$info" | awk 'FNR == 7 {print $3}')
 
   icons=("󰤯" "󰤟" "󰤢" "󰤥" "󰤨")
 
@@ -12,7 +14,7 @@ while true; do
     text=""
     color="#988ba2"
   else
-    level=$(awk -v n="$signal" 'BEGIN{print int(n/20)}')
+    level=$(awk -v n="$signal" 'BEGIN{print int(n/15)}')
     if [ "$level" -gt 4 ]; then
       level=4
     fi
@@ -23,5 +25,5 @@ while true; do
 
   echo '{ "essid": "'"$essid"'", "icon": "'"$icon"'", "color": "'"$color"'" }'
 
-  sleep 3
+  sleep 10
 done

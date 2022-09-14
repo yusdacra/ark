@@ -14,6 +14,5 @@
           :text {net.essid}))
       (button
         :class "module-net module"
-        :onclick "networkmanager_dmenu"
         :style "color: ${net.color};"
         {net.icon}))))

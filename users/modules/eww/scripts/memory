@@ -16,5 +16,5 @@ while true; do
 
   echo '{ "total": "'"$total"'", "used": "'"$used"'", "free": "'"$free"'", "percentage": '"$perc"' }'
 
-  sleep 3
+  sleep 5
 done

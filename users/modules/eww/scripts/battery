@@ -48,5 +48,5 @@ while true; do
 	STATE=$(cat /sys/class/power_supply/BAT0/status)
 
 	echo '{ "percentage": '"$CAPACITY"', "wattage": "'"$(wattage)"'", "status": "'"$(status)"'", "color": "'"$(color)"'" }'
-	sleep 3
+	sleep 60
 done

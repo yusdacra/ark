@@ -25,6 +25,9 @@
     upower
     wget
     wireplumber
+    # fonts
+    material-icons
+    material-design-icons
   ];
 
   programs.eww = {
