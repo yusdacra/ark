@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+
+get_status() {
+	playerctl -F status | while read -r s; do
+		if [ "$s" = "Playing" ]; then
+			echo ""
+		else
+			echo ""
+		fi
+	done
+}
+
+get_length_sec() {
+	playerctl -F metadata mpris:length | while read -r len; do
+		if [ -z "$len" ]; then
+			echo 0
+		else
+			bc <<< "$len / 1000000"
+		fi
+	done
+}
+
+get_length_time() {
+	playerctl -F metadata mpris:length | while read -r len; do
+		if [ -n "$len" ]; then
+			len=$(bc <<< "$len / 1000000")
+			date -d@"$len" +%M:%S
+		else
+			echo ""
+		fi
+	done
+}
+
+get_position() {
+	playerctl -F metadata -f '{{position}} {{mpris:length}}' 2>/dev/null | while read -r pos len; do
+		if [ -n "$pos" ]; then
+			bc -l <<< "$pos / $len * 100"
+		else
+			echo 0
+		fi
+	done
+}
+
+get_position_time() {
+	playerctl -F metadata -f '{{position}} {{mpris:length}}' 2>/dev/null | while read -r pos len; do
+		if [ -n "$pos" ]; then
+			date -d@"$(bc -l <<< "$pos / 1000000")" +%M:%S
+		else
+			echo 0
+		fi
+	done
+}
+
+get_cover() {
+	mkdir -p "$XDG_CACHE_HOME/eww_covers"
+	cd "$XDG_CACHE_HOME/eww_covers" || exit
+
+	IMGPATH="$XDG_CACHE_HOME/eww_covers/cover_art.png"
+
+	playerctl -F metadata mpris:artUrl | while read -r COVER_URL; do
+		if [[ "$COVER_URL" = https* ]]; then
+			wget -N "$COVER_URL" -o /dev/null
+
+			rm "$IMGPATH"
+			ln -s "$(basename "$COVER_URL")" "$IMGPATH"
+
+			echo "$IMGPATH"
+		elif [ "$COVER_URL" = "" ]; then
+			echo "images/music.png"
+		else
+			echo "$COVER_URL"
+		fi
+	done
+}
+
+## Execute accordingly
+if [ "$1" = "status" ]; then
+	get_status
+elif [ "$1" = "length" ]; then
+	get_length_sec
+elif [ "$1" = "length_time" ]; then
+	get_length_time
+elif [ "$1" = "position" ]; then
+	get_position
+elif [ "$1" = "position_time" ]; then
+	get_position_time
+elif [ "$1" = "cover" ]; then
+	get_cover
+fi

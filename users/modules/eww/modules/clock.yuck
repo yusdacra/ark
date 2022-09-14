@@ -1,0 +1,25 @@
+(defwidget clock_module []
+  (eventbox
+    :onhover "${EWW_CMD} update time_rev=true"
+    :onhoverlost "${EWW_CMD} update time_rev=false"
+    (box
+      :space-evenly "false"
+      :spacing "3"
+      :class "module"
+      (label
+        :text {time.hour}
+        :class "clock-time-class")
+      (label
+        :text ":"
+        :class "clock-time-sep")
+      (label
+        :text {time.minute}
+        :class "clock-minute-class")
+      (revealer
+        :transition "slideleft"
+        :reveal time_rev
+        :duration "350ms"
+        (button
+          :class "clock-date-class module"
+          :onclick "./scripts/pop calendar"
+          {time.date})))))

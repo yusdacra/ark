@@ -9,7 +9,7 @@
     ../swaylock
     ../wlsunset
     ./swayidle.nix
-    "${inputs.fufexan}/home/graphical/eww"
+    ../eww
     inputs.hyprland.homeManagerModules.default
   ];
 
@@ -35,7 +35,7 @@
         '';
     in ''
       # should be configured per-profile
-      monitor=eDP-1,preferred,auto,1.6
+      monitor=eDP-1,preferred,0x0,1.6
       monitor=HDMI-A-1,1920x1080@75,auto,1
       workspace=eDP-1,1
       workspace=HDMI-A-1,2

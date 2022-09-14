@@ -1,0 +1,26 @@
+(defvar bright_reveal false)
+(defvar bt_rev false)
+(defvar music_reveal false)
+(defvar net_rev false)
+(defvar time_rev false)
+(defvar vol_reveal false)
+
+(defpoll time :interval "5s" `date +'{"date": "%d/%m", "hour": "%H", "minute": "%M"}'`)
+
+(deflisten battery "scripts/battery")
+(deflisten bluetooth "scripts/bluetooth")
+(deflisten brightness "scripts/brightness")
+(deflisten memory "scripts/memory")
+(deflisten net "scripts/net")
+(deflisten volume "scripts/volume")
+
+(deflisten song_artist "playerctl -F metadata artist || true")
+(deflisten song_title "playerctl -F metadata title || true")
+(deflisten cover_art :initial "images/music.png" "scripts/music cover")
+(deflisten song_status :initial "" "scripts/music status")
+
+(deflisten song_length "scripts/music length_time")
+(deflisten song_pos :initial "0" "scripts/music position_time")
+(deflisten song_pos_perc :initial "0" "scripts/music position")
+
+(deflisten workspace "scripts/workspaces")

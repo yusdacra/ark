@@ -1,0 +1,85 @@
+@import 'css/colors';
+
+@mixin wshadow {
+  box-shadow: 0 5px 10px $shadow;
+  margin: 15px 20px 25px;
+}
+
+@import 'css/calendar';
+@import 'css/music';
+@import 'css/system';
+@import 'css/volume';
+
+* {
+  all: unset;
+  font-family: Roboto;
+  font-size: 1.3rem;
+}
+
+.bar {
+  background-color: $bg;
+  border-radius: 8px;
+  color: $fg;
+}
+
+.module { margin: 0 5px; }
+tooltip {
+  background-color: $bg;
+  border: 1px solid $border;
+  border-radius: 10px;
+  color: $fg;
+
+  label { margin: 5px; }
+}
+
+.clock-time-sep {
+  color: $fg;
+  font-weight: bold;
+}
+
+.clock-date-class {
+  color: $flamingo;
+  margin-right: 10px;
+}
+
+.clock-minute-class {
+  color: $text;
+  margin-right: 5px;
+}
+
+.clock-time-class {
+  color: $text;
+  font-weight: bold;
+}
+
+.bright-icon { color: $yellow; }
+.brightbar trough highlight {
+  background-image: linear-gradient(to right, $yellow 30%, $peach 100%);
+  border-radius: 10px;
+}
+
+.module-ssid,
+.module-net {
+  color: $lavender;
+  font-size: 1.2rem;
+}
+
+.module-bt { font-size: 1.2rem; }
+.separ { color: $surface0; }
+
+scale trough {
+  background-color: $bg1;
+  border-radius: 24px;
+  margin: 0 1rem;
+  min-height: 10px;
+  min-width: 70px;
+}
+
+.ws {
+  margin-left: 4px;
+
+  label {
+    font-size: 16px;
+    margin-top: 5px;
+  }
+}
