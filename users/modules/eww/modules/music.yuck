@@ -17,6 +17,6 @@
         :reveal music_reveal
         :duration "350ms"
         (box
-          (button :class "song-button" :onclick "playerctl previous" "")
+          (button :class "song-button" :onclick "playerctl previous" "⏮")
           (button :class "song-button" :onclick "playerctl play-pause" song_status)
-          (button :class "song-button" :onclick "playerctl next" ""))))))
+          (button :class "song-button" :onclick "playerctl next" "⏭"))))))

@@ -19,9 +19,9 @@
       (centerbox
         :halign "center"
         :class "music-button-box"
-        (button :class "music-button" :onclick "playerctl previous" "")
+        (button :class "music-button" :onclick "playerctl previous" "⏮")
         (button :class "music-button" :onclick "playerctl play-pause" song_status)
-        (button :class "music-button" :onclick "playerctl next" ""))
+        (button :class "music-button" :onclick "playerctl next" "⏭"))
       (box
         :orientation "v"
         (centerbox

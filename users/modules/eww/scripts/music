@@ -3,9 +3,9 @@
 get_status() {
 	playerctl -F status | while read -r s; do
 		if [ "$s" = "Playing" ]; then
-			echo ""
+			echo "⏸"
 		else
-			echo ""
+			echo "⏵"
 		fi
 	done
 }
