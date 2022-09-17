@@ -209,7 +209,7 @@ in {
         cloudflared
         lutris
         protontricks
-        fractal-next
+        # fractal-next
         (
           writeShellScriptBin "gh" ''
             GH_TOKEN=${secrets.githubToken} ${gh}/bin/gh $@
