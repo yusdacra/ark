@@ -1,0 +1,3 @@
+{
+  services.joycond.enable = true;
+}

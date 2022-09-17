@@ -88,6 +88,7 @@ in {
     config,
     pkgs,
     inputs,
+    secrets,
     ...
   }: let
     personal = import ../../personal.nix;
@@ -209,6 +210,11 @@ in {
         lutris
         protontricks
         fractal-next
+        (
+          writeShellScriptBin "gh" ''
+            GH_TOKEN=${secrets.githubToken} ${gh}/bin/gh $@
+          ''
+        )
       ];
     };
     programs = {
