@@ -20,6 +20,7 @@
     light
     playerctl
     wlogout
+    swaybg
   ];
 
   wayland.windowManager.hyprland = {
