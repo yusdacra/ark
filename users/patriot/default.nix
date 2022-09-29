@@ -204,7 +204,7 @@ in {
         mpv
         ffmpeg
         mupdf
-        xdg_utils
+        xdg-utils
         rust-analyzer
         cloudflared
         lutris

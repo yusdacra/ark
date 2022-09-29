@@ -39,7 +39,7 @@ in {
       skim
       tealdeer
       usbutils
-      utillinux
+      util-linux
       whois
       bat
       fzf
