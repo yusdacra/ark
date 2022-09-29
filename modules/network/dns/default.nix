@@ -1,4 +1,3 @@
 {
-  imports = [./nextdns.nix];
-  networking.resolvconf.useLocalResolver = true;
+  imports = [./cloudflare.nix];
 }
