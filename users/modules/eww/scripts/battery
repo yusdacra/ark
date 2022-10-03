@@ -38,7 +38,7 @@ gettime() {
 		else
 			EX="($FULL - $NOW) / $RATE"
 		fi
-		date -u -d@$(bc -l <<< "$EX * 3600") +%H:%M
+		date -u -d@"$(bc -l <<< "$EX * 3600")" +%H:%M
 	fi
 }
 
@@ -48,5 +48,5 @@ while true; do
 	STATE=$(cat /sys/class/power_supply/BAT0/status)
 
 	echo '{ "percentage": '"$CAPACITY"', "wattage": "'"$(wattage)"'", "status": "'"$(status)"'", "color": "'"$(color)"'" }'
-	sleep 60
+	sleep 3
 done

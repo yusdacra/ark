@@ -19,6 +19,7 @@ in {
       "adbusers"
       "dialout"
       "video"
+      (l.optional nixosConfig.networking.networkmanager.enable "networkmanager")
       (l.optional nixosConfig.virtualisation.docker.enable "docker")
     ];
     shell = pkgs.zsh;
@@ -32,7 +33,7 @@ in {
       "/home/patriot/games"
       "/home/patriot/.var"
     ];
-    systemPackages = [pkgs.qt5.qtwayland];
+    systemPackages = with pkgs; [qt5.qtwayland];
     shells = with pkgs; [bashInteractive zsh];
   };
   xdg.portal = {
@@ -41,8 +42,6 @@ in {
     wlr.settings.screencast = {
       output_name = "eDP-1";
       max_fps = 60;
-      exec_before = "pkill mako";
-      exec_after = "mako";
       chooser_type = "default";
     };
   };
@@ -97,8 +96,10 @@ in {
   in {
     imports = let
       modulesToEnable = l.flatten [
+        # wm
+        ["hyprland"]
         # desktop stuff
-        ["firefox" "hyprland" "foot" "rofi" "mako" "discord"]
+        ["firefox" "discord"]
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
@@ -106,6 +107,7 @@ in {
       ];
     in
       l.flatten [
+        ./colors.nix
         ../../modules/persist
         inputs.nixos-persistence.nixosModules.home-manager.impermanence
         (tlib.prefixStrings "${inputs.self}/users/modules/" modulesToEnable)
@@ -156,9 +158,14 @@ in {
       package = pkgs.comic-mono;
     };
 
+    settings.iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+
     home.pointerCursor = {
-      package = pkgs.quintom-cursor-theme;
-      name = "Quintom_Ink";
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
       size = 24;
       gtk.enable = true;
       x11.enable = true;
@@ -173,10 +180,7 @@ in {
 
       gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
 
-      iconTheme = {
-        name = "Papirus-Dark";
-        package = pkgs.papirus-icon-theme;
-      };
+      iconTheme = config.settings.iconTheme;
 
       theme = {
         name = "Catppuccin-Orange-Dark-Compact";
@@ -215,6 +219,8 @@ in {
             GH_TOKEN=${secrets.githubToken} ${gh}/bin/gh $@
           ''
         )
+        obs-studio
+        rofi-bluetooth-wayland
       ];
     };
     programs = {

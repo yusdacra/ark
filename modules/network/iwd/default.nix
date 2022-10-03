@@ -1,5 +1,4 @@
 {
-  imports = [./dns];
   networking.wireless.iwd = {
     enable = true;
     settings = {

@@ -1,33 +1,40 @@
 {
-  pkgs,
   config,
+  pkgs,
   ...
-}: {
-  home.packages = [pkgs.rofi-wayland];
-  xdg.enable = true;
-  xdg.dataFile = {
-    "rofi/themes/catppuccin.rasi".source = builtins.fetchurl {
-      url = "https://raw.githubusercontent.com/catppuccin/rofi/c7c242d6bfd4cabdc9a220cff71e3b0766811fbe/.local/share/rofi/themes/catppuccin.rasi";
-      sha256 = "sha256:17jssby0llsnabzfz3lp4wcc9vdzfz77i5wjcclfcyyvpswc53nx";
-    };
+}: let
+  rofi-nm = pkgs.fetchurl {
+    url = "https://raw.githubusercontent.com/P3rf/rofi-network-manager/1daa69406c9b6539a4744eafb0d5bb8afdc80e9b/rofi-network-manager.sh";
+    hash = "sha256:1nlnjmk5b743j5826z2nzfvjwk0fmbf7gk38darby93kdr3nv5zx";
   };
+in {
   xdg.configFile = {
-    "rofi/config.rasi".text = ''
-      configuration{
-          modi: "drun";
-          lines: 5;
+    "rofi-nm/rofi-nm.sh" = {
+      source = pkgs.runCommandLocal "rofi-nm" {} ''
+        cp --no-preserve=mode,ownership ${rofi-nm} rofi-nm.sh
+        substituteInPlace rofi-nm.sh \
+          --replace "#!/bin/bash" "#!${pkgs.stdenv.shell}" \
+          --replace "grep" "${pkgs.gnugrep}/bin/grep"
+        mv rofi-nm.sh $out
+      '';
+      executable = true;
+    };
+    "rofi-nm/rofi-network-manager.conf".text = ''
+      LOCATION=3
+      WIDTH_FIX_MAIN=10
+      WIDTH_FIX_STATUS=10
+    '';
+    "rofi-nm/rofi-network-manager.rasi".text = ''
+      configuration {
+        	show-icons:		false;
+        	sidebar-mode: 	false;
+        	hover-select: true;
+        	me-select-entry: "";
+        	me-accept-entry: [MousePrimary];
+      }
+
+      * {
           font: "${config.settings.font.fullName}";
-          show-icons: true;
-          terminal: "st";
-          drun-display-format: "{icon} {name}";
-          location: 0;
-          disable-history: false;
-          hide-scrollbar: true;
-          display-drun: "   Apps ";
-          display-run: "   Run ";
-          display-window: " 﩯  Window";
-          display-Network: " 󰤨  Network";
-          sidebar-mode: true;
       }
 
       @theme "catppuccin"
@@ -70,6 +77,7 @@
       }
 
       entry {
+          placeholder: "";
           padding: 6px;
           margin: 20px 0px 0px 10px;
           text-color: @fg-col;
@@ -80,7 +88,7 @@
           border: 0px 0px 0px;
           padding: 6px 0px 0px;
           margin: 10px 0px 0px 20px;
-          columns: 2;
+          columns: 1;
           background-color: @bg-col;
       }
 
@@ -101,7 +109,7 @@
 
       mode-switcher {
           spacing: 0;
-        }
+      }
 
       button {
           padding: 10px;
@@ -117,4 +125,12 @@
       }
     '';
   };
+
+  home.packages = [
+    (
+      pkgs.writeShellScriptBin "rofi-nm" ''
+        ${config.home.homeDirectory}/.config/rofi-nm/rofi-nm.sh
+      ''
+    )
+  ];
 }

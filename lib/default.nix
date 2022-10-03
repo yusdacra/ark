@@ -18,4 +18,6 @@ lib.makeExtensible (self: {
       b.map (name: "${modules}/${name}") (b.attrNames files);
   in
     filesToImport;
+
+  colors = import ./colors.nix lib;
 })

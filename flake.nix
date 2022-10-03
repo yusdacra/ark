@@ -38,6 +38,8 @@
 
     eww.url = "github:elkowar/eww";
     eww.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-colors.url = "github:Misterio77/nix-colors";
   };
 
   outputs = inputs: let
@@ -67,6 +69,7 @@
       )
       allPkgs;
   in {
+    lib = tlib;
     nixosConfigurations = import ./hosts {inherit lib tlib inputs;};
 
     packages = lib.mapAttrs (_: pkgs: pkgs._exported) allPkgs;

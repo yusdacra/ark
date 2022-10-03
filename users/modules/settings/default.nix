@@ -3,38 +3,47 @@
   lib,
   ...
 }: let
+  l = lib // builtins;
+  t = l.types;
   cfg = config.settings;
-  inherit
-    (lib)
-    types
-    mkOption
-    mkIf
-    ;
 in {
   options = {
+    settings.iconTheme = {
+      name = l.mkOption {
+        type = t.str;
+      };
+      package = l.mkOption {
+        type = t.package;
+      };
+    };
     settings.terminal = {
-      name = mkOption {
-        type = types.str;
+      name = l.mkOption {
+        type = t.str;
       };
     };
     settings.font = {
-      enable = mkOption {
-        type = types.bool;
+      enable = l.mkOption {
+        type = t.bool;
         default = false;
       };
-      name = mkOption {
-        type = types.str;
+      name = l.mkOption {
+        type = t.str;
       };
-      package = mkOption {
-        type = types.package;
+      package = l.mkOption {
+        type = t.package;
       };
-      size = mkOption {
-        type = types.ints.unsigned;
+      size = l.mkOption {
+        type = t.ints.unsigned;
+      };
+      fullName = l.mkOption {
+        type = t.str;
+        readOnly = true;
       };
     };
   };
 
-  config = mkIf cfg.font.enable {
+  config = l.mkIf cfg.font.enable {
     home.packages = [cfg.font.package];
+    settings.font.fullName = "${cfg.font.name} ${toString cfg.font.size}";
   };
 }

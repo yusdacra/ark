@@ -1,5 +1,6 @@
 {
   networking.resolvconf.useLocalResolver = true;
+  networking.networkmanager.dns = "none";
   services.dnscrypt-proxy2 = {
     enable = true;
     settings = {

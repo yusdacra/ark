@@ -1,1 +1,0 @@
-catppuccin_mocha.nix

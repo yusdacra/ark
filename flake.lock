@@ -24,6 +24,22 @@
         "type": "github"
       }
     },
+    "base16-schemes": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1654895891,
+        "narHash": "sha256-xYYmZkHnyLCUBAkqkZ7v1Lc5m39857MukQLMRtGuvdk=",
+        "owner": "base16-project",
+        "repo": "base16-schemes",
+        "rev": "7c247f734eac7f04518c6e28d098635ee8dcabf5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "base16-project",
+        "repo": "base16-schemes",
+        "type": "github"
+      }
+    },
     "bernbot": {
       "inputs": {
         "nci": "nci",
@@ -734,6 +750,25 @@
         "type": "github"
       }
     },
+    "nix-colors": {
+      "inputs": {
+        "base16-schemes": "base16-schemes",
+        "nixpkgs-lib": "nixpkgs-lib"
+      },
+      "locked": {
+        "lastModified": 1664216202,
+        "narHash": "sha256-7qXPLkgsXpi2nmxGN14DVZWMFw4QIx7foqEN6GXeTj8=",
+        "owner": "Misterio77",
+        "repo": "nix-colors",
+        "rev": "bb56fe29c3e16029a783b7a85354fc14098f2560",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Misterio77",
+        "repo": "nix-colors",
+        "type": "github"
+      }
+    },
     "nixinate": {
       "inputs": {
         "nixpkgs": [
@@ -795,6 +830,21 @@
       "original": {
         "id": "nixpkgs",
         "type": "indirect"
+      }
+    },
+    "nixpkgs-lib": {
+      "locked": {
+        "lastModified": 1655599917,
+        "narHash": "sha256-kjZbt5WdTrnjMxL79okg9TCoRUdADG50x/TWozbyTsE=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "5fb55578aa2f1a502d636a8ac71aece57cb730bb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
       }
     },
     "nixpkgs-wayland": {
@@ -914,6 +964,7 @@
         "hyprland": "hyprland",
         "hyprland-contrib": "hyprland-contrib",
         "nil": "nil",
+        "nix-colors": "nix-colors",
         "nixinate": "nixinate",
         "nixos-hardware": "nixos-hardware",
         "nixos-persistence": "nixos-persistence",
@@ -1073,11 +1124,11 @@
         "webcord": "webcord_2"
       },
       "locked": {
-        "lastModified": 1663692072,
-        "narHash": "sha256-W9y2ow4tkjFhIsPHvUuaOvawxRgxvr9hb6IMwpMoFlM=",
+        "lastModified": 1664817607,
+        "narHash": "sha256-1c9doRBUy61lrkA5MTRF4xIE9VcnBxfWUGzXMnMm0CM=",
         "owner": "fufexan",
         "repo": "webcord-flake",
-        "rev": "9578b63fe42746fdbf80a0364781946c8c35aca9",
+        "rev": "6fdcb79b9aa692acf95c2c9e05b7cd7fa426a385",
         "type": "github"
       },
       "original": {

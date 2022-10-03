@@ -14,6 +14,6 @@
           :text {bluetooth.text}))
       (button
         :class "module-bt module"
-        :onclick "blueman"
+        :onclick "rofi-bluetooth"
         :style "color: ${bluetooth.color};"
         {bluetooth.icon}))))

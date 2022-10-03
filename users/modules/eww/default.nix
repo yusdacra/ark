@@ -4,35 +4,70 @@
   inputs,
   lib,
   ...
-}: {
-  home.packages = with pkgs; [
-    config.wayland.windowManager.hyprland.package
-    config.programs.eww.package
-    bc
-    bluez
-    coreutils
-    findutils
-    gawk
-    gnused
-    jq
-    light
-    networkmanager
-    playerctl
-    procps
-    pulseaudio
-    ripgrep
-    socat
-    upower
-    wget
-    wireplumber
-    # fonts
-    material-icons
-    material-design-icons
-  ];
+}: let
+  dependencies =
+    config.home.packages
+    ++ (with pkgs; [
+      config.wayland.windowManager.hyprland.package
+      config.programs.eww.package
+      bash
+      bc
+      bluez
+      coreutils
+      dbus
+      dunst
+      findutils
+      gawk
+      gnused
+      jq
+      light
+      networkmanager
+      playerctl
+      procps
+      pulseaudio
+      ripgrep
+      socat
+      udev
+      upower
+      wget
+      wireplumber
+    ]);
+in {
+  imports = [../rofi-nm];
 
+  # home.packages = [inputs.eww.packages.${pkgs.system}.eww-wayland];
+  # home.file.".config/eww".source = config.lib.file.mkOutOfStoreSymlink ./.;
   programs.eww = {
     enable = true;
     package = inputs.eww.packages.${pkgs.system}.eww-wayland;
-    configDir = ./.;
+    # remove nix files
+    configDir = lib.cleanSourceWith {
+      filter = name: _type: let
+        baseName = baseNameOf (toString name);
+      in
+        !(lib.hasSuffix ".nix" baseName);
+      src = lib.cleanSource ./.;
+    };
+  };
+
+  home.packages = with pkgs; [
+    material-icons
+    material-design-icons
+    (nerdfonts.override {fonts = ["Hack"];})
+  ];
+
+  systemd.user.services.eww = {
+    Unit = {
+      Description = "Eww Daemon";
+      # not yet implemented
+      # PartOf = ["tray.target"];
+      PartOf = ["graphical-session.target"];
+    };
+    Service = {
+      Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
+      ExecStart = "${config.programs.eww.package}/bin/eww daemon --no-daemonize";
+      Restart = "on-failure";
+    };
+    Install.WantedBy = ["graphical-session.target"];
   };
 }

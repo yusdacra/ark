@@ -14,5 +14,6 @@
           :text {net.essid}))
       (button
         :class "module-net module"
+        :onclick "rofi-nm"
         :style "color: ${net.color};"
         {net.icon}))))

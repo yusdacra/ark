@@ -1,4 +1,4 @@
 {
-  imports = [../dns];
+  imports = [../dns ../iwd];
   networking.networkmanager.enable = true;
 }
