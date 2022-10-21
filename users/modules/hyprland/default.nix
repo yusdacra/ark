@@ -27,6 +27,7 @@
     playerctl
     wlogout
     swaybg
+    mpvpaper
   ];
 
   wayland.windowManager.hyprland = {

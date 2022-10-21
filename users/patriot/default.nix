@@ -54,6 +54,7 @@ in {
     # gnome stuffs
     seahorse.enable = true;
     dconf.enable = true;
+    weylus.users = ["patriot"];
   };
   services = {
     syncthing.folders = {
@@ -103,7 +104,7 @@ in {
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
-        ["helix" "git" "ssh" "obsidian"]
+        ["helix" "git" "ssh" "obsidian" "godot"]
       ];
     in
       l.flatten [
@@ -145,6 +146,7 @@ in {
         ];
       files = l.flatten [
         ".config/wallpaper"
+        ".config/wallpaper.mp4"
         (lib.removePrefix "~/" config.programs.ssh.userKnownHostsFile)
       ];
       allowOther = true;

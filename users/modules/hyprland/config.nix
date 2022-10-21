@@ -25,6 +25,7 @@ in {
 
     exec-once=xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
     exec-once=swaybg -i ~/.config/wallpaper
+    exec-once=mpvpaper -p -o "no-audio loop-file=inf" eDP-1 ~/.config/wallpaper.mp4
     exec-once=eww open-many bar notifications_win
 
     input {
