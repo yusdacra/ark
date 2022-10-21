@@ -16,7 +16,7 @@
       configuration{
           modi: "drun";
           lines: 5;
-          font: "${config.settings.font.fullName}";
+          font: "${config.settings.font.regular.fullName}";
           show-icons: true;
           terminal: "st";
           drun-display-format: "{icon} {name}";

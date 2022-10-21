@@ -1,18 +1,26 @@
-{lib, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   services.gnome = {
     gnome-keyring.enable = true;
     core-shell.enable = true;
     core-os-services.enable = true;
     at-spi2-core.enable = true;
-    chrome-gnome-shell.enable = false;
-    gnome-online-accounts.enable = false;
-    gnome-online-miners.enable = lib.mkForce false;
+    gnome-browser-connector.enable = true;
+    gnome-online-accounts.enable = true;
+    gnome-online-miners.enable = true;
+    tracker-miners.enable = true;
+    tracker.enable = true;
+    sushi.enable = true;
     gnome-remote-desktop.enable = false;
-    core-utilities.enable = false;
-    tracker-miners.enable = false;
-    tracker.enable = false;
-    gnome-settings-daemon.enable = lib.mkForce false;
-    sushi.enable = false;
+  };
+  services.tumbler.enable = true;
+  programs = {
+    geary.enable = lib.mkForce false;
+    gnome-terminal.enable = true;
+    evince.enable = true;
   };
   services.xserver = {
     enable = true;
@@ -37,4 +45,6 @@
     "autovt@tty1".enable = false;
   };
   services.power-profiles-daemon.enable = false;
+  environment.systemPackages = with pkgs; [gnome.gnome-tweaks ffmpegthumbnailer webp-pixbuf-loader];
+  environment.gnome.excludePackages = with pkgs; [gnome-console gnome-tour gnome.gnome-maps];
 }

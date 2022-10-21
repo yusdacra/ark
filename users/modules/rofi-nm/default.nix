@@ -34,7 +34,7 @@ in {
       }
 
       * {
-          font: "${config.settings.font.fullName}";
+          font: "${config.settings.font.regular.fullName}";
       }
 
       @theme "catppuccin"

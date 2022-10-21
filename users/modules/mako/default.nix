@@ -6,7 +6,7 @@
   programs.mako = {
     enable = true;
     anchor = "top-center";
-    font = config.settings.font.fullName;
+    font = config.settings.font.regular.fullName;
     borderRadius = 16;
     extraConfig = builtins.readFile (
       builtins.fetchurl {

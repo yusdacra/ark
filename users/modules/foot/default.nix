@@ -5,7 +5,7 @@
     server.enable = false;
     settings = {
       main = {
-        font = "${config.settings.font.name}:size=${toString config.settings.font.size}";
+        font = "${config.settings.font.monospace.name}:size=${toString config.settings.font.monospace.size}";
         dpi-aware = "yes";
       };
       colors = {

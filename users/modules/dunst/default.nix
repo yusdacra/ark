@@ -14,7 +14,7 @@ in {
         alignment = "center";
         corner_radius = 16;
         follow = "mouse";
-        font = config.settings.font.fullName;
+        font = config.settings.font.regular.fullName;
         format = "<b>%s</b>\\n%b";
         frame_width = 1;
         offset = "5x5";

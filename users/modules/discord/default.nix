@@ -15,7 +15,7 @@ in {
   ];
   home.packages = let
     pkg = inputs.webcord.packages.${pkgs.system}.webcord.override {
-      flags = "--add-css-theme=${theme}";
+      flags = ["--add-css-theme=${theme}"];
     };
   in [pkg];
 }

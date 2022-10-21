@@ -10,6 +10,7 @@
 
   nixosConfig = globalAttrs.config;
 in {
+  imports = [../../modules/de/gnome];
   users.users.patriot = {
     isNormalUser = true;
     createHome = true;
@@ -50,7 +51,6 @@ in {
     fuse.userAllowOther = true;
     adb.enable = true;
     steam.enable = true;
-    kdeconnect.enable = true;
     # gnome stuffs
     seahorse.enable = true;
     dconf.enable = true;
@@ -98,13 +98,14 @@ in {
     imports = let
       modulesToEnable = l.flatten [
         # wm
-        ["hyprland"]
+        # ["hyprland"]
+        ["wayland"]
         # desktop stuff
         ["firefox" "discord"]
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
-        ["helix" "git" "ssh" "obsidian" "godot"]
+        ["helix" "git" "ssh" "obsidian"]
       ];
     in
       l.flatten [
@@ -122,7 +123,6 @@ in {
       directories =
         l.flatten [
           "Downloads"
-          # "smos"
           ".wine"
           # ssh / gpg / keys
           ".ssh"
@@ -142,19 +142,24 @@ in {
         ]
         ++ mkPaths ".config" [
           "lutris"
-          "kdeconnect"
+          "dconf"
         ];
       files = l.flatten [
         ".config/wallpaper"
         ".config/wallpaper.mp4"
+        ".config/gnome-initial-setup-done"
         (lib.removePrefix "~/" config.programs.ssh.userKnownHostsFile)
       ];
       allowOther = true;
     };
 
     fonts.fontconfig.enable = l.mkForce true;
-    settings.font = {
-      enable = true;
+    settings.font.regular = {
+      name = "Comic Neue";
+      size = 13;
+      package = pkgs.comic-neue;
+    };
+    settings.font.monospace = {
       name = "Comic Mono";
       size = 13;
       package = pkgs.comic-mono;
@@ -177,7 +182,7 @@ in {
       enable = true;
 
       font = {
-        inherit (config.settings.font) name package;
+        inherit (config.settings.font.regular) name package;
       };
 
       gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
@@ -236,11 +241,6 @@ in {
         userName = name;
         userEmail = email;
       };
-      zsh.loginExtra = ''
-        if [[ "$(tty)" == "/dev/tty1" ]]; then
-          exec Hyprland
-        fi
-      '';
     };
     services = {
       gpg-agent = let

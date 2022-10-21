@@ -17,8 +17,8 @@
       }
 
       return {
-        font = wezterm.font("${config.settings.font.name}"),
-        font_size = ${builtins.toJSON config.settings.font.size},
+        font = wezterm.font("${config.settings.font.regular.name}"),
+        font_size = ${builtins.toJSON config.settings.font.regular.size},
         default_cursor_style = "BlinkingBar",
         enable_wayland = true,
         enable_tab_bar = false,

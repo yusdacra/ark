@@ -12,6 +12,6 @@
     effect-scale = "0.5";
     effect-greyscale = true;
     effect-blur = "20x3";
-    font = config.settings.font.name;
+    font = config.settings.font.regular.name;
   };
 }
