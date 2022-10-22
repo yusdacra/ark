@@ -1,17 +1,16 @@
 .song-cover-art {
+  @include rounding;
   background-position: center;
   background-size: cover;
-  border-radius: 16px;
   margin: 4px 5px 4px 0;
   min-height: 24px;
   min-width: 24px;
 }
 
 .music-window {
-  @include wshadow;
+  @include window;
   background-color: $bg;
   border: 1px solid $border;
-  border-radius: 16px;
   color: $fg;
 }
 
@@ -30,11 +29,11 @@
 
 .music-title {
   font-weight: bold;
+  font-size: 1.1rem;
 }
 
 .music-artist {
   color: $subtext1;
-  font-size: 1.2rem;
 }
 
 .music-button label {
@@ -44,7 +43,6 @@
 
 .music-time {
   color: $subtext1;
-  font-size: 1rem;
   margin: 0 1rem;
 }
 

@@ -10,10 +10,9 @@
 (include "./modules/volume.yuck")
 
 (include "./windows/calendar.yuck")
-(include "./windows/music_win.yuck")
+(include "./windows/music.yuck")
 (include "./windows/notifications.yuck")
-(include "./windows/system.yuck")
-(include "./windows/volume_win.yuck")
+(include "./windows/sidebar.yuck")
 
 (defwidget sep []
   (label :class "separ module" :text "|"))
@@ -21,7 +20,7 @@
 (defwidget notif-toggle []
   (button
     :class "notif-toggle module"
-    :onclick "scripts/reveal_toggle notification_rev ${EWW_CMD}";
+    :onclick "${EWW_CMD} open --toggle notifications";
     {notif_icons.icon}))
 
 ; clipboard 󰅌 󰅍 󰄷
@@ -40,7 +39,7 @@
     :space-evenly false
     :halign "end"
     (bright)
-    (volume)
+    (volume-module)
     (net)
     (bluetooth)
     (sep)
@@ -55,7 +54,7 @@
   (box
     :space-evenly false
     :halign "center"
-    (music)))
+    (music-module)))
 
 (defwidget bar []
   (centerbox

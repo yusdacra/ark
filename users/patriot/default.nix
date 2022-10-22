@@ -10,7 +10,6 @@
 
   nixosConfig = globalAttrs.config;
 in {
-  imports = [../../modules/de/gnome];
   users.users.patriot = {
     isNormalUser = true;
     createHome = true;
@@ -98,8 +97,7 @@ in {
     imports = let
       modulesToEnable = l.flatten [
         # wm
-        # ["hyprland"]
-        ["wayland"]
+        ["hyprland" "foot"]
         # desktop stuff
         ["firefox" "discord"]
         # cli stuff
@@ -142,12 +140,10 @@ in {
         ]
         ++ mkPaths ".config" [
           "lutris"
-          "dconf"
         ];
       files = l.flatten [
         ".config/wallpaper"
         ".config/wallpaper.mp4"
-        ".config/gnome-initial-setup-done"
         (lib.removePrefix "~/" config.programs.ssh.userKnownHostsFile)
       ];
       allowOther = true;
@@ -155,9 +151,9 @@ in {
 
     fonts.fontconfig.enable = l.mkForce true;
     settings.font.regular = {
-      name = "Comic Neue";
+      name = "Comic Relief";
       size = 13;
-      package = pkgs.comic-neue;
+      package = pkgs.comic-relief;
     };
     settings.font.monospace = {
       name = "Comic Mono";
@@ -227,7 +223,6 @@ in {
           ''
         )
         obs-studio
-        rofi-bluetooth-wayland
       ];
     };
     programs = {
@@ -241,6 +236,11 @@ in {
         userName = name;
         userEmail = email;
       };
+      zsh.loginExtra = ''
+        if [[ "$(tty)" == "/dev/tty1" ]]; then
+          exec Hyprland
+        fi
+      '';
     };
     services = {
       gpg-agent = let

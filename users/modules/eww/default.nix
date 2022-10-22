@@ -5,38 +5,46 @@
   lib,
   ...
 }: let
-  dependencies =
-    config.home.packages
-    ++ (with pkgs; [
-      config.wayland.windowManager.hyprland.package
-      config.programs.eww.package
-      bash
-      bc
-      bluez
-      coreutils
-      dbus
-      dunst
-      findutils
-      gawk
-      gnused
-      jq
-      light
-      networkmanager
-      playerctl
-      procps
-      pulseaudio
-      ripgrep
-      socat
-      udev
-      upower
-      wget
-      wireplumber
-    ]);
+  dependencies = with pkgs; [
+    config.wayland.windowManager.hyprland.package
+    config.programs.eww.package
+    # notifs
+    dunst
+    # utils
+    coreutils
+    findutils
+    gawk
+    gnused
+    jq
+    bash
+    bc
+    ripgrep
+    socat
+    procps
+    util-linux
+    wget
+    # brightness
+    light
+    # network
+    networkmanager
+    config.programs.rofi-nm.package
+    # volume
+    wireplumber
+    playerctl
+    pulseaudio
+    # session management
+    wlogout
+    # bluetooth
+    blueberry
+    bluez
+    # misc
+    dbus
+    udev
+    upower
+  ];
 in {
   imports = [../rofi-nm];
 
-  # home.packages = [inputs.eww.packages.${pkgs.system}.eww-wayland];
-  # home.file.".config/eww".source = config.lib.file.mkOutOfStoreSymlink ./.;
   programs.eww = {
     enable = true;
     package = inputs.eww.packages.${pkgs.system}.eww-wayland;

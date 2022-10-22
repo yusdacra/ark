@@ -25,38 +25,37 @@ in {
 
     exec-once=xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
     exec-once=swaybg -i ~/.config/wallpaper
-    exec-once=mpvpaper -p -o "no-audio loop-file=inf" eDP-1 ~/.config/wallpaper.mp4
-    exec-once=eww open-many bar notifications_win
+    exec-once=eww open bar
 
     input {
-        kb_layout=tr
-        follow_mouse=1
-        force_no_accel=1
-        touchpad {
-          natural_scroll=1
-        }
+      kb_layout=tr
+      follow_mouse=1
+      force_no_accel=1
+      touchpad {
+        natural_scroll=1
+      }
     }
     general {
-        main_mod=SUPER
-        gaps_in=5
-        gaps_out=5
-        border_size=0
+      main_mod=SUPER
+      gaps_in=5
+      gaps_out=5
+      border_size=0
     }
     decoration {
-        rounding=16
-        blur=1
-        blur_size=3
-        blur_passes=3
-        blur_new_optimizations=1
-        drop_shadow=0
-        shadow_ignore_window=1
+      rounding=16
+      blur=1
+      blur_size=3
+      blur_passes=3
+      blur_new_optimizations=1
+      drop_shadow=0
+      shadow_ignore_window=1
     }
     animations {
-        enabled=1
-        animation=windows,1,3,default,popin 80%
-        animation=border,1,2,default
-        animation=fade,1,4,default
-        animation=workspaces,1,2,default,slide
+      enabled=1
+      animation=windows,1,3,default,popin 80%
+      animation=border,1,2,default
+      animation=fade,1,4,default
+      animation=workspaces,1,2,default,slide
     }
     dwindle {
       pseudotile=1
@@ -68,17 +67,20 @@ in {
     }
 
     # window rules
-    windowrule=float,title:^(Media viewer)$
-    windowrule=float,title:^(Picture-in-Picture)$
-    windowrule=pin,title:^(Picture-in-Picture)$
-    windowrule=float,title:^(Firefox — Sharing Indicator)$
-    windowrule=move 0 0,title:^(Firefox — Sharing Indicator)$
+    windowrulev2=float,title:^(Media viewer)$
+    windowrulev2=float,title:^(Picture-in-Picture)$
+    windowrulev2=pin,title:^(Picture-in-Picture)$
+    windowrulev2=float,title:^(Firefox — Sharing Indicator)$
+    windowrulev2=move 0 0,title:^(Firefox — Sharing Indicator)$
 
     # window rules for organization
-    windowrule=workspace 1,title:^(Firefox)$
-    windowrule=workspace 2,title:^(Discord)$
-    windowrule=workspace 2,title:^(WebCord)$
-    windowrule=workspace 3,title:^(foot)$
+    windowrulev2=workspace 1,title:^(Firefox)$
+    windowrulev2=workspace 2,title:^(Discord)$
+    windowrulev2=workspace 2,title:^(WebCord)$
+    windowrulev2=workspace 3,title:^(foot)$
+
+    # make blueberry device-specific window proper size
+    windowrulev2  =  tile,  class:^(blueberry.py)$,  title:^(?!Sound).+$
 
     # mouse
     bindm=SUPER,mouse:272,movewindow

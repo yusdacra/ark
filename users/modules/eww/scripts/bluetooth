@@ -1,35 +1,51 @@
 #!/usr/bin/env bash
 
-declare -A baticon=([10]="󰁺" [20]="󰁻" [30]="󰁼" [40]="󰁽" [50]="󰁾" [60]="󰁿" [70]="󰂀" [80]="󰂁" [90]="󰂂" [100]="󰁹")
+declare -A baticon=([10]="󰤾" [20]="󰤿" [30]="󰥀" [40]="󰥁" [50]="󰥂" [60]="󰥃" [70]="󰥄" [80]="󰥅" [90]="󰥆" [100]="󰥈")
 
-while true; do
-  powered=$(bluetoothctl show | rg Powered | cut -f 2- -d ' ')
-  status=$(bluetoothctl info)
-  battery=$(echo "$status" | tail -1 | awk '{print $4 }' | tr -d '()')
-  name=$(echo "$status" | rg Name | cut -f 2- -d ' ')
+toggle() {
+  status=$(rfkill -J | jq -r '.rfkilldevices[] | select(.type == "bluetooth") | .soft' | head -1)
 
-  if [ "$powered" = "yes" ]; then
-    if [ "$status" != "Missing device address argument" ]; then
-      if [ "$battery" -le 100 ] && [ "$battery" -ge 0 ]; then
-        text="$name ${baticon[$battery]}"
-      else
-        text="$name"
-      fi
+  if [ "$status" = "unblocked" ]; then
+    rfkill block bluetooth
+  else
+    rfkill unblock bluetooth
+  fi
+}
 
-      icon=""
-      color="#b4befe"
+if [ "$1" = "toggle" ]; then
+  toggle
+else
+  while true; do
+    powered=$(bluetoothctl show | rg Powered | cut -f 2- -d ' ')
+    status=$(bluetoothctl info)
+    name=$(echo "$status" | rg Name | cut -f 2- -d ' ')
+    mac=$(echo "$status" | head -1 | awk '{print $2}' | tr ':' '_')
+
+    if [[ "$(echo "$status" | rg Percentage)" != "" ]]; then
+      battery=$(upower -i /org/freedesktop/UPower/devices/headset_dev_"$mac" | rg percentage | awk '{print $2}' | cut -f 1 -d '%')
+      batt_icon=${baticon[$battery]}
     else
-      icon=""
-      text="Disconnected"
+      batt_icon=""
+    fi
+
+    if [ "$powered" = "yes" ]; then
+      if [ "$status" != "Missing device address argument" ]; then
+        text="$name"
+        icon=""
+        color="#b4befe"
+      else
+        icon=""
+        text="Disconnected"
+        color="#45475a"
+      fi
+    else
+      icon=""
+      text="Bluetooth off"
       color="#45475a"
     fi
-  else
-    icon=""
-    text="Bluetooth off"
-    color="#45475a"
-  fi
 
-  echo '{ "icon": "'"$icon"'", "text": "'"$text"'", "color": "'"$color"'" }'
+    echo '{ "icon": "'"$icon"'", "batt_icon": "'"$batt_icon"'", "text": "'"$text"'", "color": "'"$color"'" }'
 
-  sleep 3
-done
+    sleep 3
+  done
+fi
