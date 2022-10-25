@@ -17,7 +17,10 @@
     inputs.hyprland.homeManagerModules.default
   ];
 
-  home.sessionVariables.GDK_SCALE = "2";
+  home.sessionVariables = {
+    GDK_SCALE = "2";
+    QT_SCALE_FACTOR = "2";
+  };
 
   home.packages = with pkgs; [
     wf-recorder

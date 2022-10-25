@@ -223,6 +223,8 @@ in {
           ''
         )
         obs-studio
+        libreoffice-fresh
+        helvum
       ];
     };
     programs = {
