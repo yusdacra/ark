@@ -11,7 +11,6 @@
 in {
   services.ananicy = {
     enable = true;
-    package = pkgs.ananicy-cpp;
     extraRules = l.concatStringsSep "\n" [
       # coompilers
       (mkRule "g++" "BG_CPUIO")
