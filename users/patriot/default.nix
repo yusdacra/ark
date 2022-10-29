@@ -225,6 +225,7 @@ in {
         obs-studio
         libreoffice-fresh
         helvum
+        nix-output-monitor
       ];
     };
     programs = {
