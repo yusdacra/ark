@@ -54,10 +54,13 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+  hardware.pulseaudio = {
+    enable = false;
+    support32Bit = true;
+  };
+
   services.xserver.videoDrivers = ["nvidia" "amdgpu"];
   hardware = {
-    bluetooth.enable = true;
-    xpadneo.enable = true;
     nvidia.prime = {
       amdgpuBusId = "PCI:5:0:0";
       nvidiaBusId = "PCI:1:0:0";
@@ -79,10 +82,11 @@
         vulkan-loader
       ];
     };
-    pulseaudio = {
-      enable = false;
-      support32Bit = true;
-    };
+  };
+
+  hardware = {
+    bluetooth.enable = true;
+    xpadneo.enable = true;
   };
 
   programs.light.enable = true;
@@ -109,15 +113,12 @@
     };
   };
 
+  # for tailscale
   networking.firewall.checkReversePath = "loose";
+  services.tailscale.enable = false;
+
   services = {
     earlyoom.enable = true;
-    tailscale.enable = false;
-    ipfs = {
-      enable = false;
-      enableGC = true;
-      autoMount = true;
-    };
     gvfs.enable = true;
   };
 
