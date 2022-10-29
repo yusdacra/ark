@@ -43,7 +43,7 @@ in {
     }
     decoration {
       rounding=16
-      blur=1
+      blur=0
       blur_size=3
       blur_passes=3
       blur_new_optimizations=1

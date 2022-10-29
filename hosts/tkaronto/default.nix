@@ -115,7 +115,7 @@
 
   # for tailscale
   networking.firewall.checkReversePath = "loose";
-  services.tailscale.enable = false;
+  services.tailscale.enable = true;
 
   services = {
     earlyoom.enable = true;
