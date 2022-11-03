@@ -6,16 +6,48 @@
   ...
 }: let
   theme = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/catppuccin/discord/c162aee9d71a06908abf285f9a5239c6bea8b5e9/themes/mocha.theme.css";
-    hash = "sha256-dPKW+Mru+KvivvobwbOgj2g8mSiSspdVOXrxbXCel8M=";
+    url = "https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css";
+    hash = "sha256-LCjw3k2NuPKGwAEvPUnJeQk9zQQ+TyHpZ/eNrETkWSM=";
   };
 in {
   home.persistence."${config.system.persistDir}${config.home.homeDirectory}".directories = [
-    ".config/WebCord"
+    ".config/discord"
   ];
-  home.packages = let
-    pkg = inputs.webcord.packages.${pkgs.system}.webcord.override {
-      flags = ["--add-css-theme=${theme}"];
+  xdg.configFile."discordcanary/settings.json".text = builtins.toJSON {
+    openasar = {
+      setup = true;
+      noTyping = true;
+      quickstart = true;
+      theme = builtins.readFile theme;
     };
+    SKIP_HOST_UPDATE = true;
+    IS_MAXIMIZED = true;
+    IS_MINIMIZED = false;
+    trayBalloonShown = true;
+  };
+  home.packages = let
+    flags = [
+      "--flag-switches-begin"
+      "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer,Vulkan"
+      "--flag-switches-end"
+      "--ozone-platform=wayland"
+      "--enable-webrtc-pipewire-capturer"
+      # "--disable-gpu-memory-buffer-video-frames"
+      # "--enable-accelerated-mjpeg-decode"
+      # "--enable-accelerated-video"
+      # "--enable-gpu-rasterization"
+      # "--enable-native-gpu-memory-buffers"
+      # "--enable-zero-copy"
+      # "--ignore-gpu-blocklist"
+    ];
+    pkg =
+      (pkgs.discord-canary.override {
+        withOpenASAR = true;
+      })
+      .overrideAttrs (old: {
+        preInstall = ''
+          gappsWrapperArgs+=("--add-flags" "${lib.concatStringsSep " " flags}")
+        '';
+      });
   in [pkg];
 }

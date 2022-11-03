@@ -33,9 +33,6 @@
     nil.url = "github:oxalica/nil";
     nil.inputs.nixpkgs.follows = "nixpkgs";
 
-    webcord.url = "github:fufexan/webcord-flake";
-    webcord.inputs.nixpkgs.follows = "nixpkgs";
-
     eww.url = "github:elkowar/eww";
     eww.inputs.nixpkgs.follows = "nixpkgs";
 

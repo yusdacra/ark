@@ -45,6 +45,6 @@
     "autovt@tty1".enable = false;
   };
   services.power-profiles-daemon.enable = false;
-  environment.systemPackages = with pkgs; [gnome.gnome-tweaks ffmpegthumbnailer webp-pixbuf-loader];
+  environment.systemPackages = with pkgs; [gnomeExtensions.unite gnome.gnome-tweaks ffmpegthumbnailer webp-pixbuf-loader];
   environment.gnome.excludePackages = with pkgs; [gnome-console gnome-tour gnome.gnome-maps];
 }

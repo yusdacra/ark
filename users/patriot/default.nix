@@ -10,6 +10,7 @@
 
   nixosConfig = globalAttrs.config;
 in {
+  imports = [../../modules/de/gnome];
   users.users.patriot = {
     isNormalUser = true;
     createHome = true;
@@ -97,8 +98,9 @@ in {
     imports = let
       modulesToEnable = l.flatten [
         # wm
-        ["hyprland" "foot"]
+        # ["hyprland" "foot"]
         # desktop stuff
+        ["wayland"]
         ["firefox" "discord"]
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
@@ -140,10 +142,12 @@ in {
         ]
         ++ mkPaths ".config" [
           "lutris"
+          "dconf"
         ];
       files = l.flatten [
         ".config/wallpaper"
         ".config/wallpaper.mp4"
+        ".config/gnome-initial-setup-done"
         (lib.removePrefix "~/" config.programs.ssh.userKnownHostsFile)
       ];
       allowOther = true;
@@ -162,8 +166,8 @@ in {
     };
 
     settings.iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
+      name = "Yaru";
+      package = pkgs.yaru-theme;
     };
 
     home.pointerCursor = {
@@ -186,8 +190,8 @@ in {
       iconTheme = config.settings.iconTheme;
 
       theme = {
-        name = "Catppuccin-Orange-Dark-Compact";
-        package = pkgs.catppuccin-gtk.override {size = "compact";};
+        name = "Yaru-Dark";
+        package = pkgs.yaru-theme;
       };
     };
 
@@ -239,11 +243,11 @@ in {
         userName = name;
         userEmail = email;
       };
-      zsh.loginExtra = ''
-        if [[ "$(tty)" == "/dev/tty1" ]]; then
-          exec Hyprland
-        fi
-      '';
+      # zsh.loginExtra = ''
+      #   if [[ "$(tty)" == "/dev/tty1" ]]; then
+      #     exec Hyprland
+      #   fi
+      # '';
     };
     services = {
       gpg-agent = let
