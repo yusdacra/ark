@@ -11,7 +11,7 @@
   };
 in {
   home.persistence."${config.system.persistDir}${config.home.homeDirectory}".directories = [
-    ".config/discord"
+    ".config/discordcanary"
   ];
   xdg.configFile."discordcanary/settings.json".text = builtins.toJSON {
     openasar = {
@@ -28,17 +28,17 @@ in {
   home.packages = let
     flags = [
       "--flag-switches-begin"
-      "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer,Vulkan"
+      "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer"
       "--flag-switches-end"
       "--ozone-platform=wayland"
       "--enable-webrtc-pipewire-capturer"
-      # "--disable-gpu-memory-buffer-video-frames"
-      # "--enable-accelerated-mjpeg-decode"
-      # "--enable-accelerated-video"
-      # "--enable-gpu-rasterization"
-      # "--enable-native-gpu-memory-buffers"
-      # "--enable-zero-copy"
-      # "--ignore-gpu-blocklist"
+      "--disable-gpu-memory-buffer-video-frames"
+      "--enable-accelerated-mjpeg-decode"
+      "--enable-accelerated-video"
+      "--enable-gpu-rasterization"
+      "--enable-native-gpu-memory-buffers"
+      "--enable-zero-copy"
+      "--ignore-gpu-blocklist"
     ];
     pkg =
       (pkgs.discord-canary.override {

@@ -125,7 +125,7 @@
   virtualisation = {
     waydroid.enable = false;
     podman.enable = false;
-    docker.enable = true;
+    docker.enable = false;
     libvirtd.enable = false;
   };
 

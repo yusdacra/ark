@@ -32,6 +32,8 @@ in {
       (mkRule "firefox" "Doc-View")
       (mkRule ".firefox-wrapped" "Doc-View")
       # wm
+      (mkRule ".gnome-shell-wrapped" "LowLatency_RT")
+      (mkRule "gnome-shell" "LowLatency_RT")
       (mkRule "Hyprland" "LowLatency_RT")
       (mkRule "rofi" "LowLatency_RT")
       (mkRule "wlsunset" "BG_CPUIO")
@@ -39,6 +41,8 @@ in {
       # term
       (mkRule "wezterm-gui" "Doc-View")
       (mkRule "foot" "Doc-View")
+      (mkRule "gnome-terminal" "Doc-View")
+      (mkRule ".gnome-terminal-wrapped" "Doc-View")
       # other
       (mkRule "syncthing" "BG_CPUIO")
     ];

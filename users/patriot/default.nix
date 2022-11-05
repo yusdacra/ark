@@ -101,7 +101,7 @@ in {
         # ["hyprland" "foot"]
         # desktop stuff
         ["wayland"]
-        ["firefox" "discord"]
+        ["chromium"]
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
