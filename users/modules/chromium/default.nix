@@ -1,5 +1,8 @@
 {config, ...}: {
-  home.persistence."${config.system.persistDir}${config.home.homeDirectory}".directories = [".config/chromium"];
+  home.persistence."${config.system.persistDir}${config.home.homeDirectory}".directories = [
+    ".config/chromium"
+    ".local/share/applications"
+  ];
   programs.chromium = {
     enable = true;
     commandLineArgs = [

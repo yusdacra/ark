@@ -166,7 +166,7 @@ in {
     };
 
     settings.iconTheme = {
-      name = "Yaru";
+      name = "Yaru-dark";
       package = pkgs.yaru-theme;
     };
 
@@ -190,7 +190,7 @@ in {
       iconTheme = config.settings.iconTheme;
 
       theme = {
-        name = "Yaru-Dark";
+        name = "Yaru-dark";
         package = pkgs.yaru-theme;
       };
     };
@@ -230,6 +230,7 @@ in {
         libreoffice-fresh
         helvum
         nix-output-monitor
+        spotify
       ];
     };
     programs = {
