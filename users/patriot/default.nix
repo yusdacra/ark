@@ -10,7 +10,7 @@
 
   nixosConfig = globalAttrs.config;
 in {
-  imports = [../../modules/de/gnome];
+  # imports = [../../modules/de/gnome];
   users.users.patriot = {
     isNormalUser = true;
     createHome = true;
@@ -99,9 +99,10 @@ in {
       modulesToEnable = l.flatten [
         # wm
         # ["hyprland" "foot"]
+        ["sway" "foot"]
         # desktop stuff
         ["wayland"]
-        ["chromium"]
+        ["chromium" "discord"]
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
@@ -244,11 +245,12 @@ in {
         userName = name;
         userEmail = email;
       };
-      # zsh.loginExtra = ''
-      #   if [[ "$(tty)" == "/dev/tty1" ]]; then
-      #     exec Hyprland
-      #   fi
-      # '';
+      zsh.loginExtra = ''
+        if [[ "$(tty)" == "/dev/tty1" ]]; then
+          export WLR_DRM_DEVICES=/dev/dri/card0
+          exec sway --unsupported-gpu
+        fi
+      '';
     };
     services = {
       gpg-agent = let

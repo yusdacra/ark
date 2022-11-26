@@ -27,8 +27,8 @@ in {
         renice = 15;
       };
       custom = {
-        start = "${startscript}";
-        end = "${endscript}";
+        # start = "${startscript}";
+        # end = "${endscript}";
       };
     };
   };

@@ -35,6 +35,9 @@ in {
       name = l.mkOption {
         type = t.str;
       };
+      binary = l.mkOption {
+        type = t.path;
+      };
     };
     settings.font = {
       regular = fontSettings;

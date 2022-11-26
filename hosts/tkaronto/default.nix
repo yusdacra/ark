@@ -30,13 +30,13 @@
         domain = "*";
         type = "soft";
         item = "nofile";
-        value = "524288";
+        value = "16777216";
       }
       {
         domain = "*";
         type = "hard";
         item = "nofile";
-        value = "524288";
+        value = "16777216";
       }
     ];
     allowSimultaneousMultithreading = true;

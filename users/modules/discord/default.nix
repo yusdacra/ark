@@ -42,6 +42,7 @@ in {
     ];
     pkg =
       (pkgs.discord-canary.override {
+        nss = pkgs.nss_latest;
         withOpenASAR = true;
       })
       .overrideAttrs (old: {

@@ -40,5 +40,8 @@
       ];
     })
   ];
-  home-manager.extraSpecialArgs = {inherit inputs tlib;};
+  home-manager.extraSpecialArgs = {
+    inherit inputs tlib;
+    nixosConfig = config;
+  };
 }
