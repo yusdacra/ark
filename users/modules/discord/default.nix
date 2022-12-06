@@ -4,12 +4,7 @@
   pkgs,
   lib,
   ...
-}: let
-  theme = pkgs.fetchurl {
-    url = "https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css";
-    hash = "sha256-LCjw3k2NuPKGwAEvPUnJeQk9zQQ+TyHpZ/eNrETkWSM=";
-  };
-in {
+}: {
   home.persistence."${config.system.persistDir}${config.home.homeDirectory}".directories = [
     ".config/discordcanary"
   ];
@@ -18,7 +13,7 @@ in {
       setup = true;
       noTyping = true;
       quickstart = true;
-      theme = builtins.readFile theme;
+      theme = builtins.readFile inputs.catppuccin-discord;
     };
     SKIP_HOST_UPDATE = true;
     IS_MAXIMIZED = true;

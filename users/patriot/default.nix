@@ -50,7 +50,7 @@ in {
     # this is needed for impermanence
     fuse.userAllowOther = true;
     adb.enable = true;
-    steam.enable = true;
+    # steam.enable = true;
     # gnome stuffs
     seahorse.enable = true;
     dconf.enable = true;
