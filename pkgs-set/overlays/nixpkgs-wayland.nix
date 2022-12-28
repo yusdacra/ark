@@ -1,1 +1,2 @@
-{inputs}: (import "${inputs.nixpkgs-wayland}/overlay.nix")
+# {inputs}: (import "${inputs.nixpkgs-wayland}/overlay.nix")
+final: prev: prev

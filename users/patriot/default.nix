@@ -33,6 +33,7 @@ in {
       "/home/patriot/proj"
       "/home/patriot/games"
       "/home/patriot/.var"
+      "/home/patriot/.config/libvirt"
     ];
     systemPackages = with pkgs; [qt5.qtwayland];
     shells = with pkgs; [bashInteractive zsh];
@@ -50,11 +51,15 @@ in {
     # this is needed for impermanence
     fuse.userAllowOther = true;
     adb.enable = true;
-    # steam.enable = true;
+    steam.enable = true;
     # gnome stuffs
     seahorse.enable = true;
     dconf.enable = true;
     weylus.users = ["patriot"];
+    java = {
+      enable = true;
+      package = pkgs.jre8;
+    };
   };
   services = {
     syncthing.folders = {
@@ -102,7 +107,7 @@ in {
         ["sway" "foot"]
         # desktop stuff
         ["wayland"]
-        ["chromium" "discord"]
+        ["chromium"]
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
@@ -140,10 +145,13 @@ in {
           "keyrings"
           "lutris"
           "Terraria"
+          "gnome-boxes"
+          "PrismLauncher"
         ]
         ++ mkPaths ".config" [
           "lutris"
           "dconf"
+          "gnome-boxes"
         ];
       files = l.flatten [
         ".config/wallpaper"
@@ -231,7 +239,8 @@ in {
         libreoffice-fresh
         helvum
         nix-output-monitor
-        spotify
+        gamescope
+        prismlauncher
       ];
     };
     programs = {

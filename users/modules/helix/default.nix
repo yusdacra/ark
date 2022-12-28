@@ -19,6 +19,10 @@
         name = "rust";
         language-server = {command = "${pkgs.rust-analyzer}/bin/rust-analyzer";};
       }
+      {
+        name = "zig";
+        language-server = {command = "${pkgs.zls}/bin/zls";};
+      }
     ];
     settings = {
       theme = "catppuccin_mocha";

@@ -83,7 +83,7 @@
     "catppuccin-discord": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-cOf1czMIKlTt0XLeZAw0Z398Pa8h2d90IPPT43+gjoI=",
+        "narHash": "sha256-F189DRR/QaGFQhSUED64UnPHrq6nhoLHOzitiPWVUYM=",
         "type": "file",
         "url": "https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css"
       },
@@ -471,11 +471,11 @@
         "rust-overlay": "rust-overlay_3"
       },
       "locked": {
-        "lastModified": 1670292968,
-        "narHash": "sha256-s0W84bCJKT0zqLEuT9HfJJRnoJhsvRoXjVPt5zmzDn8=",
+        "lastModified": 1670336313,
+        "narHash": "sha256-aGJH6PQjMzDDzuBBHpTNIwp1NHYCWUpA00YcFbdoDow=",
         "owner": "helix-editor",
         "repo": "helix",
-        "rev": "453a75a3739338348024b6c676231aef9ef6cb7b",
+        "rev": "af532147c97987d6170dc06a52aa3434ebf1b9d4",
         "type": "github"
       },
       "original": {
@@ -516,11 +516,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1670267535,
-        "narHash": "sha256-The+YCkkQ0dYXJWECktItiki7l8ImTsP2u1DKXkTzk0=",
+        "lastModified": 1670358704,
+        "narHash": "sha256-zBClR9FjbV3So2xDoQci6aKjsnkFVtrD1Ipnd1dY1oo=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "da76a1ed9eab3d1b5cf5fae4d040f8efe08b586c",
+        "rev": "993c382e74faddefeb62b3ab7a7281bd9a69990b",
         "type": "github"
       },
       "original": {
@@ -757,11 +757,11 @@
     "nixpkgs-wayland": {
       "flake": false,
       "locked": {
-        "lastModified": 1670205845,
-        "narHash": "sha256-hOkPA1NxTt68ClZeJF/42tGklqeeMAYuMHR+PXt9xHw=",
+        "lastModified": 1670350038,
+        "narHash": "sha256-3iFzmg3nh83lV++6jNKLzz/wXIrRfx+h2JVRsw0viKM=",
         "owner": "nix-community",
         "repo": "nixpkgs-wayland",
-        "rev": "7a42bdbb71bed152dc0fccb696b988985ecb412f",
+        "rev": "7a9e28e2fb249bc6ff31b668ccd3b005e5157aaa",
         "type": "github"
       },
       "original": {
@@ -804,17 +804,17 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1670064435,
-        "narHash": "sha256-+ELoY30UN+Pl3Yn7RWRPabykwebsVK/kYE9JsIsUMxQ=",
+        "lastModified": 1669411043,
+        "narHash": "sha256-LfPd3+EY+jaIHTRIEOUtHXuanxm59YKgUacmSzaqMLc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "61a8a98e6d557e6dd7ed0cdb54c3a3e3bbc5e25c",
+        "rev": "5dc7114b7b256d217fe7752f1614be2514e61bb8",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-unstable",
         "repo": "nixpkgs",
+        "rev": "5dc7114b7b256d217fe7752f1614be2514e61bb8",
         "type": "github"
       }
     },

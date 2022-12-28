@@ -122,12 +122,5 @@
     gvfs.enable = true;
   };
 
-  virtualisation = {
-    waydroid.enable = false;
-    podman.enable = false;
-    docker.enable = false;
-    libvirtd.enable = false;
-  };
-
   system.stateVersion = "22.05";
 }

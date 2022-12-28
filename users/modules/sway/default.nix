@@ -93,8 +93,7 @@
         };
         output = {
           "*" = {
-            bg = "${config.home.homeDirectory}/wallpaper.png fill";
-            adaptive_sync = "on";
+            bg = "${config.home.homeDirectory}/.config/wallpaper fill";
           };
           "eDP-1" = {
             scale = "2";
