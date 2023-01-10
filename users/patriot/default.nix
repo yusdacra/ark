@@ -112,6 +112,7 @@ in {
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
         ["helix" "git" "ssh" "obsidian"]
+        ["lollypop" "newsflash"]
       ];
     in
       l.flatten [
@@ -230,16 +231,10 @@ in {
         lutris
         protontricks
         # fractal-next
-        (
-          writeShellScriptBin "gh" ''
-            GH_TOKEN=${secrets.githubToken} ${gh}/bin/gh $@
-          ''
-        )
         obs-studio
         libreoffice-fresh
         helvum
         nix-output-monitor
-        gamescope
         prismlauncher
       ];
     };
