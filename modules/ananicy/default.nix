@@ -20,6 +20,7 @@ in {
       (mkRule "ld" "BG_CPUIO")
       (mkRule "gold" "BG_CPUIO")
       (mkRule "rustc" "BG_CPUIO")
+      (mkRule "zig" "BG_CPUIO")
       (mkRule "cargo" "BG_CPUIO")
       (mkRule "rust-analyzer" "BG_CPUIO")
       (mkRule "go" "BG_CPUIO")
@@ -31,11 +32,16 @@ in {
       # browser
       (mkRule "firefox" "Doc-View")
       (mkRule ".firefox-wrapped" "Doc-View")
+      (mkRule "chromium" "Doc-View")
+      (mkRule ".chromium-wrapped" "Doc-View")
       # wm
       (mkRule ".gnome-shell-wrapped" "LowLatency_RT")
       (mkRule "gnome-shell" "LowLatency_RT")
       (mkRule "Hyprland" "LowLatency_RT")
+      (mkRule "sway" "LowLatency_RT")
+      (mkRule ".sway-wrapped" "LowLatency_RT")
       (mkRule "rofi" "LowLatency_RT")
+      (mkRule ".rofi-wrapped" "LowLatency_RT")
       (mkRule "wlsunset" "BG_CPUIO")
       (mkRule "swayidle" "BG_CPUIO")
       # term

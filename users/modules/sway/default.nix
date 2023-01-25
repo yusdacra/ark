@@ -86,9 +86,18 @@
             "XF86MonBrightnessDown" = "exec ${light} -T 0.72";
           };
         input = {
-          "*" = {
+          "type:keyboard" = {
             xkb_layout = nixosConfig.services.xserver.layout;
+          };
+          "type:pointer" = {
             accel_profile = "flat";
+          };
+          "type:touchpad" = {
+            accel_profile = "adaptive";
+            tap = "enabled";
+            scroll_method = "edge";
+            dwt = "enabled";
+            events = "disabled_on_external_mouse";
           };
         };
         output = {
@@ -97,6 +106,7 @@
           };
           "eDP-1" = {
             scale = "2";
+            adaptive_sync = "on";
           };
           "HDMI-A-1" = {
             mode = "1920x1080@74.973Hz";
