@@ -106,7 +106,7 @@
           };
           "eDP-1" = {
             scale = "2";
-            adaptive_sync = "on";
+            adaptive_sync = "off";
           };
           "HDMI-A-1" = {
             mode = "1920x1080@74.973Hz";
