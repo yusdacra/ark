@@ -1,4 +1,4 @@
 {pkgs, ...}: {
-  virtualisation.libvirtd.enable = true;
+  imports = [../libvirtd];
   environment.systemPackages = [pkgs.gnome.gnome-boxes];
 }

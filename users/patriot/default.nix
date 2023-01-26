@@ -28,11 +28,17 @@ in {
   };
   environment = {
     persistence.${config.system.persistDir}.directories = l.flatten [
+      # because steam will be fucked otherwise
       (l.optional nixosConfig.programs.steam.enable "/home/patriot/.local/share/Steam")
+      # because cargo doesnt work otherwise
       "/home/patriot/.cargo"
+      # same thing since i work with cargo and other shit
       "/home/patriot/proj"
+      # same thing as steam
       "/home/patriot/games"
+      # flatpak stuff
       "/home/patriot/.var"
+      # libvirt stuff, dont think fuse mount would work here
       "/home/patriot/.config/libvirt"
     ];
     systemPackages = with pkgs; [qt5.qtwayland];
@@ -146,13 +152,11 @@ in {
           "keyrings"
           "lutris"
           "Terraria"
-          "gnome-boxes"
           "PrismLauncher"
         ]
         ++ mkPaths ".config" [
           "lutris"
           "dconf"
-          "gnome-boxes"
         ];
       files = l.flatten [
         ".config/wallpaper"
