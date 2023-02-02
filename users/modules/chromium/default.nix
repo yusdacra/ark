@@ -29,6 +29,7 @@
       "clngdbkpkpeebahjckkjfobafhncgmne" # stylus
       "hlepfoohegkhhmjieoechaddaejaokhf" # refined github
       "annfbnbieaamhaimclajlajpijgkdblo" # dark theme
+      "nblkbiljcjfemkfjnhoobnojjgjdmknf" # pronoundb
     ];
   };
 }
