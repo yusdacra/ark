@@ -2,7 +2,7 @@
   description = "config!!!";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/master";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
 
     home.url = "github:nix-community/home-manager/master";

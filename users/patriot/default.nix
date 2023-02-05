@@ -237,7 +237,7 @@ in {
         # fractal-next
         obs-studio
         libreoffice-fresh
-        helvum
+        # helvum
         nix-output-monitor
         prismlauncher
       ];
