@@ -117,8 +117,8 @@ in {
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
-        ["helix" "git" "ssh" "obsidian"]
-        ["lollypop" "newsflash"]
+        ["helix" "git" "ssh"]
+        ["lollypop"]
       ];
     in
       l.flatten [
@@ -218,10 +218,6 @@ in {
         dejavu_fonts
         # Programs
         bitwarden
-        cargo-outdated
-        cargo-release
-        cargo-udeps
-        vulkan-tools
         krita
         cachix
         gnupg
@@ -237,9 +233,10 @@ in {
         # fractal-next
         obs-studio
         libreoffice-fresh
-        # helvum
+        helvum
         nix-output-monitor
         prismlauncher
+        godot_4
       ];
     };
     programs = {
