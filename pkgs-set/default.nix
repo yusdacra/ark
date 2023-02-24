@@ -31,6 +31,7 @@
   pkgs = import inputs.nixpkgs {
     inherit system;
     config.allowUnfree = true;
+    config.allowBroken = true;
     overlays = overlays ++ newPkgs;
   };
   pkgsToExport = import ./pkgs-to-export.nix pkgs;

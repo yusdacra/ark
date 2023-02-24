@@ -33,8 +33,9 @@
     nil.url = "github:oxalica/nil";
     nil.inputs.nixpkgs.follows = "nixpkgs";
 
-    eww.url = "github:elkowar/eww";
-    eww.inputs.nixpkgs.follows = "nixpkgs";
+    # needed for hyprland setup
+    # eww.url = "github:elkowar/eww";
+    # eww.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-colors.url = "github:Misterio77/nix-colors";
     # catppuccin-discord.url = "https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css";

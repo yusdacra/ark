@@ -144,18 +144,17 @@ in {
           # caches / history stuff
           ".directory_history"
           ".cache"
-          "notes"
         ]
         ++ mkPaths ".local/share" [
           "direnv"
           "zsh"
           "keyrings"
-          "lutris"
+          # "lutris"
           "Terraria"
           "PrismLauncher"
         ]
         ++ mkPaths ".config" [
-          "lutris"
+          # "lutris"
           "dconf"
         ];
       files = l.flatten [
@@ -217,26 +216,21 @@ in {
         font-awesome
         dejavu_fonts
         # Programs
-        bitwarden
         krita
-        cachix
         gnupg
         imv
         mpv
         ffmpeg
         mupdf
         xdg-utils
-        rust-analyzer
-        cloudflared
-        lutris
+        # lutris
         protontricks
         # fractal-next
-        obs-studio
+        # obs-studio
         libreoffice-fresh
-        # helvum
-        easyeffects
+        helvum
         nix-output-monitor
-        prismlauncher
+        # prismlauncher
         godot_4
       ];
     };
