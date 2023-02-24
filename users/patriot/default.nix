@@ -233,7 +233,8 @@ in {
         # fractal-next
         obs-studio
         libreoffice-fresh
-        helvum
+        # helvum
+        easyeffects
         nix-output-monitor
         prismlauncher
         godot_4

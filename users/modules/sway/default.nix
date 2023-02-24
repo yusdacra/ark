@@ -95,7 +95,7 @@
           "type:touchpad" = {
             accel_profile = "adaptive";
             tap = "enabled";
-            scroll_method = "edge";
+            scroll_method = "two_finger";
             dwt = "enabled";
             events = "disabled_on_external_mouse";
           };
@@ -103,10 +103,10 @@
         output = {
           "*" = {
             bg = "${config.home.homeDirectory}/.config/wallpaper fill";
+            adaptive_sync = "on";
           };
           "eDP-1" = {
             scale = "2";
-            adaptive_sync = "off";
           };
           "HDMI-A-1" = {
             mode = "1920x1080@74.973Hz";

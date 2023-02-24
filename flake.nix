@@ -37,8 +37,8 @@
     eww.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-colors.url = "github:Misterio77/nix-colors";
-    catppuccin-discord.url = "https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css";
-    catppuccin-discord.flake = false;
+    # catppuccin-discord.url = "https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css";
+    # catppuccin-discord.flake = false;
   };
 
   outputs = inputs: let
