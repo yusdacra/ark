@@ -68,14 +68,6 @@ in {
     };
   };
   services = {
-    syncthing.folders = {
-      notes = {
-        enable = true;
-        path = "${config.users.users.patriot.home}/notes";
-        devices = ["redmi-phone"];
-        ignorePerms = true;
-      };
-    };
     gnome.gnome-keyring.enable = true;
   };
   # gnome keyring better fr fr
