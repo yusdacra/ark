@@ -19,21 +19,26 @@
 
     helix.url = "github:helix-editor/helix";
 
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprland.inputs.nixpkgs.follows = "nixpkgs";
-    hyprland-contrib.url = "github:hyprwm/contrib";
-    hyprland-contrib.inputs.nixpkgs.follows = "nixpkgs";
-
     blog.url = "git+https://git.gaze.systems/dusk/website.git";
     blog.inputs.nixpkgs.follows = "nixpkgs";
 
     bernbot.url = "github:yusdacra/bernbot";
     bernbot.inputs.nixpkgs.follows = "nixpkgs";
 
+    blender-bin.url = "github:edolstra/nix-warez?dir=blender";
+    blender-bin.inputs.nixpkgs.follows = "nixpkgs";
+
+    conduit.url = "gitlab:famedly/conduit";
+    conduit.inputs.nixpkgs.follows = "nixpkgs";
+
     nil.url = "github:oxalica/nil";
     nil.inputs.nixpkgs.follows = "nixpkgs";
 
     # needed for hyprland setup
+    # hyprland.url = "github:hyprwm/Hyprland";
+    # hyprland.inputs.nixpkgs.follows = "nixpkgs";
+    # hyprland-contrib.url = "github:hyprwm/contrib";
+    # hyprland-contrib.inputs.nixpkgs.follows = "nixpkgs";
     # eww.url = "github:elkowar/eww";
     # eww.inputs.nixpkgs.follows = "nixpkgs";
 

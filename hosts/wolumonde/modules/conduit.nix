@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: let
   _wellKnownFileClient = pkgs.writeText "client" (
@@ -18,16 +19,7 @@
 in {
   services.matrix-conduit = {
     enable = true;
-    package = pkgs.matrix-conduit.overrideAttrs (old: rec {
-      name = "${old.pname}-${version}";
-      version = "147f2752";
-      src = pkgs.fetchFromGitLab {
-        owner = "famedly";
-        repo = "conduit";
-        rev = "147f27521c0d7dbc32d39ec1d8da6cd00008f23c";
-        sha256 = "sha256-j469Zh8zyqJNWz7q6gjRu1Khk9y6Xbb52SpxzNjADW8=";
-      };
-    });
+    package = inputs.conduit.packages.${pkgs.system}.default;
     settings.global = {
       server_name = "gaze.systems";
       max_request_size = 1000 * 1000 * 20;

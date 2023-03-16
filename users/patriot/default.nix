@@ -208,6 +208,7 @@ in {
         font-awesome
         dejavu_fonts
         # Programs
+        inputs.blender-bin.packages.x86_64-linux.default
         krita
         gnupg
         imv

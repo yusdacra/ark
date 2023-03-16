@@ -103,13 +103,13 @@
         output = {
           "*" = {
             bg = "${config.home.homeDirectory}/.config/wallpaper fill";
-            adaptive_sync = "on";
+            # adaptive_sync = "on";
           };
           "eDP-1" = {
             scale = "2";
           };
           "HDMI-A-1" = {
-            mode = "1920x1080@74.973Hz";
+            mode = "1920x1080@60.000Hz";
           };
         };
       };
