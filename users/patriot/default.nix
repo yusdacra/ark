@@ -149,8 +149,6 @@ in {
           "dconf"
         ];
       files = l.flatten [
-        ".config/wallpaper"
-        ".config/wallpaper.mp4"
         ".config/gnome-initial-setup-done"
         (lib.removePrefix "~/" config.programs.ssh.userKnownHostsFile)
       ];
@@ -171,21 +169,6 @@ in {
       gtk.enable = true;
       x11.enable = true;
     };
-
-    # gtk = {
-    #   enable = true;
-
-    #   font = {
-    #     inherit (config.settings.font.regular) name package;
-    #   };
-
-    #   gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
-
-    #   theme = {
-    #     name = "Yaru-dark";
-    #     package = pkgs.yaru-theme;
-    #   };
-    # };
 
     home = {
       homeDirectory = nixosConfig.users.users.patriot.home;
@@ -225,12 +208,6 @@ in {
         userName = name;
         userEmail = email;
       };
-      zsh.loginExtra = ''
-        if [[ "$(tty)" == "/dev/tty1" ]]; then
-          export WLR_DRM_DEVICES=/dev/dri/card0
-          exec sway --unsupported-gpu
-        fi
-      '';
     };
     services = {
       gpg-agent = let
