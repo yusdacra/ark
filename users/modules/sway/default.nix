@@ -30,10 +30,6 @@
         exec xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
       '';
       config = {
-        fonts = {
-          names = [config.settings.font.regular.name];
-          size = config.settings.font.regular.size + 0.0;
-        };
         bars = [];
         gaps.smartBorders = "on";
         menu = mkRofiCmd ["-show" "drun"];
@@ -102,7 +98,7 @@
         };
         output = {
           "*" = {
-            bg = "${config.home.homeDirectory}/.config/wallpaper fill";
+            bg = "${config.stylix.image} fill";
             # adaptive_sync = "on";
           };
           "eDP-1" = {

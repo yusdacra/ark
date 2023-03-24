@@ -1,10 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
-  x = config.colors.x;
-in {
+{config, ...}: {
   # notification daemon
   services.dunst = {
     enable = true;
@@ -14,7 +8,6 @@ in {
         alignment = "center";
         corner_radius = 16;
         follow = "mouse";
-        font = config.settings.font.regular.fullName;
         format = "<b>%s</b>\\n%b";
         frame_width = 1;
         offset = "5x5";
@@ -28,7 +21,6 @@ in {
         mouse_right_click = "close_current";
         padding = 8;
         plain_text = "no";
-        separator_color = "auto";
         separator_height = 1;
         show_indicators = false;
         shrink = "no";
@@ -36,22 +28,6 @@ in {
       };
 
       fullscreen_delay_everything = {fullscreen = "delay";};
-
-      urgency_critical = {
-        background = x.base00;
-        foreground = x.base06;
-        frame_color = x.base08;
-      };
-      urgency_low = {
-        background = x.base00;
-        foreground = x.base06;
-        frame_color = x.base05;
-      };
-      urgency_normal = {
-        background = x.base00;
-        foreground = x.base06;
-        frame_color = x.base06;
-      };
     };
   };
 }

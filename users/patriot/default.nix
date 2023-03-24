@@ -3,14 +3,14 @@
   lib,
   tlib,
   config,
-  inputs,
   ...
 } @ globalAttrs: let
   l = lib // builtins;
 
   nixosConfig = globalAttrs.config;
 in {
-  # imports = [../../modules/de/gnome];
+  imports = [./stylix.nix];
+
   users.users.patriot = {
     isNormalUser = true;
     createHome = true;
@@ -114,7 +114,6 @@ in {
       ];
     in
       l.flatten [
-        ./colors.nix
         ../../modules/persist
         inputs.nixos-persistence.nixosModules.home-manager.impermanence
         (tlib.prefixStrings "${inputs.self}/users/modules/" modulesToEnable)
@@ -159,16 +158,6 @@ in {
     };
 
     fonts.fontconfig.enable = l.mkForce true;
-    settings.font.regular = {
-      name = "Comic Relief";
-      size = 13;
-      package = pkgs.comic-relief;
-    };
-    settings.font.monospace = {
-      name = "Comic Mono";
-      size = 13;
-      package = pkgs.comic-mono;
-    };
 
     settings.iconTheme = {
       name = "Yaru-dark";
@@ -183,22 +172,20 @@ in {
       x11.enable = true;
     };
 
-    gtk = {
-      enable = true;
+    # gtk = {
+    #   enable = true;
 
-      font = {
-        inherit (config.settings.font.regular) name package;
-      };
+    #   font = {
+    #     inherit (config.settings.font.regular) name package;
+    #   };
 
-      gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
+    #   gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
 
-      iconTheme = config.settings.iconTheme;
-
-      theme = {
-        name = "Yaru-dark";
-        package = pkgs.yaru-theme;
-      };
-    };
+    #   theme = {
+    #     name = "Yaru-dark";
+    #     package = pkgs.yaru-theme;
+    #   };
+    # };
 
     home = {
       homeDirectory = nixosConfig.users.users.patriot.home;

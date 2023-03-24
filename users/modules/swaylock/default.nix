@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = [pkgs.swaylock-effects];
 
   programs.swaylock.settings = {
@@ -12,6 +8,5 @@
     effect-scale = "0.5";
     effect-greyscale = true;
     effect-blur = "20x3";
-    font = config.settings.font.regular.name;
   };
 }

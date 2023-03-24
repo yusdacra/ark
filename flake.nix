@@ -34,6 +34,10 @@
     nil.url = "github:oxalica/nil";
     nil.inputs.nixpkgs.follows = "nixpkgs";
 
+    stylix.url = "github:danth/stylix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
+    stylix.inputs.home-manager.follows = "home";
+
     # needed for hyprland setup
     # hyprland.url = "github:hyprwm/Hyprland";
     # hyprland.inputs.nixpkgs.follows = "nixpkgs";
@@ -42,7 +46,6 @@
     # eww.url = "github:elkowar/eww";
     # eww.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix-colors.url = "github:Misterio77/nix-colors";
     # catppuccin-discord.url = "https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css";
     # catppuccin-discord.flake = false;
   };

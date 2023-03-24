@@ -21,7 +21,6 @@
       }
     ];
     settings = {
-      theme = "catppuccin_mocha";
       editor = {
         line-number = "relative";
         middle-click-paste = false;
