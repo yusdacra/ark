@@ -4,7 +4,7 @@
     settings = {
       terminal.vt = 1;
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --issue --time --cmd 'apply-hm-env'";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --issue --time --cmd 'sway --unsupported-gpu'";
         user = "greeter";
       };
     };

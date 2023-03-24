@@ -1,0 +1,1 @@
+../../../modules/de/greetd/default.nix
