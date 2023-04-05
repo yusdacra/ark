@@ -1,9 +1,10 @@
-{
+{pkgs, ...}: {
   programs.git = {
     enable = true;
     extraConfig = {
       pull.rebase = true;
       safe.directory = "/etc/nixos";
+      diff.external = "${pkgs.difftastic}/bin/difft";
     };
     lfs.enable = true;
     aliases = {
