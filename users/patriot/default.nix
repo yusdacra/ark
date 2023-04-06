@@ -54,6 +54,8 @@ in {
     };
   };
   programs = {
+    # cuz nixos complains
+    zsh.enable = true;
     # this is needed for impermanence
     fuse.userAllowOther = true;
     adb.enable = true;
