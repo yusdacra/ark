@@ -42,7 +42,7 @@
         };
         statusline = {
           left = ["mode" "spinner"];
-          center = ["file-name" "file-encoding" "separator" "version-control"];
+          center = ["file-name" "file-encoding" "version-control"];
           right = ["diagnostics" "selections"];
         };
       };
