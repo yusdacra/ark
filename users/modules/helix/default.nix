@@ -30,7 +30,6 @@
         };
         indent-guides = {
           render = true;
-          # character = "|";
         };
         auto-pairs = {
           "(" = ")";
