@@ -9,6 +9,7 @@
   imports = with inputs;
   with nixos-hardware.nixosModules;
     [
+      inputs.agenix.nixosModules.default
       nixpkgs.nixosModules.notDetected
       nixos-persistence.nixosModule
       common-pc-ssd

@@ -2,7 +2,6 @@
   pkgs,
   lib,
   inputs,
-  config,
   ...
 }: {
   nix = {
@@ -20,7 +19,6 @@
       fallback = true
       extra-experimental-features = nix-command flakes
       builders-use-substitutes = true
-      netrc-file = /etc/nix/netrc
     '';
     nixPath = ["nixpkgs=${inputs.nixpkgs}" "home-manager=${inputs.home}"];
   };

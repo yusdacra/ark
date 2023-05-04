@@ -1,12 +1,11 @@
 {
   inputs,
-  pkgs,
-  config,
-  lib,
   tlib,
   ...
-}: {
-  imports = tlib.importFolder (toString ./modules);
+}: { 
+  imports = [
+    inputs.agenix.nixosModules.default
+  ] ++ (tlib.importFolder (toString ./modules));
 
   boot.cleanTmpDir = true;
   zramSwap.enable = true;
