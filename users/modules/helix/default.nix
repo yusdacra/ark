@@ -3,6 +3,7 @@
   pkgs,
   ...
 }: {
+  stylix.targets.helix.enable = false;
   programs.helix = {
     enable = true;
     languages = [
@@ -17,6 +18,7 @@
       }
     ];
     settings = {
+      theme = "ferra";
       editor = {
         soft-wrap.enable = true;
         line-number = "relative";
@@ -26,7 +28,7 @@
         cursor-shape.insert = "block";
         lsp = {
           display-messages = true;
-          display-inlay-hints = true;
+          display-inlay-hints = false;
         };
         indent-guides = {
           render = true;

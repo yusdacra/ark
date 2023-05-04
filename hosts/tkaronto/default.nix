@@ -113,6 +113,8 @@
     };
   };
 
+  networking.firewall.allowedUDPPorts = [49152];
+
   # for tailscale
   networking.firewall.checkReversePath = "loose";
   services.tailscale.enable = true;

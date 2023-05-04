@@ -111,7 +111,7 @@ in {
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
-        ["helix" "git" "ssh"]
+        ["helix" "code" "git" "ssh"]
         ["lollypop"]
       ];
     in

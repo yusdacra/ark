@@ -34,9 +34,12 @@
     nil.url = "github:oxalica/nil";
     nil.inputs.nixpkgs.follows = "nixpkgs";
 
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:yusdacra/stylix/fixed";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
     stylix.inputs.home-manager.follows = "home";
+
+    vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
     # needed for hyprland setup
     # hyprland.url = "github:hyprwm/Hyprland";

@@ -441,6 +441,22 @@
         "type": "github"
       }
     },
+    "flake-compat_4": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1673956053,
+        "narHash": "sha256-4gtG9iQuiKITOjNQQeQIpoIB6b16fm+504Ch3sNKLd8=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "35bb57c0c8d8b62bbfd284272c928ceb64ddbde9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1678901627,
@@ -478,6 +494,21 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "rev": "93a2b84fc4b70d9e089d029deacc3583435c2ed6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_4": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
         "type": "github"
       },
       "original": {
@@ -907,7 +938,8 @@
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-wayland": "nixpkgs-wayland",
         "nur": "nur",
-        "stylix": "stylix"
+        "stylix": "stylix",
+        "vscode-extensions": "vscode-extensions"
       }
     },
     "rust-analyzer-src": {
@@ -1029,15 +1061,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1680432579,
-        "narHash": "sha256-sIcl3DvrDdQZM5kBWY25ocxJsIQFPV4gm54l79ZysB0=",
-        "owner": "danth",
+        "lastModified": 1681281620,
+        "narHash": "sha256-SjX38nDKBrlQN0CbbUgHHYshlfewrjgQ4p0nKL4W4YI=",
+        "owner": "yusdacra",
         "repo": "stylix",
-        "rev": "4205a141bfcc0b9d1c04932ec7fdf0f86f99aaf6",
+        "rev": "e53b29d8e850bd7ee3012f5e4c7c0a1ded533a91",
         "type": "github"
       },
       "original": {
-        "owner": "danth",
+        "owner": "yusdacra",
+        "ref": "fixed",
         "repo": "stylix",
         "type": "github"
       }
@@ -1054,6 +1087,28 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "vscode-extensions": {
+      "inputs": {
+        "flake-compat": "flake-compat_4",
+        "flake-utils": "flake-utils_4",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1681693872,
+        "narHash": "sha256-gEy7sfcRiJypI0irVBWZ1xxyc+4MZPb5RqcC8krQi9s=",
+        "owner": "nix-community",
+        "repo": "nix-vscode-extensions",
+        "rev": "1c784113bfb7f0f0d82b32832fdf739f083e8d3a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix-vscode-extensions",
         "type": "github"
       }
     }
