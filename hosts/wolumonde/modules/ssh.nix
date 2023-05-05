@@ -5,6 +5,6 @@
     passwordAuthentication = false;
   };
   users.users.root.openssh.authorizedKeys.keys = [
-    (builtins.readFile "${inputs.self}/secrets/ssh-key.pub")
+    (builtins.readFile "${inputs.self}/secrets/yusdacra.key.pub")
   ];
 }

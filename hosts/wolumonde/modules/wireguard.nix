@@ -4,7 +4,7 @@
     listenPort = 51820;
     privateKeyFile = config.age.secrets.wgWolumondeKey.path;
     peers = [{
-      publicKey = import ./wgTkarontoKey.pub;
+      publicKey = builtins.readFile ./wgTkarontoKey.pub;
       allowedIPs = ["10.99.0.2/32"];
     }];
   };

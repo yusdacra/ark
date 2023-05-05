@@ -3,9 +3,9 @@
   networking.wireguard.interfaces."wg0" = {
     privateKeyFile = config.age.secrets.wgTkarontoKey.path;
     peers = [{
-      publicKey = import ./wgWolumondeKey.pub;
+      publicKey = builtins.readFile ./wgWolumondeKey.pub;
       allowedIPs = ["10.99.0.1/32"];
-      endpoint = "${import ./wgWolumondeIp}:51820";
+      endpoint = "${builtins.readFile ./wgWolumondeIp}:51820";
     }];
   };
 }

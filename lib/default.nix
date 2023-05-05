@@ -14,8 +14,11 @@ lib.makeExtensible (self: {
   importFolder = modules: let
     b = builtins;
     files = b.readDir modules;
+    fileNames = b.attrNames files;
     filesToImport =
-      b.map (name: "${modules}/${name}") (b.attrNames files);
+      b.map
+      (name: "${modules}/${name}")
+      (b.filter (name: b.match ".*\.nix" name != null) fileNames);
   in
     filesToImport;
 
