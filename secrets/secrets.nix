@@ -3,8 +3,8 @@ let
   wolumonde = builtins.readFile ./wolumonde.key.pub;
 in
 {
-  "wgProxyPrivateKey.age".publicKeys = [yusdacra wolumonde];
-  "wgServerPrivateKey.age".publicKeys = [yusdacra];
+  "wgWolumondeKey.age".publicKeys = [yusdacra wolumonde];
+  "wgTkarontoKey.age".publicKeys = [yusdacra];
   "bernbotToken.age".publicKeys = [yusdacra wolumonde];
   "nixGithubAccessToken.age".publicKeys = [yusdacra];
 }

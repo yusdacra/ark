@@ -6,7 +6,6 @@
 }: let
   baseModules = [
     ../modules
-    ../secrets
     ../locale
     inputs.home.nixosModule
   ];
