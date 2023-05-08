@@ -21,6 +21,4 @@ lib.makeExtensible (self: {
       (b.filter (name: b.match ".*\.nix" name != null) fileNames);
   in
     filesToImport;
-
-  colors = import ./colors.nix lib;
 })
