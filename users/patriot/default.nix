@@ -112,7 +112,7 @@ in {
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
         ["helix" "code" "git" "ssh"]
-        ["lollypop"]
+        ["musikcube" "musikcubed"]
       ];
     in
       l.flatten [
@@ -149,6 +149,7 @@ in {
         ++ mkPaths ".config" [
           # "lutris"
           "dconf"
+          "musikcube"
         ];
       files = l.flatten [
         ".config/gnome-initial-setup-done"
@@ -200,6 +201,7 @@ in {
       ];
     };
     programs = {
+      musikcube.enable = true;
       command-not-found.enable =
         nixosConfig.programs.command-not-found.enable;
       git = {
@@ -212,6 +214,10 @@ in {
       };
     };
     services = {
+      musikcubed = {
+        enable = true;
+        settings.password = "somethingidk";
+      };
       gpg-agent = let
         defaultCacheTtl = 3600 * 6;
         maxCacheTtl = 3600 * 24;

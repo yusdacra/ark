@@ -115,6 +115,7 @@
   };
 
   networking.firewall.allowedUDPPorts = [49152];
+  networking.firewall.allowedTCPPorts = [7905 7906];
 
   # for tailscale
   networking.firewall.checkReversePath = "loose";

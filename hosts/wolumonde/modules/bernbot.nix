@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   pkgs,
   lib,
@@ -17,7 +18,7 @@ in {
         Restart = "on-failure";
         RestartSec = 5;
         WorkingDirectory = "/var/lib/bernbot";
-        EnvironmentFile = "${inputs.self}/secrets/bernbot_token";
+        EnvironmentFile = config.age.secrets.bernbotToken.path;
       }
     ];
   };

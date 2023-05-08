@@ -32,7 +32,7 @@ in {
   };
 
   services.nginx.virtualHosts."matrix.gaze.systems" = {
-    enableACME = true;
+    useACMEHost = "gaze.systems";
     forceSSL = true;
     locations."/".proxyPass = "http://localhost:${toString config.services.matrix-conduit.settings.global.port}";
   };

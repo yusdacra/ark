@@ -1,6 +1,6 @@
-{
+{lib, ...}: {
   networking.resolvconf.useLocalResolver = true;
-  networking.networkmanager.dns = "none";
+  networking.networkmanager.dns = lib.mkForce "none";
   services.dnscrypt-proxy2 = {
     enable = true;
     settings = {

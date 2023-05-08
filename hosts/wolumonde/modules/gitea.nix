@@ -11,7 +11,7 @@
   };
 
   services.nginx.virtualHosts."git.gaze.systems" = {
-    enableACME = true;
+    useACMEHost = "gaze.systems";
     forceSSL = true;
     locations."/".proxyPass = "http://localhost:3001";
   };

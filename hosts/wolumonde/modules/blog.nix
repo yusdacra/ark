@@ -4,7 +4,7 @@
   ...
 }: {
   services.nginx.virtualHosts."gaze.systems" = {
-    enableACME = true;
+    useACMEHost = "gaze.systems";
     forceSSL = true;
     root = "${inputs.blog.packages.${pkgs.system}.site}";
     locations."/".extraConfig = ''

@@ -2,6 +2,7 @@
   description = "config!!!";
 
   inputs = {
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
 
@@ -43,6 +44,12 @@
 
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
+
+    musikquad.url = "github:yusdacra/musikquadrupled";
+    musikquad.inputs.nixpkgs.follows = "nixpkgs";
+
+    musikspider.url = "github:yusdacra/musikspider";
+    musikspider.inputs.nixpkgs.follows = "nixpkgs";
 
     # needed for hyprland setup
     # hyprland.url = "github:hyprwm/Hyprland";
