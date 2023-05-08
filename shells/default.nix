@@ -7,7 +7,7 @@ tlib.genPkgs (pkgs: let
       if [ -z "''${1-}" ]; then
         agenix
       else
-        RULES="/etc/nixos/secrets/secrets.nix" agenix -i /etc/nixos/keys/ssh_key "$@"
+        RULES="/etc/nixos/secrets/secrets.nix" agenix -i /persist/keys/ssh_key "$@"
       fi
     '';
   };

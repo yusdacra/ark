@@ -1,4 +1,9 @@
-{config, pkgs, lib, ...}: let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   cfg = config.programs.musikcube;
 in {
   options = {

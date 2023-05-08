@@ -20,6 +20,7 @@ in {
       "adbusers"
       "dialout"
       "video"
+      "nix-build-key-access"
       (l.optional nixosConfig.networking.networkmanager.enable "networkmanager")
       (l.optional nixosConfig.virtualisation.docker.enable "docker")
     ];

@@ -1,8 +1,8 @@
-{...}: {
+{config, ...}: {
   programs.ssh.extraConfig = ''
     Host eu.nixbuild.net
       PubkeyAcceptedKeyTypes ssh-ed25519
-      IdentityFile /etc/nixos/keys/nixbuild.key
+      IdentityFile ${config.age.secrets.nixBuildKey.path}
   '';
 
   programs.ssh.knownHosts = {

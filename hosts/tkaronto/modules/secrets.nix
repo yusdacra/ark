@@ -8,4 +8,11 @@
     owner = "systemd-network";
     group = "systemd-network";
   };
+
+  age.secrets.nixBuildKey = {
+    file = ../../../secrets/nixBuildKey.age;
+    owner = "root";
+    group = "nix-build-key-access";
+  };
+  users.groups."nix-build-key-access" = {};
 }

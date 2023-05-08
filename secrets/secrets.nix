@@ -7,4 +7,5 @@ in {
   "bernbotToken.age".publicKeys = [yusdacra wolumonde];
   "musikquadConfig.age".publicKeys = [yusdacra wolumonde];
   "nixGithubAccessToken.age".publicKeys = [yusdacra];
+  "nixBuildKey.age".publicKeys = [yusdacra];
 }
