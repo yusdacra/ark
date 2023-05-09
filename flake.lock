@@ -817,11 +817,11 @@
         "parts": "parts_5"
       },
       "locked": {
-        "lastModified": 1683296163,
-        "narHash": "sha256-pOdVitwRl8gUNMxInXwJJtXffSYYsAc0EWkFSFGvrRk=",
+        "lastModified": 1683618968,
+        "narHash": "sha256-OkxkRYNKv0nR37YxrNC/3SW6wGBFMA0MzUWnV4nW5eU=",
         "owner": "yusdacra",
         "repo": "musikquadrupled",
-        "rev": "e259740d501d00fb3548b0be145817ef8fdc35ae",
+        "rev": "792efb0c9f2e76eb125e654ee1495c071e57e02f",
         "type": "github"
       },
       "original": {
@@ -840,11 +840,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1683276540,
-        "narHash": "sha256-JiuT8wmMH+vNVyBS18i/RNLDBUDEUCNdeqkwPQYsMDM=",
+        "lastModified": 1683646918,
+        "narHash": "sha256-DKD5gN4mj4mDd81xo6kSmtmnMrX/Ue+nQxuVGC4JbuY=",
         "owner": "yusdacra",
         "repo": "musikspider",
-        "rev": "913b0df0b0a5ed78aa761584d9c6f87eff0e781d",
+        "rev": "77ed4a6de6970ec1846d04fd1da8c3fd2a31feac",
         "type": "github"
       },
       "original": {
