@@ -17,7 +17,6 @@ in {
     ./hm-system-defaults.nix
   ];
 
-  console.font = "7x14";
   environment = {
     systemPackages = with pkgs; [
       binutils

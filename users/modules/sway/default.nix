@@ -82,8 +82,11 @@
             "XF86MonBrightnessDown" = "exec ${light} -T 0.72";
           };
         input = {
-          "type:keyboard" = {
+          "13364:832:Keychron_Keychron_V4_Keyboard" = {
             xkb_layout = nixosConfig.services.xserver.layout;
+          };
+          "1:1:AT_Translated_Set_2_keyboard" = {
+            xkb_layout = "tr";
           };
           "type:pointer" = {
             accel_profile = "flat";

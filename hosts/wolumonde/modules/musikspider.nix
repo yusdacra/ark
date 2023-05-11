@@ -17,7 +17,7 @@ in {
   };
   users.groups.musikspider = {};
 
-  systemd.services.musikspider= {
+  systemd.services.musikspider = {
     description = "musikspider";
     wantedBy = ["multi-user.target"];
     after = ["network.target"];
