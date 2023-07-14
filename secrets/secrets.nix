@@ -8,4 +8,5 @@ in {
   "musikquadConfig.age".publicKeys = [yusdacra wolumonde];
   "nixGithubAccessToken.age".publicKeys = [yusdacra];
   "nixBuildKey.age".publicKeys = [yusdacra];
+  "tmodloaderServerPass.age".publicKeys = [yusdacra wolumonde];
 }

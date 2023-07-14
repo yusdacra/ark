@@ -1,0 +1,71 @@
+{
+  config,
+  lib,
+  ...
+}: let
+  mods = [
+    "2817496179"
+    "2669644269"
+    "2824688072"
+    "2826111637"
+    "2824688804"
+    "2793782057"
+    "2570931073"
+    "2776422822"
+    "2913232891"
+    "2797072909"
+    "2565639705"
+    "2760520795"
+    "2619954303"
+    "2899871898"
+    "2790924965"
+    "2785100219"
+    "2563862309"
+    "2909886416"
+    "2563851005"
+    "2827446882"
+    "2618946390"
+    "2597324266"
+    "2599842771"
+    "2563309347"
+    #"2893332653" mod of redemption
+    "2835407664"
+    "2562997415"
+    "2634682993"
+    "2563098343"
+    "2815540735"
+    "2831752947"
+    "2580273153"
+    "2565540604"
+    "2816694149"
+    "2802867430"
+    "2797518634"
+    "2562915378"
+  ];
+  modsToUse = lib.concatStringsSep "," mods;
+in {
+  virtualisation.oci-containers.containers = {
+    tmodloader = {
+      image = "jacobsmile/tmodloader1.4:v2022.09.47.49";
+      environment = {
+        TMOD_MAXPLAYERS = "6";
+        TMOD_WORLDNAME = "cbt";
+        TMOD_WORLDSEED = "cockandballtorture";
+        TMOD_MOTD = "You should kill yourself, NOW!";
+        TMOD_WORLDSIZE = "2";
+        TMOD_AUTODOWNLOAD = modsToUse;
+        TMOD_ENABLEDMODS = modsToUse;
+      };
+      environmentFiles = [config.age.secrets.tmodloaderServerPass.path];
+      ports = ["7777:7777"];
+      volumes = [
+        "/var/lib/terraria/worlds:/home/terraria/.local/share/Terraria/tModLoader/Worlds"
+      ];
+    };
+  };
+
+  networking.firewall = {
+    allowedTCPPorts = [7777];
+    allowedUDPPorts = [7777];
+  };
+}

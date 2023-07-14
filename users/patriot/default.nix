@@ -206,12 +206,13 @@ in {
       command-not-found.enable =
         nixosConfig.programs.command-not-found.enable;
       git = {
-        signing = {
-          key = "E1C119F91F4CAE53E8445CAFBB57FCE7E35984F6";
-          signByDefault = true;
-        };
         userName = name;
         userEmail = email;
+        extraConfig = {
+          gpg.format = "ssh";
+          commit.gpgsign = true;
+          user.signingkey = builtins.readFile ../../secrets/yusdacra.key.pub;
+        };
       };
     };
     services = {

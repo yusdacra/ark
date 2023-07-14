@@ -6,7 +6,10 @@
 }: let
   _wellKnownFileClient = pkgs.writeText "client" (
     builtins.toJSON
-    {"m.homeserver"."base_url" = "https://matrix.gaze.systems";}
+    {
+      "m.homeserver"."base_url" = "https://matrix.gaze.systems";
+      "org.matrix.msc3575.proxy"."url" = "https://matrix.gaze.systems";
+    }
   );
   _wellKnownFileServer =
     pkgs.writeText "server"
@@ -28,6 +31,7 @@ in {
       trusted_servers = ["matrix.org" "nixos.dev" "conduit.rs"];
       address = "::1";
       port = 6167;
+      database_backend = "rocksdb";
     };
   };
 
