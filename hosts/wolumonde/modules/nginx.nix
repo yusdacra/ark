@@ -21,5 +21,9 @@
         "mq.gaze.systems"
       ];
     };
+    certs."limbus.company" = {
+      webroot = "/var/lib/acme/acme-challenge";
+      extraDomainNames = [];
+    };
   };
 }

@@ -51,6 +51,9 @@
     musikspider.url = "github:yusdacra/musikspider";
     musikspider.inputs.nixpkgs.follows = "nixpkgs";
 
+    limbusart.url = "git+https://git.gaze.systems/dusk/limbusart.git";
+    limbusart.inputs.nixpkgs.follows = "nixpkgs";
+
     # needed for hyprland setup
     # hyprland.url = "github:hyprwm/Hyprland";
     # hyprland.inputs.nixpkgs.follows = "nixpkgs";

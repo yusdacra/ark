@@ -1,4 +1,4 @@
-{config, ...}: {
+{...}: {
   services.gitea = {
     enable = true;
     domain = "git.gaze.systems";
@@ -15,8 +15,4 @@
     forceSSL = true;
     locations."/".proxyPass = "http://localhost:3001";
   };
-
-  networking.firewall.allowedTCPPorts = [
-    config.services.gitea.httpPort
-  ];
 }
