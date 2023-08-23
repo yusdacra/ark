@@ -108,7 +108,7 @@ in {
         ["sway" "foot"]
         # desktop stuff
         ["wayland"]
-        ["ripcord" "discord" "chromium"]
+        ["chromium"]
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
