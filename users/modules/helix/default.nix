@@ -6,7 +6,7 @@
   stylix.targets.helix.enable = false;
   programs.helix = {
     enable = true;
-    languages = [
+    languages.language = [
       {
         name = "dockerfile";
         roots = ["Dockerfile" "Containerfile"];
@@ -14,9 +14,12 @@
       }
       {
         name = "nix";
-        language-server = {command = "${inputs.nil.packages.${pkgs.system}.default}/bin/nil";};
+        language-servers = ["nixd-lsp"];
       }
     ];
+    languages.language-server = {
+      nixd-lsp = {command = "${inputs.nixd.packages.${pkgs.system}.default}/bin/nixd";};
+    };
     settings = {
       theme = "ferra";
       editor = {

@@ -1,17 +1,12 @@
-{
-  pkgs,
-  lib,
-  ...
-}: let
+{lib, ...}: let
   l = lib // builtins;
-  mkRule = name: type:
-    l.toJSON {
-      inherit name type;
-    };
+  mkRule = name: type: {
+    inherit name type;
+  };
 in {
   services.ananicy = {
     enable = true;
-    extraRules = l.concatStringsSep "\n" [
+    extraRules = [
       # coompilers
       (mkRule "g++" "BG_CPUIO")
       (mkRule "gcc" "BG_CPUIO")

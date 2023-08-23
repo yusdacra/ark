@@ -26,14 +26,13 @@
     bernbot.url = "github:yusdacra/bernbot";
     bernbot.inputs.nixpkgs.follows = "nixpkgs";
 
-    blender-bin.url = "github:edolstra/nix-warez?dir=blender";
-    blender-bin.inputs.nixpkgs.follows = "nixpkgs";
-
-    conduit.url = "gitlab:famedly/conduit";
+    conduit.url = "gitlab:famedly/conduit/next";
     conduit.inputs.nixpkgs.follows = "nixpkgs";
 
-    nil.url = "github:oxalica/nil";
-    nil.inputs.nixpkgs.follows = "nixpkgs";
+    # nil.url = "github:oxalica/nil";
+    # nil.inputs.nixpkgs.follows = "nixpkgs";
+    nixd.url = "github:nix-community/nixd";
+    nixd.inputs.nixpkgs.follows = "nixpkgs";
 
     stylix.url = "github:yusdacra/stylix/fixed";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
@@ -53,6 +52,9 @@
 
     limbusart.url = "git+https://git.gaze.systems/dusk/limbusart.git";
     limbusart.inputs.nixpkgs.follows = "nixpkgs";
+
+    steam-tui.url = "github:dmadisetti/steam-tui";
+    steam-tui.inputs.nixpkgs.follows = "nixpkgs";
 
     # needed for hyprland setup
     # hyprland.url = "github:hyprwm/Hyprland";
@@ -82,16 +84,28 @@
     miscApps =
       lib.mapAttrs
       (
-        _: pkgs: {
-          generate-firefox-addons = {
+        _: cmds:
+          lib.mapAttrs
+          (_: cmd: {
             type = "app";
-            program =
+            program = cmd;
+          })
+          cmds
+      )
+      (
+        lib.mapAttrs
+        (
+          _: pkgs: {
+            generate-firefox-addons =
               toString
               "${pkgs.generate-firefox-addons}/bin/generate-firefox-addons";
-          };
-        }
-      )
-      allPkgs;
+            # buildHost = {
+            #   type = "app";
+            # };
+          }
+        )
+        allPkgs
+      );
   in {
     lib = tlib;
     nixosConfigurations = import ./hosts {inherit lib tlib inputs;};

@@ -5,7 +5,7 @@
   lib,
   ...
 }: let
-  bernbotPkg = inputs.bernbot.packages.${pkgs.system}.bernbot;
+  bernbotPkg = inputs.bernbot.packages.${pkgs.system}.bernbot-release;
 in {
   systemd.services.bernbot = {
     description = "bernbot";

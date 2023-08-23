@@ -159,11 +159,5 @@ in {
     xserver.videoDrivers = ["amdgpu"];
   };
 
-  virtualisation = {
-    waydroid.enable = false;
-    podman.enable = false;
-    libvirtd.enable = false;
-  };
-
   system.stateVersion = "22.05";
 }

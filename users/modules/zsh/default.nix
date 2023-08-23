@@ -24,9 +24,17 @@ in {
         };
       }
     ];
+    # configure history
+    history = {
+      extended = true;
+      ignorePatterns = ["rm *" "mv *" "l" "ls" "ll" "g s" "git status"];
+      save = 1000000;
+      size = 1000000;
+    };
     # xdg compliant
     dotDir = ".config/zsh";
     history.path = "${config.home.homeDirectory}/.local/share/zsh/history";
+    # extra stuff for fixing gpg-agent ssh and some random commands
     initExtra = ''
       ${
         lib.optionalString

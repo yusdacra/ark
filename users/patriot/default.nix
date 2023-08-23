@@ -108,11 +108,11 @@ in {
         ["sway" "foot"]
         # desktop stuff
         ["wayland"]
-        ["chromium"]
+        ["ripcord" "discord" "chromium"]
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
-        ["helix" "code" "git" "ssh"]
+        ["helix" "git" "ssh"]
         ["musikcube" "musikcubed"]
       ];
     in
@@ -182,7 +182,7 @@ in {
         font-awesome
         dejavu_fonts
         # Programs
-        inputs.blender-bin.packages.x86_64-linux.default
+        pixelorama
         krita
         gnupg
         imv
@@ -198,7 +198,8 @@ in {
         helvum
         nix-output-monitor
         # prismlauncher
-        godot_4
+        steamPackages.steamcmd
+        steam-tui
       ];
     };
     programs = {

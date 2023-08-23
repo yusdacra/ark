@@ -9,12 +9,12 @@
     ".config/discordcanary"
   ];
   xdg.configFile."discordcanary/settings.json".text = builtins.toJSON {
-    openasar = {
-      setup = true;
-      noTyping = true;
-      quickstart = true;
-      theme = builtins.readFile inputs.catppuccin-discord;
-    };
+    # openasar = {
+    #   setup = true;
+    #   noTyping = true;
+    #   quickstart = true;
+    #   # theme = builtins.readFile inputs.catppuccin-discord;
+    # };
     SKIP_HOST_UPDATE = true;
     IS_MAXIMIZED = true;
     IS_MINIMIZED = false;
@@ -38,7 +38,7 @@
     pkg =
       (pkgs.discord-canary.override {
         nss = pkgs.nss_latest;
-        withOpenASAR = true;
+        # withOpenASAR = true;
       })
       .overrideAttrs (old: {
         preInstall = ''
