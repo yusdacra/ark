@@ -19,6 +19,7 @@
         "matrix.gaze.systems"
         "ms.gaze.systems"
         "mq.gaze.systems"
+        "couchdb.gaze.systems"
       ];
     };
     certs."limbus.company" = {

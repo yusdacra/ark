@@ -17,6 +17,7 @@
       common-gpu-nvidia
       common-gpu-amd
       common-cpu-amd
+      common-cpu-amd-pstate
       ../../users/root
       ../../users/patriot
     ]
@@ -93,12 +94,13 @@
   programs.light.enable = true;
 
   fonts = {
-    enableDefaultFonts = true;
+    enableDefaultPackages = true;
     fontconfig.enable = true;
-    fonts = [pkgs.dejavu_fonts];
+    packages = [pkgs.dejavu_fonts];
   };
 
   environment = {
+    sessionVariables.FLAKE = "/etc/nixos";
     systemPackages = [pkgs.ntfs3g];
     pathsToLink = ["/share/zsh"];
     persistence."${config.system.persistDir}" = {
@@ -114,8 +116,9 @@
     };
   };
 
-  networking.firewall.allowedUDPPorts = [49152];
-  networking.firewall.allowedTCPPorts = [7905 7906];
+  networking.firewall.allowedUDPPorts = [4990 4995];
+  # musikcube
+  networking.firewall.allowedTCPPorts = [7905 7906] ++ [6695 6696 6697 6698 6699];
 
   # for tailscale
   networking.firewall.checkReversePath = "loose";

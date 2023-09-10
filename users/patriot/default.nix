@@ -66,7 +66,7 @@ in {
     dconf.enable = true;
     weylus.users = ["patriot"];
     java = {
-      enable = true;
+      enable = false;
       package = pkgs.jre8;
     };
   };
@@ -108,7 +108,7 @@ in {
         ["sway" "foot"]
         # desktop stuff
         ["wayland"]
-        ["chromium"]
+        ["obsidian" "chromium"]
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
@@ -143,9 +143,9 @@ in {
           "direnv"
           "zsh"
           "keyrings"
-          # "lutris"
-          "Terraria"
-          "PrismLauncher"
+          "lutris"
+          # "Terraria"
+          # "PrismLauncher"
         ]
         ++ mkPaths ".config" [
           # "lutris"
@@ -153,7 +153,7 @@ in {
           "musikcube"
         ];
       files = l.flatten [
-        ".config/gnome-initial-setup-done"
+        # ".config/gnome-initial-setup-done"
         (lib.removePrefix "~/" config.programs.ssh.userKnownHostsFile)
       ];
       allowOther = true;
@@ -190,16 +190,18 @@ in {
         ffmpeg
         mupdf
         xdg-utils
-        # lutris
+        lutris
         protontricks
         # fractal-next
         # obs-studio
         libreoffice-fresh
         helvum
         nix-output-monitor
+        inputs.nh.packages.${pkgs.system}.default
         # prismlauncher
-        steamPackages.steamcmd
-        steam-tui
+        # steamPackages.steamcmd
+        # steam-tui
+        abaddon
       ];
     };
     programs = {

@@ -21,9 +21,9 @@ in {
   };
   config = lib.mkIf cfg.enable {
     systemd.user.services.musikcubed = {
-      Install = {
-        WantedBy = ["multi-user.target"];
-      };
+      # Install = {
+      #   WantedBy = ["default.target"];
+      # };
       Unit = {
         Description = "musikcubed";
         After = "network.target";

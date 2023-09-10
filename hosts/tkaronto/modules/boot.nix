@@ -1,12 +1,12 @@
 {pkgs, ...}: {
   boot = {
-    tmpOnTmpfs = true;
+    tmp.useTmpfs = true;
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
       systemd-boot.configurationLimit = 10;
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_zen;
     supportedFilesystems = ["f2fs"];
     initrd = {
       availableKernelModules = [

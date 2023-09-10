@@ -53,8 +53,8 @@
     limbusart.url = "git+https://git.gaze.systems/dusk/limbusart.git";
     limbusart.inputs.nixpkgs.follows = "nixpkgs";
 
-    steam-tui.url = "github:dmadisetti/steam-tui";
-    steam-tui.inputs.nixpkgs.follows = "nixpkgs";
+    nh.url = "github:viperML/nh";
+    nh.inputs.nixpkgs.follows = "nixpkgs";
 
     # needed for hyprland setup
     # hyprland.url = "github:hyprwm/Hyprland";
@@ -99,9 +99,7 @@
             generate-firefox-addons =
               toString
               "${pkgs.generate-firefox-addons}/bin/generate-firefox-addons";
-            # buildHost = {
-            #   type = "app";
-            # };
+            nh = toString "${inputs.nh.packages.${pkgs.system}.default}/bin/nh";
           }
         )
         allPkgs
