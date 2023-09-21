@@ -108,12 +108,12 @@ in {
         ["sway" "foot"]
         # desktop stuff
         ["wayland"]
-        ["obsidian" "chromium"]
+        ["obsidian" "firefox"]
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
         ["helix" "git" "ssh"]
-        ["musikcube" "musikcubed"]
+        # ["musikcube" "musikcubed"]
       ];
     in
       l.flatten [
@@ -150,7 +150,6 @@ in {
         ++ mkPaths ".config" [
           # "lutris"
           "dconf"
-          "musikcube"
         ];
       files = l.flatten [
         # ".config/gnome-initial-setup-done"
@@ -201,11 +200,12 @@ in {
         # prismlauncher
         # steamPackages.steamcmd
         # steam-tui
-        abaddon
+        gtkcord4
+        gh
       ];
     };
     programs = {
-      musikcube.enable = true;
+      # musikcube.enable = true;
       command-not-found.enable =
         nixosConfig.programs.command-not-found.enable;
       git = {
@@ -219,10 +219,10 @@ in {
       };
     };
     services = {
-      musikcubed = {
-        enable = true;
-        settings.password = "somethingidk";
-      };
+      # musikcubed = {
+      #   enable = true;
+      #   settings.password = "somethingidk";
+      # };
       gpg-agent = let
         defaultCacheTtl = 3600 * 6;
         maxCacheTtl = 3600 * 24;

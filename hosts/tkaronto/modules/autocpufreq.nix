@@ -3,15 +3,15 @@
   services.auto-cpufreq.settings = {
     charger = {
       governor = "powersave";
-      scaling_min_freq = 1500000;
+      scaling_min_freq = 600000;
       scaling_max_freq = 3000000;
-      turbo = "auto";
+      turbo = "off";
     };
     battery = {
       governor = "powersave";
-      scaling_min_freq = 900000;
-      scaling_max_freq = 1800000;
-      turbo = "auto";
+      scaling_min_freq = 400000;
+      scaling_max_freq = 2000000;
+      turbo = "off";
     };
   };
   services.tlp.settings = {

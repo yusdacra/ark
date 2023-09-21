@@ -42,7 +42,7 @@ in {
       whois
       bat
       fzf
-      exa
+      eza
       lm_sensors
       mkpasswd
       bottom
@@ -57,7 +57,7 @@ in {
     ];
     shellAliases = let
       ifSudo = string: mkIf config.security.sudo.enable string;
-      inherit (pkgs) git bat exa du-dust;
+      inherit (pkgs) git bat eza du-dust;
     in {
       g = pkgBin git;
       git-optimize = "${pkgBin git} gc --aggressive --prune=now";
@@ -66,11 +66,11 @@ in {
       du = "${pkgBin du-dust}";
       df = "${coreBin "df"} -h";
       free = "${pkgs.procps}/bin/free -h";
-      ls = pkgBin exa;
-      l = "${pkgBin exa} -lhg";
-      la = "${pkgBin exa} -lhg -a";
-      t = "${pkgBin exa} -lhg -T";
-      ta = "${pkgBin exa} -lhg -a -T";
+      ls = pkgBin eza;
+      l = "${pkgBin eza} -lhg";
+      la = "${pkgBin eza} -lhg -a";
+      t = "${pkgBin eza} -lhg -T";
+      ta = "${pkgBin eza} -lhg -a -T";
       n = nixBin;
       nf = "${nixBin} flake";
       nfu = "${nixBin} flake update";

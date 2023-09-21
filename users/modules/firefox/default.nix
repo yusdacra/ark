@@ -20,6 +20,9 @@
         lockPref("privacy.clearOnShutdown.cookies", false);
         lockPref("services.sync.engine.passwords", false);
         lockPref("network.cookie.lifetimePolicy", 0);
+        lockPref("gfx.webrender.all", true);
+        lockPref("media.ffmpeg.vaapi.enabled", true);
+        lockPref("media.hardware-video-decoding.force-enabled", true);
       '';
       extraPolicies = {
         CaptivePortal = false;
@@ -37,21 +40,6 @@
         };
       };
     };
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; let
-      myExtensions =
-        pkgs.callPackage ./extensions.nix {inherit buildFirefoxXpiAddon;};
-    in
-      [
-        ublock-origin
-        darkreader
-        bitwarden
-        refined-github
-        stylus
-      ]
-      ++ (with myExtensions; [
-        catppuccin-mocha-sky
-        youtube-disable-number-seek
-      ]);
     profiles = {
       default = {
         id = 0;
@@ -62,10 +50,23 @@
         id = 1;
         isDefault = true;
         name = "personal";
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; let
+          myExtensions =
+            pkgs.callPackage ./extensions.nix {inherit buildFirefoxXpiAddon;};
+        in
+          [
+            ublock-origin
+            darkreader
+            bitwarden
+            refined-github
+          ]
+          ++ (with myExtensions; [
+            youtube-disable-number-seek
+          ]);
         extraConfig = builtins.readFile (
           builtins.fetchurl {
-            url = "https://raw.githubusercontent.com/arkenfox/user.js/101.0/user.js";
-            sha256 = "sha256:1mb1l9dgb8mfl70lhwykgfphqnxxi1xw0h3hlgj8jyj6n1mn5v8f";
+            url = "https://raw.githubusercontent.com/arkenfox/user.js/115.1/user.js";
+            sha256 = "sha256:0x0xkbhmb53lyfpbc8wmm44dgr4zrn15b2pc6gny08mh5j4ny8m7";
           }
         );
       };
