@@ -62,6 +62,8 @@
           ]
           ++ (with myExtensions; [
             youtube-disable-number-seek
+            styl-us
+            showdex
           ]);
         extraConfig = builtins.readFile (
           builtins.fetchurl {

@@ -8,9 +8,17 @@ final: prev: {
       sha256 = "sha256-Rz3c6RMZUiKQ0YKKQkCEkelfIGUq+xVmgNskj7uEjGI=";
       fetchSubmodules = true;
     };
-    buildInputs = old.buildInputs ++ (with final; [
-      miniaudio libsodium libopus spdlog pcre2
-      rnnoise qrcodegen openssl
-    ]);
+    buildInputs =
+      old.buildInputs
+      ++ (with final; [
+        miniaudio
+        libsodium
+        libopus
+        spdlog
+        pcre2
+        rnnoise
+        qrcodegen
+        openssl
+      ]);
   });
 }
