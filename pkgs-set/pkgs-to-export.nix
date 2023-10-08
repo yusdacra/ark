@@ -1,11 +1,10 @@
 pkgs: (
   pkgs.lib.getAttrs
   [
-    "fractal-next"
+    "phantom"
     "comic-mono"
-    "chromium"
-    "discordo"
-    "abaddon"
+    "fluidsynth-dssi"
+    "calf"
   ]
   pkgs
 )

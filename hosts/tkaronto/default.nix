@@ -9,7 +9,11 @@
   imports = with inputs;
   with nixos-hardware.nixosModules;
     [
-      inputs.agenix.nixosModules.default
+      # vfio.nixosModules.kvmfr
+      # vfio.nixosModules.virtualisation
+      # vfio.nixosModules.vfio
+      # vfio.nixosModules.libvirtd
+      agenix.nixosModules.default
       nixpkgs.nixosModules.notDetected
       nixos-persistence.nixosModule
       common-pc-ssd
@@ -55,6 +59,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
   };
   hardware.pulseaudio = {
     enable = false;
@@ -101,7 +106,6 @@
 
   environment = {
     sessionVariables.FLAKE = "/etc/nixos";
-    systemPackages = [pkgs.ntfs3g];
     pathsToLink = ["/share/zsh"];
     persistence."${config.system.persistDir}" = {
       directories = lib.flatten [
@@ -116,7 +120,8 @@
     };
   };
 
-  networking.firewall.allowedUDPPorts = [4990 4995];
+  # warframe
+  networking.firewall.allowedUDPPorts = [4990 4991 4992 4993 4994 4995];
   # musikcube
   networking.firewall.allowedTCPPorts = [7905 7906] ++ [6695 6696 6697 6698 6699];
 

@@ -23,6 +23,7 @@ in {
       "nix-build-key-access"
       (l.optional nixosConfig.networking.networkmanager.enable "networkmanager")
       (l.optional nixosConfig.virtualisation.docker.enable "docker")
+      (l.optionals nixosConfig.virtualisation.libvirtd.enable ["libvirtd" "kvm"])
     ];
     shell = pkgs.zsh;
     hashedPassword = "$6$spzqhAyJfhHy$iHgLBlhjGn1l8PnbjJdWTn1GPvcjMqYNKUzdCe/7IrX6sHNgETSr/Nfpdmq9FCXLhrAfwHOd/q/8SvfeIeNX4/";
@@ -105,9 +106,9 @@ in {
       modulesToEnable = l.flatten [
         # wm
         # ["hyprland" "foot"]
-        ["sway" "foot"]
+        ["sway" "wayland" "foot"]
         # desktop stuff
-        ["wayland"]
+        # ["wayland" "foot"]
         ["obsidian" "firefox"]
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
@@ -143,16 +144,17 @@ in {
           "direnv"
           "zsh"
           "keyrings"
-          "lutris"
+          # "lutris"
           # "Terraria"
           # "PrismLauncher"
         ]
         ++ mkPaths ".config" [
           # "lutris"
           "dconf"
+          "retroarch"
         ];
       files = l.flatten [
-        # ".config/gnome-initial-setup-done"
+        ".config/gnome-initial-setup-done"
         (lib.removePrefix "~/" config.programs.ssh.userKnownHostsFile)
       ];
       allowOther = true;
@@ -172,6 +174,23 @@ in {
       gtk.enable = true;
       x11.enable = true;
     };
+    gtk.enable = true;
+    gtk.theme.package = pkgs.yaru-theme;
+    gtk.theme.name = "Yaru-dark";
+
+    home.sessionVariables.QT_QPA_PLATFORMTHEME = "qt5ct";
+    xdg.configFile = {
+      "environment.d/20-apply-qtct.conf".text = ''
+        QT_QPA_PLATFORMTHEME=qt5ct
+      '';
+    };
+    qt.enable = true;
+    qt.platformTheme = "qtct";
+    qt.style.name = "phantom";
+    qt.style.package = pkgs.phantom;
+
+    stylix.targets.gnome.enable = lib.mkForce false;
+    stylix.targets.gtk.enable = lib.mkForce false;
 
     home = {
       homeDirectory = nixosConfig.users.users.patriot.home;
@@ -189,7 +208,6 @@ in {
         ffmpeg
         mupdf
         xdg-utils
-        lutris
         protontricks
         # fractal-next
         # obs-studio
@@ -202,6 +220,18 @@ in {
         # steam-tui
         gtkcord4
         gh
+        transmission_4-gtk
+        # yabridge
+        # yabridgectl
+        # bitwig-studio
+        # reaper
+        # ardour
+        (retroarch.override {
+          cores = with libretro; [desmume melonds];
+        })
+        # wineWowPackages.stagingFull
+        # lutris
+        distrobox
       ];
     };
     programs = {

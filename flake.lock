@@ -636,6 +636,24 @@
         "type": "github"
       }
     },
+    "flake-parts_3": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib_5"
+      },
+      "locked": {
+        "lastModified": 1693611461,
+        "narHash": "sha256-aPODl8vAgGQ0ZYFIRisxYG5MOGSkIczvu2Cd8Gb9+1Y=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "7f53fdb7bdc5bb237da7fefef12d099e4fd611ca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -1011,6 +1029,21 @@
         "type": "github"
       }
     },
+    "nix-std": {
+      "locked": {
+        "lastModified": 1685917625,
+        "narHash": "sha256-2manVKofCZrCToVDnDYNvtYUFBYOM5JhdDoNGVY4fq4=",
+        "owner": "chessai",
+        "repo": "nix-std",
+        "rev": "e20af8822b5739434b875643bfc61fe0195ea2fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chessai",
+        "repo": "nix-std",
+        "type": "github"
+      }
+    },
     "nixd": {
       "inputs": {
         "flake-parts": "flake-parts_2",
@@ -1160,6 +1193,24 @@
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "4f53efe34b3a8877ac923b9350c874e3dcd5dc0a",
+        "type": "github"
+      },
+      "original": {
+        "dir": "lib",
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-lib_5": {
+      "locked": {
+        "dir": "lib",
+        "lastModified": 1693471703,
+        "narHash": "sha256-0l03ZBL8P1P6z8MaSDS/MvuU8E75rVxe5eE1N6gxeTo=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "3e52e76b70d5508f3cec70b882a29199f4d1ee85",
         "type": "github"
       },
       "original": {
@@ -1422,6 +1473,7 @@
         "nixpkgs-wayland": "nixpkgs-wayland",
         "nur": "nur",
         "stylix": "stylix",
+        "vfio": "vfio",
         "vscode-extensions": "vscode-extensions"
       }
     },
@@ -1710,6 +1762,28 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "vfio": {
+      "inputs": {
+        "flake-parts": "flake-parts_3",
+        "nix-std": "nix-std",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1696457108,
+        "narHash": "sha256-aC7zKhCO11ffT/WMuku/YErHmKJRcl3/lz2s2APgD5s=",
+        "owner": "yusdacra",
+        "repo": "nixos-vfio",
+        "rev": "fb9a8c28811fc5b98973d870659e8c1c0e592206",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yusdacra",
+        "repo": "nixos-vfio",
         "type": "github"
       }
     },

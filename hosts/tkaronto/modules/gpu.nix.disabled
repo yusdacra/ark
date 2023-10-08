@@ -1,0 +1,55 @@
+{pkgs, ...}: {
+  environment.systemPackages = with pkgs; [
+    virt-manager
+    virtiofsd
+    looking-glass-client
+  ];
+  virtualisation = {
+    spiceUSBRedirection.enable = true;
+    libvirtd = {
+      enable = true;
+      # extraConfig = ''
+      #   user="patriot"
+      # '';
+      qemu = {
+        ovmf.enable = true;
+        # runAsRoot = true;
+        # Full is needed for TPM and secure boot emulation
+        ovmf.packages = [pkgs.OVMFFull.fd];
+        swtpm.enable = true;
+        # verbatimConfig = ''
+        #   namespaces = []
+        #   cgroup_device_acl = [ "/dev/vfio/9", "/dev/kvm", "/dev/null" ]
+        #   user = "patriot"
+        #   group = "libvirtd"
+        # '';
+      };
+    };
+    vfio = {
+      enable = true;
+      IOMMUType = "amd";
+      devices = [
+        "10de:25a2" # GPU
+      ];
+      blacklistNvidia = true;
+      ignoreMSRs = true;
+      disableEFIfb = false;
+    };
+    kvmfr = {
+      enable = true;
+      devices = [
+        {
+          dimensions = {
+            width = 1920;
+            height = 1080;
+          };
+          permissions = {
+            user = "patriot";
+            group = "kvm";
+            mode = "0660";
+          };
+        }
+      ];
+    };
+  };
+}

@@ -105,10 +105,10 @@
         output = {
           "*" = {
             bg = "${config.stylix.image} fill";
-            # adaptive_sync = "on";
           };
           "eDP-1" = {
             scale = "2";
+            adaptive_sync = "on";
           };
           "HDMI-A-1" = {
             mode = "1920x1080@60.000Hz";
