@@ -139,6 +139,9 @@ in {
           # caches / history stuff
           ".directory_history"
           ".cache"
+          "Bitwig Studio"
+          ".BitwigStudio"
+          ".vst"
         ]
         ++ mkPaths ".local/share" [
           "direnv"
@@ -221,9 +224,9 @@ in {
         gtkcord4
         gh
         transmission_4-gtk
-        # yabridge
-        # yabridgectl
-        # bitwig-studio
+        yabridge
+        yabridgectl
+        bitwig-studio
         # reaper
         # ardour
         (retroarch.override {

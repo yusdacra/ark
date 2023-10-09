@@ -10,7 +10,7 @@
     l.mapAttrsToList
     (
       name: _: let
-        o = import "${./overlays}/${name}";
+        o = import "${./.}/overlays/${name}";
       in
         if (l.functionArgs o) ? inputs
         then o {inherit inputs;}

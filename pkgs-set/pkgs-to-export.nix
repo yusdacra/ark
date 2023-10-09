@@ -3,8 +3,7 @@ pkgs: (
   [
     "phantom"
     "comic-mono"
-    "fluidsynth-dssi"
-    "calf"
+    "bitwig-studio"
   ]
   pkgs
 )
