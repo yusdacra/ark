@@ -56,8 +56,8 @@
     nh.url = "github:viperML/nh";
     nh.inputs.nixpkgs.follows = "nixpkgs";
 
-    vfio.url = "github:yusdacra/nixos-vfio";
-    vfio.inputs.nixpkgs.follows = "nixpkgs";
+    # vfio.url = "github:yusdacra/nixos-vfio";
+    # vfio.inputs.nixpkgs.follows = "nixpkgs";
 
     # needed for hyprland setup
     # hyprland.url = "github:hyprwm/Hyprland";

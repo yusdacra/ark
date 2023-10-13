@@ -22,6 +22,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = [cfg.package];
+    home.persistence."${config.system.persistDir}${config.home.homeDirectory}".directories = [".config/musikcube"];
     xdg.configFile."musikcube/settings.json".text = builtins.toJSON cfg.settings;
   };
 }

@@ -10,6 +10,7 @@
       PUBLIC_MUSIKQUAD_SERVER = "mq.gaze.systems";
       PUBLIC_BASEURL = "ms.gaze.systems";
     });
+  port = "4004";
 in {
   users.users.musikspider = {
     isSystemUser = true;
@@ -23,14 +24,13 @@ in {
     after = ["network.target"];
     serviceConfig = {
       User = "musikspider";
-      ExecStart = "${pkgs.deno}/bin/deno run --allow-env --allow-read --allow-net ${pkg}/index.js";
+      ExecStart = "${pkg}/bin/musikspider";
       Restart = "on-failure";
       RestartSec = 5;
       WorkingDirectory = "/var/lib/musikspider";
+      Environment="HOME=/var/lib/musikspider";
       EnvironmentFile = pkgs.writeText "musikspider-env" ''
-        DENO_NO_UPDATE_CHECK=1
-        DENO_DIR=/var/lib/musikspider/.deno
-        PORT=4004
+        PORT=${port}
       '';
     };
   };
@@ -39,7 +39,7 @@ in {
     useACMEHost = "gaze.systems";
     forceSSL = true;
     locations."/" = {
-      proxyPass = "http://localhost:4004";
+      proxyPass = "http://localhost:${port}";
       proxyWebsockets = true;
     };
   };

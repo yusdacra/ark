@@ -9,7 +9,7 @@
     ]
     ++ (tlib.importFolder (toString ./modules));
 
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
 
   # firewall stuffs

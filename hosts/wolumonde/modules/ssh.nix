@@ -2,7 +2,7 @@
   services.fail2ban.enable = true;
   services.openssh = {
     enable = true;
-    passwordAuthentication = false;
+    settings.PasswordAuthentication = false;
   };
   users.users.root.openssh.authorizedKeys.keys = [
     (builtins.readFile "${inputs.self}/secrets/yusdacra.key.pub")

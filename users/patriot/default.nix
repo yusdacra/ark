@@ -114,7 +114,7 @@ in {
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
         ["helix" "git" "ssh"]
-        # ["musikcube" "musikcubed"]
+        ["musikcube" "musikcubed"]
       ];
     in
       l.flatten [
@@ -230,7 +230,7 @@ in {
         # reaper
         # ardour
         (retroarch.override {
-          cores = with libretro; [desmume melonds];
+          cores = with libretro; [desmume citra];
         })
         # wineWowPackages.stagingFull
         # lutris
@@ -238,7 +238,7 @@ in {
       ];
     };
     programs = {
-      # musikcube.enable = true;
+      musikcube.enable = true;
       command-not-found.enable =
         nixosConfig.programs.command-not-found.enable;
       git = {
@@ -252,10 +252,10 @@ in {
       };
     };
     services = {
-      # musikcubed = {
-      #   enable = true;
-      #   settings.password = "somethingidk";
-      # };
+      musikcubed = {
+        enable = true;
+        settings.password = "somethingidk";
+      };
       gpg-agent = let
         defaultCacheTtl = 3600 * 6;
         maxCacheTtl = 3600 * 24;
