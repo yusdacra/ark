@@ -6,7 +6,7 @@
   pkg =
     inputs.musikspider.packages.${pkgs.system}.musikspider.overrideAttrs
     (old: {
-      LOCAL_MUSIKQUAD_SERVER = "http://localhost:5005";
+      LOCAL_MUSIKQUAD_SERVER = "http://127.0.0.1:5005";
       PUBLIC_MUSIKQUAD_SERVER = "mq.gaze.systems";
       PUBLIC_BASEURL = "ms.gaze.systems";
     });
@@ -28,7 +28,7 @@ in {
       Restart = "on-failure";
       RestartSec = 5;
       WorkingDirectory = "/var/lib/musikspider";
-      Environment="HOME=/var/lib/musikspider";
+      Environment = "HOME=/var/lib/musikspider";
       EnvironmentFile = pkgs.writeText "musikspider-env" ''
         PORT=${port}
       '';

@@ -4,6 +4,46 @@
   lib,
   stdenv,
 }: {
+  "better-clean-twitter" = buildFirefoxXpiAddon {
+    pname = "better-clean-twitter";
+    version = "1.3.2";
+    addonId = "bct@presti.me";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4124387/better_clean_twitter-1.3.2.xpi";
+    sha256 = "094d99c7678c3247a0b07a2d0d942df969daafe567d392a52a6f0b40ce7382bd";
+    meta = with lib; {
+      homepage = "https://presti.me";
+      description = "Remove all the annoying clutter from your Twitter.";
+      license = licenses.gpl3;
+      mozPermissions = [
+        "*://twitter.com/*"
+        "*://api.twitter.com/*"
+        "activeTab"
+        "storage"
+        "tabs"
+        "scripting"
+        "webRequest"
+        "nativeMessaging"
+        "https://twitter.com/*"
+      ];
+      platforms = platforms.all;
+    };
+  };
+  "better-twitter-extension" = buildFirefoxXpiAddon {
+    pname = "better-twitter-extension";
+    version = "2.1.2";
+    addonId = "{ef32ca60-1728-4011-a585-4de439fe7ba7}";
+    url = "https://addons.mozilla.org/firefox/downloads/file/4056346/better_twitter_extension-2.1.2.xpi";
+    sha256 = "25cf90586def269d7a54d8b4fd71aa63529e25ed6689df4c05b0d7f8c3fabca9";
+    meta = with lib; {
+      description = "Hide what is not important on <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/26ca20fd517be4e3078c65b14f44521b572c8c48532db6c37d90ff3a2ee15167/http%3A//Twitter.com\" rel=\"nofollow\">Twitter.com</a>";
+      mozPermissions = [
+        "storage"
+        "https://twitter.com/*"
+        "https://mobile.twitter.com/*"
+      ];
+      platforms = platforms.all;
+    };
+  };
   "catppuccin-mocha-sky" = buildFirefoxXpiAddon {
     pname = "catppuccin-mocha-sky";
     version = "2.0";

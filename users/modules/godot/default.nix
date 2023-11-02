@@ -1,3 +1,3 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [godot godot-headless godot-server];
+  home.packages = with pkgs; [godot_4];
 }

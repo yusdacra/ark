@@ -114,6 +114,7 @@ in {
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
         ["helix" "git" "ssh"]
+        ["godot"]
         ["musikcube" "musikcubed"]
       ];
     in
@@ -144,17 +145,20 @@ in {
           ".vst"
         ]
         ++ mkPaths ".local/share" [
+          "bottles"
           "direnv"
           "zsh"
           "keyrings"
+          "yuzu"
           # "lutris"
           # "Terraria"
-          # "PrismLauncher"
+          "PrismLauncher"
         ]
         ++ mkPaths ".config" [
           # "lutris"
           "dconf"
           "retroarch"
+          "yuzu"
         ];
       files = l.flatten [
         ".config/gnome-initial-setup-done"
@@ -218,7 +222,7 @@ in {
         helvum
         nix-output-monitor
         inputs.nh.packages.${pkgs.system}.default
-        # prismlauncher
+        prismlauncher
         # steamPackages.steamcmd
         # steam-tui
         gtkcord4
@@ -232,9 +236,11 @@ in {
         (retroarch.override {
           cores = with libretro; [desmume citra];
         })
+        yuzu
         # wineWowPackages.stagingFull
         # lutris
         distrobox
+        bottles
       ];
     };
     programs = {

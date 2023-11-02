@@ -62,8 +62,9 @@
           ]
           ++ (with myExtensions; [
             youtube-disable-number-seek
-            styl-us
             showdex
+            better-twitter-extension
+            better-clean-twitter
           ]);
         extraConfig = builtins.readFile (
           builtins.fetchurl {

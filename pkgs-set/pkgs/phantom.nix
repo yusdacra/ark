@@ -1,4 +1,8 @@
-{stdenv, libsForQt5, ...}:
+{
+  stdenv,
+  libsForQt5,
+  ...
+}:
 stdenv.mkDerivation {
   pname = "phantomstyle";
   version = "309c97";

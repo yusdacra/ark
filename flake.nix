@@ -2,6 +2,7 @@
   description = "config!!!";
 
   inputs = {
+    nixpkgs-floorp.url = "github:christoph-heiss/nixpkgs/new/floorp";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
