@@ -110,5 +110,4 @@ in {
       config = {safe.directory = ["/etc/nixos"];};
     };
   };
-  nixpkgs.config.allowUnfree = true;
 }

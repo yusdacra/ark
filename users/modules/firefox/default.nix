@@ -3,7 +3,11 @@
   config,
   ...
 }: {
-  home.persistence."${config.system.persistDir}${config.home.homeDirectory}".directories = [".mozilla"];
+  home.persistence."${config.system.persistDir}${config.home.homeDirectory}".directories = [
+    ".mozilla"
+    ".floorp"
+  ];
+  home.packages = [(pkgs.lib.hiPrio pkgs.floorp)];
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-wayland.override {

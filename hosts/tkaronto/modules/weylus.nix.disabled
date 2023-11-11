@@ -1,0 +1,7 @@
+{
+  programs.weylus = {
+    enable = true;
+    users = ["patriot"];
+    openFirewall = true;
+  };
+}

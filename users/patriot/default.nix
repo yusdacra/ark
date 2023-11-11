@@ -116,6 +116,7 @@ in {
         ["helix" "git" "ssh"]
         ["godot"]
         ["musikcube" "musikcubed"]
+        ["arrpc" "discordrp-mpris"]
       ];
     in
       l.flatten [
