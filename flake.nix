@@ -59,6 +59,9 @@
     discordrp-mpris.url = "github:yusdacra/discordrp-mpris-flake";
     discordrp-mpris.inputs.nixpkgs.follows = "nixpkgs";
 
+    naked-shell.url = "github:yusdacra/mk-naked-shell";
+    naked-shell.flake = false;
+
     # vfio.url = "github:yusdacra/nixos-vfio";
     # vfio.inputs.nixpkgs.follows = "nixpkgs";
 

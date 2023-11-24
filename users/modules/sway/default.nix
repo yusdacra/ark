@@ -69,9 +69,9 @@
               exec export SFILE="${shotFile}.png" && mkdir -p ${shotDir} && ${grim} -g "$(${slurp})" "$SFILE" && ${cat} "$SFILE" | ${wl-copy} -t image/png
             '';
             # Record screen
-            "Mod1+r" = ''exec mkdir -p ${shotDir} && ${wf-recorder} -f "${shotFile}.mp4"'';
+            "Mod1+r" = ''exec mkdir -p ${shotDir} && ${wf-recorder} -x yuv420p -f "${shotFile}.mp4"'';
             # Record an area
-            "Mod1+Shift+r" = ''exec mkdir -p ${shotDir} && ${wf-recorder} -g "$(${slurp})" -f "${shotFile}.mp4"'';
+            "Mod1+Shift+r" = ''exec mkdir -p ${shotDir} && ${wf-recorder} -x yuv420p -g "$(${slurp})" -f "${shotFile}.mp4"'';
             # Stop recording
             "Mod1+c" = "exec pkill -INT wf-recorder";
             "XF86AudioRaiseVolume" = "exec ${pactl} set-sink-volume 0 +5%";

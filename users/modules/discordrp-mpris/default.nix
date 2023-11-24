@@ -12,4 +12,5 @@
       RestartSec = 5;
     };
   };
+  xdg.configFile."discordrp-mpris/config.toml".source = ./config.toml;
 }

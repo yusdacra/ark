@@ -1,5 +1,6 @@
-{tlib, ...}:
+{tlib, inputs, ...}:
 tlib.genPkgs (pkgs: let
+  mkNakedShell = pkgs.callPackage inputs.naked-shell {};
   agenix-wrapped = pkgs.writeShellApplication {
     name = "agenix";
     runtimeInputs = [pkgs.agenix];
@@ -12,10 +13,10 @@ tlib.genPkgs (pkgs: let
     '';
   };
 in {
-  default = with pkgs;
-    mkShell {
+  default =
+    mkNakedShell {
       name = "prts";
-      buildInputs = [git git-crypt alejandra helix agenix-wrapped rage];
+      packages = with pkgs; [git git-crypt alejandra helix agenix-wrapped rage];
       shellHook = ''
         echo \"$(tput bold)welcome to PRTS, $USER$(tput sgr0)\"
       '';

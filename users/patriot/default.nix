@@ -115,7 +115,7 @@ in {
         # dev stuff
         ["helix" "git" "ssh"]
         ["godot"]
-        ["musikcube" "musikcubed"]
+        ["musikcube" "musikcubed" "lollypop"]
         ["arrpc" "discordrp-mpris"]
       ];
     in
@@ -217,23 +217,25 @@ in {
         mupdf
         xdg-utils
         protontricks
-        # fractal-next
-        # obs-studio
         libreoffice-fresh
         helvum
         nix-output-monitor
         inputs.nh.packages.${pkgs.system}.default
-        prismlauncher
         # steamPackages.steamcmd
         # steam-tui
+        # fractal-next
         gtkcord4
         gh
         transmission_4-gtk
+        kdenlive
+        ### music prod
         yabridge
         yabridgectl
         bitwig-studio
-        # reaper
-        # ardour
+        ### stream / record
+        obs-studio
+        ### gayming
+        prismlauncher
         (retroarch.override {
           cores = with libretro; [desmume citra];
         })
