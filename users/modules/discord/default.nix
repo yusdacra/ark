@@ -33,18 +33,4 @@
         # '';
       });
   in [pkg];
-  systemd.user.services.premid = {
-    Install = {
-      WantedBy = ["default.target"];
-    };
-    Unit = {
-      Description = "premid";
-      After = "network.target";
-    };
-    Service = {
-      ExecStart = "${pkgs.premid}/bin/premid";
-      Restart = "on-failure";
-      RestartSec = 5;
-    };
-  };
 }

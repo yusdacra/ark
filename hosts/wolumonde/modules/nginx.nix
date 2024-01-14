@@ -20,6 +20,7 @@
         "ms.gaze.systems"
         "mq.gaze.systems"
         "couchdb.gaze.systems"
+        "doc.gaze.systems"
       ];
     };
     certs."limbus.company" = {

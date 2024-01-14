@@ -59,6 +59,9 @@
     discordrp-mpris.url = "github:yusdacra/discordrp-mpris-flake";
     discordrp-mpris.inputs.nixpkgs.follows = "nixpkgs";
 
+    s3s.url = "github:yusdacra/s3s-flake";
+    s3s.inputs.nixpkgs.follows = "nixpkgs";
+
     naked-shell.url = "github:yusdacra/mk-naked-shell";
     naked-shell.flake = false;
 

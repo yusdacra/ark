@@ -12,12 +12,12 @@
       bbenoist.nix
       svelte.svelte-vscode
       bradlc.vscode-tailwindcss
-      (rust-lang.rust-analyzer.overrideAttrs (old: {
-        src = old.src.overrideAttrs (old: {
-          outputHash = "sha256-k9eDTY9y2ejg4jTApji8X6UmKYK/eCLMZJbiYuoTuyY=";
-        });
-      }))
-      # explodingcamera."1am"
+      # (rust-lang.rust-analyzer.overrideAttrs (old: {
+      #   src = old.src.overrideAttrs (old: {
+      #     outputHash = "sha256-k9eDTY9y2ejg4jTApji8X6UmKYK/eCLMZJbiYuoTuyY=";
+      #   });
+      # }))
+      rust-lang.rust-analyzer
     ];
     userSettings = {
       "files.associations" = {

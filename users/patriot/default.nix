@@ -113,10 +113,11 @@ in {
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
-        ["helix" "git" "ssh"]
-        ["godot"]
+        ["helix" "git" "ssh" "code"]
+        # ["godot"]
         ["musikcube" "musikcubed" "lollypop"]
-        ["arrpc" "discordrp-mpris"]
+        ["arrpc"]
+        ["s3s"]
       ];
     in
       l.flatten [
@@ -160,6 +161,7 @@ in {
           "dconf"
           "retroarch"
           "yuzu"
+          "blender"
         ];
       files = l.flatten [
         ".config/gnome-initial-setup-done"
@@ -244,6 +246,7 @@ in {
         # lutris
         distrobox
         bottles
+        blender
       ];
     };
     programs = {
