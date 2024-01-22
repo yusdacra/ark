@@ -107,15 +107,16 @@ in {
         # wm
         # ["hyprland" "foot"]
         ["sway" "wayland" "foot"]
+        # ["fluxbox" "urxvt"]
         # desktop stuff
         # ["wayland" "foot"]
         ["obsidian" "firefox"]
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
-        ["helix" "git" "ssh" "code"]
+        ["helix" "git" "ssh"]
         # ["godot"]
-        ["musikcube" "musikcubed" "lollypop"]
+        ["musikcube" "musikcubed"]
         ["arrpc"]
         ["s3s"]
       ];
@@ -188,16 +189,16 @@ in {
     gtk.theme.package = pkgs.yaru-theme;
     gtk.theme.name = "Yaru-dark";
 
-    home.sessionVariables.QT_QPA_PLATFORMTHEME = "qt5ct";
-    xdg.configFile = {
-      "environment.d/20-apply-qtct.conf".text = ''
-        QT_QPA_PLATFORMTHEME=qt5ct
-      '';
-    };
-    qt.enable = true;
-    qt.platformTheme = "qtct";
-    qt.style.name = "phantom";
-    qt.style.package = pkgs.phantom;
+    # home.sessionVariables.QT_QPA_PLATFORMTHEME = "qt5ct";
+    # xdg.configFile = {
+    #   "environment.d/20-apply-qtct.conf".text = ''
+    #     QT_QPA_PLATFORMTHEME=qt5ct
+    #   '';
+    # };
+    # qt.enable = true;
+    # qt.platformTheme = "qtct";
+    # qt.style.name = "phantom";
+    # qt.style.package = pkgs.phantom;
 
     stylix.targets.gnome.enable = lib.mkForce false;
     stylix.targets.gtk.enable = lib.mkForce false;
@@ -226,8 +227,8 @@ in {
         # steamPackages.steamcmd
         # steam-tui
         # fractal-next
-        gtkcord4
-        gh
+        # gtkcord4
+        # gh
         transmission_4-gtk
         kdenlive
         ### music prod
@@ -237,14 +238,14 @@ in {
         ### stream / record
         obs-studio
         ### gayming
-        prismlauncher
-        (retroarch.override {
-          cores = with libretro; [desmume citra];
-        })
-        yuzu
+        # prismlauncher
+        # (retroarch.override {
+        #   cores = with libretro; [desmume citra];
+        # })
+        # yuzu
         # wineWowPackages.stagingFull
         # lutris
-        distrobox
+        # distrobox
         bottles
         blender
       ];

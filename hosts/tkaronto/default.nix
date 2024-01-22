@@ -68,9 +68,21 @@
 
   services.xserver.videoDrivers = ["nvidia" "amdgpu"];
   hardware = {
-    nvidia.prime = {
-      amdgpuBusId = "PCI:5:0:0";
-      nvidiaBusId = "PCI:1:0:0";
+    nvidia = {
+      package = config.boot.kernelPackages.nvidiaPackages.production;
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = true;
+      open = false;
+      nvidiaSettings = true;
+      prime = {
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
+        amdgpuBusId = "PCI:5:0:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
     };
     opengl = {
       driSupport = true;

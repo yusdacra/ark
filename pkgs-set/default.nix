@@ -32,6 +32,7 @@
     inherit system;
     config.allowUnfree = true;
     config.allowBroken = true;
+    config.permittedInsecurePackages = ["electron-25.9.0"];
     overlays = overlays ++ newPkgs;
   };
   pkgsToExport = import ./pkgs-to-export.nix pkgs;

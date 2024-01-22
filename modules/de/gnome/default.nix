@@ -19,7 +19,7 @@
   services.tumbler.enable = true;
   programs = {
     geary.enable = lib.mkForce false;
-    gnome-terminal.enable = lib.mkForce false;
+    gnome-terminal.enable = true;
     evince.enable = true;
   };
   services.xserver = {
@@ -29,13 +29,9 @@
       xterm.enable = false;
     };
     displayManager = {
-      autoLogin = {
-        enable = true;
-        user = "patriot";
-      };
       gdm = {
         enable = true;
-        wayland = true;
+        wayland = false;
       };
       startx.enable = false;
     };

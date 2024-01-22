@@ -10,7 +10,7 @@
   home.packages = [(pkgs.lib.hiPrio pkgs.floorp)];
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-wayland.override {
+    package = pkgs.firefox.override {
       extraPrefs = ''
         lockPref("privacy.resistFingerprinting.letterboxing", false);
         lockPref("browser.startup.homepage", "about:home");
