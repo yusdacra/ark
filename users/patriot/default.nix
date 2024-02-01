@@ -110,7 +110,7 @@ in {
         # ["fluxbox" "urxvt"]
         # desktop stuff
         # ["wayland" "foot"]
-        ["obsidian" "firefox"]
+        ["obsidian" "firefox" "vesktop"]
         # cli stuff
         ["zoxide" "zsh" "fzf" "starship" "direnv"]
         # dev stuff
