@@ -62,6 +62,7 @@ in {
     fuse.userAllowOther = true;
     adb.enable = true;
     steam.enable = true;
+    gamescope.enable = true;
     # gnome stuffs
     seahorse.enable = true;
     dconf.enable = true;

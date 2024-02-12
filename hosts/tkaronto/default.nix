@@ -105,7 +105,6 @@
 
   hardware = {
     bluetooth.enable = true;
-    xpadneo.enable = true;
   };
 
   programs.light.enable = true;

@@ -21,7 +21,6 @@
     in {
       enable = true;
       extraSessionCommands = ''
-        export SDL_VIDEODRIVER=wayland
         export QT_QPA_PLATFORM=wayland
       '';
       wrapperFeatures.gtk = true;
