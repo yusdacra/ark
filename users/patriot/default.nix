@@ -42,6 +42,8 @@ in {
       "/home/patriot/.var"
       # libvirt stuff, dont think fuse mount would work here
       "/home/patriot/.config/libvirt"
+      "/home/patriot/.config/unity3d"
+      "/home/patriot/.config/HKModInstaller"
     ];
     systemPackages = with pkgs; [qt5.qtwayland];
     shells = with pkgs; [bashInteractive zsh];
