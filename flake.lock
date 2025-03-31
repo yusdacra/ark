@@ -73,15 +73,14 @@
           "nixpkgs"
         ],
         "parts": "parts_3",
-        "sbt-derivation": "sbt-derivation",
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1738876055,
-        "narHash": "sha256-gdVOEsgbn9ygUi2diZTHGCjfzDlTtzLc88woTCIKg7U=",
+        "lastModified": 1742464692,
+        "narHash": "sha256-0g/wFzSzsh9MjoxkN16eAYsnD5Yuf3rVtqEG/R1/fLo=",
         "ref": "refs/tags/latest",
-        "rev": "3d5d808c9a07ba309f08f237b17e7531cc8ee135",
-        "revCount": 333,
+        "rev": "b4e91590481b384c06c1f238e1761fb3c13053c0",
+        "revCount": 379,
         "type": "git",
         "url": "https://git.gaze.systems/gazesys/website.git"
       },
@@ -414,21 +413,6 @@
       }
     },
     "flake-utils": {
-      "locked": {
-        "lastModified": 1667395993,
-        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_2": {
       "inputs": {
         "systems": "systems_3"
       },
@@ -446,7 +430,7 @@
         "type": "github"
       }
     },
-    "flake-utils_3": {
+    "flake-utils_2": {
       "inputs": {
         "systems": "systems_4"
       },
@@ -464,7 +448,7 @@
         "type": "github"
       }
     },
-    "flake-utils_4": {
+    "flake-utils_3": {
       "inputs": {
         "systems": "systems_5"
       },
@@ -482,7 +466,7 @@
         "type": "github"
       }
     },
-    "flake-utils_5": {
+    "flake-utils_4": {
       "inputs": {
         "systems": "systems_6"
       },
@@ -500,7 +484,7 @@
         "type": "github"
       }
     },
-    "flake-utils_6": {
+    "flake-utils_5": {
       "inputs": {
         "systems": "systems_7"
       },
@@ -543,7 +527,7 @@
     "helix": {
       "inputs": {
         "crane": "crane_2",
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
         "rust-overlay": "rust-overlay_2"
       },
@@ -606,7 +590,7 @@
     "limbusart": {
       "inputs": {
         "crane": "crane_3",
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": "nixpkgs_2",
         "rust-overlay": "rust-overlay_3"
       },
@@ -935,7 +919,7 @@
     "nixtopo": {
       "inputs": {
         "devshell": "devshell",
-        "flake-utils": "flake-utils_5",
+        "flake-utils": "flake-utils_4",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -1249,7 +1233,7 @@
     },
     "rust-overlay_3": {
       "inputs": {
-        "flake-utils": "flake-utils_4",
+        "flake-utils": "flake-utils_3",
         "nixpkgs": [
           "limbusart",
           "nixpkgs"
@@ -1288,28 +1272,6 @@
       "original": {
         "owner": "yusdacra",
         "repo": "s3s-flake",
-        "type": "github"
-      }
-    },
-    "sbt-derivation": {
-      "inputs": {
-        "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "blog",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1698464090,
-        "narHash": "sha256-Pnej7WZIPomYWg8f/CZ65sfW85IfIUjYhphMMg7/LT0=",
-        "owner": "zaninime",
-        "repo": "sbt-derivation",
-        "rev": "6762cf2c31de50efd9ff905cbcc87239995a4ef9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zaninime",
-        "repo": "sbt-derivation",
         "type": "github"
       }
     },
@@ -1613,7 +1575,7 @@
     "vscode-extensions": {
       "inputs": {
         "flake-compat": "flake-compat_5",
-        "flake-utils": "flake-utils_6",
+        "flake-utils": "flake-utils_5",
         "nixpkgs": [
           "nixpkgs"
         ]
