@@ -76,11 +76,11 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1742464692,
-        "narHash": "sha256-0g/wFzSzsh9MjoxkN16eAYsnD5Yuf3rVtqEG/R1/fLo=",
+        "lastModified": 1744194363,
+        "narHash": "sha256-QkfHPtaRCA1fTW5VlRhj40dgrbXDFudZyY+Qhxe2zKE=",
         "ref": "refs/tags/latest",
-        "rev": "b4e91590481b384c06c1f238e1761fb3c13053c0",
-        "revCount": 379,
+        "rev": "cfb8ca7dacbbcab85eacf302478e7af385eff739",
+        "revCount": 401,
         "type": "git",
         "url": "https://git.gaze.systems/gazesys/website.git"
       },
