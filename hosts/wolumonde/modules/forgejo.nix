@@ -13,6 +13,7 @@
       service = {
         DISABLE_REGISTRATION = true;
       };
+      security.REVERSE_PROXY_TRUSTED_PROXIES = "127.0.0.0/8,::1/128";
       session.COOKIE_SECURE = true;
       attachment = {
         MAX_SIZE = 50;
@@ -33,7 +34,13 @@
       extraConfig = ''
         client_max_body_size 50m;
       '';
-      proxyPass = "http://localhost:${toString config.services.forgejo.settings.server.HTTP_PORT}";
+      proxyPass = "http://localhost${config.services.anubis.instances."forgejo".settings.BIND}";
     };
+  };
+
+  services.anubis.instances."forgejo" = {
+    settings.BIND = ":6293";
+    settings.BIND_NETWORK = "tcp";
+    settings.TARGET = "http://localhost:${toString config.services.forgejo.settings.server.HTTP_PORT}";
   };
 }
