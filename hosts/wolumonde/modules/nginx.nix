@@ -16,6 +16,7 @@
       webroot = "/var/lib/acme/acme-challenge";
       extraDomainNames = [
         "git.gaze.systems"
+        "test.gaze.systems"
         # "ms.gaze.systems"
         # "mq.gaze.systems"
         "couchdb.gaze.systems"
@@ -24,7 +25,7 @@
         "limbus.gaze.systems"
         # "bsky.gaze.systems"
         "dawn.gaze.systems"
-        "guestbook.gaze.systems"
+        # "guestbook.gaze.systems"
       ];
     };
   };
