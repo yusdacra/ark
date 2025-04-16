@@ -19,6 +19,9 @@
       };
       ui = {
         DEFAULT_SHOW_FULL_NAME = true;
+        DEFAULT_THEME = "edge-dark";
+        THEMES = "edge-dark,forgejo-dark";
+        THEME_COLOR_META_TAG = "#333644";
       };
     };
   };
