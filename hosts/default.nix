@@ -7,7 +7,7 @@
   baseModules = [
     ../modules
     ../locale
-    inputs.home.nixosModule
+    inputs.home.nixosModules.default
   ];
 
   mkSystem = name: system: let
