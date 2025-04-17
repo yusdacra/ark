@@ -10,6 +10,7 @@
   # age.secrets.tmodloaderServerPass.file = ../../../secrets/tmodloaderServerPass.age;
   age.secrets.websiteConfig.file = ../../../secrets/websiteConfig.age;
   # age.secrets.giteaActRunnerToken.file = ../../../secrets/giteaActRunnerToken.age;
+  age.secrets.forgejoActRunnerToken.file = ../../../secrets/forgejoActRunnerToken.age;
   # age.secrets.xrayConfig = {
   #   name = "xrayConfig.json";
   #   file = ../../../secrets/xrayConfig.age;

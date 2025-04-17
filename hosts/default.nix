@@ -26,8 +26,8 @@
     };
 
   systems = {
-    lungmen = "x86_64-linux";
-    tkaronto = "x86_64-linux";
+    # lungmen = "x86_64-linux";
+    # tkaronto = "x86_64-linux";
     wolumonde = "x86_64-linux";
     wsl = "x86_64-linux";
   };

@@ -7,10 +7,8 @@ in {
   "bernbotToken.age".publicKeys = [yusdacra wolumonde];
   "musikquadConfig.age".publicKeys = [yusdacra wolumonde];
   "nixGithubAccessToken.age".publicKeys = [yusdacra];
-  "nixBuildKey.age".publicKeys = [yusdacra];
-  "tmodloaderServerPass.age".publicKeys = [yusdacra wolumonde];
   "websiteConfig.age".publicKeys = [yusdacra wolumonde];
-  "giteaActRunnerToken.age".publicKeys = [yusdacra wolumonde];
+  "forgejoActRunnerToken.age".publicKeys = [yusdacra wolumonde];
   "xrayConfig.age".publicKeys = [yusdacra wolumonde];
   "pdsConfig.age".publicKeys = [yusdacra wolumonde];
 }
