@@ -1,0 +1,20 @@
+name: deploy to server
+
+on:
+  push:
+    tags:
+      - 'latest'
+  workflow_dispatch:
+
+jobs:
+  tag:
+    runs-on: docker
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          github-server-url: 'https://git.gaze.systems'
+      - uses: https://github.com/cachix/cachix-action@v16
+        with:
+          name: gazesys-infra
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - run: nix run .#nh -- os build -H wolumonde .
