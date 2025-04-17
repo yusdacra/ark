@@ -15,9 +15,6 @@
       };
       security.REVERSE_PROXY_TRUSTED_PROXIES = "127.0.0.0/8,::1/128";
       session.COOKIE_SECURE = true;
-      attachment = {
-        MAX_SIZE = 50;
-      };
       ui = {
         DEFAULT_SHOW_FULL_NAME = true;
         DEFAULT_THEME = "edge-dark";
@@ -32,7 +29,7 @@
     forceSSL = true;
     locations."/" = {
       extraConfig = ''
-        client_max_body_size 50m;
+        client_max_body_size 1000m;
       '';
       proxyPass = "http://localhost${config.services.anubis.instances."forgejo".settings.BIND}";
     };
