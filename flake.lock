@@ -76,18 +76,18 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1744691212,
-        "narHash": "sha256-s3EvpOkk3O3sMC7gir/NBIyFDFuUcBROgMU5Bp/cWfw=",
+        "lastModified": 1744901470,
+        "narHash": "sha256-BXGeY8kab/Wr4MxlghPkM8QyLH8UXZI+QZO13DW3TEs=",
         "ref": "refs/tags/latest",
-        "rev": "a08b03d1e4ef9540e32c439f543987564c350f6c",
-        "revCount": 411,
+        "rev": "cdb77c3bd27de4d7189d6bef954526c3e86f3250",
+        "revCount": 416,
         "type": "git",
-        "url": "https://git.gaze.systems/gazesys/website.git"
+        "url": "https://git.gaze.systems/90008/website.git"
       },
       "original": {
         "ref": "refs/tags/latest",
         "type": "git",
-        "url": "https://git.gaze.systems/gazesys/website.git"
+        "url": "https://git.gaze.systems/90008/website.git"
       }
     },
     "crane": {
