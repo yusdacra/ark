@@ -11,8 +11,10 @@ jobs:
     runs-on: lixpine
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
-          github-server-url: 'https://git.gaze.systems'
+          path: ~/.cache/nix
+          key: ${{ runner.os }}-nix-cache
       - uses: https://github.com/cachix/cachix-action@v16
         with:
           name: gazesys-infra
