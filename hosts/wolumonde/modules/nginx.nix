@@ -12,9 +12,9 @@
   security.acme = {
     acceptTerms = true;
     defaults.email = (import "${inputs.self}/personal.nix").emails.primary;
-    certs."9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa" = {
-      webroot = "/var/lib/acme/acme-challenge";
-    };
+    # certs."9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa" = {
+    #   webroot = "/var/lib/acme/acme-challenge";
+    # };
     certs."gaze.systems" = {
       webroot = "/var/lib/acme/acme-challenge";
       extraDomainNames = [
