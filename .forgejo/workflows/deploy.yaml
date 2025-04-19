@@ -2,8 +2,6 @@ name: deploy to server
 
 on:
   push:
-    tags:
-      - 'latest'
   workflow_dispatch:
 
 jobs:
