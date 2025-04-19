@@ -17,4 +17,5 @@ jobs:
         with:
           name: gazesys-infra
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: curl -u "meow:$WEBHOOK_PASSWORD" https://webhook.gaze.systems/deploy-wolumonde
+      - name: deploy
+        run: curl -u "meow:$WEBHOOK_PASSWORD" https://webhook.gaze.systems/deploy-wolumonde
