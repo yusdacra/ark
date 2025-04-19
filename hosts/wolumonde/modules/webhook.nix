@@ -6,7 +6,12 @@
     urlPrefix = "";
   };
 
-  age.secrets.webhookAuth.file = ../../../secrets/webhookAuth.age;
+  age.secrets.webhookAuth = {
+    file = ../../../secrets/webhookAuth.age;
+    mode = "600";
+    owner = "nginx";
+    group = "nginx";
+  };
 
   services.nginx.virtualHosts."webhook.gaze.systems" = {
     useACMEHost = "gaze.systems";
