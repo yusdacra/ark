@@ -9,4 +9,5 @@ in {
   "forgejoActRunnerToken.age".publicKeys = [yusdacra wolumonde];
   "xrayConfig.age".publicKeys = [yusdacra wolumonde];
   "pdsConfig.age".publicKeys = [yusdacra wolumonde];
+  "webhookAuth.age".publicKeys = [yusdacra wolumonde];
 }

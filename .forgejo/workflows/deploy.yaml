@@ -17,4 +17,4 @@ jobs:
         with:
           name: gazesys-infra
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: nix build .#nixosConfigurations.wolumonde.config.system.build.toplevel -L --show-trace
+      - run: curl -u "meow:$WEBHOOK_PASSWORD" https://webhook.gaze.systems/deploy-wolumonde

@@ -26,6 +26,7 @@
         # "bsky.gaze.systems"
         "dawn.gaze.systems"
         # "guestbook.gaze.systems"
+        "webhook.gaze.systems"
       ];
     };
   };
