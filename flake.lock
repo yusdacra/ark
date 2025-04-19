@@ -76,14 +76,13 @@
       "locked": {
         "lastModified": 1744927245,
         "narHash": "sha256-3UPiNeHkxxvyQOgcYiCh+tUFMeiKsCAE7MYr51FYCtY=",
-        "ref": "refs/tags/latest",
+        "ref": "refs/heads/svelte",
         "rev": "234b4b62360f8a267b58c7ae61bd66f3d39b1ccd",
         "revCount": 427,
         "type": "git",
         "url": "https://git.gaze.systems/90008/website.git"
       },
       "original": {
-        "ref": "refs/tags/latest",
         "type": "git",
         "url": "https://git.gaze.systems/90008/website.git"
       }
