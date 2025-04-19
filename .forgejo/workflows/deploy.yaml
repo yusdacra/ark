@@ -8,16 +8,7 @@ jobs:
   tag:
     runs-on: lixpine
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        with:
-          path: ~/.cache/nix
-          key: ${{ runner.os }}-nix-cache
-      - uses: https://github.com/cachix/cachix-action@v16
-        with:
-          name: gazesys-infra
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: deploy
+      - name: trigger deploy
         env:
           WEBHOOK_PASSWORD: ${{ secrets.WEBHOOK_PASSWORD }}
         run: curl -u "meow:$WEBHOOK_PASSWORD" https://webhook.gaze.systems/deploy-wolumonde
