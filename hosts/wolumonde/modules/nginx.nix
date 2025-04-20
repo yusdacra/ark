@@ -30,6 +30,7 @@
         "dawn.gaze.systems"
         # "guestbook.gaze.systems"
         "webhook.gaze.systems"
+        "about.gaze.systems"
       ];
     };
   };
