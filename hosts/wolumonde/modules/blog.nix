@@ -45,12 +45,4 @@ in {
       proxyPass = "http://localhost:${toString port}";
     };
   };
-
-  services.nginx.virtualHosts."about.gaze.systems" = {
-    useACMEHost = "gaze.systems";
-    forceSSL = true;
-    locations."/" = {
-      proxyPass = "http://localhost:${toString port}/about";
-    };
-  };
 }
