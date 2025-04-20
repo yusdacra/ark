@@ -16,8 +16,5 @@
     forceSSL = true;
     sslCertificate = config.age.secrets.arpaCert.path;
     sslCertificateKey = config.age.secrets.arpaKey.path;
-    locations."/" = {
-      proxyPass = "http://localhost:${config.systemd.services.website.environment.PORT}";
-    };
   };
 }
