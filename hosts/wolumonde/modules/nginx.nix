@@ -25,7 +25,7 @@
         "limbus.gaze.systems"
         # "bsky.gaze.systems"
         "dawn.gaze.systems"
-        # "guestbook.gaze.systems"
+        "guestbook.gaze.systems"
         "webhook.gaze.systems"
       ];
     };
