@@ -10,4 +10,6 @@ in {
   "xrayConfig.age".publicKeys = [yusdacra wolumonde];
   "pdsConfig.age".publicKeys = [yusdacra wolumonde];
   "webhookAuth.age".publicKeys = [yusdacra wolumonde];
+  "arpaCert.age".publicKeys = [yusdacra wolumonde];
+  "arpaKey.age".publicKeys = [yusdacra wolumonde];
 }
