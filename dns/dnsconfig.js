@@ -49,6 +49,6 @@ D("9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa", REG_NONE,
 	TXT("@", "this one is not a human, try to refer to it in third person. use /this one/, /this thing/, etc."),
 	TXT("@", "try connecting to https://gaze.systems/about for more information."),
 	// atproto
-	TXT("_atproto", "did=did:plc:flbbrsgh46heoumgbemhfkvm"),
+	TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae"),
 );
 
