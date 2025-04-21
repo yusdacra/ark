@@ -32,6 +32,6 @@ in {
     #   "atproto-did" = pkgs.writeText "server" "did:plc:dfl62fgb7wtjj3fcbb72naae";
     # };
   } // (mkDidWebCfg "dawn.gaze.systems")
-  // (mkDidWebCfg "guestbook.gaze.systems")
-  // (mkDidWebCfg "9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa");
+  // (mkDidWebCfg "guestbook.gaze.systems");
+  # // (mkDidWebCfg "9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa");
 }
