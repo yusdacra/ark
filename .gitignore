@@ -10,3 +10,4 @@ doi
 
 pkgs/_sources/.shake*
 ssh_key
+secrets/deploy-webhook.nu
