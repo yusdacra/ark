@@ -27,6 +27,8 @@
   services.nginx.virtualHosts."git.gaze.systems" = {
     useACMEHost = "gaze.systems";
     forceSSL = true;
+    quic = true;
+    kTLS = true;
     locations."/" = {
       extraConfig = ''
         client_max_body_size 1000m;

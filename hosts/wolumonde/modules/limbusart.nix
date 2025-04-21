@@ -36,12 +36,16 @@ in {
   services.nginx.virtualHosts."pmart.gaze.systems" = {
     useACMEHost = "gaze.systems";
     forceSSL = true;
+    quic = true;
+    kTLS = true;
     locations."/".proxyPass = "http://localhost:3000";
   };
   # redirects
   services.nginx.virtualHosts."limbus.gaze.systems" = {
     useACMEHost = "gaze.systems";
     forceSSL = true;
+    quic = true;
+    kTLS = true;
     globalRedirect = "pmart.gaze.systems";
   };
 }

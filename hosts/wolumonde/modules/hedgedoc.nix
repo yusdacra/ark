@@ -16,6 +16,8 @@
   services.nginx.virtualHosts."doc.gaze.systems" = {
     useACMEHost = "gaze.systems";
     forceSSL = true;
+    quic = true;
+    kTLS = true;
     locations."/".proxyPass = "http://${config.services.hedgedoc.settings.host}:${toString config.services.hedgedoc.settings.port}";
   };
 }
