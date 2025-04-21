@@ -13,9 +13,9 @@ try {
 }
 
 let start = date now
-secrets/deploy-webhook.nu $"deploying wolumonde: started @ ($start)"
+secrets/deploy-webhook.nu $"deploying wolumonde: started"
 
 let result = nix run ".#apps.nixinate.wolumonde" -L --show-trace | complete
 let end = date now
 
-secrets/deploy-webhook.nu $"deployed wolumonde: finished @ ($end); took ($end - $start)\n\n($result | to text)" $result.exit_code
+secrets/deploy-webhook.nu $"deployed wolumonde: finished, took ($end - $start)\n\n($result | to text)" $result.exit_code
