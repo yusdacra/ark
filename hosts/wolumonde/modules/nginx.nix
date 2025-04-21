@@ -1,6 +1,7 @@
-{inputs, ...}: {
+{inputs, pkgs, ...}: {
   services.nginx = {
     enable = true;
+    package = pkgs.nginxQuic;
     recommendedTlsSettings = true;
     recommendedOptimisation = true;
     recommendedGzipSettings = true;

@@ -39,6 +39,8 @@ in {
   };
 
   services.nginx.virtualHosts."gaze.systems" = {
+    quic = true;
+    kTLS = true;
     useACMEHost = "gaze.systems";
     forceSSL = true;
     locations."/" = {
