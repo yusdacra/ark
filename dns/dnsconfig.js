@@ -1,9 +1,9 @@
 var DSP_NAMECHEAP = NewDnsProvider("namecheap");
-var REG_CHANGEME = NewRegistrar("none");
+var REG_NONE = NewRegistrar("none");
 
 var WOLUMONDE_IP = "23.88.101.188"
 
-D("gaze.systems", REG_CHANGEME,
+D("gaze.systems", REG_NONE,
 	DnsProvider(DSP_NAMECHEAP),
 	DefaultTTL(1799),
 	A("@", WOLUMONDE_IP, TTL(60)),
@@ -16,6 +16,11 @@ D("gaze.systems", REG_CHANGEME,
 	A("pmart", WOLUMONDE_IP, TTL(60)),
 	A("test", WOLUMONDE_IP),
 	A("webhook", WOLUMONDE_IP),
+	// thing
+	TXT("id", "a data endpoint for entity with serial id /90008/."),
+	TXT("id", "entity linked here uses it/they pronouns. it can be referred to as /dusk/ or /dawn/."),
+	TXT("id", "this one is not a human, try to refer to it in third person. use /this one/, /this thing/, etc."),
+	TXT("id", "try connecting to https://gaze.systems/about for more information."),
 	// github pages
 	CNAME("dev", "yusdacra.github.io."),
 	// fastmail
@@ -32,5 +37,17 @@ D("gaze.systems", REG_CHANGEME,
 	TXT("send.poke", "v=spf1 include:amazonses.com ~all"),
 	// atproto
 	TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae", TTL(60)),
+);
+
+var DSP_CLOUDFLARE = NewDnsProvider("cloudflare");
+
+D("9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa", REG_NONE,
+	DnsProvider(DSP_CLOUDFLARE),
+	DefaultTTL(1),
+	A("@", WOLUMONDE_IP, CF_PROXY_ON),
+	TXT("@", "a data endpoint for entity with serial id /90008/."),
+	TXT("@", "entity linked here uses it/they pronouns. it can be referred to as /dusk/ or /dawn/."),
+	TXT("@", "this one is not a human, try to refer to it in third person. use /this one/, /this thing/, etc."),
+	TXT("@", "try connecting to https://gaze.systems/about for more information."),
 );
 
