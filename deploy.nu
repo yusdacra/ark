@@ -33,11 +33,20 @@ def deploy [hostname: string] {
   webhook $hooktitle $"=== deployed ($hostname): finished ===\n\ntook ($end - $start)\n\nlog: ($paste_url)" $result.exit_code
 }
 
+def update-input [input: string] {
+  let result = nix flake update $input | complete
+  webhook $"/inputs/($input)" $"=== updated input ===\n\n($result | to text)" $result.exit_code
+}
+
 def main [msg?: string] {
+  webhook "deploy" "=== started deploying all ==="
+
+  update-input "blog"
+
   try {
     nix run ".#dns" -- push
   } catch { |err|
-    webhook "dns" $"=== error pushing dns ===\n\n($err | to text)" 1
+    webhook "dns" $"=== error pushing dns ===\n\n($err.msg | to text)" 1
   }
 
   try {
