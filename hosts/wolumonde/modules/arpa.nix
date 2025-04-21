@@ -3,10 +3,11 @@ let
   index = pkgs.writeText "index.txt" ''
     hi there~
 
-    you are currently interfacing with one of the information endpoints of entity with serial id /90008/.
+    you are currently interfacing with one of the data endpoints
+    of entity with serial id /90008/. you may want to open a
+    connection to https://gaze.systems/about for more data.
 
-    you may want to open a connection to https://gaze.systems/about to read more about it.
-    alternatively run /dig +short TXT 9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa/ in your preferred terminal interface for more data.
+    /dig +short TXT 9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa/
   '';
   root = pkgs.runCommand "root" {} ''
     mkdir -p $out

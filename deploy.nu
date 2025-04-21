@@ -8,6 +8,10 @@ def main [msg?: string] {
   nix flake update
 
   try {
+    nix run ".#dns" -- push
+  }
+
+  try {
     git add .
     let commit_msg = if $msg == null {
       "chore: update flake dependencies (deploy)"

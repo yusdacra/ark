@@ -10,7 +10,7 @@ writers.writeBashBin "dns" ''
   for dir in */; do
     msg="=== $1 dns changes for $(basename $dir) ==="
     echo "$msg"
-    cd $dnsDir/$dir; ${dnscontrol}/bin/dnscontrol $1; cd $dnsDir
+    cd $dnsDir/$dir; ${dnscontrol}/bin/dnscontrol $1 --notify; cd $dnsDir
     echo "$msg" | ${gnused}/bin/sed 's/./=/g'
   done
 ''
