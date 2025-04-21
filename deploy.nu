@@ -35,7 +35,9 @@ def deploy [hostname: string] {
 
 def update-input [input: string] {
   let result = nix flake update $input | complete
-  webhook $"/inputs/($input)" $"=== updated input ===\n\n($result | to text)" $result.exit_code
+  if ($result.stderr | str contains "Updated input") or ($result.exit_code != 0) {
+    webhook $"/inputs/($input)" $"=== updated input ($input) ===\n\n($result.stderr)" $result.exit_code
+  }
 }
 
 def main [msg?: string] {
