@@ -117,6 +117,7 @@
             generate-firefox-addons =
               toString
               "${pkgs.generate-firefox-addons}/bin/generate-firefox-addons";
+            dns = toString "${pkgs.dnsmngmt}/bin/dns";
             nh = toString "${inputs.nh.packages.${pkgs.system}.default}/bin/nh";
           }
         )

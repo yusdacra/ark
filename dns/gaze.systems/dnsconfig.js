@@ -1,0 +1,36 @@
+var DSP_NAMECHEAP = NewDnsProvider("namecheap");
+var REG_CHANGEME = NewRegistrar("none");
+
+var WOLUMONDE_IP = "23.88.101.188"
+
+D("gaze.systems", REG_CHANGEME,
+	DnsProvider(DSP_NAMECHEAP),
+	DefaultTTL(1799),
+	A("@", WOLUMONDE_IP, TTL(60)),
+	A("couchdb", WOLUMONDE_IP, TTL(60)),
+	A("dawn", WOLUMONDE_IP),
+	A("doc", WOLUMONDE_IP, TTL(60)),
+	A("git", WOLUMONDE_IP, TTL(60)),
+	A("guestbook", WOLUMONDE_IP),
+	A("limbus", WOLUMONDE_IP, TTL(60)),
+	A("pmart", WOLUMONDE_IP, TTL(60)),
+	A("test", WOLUMONDE_IP),
+	A("webhook", WOLUMONDE_IP),
+	// github pages
+	CNAME("dev", "yusdacra.github.io."),
+	// fastmail
+	CNAME("fm1._domainkey", "fm1.gaze.systems.dkim.fmhosted.com."),
+	CNAME("fm2._domainkey", "fm2.gaze.systems.dkim.fmhosted.com."),
+	CNAME("fm3._domainkey", "fm3.gaze.systems.dkim.fmhosted.com."),
+	MX("@", 10, "in1-smtp.messagingengine.com."),
+	MX("@", 20, "in2-smtp.messagingengine.com."),
+	TXT("@", "v=spf1 include:spf.messagingengine.com ?all"),
+	TXT("_dmarc", "v=DMARC1; p=none;"),
+	// resend
+	MX("send.poke", 10, "feedback-smtp.us-east-1.amazonses.com."),
+	TXT("resend._domainkey.poke", "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8/06F14LZgg7l6eko9GXasUwCBUGHe1Abd5hMg0Xf9ufdUj7lAUB746DS1ErS04oxGEbCdjamkAGqRsYWvk5KGRIXmeYuKyMPFM44U0dt6caHOIr8pHoDj9ytAJD/RS/p1xQZoFXHBxKgAeEY3TUZy7iNLvGxCLkxuPnO7nlWKwIDAQAB"),
+	TXT("send.poke", "v=spf1 include:amazonses.com ~all"),
+	// atproto
+	TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae", TTL(60)),
+);
+
