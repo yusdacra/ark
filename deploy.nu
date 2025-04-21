@@ -1,5 +1,9 @@
 #!/usr/bin/env nu
 
+use std "path add"
+
+path add /nix/var/nix/profiles/default/bin
+
 nix flake update
 
 git add .
