@@ -9,8 +9,8 @@ source-env secrets/deploy-webhook.nu
 def webhook [title: string, content: string, exit_code?: number, ping?: bool = false] {
   let type = if $exit_code == null { "⌛" } else if $exit_code == 0 { "✔️" } else { "❌" }
   let msg = {
+    content: (if $ping { "hey <@853064602904166430>!" } else { "" }),
     embeds: [{
-      content: (if $ping { "<@853064602904166430>" } else { "" }),
       description: $content,
       title: $"($type) /($title)/",
       footer: {
