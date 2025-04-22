@@ -6,10 +6,11 @@ path add /nix/var/nix/profiles/default/bin
 
 source-env secrets/deploy-webhook.nu
 
-def webhook [title: string, content: string, exit_code?: number] {
+def webhook [title: string, content: string, exit_code?: number, ping?: bool] {
   let type = if $exit_code == null { "⌛" } else if $exit_code == 0 { "✔️" } else { "❌" }
   let msg = {
     embeds: [{
+      content: (if $ping { "<@853064602904166430>" } else { "" }),
       description: $content,
       title: $"($type) /($title)/",
       footer: {
@@ -30,7 +31,7 @@ def deploy [hostname: string] {
   let end = date now
 
   let paste_url = http post --content-type multipart/form-data "https://0x0.st" {file: ($result | to text | into binary), secret: true}
-  webhook $hooktitle $"=== deployed ($hostname): finished ===\n\ntook ($end - $start)\n\nlog: ($paste_url)" $result.exit_code
+  webhook $hooktitle $"=== deployed ($hostname): finished ===\n\ntook ($end - $start)\n\nlog: ($paste_url)" $result.exit_code true
 }
 
 def update-input [input: string] {
