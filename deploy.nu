@@ -6,7 +6,7 @@ path add /nix/var/nix/profiles/default/bin
 
 source-env secrets/deploy-webhook.nu
 
-def webhook [title: string, content: string, exit_code?: number, ping?: bool] {
+def webhook [title: string, content: string, exit_code?: number, ping?: bool = false] {
   let type = if $exit_code == null { "⌛" } else if $exit_code == 0 { "✔️" } else { "❌" }
   let msg = {
     embeds: [{
