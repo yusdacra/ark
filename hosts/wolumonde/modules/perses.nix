@@ -4,11 +4,19 @@ let
   port = 7412;
 in
 {
+  users.users.perses.isSystemUser = true;
+  users.users.perses.group = "perses";
+  users.groups.perses = {};
+
   virtualisation.oci-containers.containers.perses = {
     image = "docker.io/persesdev/perses:v0.51";
     autoStart = true;
+    user = "perses:perses";
+    podman.user = "perses";
     environment = {
       PERSES_DATABASE_FILE_FOLDER = "/perses/db";
+      PERSES_AUTHENTICATION_ENABLE_NATIVE = "true";
+      # PERSES_AUTHORIZATION_GUEST_PERMISSIONS_ACTIONS = "read";
     };
     ports = [ "${toString port}:8080" ];
     volumes = [
