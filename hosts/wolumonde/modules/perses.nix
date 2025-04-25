@@ -2,7 +2,7 @@
 let
   domain = "dash.gaze.systems";
   port = 7412;
-  user = "podman-perses";
+  user = "perses";
 in
 {
   users.users.${user} = {
@@ -10,7 +10,7 @@ in
     group = user;
     home = "/var/lib/${user}";
     createHome = true;
-    linger = true;
+    linger = false;
     autoSubUidGidRange = true;
   };
   users.groups.${user} = {};
@@ -22,7 +22,6 @@ in
     workdir = config.users.users.${user}.home;
     podman = {
       inherit user;
-      sdnotify = "conmon";
     };
     environment = {
       PERSES_AUTHENTICATION_ENABLE_NATIVE = "true";
