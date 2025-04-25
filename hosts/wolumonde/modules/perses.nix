@@ -2,31 +2,34 @@
 let
   domain = "dash.gaze.systems";
   port = 7412;
-  user = "perses";
+  # user = "perses";
 in
 {
-  users.users.${user} = {
-    isNormalUser = true;
-    group = user;
-    home = "/var/lib/${user}";
-    createHome = true;
-    linger = false;
-    autoSubUidGidRange = true;
-  };
-  users.groups.${user} = {};
+  # users.users.${user} = {
+  #   isNormalUser = true;
+  #   group = user;
+  #   home = "/var/lib/${user}";
+  #   createHome = true;
+  #   linger = true;
+  #   autoSubUidGidRange = true;
+  # };
+  # users.groups.${user} = {};
 
   virtualisation.oci-containers.containers.perses = {
     serviceName = "perses";
     image = "docker.io/persesdev/perses:v0.51";
     autoStart = true;
-    workdir = config.users.users.${user}.home;
-    podman = {
-      inherit user;
-    };
+    # workdir = config.users.users.${user}.home;
+    # podman = {
+    #   inherit user;
+    # };
     environment = {
       PERSES_AUTHENTICATION_ENABLE_NATIVE = "true";
       # PERSES_AUTHORIZATION_GUEST_PERMISSIONS_ACTIONS = "read";
     };
+    volumes = [
+      "/var/lib/perses:/perses"
+    ];
     ports = [ "${toString port}:8080" ];
     extraOptions = [
       # "--network=host"
