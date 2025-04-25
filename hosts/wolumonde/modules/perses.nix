@@ -33,6 +33,12 @@ in
   };
   users.groups.${user} = {};
 
+  age.secrets.persesSecret = {
+    file = ../../../secrets/persesSecret.age;
+    inherit user;
+    group = user;
+  };
+
   virtualisation.oci-containers.containers.perses = {
     serviceName = "perses";
     image = "perses:latest";
@@ -43,6 +49,7 @@ in
       inherit user;
       sdnotify = "healthy";
     };
+    environmentFiles = [config.age.secrets.persesSecret.path];
     environment = {
       PERSES_SECURITY_AUTHENTICATION_PROVIDERS_ENABLE_NATIVE = "true";
       PERSES_SECURITY_AUTHENTICATION_DISABLE_SIGN_UP = "true";
