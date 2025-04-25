@@ -18,6 +18,8 @@ tlib.genPkgs (
         fi
       '';
     };
+    commit = pkgs.writers.writeNuBin "commit" ../commit.nu;
+    deploy = pkgs.writers.writeNuBin "deploy" ../deploy.nu;
   in
   {
     default = mkNakedShell {
@@ -30,7 +32,7 @@ tlib.genPkgs (
           rage
           nh
         ])
-        ++ [ agenix-wrapped ];
+        ++ [ agenix-wrapped commit deploy ];
       shellHook = ''
         echo \"$(tput bold)welcome to PRTS, $USER$(tput sgr0)\"
         export FLAKE=$PWD
