@@ -1,5 +1,5 @@
 {
-  service.victoriametrics = {
+  services.victoriametrics = {
     enable = true;
     listenAddress = ":9090";
   };
