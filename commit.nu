@@ -18,7 +18,7 @@ def main [
   ...rest
 ] {
   let types = ["feat" "build" "ci" "fix" "refactor" "chore" "style"]
-  let hosts: list<string> = (nix eval ".#nixosConfigurations" --apply builtins.attrNames --json | from json)
+  let hosts: list<string> = (nix eval ".#nixosConfigurations" --apply builtins.attrNames --json --quiet | from json)
 
   let ty: string = unwrap-or-else $type { $types | input list 'choose type' --fuzzy }
   let scp: string = unwrap-or-else $scope { $hosts | input list 'choose host' --fuzzy }
