@@ -21,7 +21,7 @@
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixpkgs-wayland.flake = false;
 
-    helix.url = "github:helix-editor/helix";
+    # helix.url = "github:helix-editor/helix";
 
     blog.url = "git+https://git.gaze.systems/90008/website.git";
     # blog.inputs.nixpkgs.follows = "nixpkgs";
@@ -34,15 +34,15 @@
 
     # nil.url = "github:oxalica/nil";
     # nil.inputs.nixpkgs.follows = "nixpkgs";
-    nixd.url = "github:nix-community/nixd";
-    nixd.inputs.nixpkgs.follows = "nixpkgs";
+    # nixd.url = "github:nix-community/nixd";
+    # nixd.inputs.nixpkgs.follows = "nixpkgs";
 
-    stylix.url = "github:yusdacra/stylix/fixed";
-    stylix.inputs.nixpkgs.follows = "nixpkgs";
-    stylix.inputs.home-manager.follows = "home";
+    # stylix.url = "github:yusdacra/stylix/fixed";
+    # stylix.inputs.nixpkgs.follows = "nixpkgs";
+    # stylix.inputs.home-manager.follows = "home";
 
-    vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-    vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
+    # vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    # vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
@@ -59,17 +59,17 @@
     nh.url = "github:viperML/nh";
     nh.inputs.nixpkgs.follows = "nixpkgs";
 
-    discordrp-mpris.url = "github:yusdacra/discordrp-mpris-flake";
-    discordrp-mpris.inputs.nixpkgs.follows = "nixpkgs";
+    # discordrp-mpris.url = "github:yusdacra/discordrp-mpris-flake";
+    # discordrp-mpris.inputs.nixpkgs.follows = "nixpkgs";
 
-    s3s.url = "github:yusdacra/s3s-flake";
-    s3s.inputs.nixpkgs.follows = "nixpkgs";
+    # s3s.url = "github:yusdacra/s3s-flake";
+    # s3s.inputs.nixpkgs.follows = "nixpkgs";
 
     naked-shell.url = "github:yusdacra/mk-naked-shell";
     naked-shell.flake = false;
 
-    nixtopo.url = "github:oddlama/nix-topology";
-    nixtopo.inputs.nixpkgs.follows = "nixpkgs";
+    # nixtopo.url = "github:oddlama/nix-topology";
+    # nixtopo.inputs.nixpkgs.follows = "nixpkgs";
 
     # vfio.url = "github:yusdacra/nixos-vfio";
     # vfio.inputs.nixpkgs.follows = "nixpkgs";
@@ -129,14 +129,15 @@
 
     packages = lib.mapAttrs (_: pkgs: pkgs._exported) allPkgs;
     legacyPackages = allPkgs;
-    apps = miscApps // (inputs.nixinate.nixinate.x86_64-linux inputs.self);
+    apps = miscApps
+      // (inputs.nixinate.nixinate.x86_64-linux inputs.self);
 
-    topology = lib.mapAttrs (_: pkgs:
-      import inputs.nixtopo {
-        inherit pkgs;
-        modules = [{nixosConfigurations = {inherit (inputs.self.nixosConfigurations) wolumonde;};}];
-      })
-    allPkgs;
+    # topology = lib.mapAttrs (_: pkgs:
+    #   import inputs.nixtopo {
+    #     inherit pkgs;
+    #     modules = [{nixosConfigurations = {inherit (inputs.self.nixosConfigurations) wolumonde;};}];
+    #   })
+    # allPkgs;
 
     devShells = import ./shells {inherit lib tlib inputs;};
   };

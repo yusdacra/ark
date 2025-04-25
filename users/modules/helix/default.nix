@@ -12,14 +12,7 @@
         roots = ["Dockerfile" "Containerfile"];
         file-types = ["Dockerfile" "Containerfile" "dockerfile" "containerfile"];
       }
-      {
-        name = "nix";
-        language-servers = ["nixd-lsp"];
-      }
     ];
-    languages.language-server = {
-      nixd-lsp = {command = "${inputs.nixd.packages.${pkgs.system}.default}/bin/nixd";};
-    };
     settings = {
       theme = "ferra";
       editor = {

@@ -7,7 +7,7 @@
   imports =
     [
       inputs.agenix.nixosModules.default
-      inputs.nixtopo.nixosModules.default
+      # inputs.nixtopo.nixosModules.default
     ]
     ++ (tlib.importFolder (toString ./modules));
 

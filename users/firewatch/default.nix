@@ -11,8 +11,6 @@
 
   signKeyText = builtins.readFile ../../secrets/yusdacra.key.pub;
 in {
-  imports = [./stylix.nix];
-
   users.users.firewatch = {
     isNormalUser = true;
     createHome = true;
