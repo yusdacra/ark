@@ -1,28 +1,44 @@
-{config, ...}:
+{pkgs, config, ...}:
 let
   domain = "dash.gaze.systems";
   port = 7412;
-  # user = "perses";
+  user = "perses";
+
+  persesImage = pkgs.dockerTools.pullImage {
+    imageName = "docker.io/persesdev/perses";
+    imageDigest = "sha256:30a6c2d66e48d64619076e4f088d7d535d14409c9083256f0d56c4cc91294684";
+    sha256 = "sha256-U6sorhUnQ0AH9cygnrnz6XDFEtD41GtQSie/Hri7u8c=";
+  };
+  persesHealthcheckImage = pkgs.dockerTools.buildImage {
+    name = "perses";
+    fromImage = persesImage;
+    config.Healthcheck = {
+      Test = ["CMD-SHELL" "true"];
+      Retries = 3;
+    };
+  };
 in
 {
-  # users.users.${user} = {
-  #   isNormalUser = true;
-  #   group = user;
-  #   home = "/var/lib/${user}";
-  #   createHome = true;
-  #   linger = true;
-  #   autoSubUidGidRange = true;
-  # };
-  # users.groups.${user} = {};
+  users.users.${user} = {
+    isNormalUser = true;
+    group = user;
+    home = "/var/lib/${user}";
+    createHome = true;
+    linger = true;
+    autoSubUidGidRange = true;
+  };
+  users.groups.${user} = {};
 
   virtualisation.oci-containers.containers.perses = {
     serviceName = "perses";
-    image = "docker.io/persesdev/perses:v0.51";
+    image = "perses";
+    imageFile = persesHealthcheckImage;
     autoStart = true;
     # workdir = config.users.users.${user}.home;
-    # podman = {
-    #   inherit user;
-    # };
+    podman = {
+      inherit user;
+      sdnotify = "healthy";
+    };
     environment = {
       PERSES_SECURITY_AUTHENTICATION_PROVIDERS_ENABLE_NATIVE = "true";
       PERSES_SECURITY_ENABLE_AUTH = "true";
@@ -34,10 +50,6 @@ in
       "/var/lib/perses:/perses"
     ];
     ports = [ "${toString port}:8080" ];
-    extraOptions = [
-      # "--network=host"
-      "--label=io.containers.autoupdate=registry"
-    ];
   };
 
   services.nginx.virtualHosts.${domain} = {
@@ -56,15 +68,5 @@ in
     autoPrune.enable = true;
     dockerCompat = true;
     defaultNetwork.settings.dns_enabled = true;
-  };
-
-  # update containers automatically
-  systemd.timers."podman-auto-update" = {
-    enable = true;
-    timerConfig = {
-      OnCalendar = "*-*-* 4:00:00";
-      Persistent = true;
-    };
-    wantedBy = [ "timers.target" ];
   };
 }

@@ -49,6 +49,7 @@ def main [] {
 
   # try committing flake updates
   try {
+    git restore -S .
     git add flake.lock
     let commit_msg = "chore: update flake dependencies (deploy)"
     git commit -m $"($commit_msg) [skip ci]"
