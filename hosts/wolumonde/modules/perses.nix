@@ -4,16 +4,20 @@ let
   port = 7412;
 in
 {
-  users.users.perses.isSystemUser = true;
-  users.users.perses.group = "perses";
+  users.users.perses = {
+    isSystemUser = true;
+    group = "perses";
+    home = "/var/lib/perses";
+    createHome = true;
+  };
   users.groups.perses = {};
 
   virtualisation.oci-containers.containers.perses = {
     serviceName = "perses";
     image = "docker.io/persesdev/perses:v0.51";
     autoStart = true;
-    user = "perses:perses";
-    workdir = "/var/lib/perses";
+    workdir = config.users.users.perses.home;
+    podman.user = "perses";
     environment = {
       PERSES_AUTHENTICATION_ENABLE_NATIVE = "true";
       # PERSES_AUTHORIZATION_GUEST_PERMISSIONS_ACTIONS = "read";
