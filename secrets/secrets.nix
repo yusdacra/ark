@@ -32,4 +32,5 @@ in
     yusdacra
     wolumonde
   ];
+  "deployWebhook.age".publicKeys = [yusdacra];
 }

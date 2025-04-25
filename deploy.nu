@@ -4,7 +4,8 @@ use std "path add"
 
 path add /nix/var/nix/profiles/default/bin
 
-source-env secrets/deploy-webhook.nu
+# load webhook secrets
+rage -d -i ./ssh_key ./secrets/deployWebhook.age | from toml | load-env
 
 def webhook [title: string, content: string, exit_code?: number, ping?: bool = false] {
   let type = if $exit_code == null { "⌛" } else if $exit_code == 0 { "✔️" } else { "❌" }
@@ -41,18 +42,15 @@ def update-input [input: string] {
   }
 }
 
-def main [msg?: string] {
+def main [] {
   webhook "deploy" "=== started deploying all ==="
 
   update-input "blog"
 
+  # try committing flake updates
   try {
     git add flake.lock
-    let commit_msg = if $msg == null {
-      "chore: update flake dependencies (deploy)"
-    } else {
-      $msg
-    }
+    let commit_msg = "chore: update flake dependencies (deploy)"
     git commit -m $"($commit_msg) [skip ci]"
     git push
   }
