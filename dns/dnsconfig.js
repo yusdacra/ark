@@ -17,6 +17,7 @@ D("gaze.systems", REG_NONE,
 	A("pmart", WOLUMONDE_IP, TTL(60)),
 	A("test", WOLUMONDE_IP),
 	A("webhook", WOLUMONDE_IP),
+	A("dash", WOLUMONDE_IP), // grafana
 	// thing
 	TXT("id", "a data endpoint for entity with serial id /90008/."),
 	TXT("id", "entity linked here uses it/they pronouns. it can be referred to as /dusk/ or /dawn/."),
