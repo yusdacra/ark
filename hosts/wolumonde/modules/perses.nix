@@ -5,10 +5,11 @@ let
 in
 {
   users.users.perses = {
-    isSystemUser = true;
+    isNormalUser = true;
     group = "perses";
     home = "/var/lib/perses";
     createHome = true;
+    linger = true;
   };
   users.groups.perses = {};
 
