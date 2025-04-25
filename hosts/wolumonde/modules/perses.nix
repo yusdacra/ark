@@ -4,7 +4,7 @@ let
   port = 7412;
 in
 {
-  virtualisation.oci-containers.containers.pds = {
+  virtualisation.oci-containers.containers.perses = {
     image = "persesdev/perses";
     autoStart = true;
     environment = {
