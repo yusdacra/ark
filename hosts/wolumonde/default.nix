@@ -27,7 +27,7 @@
     allowedUDPPortRanges = [ ];
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker.enable = false;
 
   system.stateVersion = "22.05";
 }
