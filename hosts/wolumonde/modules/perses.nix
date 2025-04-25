@@ -10,6 +10,7 @@ in
     home = "/var/lib/perses";
     createHome = true;
     linger = true;
+    autoSubUidGidRange = true;
   };
   users.groups.perses = {};
 
@@ -43,9 +44,11 @@ in
   # podmanning
   virtualisation.podman = {
     enable = true;
+    autoPrune.enable = true;
     dockerCompat = true;
     defaultNetwork.settings.dns_enabled = true;
   };
+
   # update containers automatically
   systemd.timers."podman-auto-update" = {
     enable = true;
