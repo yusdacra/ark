@@ -11,6 +11,7 @@ let
   };
   persesHealthcheckImage = pkgs.dockerTools.buildImage {
     name = "perses";
+    tag = "latest";
     fromImage = persesImage;
     config.Healthcheck = {
       Test = ["CMD-SHELL" "true"];
@@ -31,7 +32,7 @@ in
 
   virtualisation.oci-containers.containers.perses = {
     serviceName = "perses";
-    image = "perses";
+    image = "perses:latest";
     imageFile = persesHealthcheckImage;
     autoStart = true;
     # workdir = config.users.users.${user}.home;
