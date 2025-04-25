@@ -28,10 +28,12 @@ tlib.genPkgs (
           nixfmt-rfc-style
           treefmt
           rage
+          nh
         ])
         ++ [ agenix-wrapped ];
       shellHook = ''
         echo \"$(tput bold)welcome to PRTS, $USER$(tput sgr0)\"
+        export FLAKE=$PWD
       '';
     };
   }

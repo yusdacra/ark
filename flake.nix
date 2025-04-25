@@ -56,8 +56,8 @@
     limbusart.url = "git+https://git.gaze.systems/dusk/limbusart.git";
     # limbusart.inputs.nixpkgs.follows = "nixpkgs";
 
-    nh.url = "github:viperML/nh";
-    nh.inputs.nixpkgs.follows = "nixpkgs";
+    # nh.url = "github:viperML/nh";
+    # nh.inputs.nixpkgs.follows = "nixpkgs";
 
     # discordrp-mpris.url = "github:yusdacra/discordrp-mpris-flake";
     # discordrp-mpris.inputs.nixpkgs.follows = "nixpkgs";
@@ -117,7 +117,6 @@
             lib.mapAttrs (_: pkgs: {
               generate-firefox-addons = toString "${pkgs.generate-firefox-addons}/bin/generate-firefox-addons";
               dns = toString "${pkgs.dnsmngmt}/bin/dns";
-              nh = toString "${inputs.nh.packages.${pkgs.system}.default}/bin/nh";
             }) allPkgs
           );
     in

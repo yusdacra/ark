@@ -360,26 +360,6 @@
         "type": "github"
       }
     },
-    "nh": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1743682999,
-        "narHash": "sha256-bg+aAN8K90r3m/I+xXiXG0gawpbkshwlk93wxUN7KEk=",
-        "owner": "viperML",
-        "repo": "nh",
-        "rev": "9e9a4590b38b62b28f07a1fae973ce7b6ca0687a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "viperML",
-        "repo": "nh",
-        "type": "github"
-      }
-    },
     "nixinate": {
       "inputs": {
         "nixpkgs": [
@@ -692,7 +672,6 @@
         "home": "home",
         "limbusart": "limbusart",
         "naked-shell": "naked-shell_2",
-        "nh": "nh",
         "nixinate": "nixinate",
         "nixos-hardware": "nixos-hardware",
         "nixos-persistence": "nixos-persistence",
