@@ -35,7 +35,7 @@ in
 
   age.secrets.persesSecret = {
     file = ../../../secrets/persesSecret.age;
-    inherit user;
+    owner = user;
     group = user;
   };
 
