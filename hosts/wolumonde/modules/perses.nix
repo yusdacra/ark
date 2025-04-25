@@ -13,15 +13,12 @@ in
     autoStart = true;
     user = "perses:perses";
     podman.user = "perses";
+    workdir = "/var/lib/perses";
     environment = {
-      PERSES_DATABASE_FILE_FOLDER = "/perses/db";
       PERSES_AUTHENTICATION_ENABLE_NATIVE = "true";
       # PERSES_AUTHORIZATION_GUEST_PERMISSIONS_ACTIONS = "read";
     };
     ports = [ "${toString port}:8080" ];
-    volumes = [
-      "/var/lib/perses:/perses"
-    ];
     extraOptions = [
       # "--network=host"
       "--label=io.containers.autoupdate=registry"
