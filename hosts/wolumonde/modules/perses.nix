@@ -24,7 +24,8 @@ in
     #   inherit user;
     # };
     environment = {
-      PERSES_AUTHENTICATION_ENABLE_NATIVE = "true";
+      PERSES_SECURITY_ENABLE_AUTH = "true";
+      PERSES_SECURITY_AUTHENTICATION_ENABLE_NATIVE = "true";
       # PERSES_AUTHORIZATION_GUEST_PERMISSIONS_ACTIONS = "read";
     };
     volumes = [
