@@ -9,10 +9,10 @@ in
   users.groups.perses = {};
 
   virtualisation.oci-containers.containers.perses = {
+    serviceName = "perses";
     image = "docker.io/persesdev/perses:v0.51";
     autoStart = true;
     user = "perses:perses";
-    podman.user = "perses";
     workdir = "/var/lib/perses";
     environment = {
       PERSES_AUTHENTICATION_ENABLE_NATIVE = "true";
