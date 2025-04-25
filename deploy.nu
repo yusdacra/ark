@@ -47,13 +47,7 @@ def main [msg?: string] {
   update-input "blog"
 
   try {
-    nix run ".#dns" -- push
-  } catch { |err|
-    webhook "dns" $"=== error pushing dns ===\n\n($err.msg | to text)" 1
-  }
-
-  try {
-    git add .
+    git add flake.lock
     let commit_msg = if $msg == null {
       "chore: update flake dependencies (deploy)"
     } else {
@@ -61,6 +55,12 @@ def main [msg?: string] {
     }
     git commit -m $"($commit_msg) [skip ci]"
     git push
+  }
+
+  try {
+    nix run ".#dns" -- push
+  } catch { |err|
+    webhook "dns" $"=== error pushing dns ===\n\n($err.msg | to text)" 1
   }
 
   deploy "wolumonde"
