@@ -10,7 +10,7 @@ in
     environment = {
       PERSES_DATABASE_FILE_FOLDER = "/perses/db";
     };
-    ports = [ "${port}:8080" ];
+    ports = [ "${toString port}:8080" ];
     volumes = [
       "/var/lib/perses:/perses"
     ];
@@ -26,7 +26,7 @@ in
     kTLS = true;
     forceSSL = true;
     locations."/" = {
-      proxyPass = "http://localhost:${port}";
+      proxyPass = "http://localhost:${toString port}";
     };
   };
 
