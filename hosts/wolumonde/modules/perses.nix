@@ -25,7 +25,9 @@ in
     # };
     environment = {
       PERSES_SECURITY_ENABLE_AUTH = "true";
-      PERSES_SECURITY_AUTHENTICATION_ENABLE_NATIVE = "true";
+      PERSES_SECURITY_COOKIE_SAME_SITE = "strict";
+      PERSES_SECURITY_COOKIE_SECURE = "true";
+      # PERSES_SECURITY_AUTHENTICATION_ENABLE_NATIVE = "true";
       # PERSES_AUTHORIZATION_GUEST_PERMISSIONS_ACTIONS = "read";
     };
     volumes = [
