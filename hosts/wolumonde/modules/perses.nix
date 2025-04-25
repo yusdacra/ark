@@ -5,7 +5,7 @@ let
 in
 {
   virtualisation.oci-containers.containers.perses = {
-    image = "persesdev/perses";
+    image = "docker.io/persesdev/perses:v0.51";
     autoStart = true;
     environment = {
       PERSES_DATABASE_FILE_FOLDER = "/perses/db";
