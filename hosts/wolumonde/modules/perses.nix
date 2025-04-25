@@ -9,12 +9,15 @@ let
     imageDigest = "sha256:30a6c2d66e48d64619076e4f088d7d535d14409c9083256f0d56c4cc91294684";
     sha256 = "sha256-U6sorhUnQ0AH9cygnrnz6XDFEtD41GtQSie/Hri7u8c=";
   };
-  persesHealthcheckImage = pkgs.dockerTools.buildImage {
+  persesHealthcheckImage = pkgs.dockerTools.streamLayeredImage {
     name = "perses";
     tag = "latest";
     fromImage = persesImage;
+    contents = [pkgs.curl];
+    config.Entrypoint = ["/bin/perses"];
+    config.Cmd = ["--config=/etc/perses/config.yaml" "--log.level=error"];
     config.Healthcheck = {
-      Test = ["CMD-SHELL" "true"];
+      Test = ["/bin/curl" "http://localhost:8080/api/v1/health"];
       Retries = 3;
     };
   };
