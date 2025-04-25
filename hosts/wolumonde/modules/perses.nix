@@ -22,7 +22,7 @@ in
     workdir = config.users.users.${user}.home;
     podman = {
       inherit user;
-      sdnotify = "healthy";
+      sdnotify = "conmon";
     };
     environment = {
       PERSES_AUTHENTICATION_ENABLE_NATIVE = "true";
