@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   home.persistence."${config.system.persistDir}${config.home.homeDirectory}".directories = [
     ".config/chromium"
     ".local/share/applications"

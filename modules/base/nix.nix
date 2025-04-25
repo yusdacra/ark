@@ -3,12 +3,10 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   nix = {
-    registry =
-      builtins.mapAttrs
-      (_: v: {flake = v;})
-      (lib.filterAttrs (_: v: v ? outputs) inputs);
+    registry = builtins.mapAttrs (_: v: { flake = v; }) (lib.filterAttrs (_: v: v ? outputs) inputs);
     package = pkgs.lixPackageSets.latest.lix;
     gc.automatic = false;
     optimise.automatic = true;
@@ -20,12 +18,18 @@
       extra-experimental-features = nix-command flakes
       builders-use-substitutes = true
     '';
-    nixPath = ["nixpkgs=${inputs.nixpkgs}" "home-manager=${inputs.home}"];
+    nixPath = [
+      "nixpkgs=${inputs.nixpkgs}"
+      "home-manager=${inputs.home}"
+    ];
   };
   nix.settings = {
     sandbox = true;
-    allowed-users = ["@wheel"];
-    trusted-users = ["root" "@wheel"];
+    allowed-users = [ "@wheel" ];
+    trusted-users = [
+      "root"
+      "@wheel"
+    ];
     auto-optimise-store = true;
   };
 }

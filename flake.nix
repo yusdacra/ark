@@ -86,59 +86,56 @@
     # catppuccin-discord.flake = false;
   };
 
-  outputs = inputs: let
-    lib = inputs.nixpkgs.lib.extend (_: _: builtins);
-    tlib = (import ./lib lib).extend (_: prev: rec {
-      makePkgs = system:
-        import ./pkgs-set {
-          inherit system lib inputs;
-          tlib = prev;
-        };
-      genPkgs = f: prev.genSystems (system: f (makePkgs system));
-    });
-
-    allPkgs = tlib.genPkgs (x: x);
-
-    miscApps =
-      lib.mapAttrs
-      (
-        _: cmds:
-          lib.mapAttrs
-          (_: cmd: {
-            type = "app";
-            program = cmd;
-          })
-          cmds
-      )
-      (
-        lib.mapAttrs
-        (
-          _: pkgs: {
-            generate-firefox-addons =
-              toString
-              "${pkgs.generate-firefox-addons}/bin/generate-firefox-addons";
-            dns = toString "${pkgs.dnsmngmt}/bin/dns";
-            nh = toString "${inputs.nh.packages.${pkgs.system}.default}/bin/nh";
-          }
-        )
-        allPkgs
+  outputs =
+    inputs:
+    let
+      lib = inputs.nixpkgs.lib.extend (_: _: builtins);
+      tlib = (import ./lib lib).extend (
+        _: prev: rec {
+          makePkgs =
+            system:
+            import ./pkgs-set {
+              inherit system lib inputs;
+              tlib = prev;
+            };
+          genPkgs = f: prev.genSystems (system: f (makePkgs system));
+        }
       );
-  in {
-    lib = tlib;
-    nixosConfigurations = import ./hosts {inherit lib tlib inputs;};
 
-    packages = lib.mapAttrs (_: pkgs: pkgs._exported) allPkgs;
-    legacyPackages = allPkgs;
-    apps = miscApps
-      // (inputs.nixinate.nixinate.x86_64-linux inputs.self);
+      allPkgs = tlib.genPkgs (x: x);
 
-    # topology = lib.mapAttrs (_: pkgs:
-    #   import inputs.nixtopo {
-    #     inherit pkgs;
-    #     modules = [{nixosConfigurations = {inherit (inputs.self.nixosConfigurations) wolumonde;};}];
-    #   })
-    # allPkgs;
+      miscApps =
+        lib.mapAttrs
+          (
+            _: cmds:
+            lib.mapAttrs (_: cmd: {
+              type = "app";
+              program = cmd;
+            }) cmds
+          )
+          (
+            lib.mapAttrs (_: pkgs: {
+              generate-firefox-addons = toString "${pkgs.generate-firefox-addons}/bin/generate-firefox-addons";
+              dns = toString "${pkgs.dnsmngmt}/bin/dns";
+              nh = toString "${inputs.nh.packages.${pkgs.system}.default}/bin/nh";
+            }) allPkgs
+          );
+    in
+    {
+      lib = tlib;
+      nixosConfigurations = import ./hosts { inherit lib tlib inputs; };
 
-    devShells = import ./shells {inherit lib tlib inputs;};
-  };
+      packages = lib.mapAttrs (_: pkgs: pkgs._exported) allPkgs;
+      legacyPackages = allPkgs;
+      apps = miscApps // (inputs.nixinate.nixinate.x86_64-linux inputs.self);
+
+      # topology = lib.mapAttrs (_: pkgs:
+      #   import inputs.nixtopo {
+      #     inherit pkgs;
+      #     modules = [{nixosConfigurations = {inherit (inputs.self.nixosConfigurations) wolumonde;};}];
+      #   })
+      # allPkgs;
+
+      devShells = import ./shells { inherit lib tlib inputs; };
+    };
 }

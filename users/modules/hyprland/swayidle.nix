@@ -2,8 +2,12 @@
   pkgs,
   lib,
   ...
-}: {
-  home.packages = with pkgs; [wlopm swayidle];
+}:
+{
+  home.packages = with pkgs; [
+    wlopm
+    swayidle
+  ];
   services.swayidle = {
     enable = true;
     events = [
@@ -28,5 +32,5 @@
       }
     ];
   };
-  systemd.user.services.swayidle.Install.WantedBy = lib.mkForce ["hyprland-session.target"];
+  systemd.user.services.swayidle.Install.WantedBy = lib.mkForce [ "hyprland-session.target" ];
 }

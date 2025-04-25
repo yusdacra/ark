@@ -14,7 +14,7 @@ stdenv.mkDerivation {
 
   dontWrapQtApps = true;
 
-  buildInputs = [libsForQt5.qt5.qtbase];
+  buildInputs = [ libsForQt5.qt5.qtbase ];
 
   buildPhase = ''
     cd src/styleplugin

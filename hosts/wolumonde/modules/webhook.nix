@@ -1,4 +1,5 @@
-{config, tlib, ...}: {
+{ config, tlib, ... }:
+{
   imports = tlib.importFolder ./webhooks;
 
   services.webhook = {

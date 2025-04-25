@@ -4,24 +4,31 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   btrfsPartPath = "/dev/disk/by-label/NIXOS";
-  btrfsOptions = ["compress-force=zstd" "noatime"];
-in {
-  imports = with inputs;
-  with nixos-hardware.nixosModules; [
-    nixpkgs.nixosModules.notDetected
-    nixos-persistence.nixosModule
-    common-pc-ssd
-    common-pc
-    common-gpu-amd
-    common-cpu-amd
-    ../../modules/persist
-    ../../modules/network
-    #../../modules/develop/nixbuild
-    ../../users/root
-    ../../users/patriot
+  btrfsOptions = [
+    "compress-force=zstd"
+    "noatime"
   ];
+in
+{
+  imports =
+    with inputs;
+    with nixos-hardware.nixosModules;
+    [
+      nixpkgs.nixosModules.notDetected
+      nixos-persistence.nixosModule
+      common-pc-ssd
+      common-pc
+      common-gpu-amd
+      common-cpu-amd
+      ../../modules/persist
+      ../../modules/network
+      #../../modules/develop/nixbuild
+      ../../users/root
+      ../../users/patriot
+    ];
 
   system.persistDir = "/persist";
 
@@ -33,30 +40,42 @@ in {
       systemd-boot.configurationLimit = 10;
     };
     kernelPackages = pkgs.linuxPackages_latest;
-    supportedFilesystems = ["btrfs"];
+    supportedFilesystems = [ "btrfs" ];
     initrd = {
-      availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
-      kernelModules = ["amdgpu"];
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "usb_storage"
+        "usbhid"
+        "sd_mod"
+      ];
+      kernelModules = [ "amdgpu" ];
     };
-    kernelModules = ["kvm-amd"];
-    extraModulePackages = [];
-    kernel.sysctl = {"fs.inotify.max_user_watches" = 524288;};
+    kernelModules = [ "kvm-amd" ];
+    extraModulePackages = [ ];
+    kernel.sysctl = {
+      "fs.inotify.max_user_watches" = 524288;
+    };
   };
 
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
-    options = ["defaults" "size=2G" "mode=755"];
+    options = [
+      "defaults"
+      "size=2G"
+      "mode=755"
+    ];
   };
   fileSystems."/nix" = {
     device = btrfsPartPath;
     fsType = "btrfs";
-    options = ["subvol=nix"] ++ btrfsOptions;
+    options = [ "subvol=nix" ] ++ btrfsOptions;
   };
   fileSystems."${config.system.persistDir}" = {
     device = btrfsPartPath;
     fsType = "btrfs";
-    options = ["subvol=persist"] ++ btrfsOptions;
+    options = [ "subvol=persist" ] ++ btrfsOptions;
     neededForBoot = true;
   };
   fileSystems."/boot" = {
@@ -64,7 +83,7 @@ in {
     fsType = "vfat";
   };
 
-  swapDevices = [];
+  swapDevices = [ ];
   zramSwap = {
     enable = true;
     algorithm = "zstd";
@@ -113,7 +132,8 @@ in {
         vulkan-loader
         amdvlk
       ];
-      extraPackages32 = with pkgs.pkgsi686Linux;
+      extraPackages32 =
+        with pkgs.pkgsi686Linux;
         [
           libvdpau-va-gl
           vaapiVdpau
@@ -133,15 +153,15 @@ in {
   fonts = {
     enableDefaultFonts = true;
     fontconfig.enable = true;
-    fonts = [pkgs.dejavu_fonts];
+    fonts = [ pkgs.dejavu_fonts ];
   };
 
   environment = {
-    systemPackages = [pkgs.ntfs3g];
-    pathsToLink = ["/share/zsh"];
+    systemPackages = [ pkgs.ntfs3g ];
+    pathsToLink = [ "/share/zsh" ];
     persistence."${config.system.persistDir}" = {
-      directories = ["/etc/nixos"];
-      files = ["/etc/machine-id"];
+      directories = [ "/etc/nixos" ];
+      files = [ "/etc/machine-id" ];
     };
   };
 
@@ -156,7 +176,7 @@ in {
       autoMount = true;
     };
     flatpak.enable = false;
-    xserver.videoDrivers = ["amdgpu"];
+    xserver.videoDrivers = [ "amdgpu" ];
   };
 
   system.stateVersion = "22.05";

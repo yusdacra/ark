@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   _module.args.nixinate = {
     host = "gaze.systems";
     sshUser = "root";

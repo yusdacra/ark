@@ -3,8 +3,9 @@
   config,
   lib,
   ...
-}: {
-  home.packages = [pkgs.zoxide];
+}:
+{
+  home.packages = [ pkgs.zoxide ];
   home.persistence."${config.system.persistDir}${config.home.homeDirectory}".directories =
     lib.singleton ".local/share/zoxide";
   programs.zsh.initExtra = ''

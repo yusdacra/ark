@@ -5,15 +5,14 @@
   pkgs,
   inputs,
   ...
-}: {
-  imports =
-    [
-      ../../users/root
-      ../../users/firewatch
-      inputs.nixos-wsl.nixosModules.wsl
-      inputs.agenix.nixosModules.default
-    ]
-    ++ (tlib.importFolder (toString ./modules));
+}:
+{
+  imports = [
+    ../../users/root
+    ../../users/firewatch
+    inputs.nixos-wsl.nixosModules.wsl
+    inputs.agenix.nixosModules.default
+  ] ++ (tlib.importFolder (toString ./modules));
 
   wsl.enable = true;
   wsl.defaultUser = "firewatch";
@@ -22,7 +21,7 @@
 
   networking.hostName = "wsl";
 
-  environment.systemPackages = [pkgs.wget];
+  environment.systemPackages = [ pkgs.wget ];
   environment.sessionVariables = {
     FLAKE = "/home/firewatch/ark";
   };

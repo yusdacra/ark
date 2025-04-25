@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   services.nginx.virtualHosts.${config.services.pds.settings.PDS_HOSTNAME} = {
     useACMEHost = "gaze.systems";
     forceSSL = true;
@@ -28,14 +29,14 @@
       PDS_RATE_LIMITS_ENABLED = "true";
       PDS_INVITE_REQUIRED = "true";
 
-      PDS_DID_PLC_URL="https://plc.directory";
-      PDS_BSKY_APP_VIEW_URL="https://api.bsky.app";
-      PDS_BSKY_APP_VIEW_DID="did:web:api.bsky.app";
-      PDS_REPORT_SERVICE_URL="https://mod.bsky.app";
-      PDS_REPORT_SERVICE_DID="did:plc:ar7c4by46qjdydhdevvrndac";
-      PDS_CRAWLERS="https://bsky.network";
+      PDS_DID_PLC_URL = "https://plc.directory";
+      PDS_BSKY_APP_VIEW_URL = "https://api.bsky.app";
+      PDS_BSKY_APP_VIEW_DID = "did:web:api.bsky.app";
+      PDS_REPORT_SERVICE_URL = "https://mod.bsky.app";
+      PDS_REPORT_SERVICE_DID = "did:plc:ar7c4by46qjdydhdevvrndac";
+      PDS_CRAWLERS = "https://bsky.network";
     };
-    environmentFiles = [config.age.secrets.pdsConfig.path];
+    environmentFiles = [ config.age.secrets.pdsConfig.path ];
   };
 
   # virtualisation = {
@@ -50,7 +51,7 @@
   #       autoStart = true;
   #       environmentFiles = [ ./pds.env config.age.secrets.pdsConfig.path ];
   #       ports = [ "1334:1334" ];
-  #       volumes = [ 
+  #       volumes = [
   #         "/var/lib/pds:/pds"
   #       ];
   #       extraOptions = [

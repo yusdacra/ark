@@ -5,9 +5,11 @@
   pkgs,
   inputs,
   ...
-}: {
-  imports = with inputs;
-  with nixos-hardware.nixosModules;
+}:
+{
+  imports =
+    with inputs;
+    with nixos-hardware.nixosModules;
     [
       # vfio.nixosModules.kvmfr
       # vfio.nixosModules.virtualisation
@@ -66,7 +68,10 @@
     support32Bit = true;
   };
 
-  services.xserver.videoDrivers = ["nvidia" "amdgpu"];
+  services.xserver.videoDrivers = [
+    "nvidia"
+    "amdgpu"
+  ];
   hardware = {
     nvidia = {
       package = config.boot.kernelPackages.nvidiaPackages.production;
@@ -112,29 +117,47 @@
   fonts = {
     enableDefaultPackages = true;
     fontconfig.enable = true;
-    packages = [pkgs.dejavu_fonts];
+    packages = [ pkgs.dejavu_fonts ];
   };
 
   environment = {
     sessionVariables.FLAKE = "/etc/nixos";
-    pathsToLink = ["/share/zsh"];
+    pathsToLink = [ "/share/zsh" ];
     persistence."${config.system.persistDir}" = {
       directories = lib.flatten [
         "/etc/nixos"
-        (
-          lib.optional
-          config.virtualisation.docker.enable
-          ["/var/lib/docker" "/var/lib/containers"]
-        )
+        (lib.optional config.virtualisation.docker.enable [
+          "/var/lib/docker"
+          "/var/lib/containers"
+        ])
       ];
-      files = ["/etc/machine-id"];
+      files = [ "/etc/machine-id" ];
     };
   };
 
   # warframe
-  networking.firewall.allowedUDPPorts = [4990 4991 4992 4993 4994 4995];
+  networking.firewall.allowedUDPPorts = [
+    4990
+    4991
+    4992
+    4993
+    4994
+    4995
+  ];
   # musikcube
-  networking.firewall.allowedTCPPorts = [7905 7906] ++ [6695 6696 6697 6698 6699] ++ [50300];
+  networking.firewall.allowedTCPPorts =
+    [
+      7905
+      7906
+    ]
+    ++ [
+      6695
+      6696
+      6697
+      6698
+      6699
+    ]
+    ++ [ 50300 ];
 
   # for tailscale
   networking.firewall.checkReversePath = "loose";

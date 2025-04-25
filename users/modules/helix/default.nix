@@ -2,15 +2,24 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   stylix.targets.helix.enable = false;
   programs.helix = {
     enable = true;
     languages.language = [
       {
         name = "dockerfile";
-        roots = ["Dockerfile" "Containerfile"];
-        file-types = ["Dockerfile" "Containerfile" "dockerfile" "containerfile"];
+        roots = [
+          "Dockerfile"
+          "Containerfile"
+        ];
+        file-types = [
+          "Dockerfile"
+          "Containerfile"
+          "dockerfile"
+          "containerfile"
+        ];
       }
     ];
     settings = {
@@ -38,9 +47,19 @@
           "<" = ">";
         };
         statusline = {
-          left = ["mode" "spinner"];
-          center = ["file-name" "file-encoding" "version-control"];
-          right = ["diagnostics" "selections"];
+          left = [
+            "mode"
+            "spinner"
+          ];
+          center = [
+            "file-name"
+            "file-encoding"
+            "version-control"
+          ];
+          right = [
+            "diagnostics"
+            "selections"
+          ];
         };
       };
     };

@@ -3,9 +3,11 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.programs.musikcube;
-in {
+in
+{
   options = {
     programs.musikcube = {
       enable = lib.mkEnableOption "whether to enable musikcube";
@@ -14,15 +16,17 @@ in {
         default = pkgs.musikcube;
       };
       settings = lib.mkOption {
-        type = (pkgs.formats.json {}).type;
+        type = (pkgs.formats.json { }).type;
         default = builtins.fromJSON (builtins.readFile ./default-config.json);
       };
     };
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [cfg.package];
-    home.persistence."${config.system.persistDir}${config.home.homeDirectory}".directories = [".config/musikcube"];
+    home.packages = [ cfg.package ];
+    home.persistence."${config.system.persistDir}${config.home.homeDirectory}".directories = [
+      ".config/musikcube"
+    ];
     xdg.configFile."musikcube/settings.json".text = builtins.toJSON cfg.settings;
   };
 }

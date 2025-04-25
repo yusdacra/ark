@@ -1,5 +1,6 @@
-{lib, ...}: {
-  imports = [./default.nix];
+{ lib, ... }:
+{
+  imports = [ ./default.nix ];
 
   config = {
     system.persistDir = "null";

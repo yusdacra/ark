@@ -113,6 +113,11 @@ stdenv.mkDerivation rec {
     description = "Matrix group messaging app";
     homepage = "https://gitlab.gnome.org/GNOME/fractal";
     license = licenses.gpl3;
-    maintainers = teams.gnome.members ++ (with maintainers; [dtzWill genofire]);
+    maintainers =
+      teams.gnome.members
+      ++ (with maintainers; [
+        dtzWill
+        genofire
+      ]);
   };
 }

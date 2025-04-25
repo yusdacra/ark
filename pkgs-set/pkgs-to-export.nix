@@ -1,9 +1,6 @@
-pkgs: (
-  pkgs.lib.getAttrs
-  [
-    "phantom"
-    "comic-mono"
-    "bitwig-studio"
-  ]
-  pkgs
-)
+pkgs:
+(pkgs.lib.getAttrs [
+  "phantom"
+  "comic-mono"
+  "bitwig-studio"
+] pkgs)

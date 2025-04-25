@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   boot = {
     tmp.useTmpfs = true;
     loader = {
@@ -7,7 +8,7 @@
       systemd-boot.configurationLimit = 10;
     };
     kernelPackages = pkgs.linuxPackages_zen;
-    supportedFilesystems = ["f2fs"];
+    supportedFilesystems = [ "f2fs" ];
     initrd = {
       availableKernelModules = [
         "nvme"
@@ -17,10 +18,12 @@
         "usbhid"
         "sd_mod"
       ];
-      kernelModules = ["amdgpu"];
+      kernelModules = [ "amdgpu" ];
     };
-    kernelModules = ["kvm-amd"];
-    extraModulePackages = [];
-    kernel.sysctl = {"fs.inotify.max_user_watches" = 524288;};
+    kernelModules = [ "kvm-amd" ];
+    extraModulePackages = [ ];
+    kernel.sysctl = {
+      "fs.inotify.max_user_watches" = 524288;
+    };
   };
 }

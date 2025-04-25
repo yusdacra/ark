@@ -1,4 +1,4 @@
-{pkgs, config, ...}:
+{ pkgs, config, ... }:
 let
   index = pkgs.writeText "index.txt" ''
     hi there~
@@ -13,7 +13,7 @@ let
 
     /dig +short TXT 9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa/
   '';
-  root = pkgs.runCommand "root" {} ''
+  root = pkgs.runCommand "root" { } ''
     mkdir -p $out
     ln -s ${index} $out/index.txt
   '';

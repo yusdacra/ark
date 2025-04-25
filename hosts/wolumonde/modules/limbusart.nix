@@ -3,13 +3,15 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   pkg = inputs.limbusart.packages.${pkgs.system}.default;
-in {
+in
+{
   systemd.services.limbusart = {
     description = "limbusart";
-    wantedBy = ["multi-user.target"];
-    after = ["network.target"];
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
     serviceConfig = lib.mkMerge [
       {
         User = "limbusart";
@@ -31,7 +33,7 @@ in {
     isSystemUser = true;
     group = "limbusart";
   };
-  users.groups.limbusart = {};
+  users.groups.limbusart = { };
 
   services.nginx.virtualHosts."pmart.gaze.systems" = {
     useACMEHost = "gaze.systems";

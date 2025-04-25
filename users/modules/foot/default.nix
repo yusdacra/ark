@@ -2,7 +2,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   settings.terminal.name = "foot";
   settings.terminal.binary = "${pkgs.foot}/bin/foot";
   programs.foot = {

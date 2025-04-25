@@ -2,8 +2,9 @@
   config,
   inputs,
   ...
-}: {
-  users.users.syncthing.extraGroups = ["users"];
+}:
+{
+  users.users.syncthing.extraGroups = [ "users" ];
   services.syncthing = {
     enable = true;
     devices.redmi-phone = {

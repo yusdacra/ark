@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.urxvt = {
     enable = true;
     keybindings = {

@@ -1,4 +1,5 @@
-{pkgs, config, ...}: {
+{ pkgs, config, ... }:
+{
   services.forgejo = {
     enable = true;
     package = pkgs.forgejo;

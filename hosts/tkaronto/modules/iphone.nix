@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   services.usbmuxd.enable = true;
-  environment.systemPackages = [pkgs.libimobiledevice];
+  environment.systemPackages = [ pkgs.libimobiledevice ];
 }

@@ -1,4 +1,5 @@
-{inputs, pkgs, ...}: {
+{ inputs, pkgs, ... }:
+{
   services.nginx = {
     enable = true;
     package = pkgs.nginxQuic;
@@ -8,7 +9,7 @@
     recommendedProxySettings = true;
   };
 
-  users.users.nginx.extraGroups = ["acme"];
+  users.users.nginx.extraGroups = [ "acme" ];
 
   security.acme = {
     acceptTerms = true;

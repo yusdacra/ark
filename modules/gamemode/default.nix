@@ -3,7 +3,8 @@
   inputs,
   lib,
   ...
-}: let
+}:
+let
   programs = inputs.hyprland.packages.${pkgs.system}.default;
 
   startscript = pkgs.writeShellScript "gamemode-start" ''
@@ -17,7 +18,8 @@
     export HYPRLAND_INSTANCE_SIGNATURE=$(ls -w1 /tmp/hypr | tail -1)
     hyprctl --batch 'keyword decoration:blur 1 ; keyword animations:enabled 1 ; keyword misc:no_vfr 0'
   '';
-in {
+in
+{
   programs.gamemode = {
     enable = true;
     enableRenice = true;

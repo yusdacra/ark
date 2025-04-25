@@ -3,23 +3,28 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   PUBLIC_BASE_URL = "https://gaze.systems";
   pkg = inputs.blog.packages.${pkgs.system}.default.overrideAttrs (old: {
     inherit PUBLIC_BASE_URL;
   });
   port = 3003;
-in {
+in
+{
   users.users.website = {
     isSystemUser = true;
     group = "website";
   };
-  users.groups.website = {};
+  users.groups.website = { };
 
   systemd.services.website = {
     description = "website";
-    wantedBy = ["multi-user.target"];
-    after = ["network.target" "guestbook.service"];
+    wantedBy = [ "multi-user.target" ];
+    after = [
+      "network.target"
+      "guestbook.service"
+    ];
     environment = {
       HOME = "/var/lib/website";
       ORIGIN = PUBLIC_BASE_URL;

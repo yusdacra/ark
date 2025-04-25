@@ -2,9 +2,10 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   settings.terminal.name = "wezterm";
-  home.packages = [pkgs.wezterm];
+  home.packages = [ pkgs.wezterm ];
   xdg.enable = true;
   xdg.configFile = {
     "wezterm/wezterm.lua".text = ''

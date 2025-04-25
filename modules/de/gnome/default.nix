@@ -2,7 +2,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   services.gnome = {
     gnome-keyring.enable = true;
     core-shell.enable = true;

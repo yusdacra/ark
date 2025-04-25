@@ -1,11 +1,23 @@
-{config, ...}: let
+{ config, ... }:
+let
   byLabel = label: "/dev/disk/by-label/${label}";
-  f2fsOptions = ["compress_algorithm=zstd:6" "compress_chksum" "atgc" "gc_merge" "lazytime"];
-in {
+  f2fsOptions = [
+    "compress_algorithm=zstd:6"
+    "compress_chksum"
+    "atgc"
+    "gc_merge"
+    "lazytime"
+  ];
+in
+{
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
-    options = ["defaults" "size=2G" "mode=755"];
+    options = [
+      "defaults"
+      "size=2G"
+      "mode=755"
+    ];
   };
   fileSystems."/nix" = {
     device = byLabel "NIX";
@@ -23,7 +35,7 @@ in {
     fsType = "vfat";
   };
 
-  swapDevices = [];
+  swapDevices = [ ];
   zramSwap = {
     enable = true;
     algorithm = "zstd";

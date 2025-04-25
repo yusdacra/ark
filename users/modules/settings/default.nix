@@ -2,11 +2,13 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   l = lib // builtins;
   t = l.types;
   cfg = config.settings;
-in {
+in
+{
   options = {
     settings.enable = l.mkOption {
       type = t.bool;

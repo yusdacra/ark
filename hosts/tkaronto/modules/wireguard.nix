@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   systemd.network.enable = true;
   systemd.network.netdevs."wg0" = {
     enable = true;
@@ -13,7 +14,7 @@
       {
         wireguardPeerConfig = {
           PublicKey = builtins.readFile ./wgWolumondeKey.pub;
-          AllowedIPs = ["10.99.0.1/32"];
+          AllowedIPs = [ "10.99.0.1/32" ];
           Endpoint = "${builtins.readFile ./wgWolumondeIp}:51820";
           PersistentKeepalive = 25;
         };

@@ -3,26 +3,27 @@
   lib,
   tlib,
   ...
-}: let
+}:
+let
   baseModules = [
     ../modules
     ../locale
     inputs.home.nixosModules.default
   ];
 
-  mkSystem = name: system: let
-    pkgs = tlib.makePkgs system;
-  in
+  mkSystem =
+    name: system:
+    let
+      pkgs = tlib.makePkgs system;
+    in
     lib.nixosSystem {
       inherit system;
-      modules =
-        baseModules
-        ++ [
-          {networking.hostName = name;}
-          {nixpkgs.pkgs = pkgs;}
-          (import (./. + "/${name}/default.nix"))
-        ];
-      specialArgs = {inherit inputs tlib;};
+      modules = baseModules ++ [
+        { networking.hostName = name; }
+        { nixpkgs.pkgs = pkgs; }
+        (import (./. + "/${name}/default.nix"))
+      ];
+      specialArgs = { inherit inputs tlib; };
     };
 
   systems = {
@@ -32,4 +33,4 @@
     wsl = "x86_64-linux";
   };
 in
-  lib.mapAttrs mkSystem systems
+lib.mapAttrs mkSystem systems

@@ -3,15 +3,14 @@
   tlib,
   pkgs,
   ...
-}: {
-  imports =
-    [
-      inputs.agenix.nixosModules.default
-      # inputs.nixtopo.nixosModules.default
-    ]
-    ++ (tlib.importFolder (toString ./modules));
+}:
+{
+  imports = [
+    inputs.agenix.nixosModules.default
+    # inputs.nixtopo.nixosModules.default
+  ] ++ (tlib.importFolder (toString ./modules));
 
-  environment.systemPackages = [pkgs.magic-wormhole-rs];
+  environment.systemPackages = [ pkgs.magic-wormhole-rs ];
 
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
@@ -19,8 +18,13 @@
   # firewall stuffs
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [22 80 443 5005];
-    allowedUDPPortRanges = [];
+    allowedTCPPorts = [
+      22
+      80
+      443
+      5005
+    ];
+    allowedUDPPortRanges = [ ];
   };
 
   virtualisation.docker.enable = true;

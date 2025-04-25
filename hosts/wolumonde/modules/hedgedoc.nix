@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   services.hedgedoc = {
     enable = true;
     settings = {
@@ -18,6 +19,7 @@
     forceSSL = true;
     quic = true;
     kTLS = true;
-    locations."/".proxyPass = "http://${config.services.hedgedoc.settings.host}:${toString config.services.hedgedoc.settings.port}";
+    locations."/".proxyPass =
+      "http://${config.services.hedgedoc.settings.host}:${toString config.services.hedgedoc.settings.port}";
   };
 }

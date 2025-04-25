@@ -1,4 +1,5 @@
-{nixosConfig, ...}: {
+{ nixosConfig, ... }:
+{
   programs.ssh = {
     enable = true;
     compression = true;

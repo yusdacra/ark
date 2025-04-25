@@ -1,9 +1,11 @@
-{lib, ...}: let
+{ lib, ... }:
+let
   l = lib // builtins;
   mkRule = name: type: {
     inherit name type;
   };
-in {
+in
+{
   services.ananicy = {
     enable = true;
     extraRules = [

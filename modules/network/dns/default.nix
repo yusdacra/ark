@@ -1,3 +1,3 @@
 {
-  imports = [./cloudflare.nix];
+  imports = [ ./cloudflare.nix ];
 }

@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   age.secrets.bernbotToken.file = ../../../secrets/bernbotToken.age;
   age.secrets.websiteConfig.file = ../../../secrets/websiteConfig.age;
   age.secrets.pdsConfig.file = ../../../secrets/pdsConfig.age;

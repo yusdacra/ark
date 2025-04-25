@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.services.musikcubed;
-in {
+in
+{
   options = {
     services.musikcubed = {
       enable = lib.mkEnableOption "whether to enable musikcubed";
@@ -14,7 +16,7 @@ in {
         default = pkgs.musikcube;
       };
       settings = lib.mkOption {
-        type = (pkgs.formats.json {}).type;
+        type = (pkgs.formats.json { }).type;
         default = builtins.fromJSON (builtins.readFile ./default-config.json);
       };
     };
@@ -22,7 +24,7 @@ in {
   config = lib.mkIf cfg.enable {
     systemd.user.services.musikcubed = {
       Install = {
-        WantedBy = ["default.target"];
+        WantedBy = [ "default.target" ];
       };
       Unit = {
         Description = "musikcubed";
@@ -34,6 +36,7 @@ in {
         RestartSec = 5;
       };
     };
-    xdg.configFile."musikcube/plugin_musikcubeserver(wss,http).json".text = builtins.toJSON cfg.settings;
+    xdg.configFile."musikcube/plugin_musikcubeserver(wss,http).json".text =
+      builtins.toJSON cfg.settings;
   };
 }

@@ -26,8 +26,23 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-DJSrdxQpjvQTzio6e3p/iSYJWu+AbydyKkeKsRQA6qc=";
   };
 
-  nativeBuildInputs = [autoconf automake pkg-config rpm2targz libtool];
-  buildInputs = [alsa-lib dssi gtk2 libjack2 ladspaH ladspaPlugins liblo fluidsynth.dev];
+  nativeBuildInputs = [
+    autoconf
+    automake
+    pkg-config
+    rpm2targz
+    libtool
+  ];
+  buildInputs = [
+    alsa-lib
+    dssi
+    gtk2
+    libjack2
+    ladspaH
+    ladspaPlugins
+    liblo
+    fluidsynth.dev
+  ];
 
   unpackPhase = ''
     rpm2targz $src

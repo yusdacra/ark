@@ -4,9 +4,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   pkgBin = tlib.pkgBin;
-in {
+in
+{
   programs.zsh = {
     enable = true;
     autocd = true;
@@ -27,7 +29,15 @@ in {
     # configure history
     history = {
       extended = true;
-      ignorePatterns = ["rm *" "mv *" "l" "ls" "ll" "g s" "git status"];
+      ignorePatterns = [
+        "rm *"
+        "mv *"
+        "l"
+        "ls"
+        "ll"
+        "g s"
+        "git status"
+      ];
       save = 1000000;
       size = 1000000;
     };
@@ -36,11 +46,9 @@ in {
     history.path = "${config.home.homeDirectory}/.local/share/zsh/history";
     # extra stuff for fixing gpg-agent ssh and some random commands
     initExtra = ''
-      ${
-        lib.optionalString
-        (config.programs.ssh.enable && config.services.gpg-agent.enable)
-        "export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)"
-      }
+      ${lib.optionalString (
+        config.programs.ssh.enable && config.services.gpg-agent.enable
+      ) "export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)"}
 
       function tomp4 () {
         ${pkgBin pkgs.ffmpeg} -i $1 -c:v libx264 -preset slow -crf 30 -c:a aac -b:a 128k "$1.mp4"

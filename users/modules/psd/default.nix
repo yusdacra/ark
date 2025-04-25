@@ -1,13 +1,18 @@
-username: {pkgs, ...}: {
+username:
+{ pkgs, ... }:
+{
   services.psd.enable = true;
 
   security.sudo.extraRules = [
     {
-      users = [username];
+      users = [ username ];
       commands = [
         {
           command = "${pkgs.profile-sync-daemon}/bin/psd-overlay-helper";
-          options = ["SETENV" "NOPASSWD"];
+          options = [
+            "SETENV"
+            "NOPASSWD"
+          ];
         }
       ];
     }

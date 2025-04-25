@@ -1,5 +1,5 @@
 {
-  age.identityPaths = ["/persist/keys/ssh_key"];
+  age.identityPaths = [ "/persist/keys/ssh_key" ];
 
   age.secrets.nixGithubAccessToken.file = ../../../secrets/nixGithubAccessToken.age;
   age.secrets.wgTkarontoKey = {

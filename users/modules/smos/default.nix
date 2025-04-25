@@ -3,10 +3,12 @@
   inputs,
   secrets,
   ...
-}: let
+}:
+let
   smosDir = "${config.home.homeDirectory}/smos";
-in {
-  imports = ["${inputs.smos}/nix/home-manager-module.nix"];
+in
+{
+  imports = [ "${inputs.smos}/nix/home-manager-module.nix" ];
   programs.smos = {
     enable = true;
     notify.enable = true;

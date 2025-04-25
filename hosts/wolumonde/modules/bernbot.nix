@@ -4,13 +4,15 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   bernbotPkg = inputs.bernbot.packages.${pkgs.system}.bernbot-release;
-in {
+in
+{
   systemd.services.bernbot = {
     description = "bernbot";
-    wantedBy = ["multi-user.target"];
-    after = ["network.target"];
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
     serviceConfig = lib.mkMerge [
       {
         User = "bernbot";
@@ -26,5 +28,5 @@ in {
     isSystemUser = true;
     group = "bernbot";
   };
-  users.groups.bernbot = {};
+  users.groups.bernbot = { };
 }

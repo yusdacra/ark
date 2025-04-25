@@ -2,8 +2,10 @@
   config,
   pkgs,
   ...
-}: let
-  run-as-service = slice:
+}:
+let
+  run-as-service =
+    slice:
     pkgs.writeShellScript "as-systemd-transient" ''
       exec ${pkgs.systemd}/bin/systemd-run \
         --slice=app-${slice}.slice \
@@ -15,7 +17,8 @@
   launcher = "rofi";
   launcherCmd = "${launcher} -show drun";
   term = config.settings.terminal.name;
-in {
+in
+{
   wayland.windowManager.hyprland.extraConfig = ''
     # should be configured per-profile
     monitor=eDP-1,preferred,0x0,1.6
@@ -130,18 +133,22 @@ in {
     bind=SUPERSHIFT,braceright,focusmonitor,r
 
     # workspaces
-    ${builtins.concatStringsSep "\n" (builtins.genList (
-        x: let
-          ws = let
-            c = (x + 1) / 10;
-          in
+    ${builtins.concatStringsSep "\n" (
+      builtins.genList (
+        x:
+        let
+          ws =
+            let
+              c = (x + 1) / 10;
+            in
             builtins.toString (x + 1 - (c * 10));
-        in ''
+        in
+        ''
           bind=SUPER,${ws},workspace,${toString (x + 1)}
           bind=SHIFTSUPER,${ws},movetoworkspacesilent,${toString (x + 1)}
         ''
-      )
-      10)}
+      ) 10
+    )}
 
     # screenshot
     bind=,Print,exec,grimblast --notify copysave area

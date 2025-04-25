@@ -4,12 +4,14 @@
   tlib,
   config,
   ...
-} @ globalAttrs: let
+}@globalAttrs:
+let
   l = lib // builtins;
 
   nixosConfig = globalAttrs.config;
-in {
-  imports = [./stylix.nix];
+in
+{
+  imports = [ ./stylix.nix ];
 
   users.users.patriot = {
     isNormalUser = true;
@@ -23,7 +25,10 @@ in {
       "nix-build-key-access"
       (l.optional nixosConfig.networking.networkmanager.enable "networkmanager")
       (l.optional nixosConfig.virtualisation.docker.enable "docker")
-      (l.optionals nixosConfig.virtualisation.libvirtd.enable ["libvirtd" "kvm"])
+      (l.optionals nixosConfig.virtualisation.libvirtd.enable [
+        "libvirtd"
+        "kvm"
+      ])
     ];
     shell = pkgs.zsh;
     hashedPassword = "$6$spzqhAyJfhHy$iHgLBlhjGn1l8PnbjJdWTn1GPvcjMqYNKUzdCe/7IrX6sHNgETSr/Nfpdmq9FCXLhrAfwHOd/q/8SvfeIeNX4/";
@@ -45,8 +50,11 @@ in {
       "/home/patriot/.config/unity3d"
       "/home/patriot/.config/HKModInstaller"
     ];
-    systemPackages = with pkgs; [qt5.qtwayland];
-    shells = with pkgs; [bashInteractive zsh];
+    systemPackages = with pkgs; [ qt5.qtwayland ];
+    shells = with pkgs; [
+      bashInteractive
+      zsh
+    ];
   };
   xdg.portal = {
     enable = true;
@@ -68,7 +76,7 @@ in {
     # gnome stuffs
     seahorse.enable = true;
     dconf.enable = true;
-    weylus.users = ["patriot"];
+    weylus.users = [ "patriot" ];
     java = {
       enable = false;
       package = pkgs.jre8;
@@ -94,197 +102,225 @@ in {
       NetworkManager-wait-online.enable = false;
     };
   };
-  home-manager.users.patriot = {
-    config,
-    pkgs,
-    inputs,
-    secrets,
-    ...
-  }: let
-    personal = import ../../personal.nix;
-    name = personal.name;
-    email = personal.emails.primary;
-  in {
-    imports = let
-      modulesToEnable = l.flatten [
-        # wm
-        # ["hyprland" "foot"]
-        ["sway" "wayland" "foot"]
-        # ["fluxbox" "urxvt"]
-        # desktop stuff
-        # ["wayland" "foot"]
-        ["obsidian" "firefox" "vesktop"]
-        # cli stuff
-        ["zoxide" "zsh" "fzf" "starship" "direnv"]
-        # dev stuff
-        ["helix" "git" "ssh"]
-        # ["godot"]
-        ["musikcube" "musikcubed"]
-        ["arrpc"]
-        ["s3s"]
-      ];
+  home-manager.users.patriot =
+    {
+      config,
+      pkgs,
+      inputs,
+      secrets,
+      ...
+    }:
+    let
+      personal = import ../../personal.nix;
+      name = personal.name;
+      email = personal.emails.primary;
     in
-      l.flatten [
-        ../../modules/persist
-        inputs.nixos-persistence.nixosModules.home-manager.impermanence
-        (tlib.prefixStrings "${inputs.self}/users/modules/" modulesToEnable)
-      ];
-
-    system.persistDir = nixosConfig.system.persistDir;
-
-    home.persistence."${config.system.persistDir}${config.home.homeDirectory}" = let
-      mkPaths = pfx: paths: tlib.prefixStrings "${pfx}/" (l.flatten paths);
-    in {
-      directories =
+    {
+      imports =
+        let
+          modulesToEnable = l.flatten [
+            # wm
+            # ["hyprland" "foot"]
+            [
+              "sway"
+              "wayland"
+              "foot"
+            ]
+            # ["fluxbox" "urxvt"]
+            # desktop stuff
+            # ["wayland" "foot"]
+            [
+              "obsidian"
+              "firefox"
+              "vesktop"
+            ]
+            # cli stuff
+            [
+              "zoxide"
+              "zsh"
+              "fzf"
+              "starship"
+              "direnv"
+            ]
+            # dev stuff
+            [
+              "helix"
+              "git"
+              "ssh"
+            ]
+            # ["godot"]
+            [
+              "musikcube"
+              "musikcubed"
+            ]
+            [ "arrpc" ]
+            [ "s3s" ]
+          ];
+        in
         l.flatten [
-          "Downloads"
-          ".wine"
-          # ssh / gpg / keys
-          ".ssh"
-          ".gnupg"
-          "keys"
-          # caches / history stuff
-          ".directory_history"
-          ".cache"
-          "Bitwig Studio"
-          ".BitwigStudio"
-          ".vst"
-        ]
-        ++ mkPaths ".local/share" [
-          "bottles"
-          "direnv"
-          "zsh"
-          "keyrings"
-          "yuzu"
-          # "lutris"
-          # "Terraria"
-          "PrismLauncher"
-        ]
-        ++ mkPaths ".config" [
-          # "lutris"
-          "dconf"
-          "retroarch"
-          "yuzu"
-          "blender"
+          ../../modules/persist
+          inputs.nixos-persistence.nixosModules.home-manager.impermanence
+          (tlib.prefixStrings "${inputs.self}/users/modules/" modulesToEnable)
         ];
-      files = l.flatten [
-        ".config/gnome-initial-setup-done"
-        (lib.removePrefix "~/" config.programs.ssh.userKnownHostsFile)
-      ];
-      allowOther = true;
-    };
 
-    fonts.fontconfig.enable = l.mkForce true;
+      system.persistDir = nixosConfig.system.persistDir;
 
-    settings.iconTheme = {
-      name = "Yaru-dark";
-      package = pkgs.yaru-theme;
-    };
+      home.persistence."${config.system.persistDir}${config.home.homeDirectory}" =
+        let
+          mkPaths = pfx: paths: tlib.prefixStrings "${pfx}/" (l.flatten paths);
+        in
+        {
+          directories =
+            l.flatten [
+              "Downloads"
+              ".wine"
+              # ssh / gpg / keys
+              ".ssh"
+              ".gnupg"
+              "keys"
+              # caches / history stuff
+              ".directory_history"
+              ".cache"
+              "Bitwig Studio"
+              ".BitwigStudio"
+              ".vst"
+            ]
+            ++ mkPaths ".local/share" [
+              "bottles"
+              "direnv"
+              "zsh"
+              "keyrings"
+              "yuzu"
+              # "lutris"
+              # "Terraria"
+              "PrismLauncher"
+            ]
+            ++ mkPaths ".config" [
+              # "lutris"
+              "dconf"
+              "retroarch"
+              "yuzu"
+              "blender"
+            ];
+          files = l.flatten [
+            ".config/gnome-initial-setup-done"
+            (lib.removePrefix "~/" config.programs.ssh.userKnownHostsFile)
+          ];
+          allowOther = true;
+        };
 
-    home.pointerCursor = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Classic";
-      size = 24;
+      fonts.fontconfig.enable = l.mkForce true;
+
+      settings.iconTheme = {
+        name = "Yaru-dark";
+        package = pkgs.yaru-theme;
+      };
+
+      home.pointerCursor = {
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Classic";
+        size = 24;
+        gtk.enable = true;
+        x11.enable = true;
+      };
       gtk.enable = true;
-      x11.enable = true;
-    };
-    gtk.enable = true;
-    gtk.theme.package = pkgs.yaru-theme;
-    gtk.theme.name = "Yaru-dark";
+      gtk.theme.package = pkgs.yaru-theme;
+      gtk.theme.name = "Yaru-dark";
 
-    # home.sessionVariables.QT_QPA_PLATFORMTHEME = "qt5ct";
-    # xdg.configFile = {
-    #   "environment.d/20-apply-qtct.conf".text = ''
-    #     QT_QPA_PLATFORMTHEME=qt5ct
-    #   '';
-    # };
-    # qt.enable = true;
-    # qt.platformTheme = "qtct";
-    # qt.style.name = "phantom";
-    # qt.style.package = pkgs.phantom;
+      # home.sessionVariables.QT_QPA_PLATFORMTHEME = "qt5ct";
+      # xdg.configFile = {
+      #   "environment.d/20-apply-qtct.conf".text = ''
+      #     QT_QPA_PLATFORMTHEME=qt5ct
+      #   '';
+      # };
+      # qt.enable = true;
+      # qt.platformTheme = "qtct";
+      # qt.style.name = "phantom";
+      # qt.style.package = pkgs.phantom;
 
-    stylix.targets.gnome.enable = lib.mkForce false;
-    stylix.targets.gtk.enable = lib.mkForce false;
+      stylix.targets.gnome.enable = lib.mkForce false;
+      stylix.targets.gtk.enable = lib.mkForce false;
 
-    home = {
-      homeDirectory = nixosConfig.users.users.patriot.home;
-      packages = with pkgs; [
-        # Font stuff
-        noto-fonts-cjk
-        font-awesome
-        dejavu_fonts
-        # Programs
-        pixelorama
-        krita
-        gnupg
-        imv
-        mpv
-        ffmpeg
-        mupdf
-        xdg-utils
-        protontricks
-        libreoffice-fresh
-        helvum
-        nix-output-monitor
-        inputs.nh.packages.${pkgs.system}.default
-        # steamPackages.steamcmd
-        # steam-tui
-        # fractal-next
-        # gtkcord4
-        # gh
-        transmission_4-gtk
-        kdenlive
-        ### music prod
-        yabridge
-        yabridgectl
-        bitwig-studio
-        ### stream / record
-        obs-studio
-        ### gayming
-        # prismlauncher
-        # (retroarch.override {
-        #   cores = with libretro; [desmume citra];
-        # })
-        # yuzu
-        # wineWowPackages.stagingFull
-        # lutris
-        # distrobox
-        bottles
-        blender
-      ];
-    };
-    programs = {
-      musikcube.enable = true;
-      command-not-found.enable =
-        nixosConfig.programs.command-not-found.enable;
-      git = {
-        userName = name;
-        userEmail = email;
-        extraConfig = {
-          gpg.format = "ssh";
-          commit.gpgsign = true;
-          user.signingkey = builtins.readFile ../../secrets/yusdacra.key.pub;
+      home = {
+        homeDirectory = nixosConfig.users.users.patriot.home;
+        packages = with pkgs; [
+          # Font stuff
+          noto-fonts-cjk
+          font-awesome
+          dejavu_fonts
+          # Programs
+          pixelorama
+          krita
+          gnupg
+          imv
+          mpv
+          ffmpeg
+          mupdf
+          xdg-utils
+          protontricks
+          libreoffice-fresh
+          helvum
+          nix-output-monitor
+          inputs.nh.packages.${pkgs.system}.default
+          # steamPackages.steamcmd
+          # steam-tui
+          # fractal-next
+          # gtkcord4
+          # gh
+          transmission_4-gtk
+          kdenlive
+          ### music prod
+          yabridge
+          yabridgectl
+          bitwig-studio
+          ### stream / record
+          obs-studio
+          ### gayming
+          # prismlauncher
+          # (retroarch.override {
+          #   cores = with libretro; [desmume citra];
+          # })
+          # yuzu
+          # wineWowPackages.stagingFull
+          # lutris
+          # distrobox
+          bottles
+          blender
+        ];
+      };
+      programs = {
+        musikcube.enable = true;
+        command-not-found.enable = nixosConfig.programs.command-not-found.enable;
+        git = {
+          userName = name;
+          userEmail = email;
+          extraConfig = {
+            gpg.format = "ssh";
+            commit.gpgsign = true;
+            user.signingkey = builtins.readFile ../../secrets/yusdacra.key.pub;
+          };
         };
       };
-    };
-    services = {
-      musikcubed = {
-        enable = true;
-        settings.password = "somethingidk";
+      services = {
+        musikcubed = {
+          enable = true;
+          settings.password = "somethingidk";
+        };
+        gpg-agent =
+          let
+            defaultCacheTtl = 3600 * 6;
+            maxCacheTtl = 3600 * 24;
+          in
+          {
+            inherit defaultCacheTtl maxCacheTtl;
+            enable = true;
+            enableSshSupport = true;
+            sshKeys = [ "8369D9CA26C3EAAAB8302A88CEE6FD14B58AA965" ];
+            defaultCacheTtlSsh = defaultCacheTtl;
+            maxCacheTtlSsh = maxCacheTtl;
+            grabKeyboardAndMouse = false;
+            pinentryFlavor = "gnome3";
+          };
       };
-      gpg-agent = let
-        defaultCacheTtl = 3600 * 6;
-        maxCacheTtl = 3600 * 24;
-      in {
-        inherit defaultCacheTtl maxCacheTtl;
-        enable = true;
-        enableSshSupport = true;
-        sshKeys = ["8369D9CA26C3EAAAB8302A88CEE6FD14B58AA965"];
-        defaultCacheTtlSsh = defaultCacheTtl;
-        maxCacheTtlSsh = maxCacheTtl;
-        grabKeyboardAndMouse = false;
-        pinentryFlavor = "gnome3";
-      };
     };
-  };
 }

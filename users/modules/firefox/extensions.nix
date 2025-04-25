@@ -3,7 +3,8 @@
   fetchurl,
   lib,
   stdenv,
-}: {
+}:
+{
   "better-clean-twitter" = buildFirefoxXpiAddon {
     pname = "better-clean-twitter";
     version = "1.3.2";
@@ -53,7 +54,7 @@
     meta = with lib; {
       description = "Firefox theme based on <a href=\"https://prod.outgoing.prod.webservices.mozgcp.net/v1/110954a3f2718cf03892676379416caed51099b639f643aaf12989b7e698f073/https%3A//github.com/catppuccin/catppuccin\" rel=\"nofollow\">https://github.com/catppuccin/catppuccin</a>";
       license = licenses.cc-by-30;
-      mozPermissions = [];
+      mozPermissions = [ ];
       platforms = platforms.all;
     };
   };

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   xsession.enable = true;
   xsession.windowManager.fluxbox = {
     enable = true;

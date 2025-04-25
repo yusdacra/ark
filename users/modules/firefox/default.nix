@@ -2,12 +2,13 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   home.persistence."${config.system.persistDir}${config.home.homeDirectory}".directories = [
     ".mozilla"
     ".floorp"
   ];
-  home.packages = [(pkgs.lib.hiPrio pkgs.floorp)];
+  home.packages = [ (pkgs.lib.hiPrio pkgs.floorp) ];
   programs.firefox = {
     enable = true;
     package = pkgs.firefox.override {
@@ -54,10 +55,11 @@
         id = 1;
         isDefault = true;
         name = "personal";
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; let
-          myExtensions =
-            pkgs.callPackage ./extensions.nix {inherit buildFirefoxXpiAddon;};
-        in
+        extensions =
+          with pkgs.nur.repos.rycee.firefox-addons;
+          let
+            myExtensions = pkgs.callPackage ./extensions.nix { inherit buildFirefoxXpiAddon; };
+          in
           [
             ublock-origin
             darkreader
