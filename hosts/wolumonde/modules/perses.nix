@@ -36,7 +36,7 @@ in
   virtualisation.oci-containers.containers.perses = {
     serviceName = "perses";
     image = "perses:latest";
-    imageFile = persesHealthcheckImage;
+    imageStream = persesHealthcheckImage;
     autoStart = true;
     # workdir = config.users.users.${user}.home;
     podman = {
