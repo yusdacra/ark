@@ -37,8 +37,19 @@ def deploy [hostname: string] {
 
 def update-input [input: string] {
   let result = nix flake update $input | complete
-  if ($result.stderr | str contains "Updated input") or ($result.exit_code != 0) {
+  let is_ok = ($result.stderr | str contains "Updated input")
+  let is_err = ($result.exit_code != 0)
+  if $is_ok or $is_err {
     webhook $"/inputs/($input)" $"=== updated input ($input) ===\n\n($result.stderr)" $result.exit_code
+  }
+  if $is_ok {
+    # try committing flake updates
+    try {
+      git add flake.lock
+      let commit_msg = $"chore\(nix\): update input ($input) [skip ci]"
+      git commit -m $commit_msg
+      git push
+    }
   }
 }
 
@@ -46,15 +57,6 @@ def main [] {
   webhook "deploy" "=== started deploying all ==="
 
   update-input "blog"
-
-  # try committing flake updates
-  try {
-    git restore -S .
-    git add flake.lock
-    let commit_msg = "chore: update flake dependencies (deploy)"
-    git commit -m $"($commit_msg) [skip ci]"
-    git push
-  }
 
   try {
     nix run ".#dns" -- push

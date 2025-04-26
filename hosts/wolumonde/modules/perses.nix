@@ -1,4 +1,4 @@
-{pkgs, config, ...}:
+{ pkgs, config, ... }:
 let
   domain = "dash.gaze.systems";
   port = 7412;
@@ -6,21 +6,32 @@ let
 
   persesImage = pkgs.dockerTools.pullImage {
     imageName = "docker.io/persesdev/perses";
-    imageDigest = "sha256:30a6c2d66e48d64619076e4f088d7d535d14409c9083256f0d56c4cc91294684";
-    sha256 = "sha256-U6sorhUnQ0AH9cygnrnz6XDFEtD41GtQSie/Hri7u8c=";
+    imageDigest = "sha256:7d4647ce31841f67c2361bd10ea344de1edd7fbf65711c75805a5aacdc7735d0";
+    sha256 = "sha256-oOQYJzGEEEkjfqlVkEGLOH3e4iywd8QnptY9UxPd1iw=";
   };
   persesHealthcheckImage = pkgs.dockerTools.streamLayeredImage {
     name = "perses";
     tag = "latest";
     fromImage = persesImage;
-    contents = [pkgs.curl];
-    config.Entrypoint = ["/bin/perses"];
-    config.Cmd = ["--config=/etc/perses/config.yaml" "--log.level=error"];
+    contents = [ pkgs.curl ];
+    config.Entrypoint = [ "/bin/perses" ];
+    config.Cmd = [
+      "--config=/etc/perses/config.yaml"
+      "--log.level=info"
+      # "--log.method-trace"
+    ];
     config.Healthcheck = {
-      Test = ["/bin/curl" "http://localhost:8080/api/v1/health"];
+      Test = [
+        "/bin/curl"
+        "http://localhost:8080/api/v1/health"
+      ];
       Retries = 3;
     };
   };
+
+  persesEnv = config.virtualisation.oci-containers.containers.perses.environment;
+  secrets = config.age.secrets;
+  provisionFolder = "provisioning";
 in
 {
   users.users.${user} = {
@@ -31,13 +42,28 @@ in
     linger = true;
     autoSubUidGidRange = true;
   };
-  users.groups.${user} = {};
+  users.groups.${user} = { };
 
   age.secrets.persesSecret = {
     file = ../../../secrets/persesSecret.age;
     owner = user;
     group = user;
   };
+  age.secrets.persesAdminUser = {
+    file = ../../../secrets/persesAdminUser.age;
+    owner = user;
+    group = user;
+  };
+
+  systemd.services.perses.preStart =
+    let
+      provisioningFolder = "${config.users.users.${user}.home}/${provisionFolder}";
+    in
+    ''
+      rm -rf ${provisioningFolder} && mkdir -p ${provisioningFolder}
+      cp -f ${secrets.persesAdminUser.path} ${provisioningFolder}/1-admin-user.json
+      cp -f ${./perses/provision}/* ${provisioningFolder}
+    '';
 
   virtualisation.oci-containers.containers.perses = {
     serviceName = "perses";
@@ -49,13 +75,15 @@ in
       inherit user;
       sdnotify = "healthy";
     };
-    environmentFiles = [config.age.secrets.persesSecret.path];
+    environmentFiles = [ secrets.persesSecret.path ];
     environment = {
       PERSES_SECURITY_AUTHENTICATION_PROVIDERS_ENABLE_NATIVE = "true";
       PERSES_SECURITY_AUTHENTICATION_DISABLE_SIGN_UP = "true";
       PERSES_SECURITY_ENABLE_AUTH = "true";
       PERSES_SECURITY_COOKIE_SAME_SITE = "strict";
       PERSES_SECURITY_COOKIE_SECURE = "true";
+      PERSES_PROVISIONING_FOLDERS_0 = "/perses/${provisionFolder}";
+      # PERSES_PROVISIONING_INTERVAL = "1m";
       # PERSES_AUTHORIZATION_GUEST_PERMISSIONS_ACTIONS = "read";
     };
     volumes = [

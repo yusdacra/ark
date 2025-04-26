@@ -32,7 +32,11 @@ tlib.genPkgs (
           rage
           nh
         ])
-        ++ [ agenix-wrapped commit deploy ];
+        ++ [
+          agenix-wrapped
+          commit
+          deploy
+        ];
       shellHook = ''
         echo \"$(tput bold)welcome to PRTS, $USER$(tput sgr0)\"
         export FLAKE=$PWD

@@ -32,6 +32,13 @@ in
     yusdacra
     wolumonde
   ];
-  "deployWebhook.age".publicKeys = [yusdacra];
-  "persesSecret.age".publicKeys = [yusdacra wolumonde];
+  "deployWebhook.age".publicKeys = [ yusdacra ];
+  "persesSecret.age".publicKeys = [
+    yusdacra
+    wolumonde
+  ];
+  "persesAdminUser.age".publicKeys = [
+    yusdacra
+    wolumonde
+  ];
 }
