@@ -1,45 +1,68 @@
-{ config, ... }:
+{ lib, config, ... }:
+let
+  syslogUdp = 5113;
+in
 {
-  # Enable single-node VictoriaMetrics on port 8428 (default)
   services.victoriametrics = {
     enable = true;
-    listenAddress = ":8428"; # default port for metrics
-    prometheusConfig = {
-      scrape_configs = [
-        {
-          job_name = "node";
-          static_configs = [
-            {
-              targets = [ "localhost:9100" ];
-              labels.type = "node";
-            }
-          ];
-        }
-        {
-          job_name = "nginx";
-          static_configs = [ { targets = [ "localhost:9113" ]; } ];
-        }
-      ];
-    };
+    listenAddress = ":8428";
   };
 
-  # Enable VictoriaLogs (logs database) on port 9428 (default)
   services.victorialogs = {
     enable = true;
-    listenAddress = ":9428"; # default port for logs
-    # You can add extra options if needed, e.g. authentication or retention
-    # extraOptions = [ "-loggerLevel=INFO" ];
+    listenAddress = ":9428";
+    # extraOptions = ["-syslog.listenAddr.udp=:${toString syslogUdp}" "-journald.maxRequestSize=1024000000"];
   };
 
-  # Enable vmalert for LogsQL recording rules
   services.vmalert = {
     enable = true;
-    # Point vmalert to VictoriaLogs and VictoriaMetrics
-    settings = {
-      "datasource.url" = "http://127.0.0.1${config.services.victorialogs.listenAddress}"; # VictoriaLogs address
-      "remoteWrite.url" = "http://127.0.0.1${config.services.victoriametrics.listenAddress}"; # Remote-write to VictoriaMetrics
-      "remoteRead.url" = "http://127.0.0.1${config.services.victoriametrics.listenAddress}"; # Remote-read from VictoriaMetrics
-      "rule.defaultRuleType" = "vlogs"; # Use LogsQL rules by default
-    };
+    settings =
+      let
+        l = "http://localhost";
+      in
+      {
+        "datasource.url" = "${l}${config.services.victorialogs.listenAddress}";
+        "remoteWrite.url" = "${l}${config.services.victoriametrics.listenAddress}";
+        "remoteRead.url" = "${l}${config.services.victoriametrics.listenAddress}";
+        "rule.defaultRuleType" = "vlogs";
+      };
   };
+
+  services.fluent-bit.settings.pipeline.outputs = [
+    # write metrics to victoriametrics via prometheus
+    {
+      name = "prometheus_remote_write";
+      match = "metrics.*";
+      port = lib.removePrefix ":" config.services.victoriametrics.listenAddress;
+      uri = "/api/v1/write";
+    }
+    {
+      name = "http";
+      match = "logs.*";
+      port = lib.removePrefix ":" config.services.victorialogs.listenAddress;
+      uri = "/insert/jsonline?_stream_fields=stream&_msg_field=log&_time_field=date";
+      format = "json_lines";
+      json_date_format = "iso8601";
+    }
+    # write logs via syslog
+    # {
+    #   name = "syslog";
+    #   match = "*.log";
+    #   port = syslogUdp;
+    #   syslog_maxsize = 4096;
+    #   syslog_severity_key = "severity";
+    #   syslog_facility_key = "facility";
+    #   syslog_hostname_key = "hostname";
+    #   syslog_appname_key = "appname";
+    #   syslog_procid_key = "procid";
+    #   syslog_msgid_key = "msgid";
+    #   syslog_sd_key = "sd";
+    #   syslog_message_key = "message";
+    # }
+  ];
+
+  # services.journald.upload = {
+  #   enable = true;
+  #   settings.Upload.URL = "http://localhost${config.services.victorialogs.listenAddress}/insert/journald";
+  # };
 }

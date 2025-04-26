@@ -18,12 +18,13 @@ let
     config.Cmd = [
       "--config=/etc/perses/config.yaml"
       "--log.level=info"
+      "--web.listen-address=:${toString port}"
       # "--log.method-trace"
     ];
     config.Healthcheck = {
       Test = [
         "/bin/curl"
-        "http://localhost:8080/api/v1/health"
+        "http://localhost:${toString port}/api/v1/health"
       ];
       Retries = 3;
     };
@@ -89,7 +90,9 @@ in
     volumes = [
       "/var/lib/perses:/perses"
     ];
-    ports = [ "${toString port}:8080" ];
+    extraOptions = [
+      "--network=host"
+    ];
   };
 
   services.nginx.virtualHosts.${domain} = {

@@ -11,6 +11,7 @@
       extraConfig = ''
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection $connection_upgrade;
+        proxy_set_header id $request_id;
       '';
       # higher prio just to make sure
       priority = 100;
@@ -37,6 +38,39 @@
       PDS_CRAWLERS = "https://bsky.network";
     };
     environmentFiles = [ config.age.secrets.pdsConfig.path ];
+  };
+
+  services.fluent-bit.settings = {
+    parsers = [
+      {
+        name = "pds_json";
+        format = "json";
+        time_key = "time";
+        time_strict = false;
+      }
+    ];
+    pipeline = {
+      inputs = [
+        {
+          name = "systemd";
+          tag = "logs.pds";
+          systemd_filter = "_SYSTEMD_UNIT=pds.service";
+        }
+      ];
+      filters = [
+        {
+          name = "parser";
+          match = "logs.pds";
+          key_name = "MESSAGE";
+          parser = "pds_json";
+        }
+        {
+          name = "modify";
+          match = "logs.pds";
+          Rename = [ "msg _msg" ];
+        }
+      ];
+    };
   };
 
   # virtualisation = {
