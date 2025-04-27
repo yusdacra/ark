@@ -25,18 +25,45 @@ def webhook [title: string, content: string, exit_code?: number, ping?: bool = f
   http post --content-type application/json $"https://discord.com/api/webhooks/($env.WEBHOOK_ID)/($env.WEBHOOK_TOKEN)" $msg
 }
 
+def upload-paste [content: any] {
+  let paste_url = http post --content-type multipart/form-data "https://0x0.st" {file: ($content | to text | into binary), secret: true}
+  return $paste_url
+}
+
+def time-block [block] {
+  let start = date now
+  let result = do $block
+  let end = date now
+  return {result: $result, elapsed: ($end - $start)}
+}
+
 def deploy [hostname: string] {
-  log info $"trying to deploy host ($hostname)"
+  log info $"start deploy host ($hostname)"
   let hooktitle = $"/($hostname)/deploy"
 
-  let start = date now
-  webhook $hooktitle $"=== deploying ($hostname): started ===\n\n(sys disks | to text)\n\n(sys mem | to text)"
+  webhook $hooktitle $"=== deploy for ($hostname): started ===\n\n(sys disks | to text)\n\n(sys mem | to text)"
 
-  let result = nix run $".#apps.nixinate.($hostname)" -L --show-trace | complete
-  let end = date now
+  log info $"build host ($hostname)"
+  webhook $"($hooktitle)/build" $"=== building ($hostname) ==="
+  let build_result = time-block { nh os build -H $hostname -- -L --show-trace | complete }
+  let build_failed = $build_result.result.exit_code != 0
+  webhook $"($hooktitle)/build" $"=== built ($hostname) ===\n\ntook ($build_result.elapsed)\n\nlog: (upload-paste $build_result.result)" $build_result.result.exit_code $build_failed
 
-  let paste_url = http post --content-type multipart/form-data "https://0x0.st" {file: ($result | to text | into binary), secret: true}
-  webhook $hooktitle $"=== deployed ($hostname): finished ===\n\ntook ($end - $start)\n\nlog: ($paste_url)" $result.exit_code true
+  if $build_failed {
+    return
+  }
+
+  log info $"deploy host ($hostname)"
+  webhook $"($hooktitle)/build" $"=== deploying ($hostname) ==="
+  let deploy_result = time-block { nix run $".#apps.nixinate.($hostname)" -L --show-trace | complete }
+  let deploy_failed = $deploy_result.result.exit_code != 0
+  webhook $"($hooktitle)/build" $"=== deployed ($hostname) ===\n\ntook ($deploy_result.elapsed)\n\nlog: (upload-paste $deploy_result.result)" $deploy_result.result.exit_code $deploy_failed
+
+  if $deploy_failed {
+    return
+  }
+
+  webhook $hooktitle $"=== deploy for ($hostname): finished ===" 0 true
 }
 
 def update-input [input: string] {
