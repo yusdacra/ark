@@ -1,0 +1,1 @@
+../../../modules/nushell/default.nix
