@@ -7,6 +7,10 @@ path add /nix/var/nix/profiles/default/bin
 # load webhook secrets
 rage -d -i ./ssh_key ./secrets/deployWebhook.age | from toml | load-env
 
+def log [msg: string, --type (-t): string = "info"] {
+  print $"[($type)][(date now | format date "%H:%M:%S")] ($msg)"
+}
+
 def webhook [title: string, content: string, exit_code?: number, ping?: bool = false] {
   let type = if $exit_code == null { "⌛" } else if $exit_code == 0 { "✔️" } else { "❌" }
   let msg = {
@@ -19,10 +23,13 @@ def webhook [title: string, content: string, exit_code?: number, ping?: bool = f
       }
     }]
   }
+
+  log -t debug "posting webhook...."
   http post --content-type application/json $"https://discord.com/api/webhooks/($env.WEBHOOK_ID)/($env.WEBHOOK_TOKEN)" $msg
 }
 
 def deploy [hostname: string] {
+  log $"trying to deploy host ($hostname)"
   let hooktitle = $"/($hostname)/deploy"
 
   let start = date now
@@ -36,6 +43,7 @@ def deploy [hostname: string] {
 }
 
 def update-input [input: string] {
+  log $"trying to update input ($input)"
   let result = nix flake update $input | complete
   let is_ok = ($result.stderr | str contains "Updated input")
   let is_err = ($result.exit_code != 0)
@@ -59,6 +67,7 @@ def main [] {
   update-input "blog"
 
   try {
+    log "trying to update dns records"
     nix run ".#dns" -- push
   } catch { |err|
     webhook "dns" $"=== error pushing dns ===\n\n($err.msg | to text)" 1
