@@ -48,6 +48,8 @@ in
   services.anubis.instances."forgejo".settings = {
     BIND = ":6293";
     BIND_NETWORK = "tcp";
+    METRICS_BIND = ":9090";
+    METRICS_BIND_NETWORK = "tcp";
     TARGET = "http://localhost:${toString forgejoCfg.server.HTTP_PORT}";
     WEBMASTER_EMAIL = "90008@gaze.systems";
     SERVE_ROBOTS_TXT = true;
@@ -61,6 +63,11 @@ in
       job_name = "forgejo";
       metrics_path = "/metrics";
       static_configs = [ { targets = [ "localhost:${toString forgejoCfg.server.HTTP_PORT}" ]; } ];
+    }
+    {
+      job_name = "anubis_forgejo";
+      metrics_path = "/metrics";
+      static_configs = [ { targets = [ "localhost${anubisCfg.METRICS_BIND}" ]; } ];
     }
   ];
 }
