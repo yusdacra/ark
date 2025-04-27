@@ -1,4 +1,8 @@
 { pkgs, config, ... }:
+let
+  forgejoCfg = config.services.forgejo.settings;
+  anubisCfg = config.services.anubis.instances."forgejo".settings;
+in
 {
   services.forgejo = {
     enable = true;
@@ -22,6 +26,7 @@
         THEMES = "edge-dark,forgejo-dark";
         THEME_COLOR_META_TAG = "#333644";
       };
+      metrics.ENABLED = true;
     };
   };
 
@@ -30,17 +35,32 @@
     forceSSL = true;
     quic = true;
     kTLS = true;
+    # disallow metrics for public
+    locations."/metrics".return = "403";
     locations."/" = {
       extraConfig = ''
         client_max_body_size 1000m;
       '';
-      proxyPass = "http://localhost${config.services.anubis.instances."forgejo".settings.BIND}";
+      proxyPass = "http://localhost${anubisCfg.BIND}";
     };
   };
 
-  services.anubis.instances."forgejo" = {
-    settings.BIND = ":6293";
-    settings.BIND_NETWORK = "tcp";
-    settings.TARGET = "http://localhost:${toString config.services.forgejo.settings.server.HTTP_PORT}";
+  services.anubis.instances."forgejo".settings = {
+    BIND = ":6293";
+    BIND_NETWORK = "tcp";
+    TARGET = "http://localhost:${toString forgejoCfg.server.HTTP_PORT}";
+    WEBMASTER_EMAIL = "90008@gaze.systems";
+    SERVE_ROBOTS_TXT = true;
+    OG_PASSTHROUGH = true;
+    DIFFICULTY = 4;
   };
+
+  # scrape forgejo metrics
+  services.victoriametrics.prometheusConfig.scrape_configs = [
+    {
+      job_name = "forgejo";
+      metrics_path = "/metrics";
+      static_configs = [ { targets = [ "localhost:${toString forgejoCfg.server.HTTP_PORT}" ]; } ];
+    }
+  ];
 }
