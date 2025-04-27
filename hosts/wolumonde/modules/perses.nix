@@ -105,6 +105,15 @@ in
     };
   };
 
+  # scrape perses metrics
+  services.victoriametrics.prometheusConfig.scrape_configs = [
+    {
+      job_name = "perses";
+      metrics_path = "/metrics";
+      static_configs = [ { targets = [ "localhost:${toString port}" ]; } ];
+    }
+  ];
+
   # podmanning
   virtualisation.podman = {
     enable = true;
