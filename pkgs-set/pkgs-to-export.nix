@@ -3,4 +3,5 @@ pkgs:
   "phantom"
   "comic-mono"
   "bitwig-studio"
+  "percli"
 ] pkgs)

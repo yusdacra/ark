@@ -1,6 +1,6 @@
 { lib, pkgs, ... }:
 {
-  environment.shells = [pkgs.nushell];
+  environment.shells = [ pkgs.nushell ];
   users.users.root.shell = pkgs.nushell;
 
   home-manager.users.root = {

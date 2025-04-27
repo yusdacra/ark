@@ -35,6 +35,8 @@ let
   provisionFolder = "provisioning";
 in
 {
+  environment.systemPackages = [ pkgs.percli ];
+
   users.users.${user} = {
     isNormalUser = true;
     group = user;
