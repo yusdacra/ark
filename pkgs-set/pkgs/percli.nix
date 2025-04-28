@@ -5,21 +5,21 @@
 }:
 let
   pname = "percli";
-  version = "0.51.0-beta.1";
+  version = "0.50.3";
 
   src = fetchFromGitHub {
     owner = "perses";
     repo = "perses";
     tag = "v${version}";
-    hash = "sha256-tub9W9ZOv1CDaZb/4JPg98HhfBqpVDSBQ6GNR8fBJ1Y=";
+    hash = "sha256-E8PTPit9QLPMlLvdx8rbw0BwC+ZqSMTHdfPJ4aE4dsw=";
   };
 in
 buildGoModule {
   inherit pname version src;
 
-  CGO_ENABLED = 0;
+  env.CGO_ENABLED = 0;
 
   subPackages = [ "cmd/percli" ];
 
-  vendorHash = "sha256-2qtyEIzMu3UIDbsqhpAJDVYr7WGmE6H3ngN74HaON04=";
+  vendorHash = "sha256-yUqV6pBl6tyE4f4tBVN0DwgVFey+1btVpK7eiMKkwIY=";
 }

@@ -1,0 +1,12 @@
+- kind: GlobalRole
+  metadata:
+    name: guest
+  spec:
+    permissions:
+    - actions:
+      - 'read'
+      scopes:
+      - 'Dashboard'
+      - 'Project'
+      - 'Datasource'
+      - 'GlobalDatasource'

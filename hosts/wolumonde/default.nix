@@ -10,7 +10,10 @@
     # inputs.nixtopo.nixosModules.default
   ] ++ (tlib.importFolder (toString ./modules));
 
-  environment.systemPackages = [ pkgs.magic-wormhole-rs ];
+  environment.systemPackages = with pkgs; [
+    magic-wormhole-rs
+    systemctl-tui
+  ];
 
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;

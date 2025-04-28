@@ -20,6 +20,7 @@ tlib.genPkgs (
     };
     commit = pkgs.writers.writeNuBin "commit" ../commit.nu;
     deploy = pkgs.writers.writeNuBin "deploy" ../deploy.nu;
+    dash = pkgs.writers.writeNuBin "dash" ./dash.nu;
   in
   {
     default = mkNakedShell {
@@ -31,8 +32,14 @@ tlib.genPkgs (
           treefmt
           rage
           nh
+          percli
+          go
+          gopls
+          # golangci-lint
+          # golangci-lint-langserver
         ])
         ++ [
+          dash
           agenix-wrapped
           commit
           deploy

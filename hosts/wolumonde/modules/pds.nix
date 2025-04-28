@@ -73,6 +73,28 @@
     };
   };
 
+  services.vmalert.rules.groups = [
+    {
+      name = "pds-logs";
+      type = "vlogs";
+      interval = "1m";
+      rules = [
+        {
+          record = "pds_request_count";
+          expr = "name:pds | stats count(*) as requests";
+        }
+        {
+          record = "pds_5xx_count";
+          expr = ''name:pds | res.statusCode:~"5.." | stats count(*) as errors'';
+        }
+        {
+          record = "pds_response_latency";
+          expr = "name:pds | stats avg(responseTime) avg, quantile(0.5, responseTime) p50, quantile(0.9, responseTime) p90, quantile(0.99, responseTime) p99";
+        }
+      ];
+    }
+  ];
+
   # virtualisation = {
   #   podman = {
   #     enable = true;

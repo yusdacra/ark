@@ -31,7 +31,7 @@
       '"req.headers.id":"$request_id",'
       '"req.headers.referer":"$http_referer",'
       '"req.headers.user-agent":"$http_user_agent",'
-      '"responseTime":$request_time'
+      '"requestTime":$request_time'
     '}';
     access_log /var/log/nginx/access.log json_logs;
   '';
@@ -89,6 +89,13 @@
           parser = "nginx_json";
         }
       ];
+      filters = [
+        {
+          name = "modify";
+          match = "logs.nginx";
+          Add = [ "name nginx" ];
+        }
+      ];
     };
   };
 
@@ -103,19 +110,20 @@
       rules = [
         {
           record = "nginx_request_count";
-          expr = "* | stats count() as requests";
+          expr = "name:nginx | stats count(*) as req";
         }
         {
           record = "nginx_2xx_count";
-          expr = ''* | res.statusCode:~"2.." | stats count() as successes'';
+          expr = ''name:nginx | res.statusCode:~"2.." | stats count(*) as success'';
         }
         {
           record = "nginx_5xx_count";
-          expr = ''* | res.statusCode:~"5.." | stats count() as errors'';
+          expr = ''name:nginx | res.statusCode:~"5.." | stats count(*) as error'';
         }
         {
-          record = "nginx_request_latency_avg";
-          expr = "* | stats avg(responseTime) as avg_latency";
+          record = "nginx_request_latency";
+          # filter out subscribeRepos requests because they are long polling http L
+          expr = "name:nginx | filter req.url:!/xrpc/com.atproto.sync.subscribeRepos | stats avg(requestTime) avg, quantile(0.5, requestTime) p50, quantile(0.9, requestTime) p90, quantile(0.99, requestTime) p99";
         }
       ];
     }

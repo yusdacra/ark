@@ -5,6 +5,8 @@ use std/log
 
 path add /nix/var/nix/profiles/default/bin
 
+cd $env.FLAKE
+
 # load webhook secrets
 rage -d -i ./ssh_key ./secrets/deployWebhook.age | from toml | load-env
 

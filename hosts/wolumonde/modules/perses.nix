@@ -4,6 +4,28 @@ let
   port = 7412;
   user = "perses";
 
+  provisionFolder = "provisioning";
+
+  persesConfig = {
+    database.file = {
+      folder = "/perses";
+      extension = "json";
+    };
+    provisioning.folders = [ "/perses/${provisionFolder}" ];
+    security = {
+      enable_auth = true;
+      authentication = {
+        providers.enable_native = true;
+        disable_sign_up = true;
+      };
+      cookie = {
+        same_site = "strict";
+        secure = true;
+      };
+    };
+  };
+  persesConfigYaml = pkgs.writers.writeYAML "config.yaml" persesConfig;
+
   persesImage = pkgs.dockerTools.pullImage {
     imageName = "docker.io/persesdev/perses";
     imageDigest = "sha256:7d4647ce31841f67c2361bd10ea344de1edd7fbf65711c75805a5aacdc7735d0";
@@ -16,7 +38,7 @@ let
     contents = [ pkgs.curl ];
     config.Entrypoint = [ "/bin/perses" ];
     config.Cmd = [
-      "--config=/etc/perses/config.yaml"
+      "--config=${persesConfigYaml}"
       "--log.level=info"
       "--web.listen-address=:${toString port}"
       # "--log.method-trace"
@@ -32,7 +54,6 @@ let
 
   persesEnv = config.virtualisation.oci-containers.containers.perses.environment;
   secrets = config.age.secrets;
-  provisionFolder = "provisioning";
 in
 {
   environment.systemPackages = [ pkgs.percli ];
@@ -79,18 +100,8 @@ in
       sdnotify = "healthy";
     };
     environmentFiles = [ secrets.persesSecret.path ];
-    environment = {
-      PERSES_SECURITY_AUTHENTICATION_PROVIDERS_ENABLE_NATIVE = "true";
-      PERSES_SECURITY_AUTHENTICATION_DISABLE_SIGN_UP = "true";
-      PERSES_SECURITY_ENABLE_AUTH = "true";
-      PERSES_SECURITY_COOKIE_SAME_SITE = "strict";
-      PERSES_SECURITY_COOKIE_SECURE = "true";
-      PERSES_PROVISIONING_FOLDERS_0 = "/perses/${provisionFolder}";
-      # PERSES_PROVISIONING_INTERVAL = "1m";
-      # PERSES_AUTHORIZATION_GUEST_PERMISSIONS_ACTIONS = "read";
-    };
     volumes = [
-      "/var/lib/perses:/perses"
+      "/var/lib/perses:${persesConfig.database.file.folder}"
     ];
     extraOptions = [
       "--network=host"
