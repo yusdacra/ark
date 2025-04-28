@@ -34,6 +34,24 @@ func main() {
 			),
 		),
 	)
+	var cpuPanel = panels.AddPanel("cpu usage",
+		timeSeries.Chart(
+			timeSeries.WithYAxis(
+				timeSeries.YAxis{
+					Format: &common.Format{
+						Unit: "percent",
+					},
+					Max: 100.0,
+				},
+			),
+		),
+		panel.AddQuery(
+			query.PromQL(
+				`sum by (cpu) (rate(node_cpu_seconds_total{mode=~"user|system"}[1m])) * 100`,
+				query.SeriesNameFormat("cpu {{cpu}}"),
+			),
+		),
+	)
 	var memoryPanel = panels.AddPanel("memory usage",
 		timeSeries.Chart(
 			timeSeries.WithYAxis(
@@ -54,7 +72,7 @@ func main() {
 	)
 	var resPanels = dash.AddPanelGroup("resource usage",
 		panels.PanelsPerLine(4),
-		loadPanel, memoryPanel,
+		loadPanel, cpuPanel, memoryPanel,
 	)
 
 	var nginxPanel = panels.AddPanel("nginx requests / min",
