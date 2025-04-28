@@ -14,7 +14,9 @@ spec:
                     name: load over 5 min
                 plugin:
                     kind: TimeSeriesChart
-                    spec: {}
+                    spec:
+                        yAxis:
+                            max: 2
                 queries:
                     - kind: TimeSeriesQuery
                       spec:

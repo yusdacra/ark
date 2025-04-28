@@ -20,7 +20,13 @@ func main() {
 	flag.Parse()
 	exec := sdk.NewExec()
 	var loadPanel = panels.AddPanel("load over 5 min",
-		timeSeries.Chart(),
+		timeSeries.Chart(
+			timeSeries.WithYAxis(
+				timeSeries.YAxis{
+					Max: 2.0,
+				},
+			),
+		),
 		panel.AddQuery(
 			query.PromQL(
 				"node_load5",
