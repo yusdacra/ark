@@ -115,7 +115,7 @@ func main() {
 					Format: &common.Format{
 						Unit: "seconds",
 					},
-					Max: 1.0,
+					Max: 0.5,
 				},
 			),
 		),
@@ -173,7 +173,7 @@ func main() {
 					Format: &common.Format{
 						Unit: "milliseconds",
 					},
-					Max: 1000,
+					Max: 500,
 				},
 			),
 		),
