@@ -1,15 +1,18 @@
 let host_colors = {
     higashi: {start: "0xEC5228", end: "0xEF9651"},
     wolumonde: {start: "0x603F26", end: "0x6C4E31"},
+    chernobog: {start: "0xA94438", end: "0xD24545"},
 }
 let user_colors = {
     kirara: {start: "0xFF407D", end: "0xEE99C2"},
     root: {start: "0xC5172E", end: "0xBF3131"},
+    dusk: {start: "0x640D5F", end: "0xD91656"},
 }
 
 def create_left_prompt [] {
     let hostname = sys host | get hostname
-    let username = ^whoami
+    # str replace handles whoami output on windows
+    let username = ^whoami | str replace $"($hostname)\\" ""
 
     let c = $host_colors | get $hostname
     let hostname_fmt = $hostname | ansi gradient --fgstart $c.start --fgend $c.end

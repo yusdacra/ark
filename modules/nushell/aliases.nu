@@ -16,5 +16,7 @@ alias nb = nix build
 alias nd = nix develop
 alias ns = nix shell
 
+alias e = hx
+
 def mem [] { sys mem }
 def df [] { sys disks }
