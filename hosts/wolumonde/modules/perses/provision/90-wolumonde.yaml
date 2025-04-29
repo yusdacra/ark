@@ -169,6 +169,54 @@ spec:
             kind: Panel
             spec:
                 display:
+                    name: gazesys visits
+                plugin:
+                    kind: BarChart
+                    spec:
+                        calculation: last
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: gazesys_visit_real_total + gazesys_visit_fake_total
+                                seriesNameFormat: total visits
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: gazesys_visit_fake_total
+                                seriesNameFormat: (ai) bot visits
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: gazesys_visit_real_total
+                                seriesNameFormat: real visits
+        "3_1":
+            kind: Panel
+            spec:
+                display:
+                    name: gazesys pet bounce count
+                plugin:
+                    kind: StatChart
+                    spec:
+                        calculation: last
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: gazesys_pet_bounce_total
+                                seriesNameFormat: bounce count
+        "4_0":
+            kind: Panel
+            spec:
+                display:
                     name: anubis policy actions
                 plugin:
                     kind: BarChart
@@ -243,7 +291,7 @@ spec:
         - kind: Grid
           spec:
             display:
-                title: forgejo
+                title: gazesys
             items:
                 - x: 0
                   "y": 0
@@ -251,5 +299,22 @@ spec:
                   height: 6
                   content:
                     $ref: '#/spec/panels/3_0'
+                - x: 8
+                  "y": 0
+                  width: 8
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/3_1'
+        - kind: Grid
+          spec:
+            display:
+                title: forgejo
+            items:
+                - x: 0
+                  "y": 0
+                  width: 8
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/4_0'
     duration: 30m
     refreshInterval: 1m

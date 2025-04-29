@@ -10,6 +10,7 @@ import (
 	"github.com/perses/perses/go-sdk/panel"
 	panels "github.com/perses/perses/go-sdk/panel-group"
 	"github.com/perses/perses/go-sdk/panel/bar"
+	"github.com/perses/perses/go-sdk/panel/stat"
 	"github.com/perses/perses/go-sdk/prometheus/query"
 
 	timeSeries "github.com/perses/perses/go-sdk/panel/time-series"
@@ -206,11 +207,48 @@ func main() {
 		anubisForgejoPanel,
 	)
 
+	var gazesys_visit_panel = panels.AddPanel("gazesys visits",
+		bar.Chart(),
+		panel.AddQuery(
+			query.PromQL(
+				"gazesys_visit_real_total + gazesys_visit_fake_total",
+				query.SeriesNameFormat("total visits"),
+			),
+		),
+		panel.AddQuery(
+			query.PromQL(
+				"gazesys_visit_fake_total",
+				query.SeriesNameFormat("(ai) bot visits"),
+			),
+		),
+		panel.AddQuery(
+			query.PromQL(
+				"gazesys_visit_real_total",
+				query.SeriesNameFormat("real visits"),
+			),
+		),
+	)
+
+	var gazesys_pet_panel = panels.AddPanel("gazesys pet bounce count",
+		stat.Chart(),
+		panel.AddQuery(
+			query.PromQL(
+				"gazesys_pet_bounce_total",
+				query.SeriesNameFormat("bounce count"),
+			),
+		),
+	)
+
+	var gazesys_panels = dash.AddPanelGroup("gazesys",
+		panels.PanelsPerLine(3),
+		gazesys_visit_panel, gazesys_pet_panel,
+	)
+
 	builder, buildErr := dash.New("wolumonde",
 		dash.ProjectName("private-infra"),
 		dash.Duration(30*time.Minute),
 		dash.RefreshInterval(time.Minute),
-		resPanels, nginxPanels, pdsPanels, forgejoPanels,
+		resPanels, nginxPanels, pdsPanels, gazesys_panels, forgejoPanels,
 	)
 	exec.BuildDashboard(builder, buildErr)
 }
