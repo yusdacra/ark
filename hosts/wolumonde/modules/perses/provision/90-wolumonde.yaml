@@ -13,6 +13,86 @@ spec:
                 display:
                     name: load over 5 min
                 plugin:
+                    kind: GaugeChart
+                    spec:
+                        calculation: last
+                        format:
+                            unit: percent
+                        max: 100
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: node_load5 * 100 / count(count(node_cpu_seconds_total) by (cpu))
+                                seriesNameFormat: load %
+        "0_1":
+            kind: Panel
+            spec:
+                display:
+                    name: cpu usage
+                plugin:
+                    kind: GaugeChart
+                    spec:
+                        calculation: last
+                        format:
+                            unit: percent
+                        max: 100
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: sum by (cpu) (rate(node_cpu_seconds_total{mode=~"user|system"}[1m])) * 100
+                                seriesNameFormat: cpu {{cpu}}
+        "0_2":
+            kind: Panel
+            spec:
+                display:
+                    name: memory usage
+                plugin:
+                    kind: GaugeChart
+                    spec:
+                        calculation: last
+                        format:
+                            unit: percent
+                        max: 100
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) * 100 / node_memory_MemTotal_bytes
+                                seriesNameFormat: memory usage %
+        "0_3":
+            kind: Panel
+            spec:
+                display:
+                    name: disk usage /
+                plugin:
+                    kind: GaugeChart
+                    spec:
+                        calculation: last
+                        format:
+                            unit: percent
+                        max: 100
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: (node_filesystem_size_bytes{mountpoint="/"} - node_filesystem_free_bytes{mountpoint="/"}) * 100 / node_filesystem_size_bytes{mountpoint="/"}
+                                seriesNameFormat: disk usage %
+        "0_4":
+            kind: Panel
+            spec:
+                display:
+                    name: load over 5 min
+                plugin:
                     kind: TimeSeriesChart
                     spec:
                         yAxis:
@@ -25,7 +105,7 @@ spec:
                             spec:
                                 query: node_load5
                                 seriesNameFormat: load
-        "0_1":
+        "0_5":
             kind: Panel
             spec:
                 display:
@@ -45,7 +125,7 @@ spec:
                             spec:
                                 query: sum by (cpu) (rate(node_cpu_seconds_total{mode=~"user|system"}[1m])) * 100
                                 seriesNameFormat: cpu {{cpu}}
-        "0_2":
+        "0_6":
             kind: Panel
             spec:
                 display:
@@ -65,6 +145,26 @@ spec:
                             spec:
                                 query: node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes
                                 seriesNameFormat: current memory usage
+        "0_7":
+            kind: Panel
+            spec:
+                display:
+                    name: disk usage /
+                plugin:
+                    kind: TimeSeriesChart
+                    spec:
+                        yAxis:
+                            format:
+                                unit: bytes
+                            max: 3.8e+10
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: node_filesystem_size_bytes{mountpoint="/"} - node_filesystem_free_bytes{mountpoint="/"}
+                                seriesNameFormat: disk usage
         "1_0":
             kind: Panel
             spec:
@@ -254,6 +354,36 @@ spec:
                   height: 6
                   content:
                     $ref: '#/spec/panels/0_2'
+                - x: 18
+                  "y": 0
+                  width: 6
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/0_3'
+                - x: 0
+                  "y": 6
+                  width: 6
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/0_4'
+                - x: 6
+                  "y": 6
+                  width: 6
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/0_5'
+                - x: 12
+                  "y": 6
+                  width: 6
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/0_6'
+                - x: 18
+                  "y": 6
+                  width: 6
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/0_7'
         - kind: Grid
           spec:
             display:

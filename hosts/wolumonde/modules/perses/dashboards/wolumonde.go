@@ -10,6 +10,7 @@ import (
 	"github.com/perses/perses/go-sdk/panel"
 	panels "github.com/perses/perses/go-sdk/panel-group"
 	"github.com/perses/perses/go-sdk/panel/bar"
+	"github.com/perses/perses/go-sdk/panel/gauge"
 	"github.com/perses/perses/go-sdk/panel/stat"
 	"github.com/perses/perses/go-sdk/prometheus/query"
 
@@ -20,6 +21,7 @@ import (
 func main() {
 	flag.Parse()
 	exec := sdk.NewExec()
+
 	var loadPanel = panels.AddPanel("load over 5 min",
 		timeSeries.Chart(
 			timeSeries.WithYAxis(
@@ -71,9 +73,80 @@ func main() {
 			),
 		),
 	)
+
+	var diskPanel = panels.AddPanel("disk usage /",
+		timeSeries.Chart(
+			timeSeries.WithYAxis(
+				timeSeries.YAxis{
+					Format: &common.Format{
+						Unit: "bytes",
+					},
+					Max: 38000000000,
+				},
+			),
+		),
+		panel.AddQuery(
+			query.PromQL(
+				`node_filesystem_size_bytes{mountpoint="/"} - node_filesystem_free_bytes{mountpoint="/"}`,
+				query.SeriesNameFormat("disk usage"),
+			),
+		),
+	)
+
+	// Gauge versions (percent unit)
+	var loadGaugePanel = panels.AddPanel("load over 5 min",
+		gauge.Chart(
+			gauge.Format(common.Format{Unit: "percent"}),
+			gauge.Max(100),
+		),
+		panel.AddQuery(
+			query.PromQL(
+				"node_load5 * 100 / count(count(node_cpu_seconds_total) by (cpu))",
+				query.SeriesNameFormat("load %"),
+			),
+		),
+	)
+	var cpuGaugePanel = panels.AddPanel("cpu usage",
+		gauge.Chart(
+			gauge.Format(common.Format{Unit: "percent"}),
+			gauge.Max(100),
+		),
+		panel.AddQuery(
+			query.PromQL(
+				`sum by (cpu) (rate(node_cpu_seconds_total{mode=~"user|system"}[1m])) * 100`,
+				query.SeriesNameFormat("cpu {{cpu}}"),
+			),
+		),
+	)
+	var memoryGaugePanel = panels.AddPanel("memory usage",
+		gauge.Chart(
+			gauge.Format(common.Format{Unit: "percent"}),
+			gauge.Max(100),
+		),
+		panel.AddQuery(
+			query.PromQL(
+				"(node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) * 100 / node_memory_MemTotal_bytes",
+				query.SeriesNameFormat("memory usage %"),
+			),
+		),
+	)
+	var diskGaugePanel = panels.AddPanel("disk usage /",
+		gauge.Chart(
+			gauge.Format(common.Format{Unit: "percent"}),
+			gauge.Max(100),
+		),
+		panel.AddQuery(
+			query.PromQL(
+				`(node_filesystem_size_bytes{mountpoint="/"} - node_filesystem_free_bytes{mountpoint="/"}) * 100 / node_filesystem_size_bytes{mountpoint="/"}`,
+				query.SeriesNameFormat("disk usage %"),
+			),
+		),
+	)
+
 	var resPanels = dash.AddPanelGroup("resource usage",
 		panels.PanelsPerLine(4),
-		loadPanel, cpuPanel, memoryPanel,
+		loadGaugePanel, cpuGaugePanel, memoryGaugePanel, diskGaugePanel,
+		loadPanel, cpuPanel, memoryPanel, diskPanel,
 	)
 
 	var nginxPanel = panels.AddPanel("nginx requests / min",
