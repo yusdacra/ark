@@ -98,6 +98,7 @@ func main() {
 		gauge.Chart(
 			gauge.Format(common.Format{Unit: "percent"}),
 			gauge.Max(100),
+			gauge.Calculation(common.MeanCalculation),
 		),
 		panel.AddQuery(
 			query.PromQL(
@@ -110,6 +111,7 @@ func main() {
 		gauge.Chart(
 			gauge.Format(common.Format{Unit: "percent"}),
 			gauge.Max(100),
+			gauge.Calculation(common.MeanCalculation),
 		),
 		panel.AddQuery(
 			query.PromQL(
@@ -122,6 +124,7 @@ func main() {
 		gauge.Chart(
 			gauge.Format(common.Format{Unit: "percent"}),
 			gauge.Max(100),
+			gauge.Calculation(common.MeanCalculation),
 		),
 		panel.AddQuery(
 			query.PromQL(

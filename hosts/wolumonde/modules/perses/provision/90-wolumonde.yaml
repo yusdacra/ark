@@ -15,7 +15,7 @@ spec:
                 plugin:
                     kind: GaugeChart
                     spec:
-                        calculation: last
+                        calculation: mean
                         format:
                             unit: percent
                         max: 100
@@ -35,7 +35,7 @@ spec:
                 plugin:
                     kind: GaugeChart
                     spec:
-                        calculation: last
+                        calculation: mean
                         format:
                             unit: percent
                         max: 100
@@ -55,7 +55,7 @@ spec:
                 plugin:
                     kind: GaugeChart
                     spec:
-                        calculation: last
+                        calculation: mean
                         format:
                             unit: percent
                         max: 100
