@@ -9,7 +9,6 @@ let
     '';
   mkWellKnownCfg = files: {
     locations."/.well-known/".extraConfig = ''
-      add_header content-type text/plain;
       add_header access-control-allow-origin *;
       alias ${mkWellKnownDir files}/;
     '';
