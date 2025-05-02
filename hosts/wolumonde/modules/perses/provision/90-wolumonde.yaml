@@ -173,28 +173,25 @@ spec:
                 plugin:
                     kind: TimeSeriesChart
                     spec:
+                        legend:
+                            position: bottom
+                            size: small
                         yAxis:
                             format:
                                 unit: decimal
-                        querySettings:
-                            - queryIndex: 0
-                              colorMode: fixed
-                              colorValue: '#FF0000'
+                        visual:
+                            display: bar
+                            palette:
+                                mode: categorical
+                            stack: all
                 queries:
                     - kind: TimeSeriesQuery
                       spec:
                         plugin:
                             kind: PrometheusTimeSeriesQuery
                             spec:
-                                query: nginx_5xx_count
-                                seriesNameFormat: 5xx errors
-                    - kind: TimeSeriesQuery
-                      spec:
-                        plugin:
-                            kind: PrometheusTimeSeriesQuery
-                            spec:
                                 query: nginx_request_count
-                                seriesNameFormat: requests
+                                seriesNameFormat: '{{res.statusCode}}'
         "1_1":
             kind: Panel
             spec:
@@ -223,28 +220,25 @@ spec:
                 plugin:
                     kind: TimeSeriesChart
                     spec:
+                        legend:
+                            position: bottom
+                            size: small
                         yAxis:
                             format:
                                 unit: decimal
-                        querySettings:
-                            - queryIndex: 0
-                              colorMode: fixed
-                              colorValue: '#FF0000'
+                        visual:
+                            display: bar
+                            palette:
+                                mode: categorical
+                            stack: all
                 queries:
                     - kind: TimeSeriesQuery
                       spec:
                         plugin:
                             kind: PrometheusTimeSeriesQuery
                             spec:
-                                query: pds_5xx_count
-                                seriesNameFormat: 5xx errors
-                    - kind: TimeSeriesQuery
-                      spec:
-                        plugin:
-                            kind: PrometheusTimeSeriesQuery
-                            spec:
                                 query: pds_request_count
-                                seriesNameFormat: requests
+                                seriesNameFormat: '{{res.statusCode}}'
         "2_1":
             kind: Panel
             spec:

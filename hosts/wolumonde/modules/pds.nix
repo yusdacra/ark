@@ -81,11 +81,7 @@
       rules = [
         {
           record = "pds_request_count";
-          expr = "name:pds | stats count(*) as requests";
-        }
-        {
-          record = "pds_5xx_count";
-          expr = ''name:pds | res.statusCode:~"5.." | stats count(*) as errors'';
+          expr = "name:pds | stats (res.statusCode) count() as total_requests";
         }
         {
           record = "pds_response_latency";

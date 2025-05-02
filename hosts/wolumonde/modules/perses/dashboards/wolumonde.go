@@ -154,15 +154,6 @@ func main() {
 
 	var nginxPanel = panels.AddPanel("nginx requests / min",
 		timeSeries.Chart(
-			timeSeries.WithQuerySettings(
-				[]timeSeries.QuerySettingsItem{
-					{
-						QueryIndex: 0,
-						ColorMode:  timeSeries.FixedMode,
-						ColorValue: "#FF0000",
-					},
-				},
-			),
 			timeSeries.WithYAxis(
 				timeSeries.YAxis{
 					Format: &common.Format{
@@ -170,17 +161,22 @@ func main() {
 					},
 				},
 			),
-		),
-		panel.AddQuery(
-			query.PromQL(
-				"nginx_5xx_count",
-				query.SeriesNameFormat("5xx errors"),
-			),
+			timeSeries.WithVisual(timeSeries.Visual{
+				Display: timeSeries.BarDisplay,
+				Palette: timeSeries.Palette{
+					Mode: timeSeries.CategoricalMode,
+				},
+				Stack: timeSeries.AllStack,
+			}),
+			timeSeries.WithLegend(timeSeries.Legend{
+				Position: timeSeries.BottomPosition,
+				Size:     timeSeries.SmallSize,
+			}),
 		),
 		panel.AddQuery(
 			query.PromQL(
 				"nginx_request_count",
-				query.SeriesNameFormat("requests"),
+				query.SeriesNameFormat("{{res.statusCode}}"),
 			),
 		),
 	)
@@ -212,15 +208,6 @@ func main() {
 
 	var pdsPanel = panels.AddPanel("pds requests / min",
 		timeSeries.Chart(
-			timeSeries.WithQuerySettings(
-				[]timeSeries.QuerySettingsItem{
-					{
-						QueryIndex: 0,
-						ColorMode:  timeSeries.FixedMode,
-						ColorValue: "#FF0000",
-					},
-				},
-			),
 			timeSeries.WithYAxis(
 				timeSeries.YAxis{
 					Format: &common.Format{
@@ -228,17 +215,22 @@ func main() {
 					},
 				},
 			),
-		),
-		panel.AddQuery(
-			query.PromQL(
-				"pds_5xx_count",
-				query.SeriesNameFormat("5xx errors"),
-			),
+			timeSeries.WithVisual(timeSeries.Visual{
+				Display: timeSeries.BarDisplay,
+				Palette: timeSeries.Palette{
+					Mode: timeSeries.CategoricalMode,
+				},
+				Stack: timeSeries.AllStack,
+			}),
+			timeSeries.WithLegend(timeSeries.Legend{
+				Position: timeSeries.BottomPosition,
+				Size:     timeSeries.SmallSize,
+			}),
 		),
 		panel.AddQuery(
 			query.PromQL(
 				"pds_request_count",
-				query.SeriesNameFormat("requests"),
+				query.SeriesNameFormat("{{res.statusCode}}"),
 			),
 		),
 	)

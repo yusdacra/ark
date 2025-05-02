@@ -110,15 +110,7 @@
       rules = [
         {
           record = "nginx_request_count";
-          expr = "name:nginx | stats count(*) as req";
-        }
-        {
-          record = "nginx_2xx_count";
-          expr = ''name:nginx | res.statusCode:~"2.." | stats count(*) as success'';
-        }
-        {
-          record = "nginx_5xx_count";
-          expr = ''name:nginx | res.statusCode:~"5.." | stats count(*) as error'';
+          expr = "name:nginx | stats (res.statusCode) count() as total_requests";
         }
         {
           record = "nginx_request_latency";
