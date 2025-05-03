@@ -297,12 +297,24 @@ func main() {
 		),
 	)
 
-	var gazesys_pet_panel = panels.AddPanel("gazesys pet bounce count",
-		stat.Chart(),
+	var gazesys_pet_panel = panels.AddPanel("gazesys pet",
+		stat.Chart(
+			stat.Format(common.Format{
+				Unit:          "decimal",
+				ShortValues:   true,
+				DecimalPlaces: 0,
+			}),
+		),
 		panel.AddQuery(
 			query.PromQL(
 				"gazesys_pet_bounce_total",
 				query.SeriesNameFormat("bounce count"),
+			),
+		),
+		panel.AddQuery(
+			query.PromQL(
+				"gazesys_pet_distance_total",
+				query.SeriesNameFormat("distance travelled"),
 			),
 		),
 	)

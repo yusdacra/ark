@@ -294,11 +294,14 @@ spec:
             kind: Panel
             spec:
                 display:
-                    name: gazesys pet bounce count
+                    name: gazesys pet
                 plugin:
                     kind: StatChart
                     spec:
                         calculation: last
+                        format:
+                            unit: decimal
+                            shortValues: true
                 queries:
                     - kind: TimeSeriesQuery
                       spec:
@@ -307,6 +310,13 @@ spec:
                             spec:
                                 query: gazesys_pet_bounce_total
                                 seriesNameFormat: bounce count
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: gazesys_pet_distance_total
+                                seriesNameFormat: distance travelled
         "4_0":
             kind: Panel
             spec:
