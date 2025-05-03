@@ -1,17 +1,19 @@
 { pkgs, lib, ... }:
 let
-  mkFileCopy = name: file: "cp ${file} $out/${name}";
-  mkWellKnownDir =
-    files:
-    pkgs.runCommand "well-known" { } ''
-      mkdir -p $out
-      ${lib.concatStringsSep "\n" (lib.mapAttrsToList mkFileCopy files)}
-    '';
+  getFileType = name: if lib.hasSuffix ".json" name then "application/json" else "text/plain";
   mkWellKnownCfg = files: {
-    locations."/.well-known/".extraConfig = ''
-      add_header access-control-allow-origin *;
-      alias ${mkWellKnownDir files}/;
-    '';
+    locations = (
+      lib.mapAttrs' (name: file: {
+        name = "=/.well-known/${name}";
+        value = {
+          extraConfig = ''
+            alias ${file};
+            add_header access-control-allow-origin *;
+            default_type ${getFileType name};
+          '';
+        };
+      }) files
+    );
   };
   mkDidWebCfg = domain: {
     "${domain}" =
@@ -22,6 +24,8 @@ let
       // (lib.optionalAttrs (lib.hasSuffix "gaze.systems" domain) {
         useACMEHost = "gaze.systems";
         forceSSL = true;
+        quic = true;
+        kTLS = true;
       });
   };
 in
@@ -35,6 +39,8 @@ in
         // {
           useACMEHost = "gaze.systems";
           forceSSL = true;
+          quic = true;
+          kTLS = true;
         };
       # "9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa" = mkWellKnownCfg {
       #   "atproto-did" = pkgs.writeText "server" "did:plc:dfl62fgb7wtjj3fcbb72naae";
