@@ -41,4 +41,7 @@ in
     yusdacra
     wolumonde
   ];
+  "ratholeCreds.age".publicKeys = [
+    yusdacra wolumonde
+  ];
 }
