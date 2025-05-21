@@ -15,7 +15,7 @@ D("gaze.systems", REG_NONE,
 	A("guestbook", WOLUMONDE_IP),
 	A("limbus", WOLUMONDE_IP, TTL(60)),
 	A("pmart", WOLUMONDE_IP, TTL(60)),
-	A("test", WOLUMONDE_IP),
+	// A("test", WOLUMONDE_IP),
 	A("webhook", WOLUMONDE_IP),
 	A("dash", WOLUMONDE_IP), // grafana
 	// thing
