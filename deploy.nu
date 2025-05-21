@@ -69,6 +69,7 @@ def deploy [hostname: string] {
 }
 
 def update-input [input: string] {
+  try { git stash }
   log info $"trying to update input ($input)"
   let result = nix flake update $input | complete
   let is_ok = ($result.stderr | str contains "Updated input")
@@ -85,6 +86,7 @@ def update-input [input: string] {
       git push
     }
   }
+  try { git stash pop }
 }
 
 def main [] {
