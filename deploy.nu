@@ -85,6 +85,10 @@ def update-input [input: string] {
       git commit -m $commit_msg
       git push
     }
+  } else {
+    try {
+      git restore .
+    }
   }
   try { git stash pop }
 }
