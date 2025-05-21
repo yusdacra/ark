@@ -23,16 +23,20 @@ def webhook [title: string, content: string, exit_code?: number, ping?: bool = f
     }]
   }
 
-  log debug "posting webhook...."
+  if $exit_code == 0 or $exit_code == null {
+    log info $content
+  } else {
+    log error $content
+  }
   http post --content-type application/json $"https://discord.com/api/webhooks/($env.WEBHOOK_ID)/($env.WEBHOOK_TOKEN)" $msg
 }
 
-def upload-paste [content: any] {
-  let paste_url = http post --content-type multipart/form-data "https://0x0.st" {file: ($content | to text | into binary), secret: true}
+def upload-paste []: any -> string {
+  let paste_url = http post --content-type multipart/form-data "https://0x0.st" {file: ($in | to text | into binary), secret: true}
   return $paste_url
 }
 
-def time-block [block] {
+def time-block [block]: nothing -> record {
   let start = date now
   let result = do $block
   let end = date now
@@ -45,23 +49,37 @@ def deploy [hostname: string] {
 
   webhook $hooktitle $"=== deploy for ($hostname): started ===\n\n(sys disks | to text)\n\n(sys mem | to text)"
 
-  log info $"build host ($hostname)"
-  webhook $"($hooktitle)/build" $"=== building ($hostname) ==="
-  let build_result = time-block { nh os build -H $hostname -- -L --show-trace | complete }
-  let build_failed = $build_result.result.exit_code != 0
-  webhook $"($hooktitle)/build" $"=== built ($hostname) ===\n\ntook ($build_result.elapsed)\n\nlog: (upload-paste $build_result.result)" $build_result.result.exit_code $build_failed
+  def run_step [action: string, block]: nothing -> bool {
+    webhook $"($hooktitle)/($action)" $"=== ($action) ($hostname) started ==="
+    let result = time-block $block
+    let failed = $result.result.exit_code != 0
+    log info ($result.result | to text)
+    webhook $"($hooktitle)/($action)" $"=== ($action) ($hostname) is done ===\n\ntook ($result.elapsed)\n\nlog: ($result.result | upload-paste)" $result.result.exit_code $failed
+    return $failed
+  }
 
+  let result_dir = mktemp -d | path join "result"
+  let build_failed = run_step "build" {
+    nh os build --no-nom -H $hostname -o $result_dir -- -L --show-trace | complete
+  }
   if $build_failed {
     return
   }
+  let result_link = readlink $result_dir
 
-  log info $"deploy host ($hostname)"
-  webhook $"($hooktitle)/build" $"=== deploying ($hostname) ==="
-  let deploy_result = time-block { nix run $".#apps.nixinate.($hostname)" -L --show-trace | complete }
-  let deploy_failed = $deploy_result.result.exit_code != 0
-  webhook $"($hooktitle)/build" $"=== deployed ($hostname) ===\n\ntook ($deploy_result.elapsed)\n\nlog: (upload-paste $deploy_result.result)" $deploy_result.result.exit_code $deploy_failed
+  # TODO: dont hardcode user
+  let target = $"root@($hostname)"
+  let copy_failed = run_step "copy to" {
+    nix copy --to $"ssh://($target)" $result_link | complete
+  }
+  if $copy_failed {
+    return
+  }
 
-  if $deploy_failed {
+  let activate_failed = run_step "activate" {
+    ssh $target $"sudo '($result_link)/bin/switch-to-configuration' 'switch'" | complete
+  }
+  if $activate_failed {
     return
   }
 

@@ -15,9 +15,6 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixos-persistence.url = "github:nix-community/impermanence";
 
-    nixinate.url = "github:matthewcroughan/nixinate";
-    nixinate.inputs.nixpkgs.follows = "nixpkgs";
-
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixpkgs-wayland.flake = false;
 
@@ -126,7 +123,7 @@
 
       packages = lib.mapAttrs (_: pkgs: pkgs._exported) allPkgs;
       legacyPackages = allPkgs;
-      apps = miscApps // (inputs.nixinate.nixinate.x86_64-linux inputs.self);
+      apps = miscApps;
 
       # topology = lib.mapAttrs (_: pkgs:
       #   import inputs.nixtopo {
