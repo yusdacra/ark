@@ -360,26 +360,6 @@
         "type": "github"
       }
     },
-    "nixinate": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1742737607,
-        "narHash": "sha256-rXR5zT+/ivE5JTi6m5tCvqN4obQPIT0mgmrBHkdjwEs=",
-        "owner": "matthewcroughan",
-        "repo": "nixinate",
-        "rev": "617b9bb5297147e35cbb24c93e2f30129f31bb9d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "matthewcroughan",
-        "repo": "nixinate",
-        "type": "github"
-      }
-    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1744633460,
@@ -672,7 +652,6 @@
         "home": "home",
         "limbusart": "limbusart",
         "naked-shell": "naked-shell_2",
-        "nixinate": "nixinate",
         "nixos-hardware": "nixos-hardware",
         "nixos-persistence": "nixos-persistence",
         "nixos-wsl": "nixos-wsl",
