@@ -25,9 +25,9 @@ in
         DEFAULT_THEME = "edge-dark";
         THEMES = "edge-dark,forgejo-dark";
         THEME_COLOR_META_TAG = "#333644";
-        meta = {
-          DESCRIPTION = "nyan? arf!!!! :3";
-        };
+      };
+      "ui.meta" = {
+        DESCRIPTION = "nyan? arf!!!! :3";
       };
       metrics.ENABLED = true;
     };
