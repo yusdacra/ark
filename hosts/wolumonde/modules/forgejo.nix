@@ -35,8 +35,10 @@ in
 
   # copy custom data stuff
   systemd.services.forgejo.preStart = let
-    getCustomDir = name: "${config.services.forgejo.stateDir}/custom/${name}";
+    customDir = "${config.services.forgejo.stateDir}/custom";
+    getCustomDir = name: "${customDir}/${name}";
     makeCopyCommand = dir: ''
+      mkdir -p ${customDir}
       rm -rf ${getCustomDir dir}
       cp -r --no-preserve=mode,ownership ${./forgejo/${dir}} ${getCustomDir dir}
     '';
