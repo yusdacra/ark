@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, lib, config, ... }:
 let
   forgejoCfg = config.services.forgejo.settings;
   anubisCfg = config.services.anubis.instances."forgejo".settings;
@@ -32,6 +32,16 @@ in
       metrics.ENABLED = true;
     };
   };
+
+  # copy custom data stuff
+  systemd.services.forgejo.preStart = let
+    getCustomDir = name: "${config.services.forgejo.stateDir}/custom/${name}";
+    makeCopyCommand = dir: ''
+      rm -rf ${getCustomDir dir}
+      cp -r --no-preserve=mode,ownership ${./forgejo/${dir}} ${getCustomDir dir}
+    '';
+  in
+    lib.concatMapStrings makeCopyCommand ["templates" "public"];
 
   services.nginx.virtualHosts."git.gaze.systems" = {
     useACMEHost = "gaze.systems";
