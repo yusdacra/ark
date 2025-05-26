@@ -9,7 +9,7 @@ in
     package = pkgs.forgejo;
     lfs.enable = true;
     settings = {
-      DEFAULT.APP_NAME = "meow :3";
+      DEFAULT.APP_NAME = "awruff ^^";
       server = {
         DOMAIN = "git.gaze.systems";
         ROOT_URL = "https://git.gaze.systems/";
@@ -25,6 +25,9 @@ in
         DEFAULT_THEME = "edge-dark";
         THEMES = "edge-dark,forgejo-dark";
         THEME_COLOR_META_TAG = "#333644";
+        meta = {
+          DESCRIPTION = "nyan? arf!!!! :3";
+        };
       };
       metrics.ENABLED = true;
     };
