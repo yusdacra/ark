@@ -81,6 +81,9 @@
 
     # catppuccin-discord.url = "https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css";
     # catppuccin-discord.flake = false;
+
+    tangled.url = "git+https://tangled.sh/@tangled.sh/core";
+    tangled.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =

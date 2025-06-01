@@ -114,7 +114,9 @@ def update-input [input: string] {
     }
   }
   if $stashed {
-    try { git stash pop }
+    try {
+      git stash pop
+    }
   }
 }
 

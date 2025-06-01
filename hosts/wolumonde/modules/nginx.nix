@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   inputs,
   pkgs,
@@ -57,6 +56,7 @@
         "guestbook.gaze.systems"
         "webhook.gaze.systems"
         "dash.gaze.systems"
+        "knot.gaze.systems"
       ];
     };
   };

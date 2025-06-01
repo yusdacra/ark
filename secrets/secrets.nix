@@ -44,4 +44,5 @@ in
   "ratholeCreds.age".publicKeys = [
     yusdacra wolumonde
   ];
+  "tangledKnot.age".publicKeys = [yusdacra wolumonde];
 }
