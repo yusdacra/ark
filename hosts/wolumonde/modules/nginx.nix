@@ -57,6 +57,7 @@
         "webhook.gaze.systems"
         "dash.gaze.systems"
         "knot.gaze.systems"
+        "skeetdeck.gaze.systems"
       ];
     };
   };

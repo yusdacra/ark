@@ -23,33 +23,11 @@
         "type": "github"
       }
     },
-    "bernbot": {
-      "inputs": {
-        "nci": "nci",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "parts": "parts_2"
-      },
-      "locked": {
-        "lastModified": 1716864995,
-        "narHash": "sha256-E8ibHezviAD8rqNf9K1BV0hniPGFIIp+g2aNR6ZzTX8=",
-        "owner": "yusdacra",
-        "repo": "bernbot",
-        "rev": "90311993f3f91b0c4eb349fc0d6a9a3381ebe3f7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "yusdacra",
-        "repo": "bernbot",
-        "type": "github"
-      }
-    },
     "blog": {
       "inputs": {
         "naked-shell": "naked-shell",
         "nixpkgs": "nixpkgs",
-        "parts": "parts_3",
+        "parts": "parts",
         "systems": "systems_2"
       },
       "locked": {
@@ -67,23 +45,6 @@
       }
     },
     "crane": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1699217310,
-        "narHash": "sha256-xpW3VFUG7yE6UE6Wl0dhqencuENSkV7qpnpe9I8VbPw=",
-        "owner": "ipetkov",
-        "repo": "crane",
-        "rev": "d535642bbe6f377077f7c23f0febb78b1463f449",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ipetkov",
-        "ref": "v0.15.0",
-        "repo": "crane",
-        "type": "github"
-      }
-    },
-    "crane_2": {
       "inputs": {
         "nixpkgs": [
           "limbusart",
@@ -123,30 +84,6 @@
         "owner": "lnl7",
         "ref": "master",
         "repo": "nix-darwin",
-        "type": "github"
-      }
-    },
-    "dream2nix": {
-      "inputs": {
-        "nixpkgs": [
-          "bernbot",
-          "nci",
-          "nixpkgs"
-        ],
-        "purescript-overlay": "purescript-overlay",
-        "pyproject-nix": "pyproject-nix"
-      },
-      "locked": {
-        "lastModified": 1716748361,
-        "narHash": "sha256-piN/a/Ge4Z10DXigw18g+trfUfkutZNyVMdm03+svnQ=",
-        "owner": "nix-community",
-        "repo": "dream2nix",
-        "rev": "e59d83c35ecfdf3104d4b283fa80a7b3e308138f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "dream2nix",
         "type": "github"
       }
     },
@@ -342,10 +279,10 @@
     },
     "limbusart": {
       "inputs": {
-        "crane": "crane_2",
+        "crane": "crane",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs_2",
-        "rust-overlay": "rust-overlay_2"
+        "rust-overlay": "rust-overlay"
       },
       "locked": {
         "lastModified": 1730724204,
@@ -372,22 +309,6 @@
       "original": {
         "type": "tarball",
         "url": "https://github.com/lucide-icons/lucide/releases/download/0.483.0/lucide-icons-0.483.0.zip"
-      }
-    },
-    "mk-naked-shell": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1681286841,
-        "narHash": "sha256-3XlJrwlR0nBiREnuogoa5i1b4+w/XPe0z8bbrJASw0g=",
-        "owner": "yusdacra",
-        "repo": "mk-naked-shell",
-        "rev": "7612f828dd6f22b7fb332cc69440e839d7ffe6bd",
-        "type": "github"
-      },
-      "original": {
-        "owner": "yusdacra",
-        "repo": "mk-naked-shell",
-        "type": "github"
       }
     },
     "naked-shell": {
@@ -418,33 +339,6 @@
       "original": {
         "owner": "yusdacra",
         "repo": "mk-naked-shell",
-        "type": "github"
-      }
-    },
-    "nci": {
-      "inputs": {
-        "crane": "crane",
-        "dream2nix": "dream2nix",
-        "mk-naked-shell": "mk-naked-shell",
-        "nixpkgs": [
-          "bernbot",
-          "nixpkgs"
-        ],
-        "parts": "parts",
-        "rust-overlay": "rust-overlay",
-        "treefmt": "treefmt"
-      },
-      "locked": {
-        "lastModified": 1716860539,
-        "narHash": "sha256-zgecgkzLlKzbVcI7/ZxsPfWonkx/ZsVmUBRw3VaU+Zc=",
-        "owner": "yusdacra",
-        "repo": "nix-cargo-integration",
-        "rev": "aa0e6844f88a63cc199686bbf27b0df111272ed1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "yusdacra",
-        "repo": "nix-cargo-integration",
         "type": "github"
       }
     },
@@ -632,49 +526,6 @@
     },
     "parts": {
       "inputs": {
-        "nixpkgs-lib": [
-          "bernbot",
-          "nci",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1715865404,
-        "narHash": "sha256-/GJvTdTpuDjNn84j82cU6bXztE0MSkdnTWClUCRub78=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "8dc45382d5206bd292f9c2768b8058a8fd8311d9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
-    "parts_2": {
-      "inputs": {
-        "nixpkgs-lib": [
-          "bernbot",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1715865404,
-        "narHash": "sha256-/GJvTdTpuDjNn84j82cU6bXztE0MSkdnTWClUCRub78=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "8dc45382d5206bd292f9c2768b8058a8fd8311d9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
-    "parts_3": {
-      "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
@@ -691,51 +542,9 @@
         "type": "github"
       }
     },
-    "purescript-overlay": {
-      "inputs": {
-        "nixpkgs": [
-          "bernbot",
-          "nci",
-          "dream2nix",
-          "nixpkgs"
-        ],
-        "slimlock": "slimlock"
-      },
-      "locked": {
-        "lastModified": 1696022621,
-        "narHash": "sha256-eMjFmsj2G1E0Q5XiibUNgFjTiSz0GxIeSSzzVdoN730=",
-        "owner": "thomashoneyman",
-        "repo": "purescript-overlay",
-        "rev": "047c7933abd6da8aa239904422e22d190ce55ead",
-        "type": "github"
-      },
-      "original": {
-        "owner": "thomashoneyman",
-        "repo": "purescript-overlay",
-        "type": "github"
-      }
-    },
-    "pyproject-nix": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1702448246,
-        "narHash": "sha256-hFg5s/hoJFv7tDpiGvEvXP0UfFvFEDgTdyHIjDVHu1I=",
-        "owner": "davhau",
-        "repo": "pyproject.nix",
-        "rev": "5a06a2697b228c04dd2f35659b4b659ca74f7aeb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "davhau",
-        "ref": "dream2nix",
-        "repo": "pyproject.nix",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "agenix": "agenix",
-        "bernbot": "bernbot",
         "blog": "blog",
         "home": "home",
         "limbusart": "limbusart",
@@ -747,26 +556,11 @@
         "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-wayland": "nixpkgs-wayland",
         "nur": "nur",
+        "skeetdeck": "skeetdeck",
         "tangled": "tangled"
       }
     },
     "rust-overlay": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1716776264,
-        "narHash": "sha256-fYzMk5o//g5Wt1g0FyOC8/XVllbGdVdzdylXxcanakU=",
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "rev": "8ef3f6a8f5af867ab5f75fc86fbd934a6351820b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "type": "github"
-      }
-    },
-    "rust-overlay_2": {
       "inputs": {
         "flake-utils": "flake-utils_2",
         "nixpkgs": [
@@ -788,28 +582,17 @@
         "type": "github"
       }
     },
-    "slimlock": {
-      "inputs": {
-        "nixpkgs": [
-          "bernbot",
-          "nci",
-          "dream2nix",
-          "purescript-overlay",
-          "nixpkgs"
-        ]
-      },
+    "skeetdeck": {
+      "flake": false,
       "locked": {
-        "lastModified": 1688610262,
-        "narHash": "sha256-Wg0ViDotFWGWqKIQzyYCgayeH8s4U1OZcTiWTQYdAp4=",
-        "owner": "thomashoneyman",
-        "repo": "slimlock",
-        "rev": "b5c6cdcaf636ebbebd0a1f32520929394493f1a6",
-        "type": "github"
+        "lastModified": 1749063631,
+        "narHash": "sha256-afqv6ZLc4gmKYCXCFRgFSYu3CA12r+5Ga2JYkN3R3MA=",
+        "type": "tarball",
+        "url": "file:///home/kirara/proj/skeetdeck-dist.tar.gz"
       },
       "original": {
-        "owner": "thomashoneyman",
-        "repo": "slimlock",
-        "type": "github"
+        "type": "tarball",
+        "url": "file:///home/kirara/proj/skeetdeck-dist.tar.gz"
       }
     },
     "systems": {
@@ -896,28 +679,6 @@
       "original": {
         "type": "git",
         "url": "https://tangled.sh/@tangled.sh/core"
-      }
-    },
-    "treefmt": {
-      "inputs": {
-        "nixpkgs": [
-          "bernbot",
-          "nci",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1715940852,
-        "narHash": "sha256-wJqHMg/K6X3JGAE9YLM0LsuKrKb4XiBeVaoeMNlReZg=",
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "rev": "2fba33a182602b9d49f0b2440513e5ee091d838b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "type": "github"
       }
     },
     "treefmt-nix": {
