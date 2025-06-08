@@ -29,6 +29,9 @@
     skeetdeck.url = "file:///home/kirara/proj/skeetdeck-dist.tar.gz";
     skeetdeck.flake = false;
 
+    bsky-repost-likes.url = "git+https://tangled.sh/@gaze.systems/bsky-repost-likes";
+    bsky-repost-likes.inputs.nixpkgs.follows = "nixpkgs";
+
     # conduit.url = "gitlab:famedly/conduit/next";
     # conduit.inputs.nixpkgs.follows = "nixpkgs";
 

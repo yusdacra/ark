@@ -58,6 +58,7 @@
         "dash.gaze.systems"
         "knot.gaze.systems"
         "skeetdeck.gaze.systems"
+        "likes.gaze.systems"
       ];
     };
   };

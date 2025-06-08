@@ -44,6 +44,27 @@
         "url": "https://git.gaze.systems/90008/website.git"
       }
     },
+    "bsky-repost-likes": {
+      "inputs": {
+        "flake-parts": "flake-parts",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1749407307,
+        "narHash": "sha256-PkMH3ZfdtzHCr+ugqSgFoY7XDOaIpjClF/Wwv/G19kE=",
+        "ref": "refs/heads/main",
+        "rev": "eea4e683827ee7d86b2497283157260aaadb2af8",
+        "revCount": 14,
+        "type": "git",
+        "url": "https://tangled.sh/@gaze.systems/bsky-repost-likes"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://tangled.sh/@gaze.systems/bsky-repost-likes"
+      }
+    },
     "crane": {
       "inputs": {
         "nixpkgs": [
@@ -104,6 +125,24 @@
       }
     },
     "flake-parts": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib_2"
+      },
+      "locked": {
+        "lastModified": 1748821116,
+        "narHash": "sha256-F82+gS044J1APL0n4hH50GYdPRv/5JWm34oCJYmVKdE=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "49f0870db23e8c1ca0b5259734a02cd9e1e371a1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_2": {
       "inputs": {
         "nixpkgs-lib": [
           "nur",
@@ -424,6 +463,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-lib_2": {
+      "locked": {
+        "lastModified": 1748740939,
+        "narHash": "sha256-rQaysilft1aVMwF14xIdGS3sj1yHlI6oKQNBRTF40cc=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "656a64127e9d791a334452c6b6606d17539476e2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
     "nixpkgs-master": {
       "locked": {
         "lastModified": 1745273220,
@@ -506,7 +560,7 @@
     },
     "nur": {
       "inputs": {
-        "flake-parts": "flake-parts",
+        "flake-parts": "flake-parts_2",
         "nixpkgs": "nixpkgs_4",
         "treefmt-nix": "treefmt-nix"
       },
@@ -546,6 +600,7 @@
       "inputs": {
         "agenix": "agenix",
         "blog": "blog",
+        "bsky-repost-likes": "bsky-repost-likes",
         "home": "home",
         "limbusart": "limbusart",
         "naked-shell": "naked-shell_2",
