@@ -31,7 +31,7 @@ in
     quic = true;
     kTLS = true;
     forceSSL = true;
-    locations."/" = {
+    locations."/subscribe" = {
       proxyPass = "http://localhost:8080";
       extraConfig = ''
         proxy_set_header Upgrade $http_upgrade;
@@ -40,5 +40,6 @@ in
         proxy_read_timeout 7d;
       '';
     };
+    locations."/".root = inputs.brl-monitor;
   };
 }
