@@ -1,0 +1,20 @@
+{config, ...}: {
+  services.shadowsocks = {
+    enable = true;
+    port = 8888;
+    password = "meow";
+  };
+
+  networking.firewall.allowedTCPPorts = [ config.services.shadowsocks.port ];
+  networking.firewall.allowedUDPPorts = [ config.services.shadowsocks.port ];
+
+  # services.microsocks = {
+  #   enable = true;
+  #   port = 8888;
+  #   authUsername = "meow";
+  #   authPasswordFile = config.age.secrets.microsocksPassword.path;
+  # };
+
+  # networking.firewall.allowedTCPPorts = [ config.services.microsocks.port ];
+  # networking.firewall.allowedUDPPorts = [ config.services.microsocks.port ];
+}

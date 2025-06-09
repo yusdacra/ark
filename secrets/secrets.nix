@@ -45,4 +45,5 @@ in
     yusdacra wolumonde
   ];
   "tangledKnot.age".publicKeys = [yusdacra wolumonde];
+  # "microsocksPassword.age".publicKeys = [yusdacra wolumonde];
 }
