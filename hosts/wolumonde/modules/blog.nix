@@ -21,7 +21,7 @@ in
   systemd.services.website = {
     description = "website";
     wantedBy = [ "multi-user.target" ];
-    after = ["network.target"];
+    after = [ "network.target" ];
     environment = {
       HOME = "/var/lib/website";
       ORIGIN = PUBLIC_BASE_URL;

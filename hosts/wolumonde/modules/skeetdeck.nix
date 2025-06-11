@@ -1,4 +1,5 @@
-{inputs, ...}: {
+{ inputs, ... }:
+{
   services.nginx.virtualHosts."skeetdeck.gaze.systems" = {
     forceSSL = true;
     enableACME = true;

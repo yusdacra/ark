@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   forgejoCfg = config.services.forgejo.settings;
   anubisCfg = config.services.anubis.instances."forgejo".settings;
@@ -34,16 +39,20 @@ in
   };
 
   # copy custom data stuff
-  systemd.services.forgejo.preStart = let
-    customDir = "${config.services.forgejo.stateDir}/custom";
-    getCustomDir = name: "${customDir}/${name}";
-    makeCopyCommand = dir: ''
-      mkdir -p ${customDir}
-      rm -rf ${getCustomDir dir}
-      cp -r --no-preserve=mode,ownership ${./forgejo/${dir}} ${getCustomDir dir}
-    '';
-  in
-    lib.concatMapStrings makeCopyCommand ["templates" "public"];
+  systemd.services.forgejo.preStart =
+    let
+      customDir = "${config.services.forgejo.stateDir}/custom";
+      getCustomDir = name: "${customDir}/${name}";
+      makeCopyCommand = dir: ''
+        mkdir -p ${customDir}
+        rm -rf ${getCustomDir dir}
+        cp -r --no-preserve=mode,ownership ${./forgejo/${dir}} ${getCustomDir dir}
+      '';
+    in
+    lib.concatMapStrings makeCopyCommand [
+      "templates"
+      "public"
+    ];
 
   services.nginx.virtualHosts."git.gaze.systems" = {
     useACMEHost = "gaze.systems";

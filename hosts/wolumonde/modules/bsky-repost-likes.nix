@@ -15,8 +15,8 @@ in
 
   systemd.services.repostream = {
     description = "repostream";
-    wantedBy = ["multi-user.target"];
-    after = ["network.target"];
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
     serviceConfig = {
       User = "repostream";
       ExecStart = "${pkg}/bin/bsky-repost-likes";

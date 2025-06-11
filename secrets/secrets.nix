@@ -42,8 +42,12 @@ in
     wolumonde
   ];
   "ratholeCreds.age".publicKeys = [
-    yusdacra wolumonde
+    yusdacra
+    wolumonde
   ];
-  "tangledKnot.age".publicKeys = [yusdacra wolumonde];
+  "tangledKnot.age".publicKeys = [
+    yusdacra
+    wolumonde
+  ];
   # "microsocksPassword.age".publicKeys = [yusdacra wolumonde];
 }

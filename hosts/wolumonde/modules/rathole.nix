@@ -1,4 +1,4 @@
-{config, ...}:
+{ config, ... }:
 let
   ratholePort = 11111;
   mcPort = 25565;
@@ -17,7 +17,13 @@ in
     credentialsFile = config.age.secrets.ratholeCreds.path;
   };
   networking.firewall = {
-    allowedTCPPorts = [ratholePort mcPort];
-    allowedUDPPorts = [ratholePort mcPort];
+    allowedTCPPorts = [
+      ratholePort
+      mcPort
+    ];
+    allowedUDPPorts = [
+      ratholePort
+      mcPort
+    ];
   };
 }

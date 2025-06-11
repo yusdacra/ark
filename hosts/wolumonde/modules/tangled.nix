@@ -1,9 +1,9 @@
-{config, inputs, ...}:
+{ config, inputs, ... }:
 let
   cfg = config.services.tangled-knot;
 in
 {
-  imports = [inputs.tangled.nixosModules.knot];
+  imports = [ inputs.tangled.nixosModules.knot ];
 
   age.secrets.tangledKnot.file = ../../../secrets/tangledKnot.age;
 
