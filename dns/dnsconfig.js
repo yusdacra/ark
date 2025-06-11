@@ -1,26 +1,23 @@
-var DSP_NAMECHEAP = NewDnsProvider("namecheap");
 var DSP_CLOUDFLARE = NewDnsProvider("cloudflare");
 var REG_NONE = NewRegistrar("none");
 
 var WOLUMONDE_IP = "23.88.101.188"
 
 D("gaze.systems", REG_NONE,
-	DnsProvider(DSP_NAMECHEAP),
-	DefaultTTL(1799),
-	A("@", WOLUMONDE_IP, TTL(60)),
-	// A("couchdb", WOLUMONDE_IP, TTL(60)),
-	A("dawn", WOLUMONDE_IP),
-	A("doc", WOLUMONDE_IP, TTL(60)),
-	A("git", WOLUMONDE_IP, TTL(60)),
-	A("guestbook", WOLUMONDE_IP),
-	A("limbus", WOLUMONDE_IP, TTL(60)),
-	A("pmart", WOLUMONDE_IP, TTL(60)),
-	// A("test", WOLUMONDE_IP),
-	A("webhook", WOLUMONDE_IP),
-	A("dash", WOLUMONDE_IP), // grafana
-	A("knot", WOLUMONDE_IP),
-	A("skeetdeck", WOLUMONDE_IP),
-	A("likes", WOLUMONDE_IP),
+	DnsProvider(DSP_CLOUDFLARE),
+	DefaultTTL(1),
+	A("@", WOLUMONDE_IP, CF_PROXY_OFF),
+	A("dawn", WOLUMONDE_IP, CF_PROXY_OFF),
+	A("doc", WOLUMONDE_IP, CF_PROXY_OFF),
+	A("git", WOLUMONDE_IP, CF_PROXY_OFF),
+	A("guestbook", WOLUMONDE_IP, CF_PROXY_OFF),
+	A("limbus", WOLUMONDE_IP, CF_PROXY_OFF),
+	A("pmart", WOLUMONDE_IP, CF_PROXY_OFF),
+	A("webhook", WOLUMONDE_IP, CF_PROXY_OFF),
+	A("dash", WOLUMONDE_IP, CF_PROXY_OFF), // grafana
+	A("knot", WOLUMONDE_IP, CF_PROXY_OFF),
+	A("skeetdeck", WOLUMONDE_IP, CF_PROXY_OFF),
+	A("likes", WOLUMONDE_IP, CF_PROXY_OFF),
 	// thing
 	TXT("id", "a data endpoint for entity with serial id /90008/."),
 	TXT("id", "entity linked here uses it/they pronouns. it can be referred to as /dusk/ or /dawn/."),
@@ -41,7 +38,7 @@ D("gaze.systems", REG_NONE,
 	TXT("resend._domainkey.poke", "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8/06F14LZgg7l6eko9GXasUwCBUGHe1Abd5hMg0Xf9ufdUj7lAUB746DS1ErS04oxGEbCdjamkAGqRsYWvk5KGRIXmeYuKyMPFM44U0dt6caHOIr8pHoDj9ytAJD/RS/p1xQZoFXHBxKgAeEY3TUZy7iNLvGxCLkxuPnO7nlWKwIDAQAB"),
 	TXT("send.poke", "v=spf1 include:amazonses.com ~all"),
 	// atproto
-	TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae", TTL(60)),
+	// TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae", TTL(60)),
 );
 
 D("9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa", REG_NONE,
@@ -56,3 +53,8 @@ D("9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa", REG_NONE,
 	// TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae"),
 );
 
+D("poor.dog", REG_NONE,
+	DnsProvider(DSP_CLOUDFLARE),
+	DefaultTTL(1),
+	A("@", WOLUMONDE_IP, CF_PROXY_OFF),
+);

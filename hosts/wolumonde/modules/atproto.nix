@@ -2,6 +2,8 @@
 let
   getFileType = name: if lib.hasSuffix ".json" name then "application/json" else "text/plain";
   mkWellKnownCfg = files: {
+    quic = true;
+    kTLS = true;
     locations = (
       lib.mapAttrs' (name: file: {
         name = "=/.well-known/${name}";
@@ -24,8 +26,6 @@ let
       // (lib.optionalAttrs (lib.hasSuffix "gaze.systems" domain) {
         useACMEHost = "gaze.systems";
         forceSSL = true;
-        quic = true;
-        kTLS = true;
       });
   };
 in
@@ -39,9 +39,13 @@ in
         // {
           useACMEHost = "gaze.systems";
           forceSSL = true;
-          quic = true;
-          kTLS = true;
         };
+      "poor.dog" = (mkWellKnownCfg {
+        "atproto-did" = pkgs.writeText "server" "did:plc:dfl62fgb7wtjj3fcbb72naae";
+      }) // {
+        useACMEHost = "poor.dog";
+        forceSSL = true;
+      };
       # "9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa" = mkWellKnownCfg {
       #   "atproto-did" = pkgs.writeText "server" "did:plc:dfl62fgb7wtjj3fcbb72naae";
       # };

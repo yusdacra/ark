@@ -40,8 +40,9 @@
   security.acme = {
     acceptTerms = true;
     defaults.email = (import "${inputs.self}/personal.nix").emails.primary;
+    defaults.webroot = "/var/lib/acme/acme-challenge";
+    certs."poor.dog" = {};
     certs."gaze.systems" = {
-      webroot = "/var/lib/acme/acme-challenge";
       extraDomainNames = [
         "git.gaze.systems"
         # "test.gaze.systems"
