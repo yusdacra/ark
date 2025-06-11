@@ -26,7 +26,7 @@ def main [
 
   let ty: string = unwrap-or-else $type { $types | input list 'choose type' --fuzzy }
   let scp: string = unwrap-or-else $scope { $scopes | input list 'choose scope' --fuzzy }
-  let skipci = if $skip_ci == null { "" } else { " [skip ci]" }
+  let skipci = if not $skip_ci { "" } else { " [skip ci]" }
   let commit_msg = $"($ty)\(($scp)\): ($msg)($skipci)"
   git commit -m $commit_msg ...$rest
 }
