@@ -47,8 +47,8 @@
     "brl-monitor": {
       "flake": false,
       "locked": {
-        "lastModified": 1749494770,
-        "narHash": "sha256-nKCTc/ldebSUVSrGOiXdEI6Tm6YnklNSlwxahO/C0NM=",
+        "lastModified": 1749651190,
+        "narHash": "sha256-rVMjEcExipwIS5D6qUA0T+8oG6mbhrKg2sh2JYx7o9c=",
         "type": "tarball",
         "url": "file:///home/kirara/proj/repostream-dist.tar.gz"
       },
