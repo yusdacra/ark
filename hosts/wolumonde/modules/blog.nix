@@ -44,17 +44,9 @@ in
   };
 
   services.nginx.virtualHosts."gaze.systems" = {
-    quic = true;
-    kTLS = true;
-    useACMEHost = "gaze.systems";
-    forceSSL = true;
     locations."/".proxyPass = "http://localhost:${toString port}";
   };
   services.nginx.virtualHosts."poor.dog" = {
-    quic = true;
-    kTLS = true;
-    useACMEHost = "poor.dog";
-    forceSSL = true;
     locations."/".return = "301 https://gaze.systems$request_uri";
   };
 }

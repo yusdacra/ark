@@ -63,6 +63,18 @@
       ];
     };
   };
+  services.nginx.virtualHosts."gaze.systems" = {
+    quic = true;
+    kTLS = true;
+    useACMEHost = "gaze.systems";
+    forceSSL = true;
+  };
+  services.nginx.virtualHosts."poor.dog" = {
+    quic = true;
+    kTLS = true;
+    useACMEHost = "poor.dog";
+    forceSSL = true;
+  };
 
   services.fluent-bit.settings = {
     parsers = [
