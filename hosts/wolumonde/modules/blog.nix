@@ -21,15 +21,11 @@ in
   systemd.services.website = {
     description = "website";
     wantedBy = [ "multi-user.target" ];
-    after = [
-      "network.target"
-      "guestbook.service"
-    ];
+    after = ["network.target"];
     environment = {
       HOME = "/var/lib/website";
       ORIGIN = PUBLIC_BASE_URL;
       PORT = toString port;
-      GUESTBOOK_BASE_URL = "http://localhost:8080";
       WEBSITE_DATA_DIR = "/var/lib/website";
       VITE_CLOUDINARY_CLOUD_NAME = "dgtwf7mar";
     };
