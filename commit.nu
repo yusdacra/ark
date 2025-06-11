@@ -15,6 +15,7 @@ def main [
   _msg?: string
   --type (-t): string
   --scope (-s): string
+  --skip-ci (-c)
   ...rest
 ] {
   let msg: string = unwrap-or-else $_msg { input 'enter commit message: ' }
@@ -25,6 +26,7 @@ def main [
 
   let ty: string = unwrap-or-else $type { $types | input list 'choose type' --fuzzy }
   let scp: string = unwrap-or-else $scope { $scopes | input list 'choose scope' --fuzzy }
-  let commit_msg = $"($ty)\(($scp)\): ($msg)"
+  let skipci = if $skip_ci == null { "" } else { " [skip ci]" }
+  let commit_msg = $"($ty)\(($scp)\): ($msg)($skipci)"
   git commit -m $commit_msg ...$rest
 }
