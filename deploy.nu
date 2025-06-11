@@ -51,35 +51,28 @@ def deploy [hostname: string] {
 
   def run_step [action: string, block]: nothing -> bool {
     webhook $"($hooktitle)/($action)" $"=== ($action) ($hostname) started ==="
-    let result = time-block $block
+    let result = time-block { do $block | tee -e {print -r} | tee {print -r} | complete }
     let failed = $result.result.exit_code != 0
-    log info ($result.result | to text)
     webhook $"($hooktitle)/($action)" $"=== ($action) ($hostname) is done ===\n\ntook ($result.elapsed)\n\nlog: ($result.result | upload-paste)" $result.result.exit_code $failed
     return $failed
   }
 
   let result_dir = mktemp -d | path join "result"
-  let build_failed = run_step "build" {
-    nh os build --no-nom -H $hostname -o $result_dir -- -L --show-trace | complete
-  }
-  if $build_failed {
+  let build_cmd = {nh os build --no-nom -H $hostname -o $result_dir -- -L --show-trace}
+  if (run_step "build" $build_cmd) {
     return
   }
   let result_link = readlink $result_dir
 
   # TODO: dont hardcode user
   let target = $"root@($hostname)"
-  let copy_failed = run_step "copy to" {
-    nix copy --to $"ssh://($target)" $result_link | complete
-  }
-  if $copy_failed {
+  let copy_cmd = {nix copy --to $"ssh://($target)" $result_link}
+  if (run_step "copy to" $copy_cmd) {
     return
   }
 
-  let activate_failed = run_step "activate" {
-    ssh $target $"sudo '($result_link)/bin/switch-to-configuration' 'switch'" | complete
-  }
-  if $activate_failed {
+  let activate_cmd = {ssh $target $"sudo '($result_link)/bin/switch-to-configuration' 'switch'"}
+  if (run_step "activate" $activate_cmd) {
     return
   }
 
