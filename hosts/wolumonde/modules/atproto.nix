@@ -32,9 +32,9 @@ in
 {
   services.nginx.virtualHosts =
     {
-      "gaze.systems" = mkWellKnownCfg {
-        "atproto-did" = pkgs.writeText "server" "did:plc:dfl62fgb7wtjj3fcbb72naae";
-      };
+      # "gaze.systems" = mkWellKnownCfg {
+      #   "atproto-did" = pkgs.writeText "server" "did:plc:dfl62fgb7wtjj3fcbb72naae";
+      # };
       "poor.dog" = mkWellKnownCfg {
         "atproto-did" = pkgs.writeText "server" "did:plc:dfl62fgb7wtjj3fcbb72naae";
       };

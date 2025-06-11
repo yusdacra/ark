@@ -65,17 +65,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1749575664,
-        "narHash": "sha256-IjCrSLOFyicCPm5tIrl6PW/8Dg6nxbx5gezbHjnlWmo=",
+        "lastModified": 1749651181,
+        "narHash": "sha256-s99z81bS322ABVYoTkRnTxfGQVg4wpQCg6ho40Fqx3k=",
         "ref": "refs/heads/main",
-        "rev": "6f790069add6e0ef47944f3576a5d381f5b05d7a",
-        "revCount": 23,
+        "rev": "d598e4b3f84a3498064e0eb25b7cb9d7fc694461",
+        "revCount": 24,
         "type": "git",
-        "url": "https://tangled.sh/@gaze.systems/bsky-repost-likes"
+        "url": "https://tangled.sh/@poor.dog/bsky-repost-likes"
       },
       "original": {
         "type": "git",
-        "url": "https://tangled.sh/@gaze.systems/bsky-repost-likes"
+        "url": "https://tangled.sh/@poor.dog/bsky-repost-likes"
       }
     },
     "crane": {

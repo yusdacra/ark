@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 let
   index = pkgs.writeText "index.txt" ''
     hi there~
@@ -8,7 +8,7 @@ let
     connection to https://gaze.systems/about for more data.
 
     /discord         yusdacra/
-    /bsky       @gaze.systems/
+    /bsky           @poor.dog/
     /email 90008@gaze.systems/
 
     /dig +short TXT 9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa/

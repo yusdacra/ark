@@ -31,7 +31,7 @@
     brl-monitor.url = "file:///home/kirara/proj/repostream-dist.tar.gz";
     brl-monitor.flake = false;
 
-    bsky-repost-likes.url = "git+https://tangled.sh/@gaze.systems/bsky-repost-likes";
+    bsky-repost-likes.url = "git+https://tangled.sh/@poor.dog/bsky-repost-likes";
     bsky-repost-likes.inputs.nixpkgs.follows = "nixpkgs";
 
     # conduit.url = "gitlab:famedly/conduit/next";
