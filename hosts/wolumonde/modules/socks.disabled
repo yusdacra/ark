@@ -1,8 +1,10 @@
 {config, ...}: {
+  age.secrets.socksPassword.file = ../../../secrets/socksPassword.age;
+
   services.shadowsocks = {
     enable = true;
     port = 8888;
-    password = "meow";
+    passwordFile = config.age.secrets.socksPassword.path;
   };
 
   networking.firewall.allowedTCPPorts = [ config.services.shadowsocks.port ];

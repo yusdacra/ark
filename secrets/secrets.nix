@@ -49,5 +49,5 @@ in
     yusdacra
     wolumonde
   ];
-  # "microsocksPassword.age".publicKeys = [yusdacra wolumonde];
+  "socksPassword.age".publicKeys = [yusdacra wolumonde];
 }
