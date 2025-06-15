@@ -47,8 +47,8 @@
     "brl-monitor": {
       "flake": false,
       "locked": {
-        "lastModified": 1749651190,
-        "narHash": "sha256-rVMjEcExipwIS5D6qUA0T+8oG6mbhrKg2sh2JYx7o9c=",
+        "lastModified": 1749739819,
+        "narHash": "sha256-pfJjstpB0tn7dxyiI7QMvjHoD7/ayMMK4FJy0lLgviM=",
         "type": "tarball",
         "url": "file:///home/kirara/proj/repostream-dist.tar.gz"
       },
@@ -65,11 +65,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1749651181,
-        "narHash": "sha256-s99z81bS322ABVYoTkRnTxfGQVg4wpQCg6ho40Fqx3k=",
+        "lastModified": 1749739733,
+        "narHash": "sha256-WQzEhjLSZgN9neyDB9zf/m2MhCnnc3dSGIbUw5GlCU8=",
         "ref": "refs/heads/main",
-        "rev": "d598e4b3f84a3498064e0eb25b7cb9d7fc694461",
-        "revCount": 24,
+        "rev": "cd5978098742aba204ce956ed36e7d7b1a5995d3",
+        "revCount": 26,
         "type": "git",
         "url": "https://tangled.sh/@poor.dog/bsky-repost-likes"
       },
