@@ -31,11 +31,11 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1749807318,
-        "narHash": "sha256-fgPCKdJz2fUGIjrTVcG4K8IPzqv3OKHKS7Ne7bah6Ks=",
+        "lastModified": 1750016329,
+        "narHash": "sha256-iLV1lWDRanMp/JYd4mA0jnDR8RJTbirdpl6hvgG4+SM=",
         "ref": "refs/heads/svelte",
-        "rev": "ebb7a1b90b45552518de1a4f7499053b9cb5fa0c",
-        "revCount": 496,
+        "rev": "c2b225f34c0dfe3a4601054e0953ea59d15e5d8c",
+        "revCount": 498,
         "type": "git",
         "url": "https://git.gaze.systems/90008/website.git"
       },
@@ -367,13 +367,13 @@
       "locked": {
         "lastModified": 1681286841,
         "narHash": "sha256-3XlJrwlR0nBiREnuogoa5i1b4+w/XPe0z8bbrJASw0g=",
-        "owner": "yusdacra",
+        "owner": "90-008",
         "repo": "mk-naked-shell",
         "rev": "7612f828dd6f22b7fb332cc69440e839d7ffe6bd",
         "type": "github"
       },
       "original": {
-        "owner": "yusdacra",
+        "owner": "90-008",
         "repo": "mk-naked-shell",
         "type": "github"
       }
