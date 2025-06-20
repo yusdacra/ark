@@ -31,11 +31,11 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1750433289,
-        "narHash": "sha256-Z1nENvtzMi0vxABDgRqB6IiXvgRkN6eUwkQ/b8HqBdc=",
+        "lastModified": 1750435454,
+        "narHash": "sha256-ZnJ1HYfbWxsqyVRNR9tBPpNgTIE3i7slZY85SS47R2I=",
         "ref": "refs/heads/svelte",
-        "rev": "44525e92245c0b1ef54214283dd17799b037981e",
-        "revCount": 503,
+        "rev": "43c23359a5d6de6ed135df858796a3724f90c652",
+        "revCount": 504,
         "type": "git",
         "url": "https://git.gaze.systems/90008/website.git"
       },
