@@ -15,7 +15,13 @@ let
     security = {
       enable_auth = true;
       authentication = {
-        providers.enable_native = true;
+        providers.oidc = [{
+          slug_id = "pocketid";
+          name = "Pocket ID";
+          client_id = "aa583db6-e03c-4490-853a-7f2b3e089fbe";
+          issuer = config.services.pocket-id.settings.APP_URL;
+          scopes = ["openid profile email"];
+        }];
         disable_sign_up = true;
       };
       cookie = {
