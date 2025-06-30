@@ -14,15 +14,17 @@ D("gaze.systems", REG_NONE,
 	A("limbus", WOLUMONDE_IP, CF_PROXY_OFF),
 	A("pmart", WOLUMONDE_IP, CF_PROXY_OFF),
 	A("webhook", WOLUMONDE_IP, CF_PROXY_OFF),
-	A("dash", WOLUMONDE_IP, CF_PROXY_OFF), // grafana
+	A("dash", WOLUMONDE_IP, CF_PROXY_OFF), // perses
 	A("knot", WOLUMONDE_IP, CF_PROXY_OFF),
 	A("skeetdeck", WOLUMONDE_IP, CF_PROXY_OFF),
 	A("likes", WOLUMONDE_IP, CF_PROXY_OFF),
+	A("bird", WOLUMONDE_IP, CF_PROXY_OFF),
+	A("id", WOLUMONDE_IP, CF_PROXY_OFF),
 	// thing
-	TXT("id", "a data endpoint for entity with serial id /90008/."),
-	TXT("id", "entity linked here uses it/they pronouns. it can be referred to as /dusk/ or /dawn/."),
-	TXT("id", "this one is not a human, try to refer to it in third person. use /this one/, /this thing/, etc."),
-	TXT("id", "try connecting to https://gaze.systems/about for more information."),
+	// TXT("id", "a data endpoint for entity with serial id /90008/."),
+	// TXT("id", "entity linked here uses it/they pronouns. it can be referred to as /dusk/ or /dawn/."),
+	// TXT("id", "this one is not a human, try to refer to it in third person. use /this one/, /this thing/, etc."),
+	// TXT("id", "try connecting to https://gaze.systems/about for more information."),
 	// github pages
 	CNAME("dev", "yusdacra.github.io."),
 	// fastmail

@@ -14,7 +14,7 @@ in
     # extraOptions = ["-syslog.listenAddr.udp=:${toString syslogUdp}" "-journald.maxRequestSize=1024000000"];
   };
 
-  services.vmalert = {
+  services.vmalert.instances."" = {
     enable = true;
     settings =
       let

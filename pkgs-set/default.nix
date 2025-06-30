@@ -6,7 +6,7 @@
   ...
 }:
 let
-  l = lib;
+  l = lib // builtins;
   overlays = l.mapAttrsToList (
     name: _:
     let

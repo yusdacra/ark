@@ -5,7 +5,7 @@ use std/log
 
 path add /nix/var/nix/profiles/default/bin
 
-cd $env.FLAKE
+cd $env.NH_FLAKE
 
 # load webhook secrets
 rage -d -i ./ssh_key ./secrets/deployWebhook.age | from toml | load-env
@@ -28,12 +28,13 @@ def webhook [title: string, content: string, exit_code?: number, ping?: bool = f
   } else {
     log error $content
   }
-  http post --content-type application/json $"https://discord.com/api/webhooks/($env.WEBHOOK_ID)/($env.WEBHOOK_TOKEN)" $msg
+  # http post --content-type application/json $"https://discord.com/api/webhooks/($env.WEBHOOK_ID)/($env.WEBHOOK_TOKEN)" $msg
 }
 
 def upload-paste []: any -> string {
-  let paste_url = http post --content-type multipart/form-data "https://0x0.st" {file: ($in | to text | into binary), secret: true}
-  return $paste_url
+  # let paste_url = http post --content-type multipart/form-data "https://0x0.st" {file: ($in | to text | into binary), secret: true}
+  # return $paste_url
+  return ""
 }
 
 def time-block [block]: nothing -> record {

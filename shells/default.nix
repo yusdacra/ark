@@ -14,7 +14,7 @@ tlib.genPkgs (
         if [ -z "''${1-}" ]; then
           agenix
         else
-          RULES="$FLAKE/secrets/secrets.nix" agenix -i "$FLAKE/ssh_key" "$@"
+          RULES="$NH_FLAKE/secrets/secrets.nix" agenix -i "$NH_FLAKE/ssh_key" "$@"
         fi
       '';
     };
@@ -46,7 +46,7 @@ tlib.genPkgs (
         ];
       shellHook = ''
         echo \"$(tput bold)welcome to PRTS, $USER$(tput sgr0)\"
-        export FLAKE=$PWD
+        export NH_FLAKE=$PWD
       '';
     };
   }

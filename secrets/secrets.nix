@@ -49,5 +49,20 @@ in
     yusdacra
     wolumonde
   ];
-  "socksPassword.age".publicKeys = [yusdacra wolumonde];
+  "socksPassword.age".publicKeys = [
+    yusdacra
+    wolumonde
+  ];
+  "netbirdCoturnPass.age".publicKeys = [
+    yusdacra
+    wolumonde
+  ];
+  "netbirdDataStoreEncKey.age".publicKeys = [
+    yusdacra
+    wolumonde
+  ];
+  "netbirdTurnSecret.age".publicKeys = [
+    yusdacra
+    wolumonde
+  ];
 }

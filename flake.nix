@@ -2,9 +2,13 @@
   description = "config!!!";
 
   inputs = {
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
+
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
@@ -97,7 +101,7 @@
   outputs =
     inputs:
     let
-      lib = inputs.nixpkgs.lib.extend (_: _: builtins);
+      lib = inputs.nixpkgs.lib;
       tlib = (import ./lib lib).extend (
         _: prev: rec {
           makePkgs =

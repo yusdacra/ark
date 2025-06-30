@@ -60,6 +60,8 @@
         "knot.gaze.systems"
         "skeetdeck.gaze.systems"
         "likes.gaze.systems"
+        "bird.gaze.systems"
+        "id.gaze.systems"
       ];
     };
   };

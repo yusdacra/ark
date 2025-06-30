@@ -52,7 +52,7 @@ let
     };
   };
 
-  persesEnv = config.virtualisation.oci-containers.containers.perses.environment;
+  # persesEnv = config.virtualisation.oci-containers.containers.perses.environment;
   secrets = config.age.secrets;
 in
 {
@@ -65,8 +65,11 @@ in
     createHome = true;
     linger = true;
     autoSubUidGidRange = true;
+    uid = 1001;
   };
-  users.groups.${user} = { };
+  users.groups.${user} = {
+    gid = 976;
+  };
 
   age.secrets.persesSecret = {
     file = ../../../secrets/persesSecret.age;

@@ -1,13 +1,13 @@
 {
-  pkgs,
   lib,
   inputs,
   ...
 }:
 {
+  imports = [ inputs.lix-module.nixosModules.default ];
+
   nix = {
     registry = builtins.mapAttrs (_: v: { flake = v; }) (lib.filterAttrs (_: v: v ? outputs) inputs);
-    package = pkgs.lixPackageSets.latest.lix;
     gc.automatic = false;
     optimise.automatic = true;
     extraOptions = ''
@@ -23,6 +23,7 @@
       "home-manager=${inputs.home}"
     ];
   };
+
   nix.settings = {
     sandbox = true;
     allowed-users = [ "@wheel" ];
