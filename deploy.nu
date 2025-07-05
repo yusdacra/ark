@@ -118,7 +118,7 @@ def main [] {
   webhook "deploy" "=== started deploying all ==="
 
   ["blog" "skeetdeck" "bsky-repost-likes" "brl-monitor" "limbusart"]
-    | each {|input| update-input input}
+    | each {|input| update-input $input}
 
   try {
     log info "trying to update dns records"
