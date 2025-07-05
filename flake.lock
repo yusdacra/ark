@@ -65,11 +65,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1751717337,
-        "narHash": "sha256-fbEtaD0zPdfNvklhflOBOod/vaXUHElSyZR4d/DZMI8=",
+        "lastModified": 1751737470,
+        "narHash": "sha256-9bIPyoLyn4ekJcygKvo1VAOL+nUcSBA0fYshQ1HY6XI=",
         "ref": "refs/heads/main",
-        "rev": "76405e9f3e9e0cd402d4342ff63634aa127afca8",
-        "revCount": 28,
+        "rev": "1e47dacb6acfa99fb9884f9dd0a651592016e6ce",
+        "revCount": 29,
         "type": "git",
         "url": "https://tangled.sh/@poor.dog/bsky-repost-likes"
       },
