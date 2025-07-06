@@ -26,7 +26,7 @@ D("gaze.systems", REG_NONE,
 	// TXT("id", "this one is not a human, try to refer to it in third person. use /this one/, /this thing/, etc."),
 	// TXT("id", "try connecting to https://gaze.systems/about for more information."),
 	// github pages
-	CNAME("dev", "yusdacra.github.io."),
+	CNAME("dev", "90-008.github.io."),
 	// fastmail
 	CNAME("fm1._domainkey", "fm1.gaze.systems.dkim.fmhosted.com."),
 	CNAME("fm2._domainkey", "fm2.gaze.systems.dkim.fmhosted.com."),
