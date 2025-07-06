@@ -5,7 +5,7 @@ alias la = ls -a
 alias cat = bat
 alias c = bat
 
-alias g = jj
+alias g = git
 
 alias n = nix
 alias nfu = nix flake update
