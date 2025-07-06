@@ -4,7 +4,7 @@
   ...
 }:
 let
-  pkg = inputs.bsky-repost-likes.packages.${pkgs.system}.default;
+  pkg = inputs.brl.packages.${pkgs.system}.default;
 in
 {
   users.users.repostream = {
@@ -40,6 +40,6 @@ in
         proxy_read_timeout 7d;
       '';
     };
-    locations."/".root = inputs.brl-monitor;
+    locations."/".root = inputs.brl.packages.${pkgs.system}.webapp;
   };
 }

@@ -117,7 +117,7 @@ def update-input [input: string] {
 def main [] {
   webhook "deploy" "=== started deploying all ==="
 
-  ["blog" "skeetdeck" "bsky-repost-likes" "brl-monitor" "limbusart"]
+  ["blog" "skeetdeck" "brl" "limbusart"]
     | each {|input| update-input $input}
 
   try {
