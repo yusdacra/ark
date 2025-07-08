@@ -18,8 +18,8 @@ in
   };
 
   services.nginx.virtualHosts.${cfg.server.hostname} = {
+    useACMEHost = "gaze.systems";
     forceSSL = true;
-    enableACME = true;
     quic = true;
     kTLS = true;
     locations."/".proxyPass = "http://${cfg.server.listenAddr}";
