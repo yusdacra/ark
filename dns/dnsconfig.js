@@ -42,6 +42,7 @@ D("gaze.systems", REG_NONE,
 	TXT("send.poke", "v=spf1 include:amazonses.com ~all"),
 	// atproto
 	// TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae", TTL(60)),
+	TXT("_atproto.dusk", "did=did:plc:dfl62fgb7wtjj3fcbb72naae", TTL(60)),
 );
 
 D("9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa", REG_NONE,
