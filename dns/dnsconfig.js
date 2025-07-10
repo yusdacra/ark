@@ -16,6 +16,7 @@ D("gaze.systems", REG_NONE,
 	A("webhook", WOLUMONDE_IP, CF_PROXY_OFF),
 	A("dash", WOLUMONDE_IP, CF_PROXY_OFF), // perses
 	A("knot", WOLUMONDE_IP, CF_PROXY_OFF),
+	A("spindle", WOLUMONDE_IP, CF_PROXY_OFF),
 	A("skeetdeck", WOLUMONDE_IP, CF_PROXY_OFF),
 	A("likes", WOLUMONDE_IP, CF_PROXY_OFF),
 	// A("bird", WOLUMONDE_IP, CF_PROXY_OFF),

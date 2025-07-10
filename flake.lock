@@ -310,13 +310,13 @@
     "htmx-ws-src": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-XbUFiv94ZPB6VVULoTWOsje5Gq1I+IT72lMc4CpUYrY=",
+        "narHash": "sha256-2fg6KyEJoO24q0fQqbz9RMaYNPQrMwpZh29tkSqdqGY=",
         "type": "file",
-        "url": "https://unpkg.com/htmx.org@2.0.4/dist/ext/ws.js"
+        "url": "https://cdn.jsdelivr.net/npm/htmx-ext-ws@2.0.2"
       },
       "original": {
         "type": "file",
-        "url": "https://unpkg.com/htmx.org@2.0.4/dist/ext/ws.js"
+        "url": "https://cdn.jsdelivr.net/npm/htmx-ext-ws@2.0.2"
       }
     },
     "ibm-plex-mono-src": {
@@ -817,11 +817,11 @@
         "sqlite-lib-src": "sqlite-lib-src"
       },
       "locked": {
-        "lastModified": 1750884686,
-        "narHash": "sha256-MP+xB3iSmyrQJLW0ulDhT+vY8WOlVP0Tur0394cYWFk=",
+        "lastModified": 1751979681,
+        "narHash": "sha256-W8RKBKsLvfUsLeqUulwj3+yqH2hqxUewH9ktcqoe20s=",
         "ref": "refs/heads/master",
-        "rev": "a3bce1c10a4ee29a820bac14ea9604d2bdfb3f1a",
-        "revCount": 874,
+        "rev": "e3e0c95d1a1c163ee812af7caef95309a12083b3",
+        "revCount": 890,
         "type": "git",
         "url": "https://tangled.sh/@tangled.sh/core"
       },

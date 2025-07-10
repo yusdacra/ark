@@ -58,6 +58,7 @@
         "webhook.gaze.systems"
         "dash.gaze.systems"
         "knot.gaze.systems"
+        "spindle.gaze.systems"
         "skeetdeck.gaze.systems"
         "likes.gaze.systems"
         "bird.gaze.systems"
