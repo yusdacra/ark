@@ -1,18 +1,22 @@
 { lib, config, ... }:
 let
-  syslogUdp = 5113;
+  # syslogUdp = 5113;
+  metricsPort = 8428;
+  logsPort = 9428;
 in
 {
   services.victoriametrics = {
     enable = true;
-    listenAddress = ":8428";
+    listenAddress = ":${toString metricsPort}";
   };
 
   services.victorialogs = {
     enable = true;
-    listenAddress = ":9428";
+    listenAddress = ":${toString logsPort}";
     # extraOptions = ["-syslog.listenAddr.udp=:${toString syslogUdp}" "-journald.maxRequestSize=1024000000"];
   };
+
+  networking.firewall.allowedTCPPorts = [metricsPort logsPort];
 
   services.vmalert.instances."" = {
     enable = true;
