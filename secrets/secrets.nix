@@ -65,4 +65,8 @@ in
     yusdacra
     wolumonde
   ];
+  "netbirdClientKey.age".publicKeys = [
+    yusdacra
+    wolumonde
+  ];
 }

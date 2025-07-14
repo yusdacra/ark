@@ -44,6 +44,10 @@ def time-block [block]: nothing -> record {
   return {result: $result, elapsed: ($end - $start)}
 }
 
+let ips = {
+  wolumonde: "23.88.101.188",
+}
+
 def deploy [hostname: string] {
   log info $"start deploy host ($hostname)"
   let hooktitle = $"/($hostname)/deploy"
@@ -66,7 +70,7 @@ def deploy [hostname: string] {
   let result_link = readlink $result_dir
 
   # TODO: dont hardcode user
-  let target = $"root@($hostname)"
+  let target = $"root@($ips | get $hostname)"
   let copy_cmd = {nix copy --to $"ssh://($target)" $result_link}
   if (run_step "copy to" $copy_cmd) {
     return
@@ -114,7 +118,7 @@ def update-input [input: string] {
   }
 }
 
-def main [] {
+def main [hostname: string = "wolumonde"] {
   webhook "deploy" "=== started deploying all ==="
 
   ["blog" "skeetdeck" "brl" "limbusart"]
@@ -127,5 +131,5 @@ def main [] {
     webhook "dns" $"=== error pushing dns ===\n\n($err.msg | to text)" 1
   }
 
-  deploy "wolumonde"
+  deploy $hostname
 }
