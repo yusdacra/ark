@@ -94,7 +94,7 @@ in
     };
   };
 
-  services.vmalert.rules.groups = [
+  services.vmalert.instances."".rules.groups = [
     {
       name = "pds-logs";
       type = "vlogs";

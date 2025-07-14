@@ -120,7 +120,7 @@
   # need so fluent-bit can access nginx
   systemd.services.fluent-bit.serviceConfig.SupplementaryGroups = lib.mkForce "systemd-journal nginx";
 
-  services.vmalert.rules.groups = [
+  services.vmalert.instances."".rules.groups = [
     {
       name = "nginx-logs";
       type = "vlogs";
