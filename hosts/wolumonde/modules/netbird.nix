@@ -1,5 +1,6 @@
 { config, ... }:
 let
+  cfg = config.services.netbird.server;
   oidcUrl = config.services.pocket-id.settings.APP_URL;
   oidcClientId = "41f4ea08-a20f-43dc-aa75-c76efa49bbb8";
 in
@@ -24,10 +25,11 @@ in
       AUTH_CLIENT_ID = oidcClientId;
       AUTH_AUDIENCE = oidcClientId;
     };
+    signal.metricsPort = 9091;
     management = {
       metricsPort = 9409;
       oidcConfigEndpoint = "${oidcUrl}/.well-known/openid-configuration";
-      turnDomain = config.services.netbird.server.domain;
+      turnDomain = cfg.domain;
       settings = {
         TURNConfig.Secret._secret = config.age.secrets.netbirdTurnSecret.path;
         DataStoreEncryptionKey._secret = config.age.secrets.netbirdDataStoreEncKey.path;
@@ -51,10 +53,23 @@ in
     };
   };
 
-  services.nginx.virtualHosts.${config.services.netbird.server.domain} = {
+  services.nginx.virtualHosts.${cfg.domain} = {
     useACMEHost = "gaze.systems";
     forceSSL = true;
     quic = true;
     kTLS = true;
   };
+
+  services.victoriametrics.prometheusConfig.scrape_configs = [
+    {
+      job_name = "netbird_management";
+      metrics_path = "/metrics";
+      static_configs = [ { targets = [ "localhost:${toString cfg.management.metricsPort}" ]; } ];
+    }
+    {
+      job_name = "netbird_signal";
+      metrics_path = "/metrics";
+      static_configs = [ { targets = [ "localhost${toString cfg.signal.metricsPort}" ]; } ];
+    }
+  ];
 }
