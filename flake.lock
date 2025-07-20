@@ -44,27 +44,6 @@
         "url": "https://git.gaze.systems/90008/website.git"
       }
     },
-    "brl": {
-      "inputs": {
-        "flake-parts": "flake-parts",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1752005424,
-        "narHash": "sha256-L4iUCkBCdTuDoEpjvXcxZgaeMr6elGV5UTAISvA4miQ=",
-        "ref": "refs/heads/main",
-        "rev": "f6a7eb0c237104deeab2c1490609592fb152a6c4",
-        "revCount": 59,
-        "type": "git",
-        "url": "https://tangled.sh/@poor.dog/bsky-repost-likes"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://tangled.sh/@poor.dog/bsky-repost-likes"
-      }
-    },
     "crane": {
       "inputs": {
         "nixpkgs": [
@@ -182,24 +161,6 @@
       }
     },
     "flake-parts": {
-      "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib_2"
-      },
-      "locked": {
-        "lastModified": 1751413152,
-        "narHash": "sha256-Tyw1RjYEsp5scoigs1384gIg6e0GoBVjms4aXFfRssQ=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "77826244401ea9de6e3bac47c2db46005e1f30b5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
-    "flake-parts_2": {
       "inputs": {
         "nixpkgs-lib": [
           "nur",
@@ -693,21 +654,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-lib_3": {
-      "locked": {
-        "lastModified": 1751159883,
-        "narHash": "sha256-urW/Ylk9FIfvXfliA1ywh75yszAbiTEVgpPeinFyVZo=",
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "rev": "14a40a1d7fb9afa4739275ac642ed7301a9ba1ab",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "type": "github"
-      }
-    },
     "nixpkgs-wayland": {
       "flake": false,
       "locked": {
@@ -798,7 +744,7 @@
     },
     "nur": {
       "inputs": {
-        "flake-parts": "flake-parts_2",
+        "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
@@ -857,7 +803,7 @@
     },
     "parts_3": {
       "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib_3"
+        "nixpkgs-lib": "nixpkgs-lib_2"
       },
       "locked": {
         "lastModified": 1751413152,
@@ -925,7 +871,6 @@
       "inputs": {
         "agenix": "agenix",
         "blog": "blog",
-        "brl": "brl",
         "home": "home",
         "limbusart": "limbusart",
         "lix-module": "lix-module",
@@ -938,7 +883,6 @@
         "nixpkgs-wayland": "nixpkgs-wayland",
         "nsid-tracker": "nsid-tracker",
         "nur": "nur",
-        "skeetdeck": "skeetdeck",
         "tangled": "tangled"
       }
     },
@@ -984,19 +928,6 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "type": "github"
-      }
-    },
-    "skeetdeck": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1749063631,
-        "narHash": "sha256-afqv6ZLc4gmKYCXCFRgFSYu3CA12r+5Ga2JYkN3R3MA=",
-        "type": "tarball",
-        "url": "file:///home/kirara/proj/skeetdeck-dist.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "file:///home/kirara/proj/skeetdeck-dist.tar.gz"
       }
     },
     "slimlock": {

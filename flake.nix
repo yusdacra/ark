@@ -22,75 +22,17 @@
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixpkgs-wayland.flake = false;
 
-    # helix.url = "github:helix-editor/helix";
-
     blog.url = "git+https://git.gaze.systems/90008/website.git";
     # blog.inputs.nixpkgs.follows = "nixpkgs";
-
-    # bernbot.url = "github:yusdacra/bernbot";
-    # bernbot.inputs.nixpkgs.follows = "nixpkgs";
-
-    skeetdeck.url = "file:///home/kirara/proj/skeetdeck-dist.tar.gz";
-    skeetdeck.flake = false;
-
-    brl.url = "git+https://tangled.sh/@poor.dog/bsky-repost-likes";
-    brl.inputs.nixpkgs.follows = "nixpkgs";
-
-    # conduit.url = "gitlab:famedly/conduit/next";
-    # conduit.inputs.nixpkgs.follows = "nixpkgs";
-
-    # nil.url = "github:oxalica/nil";
-    # nil.inputs.nixpkgs.follows = "nixpkgs";
-    # nixd.url = "github:nix-community/nixd";
-    # nixd.inputs.nixpkgs.follows = "nixpkgs";
-
-    # stylix.url = "github:yusdacra/stylix/fixed";
-    # stylix.inputs.nixpkgs.follows = "nixpkgs";
-    # stylix.inputs.home-manager.follows = "home";
-
-    # vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-    # vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
-    # musikquad.url = "git+https://git.gaze.systems/dusk/musikquadrupled.git";
-    # musikquad.inputs.nixpkgs.follows = "nixpkgs";
-
-    # musikspider.url = "git+https://git.gaze.systems/dusk/musikspider.git";
-    # musikspider.inputs.nixpkgs.follows = "nixpkgs";
-
     limbusart.url = "git+https://git.gaze.systems/dusk/limbusart.git";
     # limbusart.inputs.nixpkgs.follows = "nixpkgs";
 
-    # nh.url = "github:viperML/nh";
-    # nh.inputs.nixpkgs.follows = "nixpkgs";
-
-    # discordrp-mpris.url = "github:yusdacra/discordrp-mpris-flake";
-    # discordrp-mpris.inputs.nixpkgs.follows = "nixpkgs";
-
-    # s3s.url = "github:yusdacra/s3s-flake";
-    # s3s.inputs.nixpkgs.follows = "nixpkgs";
-
     naked-shell.url = "github:yusdacra/mk-naked-shell";
     naked-shell.flake = false;
-
-    # nixtopo.url = "github:oddlama/nix-topology";
-    # nixtopo.inputs.nixpkgs.follows = "nixpkgs";
-
-    # vfio.url = "github:yusdacra/nixos-vfio";
-    # vfio.inputs.nixpkgs.follows = "nixpkgs";
-
-    # needed for hyprland setup
-    # hyprland.url = "github:hyprwm/Hyprland";
-    # hyprland.inputs.nixpkgs.follows = "nixpkgs";
-    # hyprland-contrib.url = "github:hyprwm/contrib";
-    # hyprland-contrib.inputs.nixpkgs.follows = "nixpkgs";
-    # eww.url = "github:elkowar/eww";
-    # eww.inputs.nixpkgs.follows = "nixpkgs";
-
-    # catppuccin-discord.url = "https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css";
-    # catppuccin-discord.flake = false;
 
     tangled.url = "git+https://tangled.sh/@tangled.sh/core";
     tangled.inputs.nixpkgs.follows = "nixpkgs";
@@ -145,6 +87,7 @@
     {
       lib = tlib;
       nixosConfigurations = import ./hosts { inherit lib tlib inputs; };
+      homeConfigurations = import ./users;
 
       packages = lib.mapAttrs (_: pkgs: pkgs._exported) allPkgs;
       legacyPackages = allPkgs;
