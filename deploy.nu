@@ -121,7 +121,7 @@ def update-input [input: string] {
 def main [hostname: string = "wolumonde"] {
   webhook "deploy" "=== started deploying all ==="
 
-  ["blog" "skeetdeck" "brl" "limbusart"]
+  ["blog" "limbusart" "nsid-tracker"]
     | each {|input| update-input $input}
 
   try {

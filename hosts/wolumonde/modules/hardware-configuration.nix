@@ -17,4 +17,11 @@
     fsType = "btrfs";
     options = [ "noatime" "autodefrag" "compress-force=zstd:8" ];
   };
+  services.beesd.filesystems = {
+    "-" = {
+      spec = "/dev/disk/by-id/scsi-0HC_Volume_102930299";
+      hashTableSizeMB = 48;
+      verbosity = "crit";
+    };
+  };
 }
