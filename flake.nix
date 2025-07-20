@@ -94,6 +94,12 @@
 
     tangled.url = "git+https://tangled.sh/@tangled.sh/core";
     tangled.inputs.nixpkgs.follows = "nixpkgs";
+
+    ncr.url = "git+https://tangled.sh/@poor.dog/nixos-cloud-resources";
+    ncr.inputs.nixpkgs.follows = "nixpkgs";
+
+    nsid-tracker.url = "git+https://tangled.sh/@poor.dog/nsid-tracker";
+    nsid-tracker.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -124,10 +130,16 @@
             }) cmds
           )
           (
-            lib.mapAttrs (_: pkgs: {
+            lib.mapAttrs
+            (_: pkgs: (
+              lib.mapAttrs
+              (_: app: app.program)
+              (inputs.ncr.makeApps {inherit pkgs; inherit (inputs) self;})
+            ) // {
               generate-firefox-addons = toString "${pkgs.generate-firefox-addons}/bin/generate-firefox-addons";
               dns = toString "${pkgs.dnsmngmt}/bin/dns";
-            }) allPkgs
+            })
+            allPkgs
           );
     in
     {

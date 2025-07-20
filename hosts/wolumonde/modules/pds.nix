@@ -12,10 +12,9 @@ in
         # silly but i want root domain >:3
         "/xrpc" = {
           proxyPass = pdsLocalhost;
+          proxyWebsockets = true;
           # pass ws headers so we can actually proxy the ws
           extraConfig = ''
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection $connection_upgrade;
             proxy_set_header id $request_id;
             client_max_body_size 100M;
           '';

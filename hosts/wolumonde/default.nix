@@ -7,7 +7,8 @@
 {
   imports = [
     inputs.agenix.nixosModules.default
-    # inputs.nixtopo.nixosModules.default
+    inputs.ncr.nixosModules.firewall
+    inputs.ncr.nixosModules.firewall-hetzner
   ] ++ (tlib.importFolder (toString ./modules));
 
   environment.systemPackages = with pkgs; [
@@ -19,18 +20,11 @@
   zramSwap.enable = true;
 
   # firewall stuffs
-  networking.firewall = {
+  networking.firewall.enable = true;
+  providers.hetzner.firewall = {
     enable = true;
-    allowedTCPPorts = [
-      22
-      80
-      443
-      5005
-    ];
-    allowedUDPPortRanges = [ ];
+    id = 476406;
   };
-
-  virtualisation.docker.enable = false;
 
   system.stateVersion = "22.05";
 }

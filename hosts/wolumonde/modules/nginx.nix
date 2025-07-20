@@ -16,6 +16,8 @@
     statusPage = true;
   };
 
+  networking.firewall.public."http(s)".allowedTCPPorts = [80 443];
+
   # output json logs so we can consume them more easily
   services.nginx.appendHttpConfig = ''
     log_format json_logs escape=json '{'

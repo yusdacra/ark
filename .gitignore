@@ -3,14 +3,11 @@ result
 doc/index.html
 keys
 
-# Result of bud commands
-vm
-iso
-doi
-
-pkgs/_sources/.shake*
 ssh_key
 secrets/deploy-webhook.nu
 
 # dnscontrol
 creds.json
+
+# deploy resources
+.hetzner

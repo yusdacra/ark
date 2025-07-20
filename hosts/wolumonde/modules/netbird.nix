@@ -52,6 +52,10 @@ in
       useAcmeCertificates = true;
     };
   };
+  networking.firewall.public."netbird coturn" ={
+    allowedTCPPortRanges = [{from = 3478; to = 3479;}];
+    allowedUDPPortRanges = [{from = 3478; to = 3479;} {from = 49152; to = 65535;}];
+  };
 
   services.nginx.virtualHosts.${cfg.domain} = {
     useACMEHost = "gaze.systems";

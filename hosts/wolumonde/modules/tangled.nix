@@ -25,11 +25,7 @@ in
     kTLS = true;
     locations."/" = {
       proxyPass = "http://${knotCfg.server.listenAddr}";
-      extraConfig = ''
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_set_header id $request_id;
-      '';
+      proxyWebsockets = true;
     };
   };
 
@@ -62,11 +58,7 @@ in
     kTLS = true;
     locations."/" = {
       proxyPass = "http://${spindleCfg.server.listenAddr}";
-      extraConfig = ''
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_set_header id $request_id;
-      '';
+      proxyWebsockets = true;
     };
   };
 
