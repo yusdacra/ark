@@ -1,11 +1,9 @@
-{ nixosConfig, ... }:
 {
   programs.ssh = {
     enable = true;
     compression = true;
     hashKnownHosts = true;
     addKeysToAgent = "yes";
-    package = nixosConfig.programs.ssh.package;
     # Only needed for darcs hub
     # extraConfig = ''
     #   Host hub.darcs.net

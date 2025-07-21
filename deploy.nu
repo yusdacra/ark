@@ -44,13 +44,23 @@ def time-block [block]: nothing -> record {
   return {result: $result, elapsed: ($end - $start)}
 }
 
-let ips = {
-  wolumonde: "23.88.101.188",
+let hosts = {
+  wolumonde: {
+    type: "nixos",
+    user: "root",
+    addr: "23.88.101.188",
+  },
+  "dusk@devel.mobi": {
+    type: "home",
+    user: "dusk",
+    addr: "devel.mobi",
+  },
 }
 
 def deploy [hostname: string] {
   log info $"start deploy host ($hostname)"
   let hooktitle = $"/($hostname)/deploy"
+  let hostcfg = $hosts | get $hostname
 
   webhook $hooktitle $"=== deploy for ($hostname): started ===\n\n(sys disks | to text)\n\n(sys mem | to text)"
 
@@ -63,20 +73,30 @@ def deploy [hostname: string] {
   }
 
   let result_dir = mktemp -d | path join "result"
-  let build_cmd = {nh os build --no-nom -H $hostname -o $result_dir -- -L --show-trace}
+  let build_cmd = {
+    match $hostcfg.type {
+      "nixos" => {nh os build --no-nom -H $hostname -o $result_dir -- -L --show-trace}
+      "home" => {nh home build --no-nom -c $hostname -o $result_dir -- -L --show-trace}
+    }
+  }
   if (run_step "build" $build_cmd) {
     return
   }
   let result_link = readlink $result_dir
 
-  # TODO: dont hardcode user
-  let target = $"root@($ips | get $hostname)"
+  let target = $"($hostcfg.user)@($hostcfg.addr)"
   let copy_cmd = {nix copy --to $"ssh://($target)" $result_link}
   if (run_step "copy to" $copy_cmd) {
     return
   }
 
-  let activate_cmd = {ssh $target $"sudo '($result_link)/bin/switch-to-configuration' 'switch'"}
+  let activate_cmd = {
+    let cmd = match $hostcfg.type {
+      "nixos" => $"sudo '($result_link)/bin/switch-to-configuration' 'switch'",
+      "home" => $"($result_link)/activate",
+    }
+    ssh $target $cmd
+  }
   if (run_step "activate" $activate_cmd) {
     return
   }
@@ -118,17 +138,19 @@ def update-input [input: string] {
   }
 }
 
-def main [hostname: string = "wolumonde"] {
+def main [hostname: string = "wolumonde", --only-deploy (-d)] {
   webhook "deploy" "=== started deploying all ==="
 
-  ["blog" "limbusart" "nsid-tracker"]
-    | each {|input| update-input $input}
+  if $only_deploy == false {
+    ["blog" "limbusart" "nsid-tracker"]
+      | each {|input| update-input $input}
 
-  try {
-    log info "trying to update dns records"
-    nix run ".#dns" -- push
-  } catch { |err|
-    webhook "dns" $"=== error pushing dns ===\n\n($err.msg | to text)" 1
+    try {
+      log info "trying to update dns records"
+      nix run ".#dns" -- push
+    } catch { |err|
+      webhook "dns" $"=== error pushing dns ===\n\n($err.msg | to text)" 1
+    }
   }
 
   deploy $hostname
