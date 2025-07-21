@@ -4,7 +4,7 @@
   cfg = config.services.netbird;
   wrapped = pkgs.writers.writeBashBin "netbird" ''
     ${pkgs.netbird}/bin/netbird \
-      --daemon-addr "unix://netbird.sock" \
+      --daemon-addr "unix://$XDG_RUNTIME_DIR/netbird.sock" \
       --config "${config.xdg.configHome}/netbird/config.json" $@
   '';
   proxychainsCfg = pkgs.writers.writeText "proxychains.conf" ''
@@ -14,9 +14,7 @@
     socks5 127.0.0.1 1080
   '';
   wrappedProxychains = pkgs.writers.writeBashBin "netbird-proxychains" ''
-    ${pkgs.proxychains-ng}/bin/proxychains4 \
-      -f "${proxychainsCfg}" \
-      $@
+    ${pkgs.proxychains-ng}/bin/proxychains4 -f "${proxychainsCfg}" $@
   '';
 in {
   options = {
@@ -48,7 +46,7 @@ in {
       };
 
       Service = {
-        ExecStart = "${pkgs.netbird}/bin/netbird up -F";
+        ExecStart = "${pkgs.netbird}/bin/netbird service run";
         Restart = "on-failure";
         RestartSec = "5s";
         Environment = l.mapAttrsToList (k: v: "${k}=${toString v}") {
@@ -62,6 +60,7 @@ in {
           NB_SETUP_KEY_FILE = l.replaceString "\${XDG_RUNTIME_DIR}" "%t" cfg.setupKeyFile;
           NB_MANAGEMENT_URL = cfg.managementUrl;
           NB_CONFIG = "${config.xdg.configHome}/netbird/config.json";
+          NB_LOG_FILE = "${config.xdg.dataHome}/netbird/netbird.log";
           NB_DAEMON_ADDR = "unix://%t/netbird.sock";
         };
       };
