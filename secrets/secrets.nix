@@ -1,6 +1,7 @@
 let
   yusdacra = builtins.readFile ./yusdacra.key.pub;
   wolumonde = builtins.readFile ./wolumonde.key.pub;
+  develMobi = builtins.readFile ./develMobi.key.pub;
 in
 {
   "bernbotToken.age".publicKeys = [
@@ -68,5 +69,9 @@ in
   "netbirdClientKey.age".publicKeys = [
     yusdacra
     wolumonde
+  ];
+  "develMobiNetbirdClientKey.age".publicKeys = [
+    yusdacra
+    develMobi
   ];
 }

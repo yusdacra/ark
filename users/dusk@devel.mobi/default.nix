@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   tlib,
@@ -22,6 +23,7 @@ in
           "fzf"
           "direnv"
           "nushell"
+          "netbird"
         ]
         # dev stuff
         [
@@ -32,20 +34,41 @@ in
       ];
     in
     l.flatten [
+      inputs.agenix.homeManagerModules.default
       ../../modules/persist/null.nix
       (tlib.prefixStrings "${inputs.self}/users/modules/" modulesToEnable)
     ];
 
+  age.identityPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
   home = {
     homeDirectory = "/home/dusk";
     username = "dusk";
     stateVersion = "25.11";
-    # file.".ssh/authorized_keys".text = ''
-    #   ${signKeyText}
-    # '';
+    # shell
+    shell.enableShellIntegration = true;
+    shellAliases = {
+      ctl = "systemctl --user";
+      jtl = "journalctl --user";
+      jtlu = "journalctl --user --unit";
+    };
+  };
+
+  age.secrets.netbirdClientKey = {
+    file = ../../secrets/develMobiNetbirdClientKey.age;
+    mode = "600";
+  };
+  services.netbird = {
+    enable = true;
+    managementUrl = "https://bird.gaze.systems";
+    setupKeyFile = config.age.secrets.netbirdClientKey.path;
   };
 
   programs = {
+    bash = {
+      enable = true;
+      enableCompletion = true;
+    };
+    tealdeer.enable = true;
     git = {
       userName = name;
       userEmail = email;
@@ -55,9 +78,5 @@ in
         user.signingkey = signKeyText;
       };
     };
-  };
-
-  services.podman = {
-    enable = true;
   };
 }
