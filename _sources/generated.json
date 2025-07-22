@@ -1,0 +1,214 @@
+{
+    "agenix": {
+        "cargoLocks": null,
+        "date": "2025-06-17",
+        "extract": null,
+        "name": "agenix",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "ryantm",
+            "repo": "agenix",
+            "rev": "531beac616433bac6f9e2a19feb8e99a22a66baf",
+            "sha256": "sha256-9P1FziAwl5+3edkfFcr5HeGtQUtrSdk/MksX39GieoA=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "531beac616433bac6f9e2a19feb8e99a22a66baf"
+    },
+    "blog": {
+        "cargoLocks": null,
+        "date": "2025-07-22",
+        "extract": null,
+        "name": "blog",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "420c26e68b1aebe29a880be60ead8b00954c9ace",
+            "sha256": "sha256-MxamnEYU/CeMq98GNzliN+vwBYE9+Jq8FUD2cRH0x7U=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://git.gaze.systems/90008/website.git"
+        },
+        "version": "420c26e68b1aebe29a880be60ead8b00954c9ace"
+    },
+    "gomod2nix": {
+        "cargoLocks": null,
+        "date": "2025-07-21",
+        "extract": null,
+        "name": "gomod2nix",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "nix-community",
+            "repo": "gomod2nix",
+            "rev": "be828766411cad04c194c8f714d46aa2b2596362",
+            "sha256": "sha256-MaaWYgN/nia7xJcOYLBtPk+cFo7X2zEM1d9xIGPQrLU=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "be828766411cad04c194c8f714d46aa2b2596362"
+    },
+    "home": {
+        "cargoLocks": null,
+        "date": "2025-07-22",
+        "extract": null,
+        "name": "home",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "nix-community",
+            "repo": "home-manager",
+            "rev": "0cdfcdbb525b77b951c889b6131047bc374f48fe",
+            "sha256": "sha256-CLQfNtUqirNVSYoW/kYbvL4PeeNasmZonaPnjO3+1YQ=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "0cdfcdbb525b77b951c889b6131047bc374f48fe"
+    },
+    "limbusart": {
+        "cargoLocks": null,
+        "date": "2025-07-22",
+        "extract": null,
+        "name": "limbusart",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "7f29ab57b73eb8a4db7163fc7d19a71cf89c3d8b",
+            "sha256": "sha256-xATZz/sHYHkEXjwcmq1DSntclWxnDIKCpH314MaL63U=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://git.gaze.systems/90008/limbusart.git"
+        },
+        "version": "7f29ab57b73eb8a4db7163fc7d19a71cf89c3d8b"
+    },
+    "lix-module": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "lix-module",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "sha256": "sha256-SXUAlxpjPRkArRMHy5+Hdi+PiC+ND9yzzIjiaHmTvQU=",
+            "type": "tarball",
+            "url": "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz"
+        },
+        "version": "2.93.2-1"
+    },
+    "ncr": {
+        "cargoLocks": null,
+        "date": "2025-07-18",
+        "extract": null,
+        "name": "ncr",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "4660aa9cd9b24bef569696eee46dbe7e8df3e237",
+            "sha256": "sha256-miZ64o8p+ToR6VIpcco/wq0rdHGjHsfepJdMcSiJEDk=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://tangled.sh/@poor.dog/nixos-cloud-resources"
+        },
+        "version": "4660aa9cd9b24bef569696eee46dbe7e8df3e237"
+    },
+    "nixos-wsl": {
+        "cargoLocks": null,
+        "date": "2025-07-16",
+        "extract": null,
+        "name": "nixos-wsl",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "nix-community",
+            "repo": "NixOS-WSL",
+            "rev": "20001f9bf0aaf2b1c307e43a5eec8cf8f800fe14",
+            "sha256": "sha256-ZNIpqCG/CfhmV+TgIeyO/XbhDjSWpwWokHM44j0Mn0w=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "20001f9bf0aaf2b1c307e43a5eec8cf8f800fe14"
+    },
+    "nsid-tracker": {
+        "cargoLocks": null,
+        "date": "2025-07-22",
+        "extract": null,
+        "name": "nsid-tracker",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "9bab265d0ef9b2800614073f5ccdd89ea3eeedee",
+            "sha256": "sha256-8c+EbZC7ZWA+uYJlR6fez+gcQNck1xC2uOMo2nzwfjg=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://tangled.sh/@poor.dog/nsid-tracker"
+        },
+        "version": "9bab265d0ef9b2800614073f5ccdd89ea3eeedee"
+    },
+    "tangled": {
+        "cargoLocks": null,
+        "date": "2025-07-22",
+        "extract": null,
+        "name": "tangled",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "84c9175d8a3f00516d73e5e2a4bdb14b72dc3b2e",
+            "sha256": "sha256-hmEO0FRxOeAfApQYb5DVy0iuxjJBzyY9dZxO/0NuWEA=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://tangled.sh/@poor.dog/core"
+        },
+        "version": "84c9175d8a3f00516d73e5e2a4bdb14b72dc3b2e"
+    },
+    "tangled-sqlite-lib": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "tangled-sqlite-lib",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "sha256": "sha256-bJoMjirsBjm2Qk9KPiy3yV3+8b/POlYe76/FQbciHro=",
+            "type": "tarball",
+            "url": "https://sqlite.org/2024/sqlite-amalgamation-3450100.zip"
+        },
+        "version": "3450100"
+    }
+}

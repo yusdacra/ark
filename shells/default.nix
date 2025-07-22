@@ -1,7 +1,6 @@
 {
   lib,
   allPkgsSets,
-  inputs,
   ...
 }:
 lib.mapAttrs
@@ -9,8 +8,7 @@ lib.mapAttrs
   system: set:
   let
     inherit (set) pkgs;
-    mkNakedShell = pkgs.callPackage inputs.naked-shell { };
-    agenix = pkgs.callPackage "${inputs.agenix}/pkgs/agenix.nix" {};
+    agenix = pkgs.callPackage "${set.inputs.agenix}/pkgs/agenix.nix" {};
     agenix-wrapped = pkgs.writeShellApplication {
       name = "agenix";
       runtimeInputs = [ agenix ];
@@ -27,7 +25,7 @@ lib.mapAttrs
     dash = pkgs.writers.writeNuBin "dash" ./dash.nu;
   in
   {
-    default = mkNakedShell {
+    default = pkgs.mkShellNoCC {
       name = "prts";
       packages =
         (with pkgs; [
@@ -38,6 +36,7 @@ lib.mapAttrs
           nh
           go
           gopls
+          nvfetcher
           # golangci-lint
           # golangci-lint-langserver
         ])

@@ -1,5 +1,4 @@
 {
-  inputs,
   lib,
   tlib,
   allPkgsSets,
@@ -8,12 +7,12 @@
 let
   mkHome =
     name: set:
-    import "${inputs.home}/modules" {
+    import "${set.inputs.home}/modules" {
       inherit (set) pkgs;
       configuration = import (./. + "/${name}/default.nix");
       extraSpecialArgs = {
-        inherit (set) pkgs terra;
-        inherit tlib inputs;
+        inherit (set) pkgs terra inputs;
+        inherit tlib;
       };
     };
 

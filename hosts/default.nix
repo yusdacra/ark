@@ -1,30 +1,26 @@
 {
-  inputs,
   lib,
   tlib,
   allPkgsSets,
   ...
 }:
 let
-  baseModules = [
-    ../modules
-    ../locale
-    "${inputs.home}/nixos"
-  ];
-
   mkSystem =
     name: set:
-    import "${inputs.nixpkgs}/nixos/lib/eval-config.nix" {
+    import "${set.inputs.nixpkgs}/nixos/lib/eval-config.nix" {
       inherit lib;
       system = null;
-      modules = baseModules ++ [
+      modules = [
+        ../modules
+        ../locale
+        "${set.inputs.home}/nixos"
         { networking.hostName = name; }
         { nixpkgs.pkgs = set.pkgs; }
         (import (./. + "/${name}/default.nix"))
       ];
       specialArgs = {
-        inherit (set) terra;
-        inherit inputs tlib;
+        inherit (set) terra inputs;
+        inherit tlib;
       };
     };
 
