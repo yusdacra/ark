@@ -9,13 +9,14 @@ let
   baseModules = [
     ../modules
     ../locale
-    inputs.home.nixosModules.default
+    "${inputs.home}/nixos"
   ];
 
   mkSystem =
     name: set:
-    lib.nixosSystem {
-      system = set.pkgs.system;
+    import "${inputs.nixpkgs}/nixos/lib/eval-config.nix" {
+      inherit lib;
+      system = null;
       modules = baseModules ++ [
         { networking.hostName = name; }
         { nixpkgs.pkgs = set.pkgs; }

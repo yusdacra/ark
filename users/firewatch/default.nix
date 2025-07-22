@@ -78,7 +78,6 @@ in
         packages = with pkgs; [
           # Programs
           nix-output-monitor
-          inputs.nh.packages.${pkgs.system}.default
         ];
         file.".ssh/authorized_keys".text = ''
           ${signKeyText}

@@ -34,7 +34,7 @@ in
       ];
     in
     l.flatten [
-      inputs.agenix.homeManagerModules.default
+      "${inputs.agenix}/modules/age-home.nix"
       ../../modules/persist/null.nix
       (tlib.prefixStrings "${inputs.self}/users/modules/" modulesToEnable)
       ./nsid-tracker.nix

@@ -1,15 +1,19 @@
-{ lib, config, inputs, ... }:
+{ lib, config, inputs, terra, ... }:
 let
   knotCfg = config.services.tangled-knot;
   spindleCfg = config.services.tangled-spindle;
 in
 {
-  imports = [ inputs.tangled.nixosModules.knot inputs.tangled.nixosModules.spindle ];
+  imports = [
+    "${inputs.tangled}/nix/modules/knot.nix"
+    "${inputs.tangled}/nix/modules/spindle.nix"
+  ];
 
   age.secrets.tangledKnot.file = ../../../secrets/tangledKnot.age;
 
   services.tangled-knot = {
     enable = true;
+    package = terra.tangled-knot;
     gitUser = "git";
     server = {
       listenAddr = "0.0.0.0:7777";
@@ -31,6 +35,7 @@ in
 
   services.tangled-spindle = {
     enable = true;
+    package = terra.tangled-spindle;
     server = {
       listenAddr = "0.0.0.0:7391";
       hostname = "spindle.gaze.systems";

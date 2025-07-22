@@ -10,9 +10,10 @@ lib.mapAttrs
   let
     inherit (set) pkgs;
     mkNakedShell = pkgs.callPackage inputs.naked-shell { };
+    agenix = pkgs.callPackage "${inputs.agenix}/pkgs/agenix.nix" {};
     agenix-wrapped = pkgs.writeShellApplication {
       name = "agenix";
-      runtimeInputs = [ inputs.agenix.packages.${system}.default ];
+      runtimeInputs = [ agenix ];
       text = ''
         if [ -z "''${1-}" ]; then
           agenix

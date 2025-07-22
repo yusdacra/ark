@@ -6,9 +6,9 @@
 }:
 {
   imports = [
-    inputs.agenix.nixosModules.default
-    inputs.ncr.nixosModules.firewall
-    inputs.ncr.nixosModules.firewall-hetzner
+    "${inputs.agenix}/modules/age.nix"
+    "${inputs.ncr}/firewall"
+    "${inputs.ncr}/firewall/hetzner"
   ] ++ (tlib.importFolder (toString ./modules));
 
   environment.systemPackages = with pkgs; [

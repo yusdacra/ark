@@ -10,8 +10,8 @@
   imports = [
     ../../users/root
     ../../users/firewatch
-    inputs.nixos-wsl.nixosModules.wsl
-    inputs.agenix.nixosModules.default
+    "${inputs.nixos-wsl}/modules"
+    "${inputs.agenix}/modules/age.nix"
   ] ++ (tlib.importFolder (toString ./modules));
 
   wsl.enable = true;

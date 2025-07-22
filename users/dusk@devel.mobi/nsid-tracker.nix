@@ -1,10 +1,10 @@
 {
   pkgs,
-  inputs,
+  terra,
   ...
 }:
 let
-  server = inputs.nsid-tracker.packages.${pkgs.system}.server;
+  server = terra.nsid-tracker-server;
   port = 6432;
 in
 {

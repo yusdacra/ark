@@ -4,8 +4,6 @@
   ...
 }:
 {
-  imports = [ inputs.lix-module.nixosModules.default ];
-
   nix = {
     registry = builtins.mapAttrs (_: v: { flake = v; }) (lib.filterAttrs (_: v: v ? outputs) inputs);
     gc.automatic = false;

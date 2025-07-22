@@ -31,11 +31,14 @@ let
     # config.permittedInsecurePackages = ["electron-25.9.0"];
   };
   terraPkgs =
-    l.genAttrs
-    (l.map (l.removeSuffix ".nix") (l.attrNames (l.readDir ./pkgs)))
-    (name: pkgs.callPackage "${./pkgs}/${name}.nix" {
-      inherit inputs tlib;
-    });
+    pkgs.lib.makeScope pkgs.newScope (
+      self:
+        l.genAttrs
+        (l.map (l.removeSuffix ".nix") (l.attrNames (l.readDir ./pkgs)))
+        (name: self.callPackage "${./pkgs}/${name}.nix" {
+          inherit inputs tlib;
+        })
+    );
   pkgsToExport = pkgs.lib.getAttrs (import ./exported.nix) (pkgs // terraPkgs);
 in {
   inherit pkgs;

@@ -1,13 +1,20 @@
 {
   pkgs,
+  terra,
   inputs,
   ...
 }:
 let
-  server = inputs.nsid-tracker.packages.${pkgs.system}.server;
-  client = inputs.nsid-tracker.packages.${pkgs.system}.client.overrideAttrs (old: {
+  client-modules =
+    (pkgs.callPackage "${inputs.nsid-tracker}/nix/client-modules.nix" {})
+    .overrideAttrs (_: {
+      outputHash = "sha256-TzTafbNTng/mMyf0yR9Rc6XS9/zzipwmK9SUWm2XxeY=";
+    });
+  client = pkgs.callPackage "${inputs.nsid-tracker}/nix/client.nix" {
     PUBLIC_API_URL = "gaze.systems/nsid-tracker/api";
-  });
+    inherit client-modules;
+  };
+  server = terra.nsid-tracker-server;
   port = 6432;
 in
 {
