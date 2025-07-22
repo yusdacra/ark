@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, terra, config, ... }:
 let
   domain = "dash.gaze.systems";
   port = 7412;
@@ -62,7 +62,7 @@ let
   secrets = config.age.secrets;
 in
 {
-  environment.systemPackages = [ pkgs.percli ];
+  environment.systemPackages = [ terra.percli ];
 
   users.users.${user} = {
     isNormalUser = true;

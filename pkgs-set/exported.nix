@@ -1,0 +1,4 @@
+[
+  "comic-mono"
+  "percli"
+]

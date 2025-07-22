@@ -48,49 +48,42 @@
     inputs:
     let
       lib = inputs.nixpkgs.lib;
-      tlib = (import ./lib lib).extend (
-        _: prev: rec {
-          makePkgs =
-            system:
-            import ./pkgs-set {
-              inherit system lib inputs;
-              tlib = prev;
-            };
-          genPkgs = f: prev.genSystems (system: f (makePkgs system));
-        }
-      );
+      tlib = import ./lib lib;
+      l = lib;
 
-      allPkgs = tlib.genPkgs (x: x);
+      makePkgsSet = system: import ./pkgs-set {
+        inherit system inputs lib tlib;
+      };
+      allPkgsSets = tlib.genSystems makePkgsSet;
 
       miscApps =
-        lib.mapAttrs
+        l.mapAttrs
           (
             _: cmds:
-            lib.mapAttrs (_: cmd: {
+            l.mapAttrs (_: cmd: {
               type = "app";
               program = cmd;
             }) cmds
           )
           (
-            lib.mapAttrs
-            (_: pkgs: (
-              lib.mapAttrs
+            l.mapAttrs
+            (_: set: (
+              l.mapAttrs
               (_: app: app.program)
-              (inputs.ncr.makeApps {inherit pkgs; inherit (inputs) self;})
+              (inputs.ncr.makeApps {inherit (set) pkgs; inherit (inputs) self;})
             ) // {
-              generate-firefox-addons = toString "${pkgs.generate-firefox-addons}/bin/generate-firefox-addons";
-              dns = toString "${pkgs.dnsmngmt}/bin/dns";
+              generate-firefox-addons = toString "${set.pkgs.generate-firefox-addons}/bin/generate-firefox-addons";
+              dns = toString "${set.pkgs.dnsmngmt}/bin/dns";
             })
-            allPkgs
+            allPkgsSets
           );
     in
     {
       lib = tlib;
-      nixosConfigurations = import ./hosts { inherit lib tlib inputs allPkgs; };
-      homeConfigurations = import ./users { inherit lib tlib inputs allPkgs; };
+      nixosConfigurations = import ./hosts { inherit lib tlib inputs allPkgsSets; };
+      homeConfigurations = import ./users { inherit lib tlib inputs allPkgsSets; };
 
-      packages = lib.mapAttrs (_: pkgs: pkgs._exported) allPkgs;
-      legacyPackages = allPkgs;
+      packages = l.mapAttrs (_: set: set.exported) allPkgsSets;
       apps = miscApps;
 
       # topology = lib.mapAttrs (_: pkgs:
@@ -100,6 +93,6 @@
       #   })
       # allPkgs;
 
-      devShells = import ./shells { inherit lib tlib inputs; };
+      devShells = import ./shells { inherit lib inputs allPkgsSets; };
     };
 }

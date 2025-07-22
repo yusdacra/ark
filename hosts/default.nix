@@ -2,7 +2,7 @@
   inputs,
   lib,
   tlib,
-  allPkgs,
+  allPkgsSets,
   ...
 }:
 let
@@ -13,22 +13,25 @@ let
   ];
 
   mkSystem =
-    name: pkgs:
+    name: set:
     lib.nixosSystem {
-      system = pkgs.system;
+      system = set.pkgs.system;
       modules = baseModules ++ [
         { networking.hostName = name; }
-        { nixpkgs.pkgs = pkgs; }
+        { nixpkgs.pkgs = set.pkgs; }
         (import (./. + "/${name}/default.nix"))
       ];
-      specialArgs = { inherit inputs tlib; };
+      specialArgs = {
+        inherit (set) terra;
+        inherit inputs tlib;
+      };
     };
 
   systems = {
     # lungmen = "x86_64-linux";
     # tkaronto = "x86_64-linux";
-    wolumonde = allPkgs.x86_64-linux;
-    wsl = allPkgs.x86_64-linux;
+    wolumonde = allPkgsSets.x86_64-linux;
+    wsl = allPkgsSets.x86_64-linux;
   };
 in
 lib.mapAttrs mkSystem systems

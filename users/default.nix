@@ -2,20 +2,23 @@
   inputs,
   lib,
   tlib,
-  allPkgs,
+  allPkgsSets,
   ...
 }:
 let
   mkHome =
-    name: pkgs:
+    name: set:
     import "${inputs.home}/modules" {
-      inherit pkgs;
+      inherit (set) pkgs;
       configuration = import (./. + "/${name}/default.nix");
-      extraSpecialArgs = {inherit tlib inputs pkgs;};
+      extraSpecialArgs = {
+        inherit (set) pkgs terra;
+        inherit tlib inputs;
+      };
     };
 
   users = {
-    "dusk@devel.mobi" = allPkgs.x86_64-linux;
+    "dusk@devel.mobi" = allPkgsSets.x86_64-linux;
   };
 in
 lib.mapAttrs mkHome users

@@ -1,15 +1,18 @@
 {
-  tlib,
+  lib,
+  allPkgsSets,
   inputs,
   ...
 }:
-tlib.genPkgs (
-  pkgs:
+lib.mapAttrs
+(
+  system: set:
   let
+    inherit (set) pkgs;
     mkNakedShell = pkgs.callPackage inputs.naked-shell { };
     agenix-wrapped = pkgs.writeShellApplication {
       name = "agenix";
-      runtimeInputs = [ pkgs.agenix ];
+      runtimeInputs = [ inputs.agenix.packages.${system}.default ];
       text = ''
         if [ -z "''${1-}" ]; then
           agenix
@@ -32,7 +35,6 @@ tlib.genPkgs (
           treefmt
           rage
           nh
-          percli
           go
           gopls
           # golangci-lint
@@ -43,6 +45,7 @@ tlib.genPkgs (
           agenix-wrapped
           commit
           deploy
+          set.terra.percli
         ];
       shellHook = ''
         echo \"$(tput bold)welcome to PRTS, $USER$(tput sgr0)\"
@@ -51,3 +54,4 @@ tlib.genPkgs (
     };
   }
 )
+allPkgsSets
