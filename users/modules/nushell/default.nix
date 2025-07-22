@@ -57,14 +57,14 @@
           algorithm: "fuzzy"    # prefix or fuzzy
           external: {
             # set to false to prevent nushell looking into $env.PATH to find more suggestions
-            enable: true 
+            enable: true
             # set to lower can improve completion performance at the cost of omitting some options
-            max_results: 100 
+            max_results: 100
             completer: $multiple_completers
           }
         }
-      } 
-      $env.PATH = ($env.PATH | 
+      }
+      $env.PATH = ($env.PATH |
         split row (char esep) |
         append /usr/bin/env
       )

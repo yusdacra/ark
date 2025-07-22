@@ -50,13 +50,12 @@ in {
         Restart = "on-failure";
         RestartSec = "5s";
         Environment = l.mapAttrsToList (k: v: "${k}=${toString v}") {
-          PATH = "${pkgs.coreutils}/bin:$PATH";
-          NB_WG_KERNEL_DISABLE = "true";
+          NB_WG_KERNEL_DISABLED = "true";
           NB_USE_NETSTACK_MODE = "true";
+          NB_FORCE_USERSPACE_ROUTER = "true";
           NB_ENABLE_NETSTACK_LOCAL_FORWARDING = "true";
           NB_NETSTACK_SKIP_PROXY = "false";
           NB_SOCKS5_LISTENER_PORT = 1080;
-          NB_DISABLE_DNS = "false";
           NB_SETUP_KEY_FILE = l.replaceString "\${XDG_RUNTIME_DIR}" "%t" cfg.setupKeyFile;
           NB_MANAGEMENT_URL = cfg.managementUrl;
           NB_CONFIG = "${config.xdg.configHome}/netbird/config.json";

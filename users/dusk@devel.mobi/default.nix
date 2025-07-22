@@ -37,7 +37,12 @@ in
       inputs.agenix.homeManagerModules.default
       ../../modules/persist/null.nix
       (tlib.prefixStrings "${inputs.self}/users/modules/" modulesToEnable)
+      ./nsid-tracker.nix
     ];
+
+  systemd.user.settings.Manager.DefaultEnvironment = {
+    PATH = "${pkgs.coreutils-full}/bin:$PATH";
+  };
 
   age.identityPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
   home = {
@@ -49,7 +54,6 @@ in
     shellAliases = {
       ctl = "systemctl --user";
       jtl = "journalctl --user";
-      jtlu = "journalctl --user --unit";
     };
   };
 
