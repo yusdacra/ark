@@ -86,8 +86,8 @@
     in
     {
       lib = tlib;
-      nixosConfigurations = import ./hosts { inherit lib tlib inputs; };
-      homeConfigurations = import ./users { inherit lib tlib inputs; };
+      nixosConfigurations = import ./hosts { inherit lib tlib inputs allPkgs; };
+      homeConfigurations = import ./users { inherit lib tlib inputs allPkgs; };
 
       packages = lib.mapAttrs (_: pkgs: pkgs._exported) allPkgs;
       legacyPackages = allPkgs;

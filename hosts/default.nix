@@ -2,6 +2,7 @@
   inputs,
   lib,
   tlib,
+  allPkgs,
   ...
 }:
 let
@@ -12,12 +13,9 @@ let
   ];
 
   mkSystem =
-    name: system:
-    let
-      pkgs = tlib.makePkgs system;
-    in
+    name: pkgs:
     lib.nixosSystem {
-      inherit system;
+      system = pkgs.system;
       modules = baseModules ++ [
         { networking.hostName = name; }
         { nixpkgs.pkgs = pkgs; }
@@ -29,8 +27,8 @@ let
   systems = {
     # lungmen = "x86_64-linux";
     # tkaronto = "x86_64-linux";
-    wolumonde = "x86_64-linux";
-    wsl = "x86_64-linux";
+    wolumonde = allPkgs.x86_64-linux;
+    wsl = allPkgs.x86_64-linux;
   };
 in
 lib.mapAttrs mkSystem systems
