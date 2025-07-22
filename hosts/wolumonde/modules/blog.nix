@@ -6,9 +6,13 @@
 }:
 let
   PUBLIC_BASE_URL = "https://gaze.systems";
-  pkg = inputs.blog.packages.${pkgs.system}.default.overrideAttrs (old: {
-    inherit PUBLIC_BASE_URL;
+  modules = (pkgs.callPackage "${inputs.blog}/nix/modules.nix" {}).overrideAttrs (_: {
+    outputHash = "sha256-CO0bFv5WbNBSgucHCb+I9kIZEkh6QqWngRra0luMtSI=";
   });
+  pkg = pkgs.callPackage "${inputs.blog}/nix" {
+    inherit PUBLIC_BASE_URL;
+    gazesys-modules = modules;
+  };
   port = 3003;
 in
 {

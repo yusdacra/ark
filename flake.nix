@@ -23,7 +23,7 @@
     nixpkgs-wayland.flake = false;
 
     blog.url = "git+https://git.gaze.systems/90008/website.git";
-    # blog.inputs.nixpkgs.follows = "nixpkgs";
+    blog.flake = false;
 
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
