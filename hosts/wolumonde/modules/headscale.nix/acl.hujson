@@ -1,0 +1,53 @@
+{
+    // Headscale ACL Configuration
+    // Defines groups, tags, and access control rules
+
+    // Groups define collections of users
+    "groups": {
+        "group:admin": ["90008@"],
+    },
+
+    // Tags are used to label devices/nodes for access control
+    "tagOwners": {
+        "tag:private-infra": ["group:admin"],
+        "tag:other-infra": ["group:admin"],
+    },
+
+    // Access Control Lists - define what can access what
+    "acls": [
+        // Admin group (user 90008) can access their own devices
+        {
+            "action": "accept",
+            "src": ["group:admin"],
+            "dst": ["group:admin:*"],
+        },
+
+        // Private infrastructure can access other infrastructure
+        {
+            "action": "accept",
+            "src": ["tag:private-infra"],
+            "dst": ["tag:other-infra:*"],
+        },
+
+        // Private infrastructure can access itself
+        {
+            "action": "accept",
+            "src": ["tag:private-infra"],
+            "dst": ["tag:private-infra:*"],
+        },
+
+        // Other infrastructure can access itself
+        {
+            "action": "accept",
+            "src": ["tag:other-infra"],
+            "dst": ["tag:other-infra:*"],
+        },
+
+        // Admin group can access both infrastructure tags
+        {
+            "action": "accept",
+            "src": ["group:admin"],
+            "dst": ["tag:private-infra:*", "tag:other-infra:*"],
+        },
+    ],
+}

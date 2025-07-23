@@ -78,12 +78,12 @@ in
   };
 
   age.secrets.persesSecret = {
-    file = ../../../secrets/persesSecret.age;
+    file = ../../../../secrets/persesSecret.age;
     owner = user;
     group = user;
   };
   age.secrets.persesAdminUser = {
-    file = ../../../secrets/persesAdminUser.age;
+    file = ../../../../secrets/persesAdminUser.age;
     owner = user;
     group = user;
   };
@@ -95,7 +95,7 @@ in
     ''
       rm -rf ${provisioningFolder} && mkdir -p ${provisioningFolder}
       cp -f ${secrets.persesAdminUser.path} ${provisioningFolder}/1-admin-user.json
-      cp -f ${./perses/provision}/* ${provisioningFolder}
+      cp -f ${./provision}/* ${provisioningFolder}
     '';
 
   virtualisation.oci-containers.containers.perses = {

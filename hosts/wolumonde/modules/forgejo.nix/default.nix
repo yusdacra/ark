@@ -46,7 +46,7 @@ in
       makeCopyCommand = dir: ''
         mkdir -p ${customDir}
         rm -rf ${getCustomDir dir}
-        cp -r --no-preserve=mode,ownership ${./forgejo/${dir}} ${getCustomDir dir}
+        cp -r --no-preserve=mode,ownership ${./${dir}} ${getCustomDir dir}
       '';
     in
     lib.concatMapStrings makeCopyCommand [

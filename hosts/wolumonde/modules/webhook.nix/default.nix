@@ -1,6 +1,6 @@
 { config, tlib, ... }:
 {
-  imports = tlib.importFolder ./webhooks;
+  imports = tlib.importFolder ./.;
 
   services.webhook = {
     enable = true;
@@ -8,7 +8,7 @@
   };
 
   age.secrets.webhookAuth = {
-    file = ../../../secrets/webhookAuth.age;
+    file = ../../../../secrets/webhookAuth.age;
     mode = "600";
     owner = "nginx";
     group = "nginx";

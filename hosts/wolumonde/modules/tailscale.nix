@@ -5,6 +5,7 @@
     enable = true;
     port = 41641;
     extraSetFlags = [ "--advertise-exit-node" ];
+    extraUpFlags = [ "--ssh" ];
     extraDaemonFlags = [ "--no-logs-no-support" ];
     useRoutingFeatures = "both";
     authKeyFile = config.age.secrets.tailscaleAuthKey.path;
