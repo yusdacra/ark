@@ -58,6 +58,10 @@ in
     yusdacra
     wolumonde
   ];
+  "headplaneSecrets.age".publicKeys = [
+    yusdacra
+    wolumonde
+  ];
   "tailscaleAuthKey.age".publicKeys = [
     yusdacra
     wolumonde

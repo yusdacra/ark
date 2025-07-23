@@ -61,6 +61,27 @@
         },
         "version": "be828766411cad04c194c8f714d46aa2b2596362"
     },
+    "headplane": {
+        "cargoLocks": null,
+        "date": "2025-07-23",
+        "extract": null,
+        "name": "headplane",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "90-008",
+            "repo": "headplane",
+            "rev": "e9fe8625db3b03c121e0b7fb50add4cd729d986c",
+            "sha256": "sha256-KM7Jxrab3o38tJr3gA6wQ2zalZ2N5yK4d65r3KhGZKg=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "e9fe8625db3b03c121e0b7fb50add4cd729d986c"
+    },
     "home": {
         "cargoLocks": null,
         "date": "2025-07-22",
