@@ -62,4 +62,8 @@ in
     yusdacra
     wolumonde
   ];
+  "develMobiTailscaleAuthKey.age".publicKeys = [
+    yusdacra
+    develMobi
+  ];
 }

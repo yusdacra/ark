@@ -23,7 +23,7 @@ in
           "fzf"
           "direnv"
           "nushell"
-          "netbird"
+          "tailscale"
         ]
         # dev stuff
         [
@@ -57,14 +57,15 @@ in
     };
   };
 
-  age.secrets.netbirdClientKey = {
-    file = ../../secrets/develMobiNetbirdClientKey.age;
+  age.secrets.tailscaleAuthKey = {
+    file = ../../secrets/develMobiTailscaleAuthKey.age;
     mode = "600";
   };
-  services.netbird = {
+  services.tailscale = {
     enable = true;
-    managementUrl = "https://bird.gaze.systems";
-    setupKeyFile = config.age.secrets.netbirdClientKey.path;
+    controlServer = "https://vpn.gaze.systems";
+    authKeyFile = config.age.secrets.tailscaleAuthKey.path;
+    extraUpFlags = ["--hostname=dusk-devel-mobi"];
   };
 
   programs = {
