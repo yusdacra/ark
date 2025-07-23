@@ -6,6 +6,7 @@
 }:
 {
   imports = [
+    ../../users/root
     "${inputs.agenix}/modules/age.nix"
     "${inputs.ncr}/firewall"
     "${inputs.ncr}/firewall/hetzner"

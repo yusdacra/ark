@@ -21,7 +21,7 @@ D(
     A("spindle", WOLUMONDE_IP, CF_PROXY_OFF),
     A("skeetdeck", WOLUMONDE_IP, CF_PROXY_OFF),
     A("likes", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("bird", WOLUMONDE_IP, CF_PROXY_OFF),
+    A("vpn", WOLUMONDE_IP, CF_PROXY_OFF),
     A("id", WOLUMONDE_IP, CF_PROXY_OFF),
     // thing
     // TXT("id", "a data endpoint for entity with serial id /90008/."),

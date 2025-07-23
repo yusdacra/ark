@@ -54,24 +54,12 @@ in
     yusdacra
     wolumonde
   ];
-  "netbirdCoturnPass.age".publicKeys = [
+  "headscaleOidcSecret.age".publicKeys = [
     yusdacra
     wolumonde
   ];
-  "netbirdDataStoreEncKey.age".publicKeys = [
+  "tailscaleAuthKey.age".publicKeys = [
     yusdacra
     wolumonde
-  ];
-  "netbirdTurnSecret.age".publicKeys = [
-    yusdacra
-    wolumonde
-  ];
-  "netbirdClientKey.age".publicKeys = [
-    yusdacra
-    wolumonde
-  ];
-  "develMobiNetbirdClientKey.age".publicKeys = [
-    yusdacra
-    develMobi
   ];
 }

@@ -104,26 +104,26 @@ def deploy [hostname: string] {
   webhook $hooktitle $"=== deploy for ($hostname): finished ===" 0 true
 }
 
-def update-input [input: string] {
+def update-inputs [inputs: list<string>] {
+  let inputsText = $inputs | str join ", "
   let stashed = try {
     let stash_result = git stash | complete
     $stash_result.stdout | str contains "Saved working directory"
   } catch {
     false
   }
-  log info $"trying to update input ($input)"
-  let result = nix flake update $input | complete
+  log info $"trying to update inputs ($inputsText)"
+  let result = nix run .#nvfetcher -- -f $"\(($inputs | str join '|')\)" | complete
   let is_ok = ($result.stderr | str contains "Updated input")
   let is_err = ($result.exit_code != 0)
   if $is_ok or $is_err {
-    webhook $"/inputs/($input)" $"=== updated input ($input) ===\n\n($result.stderr)" $result.exit_code
+    webhook $"/inputs" $"=== updated inputs ===\n\n($result.stderr)" $result.exit_code
   }
   if $is_ok {
     # try committing flake updates
     try {
-      git add flake.lock
-      let commit_msg = $"chore\(nix\): update input ($input) [skip ci]"
-      git commit -m $commit_msg
+      git add _sources
+      git commit -m "chore(nix): update inputs [skip ci]"
       git push
     }
   } else {
@@ -142,9 +142,7 @@ def main [hostname: string = "wolumonde", --only-deploy (-d)] {
   webhook "deploy" "=== started deploying all ==="
 
   if $only_deploy == false {
-    ["blog" "limbusart" "nsid-tracker"]
-      | each {|input| update-input $input}
-
+    update-inputs ["blog" "limbusart" "nsid-tracker"]
     try {
       log info "trying to update dns records"
       nix run ".#dns" -- push

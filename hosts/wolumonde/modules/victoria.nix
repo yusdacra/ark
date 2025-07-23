@@ -16,8 +16,6 @@ in
     # extraOptions = ["-syslog.listenAddr.udp=:${toString syslogUdp}" "-journald.maxRequestSize=1024000000"];
   };
 
-  networking.firewall.allowedTCPPorts = [metricsPort logsPort];
-
   services.vmalert.instances."" = {
     enable = true;
     settings =

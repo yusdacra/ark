@@ -16,7 +16,8 @@
     statusPage = true;
   };
 
-  networking.firewall.public."http(s)".allowedTCPPorts = [80 443];
+  networking.firewall.public."http".allowedTCPPorts = [80];
+  networking.firewall.public."https".allowedTCPPorts = [443];
 
   # output json logs so we can consume them more easily
   services.nginx.appendHttpConfig = ''
@@ -63,8 +64,8 @@
         "spindle.gaze.systems"
         "skeetdeck.gaze.systems"
         "likes.gaze.systems"
-        "bird.gaze.systems"
         "id.gaze.systems"
+        "vpn.gaze.systems"
       ];
     };
   };
