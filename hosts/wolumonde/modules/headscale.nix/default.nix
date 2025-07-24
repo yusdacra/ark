@@ -17,7 +17,7 @@ in {
       server_url = "https://${domain}";
       policy = {
         mode = "file";
-        file = ./acl.hujson;
+        path = ./acl.hujson;
       };
       dns = {
         base_domain = "lan.${rootDomain}";

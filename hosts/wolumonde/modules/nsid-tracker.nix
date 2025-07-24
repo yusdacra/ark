@@ -14,38 +14,38 @@ let
     PUBLIC_API_URL = "gaze.systems/nsid-tracker/api";
     inherit client-modules;
   };
-  server = terra.nsid-tracker-server;
-  port = 6432;
+  # server = terra.nsid-tracker-server;
+  port = 3713;
 in
 {
-  users.users.nsidtracker = {
-    isSystemUser = true;
-    home = "/mnt/data/nsid-tracker";
-    createHome = true;
-    group = "nsidtracker";
-  };
-  users.groups.nsidtracker = { };
+  # users.users.nsidtracker = {
+  #   isSystemUser = true;
+  #   home = "/mnt/data/nsid-tracker";
+  #   createHome = true;
+  #   group = "nsidtracker";
+  # };
+  # users.groups.nsidtracker = { };
 
-  systemd.services.nsid-tracker = {
-    description = "nsid-tracker";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
-    environment = {
-      HOME = "/mnt/data/nsid-tracker";
-      PORT = toString port;
-    };
-    serviceConfig = {
-      User = "nsidtracker";
-      ExecStart = "${server}/bin/server";
-      Restart = "on-failure";
-      RestartSec = 5;
-      WorkingDirectory = "/mnt/data/nsid-tracker";
-    };
-  };
+  # systemd.services.nsid-tracker = {
+  #   description = "nsid-tracker";
+  #   wantedBy = [ "multi-user.target" ];
+  #   after = [ "network.target" ];
+  #   environment = {
+  #     HOME = "/mnt/data/nsid-tracker";
+  #     PORT = toString port;
+  #   };
+  #   serviceConfig = {
+  #     User = "nsidtracker";
+  #     ExecStart = "${server}/bin/server";
+  #     Restart = "on-failure";
+  #     RestartSec = 5;
+  #     WorkingDirectory = "/mnt/data/nsid-tracker";
+  #   };
+  # };
 
   services.nginx.virtualHosts."gaze.systems" = {
     locations."/nsid-tracker/api" = {
-      proxyPass = "http://localhost:${toString port}/";
+      proxyPass = "http://dusk-devel-mobi:${toString port}/";
       proxyWebsockets = true;
       extraConfig = ''
         rewrite ^/nsid-tracker/api/(.*) /$1 break;
