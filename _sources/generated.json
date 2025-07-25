@@ -180,7 +180,7 @@
     },
     "nsid-tracker": {
         "cargoLocks": null,
-        "date": "2025-07-22",
+        "date": "2025-07-25",
         "extract": null,
         "name": "nsid-tracker",
         "passthru": null,
@@ -190,13 +190,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "9bab265d0ef9b2800614073f5ccdd89ea3eeedee",
-            "sha256": "sha256-8c+EbZC7ZWA+uYJlR6fez+gcQNck1xC2uOMo2nzwfjg=",
+            "rev": "fddc6d5ecba142bbb56857422ddd0306a74c5981",
+            "sha256": "sha256-kXkrAMnA/N+vNWL5o1exQXne0OrHd9QrtMnG1glF3/0=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.sh/@poor.dog/nsid-tracker"
         },
-        "version": "9bab265d0ef9b2800614073f5ccdd89ea3eeedee"
+        "version": "fddc6d5ecba142bbb56857422ddd0306a74c5981"
     },
     "tangled": {
         "cargoLocks": null,
