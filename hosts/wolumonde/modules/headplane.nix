@@ -20,6 +20,7 @@ let
 
   headscaleConfig = format.generate "headscale.yml" settings;
 
+  domain = "plane.lan.gaze.systems";
   cfg = config.services.headplane.settings;
 in
 {
@@ -49,10 +50,16 @@ in
         token_endpoint_auth_method = "client_secret_post";
         headscale_api_key = "";
         disable_api_key_login = true;
-        redirect_uri = "http://wolumonde:${toString cfg.server.port}/admin/oidc/callback";
+        redirect_uri = "http://${domain}/admin/oidc/callback";
       };
     };
   };
   age.secrets.headplaneSecrets.file = ../../../secrets/headplaneSecrets.age;
   systemd.services.headplane.serviceConfig.EnvironmentFile = config.age.secrets.headplaneSecrets.path;
+
+  services.nginx.virtualHosts.${domain} = {
+    quic = true;
+    locations."=/".return = "301 /admin";
+    locations."/".proxyPass = "http://localhost:${toString cfg.server.port}";
+  };
 }
