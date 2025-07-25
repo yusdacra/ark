@@ -8,5 +8,5 @@
   users.users.root.openssh.authorizedKeys.keys = [
     (builtins.readFile "${inputs.self}/secrets/yusdacra.key.pub")
   ];
-  networking.firewall.public."ssh".allowedTCPPorts = [22];
+  networking.firewall.public."ssh".allowedTCPPorts = [ 22 ];
 }

@@ -6,14 +6,16 @@
   ...
 }:
 let
-  unwrapped = (callPackage "${inputs.tangled}/nix/pkgs/knot-unwrapped.nix" {
-    modules = tangled-modules;
-    sqlite-lib = tangled-sqlite-lib;
-    gitignoreSource = null;
-  }).overrideAttrs (_: {
-    src = inputs.tangled;
-  });
+  unwrapped =
+    (callPackage "${inputs.tangled}/nix/pkgs/knot-unwrapped.nix" {
+      modules = tangled-modules;
+      sqlite-lib = tangled-sqlite-lib;
+      gitignoreSource = null;
+    }).overrideAttrs
+      (_: {
+        src = inputs.tangled;
+      });
 in
-  callPackage "${inputs.tangled}/nix/pkgs/knot.nix" {
-    knot-unwrapped = unwrapped;
-  }
+callPackage "${inputs.tangled}/nix/pkgs/knot.nix" {
+  knot-unwrapped = unwrapped;
+}

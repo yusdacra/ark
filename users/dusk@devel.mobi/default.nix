@@ -44,7 +44,7 @@ in
     PATH = "${pkgs.coreutils-full}/bin:$PATH";
   };
 
-  age.identityPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
+  age.identityPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
   home = {
     homeDirectory = "/home/dusk";
     username = "dusk";
@@ -65,7 +65,7 @@ in
     enable = true;
     controlServer = "https://vpn.gaze.systems";
     authKeyFile = config.age.secrets.tailscaleAuthKey.path;
-    extraUpFlags = ["--hostname=dusk-devel-mobi"];
+    extraUpFlags = [ "--hostname=dusk-devel-mobi" ];
   };
 
   programs = {

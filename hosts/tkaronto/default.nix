@@ -145,19 +145,18 @@
     4995
   ];
   # musikcube
-  networking.firewall.allowedTCPPorts =
-    [
-      7905
-      7906
-    ]
-    ++ [
-      6695
-      6696
-      6697
-      6698
-      6699
-    ]
-    ++ [ 50300 ];
+  networking.firewall.allowedTCPPorts = [
+    7905
+    7906
+  ]
+  ++ [
+    6695
+    6696
+    6697
+    6698
+    6699
+  ]
+  ++ [ 50300 ];
 
   # for tailscale
   networking.firewall.checkReversePath = "loose";

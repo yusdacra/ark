@@ -1,6 +1,13 @@
-{lib, config, pkgs, terra, inputs, ...}:
+{
+  lib,
+  config,
+  pkgs,
+  terra,
+  inputs,
+  ...
+}:
 let
-  format = pkgs.formats.yaml {};
+  format = pkgs.formats.yaml { };
 
   # A workaround generate a valid Headscale config accepted by Headplane when `config_strict == true`.
   settings = lib.recursiveUpdate config.services.headscale.settings {
@@ -14,8 +21,9 @@ let
   headscaleConfig = format.generate "headscale.yml" settings;
 
   cfg = config.services.headplane.settings;
-in {
-  imports = ["${inputs.headplane}/nix/module.nix"];
+in
+{
+  imports = [ "${inputs.headplane}/nix/module.nix" ];
 
   services.headplane = {
     enable = true;

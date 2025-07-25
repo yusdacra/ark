@@ -6,7 +6,7 @@
 }:
 let
   PUBLIC_BASE_URL = "https://gaze.systems";
-  modules = (pkgs.callPackage "${inputs.blog}/nix/modules.nix" {}).overrideAttrs (_: {
+  modules = (pkgs.callPackage "${inputs.blog}/nix/modules.nix" { }).overrideAttrs (_: {
     outputHash = "sha256-CO0bFv5WbNBSgucHCb+I9kIZEkh6QqWngRra0luMtSI=";
   });
   pkg = pkgs.callPackage "${inputs.blog}/nix" {

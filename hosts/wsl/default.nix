@@ -12,7 +12,8 @@
     ../../users/firewatch
     "${inputs.nixos-wsl}/modules"
     "${inputs.agenix}/modules/age.nix"
-  ] ++ (tlib.importFolder (toString ./modules));
+  ]
+  ++ (tlib.importFolder (toString ./modules));
 
   wsl.enable = true;
   wsl.defaultUser = "firewatch";

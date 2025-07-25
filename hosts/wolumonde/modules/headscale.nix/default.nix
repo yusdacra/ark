@@ -1,7 +1,9 @@
-{config, ...}: let
+{ config, ... }:
+let
   rootDomain = "gaze.systems";
   domain = "vpn.${rootDomain}";
-in {
+in
+{
   age.secrets.headscaleOidcSecret = {
     file = ../../../../secrets/headscaleOidcSecret.age;
     mode = "600";
@@ -21,7 +23,12 @@ in {
       };
       dns = {
         base_domain = "lan.${rootDomain}";
-        nameservers.global = ["1.1.1.1" "1.0.0.1" "9.9.9.9" "149.112.112.112"];
+        nameservers.global = [
+          "1.1.1.1"
+          "1.0.0.1"
+          "9.9.9.9"
+          "149.112.112.112"
+        ];
       };
       oidc = {
         issuer = config.services.pocket-id.settings.APP_URL;

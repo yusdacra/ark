@@ -1,4 +1,10 @@
-{lib, config, pkgs, ...}: let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+let
   l = lib;
   t = l.types;
   cfg = config.services.netbird;
@@ -16,7 +22,8 @@
   wrappedProxychains = pkgs.writers.writeBashBin "netbird-proxychains" ''
     ${pkgs.proxychains-ng}/bin/proxychains4 -f "${proxychainsCfg}" $@
   '';
-in {
+in
+{
   options = {
     services.netbird = {
       enable = l.mkEnableOption "netbird client";
@@ -37,7 +44,10 @@ in {
     };
   };
   config = l.mkIf cfg.enable {
-    home.packages = [ wrapped wrappedProxychains ];
+    home.packages = [
+      wrapped
+      wrappedProxychains
+    ];
     services.netbird.proxyScript = wrappedProxychains;
     systemd.user.services.netbird = {
       Unit = {

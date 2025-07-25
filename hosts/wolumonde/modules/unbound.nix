@@ -1,6 +1,8 @@
-{config, lib, ...}: let
+{ config, lib, ... }:
+let
   cfg = config.services.unbound.settings;
-in {
+in
+{
   services.unbound = {
     enable = true;
     enableRootTrustAnchor = false;
@@ -47,7 +49,7 @@ in {
     };
   };
   networking.firewall = {
-    allowedTCPPorts = [cfg.server.port];
-    allowedUDPPorts = [cfg.server.port];
+    allowedTCPPorts = [ cfg.server.port ];
+    allowedUDPPorts = [ cfg.server.port ];
   };
 }

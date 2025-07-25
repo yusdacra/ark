@@ -1,1 +1,1 @@
-{callPackage, inputs, ...}: callPackage "${inputs.nsid-tracker}/nix/server.nix" {}
+{ callPackage, inputs, ... }: callPackage "${inputs.nsid-tracker}/nix/server.nix" { }

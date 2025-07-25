@@ -9,6 +9,7 @@
   modules = tangled-modules;
   sqlite-lib = tangled-sqlite-lib;
   gitignoreSource = null;
-}).overrideAttrs (_: {
-  src = inputs.tangled;
-})
+}).overrideAttrs
+  (_: {
+    src = inputs.tangled;
+  })

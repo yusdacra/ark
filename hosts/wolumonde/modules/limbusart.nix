@@ -5,7 +5,7 @@
   ...
 }:
 let
-  pkg = pkgs.callPackage "${inputs.limbusart}/package.nix" {};
+  pkg = pkgs.callPackage "${inputs.limbusart}/package.nix" { };
 in
 {
   systemd.services.limbusart = {

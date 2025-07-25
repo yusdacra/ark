@@ -1,4 +1,10 @@
-{ lib, config, inputs, terra, ... }:
+{
+  lib,
+  config,
+  inputs,
+  terra,
+  ...
+}:
 let
   knotCfg = config.services.tangled-knot;
   spindleCfg = config.services.tangled-spindle;
@@ -46,10 +52,10 @@ in
     group = "spindle";
     isSystemUser = true;
   };
-  users.groups.spindle = {};
-  users.groups.podman.members = ["spindle"];
+  users.groups.spindle = { };
+  users.groups.podman.members = [ "spindle" ];
   systemd.services.spindle = {
-    after = lib.mkForce ["network.target"];
+    after = lib.mkForce [ "network.target" ];
     serviceConfig = {
       User = "spindle";
       Group = "spindle";

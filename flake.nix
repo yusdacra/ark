@@ -11,26 +11,34 @@
       tlib = import ./lib lib;
       l = lib;
 
-      makePkgsSet = system: import ./pkgs-set {
-        inherit system lib tlib flakeInputs;
-      };
+      makePkgsSet =
+        system:
+        import ./pkgs-set {
+          inherit
+            system
+            lib
+            tlib
+            flakeInputs
+            ;
+        };
       allPkgsSets = tlib.genSystems makePkgsSet;
 
       miscApps =
         l.mapAttrs
           (
-            _: l.mapAttrs (_: cmd: {
-              type = "app";
-              program = cmd;
-            })
+            _:
+            l.mapAttrs (
+              _: cmd: {
+                type = "app";
+                program = cmd;
+              }
+            )
           )
           (
-            l.mapAttrs
-            (_: set: {
+            l.mapAttrs (_: set: {
               deploy-ncr = l.getExe set.terra.deploy-ncr;
               dns = l.getExe set.terra.dnsmngmt;
-            })
-            allPkgsSets
+            }) allPkgsSets
           );
     in
     {
@@ -38,7 +46,7 @@
       nixosConfigurations = import ./hosts { inherit lib tlib allPkgsSets; };
       homeConfigurations = import ./users { inherit lib tlib allPkgsSets; };
 
-      legacyPackages = l.mapAttrs (_: set: set.pkgs // {inherit (set) inputs;}) allPkgsSets;
+      legacyPackages = l.mapAttrs (_: set: set.pkgs // { inherit (set) inputs; }) allPkgsSets;
       packages = l.mapAttrs (_: set: set.exported) allPkgsSets;
       apps = miscApps;
 

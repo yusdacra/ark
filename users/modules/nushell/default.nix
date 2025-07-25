@@ -1,4 +1,5 @@
-{pkgs, lib, ...}: {
+{ pkgs, lib, ... }:
+{
   programs.carapace.enable = true;
   programs.carapace.enableNushellIntegration = true;
   programs.nushell = {

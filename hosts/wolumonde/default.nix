@@ -10,7 +10,8 @@
     "${inputs.agenix}/modules/age.nix"
     "${inputs.ncr}/firewall"
     "${inputs.ncr}/firewall/hetzner"
-  ] ++ (tlib.importFolder (toString ./modules));
+  ]
+  ++ (tlib.importFolder (toString ./modules));
 
   environment.systemPackages = with pkgs; [
     magic-wormhole-rs

@@ -1,4 +1,10 @@
-{lib, config, pkgs, ...}: let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+let
   l = lib;
   t = l.types;
   cfg = config.services.tailscale;
@@ -15,7 +21,8 @@
   wrapped = pkgs.writers.writeBashBin "tailscale" ''
     ${pkgs.tailscale}/bin/tailscale --socket $XDG_RUNTIME_DIR/tailscaled.sock $@
   '';
-in {
+in
+{
   options = {
     services.tailscale = {
       enable = l.mkEnableOption "tailscale client";
@@ -31,7 +38,7 @@ in {
       };
       extraUpFlags = l.mkOption {
         type = t.listOf t.str;
-        default = [];
+        default = [ ];
         description = "Extra flags to pass to tailscale up";
       };
       proxyScript = l.mkOption {
@@ -42,7 +49,10 @@ in {
     };
   };
   config = l.mkIf cfg.enable {
-    home.packages = [ wrapped wrappedProxychains ];
+    home.packages = [
+      wrapped
+      wrappedProxychains
+    ];
     services.tailscale.proxyScript = wrappedProxychains;
     systemd.user.services.tailscaled = {
       Unit = {
@@ -54,7 +64,8 @@ in {
         ExecStart = "${pkgs.tailscale}/bin/tailscaled --tun=userspace-networking --socks5-server=localhost:1055 --outbound-http-proxy-listen=localhost:1055 --socket %t/tailscaled.sock";
         Restart = "on-failure";
         RestartSec = "5s";
-      } // l.optionalAttrs (cfg.authKeyFile != null) {
+      }
+      // l.optionalAttrs (cfg.authKeyFile != null) {
         ExecStartPost = "${wrapped}/bin/tailscale up --reset --login-server=${cfg.controlServer} --auth-key=file:${cfg.authKeyFile} ${l.concatStringsSep " " cfg.extraUpFlags}";
       };
 

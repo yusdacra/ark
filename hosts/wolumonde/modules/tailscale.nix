@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   age.secrets.tailscaleAuthKey.file = ../../../secrets/tailscaleAuthKey.age;
 
   services.tailscale = {

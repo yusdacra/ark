@@ -3,12 +3,11 @@
   allPkgsSets,
   ...
 }:
-lib.mapAttrs
-(
+lib.mapAttrs (
   system: set:
   let
     inherit (set) pkgs;
-    agenix = pkgs.callPackage "${set.inputs.agenix}/pkgs/agenix.nix" {};
+    agenix = pkgs.callPackage "${set.inputs.agenix}/pkgs/agenix.nix" { };
     agenix-wrapped = pkgs.writeShellApplication {
       name = "agenix";
       runtimeInputs = [ agenix ];
@@ -53,5 +52,4 @@ lib.mapAttrs
       '';
     };
   }
-)
-allPkgsSets
+) allPkgsSets

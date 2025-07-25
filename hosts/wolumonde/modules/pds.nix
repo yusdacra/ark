@@ -6,36 +6,35 @@ in
   services.nginx.virtualHosts.${config.services.pds.settings.PDS_HOSTNAME} = {
     useACMEHost = "gaze.systems";
     forceSSL = true;
-    locations =
-      {
-        # we need to proxy /xrpc for pds to work
-        # silly but i want root domain >:3
-        "/xrpc" = {
-          proxyPass = pdsLocalhost;
-          proxyWebsockets = true;
-          # pass ws headers so we can actually proxy the ws
-          extraConfig = ''
-            proxy_set_header id $request_id;
-            client_max_body_size 100M;
-          '';
-          # higher prio just to make sure
-          priority = 100;
-        };
-      }
-      # others
-      // (lib.genAttrs
-        [
-          "/@atproto"
-          "/oauth"
-          "=/.well-known/oauth-protected-resource"
-          "=/.well-known/oauth-authorization-server"
-        ]
-        (_: {
-          proxyPass = pdsLocalhost;
-          # higher prio just to make sure
-          priority = 100;
-        })
-      );
+    locations = {
+      # we need to proxy /xrpc for pds to work
+      # silly but i want root domain >:3
+      "/xrpc" = {
+        proxyPass = pdsLocalhost;
+        proxyWebsockets = true;
+        # pass ws headers so we can actually proxy the ws
+        extraConfig = ''
+          proxy_set_header id $request_id;
+          client_max_body_size 100M;
+        '';
+        # higher prio just to make sure
+        priority = 100;
+      };
+    }
+    # others
+    // (lib.genAttrs
+      [
+        "/@atproto"
+        "/oauth"
+        "=/.well-known/oauth-protected-resource"
+        "=/.well-known/oauth-authorization-server"
+      ]
+      (_: {
+        proxyPass = pdsLocalhost;
+        # higher prio just to make sure
+        priority = 100;
+      })
+    );
   };
   # setup pds stuff
   services.pds = {
