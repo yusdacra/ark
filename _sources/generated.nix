@@ -127,17 +127,17 @@
   };
   tangled = {
     pname = "tangled";
-    version = "84c9175d8a3f00516d73e5e2a4bdb14b72dc3b2e";
+    version = "a2586d477f5908cabea2d04a9a50557e52bcf416";
     src = fetchgit {
-      url = "https://tangled.sh/@poor.dog/core";
-      rev = "84c9175d8a3f00516d73e5e2a4bdb14b72dc3b2e";
+      url = "https://tangled.sh/@tangled.sh/core";
+      rev = "a2586d477f5908cabea2d04a9a50557e52bcf416";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-hmEO0FRxOeAfApQYb5DVy0iuxjJBzyY9dZxO/0NuWEA=";
+      sha256 = "sha256-vQuHKJumfkS8S3vJkBaGzbSsJQT9ntmdW6IdZs2YXtY=";
     };
-    date = "2025-07-22";
+    date = "2025-07-25";
   };
   tangled-sqlite-lib = {
     pname = "tangled-sqlite-lib";

@@ -37,8 +37,8 @@ src.git = "https://tangled.sh/@poor.dog/nsid-tracker"
 fetch.git = "https://tangled.sh/@poor.dog/nsid-tracker"
 
 [tangled]
-src.git = "https://tangled.sh/@poor.dog/core"
-fetch.git = "https://tangled.sh/@poor.dog/core"
+src.git = "https://tangled.sh/@tangled.sh/core"
+fetch.git = "https://tangled.sh/@tangled.sh/core"
 
 [tangled-sqlite-lib]
 src.manual = "3450100"
