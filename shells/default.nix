@@ -34,6 +34,7 @@ lib.mapAttrs (
           rage
           nh
           nvfetcher
+          treefmt
           # golangci-lint
           # golangci-lint-langserver
         ])
@@ -48,7 +49,12 @@ lib.mapAttrs (
       '';
     };
     perses = pkgs.mkShellNoCC {
-      packages = [dash set.terra.percli pkgs.go pkgs.gopls];
+      packages = [
+        dash
+        set.terra.percli
+        pkgs.go
+        pkgs.gopls
+      ];
     };
   }
 ) allPkgsSets
