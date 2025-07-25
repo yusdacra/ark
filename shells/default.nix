@@ -33,23 +33,22 @@ lib.mapAttrs (
           treefmt
           rage
           nh
-          go
-          gopls
           nvfetcher
           # golangci-lint
           # golangci-lint-langserver
         ])
         ++ [
-          dash
           agenix-wrapped
           commit
           deploy
-          set.terra.percli
         ];
       shellHook = ''
         echo \"$(tput bold)welcome to PRTS, $USER$(tput sgr0)\"
         export NH_FLAKE=$PWD
       '';
+    };
+    perses = pkgs.mkShellNoCC {
+      packages = [dash set.terra.percli pkgs.go pkgs.gopls];
     };
   }
 ) allPkgsSets
