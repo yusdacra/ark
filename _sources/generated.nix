@@ -113,17 +113,17 @@
   };
   nsid-tracker = {
     pname = "nsid-tracker";
-    version = "fddc6d5ecba142bbb56857422ddd0306a74c5981";
+    version = "c806b451e23d06340e5acc0c355711b0b9eddc64";
     src = fetchgit {
       url = "https://tangled.sh/@poor.dog/nsid-tracker";
-      rev = "fddc6d5ecba142bbb56857422ddd0306a74c5981";
+      rev = "c806b451e23d06340e5acc0c355711b0b9eddc64";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-kXkrAMnA/N+vNWL5o1exQXne0OrHd9QrtMnG1glF3/0=";
+      sha256 = "sha256-yPANagtG948e5N8OQrG78w+jUSH4/PFUSILKgTc1i6E=";
     };
-    date = "2025-07-25";
+    date = "2025-07-26";
   };
   tangled = {
     pname = "tangled";
