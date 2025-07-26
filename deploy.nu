@@ -28,13 +28,12 @@ def webhook [title: string, content: string, exit_code?: number, ping?: bool = f
   } else {
     log error $content
   }
-  # http post --content-type application/json $"https://discord.com/api/webhooks/($env.WEBHOOK_ID)/($env.WEBHOOK_TOKEN)" $msg
+  http post --content-type application/json $"https://discord.com/api/webhooks/($env.WEBHOOK_ID)/($env.WEBHOOK_TOKEN)" $msg
 }
 
 def upload-paste []: any -> string {
-  # let paste_url = http post --content-type multipart/form-data "https://0x0.st" {file: ($in | to text | into binary), secret: true}
-  # return $paste_url
-  return ""
+  let paste_url = http post --content-type multipart/form-data "https://0x0.st" {file: ($in | to text | into binary), secret: true}
+  return $paste_url
 }
 
 def time-block [block]: nothing -> record {
@@ -101,6 +100,7 @@ def deploy [hostname: string] {
     return
   }
 
+  try { git push }
   webhook $hooktitle $"=== deploy for ($hostname): finished ===" 0 true
 }
 
@@ -114,17 +114,16 @@ def update-inputs [inputs: list<string>] {
   }
   log info $"trying to update inputs ($inputsText)"
   let result = nix run .#nvfetcher -- -f $"\(($inputs | str join '|')\)" | complete
-  let is_ok = ($result.stderr | str contains "Updated input")
-  let is_err = ($result.exit_code != 0)
-  if $is_ok or $is_err {
-    webhook $"/inputs" $"=== updated inputs ===\n\n($result.stderr)" $result.exit_code
+  let is_ok = ($result.stdout | str contains "Changes:")
+  if $is_ok {
+    let changes_content = $result.stdout | lines | skip until {|line| $line | str contains "Changes:"} | skip 1 | str join "\n"
+    webhook $"/inputs" $"=== updated inputs ===\n\n($changes_content)" $result.exit_code
   }
   if $is_ok {
     # try committing flake updates
     try {
       git add _sources
       git commit -m "chore(nix): update inputs [skip ci]"
-      git push
     }
   } else {
     try {
@@ -139,10 +138,10 @@ def update-inputs [inputs: list<string>] {
 }
 
 def main [hostname: string = "wolumonde", --only-deploy (-d)] {
-  webhook "deploy" "=== started deploying all ==="
+  webhook "deploy" "=== started deploying ==="
 
   if $only_deploy == false {
-    update-inputs ["blog" "limbusart" "nsid-tracker"]
+    update-inputs ["blog" "limbusart" "nsid-tracker" "tangled" "headplane"]
     try {
       log info "trying to update dns records"
       nix run ".#dns" -- push
