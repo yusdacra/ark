@@ -5,11 +5,7 @@
   ...
 }:
 let
-  client-modules =
-    (pkgs.callPackage "${inputs.nsid-tracker}/nix/client-modules.nix" { }).overrideAttrs
-      (_: {
-        outputHash = "sha256-TzTafbNTng/mMyf0yR9Rc6XS9/zzipwmK9SUWm2XxeY=";
-      });
+  client-modules = pkgs.callPackage "${inputs.nsid-tracker}/nix/client-modules.nix" { };
   client = pkgs.callPackage "${inputs.nsid-tracker}/nix/client.nix" {
     PUBLIC_API_URL = "gaze.systems/nsid-tracker/api";
     inherit client-modules;
