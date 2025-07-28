@@ -29,13 +29,6 @@ in
           "9.9.9.9"
           "149.112.112.112"
         ];
-        extra_records = [
-          {
-            name = "plane.lan.gaze.systems";
-            type = "A";
-            value = "100.64.0.2";
-          }
-        ];
       };
       oidc = {
         issuer = config.services.pocket-id.settings.APP_URL;

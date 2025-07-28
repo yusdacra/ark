@@ -57,6 +57,13 @@ in
   age.secrets.headplaneSecrets.file = ../../../secrets/headplaneSecrets.age;
   systemd.services.headplane.serviceConfig.EnvironmentFile = config.age.secrets.headplaneSecrets.path;
 
+  services.headscale.settings.dns.extra_records = [
+    {
+      name = "plane.${config.services.headscale.settings.dns.base_domain}";
+      type = "A";
+      value = "100.64.0.2";
+    }
+  ];
   services.nginx.virtualHosts.${domain} = {
     quic = true;
     locations."=/".return = "301 /admin";
