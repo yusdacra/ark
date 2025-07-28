@@ -100,12 +100,11 @@ def deploy [hostname: string] {
     return
   }
 
-  try { git push }
   webhook $hooktitle $"=== deploy for ($hostname): finished ===" 0 true
 }
 
-def update-inputs [inputs: list<string>] {
-  let inputsText = $inputs | str join ", "
+def update-inputs []: list<string> -> bool {
+  let inputsText = $in | str join ", "
   let stashed = try {
     let stash_result = git stash | complete
     $stash_result.stdout | str contains "Saved working directory"
@@ -113,7 +112,7 @@ def update-inputs [inputs: list<string>] {
     false
   }
   log info $"trying to update inputs ($inputsText)"
-  let result = nix run .#nvfetcher -- -f $"\(($inputs | str join '|')\)" | complete
+  let result = nix run .#nvfetcher -- -f $"\(($in | str join '|')\)" | complete
   let is_ok = ($result.stdout | str contains "Changes:")
   if $is_ok {
     let changes_content = $result.stdout | lines | skip until {|line| $line | str contains "Changes:"} | skip 1 | str join "\n"
@@ -135,13 +134,15 @@ def update-inputs [inputs: list<string>] {
       git stash pop
     }
   }
+  $is_ok
 }
 
 def main [hostname: string = "wolumonde", --only-deploy (-d)] {
   webhook "deploy" "=== started deploying ==="
 
+  mut inputs_updated = false
   if $only_deploy == false {
-    update-inputs ["blog" "limbusart" "nsid-tracker" "tangled" "headplane"]
+    $inputs_updated = ["blog" "limbusart" "nsid-tracker" "tangled" "headplane"] | update-inputs
     try {
       log info "trying to update dns records"
       nix run ".#dns" -- push
@@ -151,4 +152,8 @@ def main [hostname: string = "wolumonde", --only-deploy (-d)] {
   }
 
   deploy $hostname
+
+  if $inputs_updated {
+    try { git push }
+  }
 }
