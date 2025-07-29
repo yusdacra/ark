@@ -38,6 +38,23 @@ in
   #     WorkingDirectory = "/mnt/data/nsid-tracker";
   #   };
   # };
+  #
+
+  systemd.services.nsid-tracker-keep-alive = {
+    description = "keeps nsid-tracker peer connection alive";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.curl}/bin/curl http://dusk-devel-mobi:${toString port}/events";
+    };
+  };
+  systemd.timers.nsid-tracker-keep-alive = {
+    timerConfig = {
+      OnCalendar = "*-*-* *:00/5:05";
+      Unit = "nsid-tracker-keep-alive.service";
+    };
+  };
 
   services.nginx.virtualHosts."gaze.systems" = {
     locations."/nsid-tracker/api" = {
