@@ -151,7 +151,11 @@ def main [hostname: string = "wolumonde", --only-deploy (-d)] {
     }
   }
 
-  deploy $hostname
+  if $hostname == "all" {
+    $hosts | columns | each {|host| deploy $host}
+  } else {
+    deploy $hostname
+  }
 
   if $inputs_updated {
     try { git push }
