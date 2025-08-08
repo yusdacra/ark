@@ -3,41 +3,41 @@
 {
   agenix = {
     pname = "agenix";
-    version = "531beac616433bac6f9e2a19feb8e99a22a66baf";
+    version = "9edb1787864c4f59ae5074ad498b6272b3ec308d";
     src = fetchFromGitHub {
       owner = "ryantm";
       repo = "agenix";
-      rev = "531beac616433bac6f9e2a19feb8e99a22a66baf";
+      rev = "9edb1787864c4f59ae5074ad498b6272b3ec308d";
       fetchSubmodules = false;
-      sha256 = "sha256-9P1FziAwl5+3edkfFcr5HeGtQUtrSdk/MksX39GieoA=";
+      sha256 = "sha256-NA/FT2hVhKDftbHSwVnoRTFhes62+7dxZbxj5Gxvghs=";
     };
-    date = "2025-06-17";
+    date = "2025-08-05";
   };
   blog = {
     pname = "blog";
-    version = "420c26e68b1aebe29a880be60ead8b00954c9ace";
+    version = "99aec19046bf6ed852815bbc3664a339c675b38e";
     src = fetchgit {
       url = "https://git.gaze.systems/90008/website.git";
-      rev = "420c26e68b1aebe29a880be60ead8b00954c9ace";
+      rev = "99aec19046bf6ed852815bbc3664a339c675b38e";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-MxamnEYU/CeMq98GNzliN+vwBYE9+Jq8FUD2cRH0x7U=";
+      sha256 = "sha256-MUlJt823qNxjfy6BhbnoKbUGOSY1ziIH2XrxnWs3m8Y=";
     };
-    date = "2025-07-22";
+    date = "2025-08-03";
   };
   gomod2nix = {
     pname = "gomod2nix";
-    version = "be828766411cad04c194c8f714d46aa2b2596362";
+    version = "7f963246a71626c7fc70b431a315c4388a0c95cf";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "gomod2nix";
-      rev = "be828766411cad04c194c8f714d46aa2b2596362";
+      rev = "7f963246a71626c7fc70b431a315c4388a0c95cf";
       fetchSubmodules = false;
-      sha256 = "sha256-MaaWYgN/nia7xJcOYLBtPk+cFo7X2zEM1d9xIGPQrLU=";
+      sha256 = "sha256-YVoIFDCDpYuU3riaDEJ3xiGdPOtsx4sR5eTzHTytPV8=";
     };
-    date = "2025-07-21";
+    date = "2025-08-01";
   };
   headplane = {
     pname = "headplane";
@@ -53,15 +53,15 @@
   };
   home = {
     pname = "home";
-    version = "0cdfcdbb525b77b951c889b6131047bc374f48fe";
+    version = "cc2fa2331aebf9661d22bb507d362b39852ac73f";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "home-manager";
-      rev = "0cdfcdbb525b77b951c889b6131047bc374f48fe";
+      rev = "cc2fa2331aebf9661d22bb507d362b39852ac73f";
       fetchSubmodules = false;
-      sha256 = "sha256-CLQfNtUqirNVSYoW/kYbvL4PeeNasmZonaPnjO3+1YQ=";
+      sha256 = "sha256-ueR1mGX4I4DWfDRRxxMphbKDNisDeMPMusN72VV1+cc=";
     };
-    date = "2025-07-22";
+    date = "2025-08-07";
   };
   limbusart = {
     pname = "limbusart";
@@ -101,43 +101,43 @@
   };
   nixos-wsl = {
     pname = "nixos-wsl";
-    version = "20001f9bf0aaf2b1c307e43a5eec8cf8f800fe14";
+    version = "ca55236cd9ef3cdea29b51a0b52a9402c60e9a27";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "NixOS-WSL";
-      rev = "20001f9bf0aaf2b1c307e43a5eec8cf8f800fe14";
+      rev = "ca55236cd9ef3cdea29b51a0b52a9402c60e9a27";
       fetchSubmodules = false;
-      sha256 = "sha256-ZNIpqCG/CfhmV+TgIeyO/XbhDjSWpwWokHM44j0Mn0w=";
+      sha256 = "sha256-3ynDaygIzQYlBZFHGDeQzXmPkX2ILeZ0wWJ84FR4g7E=";
     };
-    date = "2025-07-16";
+    date = "2025-08-04";
   };
   nsid-tracker = {
     pname = "nsid-tracker";
-    version = "f73de8d33b61fef099a1af78bbeb724c8ed41bd3";
+    version = "3a6fd033206625cc7ac409d1179c0795734ce184";
     src = fetchgit {
       url = "https://tangled.sh/@poor.dog/nsid-tracker";
-      rev = "f73de8d33b61fef099a1af78bbeb724c8ed41bd3";
+      rev = "3a6fd033206625cc7ac409d1179c0795734ce184";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-U1vO6Fspwp44WJ6KxelZWhY54hVgZV9HhGtUbPkjwlo=";
+      sha256 = "sha256-3WSgafFWrI0AyDec8ds1vKse1MB8ZChCN19fV7ilGg8=";
     };
-    date = "2025-07-27";
+    date = "2025-08-08";
   };
   tangled = {
     pname = "tangled";
-    version = "8aad4c6d4552174a7f92a628c071702ef041e23f";
+    version = "2bc0d160218c1d4ce0a2c3dff4cd7c7f03320d70";
     src = fetchgit {
       url = "https://tangled.sh/@tangled.sh/core";
-      rev = "8aad4c6d4552174a7f92a628c071702ef041e23f";
+      rev = "2bc0d160218c1d4ce0a2c3dff4cd7c7f03320d70";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-v8NVf/GkBpNLGCBULjqLgyHW+GIQK//ObEUZ/1/5UxQ=";
+      sha256 = "sha256-1W5qjnJZT/xlQ4vjj4WasOUbDE0EvKqKg6sBwj6YKlI=";
     };
-    date = "2025-07-27";
+    date = "2025-08-08";
   };
   tangled-sqlite-lib = {
     pname = "tangled-sqlite-lib";
