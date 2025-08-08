@@ -21,6 +21,7 @@ in
     enable = true;
     package = terra.tangled-knot;
     gitUser = "git";
+    motd = "*paws at your commits* arf :3c\n";
     server = {
       listenAddr = "0.0.0.0:7777";
       secretFile = config.age.secrets.tangledKnot.path;
@@ -46,6 +47,10 @@ in
       listenAddr = "0.0.0.0:7391";
       hostname = "spindle.gaze.systems";
       owner = "did:plc:dfl62fgb7wtjj3fcbb72naae";
+      secrets = {
+        provider = "openbao";
+        openbao.proxyAddr = "http://bao.lan.gaze.systems";
+      };
     };
   };
   users.users.spindle = {
