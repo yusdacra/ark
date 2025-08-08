@@ -10,7 +10,6 @@ let
     (callPackage "${inputs.tangled}/nix/pkgs/knot-unwrapped.nix" {
       modules = tangled-modules;
       sqlite-lib = tangled-sqlite-lib;
-      gitignoreSource = null;
     }).overrideAttrs
       (_: {
         src = inputs.tangled;
