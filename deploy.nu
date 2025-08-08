@@ -142,7 +142,7 @@ def main [hostname: string = "wolumonde", --only-deploy (-d)] {
 
   mut inputs_updated = false
   if $only_deploy == false {
-    $inputs_updated = ["blog" "limbusart" "nsid-tracker" "tangled" "headplane"] | update-inputs
+    $inputs_updated = ["blog" "limbusart" "nsid-tracker" "tangled"] | update-inputs
     try {
       log info "trying to update dns records"
       nix run ".#dns" -- push

@@ -39,18 +39,6 @@
     };
     date = "2025-08-01";
   };
-  headplane = {
-    pname = "headplane";
-    version = "e9fe8625db3b03c121e0b7fb50add4cd729d986c";
-    src = fetchFromGitHub {
-      owner = "90-008";
-      repo = "headplane";
-      rev = "e9fe8625db3b03c121e0b7fb50add4cd729d986c";
-      fetchSubmodules = false;
-      sha256 = "sha256-KM7Jxrab3o38tJr3gA6wQ2zalZ2N5yK4d65r3KhGZKg=";
-    };
-    date = "2025-07-23";
-  };
   home = {
     pname = "home";
     version = "cc2fa2331aebf9661d22bb507d362b39852ac73f";
