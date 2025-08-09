@@ -50,8 +50,8 @@ in
       PDS_INVITE_REQUIRED = "true";
 
       PDS_DID_PLC_URL = "https://plc.directory";
-      PDS_BSKY_APP_VIEW_URL = "https://api.bsky.app";
-      PDS_BSKY_APP_VIEW_DID = "did:web:api.bsky.app";
+      PDS_BSKY_APP_VIEW_URL = "https://api.zeppelin.social";
+      PDS_BSKY_APP_VIEW_DID = "did:web:bsky.zeppelin.social";
       PDS_REPORT_SERVICE_URL = "https://mod.bsky.app";
       PDS_REPORT_SERVICE_DID = "did:plc:ar7c4by46qjdydhdevvrndac";
       PDS_CRAWLERS = "https://bsky.network";
