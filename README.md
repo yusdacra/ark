@@ -1,1 +1,1 @@
-NixOS / home manager configs, packages and modules
+nixos, home manager etc. configurations, packages and modules
