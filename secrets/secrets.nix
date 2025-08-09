@@ -70,4 +70,12 @@ in
     yusdacra
     develMobi
   ];
+  "spindleOpenbaoRoleId.age".publicKeys = [
+    yusdacra
+    wolumonde
+  ];
+  "spindleOpenbaoSecretId.age".publicKeys = [
+    yusdacra
+    wolumonde
+  ];
 }

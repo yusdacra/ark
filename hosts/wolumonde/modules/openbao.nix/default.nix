@@ -1,9 +1,11 @@
-{config, ...}: let
+{lib, config, ...}: let
   port = 5394;
   domain = "bao.${config.services.headscale.settings.dns.base_domain}";
   cfg = config.services.openbao.settings;
   apiAddress = "127.0.0.1:${toString port}";
 in {
+  imports = [./spindle-proxy];
+
   services.openbao = {
     enable = true;
     settings = {
@@ -12,6 +14,7 @@ in {
       listener.default = {
         type = "tcp";
         address = apiAddress;
+        tls_disable = true;
       };
 
       cluster_addr = "http://127.0.0.1:8201";
@@ -20,6 +23,12 @@ in {
       storage.file.path = "/var/lib/openbao/data";
     };
   };
+
+  systemd.services.openbao.preStart = ''
+    mkdir -p /var/lib/openbao
+    rm -rf /var/lib/openbao/policies
+    cp -r ${./policies} /var/lib/openbao/policies
+  '';
 
   services.headscale.settings.dns.extra_records = [
     {

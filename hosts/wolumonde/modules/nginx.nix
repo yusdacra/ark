@@ -58,12 +58,9 @@
         # "bsky.gaze.systems"
         "dawn.gaze.systems"
         "guestbook.gaze.systems"
-        "webhook.gaze.systems"
         "dash.gaze.systems"
         "knot.gaze.systems"
         "spindle.gaze.systems"
-        "skeetdeck.gaze.systems"
-        "likes.gaze.systems"
         "id.gaze.systems"
         "vpn.gaze.systems"
       ];
