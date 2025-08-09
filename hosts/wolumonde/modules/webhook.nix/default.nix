@@ -1,5 +1,6 @@
-{ config, tlib, ... }:
-{
+{ config, tlib, ... }: let
+  domain = "webhook.gaze.systems";
+in {
   imports = tlib.importFolder ./.;
 
   services.webhook = {
@@ -14,9 +15,12 @@
     group = "nginx";
   };
 
-  services.nginx.virtualHosts."webhook.gaze.systems" = {
+  security.acme.certs."gaze.systems".extraDomainNames = [domain];
+  services.nginx.virtualHosts.${domain} = {
     useACMEHost = "gaze.systems";
     forceSSL = true;
+    kTLS = true;
+    quic = true;
     basicAuthFile = config.age.secrets.webhookAuth.path;
     locations."/" = {
       proxyPass = "http://localhost:${toString config.services.webhook.port}";
