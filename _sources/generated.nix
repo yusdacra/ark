@@ -15,17 +15,17 @@
   };
   blog = {
     pname = "blog";
-    version = "442192142f8729a35b49bedac667fd34ae6e0a2d";
+    version = "67a0fcdbc770c8cf569a20f3b29b608f9f95c1b2";
     src = fetchgit {
       url = "https://git.gaze.systems/90008/website.git";
-      rev = "442192142f8729a35b49bedac667fd34ae6e0a2d";
+      rev = "67a0fcdbc770c8cf569a20f3b29b608f9f95c1b2";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-KF9zWKDGnv+jGXQ2qGpxWXFpRCfrqokEdqhLuFxmFpg=";
+      sha256 = "sha256-qsUACKml9qh3pTSBG6uVx0B+OnwUPfNZIQ4UbuNkY4Y=";
     };
-    date = "2025-08-09";
+    date = "2025-08-10";
   };
   gomod2nix = {
     pname = "gomod2nix";
@@ -101,17 +101,17 @@
   };
   nsid-tracker = {
     pname = "nsid-tracker";
-    version = "3a6fd033206625cc7ac409d1179c0795734ce184";
+    version = "c2522740408351f4dc6a68aa88e65b502151533a";
     src = fetchgit {
       url = "https://tangled.sh/@poor.dog/nsid-tracker";
-      rev = "3a6fd033206625cc7ac409d1179c0795734ce184";
+      rev = "c2522740408351f4dc6a68aa88e65b502151533a";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-3WSgafFWrI0AyDec8ds1vKse1MB8ZChCN19fV7ilGg8=";
+      sha256 = "sha256-Aq3vyqUwrFZMnGg4x9x5oSIVPfwOZnl7QyO1RQLpj/Q=";
     };
-    date = "2025-08-08";
+    date = "2025-08-09";
   };
   tangled = {
     pname = "tangled";
