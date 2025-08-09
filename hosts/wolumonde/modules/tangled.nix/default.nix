@@ -15,7 +15,7 @@ in
     "${inputs.tangled}/nix/modules/spindle.nix"
   ];
 
-  age.secrets.tangledKnot.file = ../../../secrets/tangledKnot.age;
+  age.secrets.tangledKnot.file = ../../../../secrets/tangledKnot.age;
 
   services.tangled-knot = {
     enable = true;
