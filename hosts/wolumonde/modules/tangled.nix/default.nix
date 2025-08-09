@@ -21,7 +21,7 @@ in
     enable = true;
     package = terra.tangled-knot;
     gitUser = "git";
-    motd = "*paws at your commits* arf :3c\n";
+    motdFile = ./motd;
     server = {
       listenAddr = "0.0.0.0:7777";
       secretFile = config.age.secrets.tangledKnot.path;
