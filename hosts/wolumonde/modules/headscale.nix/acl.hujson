@@ -19,6 +19,11 @@
         },
         {
             "action": "accept",
+            "src": ["tag:private-infra"],
+            "dst": ["tag:private-infra:*"],
+        },
+        {
+            "action": "accept",
             "src": ["90008@gaze.systems"],
             "dst": ["90008@gaze.systems:*"],
         },

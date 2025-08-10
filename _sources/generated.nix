@@ -41,15 +41,15 @@
   };
   home = {
     pname = "home";
-    version = "cc2fa2331aebf9661d22bb507d362b39852ac73f";
+    version = "3ec1cd9a0703fbd55d865b7fd2b07d08374f0355";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "home-manager";
-      rev = "cc2fa2331aebf9661d22bb507d362b39852ac73f";
+      rev = "3ec1cd9a0703fbd55d865b7fd2b07d08374f0355";
       fetchSubmodules = false;
-      sha256 = "sha256-ueR1mGX4I4DWfDRRxxMphbKDNisDeMPMusN72VV1+cc=";
+      sha256 = "sha256-W1jYKMetZSOHP5m2Z5Wokdj/ct17swPHs+MiY2WT1HQ=";
     };
-    date = "2025-08-07";
+    date = "2025-08-09";
   };
   limbusart = {
     pname = "limbusart";
