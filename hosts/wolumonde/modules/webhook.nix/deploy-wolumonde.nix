@@ -1,5 +1,6 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: let
+  port = toString 9000;
+in {
   services.webhook.hooks."deploy-wolumonde" = {
     execute-command = "${pkgs.curl}/bin/curl";
     pass-arguments-to-command =
@@ -8,6 +9,12 @@
         source = "string";
         name = n;
       })
-      [ "http://higashi:9000/hooks/deploy-wolumonde" ];
+      [ "http://higashi:${port}/hooks/deploy-wolumonde" ];
   };
+
+  services.headscale.acl.rules = [{
+    proto = "tcp";
+    src = ["wolumonde"];
+    dst = ["higashi:${port}"];
+  }];
 }
