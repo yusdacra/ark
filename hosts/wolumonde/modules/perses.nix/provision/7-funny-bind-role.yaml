@@ -1,8 +1,0 @@
-- kind: GlobalRoleBinding
-  metadata:
-    name: cat
-  spec:
-    role: guest
-    subjects:
-    - kind: User
-      name: cat

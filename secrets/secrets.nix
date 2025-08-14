@@ -38,10 +38,6 @@ in
     yusdacra
     wolumonde
   ];
-  "persesAdminUser.age".publicKeys = [
-    yusdacra
-    wolumonde
-  ];
   "ratholeCreds.age".publicKeys = [
     yusdacra
     wolumonde
