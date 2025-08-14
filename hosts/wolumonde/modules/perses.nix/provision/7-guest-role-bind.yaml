@@ -1,0 +1,8 @@
+- kind: GlobalRoleBinding
+  metadata:
+    name: guest
+  spec:
+    role: guest
+    subjects:
+    - kind: User
+      name: sorryu02
