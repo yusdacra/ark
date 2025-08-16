@@ -41,15 +41,15 @@
   };
   home = {
     pname = "home";
-    version = "3ec1cd9a0703fbd55d865b7fd2b07d08374f0355";
+    version = "2a749f4790a14f7168be67cdf6e548ef1c944e10";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "home-manager";
-      rev = "3ec1cd9a0703fbd55d865b7fd2b07d08374f0355";
+      rev = "2a749f4790a14f7168be67cdf6e548ef1c944e10";
       fetchSubmodules = false;
-      sha256 = "sha256-W1jYKMetZSOHP5m2Z5Wokdj/ct17swPHs+MiY2WT1HQ=";
+      sha256 = "sha256-pQb7bNcolxYGRiylUCrTddiF+qW2wsUiM9+eRIDUrVU=";
     };
-    date = "2025-08-09";
+    date = "2025-08-15";
   };
   limbusart = {
     pname = "limbusart";
@@ -89,15 +89,15 @@
   };
   nixos-wsl = {
     pname = "nixos-wsl";
-    version = "ca55236cd9ef3cdea29b51a0b52a9402c60e9a27";
+    version = "203a7b463f307c60026136dd1191d9001c43457f";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "NixOS-WSL";
-      rev = "ca55236cd9ef3cdea29b51a0b52a9402c60e9a27";
+      rev = "203a7b463f307c60026136dd1191d9001c43457f";
       fetchSubmodules = false;
-      sha256 = "sha256-3ynDaygIzQYlBZFHGDeQzXmPkX2ILeZ0wWJ84FR4g7E=";
+      sha256 = "sha256-EOqCupB5X5WoGVHVcfOZcqy0SbKWNuY3kq+lj1wHdu8=";
     };
-    date = "2025-08-04";
+    date = "2025-08-15";
   };
   nsid-tracker = {
     pname = "nsid-tracker";
@@ -115,17 +115,17 @@
   };
   tangled = {
     pname = "tangled";
-    version = "18134062a1b41c63ce91df8e11394a29a5222fcb";
+    version = "8de7701ee566d1cd09a28240d8af467b33bc29dd";
     src = fetchgit {
       url = "https://tangled.sh/@tangled.sh/core";
-      rev = "18134062a1b41c63ce91df8e11394a29a5222fcb";
+      rev = "8de7701ee566d1cd09a28240d8af467b33bc29dd";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-pWtvu99YBaPhIHTZKI8hujoNQfrWOEk20SRilCPJJxE=";
+      sha256 = "sha256-BFkHJu7r1rkd4ISP2lzeQyL5kpBzPWulxg/b/6GrSsI=";
     };
-    date = "2025-08-11";
+    date = "2025-08-15";
   };
   tangled-sqlite-lib = {
     pname = "tangled-sqlite-lib";
