@@ -58,7 +58,7 @@ in
 
   services.nginx.virtualHosts."gaze.systems" = {
     locations."/nsid-tracker/api" = {
-      proxyPass = "http://dusk-devel-mobi:${toString port}/";
+      proxyPass = "http://100.64.0.6:${toString port}/";
       proxyWebsockets = true;
       extraConfig = ''
         rewrite ^/nsid-tracker/api/(.*) /$1 break;
