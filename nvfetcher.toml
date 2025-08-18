@@ -1,8 +1,8 @@
 # nvfetcher configuration for Nix flake inputs
 
 [lix-module]
-src.manual = "2.93.2-1"
-fetch.tarball = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz"
+src.manual = "2.93.3-1"
+fetch.tarball = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-1.tar.gz"
 
 [nixos-wsl]
 src.git = "https://github.com/nix-community/NixOS-WSL"

@@ -63,7 +63,7 @@
     },
     "home": {
         "cargoLocks": null,
-        "date": "2025-08-15",
+        "date": "2025-08-17",
         "extract": null,
         "name": "home",
         "passthru": null,
@@ -75,12 +75,12 @@
             "name": null,
             "owner": "nix-community",
             "repo": "home-manager",
-            "rev": "2a749f4790a14f7168be67cdf6e548ef1c944e10",
-            "sha256": "sha256-pQb7bNcolxYGRiylUCrTddiF+qW2wsUiM9+eRIDUrVU=",
+            "rev": "f8af2cbe386f9b96dd9efa57ab15a09377f38f4d",
+            "sha256": "sha256-ib1Xi13NEalrFqQAHceRsb+6aIPANFuQq80SS/bY10M=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "2a749f4790a14f7168be67cdf6e548ef1c944e10"
+        "version": "f8af2cbe386f9b96dd9efa57ab15a09377f38f4d"
     },
     "limbusart": {
         "cargoLocks": null,
@@ -110,11 +110,11 @@
         "passthru": null,
         "pinned": false,
         "src": {
-            "sha256": "sha256-SXUAlxpjPRkArRMHy5+Hdi+PiC+ND9yzzIjiaHmTvQU=",
+            "sha256": "sha256-KYMUrTV7H/RR5/HRnjV5R3rRIuBXMemyJzTLi50NFTs=",
             "type": "tarball",
-            "url": "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz"
+            "url": "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-1.tar.gz"
         },
-        "version": "2.93.2-1"
+        "version": "2.93.3-1"
     },
     "ncr": {
         "cargoLocks": null,
@@ -179,7 +179,7 @@
     },
     "tangled": {
         "cargoLocks": null,
-        "date": "2025-08-15",
+        "date": "2025-08-18",
         "extract": null,
         "name": "tangled",
         "passthru": null,
@@ -189,13 +189,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "8de7701ee566d1cd09a28240d8af467b33bc29dd",
-            "sha256": "sha256-BFkHJu7r1rkd4ISP2lzeQyL5kpBzPWulxg/b/6GrSsI=",
+            "rev": "eb67abe4d0c2754f1204544a86212b689b37ec46",
+            "sha256": "sha256-cPK37pjuOXrEAMyAYI+pvByzWRumS9GnRNhb3qiuqNc=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.sh/@tangled.sh/core"
         },
-        "version": "8de7701ee566d1cd09a28240d8af467b33bc29dd"
+        "version": "eb67abe4d0c2754f1204544a86212b689b37ec46"
     },
     "tangled-sqlite-lib": {
         "cargoLocks": null,

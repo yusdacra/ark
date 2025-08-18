@@ -41,15 +41,15 @@
   };
   home = {
     pname = "home";
-    version = "2a749f4790a14f7168be67cdf6e548ef1c944e10";
+    version = "f8af2cbe386f9b96dd9efa57ab15a09377f38f4d";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "home-manager";
-      rev = "2a749f4790a14f7168be67cdf6e548ef1c944e10";
+      rev = "f8af2cbe386f9b96dd9efa57ab15a09377f38f4d";
       fetchSubmodules = false;
-      sha256 = "sha256-pQb7bNcolxYGRiylUCrTddiF+qW2wsUiM9+eRIDUrVU=";
+      sha256 = "sha256-ib1Xi13NEalrFqQAHceRsb+6aIPANFuQq80SS/bY10M=";
     };
-    date = "2025-08-15";
+    date = "2025-08-17";
   };
   limbusart = {
     pname = "limbusart";
@@ -67,10 +67,10 @@
   };
   lix-module = {
     pname = "lix-module";
-    version = "2.93.2-1";
+    version = "2.93.3-1";
     src = fetchTarball {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz";
-      sha256 = "sha256-SXUAlxpjPRkArRMHy5+Hdi+PiC+ND9yzzIjiaHmTvQU=";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-1.tar.gz";
+      sha256 = "sha256-KYMUrTV7H/RR5/HRnjV5R3rRIuBXMemyJzTLi50NFTs=";
     };
   };
   ncr = {
@@ -115,17 +115,17 @@
   };
   tangled = {
     pname = "tangled";
-    version = "8de7701ee566d1cd09a28240d8af467b33bc29dd";
+    version = "eb67abe4d0c2754f1204544a86212b689b37ec46";
     src = fetchgit {
       url = "https://tangled.sh/@tangled.sh/core";
-      rev = "8de7701ee566d1cd09a28240d8af467b33bc29dd";
+      rev = "eb67abe4d0c2754f1204544a86212b689b37ec46";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-BFkHJu7r1rkd4ISP2lzeQyL5kpBzPWulxg/b/6GrSsI=";
+      sha256 = "sha256-cPK37pjuOXrEAMyAYI+pvByzWRumS9GnRNhb3qiuqNc=";
     };
-    date = "2025-08-15";
+    date = "2025-08-18";
   };
   tangled-sqlite-lib = {
     pname = "tangled-sqlite-lib";
