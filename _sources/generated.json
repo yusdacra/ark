@@ -169,13 +169,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "b925c4a037863d61724170719dd86116fc4a7b19",
-            "sha256": "sha256-5lIQS5OKr615+8MMFoTABVx4/Wkgh/aMRYhjx0qjNGA=",
+            "rev": "64d240c819bede7f3adbcb72ced249fceef2637f",
+            "sha256": "sha256-OsNdSogVwyr83DxWOJpKQns597erQxNt3dWiHKJwkPw=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.sh/@poor.dog/nsid-tracker"
         },
-        "version": "b925c4a037863d61724170719dd86116fc4a7b19"
+        "version": "64d240c819bede7f3adbcb72ced249fceef2637f"
     },
     "tangled": {
         "cargoLocks": null,
