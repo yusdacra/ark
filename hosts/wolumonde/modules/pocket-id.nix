@@ -13,6 +13,8 @@ in
     };
   };
 
+  security.acme.certs."gaze.systems".extraDomainNames = [domain];
+
   services.nginx.virtualHosts.${domain} = {
     useACMEHost = "gaze.systems";
     forceSSL = true;

@@ -54,7 +54,8 @@ in
       "public"
     ];
 
-  services.nginx.virtualHosts."git.gaze.systems" = {
+  security.acme.certs."gaze.systems".extraDomainNames = [forgejoCfg.server.DOMAIN];
+  services.nginx.virtualHosts.${forgejoCfg.server.DOMAIN} = {
     useACMEHost = "gaze.systems";
     forceSSL = true;
     quic = true;

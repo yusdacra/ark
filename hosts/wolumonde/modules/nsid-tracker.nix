@@ -49,11 +49,10 @@ in
       ExecStart = "${pkgs.curl}/bin/curl http://dusk-devel-mobi:${toString port}/events";
     };
   };
-  systemd.timers.nsid-tracker-keep-alive = {
-    timerConfig = {
-      OnCalendar = "*-*-* *:00/5:05";
-      Unit = "nsid-tracker-keep-alive.service";
-    };
+  systemd.timers.nsid-tracker-keep-alive.timerConfig = {
+    OnBootSec = "5 min";
+    OnUnitActiveSec = "5 min";
+    Unit = "nsid-tracker-keep-alive.service";
   };
 
   services.nginx.virtualHosts."gaze.systems" = {

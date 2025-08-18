@@ -45,26 +45,7 @@
     defaults.email = (import "${inputs.self}/personal.nix").emails.primary;
     defaults.webroot = "/var/lib/acme/acme-challenge";
     certs."poor.dog" = { };
-    certs."gaze.systems" = {
-      extraDomainNames = [
-        "git.gaze.systems"
-        # "test.gaze.systems"
-        # "ms.gaze.systems"
-        # "mq.gaze.systems"
-        # "couchdb.gaze.systems"
-        "doc.gaze.systems"
-        "pmart.gaze.systems"
-        "limbus.gaze.systems"
-        # "bsky.gaze.systems"
-        "dawn.gaze.systems"
-        "guestbook.gaze.systems"
-        "dash.gaze.systems"
-        "knot.gaze.systems"
-        "spindle.gaze.systems"
-        "id.gaze.systems"
-        "vpn.gaze.systems"
-      ];
-    };
+    certs."gaze.systems" = { };
   };
   services.nginx.virtualHosts."gaze.systems" = {
     quic = true;

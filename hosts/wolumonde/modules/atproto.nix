@@ -28,8 +28,13 @@ let
         forceSSL = true;
       });
   };
+  dawnDid = "dawn.gaze.systems";
+  guestbookDid = "guestbook.gaze.systems";
 in
 {
+  security.acme.certs."gaze.systems".extraDomainNames = [
+    dawnDid guestbookDid
+  ];
   services.nginx.virtualHosts = {
     # "gaze.systems" = mkWellKnownCfg {
     #   "atproto-did" = pkgs.writeText "server" "did:plc:dfl62fgb7wtjj3fcbb72naae";
@@ -41,7 +46,7 @@ in
     #   "atproto-did" = pkgs.writeText "server" "did:plc:dfl62fgb7wtjj3fcbb72naae";
     # };
   }
-  // (mkDidWebCfg "dawn.gaze.systems")
-  // (mkDidWebCfg "guestbook.gaze.systems");
+  // (mkDidWebCfg dawnDid)
+  // (mkDidWebCfg guestbookDid);
   # // (mkDidWebCfg "9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa");
 }

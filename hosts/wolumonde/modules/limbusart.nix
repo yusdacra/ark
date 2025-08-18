@@ -6,6 +6,8 @@
 }:
 let
   pkg = pkgs.callPackage "${inputs.limbusart}/package.nix" { };
+  domain = "pmart.gaze.systems";
+  oldDomain = "limbus.gaze.systems";
 in
 {
   systemd.services.limbusart = {
@@ -35,7 +37,11 @@ in
   };
   users.groups.limbusart = { };
 
-  services.nginx.virtualHosts."pmart.gaze.systems" = {
+  security.acme.certs."gaze.systems".extraDomainNames = [
+    domain
+    oldDomain
+  ];
+  services.nginx.virtualHosts.${domain} = {
     useACMEHost = "gaze.systems";
     forceSSL = true;
     quic = true;
@@ -43,11 +49,11 @@ in
     locations."/".proxyPass = "http://localhost:3000";
   };
   # redirects
-  services.nginx.virtualHosts."limbus.gaze.systems" = {
+  services.nginx.virtualHosts.${oldDomain} = {
     useACMEHost = "gaze.systems";
     forceSSL = true;
     quic = true;
     kTLS = true;
-    globalRedirect = "pmart.gaze.systems";
+    globalRedirect = domain;
   };
 }

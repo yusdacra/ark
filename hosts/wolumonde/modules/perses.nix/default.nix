@@ -78,6 +78,7 @@ in
     cp -f ${./provision}/* ${provisioningFolder}
   '';
 
+  security.acme.certs."gaze.systems".extraDomainNames = [domain];
   services.nginx.virtualHosts.${domain} = {
     useACMEHost = "gaze.systems"; # TODO: write a module to define vhosts for subdomains
     quic = true;
