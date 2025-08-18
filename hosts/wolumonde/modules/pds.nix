@@ -24,6 +24,7 @@ in
     # others
     // (lib.genAttrs
       [
+        "/account"
         "/@atproto"
         "/oauth"
         "=/.well-known/oauth-protected-resource"
@@ -44,7 +45,7 @@ in
       PDS_PORT = 1334;
 
       PDS_SERVICE_NAME = ''"gazing at the sky"'';
-      PDS_LOGO_URL = "https://gaze.systems/icons/gaze.png";
+      PDS_LOGO_URL = "https://gaze.systems/icons/gaze_site.webp";
 
       PDS_RATE_LIMITS_ENABLED = "true";
       PDS_INVITE_REQUIRED = "true";
