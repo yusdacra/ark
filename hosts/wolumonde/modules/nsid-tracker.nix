@@ -14,30 +14,22 @@ let
   port = 3713;
 in
 {
-  # users.users.nsidtracker = {
-  #   isSystemUser = true;
-  #   home = "/mnt/data/nsid-tracker";
-  #   createHome = true;
-  #   group = "nsidtracker";
-  # };
-  # users.groups.nsidtracker = { };
-
-  # systemd.services.nsid-tracker = {
-  #   description = "nsid-tracker";
-  #   wantedBy = [ "multi-user.target" ];
-  #   after = [ "network.target" ];
-  #   environment = {
-  #     HOME = "/mnt/data/nsid-tracker";
-  #     PORT = toString port;
-  #   };
-  #   serviceConfig = {
-  #     User = "nsidtracker";
-  #     ExecStart = "${server}/bin/server";
-  #     Restart = "on-failure";
-  #     RestartSec = 5;
-  #     WorkingDirectory = "/mnt/data/nsid-tracker";
-  #   };
-  # };
+  systemd.services.nsid-tracker-client = {
+    description = "nsid-tracker-client";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+    environment = {
+      # ORIGIN = "https://gaze.systems";
+      PORT = toString port;
+    };
+    serviceConfig = {
+      DynamicUser = true;
+      ExecStart = "${client}/bin/website";
+      Restart = "on-failure";
+      RestartSec = 5;
+      WorkingDirectory = "/var/lib/nsid-tracker";
+    };
+  };
   #
 
   systemd.services.nsid-tracker-keep-alive = {
@@ -65,8 +57,10 @@ in
     };
     locations."/nsid-tracker".return = "301 /nsid-tracker/";
     locations."/nsid-tracker/" = {
-      alias = "${client}/";
-      tryFiles = "$uri $uri/ /index.html";
+      proxyPass = "http://localhost:${toString port}/";
+      extraConfig = ''
+        rewrite ^/nsid-tracker/(.*)$ /$1 break;
+      '';
     };
   };
 }
