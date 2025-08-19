@@ -22,7 +22,7 @@
     },
     "blog": {
         "cargoLocks": null,
-        "date": "2025-08-10",
+        "date": "2025-08-19",
         "extract": null,
         "name": "blog",
         "passthru": null,
@@ -32,13 +32,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "aee000bfe56ebc5ae1c09354892f6489f48ca5e6",
-            "sha256": "sha256-o41oC6F2usguM0elQbiXIiug7L7AMoXa+iFMma8/10U=",
+            "rev": "ff0496ce2cebe5a95029f250fbb4f93f99372119",
+            "sha256": "sha256-uGBJBIniyOT2OZNh94TjA4ztj5+ooj/NGP71EIRGZNo=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://git.gaze.systems/90008/website.git"
         },
-        "version": "aee000bfe56ebc5ae1c09354892f6489f48ca5e6"
+        "version": "ff0496ce2cebe5a95029f250fbb4f93f99372119"
     },
     "gomod2nix": {
         "cargoLocks": null,
@@ -169,13 +169,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "64d240c819bede7f3adbcb72ced249fceef2637f",
-            "sha256": "sha256-OsNdSogVwyr83DxWOJpKQns597erQxNt3dWiHKJwkPw=",
+            "rev": "82c8c27757b76e0e502a7c0adf7339eadfc96f15",
+            "sha256": "sha256-zCXJ/TPCGZv9LsccqTuLWyJwwr4LujZWogff5S3rB5s=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.sh/@poor.dog/nsid-tracker"
         },
-        "version": "64d240c819bede7f3adbcb72ced249fceef2637f"
+        "version": "82c8c27757b76e0e502a7c0adf7339eadfc96f15"
     },
     "tangled": {
         "cargoLocks": null,
