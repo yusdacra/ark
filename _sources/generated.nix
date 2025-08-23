@@ -101,31 +101,31 @@
   };
   nsid-tracker = {
     pname = "nsid-tracker";
-    version = "c0968d557add83287354c9446fab5a70c62dd1e9";
+    version = "a4dd7621f5b3a5a3136d7e187caa90ac38c6a402";
     src = fetchgit {
       url = "https://tangled.sh/@poor.dog/nsid-tracker";
-      rev = "c0968d557add83287354c9446fab5a70c62dd1e9";
+      rev = "a4dd7621f5b3a5a3136d7e187caa90ac38c6a402";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-8Uq1M8XoA1h2cfUk+54ntcJF2E6ai1y8XptAS5CvHgE=";
+      sha256 = "sha256-aYoe2uo1VR1PdC2mMbgX4A0rlMt24KrxcMUl7o2WFb8=";
     };
-    date = "2025-08-19";
+    date = "2025-08-23";
   };
   tangled = {
     pname = "tangled";
-    version = "6f03cdc590127b7421600ea7bd5814cf885bad91";
+    version = "634c03e1c668d83693ff5105f88ad1a57903564a";
     src = fetchgit {
       url = "https://tangled.sh/@tangled.sh/core";
-      rev = "6f03cdc590127b7421600ea7bd5814cf885bad91";
+      rev = "634c03e1c668d83693ff5105f88ad1a57903564a";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-bP/cbXI8M81klQqk07/7cSwJrxqGCr1wiZp7lEO/L6k=";
+      sha256 = "sha256-lEUh0UlR1XDIXPH+20Wj5I+vVbhKLk8pRhPy5fEVysQ=";
     };
-    date = "2025-08-19";
+    date = "2025-08-23";
   };
   tangled-sqlite-lib = {
     pname = "tangled-sqlite-lib";
