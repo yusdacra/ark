@@ -22,7 +22,7 @@
     },
     "blog": {
         "cargoLocks": null,
-        "date": "2025-08-24",
+        "date": "2025-08-25",
         "extract": null,
         "name": "blog",
         "passthru": null,
@@ -32,13 +32,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "f02b700da435e0cabadc4d8a1a3fc7c9490c640f",
-            "sha256": "sha256-PyFagwrkxSTSbKDSYmG5Y7MlREAC98j8Ubew9g/oQxo=",
+            "rev": "b17dc1f4c9697b942da85f4aea4ced2ed5fc2dd9",
+            "sha256": "sha256-BvA2hoF2FdBb9FoxgUAHdpMoaLQr6tz6gzs1aWfqJUo=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://git.gaze.systems/90008/website.git"
         },
-        "version": "f02b700da435e0cabadc4d8a1a3fc7c9490c640f"
+        "version": "b17dc1f4c9697b942da85f4aea4ced2ed5fc2dd9"
     },
     "gomod2nix": {
         "cargoLocks": null,
@@ -179,7 +179,7 @@
     },
     "tangled": {
         "cargoLocks": null,
-        "date": "2025-08-23",
+        "date": "2025-08-25",
         "extract": null,
         "name": "tangled",
         "passthru": null,
@@ -189,13 +189,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "612bc42700f611699b5dbdb542b53bf2fc79a6bb",
-            "sha256": "sha256-HJT7EK+OJ4TNrabVrbYUzu60s3DjrrPqsti6BZ2mRdI=",
+            "rev": "fb4bff75f3b15d427f3980bf4cb6d1a6c40decd2",
+            "sha256": "sha256-qKFdwgBiUIlRP4vFKl5p9UBXosO6Q5xzL278zEVy2KA=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.sh/@tangled.sh/core"
         },
-        "version": "612bc42700f611699b5dbdb542b53bf2fc79a6bb"
+        "version": "fb4bff75f3b15d427f3980bf4cb6d1a6c40decd2"
     },
     "tangled-sqlite-lib": {
         "cargoLocks": null,

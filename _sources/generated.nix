@@ -15,17 +15,17 @@
   };
   blog = {
     pname = "blog";
-    version = "f02b700da435e0cabadc4d8a1a3fc7c9490c640f";
+    version = "b17dc1f4c9697b942da85f4aea4ced2ed5fc2dd9";
     src = fetchgit {
       url = "https://git.gaze.systems/90008/website.git";
-      rev = "f02b700da435e0cabadc4d8a1a3fc7c9490c640f";
+      rev = "b17dc1f4c9697b942da85f4aea4ced2ed5fc2dd9";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-PyFagwrkxSTSbKDSYmG5Y7MlREAC98j8Ubew9g/oQxo=";
+      sha256 = "sha256-BvA2hoF2FdBb9FoxgUAHdpMoaLQr6tz6gzs1aWfqJUo=";
     };
-    date = "2025-08-24";
+    date = "2025-08-25";
   };
   gomod2nix = {
     pname = "gomod2nix";
@@ -115,17 +115,17 @@
   };
   tangled = {
     pname = "tangled";
-    version = "612bc42700f611699b5dbdb542b53bf2fc79a6bb";
+    version = "fb4bff75f3b15d427f3980bf4cb6d1a6c40decd2";
     src = fetchgit {
       url = "https://tangled.sh/@tangled.sh/core";
-      rev = "612bc42700f611699b5dbdb542b53bf2fc79a6bb";
+      rev = "fb4bff75f3b15d427f3980bf4cb6d1a6c40decd2";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-HJT7EK+OJ4TNrabVrbYUzu60s3DjrrPqsti6BZ2mRdI=";
+      sha256 = "sha256-qKFdwgBiUIlRP4vFKl5p9UBXosO6Q5xzL278zEVy2KA=";
     };
-    date = "2025-08-23";
+    date = "2025-08-25";
   };
   tangled-sqlite-lib = {
     pname = "tangled-sqlite-lib";
