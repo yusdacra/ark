@@ -15,15 +15,15 @@
   };
   blog = {
     pname = "blog";
-    version = "5ded1fb4ede895cd66876ee82123a7c8bccf7ced";
+    version = "07f12422a77ae1cd32f13d43cdaa83fb3a0141c5";
     src = fetchgit {
       url = "https://git.gaze.systems/90008/website.git";
-      rev = "5ded1fb4ede895cd66876ee82123a7c8bccf7ced";
+      rev = "07f12422a77ae1cd32f13d43cdaa83fb3a0141c5";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-m6ojdHSVWCwruMJzQjR+p2zrW6aDxWYkq4xo3WxHddk=";
+      sha256 = "sha256-uKpg0L7WOihK4xMIQ0IcHWkmJ3pnfp5cWT5pjRq4ZKs=";
     };
     date = "2025-08-28";
   };
