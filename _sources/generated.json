@@ -42,7 +42,7 @@
     },
     "gomod2nix": {
         "cargoLocks": null,
-        "date": "2025-08-01",
+        "date": "2025-08-24",
         "extract": null,
         "name": "gomod2nix",
         "passthru": null,
@@ -54,16 +54,16 @@
             "name": null,
             "owner": "nix-community",
             "repo": "gomod2nix",
-            "rev": "7f963246a71626c7fc70b431a315c4388a0c95cf",
-            "sha256": "sha256-YVoIFDCDpYuU3riaDEJ3xiGdPOtsx4sR5eTzHTytPV8=",
+            "rev": "47d628dc3b506bd28632e47280c6b89d3496909d",
+            "sha256": "sha256-JeuGh9kA1SPL70fnvpLxkIkCWpTjtoPaus3jzvdna0k=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "7f963246a71626c7fc70b431a315c4388a0c95cf"
+        "version": "47d628dc3b506bd28632e47280c6b89d3496909d"
     },
     "home": {
         "cargoLocks": null,
-        "date": "2025-08-17",
+        "date": "2025-08-26",
         "extract": null,
         "name": "home",
         "passthru": null,
@@ -75,12 +75,12 @@
             "name": null,
             "owner": "nix-community",
             "repo": "home-manager",
-            "rev": "f8af2cbe386f9b96dd9efa57ab15a09377f38f4d",
-            "sha256": "sha256-ib1Xi13NEalrFqQAHceRsb+6aIPANFuQq80SS/bY10M=",
+            "rev": "77f348da3176dc68b20a73dab94852a417daf361",
+            "sha256": "sha256-eiy0klFK5EVJLNilutR7grsZN/7Itj9DyD75eyOf83k=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "f8af2cbe386f9b96dd9efa57ab15a09377f38f4d"
+        "version": "77f348da3176dc68b20a73dab94852a417daf361"
     },
     "limbusart": {
         "cargoLocks": null,

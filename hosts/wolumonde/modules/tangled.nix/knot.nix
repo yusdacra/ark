@@ -12,8 +12,6 @@ in
     "${inputs.tangled}/nix/modules/knot.nix"
   ];
 
-  age.secrets.tangledKnot.file = ../../../../secrets/tangledKnot.age;
-
   services.tangled-knot = {
     enable = true;
     package = terra.tangled-knot;
@@ -21,8 +19,8 @@ in
     motdFile = ./motd;
     server = {
       listenAddr = "0.0.0.0:7777";
-      secretFile = config.age.secrets.tangledKnot.path;
       hostname = "knot.gaze.systems";
+      owner = "did:plc:dfl62fgb7wtjj3fcbb72naae";
     };
   };
 

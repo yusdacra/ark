@@ -45,6 +45,14 @@ in
 
   services.nginx.virtualHosts."gaze.systems" = {
     locations."/".proxyPass = "http://localhost:${toString port}";
+    locations."/annoy/ws/" = {
+      proxyWebsockets = true;
+      proxyPass = "http://100.64.0.1:3111/";
+      extraConfig = ''
+        rewrite ^/annoy/ws/(.*) /$1 break;
+      '';
+    };
+    locations."/annoy/ws".return = "301 /annoy/ws/";
   };
   services.nginx.virtualHosts."poor.dog" = {
     locations."/".return = "301 https://gaze.systems$request_uri";

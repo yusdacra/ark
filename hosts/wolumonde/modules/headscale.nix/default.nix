@@ -24,6 +24,7 @@ in
         other-infra = ["group:admin"];
       };
       hosts = {
+        chernobog = "100.64.0.1";
         wolumonde = "100.64.0.2";
         higashi = "100.64.0.5";
       };
@@ -35,6 +36,10 @@ in
         {
           src = ["tag:private-infra"];
           dst = ["tag:other-infra:*"];
+        }
+        {
+          src = ["wolumonde"];
+          dst = ["chernobog:*"];
         }
         {
           src = ["90008@gaze.systems"];

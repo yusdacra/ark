@@ -42,10 +42,6 @@ in
     yusdacra
     wolumonde
   ];
-  "tangledKnot.age".publicKeys = [
-    yusdacra
-    wolumonde
-  ];
   "socksPassword.age".publicKeys = [
     yusdacra
     wolumonde

@@ -29,27 +29,27 @@
   };
   gomod2nix = {
     pname = "gomod2nix";
-    version = "7f963246a71626c7fc70b431a315c4388a0c95cf";
+    version = "47d628dc3b506bd28632e47280c6b89d3496909d";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "gomod2nix";
-      rev = "7f963246a71626c7fc70b431a315c4388a0c95cf";
+      rev = "47d628dc3b506bd28632e47280c6b89d3496909d";
       fetchSubmodules = false;
-      sha256 = "sha256-YVoIFDCDpYuU3riaDEJ3xiGdPOtsx4sR5eTzHTytPV8=";
+      sha256 = "sha256-JeuGh9kA1SPL70fnvpLxkIkCWpTjtoPaus3jzvdna0k=";
     };
-    date = "2025-08-01";
+    date = "2025-08-24";
   };
   home = {
     pname = "home";
-    version = "f8af2cbe386f9b96dd9efa57ab15a09377f38f4d";
+    version = "77f348da3176dc68b20a73dab94852a417daf361";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "home-manager";
-      rev = "f8af2cbe386f9b96dd9efa57ab15a09377f38f4d";
+      rev = "77f348da3176dc68b20a73dab94852a417daf361";
       fetchSubmodules = false;
-      sha256 = "sha256-ib1Xi13NEalrFqQAHceRsb+6aIPANFuQq80SS/bY10M=";
+      sha256 = "sha256-eiy0klFK5EVJLNilutR7grsZN/7Itj9DyD75eyOf83k=";
     };
-    date = "2025-08-17";
+    date = "2025-08-26";
   };
   limbusart = {
     pname = "limbusart";
