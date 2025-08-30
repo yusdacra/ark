@@ -77,5 +77,6 @@ in
   };
   services.nginx.virtualHosts."poor.dog" = {
     locations."/".return = "301 https://gaze.systems$request_uri";
+    locations."/asdfhjaiwuehfjasjdhf".proxyPass = "http://100.64.0.1:8668";
   };
 }
