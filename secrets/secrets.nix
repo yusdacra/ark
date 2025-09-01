@@ -33,6 +33,10 @@ in
     yusdacra
     wolumonde
   ];
+  "clickerAuth.age".publicKeys = [
+    yusdacra
+    wolumonde
+  ];
   "deployWebhook.age".publicKeys = [ yusdacra ];
   "persesSecret.age".publicKeys = [
     yusdacra
