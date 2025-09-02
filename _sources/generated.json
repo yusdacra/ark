@@ -32,13 +32,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "0833169eb233d07d08b0ab39111d2d31eb172f07",
-            "sha256": "sha256-Ytwbw+TLnRLydyUyvjVOF/dQGWdtp0vZq4vRavHSzPI=",
+            "rev": "fdee952ff5d9829e08b47fa7438b3b64b1212fa5",
+            "sha256": "sha256-8dhgQTSwDfUrnsUzwlwmM7KK0FvoFZUllNFM3LWUqx8=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://git.gaze.systems/90008/website.git"
         },
-        "version": "0833169eb233d07d08b0ab39111d2d31eb172f07"
+        "version": "fdee952ff5d9829e08b47fa7438b3b64b1212fa5"
     },
     "gomod2nix": {
         "cargoLocks": null,
