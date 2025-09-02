@@ -22,7 +22,7 @@
     },
     "blog": {
         "cargoLocks": null,
-        "date": "2025-09-01",
+        "date": "2025-09-03",
         "extract": null,
         "name": "blog",
         "passthru": null,
@@ -32,13 +32,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "ce5acd14c0477a72e93f292a44821f9a98694226",
-            "sha256": "sha256-kNxZwbqaSotYeDVgqt4eB7o/UYlP2kL5qK35rIC/+yA=",
+            "rev": "f412f93eda51585d57656938b9f5ebd54d3146cf",
+            "sha256": "sha256-wef6nkosHqD/q7dK52pHJqzELT3J0+ZwO9NcOu0gN2M=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://git.gaze.systems/90008/website.git"
         },
-        "version": "ce5acd14c0477a72e93f292a44821f9a98694226"
+        "version": "f412f93eda51585d57656938b9f5ebd54d3146cf"
     },
     "gomod2nix": {
         "cargoLocks": null,
