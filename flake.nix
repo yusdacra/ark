@@ -1,7 +1,7 @@
 {
   description = "config!!!";
 
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/master";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
   inputs.nixpkgs.flake = false;
 
   outputs =

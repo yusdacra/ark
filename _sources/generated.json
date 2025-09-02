@@ -63,7 +63,7 @@
     },
     "home": {
         "cargoLocks": null,
-        "date": "2025-08-26",
+        "date": "2025-09-01",
         "extract": null,
         "name": "home",
         "passthru": null,
@@ -75,12 +75,12 @@
             "name": null,
             "owner": "nix-community",
             "repo": "home-manager",
-            "rev": "77f348da3176dc68b20a73dab94852a417daf361",
-            "sha256": "sha256-eiy0klFK5EVJLNilutR7grsZN/7Itj9DyD75eyOf83k=",
+            "rev": "f3d3b4592a73fb64b5423234c01985ea73976596",
+            "sha256": "sha256-LOrOfPWpJU/ADWDyVwPv9XNuYPq5KJtmAmSzplpccmE=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "77f348da3176dc68b20a73dab94852a417daf361"
+        "version": "f3d3b4592a73fb64b5423234c01985ea73976596"
     },
     "limbusart": {
         "cargoLocks": null,
@@ -189,13 +189,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "0749c39afe26d07782d3e3b38e06e8fdb3b05aff",
-            "sha256": "sha256-RPPyS8idctA3OPSQiVKxKrmdzrj0hLjo0W2UZI20Y3w=",
+            "rev": "da3540c0c134331c10f1a8d124ee0925e57f8112",
+            "sha256": "sha256-yD8PMlRjUI2sN5PvkDJRfGz96zCp4gejaguDVmZ4utg=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.sh/@tangled.sh/core"
         },
-        "version": "0749c39afe26d07782d3e3b38e06e8fdb3b05aff"
+        "version": "da3540c0c134331c10f1a8d124ee0925e57f8112"
     },
     "tangled-sqlite-lib": {
         "cargoLocks": null,

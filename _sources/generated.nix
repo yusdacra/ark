@@ -41,15 +41,15 @@
   };
   home = {
     pname = "home";
-    version = "77f348da3176dc68b20a73dab94852a417daf361";
+    version = "f3d3b4592a73fb64b5423234c01985ea73976596";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "home-manager";
-      rev = "77f348da3176dc68b20a73dab94852a417daf361";
+      rev = "f3d3b4592a73fb64b5423234c01985ea73976596";
       fetchSubmodules = false;
-      sha256 = "sha256-eiy0klFK5EVJLNilutR7grsZN/7Itj9DyD75eyOf83k=";
+      sha256 = "sha256-LOrOfPWpJU/ADWDyVwPv9XNuYPq5KJtmAmSzplpccmE=";
     };
-    date = "2025-08-26";
+    date = "2025-09-01";
   };
   limbusart = {
     pname = "limbusart";
@@ -115,15 +115,15 @@
   };
   tangled = {
     pname = "tangled";
-    version = "0749c39afe26d07782d3e3b38e06e8fdb3b05aff";
+    version = "da3540c0c134331c10f1a8d124ee0925e57f8112";
     src = fetchgit {
       url = "https://tangled.sh/@tangled.sh/core";
-      rev = "0749c39afe26d07782d3e3b38e06e8fdb3b05aff";
+      rev = "da3540c0c134331c10f1a8d124ee0925e57f8112";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-RPPyS8idctA3OPSQiVKxKrmdzrj0hLjo0W2UZI20Y3w=";
+      sha256 = "sha256-yD8PMlRjUI2sN5PvkDJRfGz96zCp4gejaguDVmZ4utg=";
     };
     date = "2025-09-01";
   };
