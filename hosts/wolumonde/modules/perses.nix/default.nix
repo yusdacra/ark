@@ -66,7 +66,8 @@ in
 
   systemd.services.perses = {
     description = "perses";
-    after = ["network.target"];
+    after = ["network.target" "pocket-id.service"];
+    requires = ["pocket-id.service"];
     serviceConfig = {
       ExecStart = "${pkgs.perses}/bin/perses --config=${persesConfigYaml} --web.listen-address=:${toString port} --log.level=info";
       EnvironmentFile = secrets.persesSecret.path;
