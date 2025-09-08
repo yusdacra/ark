@@ -49,6 +49,10 @@ in
           src = ["90008@gaze.systems" "tag:private-infra"];
           dst = ["autogroup:internet:*"];
         }
+        {
+          src = ["ellite@ellite.dev"];
+          dst = ["chernobog:8463"];
+        }
       ];
     };
     settings = {

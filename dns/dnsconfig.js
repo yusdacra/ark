@@ -47,7 +47,7 @@ D(
     TXT("send.poke", "v=spf1 include:amazonses.com ~all"),
     // atproto
     // TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae", TTL(60)),
-    TXT("_atproto.dusk", "did=did:plc:dfl62fgb7wtjj3fcbb72naae", TTL(60)),
+    // TXT("_atproto.dusk", "did=did:plc:dfl62fgb7wtjj3fcbb72naae", TTL(60)),
 );
 
 D(
