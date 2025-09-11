@@ -159,7 +159,7 @@
     },
     "nsid-tracker": {
         "cargoLocks": null,
-        "date": "2025-08-23",
+        "date": "2025-09-11",
         "extract": null,
         "name": "nsid-tracker",
         "passthru": null,
@@ -169,17 +169,17 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "b7d77d2231d05303be46a9610f5a7351264c0e00",
-            "sha256": "sha256-Nt204Rhdo/JRgZs5SecifTtyUUszY6rWfMhh7ac8Loc=",
+            "rev": "2683e619932808b8aa78ec7100de6324c8216daf",
+            "sha256": "sha256-utNIYZiuPql6gvM8k8T/NuLomFRWknfbFvvHpXPei3k=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.sh/@poor.dog/nsid-tracker"
         },
-        "version": "b7d77d2231d05303be46a9610f5a7351264c0e00"
+        "version": "2683e619932808b8aa78ec7100de6324c8216daf"
     },
     "tangled": {
         "cargoLocks": null,
-        "date": "2025-09-01",
+        "date": "2025-09-11",
         "extract": null,
         "name": "tangled",
         "passthru": null,
@@ -189,13 +189,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "da3540c0c134331c10f1a8d124ee0925e57f8112",
-            "sha256": "sha256-yD8PMlRjUI2sN5PvkDJRfGz96zCp4gejaguDVmZ4utg=",
+            "rev": "acce4932c10307047c5710855bb97fa08132f08d",
+            "sha256": "sha256-3qQxSkJyotDf6WKau1DimetbKvXf4/jgTSZgcBErVyM=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.sh/@tangled.sh/core"
         },
-        "version": "da3540c0c134331c10f1a8d124ee0925e57f8112"
+        "version": "acce4932c10307047c5710855bb97fa08132f08d"
     },
     "tangled-sqlite-lib": {
         "cargoLocks": null,
