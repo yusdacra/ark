@@ -84,7 +84,6 @@ in
     locations."/".return = "301 https://gaze.systems$request_uri";
     locations."/click" = {
       proxyPass = "http://100.64.0.1:8668";
-      basicAuthFile = config.age.secrets.clickerAuth.path;
     };
   };
 }

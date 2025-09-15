@@ -41,15 +41,15 @@
   };
   home = {
     pname = "home";
-    version = "f3d3b4592a73fb64b5423234c01985ea73976596";
+    version = "9eab59f3e71ea3a725e4817d8dcf0da0824ad19d";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "home-manager";
-      rev = "f3d3b4592a73fb64b5423234c01985ea73976596";
+      rev = "9eab59f3e71ea3a725e4817d8dcf0da0824ad19d";
       fetchSubmodules = false;
-      sha256 = "sha256-LOrOfPWpJU/ADWDyVwPv9XNuYPq5KJtmAmSzplpccmE=";
+      sha256 = "sha256-OrythrqccPKtuVt0mj26rr83Qo3Ljb4ZmwLdPGjzjMU=";
     };
-    date = "2025-09-01";
+    date = "2025-09-11";
   };
   limbusart = {
     pname = "limbusart";
@@ -89,15 +89,15 @@
   };
   nixos-wsl = {
     pname = "nixos-wsl";
-    version = "203a7b463f307c60026136dd1191d9001c43457f";
+    version = "42666441c3ddf34a8583a77f07a2c7cae32513c3";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "NixOS-WSL";
-      rev = "203a7b463f307c60026136dd1191d9001c43457f";
+      rev = "42666441c3ddf34a8583a77f07a2c7cae32513c3";
       fetchSubmodules = false;
-      sha256 = "sha256-EOqCupB5X5WoGVHVcfOZcqy0SbKWNuY3kq+lj1wHdu8=";
+      sha256 = "sha256-ZzoQXe7GV7QX3B3Iw59BogmrtHSP5Ig7MAPPD0cOFW4=";
     };
-    date = "2025-08-15";
+    date = "2025-09-12";
   };
   nsid-tracker = {
     pname = "nsid-tracker";
