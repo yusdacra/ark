@@ -27,6 +27,20 @@
     };
     date = "2025-09-03";
   };
+  clickee-proxy = {
+    pname = "clickee-proxy";
+    version = "a60247a8d92e1802298fc197034d0b7b54cd90b7";
+    src = fetchgit {
+      url = "https://tangled.sh/@poor.dog/clickee-proxy";
+      rev = "a60247a8d92e1802298fc197034d0b7b54cd90b7";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sparseCheckout = [ ];
+      sha256 = "sha256-sMLvbvnhGGt+LpKmD3e/iPcEtUd6Yu+92DTlEwHxZCI=";
+    };
+    date = "2025-09-15";
+  };
   gomod2nix = {
     pname = "gomod2nix";
     version = "47d628dc3b506bd28632e47280c6b89d3496909d";
@@ -41,15 +55,15 @@
   };
   home = {
     pname = "home";
-    version = "9eab59f3e71ea3a725e4817d8dcf0da0824ad19d";
+    version = "11cc5449c50e0e5b785be3dfcb88245232633eb8";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "home-manager";
-      rev = "9eab59f3e71ea3a725e4817d8dcf0da0824ad19d";
+      rev = "11cc5449c50e0e5b785be3dfcb88245232633eb8";
       fetchSubmodules = false;
-      sha256 = "sha256-OrythrqccPKtuVt0mj26rr83Qo3Ljb4ZmwLdPGjzjMU=";
+      sha256 = "sha256-Mv16aegXLulgyDunijP6SPFJNm8lSXb2w3Q0X+vZ9TY=";
     };
-    date = "2025-09-11";
+    date = "2025-09-15";
   };
   limbusart = {
     pname = "limbusart";
@@ -89,15 +103,15 @@
   };
   nixos-wsl = {
     pname = "nixos-wsl";
-    version = "42666441c3ddf34a8583a77f07a2c7cae32513c3";
+    version = "134e117c969f42277f1c5e60c8fbcac103c2c454";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "NixOS-WSL";
-      rev = "42666441c3ddf34a8583a77f07a2c7cae32513c3";
+      rev = "134e117c969f42277f1c5e60c8fbcac103c2c454";
       fetchSubmodules = false;
-      sha256 = "sha256-ZzoQXe7GV7QX3B3Iw59BogmrtHSP5Ig7MAPPD0cOFW4=";
+      sha256 = "sha256-B+MT526k5th4x22h213/CgzdkKWIaeaa0+Y0uuCkH/I=";
     };
-    date = "2025-09-12";
+    date = "2025-09-15";
   };
   nsid-tracker = {
     pname = "nsid-tracker";
@@ -115,17 +129,17 @@
   };
   tangled = {
     pname = "tangled";
-    version = "acce4932c10307047c5710855bb97fa08132f08d";
+    version = "708fbcf042177edb51e0c7cf53d4186eceb2c36c";
     src = fetchgit {
       url = "https://tangled.sh/@tangled.sh/core";
-      rev = "acce4932c10307047c5710855bb97fa08132f08d";
+      rev = "708fbcf042177edb51e0c7cf53d4186eceb2c36c";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-3qQxSkJyotDf6WKau1DimetbKvXf4/jgTSZgcBErVyM=";
+      sha256 = "sha256-1Bg0qm86uaE2q4whS9lthUTh1hfUWRCHWBP+aO25yE8=";
     };
-    date = "2025-09-11";
+    date = "2025-09-14";
   };
   tangled-sqlite-lib = {
     pname = "tangled-sqlite-lib";

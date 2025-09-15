@@ -28,6 +28,10 @@ fetch.git = "https://tangled.sh/@poor.dog/nixos-cloud-resources"
 src.git = "https://git.gaze.systems/90008/limbusart.git"
 fetch.git = "https://git.gaze.systems/90008/limbusart.git"
 
+[clickee-proxy]
+src.git = "https://tangled.sh/@poor.dog/clickee-proxy"
+fetch.git = "https://tangled.sh/@poor.dog/clickee-proxy"
+
 [nsid-tracker]
 src.git = "https://tangled.sh/@poor.dog/nsid-tracker"
 fetch.git = "https://tangled.sh/@poor.dog/nsid-tracker"

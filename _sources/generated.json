@@ -40,6 +40,26 @@
         },
         "version": "104a7d21a69c96a1eadf9bcd2807b7dcc968434b"
     },
+    "clickee-proxy": {
+        "cargoLocks": null,
+        "date": "2025-09-15",
+        "extract": null,
+        "name": "clickee-proxy",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "a60247a8d92e1802298fc197034d0b7b54cd90b7",
+            "sha256": "sha256-sMLvbvnhGGt+LpKmD3e/iPcEtUd6Yu+92DTlEwHxZCI=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://tangled.sh/@poor.dog/clickee-proxy"
+        },
+        "version": "a60247a8d92e1802298fc197034d0b7b54cd90b7"
+    },
     "gomod2nix": {
         "cargoLocks": null,
         "date": "2025-08-24",
@@ -63,7 +83,7 @@
     },
     "home": {
         "cargoLocks": null,
-        "date": "2025-09-11",
+        "date": "2025-09-15",
         "extract": null,
         "name": "home",
         "passthru": null,
@@ -75,12 +95,12 @@
             "name": null,
             "owner": "nix-community",
             "repo": "home-manager",
-            "rev": "9eab59f3e71ea3a725e4817d8dcf0da0824ad19d",
-            "sha256": "sha256-OrythrqccPKtuVt0mj26rr83Qo3Ljb4ZmwLdPGjzjMU=",
+            "rev": "11cc5449c50e0e5b785be3dfcb88245232633eb8",
+            "sha256": "sha256-Mv16aegXLulgyDunijP6SPFJNm8lSXb2w3Q0X+vZ9TY=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "9eab59f3e71ea3a725e4817d8dcf0da0824ad19d"
+        "version": "11cc5449c50e0e5b785be3dfcb88245232633eb8"
     },
     "limbusart": {
         "cargoLocks": null,
@@ -138,7 +158,7 @@
     },
     "nixos-wsl": {
         "cargoLocks": null,
-        "date": "2025-09-12",
+        "date": "2025-09-15",
         "extract": null,
         "name": "nixos-wsl",
         "passthru": null,
@@ -150,12 +170,12 @@
             "name": null,
             "owner": "nix-community",
             "repo": "NixOS-WSL",
-            "rev": "42666441c3ddf34a8583a77f07a2c7cae32513c3",
-            "sha256": "sha256-ZzoQXe7GV7QX3B3Iw59BogmrtHSP5Ig7MAPPD0cOFW4=",
+            "rev": "134e117c969f42277f1c5e60c8fbcac103c2c454",
+            "sha256": "sha256-B+MT526k5th4x22h213/CgzdkKWIaeaa0+Y0uuCkH/I=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "42666441c3ddf34a8583a77f07a2c7cae32513c3"
+        "version": "134e117c969f42277f1c5e60c8fbcac103c2c454"
     },
     "nsid-tracker": {
         "cargoLocks": null,
@@ -179,7 +199,7 @@
     },
     "tangled": {
         "cargoLocks": null,
-        "date": "2025-09-11",
+        "date": "2025-09-14",
         "extract": null,
         "name": "tangled",
         "passthru": null,
@@ -189,13 +209,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "acce4932c10307047c5710855bb97fa08132f08d",
-            "sha256": "sha256-3qQxSkJyotDf6WKau1DimetbKvXf4/jgTSZgcBErVyM=",
+            "rev": "708fbcf042177edb51e0c7cf53d4186eceb2c36c",
+            "sha256": "sha256-1Bg0qm86uaE2q4whS9lthUTh1hfUWRCHWBP+aO25yE8=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.sh/@tangled.sh/core"
         },
-        "version": "acce4932c10307047c5710855bb97fa08132f08d"
+        "version": "708fbcf042177edb51e0c7cf53d4186eceb2c36c"
     },
     "tangled-sqlite-lib": {
         "cargoLocks": null,

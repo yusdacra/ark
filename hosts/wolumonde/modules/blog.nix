@@ -76,14 +76,7 @@ in
     };
   };
 
-  age.secrets.clickerAuth = {
-    file = ../../../secrets/clickerAuth.age;
-  };
-
   services.nginx.virtualHosts."poor.dog" = {
     locations."/".return = "301 https://gaze.systems$request_uri";
-    locations."/click" = {
-      proxyPass = "http://100.64.0.1:8668";
-    };
   };
 }

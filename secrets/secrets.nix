@@ -33,7 +33,7 @@ in
     yusdacra
     wolumonde
   ];
-  "clickerAuth.age".publicKeys = [
+  "clickeeProxyConfig.age".publicKeys = [
     yusdacra
     wolumonde
   ];
