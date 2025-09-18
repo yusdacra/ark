@@ -7,7 +7,7 @@ let
     of entity with serial id /90008/. you may want to open a
     connection to https://gaze.systems/about for more data.
 
-    /discord         yusdacra/
+    /discord           90.008/
     /bsky           @poor.dog/
     /email 90008@gaze.systems/
 
