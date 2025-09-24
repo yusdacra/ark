@@ -43,20 +43,20 @@ in
     };
   };
 
-  systemd.services.annoy-keep-alive = {
-    description = "keeps annoy peer connection alive";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.curl}/bin/curl http://100.64.0.1:3111/";
-    };
-  };
-  systemd.timers.annoy-keep-alive.timerConfig = {
-    OnBootSec = "5 min";
-    OnUnitActiveSec = "5 min";
-    Unit = "annoy-keep-alive.service";
-  };
+  # systemd.services.annoy-keep-alive = {
+  #   description = "keeps annoy peer connection alive";
+  #   wantedBy = [ "multi-user.target" ];
+  #   after = [ "network.target" ];
+  #   serviceConfig = {
+  #     Type = "oneshot";
+  #     ExecStart = "${pkgs.curl}/bin/curl http://100.64.0.1:3111/";
+  #   };
+  # };
+  # systemd.timers.annoy-keep-alive.timerConfig = {
+  #   OnBootSec = "5 min";
+  #   OnUnitActiveSec = "5 min";
+  #   Unit = "annoy-keep-alive.service";
+  # };
 
   services.nginx.virtualHosts."gaze.systems" = {
     locations."/".proxyPass = "http://localhost:${toString port}";

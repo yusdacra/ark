@@ -23,6 +23,7 @@ D(
     A("likes", WOLUMONDE_IP, CF_PROXY_OFF),
     A("vpn", WOLUMONDE_IP, CF_PROXY_OFF),
     A("id", WOLUMONDE_IP, CF_PROXY_OFF),
+    // A("meow", WOLUMONDE_IP, CF_PROXY_OFF),
     // thing
     // TXT("id", "a data endpoint for entity with serial id /90008/."),
     // TXT("id", "entity linked here uses it/they pronouns. it can be referred to as /dusk/ or /dawn/."),

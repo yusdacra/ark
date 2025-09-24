@@ -34,6 +34,7 @@ in
 {
   security.acme.certs."gaze.systems".extraDomainNames = [
     dawnDid guestbookDid
+    # "meow.gaze.systems"
   ];
   services.nginx.virtualHosts = {
     # "gaze.systems" = mkWellKnownCfg {
@@ -44,6 +45,12 @@ in
     };
     # "9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa" = mkWellKnownCfg {
     #   "atproto-did" = pkgs.writeText "server" "did:plc:dfl62fgb7wtjj3fcbb72naae";
+    # };
+    # "meow.gaze.systems" = {
+    #   useACMEHost = "gaze.systems";
+    #   quic = true;
+    #   kTLS = true;
+    #   forceSSL = true;
     # };
   }
   // (mkDidWebCfg dawnDid)
