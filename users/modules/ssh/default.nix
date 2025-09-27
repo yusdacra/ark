@@ -1,9 +1,19 @@
 {
   programs.ssh = {
     enable = true;
-    compression = true;
-    hashKnownHosts = true;
-    addKeysToAgent = "yes";
+    enableDefaultConfig = false;
+    matchBlocks."*" = {
+        forwardAgent = false;
+        serverAliveInterval = 0;
+        serverAliveCountMax = 3;
+        compression = true;
+        hashKnownHosts = true;
+        addKeysToAgent = "yes";
+        userKnownHostsFile = "~/.ssh/known_hosts";
+        controlMaster = "no";
+        controlPath = "~/.ssh/master-%r@%n:%p";
+        controlPersist = "no";
+    };
     # Only needed for darcs hub
     # extraConfig = ''
     #   Host hub.darcs.net

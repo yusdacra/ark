@@ -9,10 +9,8 @@ D(
     DnsProvider(DSP_CLOUDFLARE),
     DefaultTTL(1),
     A("@", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("dawn", WOLUMONDE_IP, CF_PROXY_OFF),
     A("doc", WOLUMONDE_IP, CF_PROXY_OFF),
     A("git", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("guestbook", WOLUMONDE_IP, CF_PROXY_OFF),
     A("limbus", WOLUMONDE_IP, CF_PROXY_OFF),
     A("pmart", WOLUMONDE_IP, CF_PROXY_OFF),
     A("webhook", WOLUMONDE_IP, CF_PROXY_OFF),
@@ -23,6 +21,10 @@ D(
     A("likes", WOLUMONDE_IP, CF_PROXY_OFF),
     A("vpn", WOLUMONDE_IP, CF_PROXY_OFF),
     A("id", WOLUMONDE_IP, CF_PROXY_OFF),
+    // atp handles
+    A("dawn", WOLUMONDE_IP, CF_PROXY_OFF),
+    A("guestbook", WOLUMONDE_IP, CF_PROXY_OFF),
+    A("drew", WOLUMONDE_IP, CF_PROXY_OFF),
     // A("meow", WOLUMONDE_IP, CF_PROXY_OFF),
     // thing
     // TXT("id", "a data endpoint for entity with serial id /90008/."),

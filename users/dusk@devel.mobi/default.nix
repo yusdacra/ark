@@ -54,6 +54,11 @@ in
     shellAliases = {
       ctl = "systemctl --user";
       jtl = "journalctl --user";
+      g = "git";
+      e = "hx";
+    };
+    sessionVariables = {
+      EDITOR = "hx";
     };
   };
 
