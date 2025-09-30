@@ -85,3 +85,16 @@ D(
     TXT("@", "v=spf1 -all"),
     TXT("_dmarc", "v=DMARC1; p=reject;"),
 );
+
+D(
+    "ptr.pet",
+    REG_NONE,
+    DnsProvider(DSP_CLOUDFLARE),
+    DefaultTTL(1),
+    A("@", WOLUMONDE_IP, CF_PROXY_OFF),
+    A("nil", WOLUMONDE_IP, CF_PROXY_OFF),
+    TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae"),
+    TXT("_atproto.nil", "did=did:web:dawn.gaze.systems"),
+    TXT("@", "v=spf1 -all"),
+    TXT("_dmarc", "v=DMARC1; p=reject;"),
+);

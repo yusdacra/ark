@@ -45,6 +45,7 @@
     defaults.email = (import "${inputs.self}/personal.nix").emails.primary;
     defaults.webroot = "/var/lib/acme/acme-challenge";
     certs."poor.dog" = { };
+    certs."ptr.pet" = { };
     certs."gaze.systems" = { };
   };
   services.nginx.virtualHosts."gaze.systems" = {
@@ -57,6 +58,12 @@
     quic = true;
     kTLS = true;
     useACMEHost = "poor.dog";
+    forceSSL = true;
+  };
+  services.nginx.virtualHosts."ptr.pet" = {
+    quic = true;
+    kTLS = true;
+    useACMEHost = "ptr.pet";
     forceSSL = true;
   };
 

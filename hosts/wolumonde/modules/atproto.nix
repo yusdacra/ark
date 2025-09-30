@@ -17,6 +17,15 @@ let
       }) files
     );
   };
+  mkHandleCfg = rootDomain: did: (mkWellKnownCfg {
+    "atproto-did" = pkgs.writeText "server" did;
+  })
+  // {
+    useACMEHost = rootDomain;
+    forceSSL = true;
+    quic = true;
+    kTLS = true;
+  };
   mkDidWebCfg = domain: {
     "${domain}" =
       (mkWellKnownCfg {
@@ -26,6 +35,8 @@ let
       // (lib.optionalAttrs (lib.hasSuffix "gaze.systems" domain) {
         useACMEHost = "gaze.systems";
         forceSSL = true;
+        quic = true;
+        kTLS = true;
       });
   };
   dawnDid = "dawn.gaze.systems";
@@ -36,21 +47,10 @@ in
     dawnDid guestbookDid "drew.gaze.systems"
   ];
   services.nginx.virtualHosts = {
-    # "gaze.systems" = mkWellKnownCfg {
-    #   "atproto-did" = pkgs.writeText "server" "did:plc:dfl62fgb7wtjj3fcbb72naae";
-    # };
-    "poor.dog" = mkWellKnownCfg {
-      "atproto-did" = pkgs.writeText "server" "did:plc:dfl62fgb7wtjj3fcbb72naae";
-    };
-    # "9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa" = mkWellKnownCfg {
-    #   "atproto-did" = pkgs.writeText "server" "did:plc:dfl62fgb7wtjj3fcbb72naae";
-    # };
-    "drew.gaze.systems" = (mkWellKnownCfg {
-      "atproto-did" = pkgs.writeText "server" "did:plc:vo6ie3kd6xvpjlof4pnb2zzp";
-    }) // {
-        useACMEHost = "gaze.systems";
-        forceSSL = true;
-    };
+    "poor.dog" = mkHandleCfg "poor.dog" "did:plc:dfl62fgb7wtjj3fcbb72naae";
+    "ptr.pet" = mkHandleCfg "ptr.pet" "did:plc:dfl62fgb7wtjj3fcbb72naae";
+    "nil.ptr.pet" = mkHandleCfg "ptr.pet" "did:web:dawn.gaze.systems";
+    "drew.gaze.systems" = mkHandleCfg "gaze.systems" "did:plc:vo6ie3kd6xvpjlof4pnb2zzp";
   }
   // (mkDidWebCfg dawnDid)
   // (mkDidWebCfg guestbookDid);
