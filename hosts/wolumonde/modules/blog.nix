@@ -79,8 +79,4 @@ in
   services.nginx.virtualHosts."poor.dog" = {
     locations."/".return = "301 https://gaze.systems$request_uri";
   };
-
-  services.nginx.virtualHosts."ptr.pet" = {
-    locations."/".return = "301 https://gaze.systems$request_uri";
-  };
 }

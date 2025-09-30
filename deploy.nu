@@ -32,7 +32,7 @@ def webhook [title: string, content: string, exit_code?: number, ping?: bool = f
 }
 
 def upload-paste []: any -> string {
-  let paste_url = http post --content-type multipart/form-data "https://0x0.st" {file: ($in | to text | into binary), secret: true}
+  let paste_url = http post -H ["user-agent" "gaze.systems terra deploy"] --content-type multipart/form-data "https://0x0.st" {file: ($in | to text | into binary), secret: true}
   return $paste_url
 }
 

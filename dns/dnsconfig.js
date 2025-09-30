@@ -21,6 +21,7 @@ D(
     A("likes", WOLUMONDE_IP, CF_PROXY_OFF),
     A("vpn", WOLUMONDE_IP, CF_PROXY_OFF),
     A("id", WOLUMONDE_IP, CF_PROXY_OFF),
+    A("test", WOLUMONDE_IP, CF_PROXY_OFF),
     // atp handles
     A("dawn", WOLUMONDE_IP, CF_PROXY_OFF),
     A("guestbook", WOLUMONDE_IP, CF_PROXY_OFF),
@@ -86,15 +87,89 @@ D(
     TXT("_dmarc", "v=DMARC1; p=reject;"),
 );
 
+var EMAIL_TTL = 86400;
+
 D(
     "ptr.pet",
     REG_NONE,
     DnsProvider(DSP_CLOUDFLARE),
     DefaultTTL(1),
     A("@", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("nil", WOLUMONDE_IP, CF_PROXY_OFF),
+    A("test", WOLUMONDE_IP, CF_PROXY_OFF),
+    // atproto
     TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae"),
+    A("nil", WOLUMONDE_IP, CF_PROXY_OFF),
     TXT("_atproto.nil", "did=did:web:dawn.gaze.systems"),
-    TXT("@", "v=spf1 -all"),
-    TXT("_dmarc", "v=DMARC1; p=reject;"),
+    TXT("_atproto.june", "did=did:plc:y3z2rr7q5rywu4fjn3fmfyop"),
+    // june
+    CNAME("june", "girlboss.ceo."),
+    CNAME("*.june", "girlboss.ceo."),
+    // email
+    // verification
+    TXT("@", "hosted-email-verify=zr04ylon", TTL(EMAIL_TTL)),
+
+    MX("@", 10, "aspmx1.migadu.com.", TTL(EMAIL_TTL)),
+    MX("@", 20, "aspmx2.migadu.com.", TTL(EMAIL_TTL)),
+
+    // DKIM
+    CNAME(
+        "key1._domainkey",
+        "key1.ptr.pet._domainkey.migadu.com.",
+        TTL(EMAIL_TTL),
+    ),
+    CNAME(
+        "key2._domainkey",
+        "key2.ptr.pet._domainkey.migadu.com.",
+        TTL(EMAIL_TTL),
+    ),
+    CNAME(
+        "key3._domainkey",
+        "key3.ptr.pet._domainkey.migadu.com.",
+        TTL(EMAIL_TTL),
+    ),
+
+    // SPF
+    TXT("@", "v=spf1 include:spf.migadu.com -all", TTL(EMAIL_TTL)),
+
+    // DMARC
+    TXT(
+        "_dmarc",
+        "v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s; fo=1; pct=100; rua=mailto:infrastructure@ptr.pet; ruf=mailto:infrastructure@ptr.pet",
+        TTL(EMAIL_TTL),
+    ),
+
+    // configuration
+    TXT(
+        "@",
+        "mailconf=https://autoconfig.migadu.com/mail/config-v1.1.xml",
+        TTL(EMAIL_TTL),
+    ),
+
+    // TLS reporting
+    TXT(
+        "_smtp._tls",
+        "v=TLSRPTv1; rua=mailto:infrastructure@ptr.pet",
+        TTL(EMAIL_TTL),
+    ),
+
+    // mta-sts
+    A("mta-sts", WOLUMONDE_IP, CF_PROXY_OFF),
+    TXT("_mta-sts", "v=STSv1; id=20250930T1945", TTL(EMAIL_TTL)),
+
+    // autoconfig
+    A("autoconfig", WOLUMONDE_IP, CF_PROXY_OFF),
+    A("autodiscover", WOLUMONDE_IP, CF_PROXY_OFF),
+
+    // autodiscovery
+    SRV(
+        "_autodiscover._tcp",
+        0,
+        1,
+        443,
+        "autodiscover.migadu.com.",
+        TTL(EMAIL_TTL),
+    ),
+    SRV("_submissions._tcp", 0, 1, 465, "smtp.migadu.com.", TTL(EMAIL_TTL)),
+    SRV("_imaps._tcp", 0, 1, 993, "imap.migadu.com.", TTL(EMAIL_TTL)),
+    SRV("_pop3s._tcp", 0, 1, 995, "pop.migadu.com.", TTL(EMAIL_TTL)),
 );
