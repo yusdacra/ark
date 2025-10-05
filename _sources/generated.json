@@ -56,7 +56,7 @@
             "sha256": "sha256-sMLvbvnhGGt+LpKmD3e/iPcEtUd6Yu+92DTlEwHxZCI=",
             "sparseCheckout": [],
             "type": "git",
-            "url": "https://tangled.sh/@poor.dog/clickee-proxy"
+            "url": "https://tangled.org/@ptr.pet/clickee-proxy"
         },
         "version": "a60247a8d92e1802298fc197034d0b7b54cd90b7"
     },
@@ -152,7 +152,7 @@
             "sha256": "sha256-miZ64o8p+ToR6VIpcco/wq0rdHGjHsfepJdMcSiJEDk=",
             "sparseCheckout": [],
             "type": "git",
-            "url": "https://tangled.sh/@poor.dog/nixos-cloud-resources"
+            "url": "https://tangled.org/@ptr.pet/nixos-cloud-resources"
         },
         "version": "4660aa9cd9b24bef569696eee46dbe7e8df3e237"
     },
@@ -193,13 +193,13 @@
             "sha256": "sha256-utNIYZiuPql6gvM8k8T/NuLomFRWknfbFvvHpXPei3k=",
             "sparseCheckout": [],
             "type": "git",
-            "url": "https://tangled.sh/@poor.dog/nsid-tracker"
+            "url": "https://tangled.org/@ptr.pet/nsid-tracker"
         },
         "version": "2683e619932808b8aa78ec7100de6324c8216daf"
     },
     "tangled": {
         "cargoLocks": null,
-        "date": "2025-09-23",
+        "date": "2025-10-01",
         "extract": null,
         "name": "tangled",
         "passthru": null,
@@ -209,13 +209,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "8aab931c24affcd4e06e625447ef2d4a2cd790a5",
-            "sha256": "sha256-qbyRvuMvjoeq8/SnO+/4lqAvosg9cBdbXOEN5+78gjg=",
+            "rev": "5df3d5df76ee20ad0ad818c3aa76d92788672873",
+            "sha256": "sha256-J9nr84+CNL//9CvR8ELCkzby57EEgZum19WYslnSEG0=",
             "sparseCheckout": [],
             "type": "git",
-            "url": "https://tangled.sh/@tangled.sh/core"
+            "url": "https://tangled.org/@tangled.org/core"
         },
-        "version": "8aab931c24affcd4e06e625447ef2d4a2cd790a5"
+        "version": "5df3d5df76ee20ad0ad818c3aa76d92788672873"
     },
     "tangled-sqlite-lib": {
         "cargoLocks": null,

@@ -31,7 +31,7 @@
     pname = "clickee-proxy";
     version = "a60247a8d92e1802298fc197034d0b7b54cd90b7";
     src = fetchgit {
-      url = "https://tangled.sh/@poor.dog/clickee-proxy";
+      url = "https://tangled.org/@ptr.pet/clickee-proxy";
       rev = "a60247a8d92e1802298fc197034d0b7b54cd90b7";
       fetchSubmodules = false;
       deepClone = false;
@@ -91,7 +91,7 @@
     pname = "ncr";
     version = "4660aa9cd9b24bef569696eee46dbe7e8df3e237";
     src = fetchgit {
-      url = "https://tangled.sh/@poor.dog/nixos-cloud-resources";
+      url = "https://tangled.org/@ptr.pet/nixos-cloud-resources";
       rev = "4660aa9cd9b24bef569696eee46dbe7e8df3e237";
       fetchSubmodules = false;
       deepClone = false;
@@ -117,7 +117,7 @@
     pname = "nsid-tracker";
     version = "2683e619932808b8aa78ec7100de6324c8216daf";
     src = fetchgit {
-      url = "https://tangled.sh/@poor.dog/nsid-tracker";
+      url = "https://tangled.org/@ptr.pet/nsid-tracker";
       rev = "2683e619932808b8aa78ec7100de6324c8216daf";
       fetchSubmodules = false;
       deepClone = false;
@@ -129,17 +129,17 @@
   };
   tangled = {
     pname = "tangled";
-    version = "8aab931c24affcd4e06e625447ef2d4a2cd790a5";
+    version = "5df3d5df76ee20ad0ad818c3aa76d92788672873";
     src = fetchgit {
-      url = "https://tangled.sh/@tangled.sh/core";
-      rev = "8aab931c24affcd4e06e625447ef2d4a2cd790a5";
+      url = "https://tangled.org/@tangled.org/core";
+      rev = "5df3d5df76ee20ad0ad818c3aa76d92788672873";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-qbyRvuMvjoeq8/SnO+/4lqAvosg9cBdbXOEN5+78gjg=";
+      sha256 = "sha256-J9nr84+CNL//9CvR8ELCkzby57EEgZum19WYslnSEG0=";
     };
-    date = "2025-09-23";
+    date = "2025-10-01";
   };
   tangled-sqlite-lib = {
     pname = "tangled-sqlite-lib";
