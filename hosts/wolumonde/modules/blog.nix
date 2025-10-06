@@ -62,14 +62,14 @@ in
     locations."/".proxyPass = "http://localhost:${toString port}";
     locations."/annoy/ws/" = {
       proxyWebsockets = true;
-      proxyPass = "http://100.64.0.1:3111/";
+      proxyPass = "http://100.64.0.9:3111/";
       extraConfig = ''
         rewrite ^/annoy/ws/(.*) /$1 break;
       '';
     };
     locations."/annoy/ws" = {
       proxyWebsockets = true;
-      proxyPass = "http://100.64.0.1:3111/";
+      proxyPass = "http://100.64.0.9:3111/";
       extraConfig = ''
         rewrite ^/annoy/ws(.*) /$1 break;
       '';
