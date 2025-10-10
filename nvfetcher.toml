@@ -13,8 +13,8 @@ src.git = "https://github.com/nix-community/home-manager"
 fetch.github = "nix-community/home-manager"
 
 [blog]
-src.git = "https://git.gaze.systems/90008/website.git"
-fetch.git = "https://git.gaze.systems/90008/website.git"
+src.git = "https://tangled.org/@ptr.pet/endpoint"
+fetch.git = "https://tangled.org/@ptr.pet/endpoint"
 
 [agenix]
 src.git = "https://github.com/ryantm/agenix"

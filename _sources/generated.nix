@@ -15,17 +15,17 @@
   };
   blog = {
     pname = "blog";
-    version = "62d10d56ca043a0fe6b7c20c347d2416d4b02b61";
+    version = "f10e63efdf0b4bae730a976f26e2d3f969d4173b";
     src = fetchgit {
-      url = "https://git.gaze.systems/90008/website.git";
-      rev = "62d10d56ca043a0fe6b7c20c347d2416d4b02b61";
+      url = "https://tangled.org/@ptr.pet/endpoint";
+      rev = "f10e63efdf0b4bae730a976f26e2d3f969d4173b";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-vju24bv9gTp2Gpj/3eFczWZwrW1EjSotknpkxfnzdGI=";
+      sha256 = "sha256-8Zz/Dl1yQ7th0mirSB9UFRHmOIPKKbzy7kNZKKwBtVg=";
     };
-    date = "2025-09-23";
+    date = "2025-10-10";
   };
   clickee-proxy = {
     pname = "clickee-proxy";

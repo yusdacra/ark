@@ -7,7 +7,7 @@
 let
   PUBLIC_BASE_URL = "https://gaze.systems";
   modules = (pkgs.callPackage "${inputs.blog}/nix/modules.nix" { }).overrideAttrs (_: {
-    outputHash = "sha256-CO0bFv5WbNBSgucHCb+I9kIZEkh6QqWngRra0luMtSI=";
+    outputHash = "sha256-FhJT1CR5FyGlWMYjGDQDSebXtPWdRvDn5DR/rtk/T+4=";
   });
   pkg = pkgs.callPackage "${inputs.blog}/nix" {
     inherit PUBLIC_BASE_URL;
@@ -40,6 +40,7 @@ in
       RestartSec = 5;
       WorkingDirectory = "/var/lib/website";
       EnvironmentFile = config.age.secrets.websiteConfig.path;
+      KillSignal = "SIGKILL";
     };
   };
 
