@@ -70,7 +70,7 @@ in
     enable = true;
     controlServer = "https://vpn.gaze.systems";
     authKeyFile = config.age.secrets.tailscaleAuthKey.path;
-    extraUpFlags = [ "--hostname=dusk-devel-mobi" ];
+    extraUpFlags = [ "--advertise-exit-node=true" "--hostname=dusk-devel-mobi" ];
   };
 
   programs = {
