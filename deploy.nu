@@ -28,7 +28,7 @@ def webhook [title: string, content: string, exit_code?: number, ping?: bool = f
   } else {
     log error $content
   }
-  http post --content-type application/json $"https://discord.com/api/webhooks/($env.WEBHOOK_ID)/($env.WEBHOOK_TOKEN)" $msg
+  # http post --content-type application/json $"https://discord.com/api/webhooks/($env.WEBHOOK_ID)/($env.WEBHOOK_TOKEN)" $msg
 }
 
 def upload-paste []: any -> string {
@@ -49,6 +49,16 @@ let hosts = {
     type: "nixos",
     user: "root",
     addr: "23.88.101.188",
+  },
+  dzwonek: {
+    type: "nixos",
+    user: "root",
+    addr: "94.237.26.47",
+  },
+  volsinii: {
+    type: "nixos",
+    user: "root",
+    addr: "199.71.188.53",
   },
   "dusk@devel.mobi": {
     type: "home",
@@ -85,7 +95,7 @@ def deploy [hostname: string] {
   let result_link = readlink $result_dir
 
   let target = $"($hostcfg.user)@($hostcfg.addr)"
-  let copy_cmd = {nix copy --to $"ssh://($target)" $result_link}
+  let copy_cmd = {nix copy -s --to $"ssh://($target)" $result_link}
   if (run_step "copy to" $copy_cmd) {
     return
   }

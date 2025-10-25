@@ -3,6 +3,8 @@ let host_colors = {
     wolumonde: {start: "0x603F26", end: "0x6C4E31"},
     chernobog: {start: "0xA94438", end: "0xD24545"},
     "sd-148036": {start: "0x595CFF", end: "0xC6F8FF"},
+    dzwonek: {start: "0x595CFF", end: "0xC6F8FF"},
+    volsinii: {start: "0x595CFF", end: "0xC6F8FF"},
 }
 let user_colors = {
     kirara: {start: "0xFF407D", end: "0xEE99C2"},

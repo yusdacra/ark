@@ -8,6 +8,9 @@
 }:
 {
   imports = [
+    ../../modules
+    ../../locale
+    "${inputs.home}/nixos"
     ../../users/root
     ../../users/firewatch
     "${inputs.nixos-wsl}/modules"

@@ -8,6 +8,10 @@ fetch.tarball = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3
 src.git = "https://github.com/nix-community/NixOS-WSL"
 fetch.github = "nix-community/NixOS-WSL"
 
+[disko]
+src.git = "https://github.com/nix-community/disko"
+fetch.github = "nix-community/disko"
+
 [home]
 src.git = "https://github.com/nix-community/home-manager"
 fetch.github = "nix-community/home-manager"

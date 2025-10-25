@@ -11,9 +11,6 @@ let
       inherit lib;
       system = null;
       modules = [
-        ../modules
-        ../locale
-        "${set.inputs.home}/nixos"
         { networking.hostName = name; }
         { nixpkgs.pkgs = set.pkgs; }
         (import (./. + "/${name}/default.nix"))
@@ -28,7 +25,9 @@ let
     # lungmen = "x86_64-linux";
     # tkaronto = "x86_64-linux";
     wolumonde = allPkgsSets.x86_64-linux;
-    wsl = allPkgsSets.x86_64-linux;
+    # wsl = allPkgsSets.x86_64-linux;
+    dzwonek = allPkgsSets.x86_64-linux;
+    volsinii = allPkgsSets.x86_64-linux;
   };
 in
 lib.mapAttrs mkSystem systems

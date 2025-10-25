@@ -41,6 +41,18 @@
     };
     date = "2025-09-15";
   };
+  disko = {
+    pname = "disko";
+    version = "3a9450b26e69dcb6f8de6e2b07b3fc1c288d85f5";
+    src = fetchFromGitHub {
+      owner = "nix-community";
+      repo = "disko";
+      rev = "3a9450b26e69dcb6f8de6e2b07b3fc1c288d85f5";
+      fetchSubmodules = false;
+      sha256 = "sha256-y7UhnWlER8r776JsySqsbTUh2Txf7K30smfHlqdaIQw=";
+    };
+    date = "2025-10-17";
+  };
   gomod2nix = {
     pname = "gomod2nix";
     version = "7f8d7438f5870eb167abaf2c39eea3d2302019d1";

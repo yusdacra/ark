@@ -60,6 +60,27 @@
         },
         "version": "a60247a8d92e1802298fc197034d0b7b54cd90b7"
     },
+    "disko": {
+        "cargoLocks": null,
+        "date": "2025-10-17",
+        "extract": null,
+        "name": "disko",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "nix-community",
+            "repo": "disko",
+            "rev": "3a9450b26e69dcb6f8de6e2b07b3fc1c288d85f5",
+            "sha256": "sha256-y7UhnWlER8r776JsySqsbTUh2Txf7K30smfHlqdaIQw=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "3a9450b26e69dcb6f8de6e2b07b3fc1c288d85f5"
+    },
     "gomod2nix": {
         "cargoLocks": null,
         "date": "2025-10-09",

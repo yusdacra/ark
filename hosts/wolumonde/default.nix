@@ -6,6 +6,9 @@
 }:
 {
   imports = [
+    ../../modules
+    ../../locale
+    "${inputs.home}/nixos"
     ../../users/root
     "${inputs.agenix}/modules/age.nix"
     "${inputs.ncr}/firewall"
