@@ -27,10 +27,6 @@ in
     yusdacra
     dzwonek
   ];
-  "tailscaleAuthKey.age".publicKeys = [
-    yusdacra
-    wolumonde
-  ];
   "develMobiTailscaleAuthKey.age".publicKeys = [
     yusdacra
     develMobi
