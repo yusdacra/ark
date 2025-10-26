@@ -4,7 +4,7 @@ let
   domain = "vpn.${rootDomain}";
 in
 {
-  imports = [./acl.nix];
+  imports = [ ./acl.nix ];
 
   age.secrets.headscaleOidcSecret = {
     file = ../../../../secrets/headscaleOidcSecret.age;
@@ -18,10 +18,10 @@ in
     address = "0.0.0.0";
     port = 1111;
     acl = {
-      groups.admin = ["90008@gaze.systems"];
+      groups.admin = [ "90008@gaze.systems" ];
       tagOwners = {
-        private-infra = ["group:admin"];
-        other-infra = ["group:admin"];
+        private-infra = [ "group:admin" ];
+        other-infra = [ "group:admin" ];
       };
       hosts = {
         chernobog = "100.64.0.9";
@@ -30,28 +30,34 @@ in
       };
       rules = lib.mkBefore [
         {
-          src = ["group:admin"];
-          dst = ["tag:private-infra:*" "tag:other-infra:*"];
+          src = [ "group:admin" ];
+          dst = [
+            "tag:private-infra:*"
+            "tag:other-infra:*"
+          ];
         }
         {
-          src = ["tag:private-infra"];
-          dst = ["tag:other-infra:*"];
+          src = [ "tag:private-infra" ];
+          dst = [ "tag:other-infra:*" ];
         }
         {
-          src = ["wolumonde"];
-          dst = ["chernobog:*"];
+          src = [ "wolumonde" ];
+          dst = [ "chernobog:*" ];
         }
         {
-          src = ["90008@gaze.systems"];
-          dst = ["90008@gaze.systems:*"];
+          src = [ "90008@gaze.systems" ];
+          dst = [ "90008@gaze.systems:*" ];
         }
         {
-          src = ["90008@gaze.systems" "tag:private-infra"];
-          dst = ["autogroup:internet:*"];
+          src = [
+            "90008@gaze.systems"
+            "tag:private-infra"
+          ];
+          dst = [ "autogroup:internet:*" ];
         }
         {
-          src = ["ellite@ellite.dev"];
-          dst = ["chernobog:8463"];
+          src = [ "ellite@ellite.dev" ];
+          dst = [ "chernobog:8463" ];
         }
       ];
     };
@@ -76,7 +82,6 @@ in
     };
   };
 
-  
   # security.acme.certs.${rootDomain}.extraDomainNames = [domain];
   services.nginx.virtualHosts.${domain} = {
     useACMEHost = domain;

@@ -17,15 +17,17 @@ let
       }) files
     );
   };
-  mkHandleCfg = rootDomain: did: (mkWellKnownCfg {
-    "atproto-did" = pkgs.writeText "server" did;
-  })
-  // {
-    useACMEHost = rootDomain;
-    forceSSL = true;
-    quic = true;
-    kTLS = true;
-  };
+  mkHandleCfg =
+    rootDomain: did:
+    (mkWellKnownCfg {
+      "atproto-did" = pkgs.writeText "server" did;
+    })
+    // {
+      useACMEHost = rootDomain;
+      forceSSL = true;
+      quic = true;
+      kTLS = true;
+    };
   mkDidWebCfg = domain: {
     "${domain}" =
       (mkWellKnownCfg {
@@ -44,7 +46,10 @@ let
 in
 {
   security.acme.certs."gaze.systems".extraDomainNames = [
-    dawnDid guestbookDid "drew.gaze.systems" "test.gaze.systems"
+    dawnDid
+    guestbookDid
+    "drew.gaze.systems"
+    "test.gaze.systems"
   ];
   services.nginx.virtualHosts = {
     "test.gaze.systems" = mkHandleCfg "gaze.systems" "did:web:dawn.gaze.systems";

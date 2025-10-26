@@ -1,3 +1,6 @@
 {
-  imports = [./knot.nix ./spindle.nix];
+  imports = [
+    ./knot.nix
+    ./spindle.nix
+  ];
 }

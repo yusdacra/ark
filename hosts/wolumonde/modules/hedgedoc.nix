@@ -1,4 +1,5 @@
-{ config, ... }: let
+{ config, ... }:
+let
   cfg = config.services.hedgedoc.settings;
 in
 {
@@ -16,13 +17,12 @@ in
     };
   };
 
-  security.acme.certs."gaze.systems".extraDomainNames = [cfg.domain];
+  security.acme.certs."gaze.systems".extraDomainNames = [ cfg.domain ];
   services.nginx.virtualHosts.${cfg.domain} = {
     useACMEHost = "gaze.systems";
     forceSSL = true;
     quic = true;
     kTLS = true;
-    locations."/".proxyPass =
-      "http://${cfg.host}:${toString cfg.port}";
+    locations."/".proxyPass = "http://${cfg.host}:${toString cfg.port}";
   };
 }

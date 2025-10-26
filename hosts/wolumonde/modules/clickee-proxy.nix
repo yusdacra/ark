@@ -1,6 +1,8 @@
-{config, terra, ...}: let
+{ config, terra, ... }:
+let
   port = 7145;
-in {
+in
+{
   age.secrets.clickeeProxyConfig = {
     file = ../../../secrets/clickeeProxyConfig.age;
   };

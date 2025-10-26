@@ -1,24 +1,29 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   port = 8945;
   secrets = config.age.secrets;
   cfgFile = pkgs.writeText "openbao-proxy-spindle-config.hcl" (
     lib.replaceStrings
-    [
-      "%role_id%"
-      "%secret_id%"
-      "%vault_address%"
-      "%listener_port%"
-      "%name%"
-    ]
-    [
-      secrets.spindleOpenbaoRoleId.path
-      secrets.spindleOpenbaoSecretId.path
-      config.services.openbao.settings.api_addr
-      (toString port)
-      name
-    ]
-    (lib.fileContents ./config.hcl)
+      [
+        "%role_id%"
+        "%secret_id%"
+        "%vault_address%"
+        "%listener_port%"
+        "%name%"
+      ]
+      [
+        secrets.spindleOpenbaoRoleId.path
+        secrets.spindleOpenbaoSecretId.path
+        config.services.openbao.settings.api_addr
+        (toString port)
+        name
+      ]
+      (lib.fileContents ./config.hcl)
   );
   domain = "spindle.bao.lan.gaze.systems";
   name = "openbao-proxy-spindle";
@@ -42,7 +47,7 @@ in
     group = name;
   };
   users.groups.${name} = {
-    members = [name];
+    members = [ name ];
   };
 
   systemd.services.${name} = {
@@ -58,24 +63,32 @@ in
       LimitNOFILE = "65536";
       User = name;
       Group = name;
-      RuntimeDirectory=name;
-      RuntimeDirectoryMode=0700;
-      StateDirectory=name;
-      StateDirectoryMode=0700;
-      ProcSubset="pid";
-      ProtectClock=true;
-      ProtectControlGroups=true;
-      ProtectHome=true;
-      ProtectHostname=true;
-      ProtectKernelLogs=true;
-      ProtectKernelModules=true;
-      ProtectKernelTunables=true;
-      ProtectProc="invisible";
-      RestrictNamespaces=true;
-      RestrictRealtime=true;
-      RestrictAddressFamilies=["AF_INET" "AF_INET6" "AF_UNIX"];
-      SystemCallArchitectures="native";
-      SystemCallFilter=["@system-service" "@resources" "~@privileged"];
+      RuntimeDirectory = name;
+      RuntimeDirectoryMode = 0700;
+      StateDirectory = name;
+      StateDirectoryMode = 0700;
+      ProcSubset = "pid";
+      ProtectClock = true;
+      ProtectControlGroups = true;
+      ProtectHome = true;
+      ProtectHostname = true;
+      ProtectKernelLogs = true;
+      ProtectKernelModules = true;
+      ProtectKernelTunables = true;
+      ProtectProc = "invisible";
+      RestrictNamespaces = true;
+      RestrictRealtime = true;
+      RestrictAddressFamilies = [
+        "AF_INET"
+        "AF_INET6"
+        "AF_UNIX"
+      ];
+      SystemCallArchitectures = "native";
+      SystemCallFilter = [
+        "@system-service"
+        "@resources"
+        "~@privileged"
+      ];
     };
   };
 

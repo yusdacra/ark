@@ -24,7 +24,7 @@ in
     };
   };
 
-  security.acme.certs."gaze.systems".extraDomainNames = [knotCfg.server.hostname];
+  security.acme.certs."gaze.systems".extraDomainNames = [ knotCfg.server.hostname ];
 
   services.nginx.virtualHosts.${knotCfg.server.hostname} = {
     useACMEHost = "gaze.systems";

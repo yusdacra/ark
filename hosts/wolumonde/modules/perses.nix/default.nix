@@ -66,8 +66,11 @@ in
 
   systemd.services.perses = {
     description = "perses";
-    after = ["network.target" "pocket-id.service"];
-    requires = ["pocket-id.service"];
+    after = [
+      "network.target"
+      "pocket-id.service"
+    ];
+    requires = [ "pocket-id.service" ];
     serviceConfig = {
       ExecStart = "${pkgs.perses}/bin/perses --config=${persesConfigYaml} --web.listen-address=:${toString port} --log.level=info";
       EnvironmentFile = secrets.persesSecret.path;
@@ -79,7 +82,7 @@ in
     cp -f ${./provision}/* ${provisioningFolder}
   '';
 
-  security.acme.certs."gaze.systems".extraDomainNames = [domain];
+  security.acme.certs."gaze.systems".extraDomainNames = [ domain ];
   services.nginx.virtualHosts.${domain} = {
     useACMEHost = "gaze.systems"; # TODO: write a module to define vhosts for subdomains
     quic = true;

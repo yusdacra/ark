@@ -16,7 +16,6 @@
   ]
   ++ (tlib.importFolder (toString ./modules));
 
-
   environment.systemPackages = [
     pkgs.curl
     pkgs.gitMinimal

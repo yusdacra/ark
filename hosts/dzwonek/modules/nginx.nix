@@ -16,7 +16,10 @@
     statusPage = true;
   };
 
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 
   # output json logs so we can consume them more easily
   services.nginx.appendHttpConfig = ''

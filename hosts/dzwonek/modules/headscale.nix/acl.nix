@@ -1,4 +1,5 @@
-{config, lib, ...}: let
+{ config, lib, ... }:
+let
   l = lib // builtins;
   t = l.types;
 
@@ -10,7 +11,12 @@
         default = "accept";
       };
       proto = l.mkOption {
-        type = t.nullOr (t.enum ["tcp" "udp"]);
+        type = t.nullOr (
+          t.enum [
+            "tcp"
+            "udp"
+          ]
+        );
         default = null;
       };
       src = l.mkOption {
@@ -21,45 +27,44 @@
       };
     };
   };
-in {
+in
+{
   options = {
     services.headscale.acl = {
       groups = l.mkOption {
         type = t.attrsOf (t.listOf t.str);
-        default = [];
+        default = [ ];
       };
       tagOwners = l.mkOption {
         type = t.attrsOf (t.listOf t.str);
-        default = [];
+        default = [ ];
       };
       hosts = l.mkOption {
         type = t.attrsOf t.str;
-        default = [];
+        default = [ ];
       };
       rules = l.mkOption {
         type = t.listOf ruleType;
-        default = [];
+        default = [ ];
       };
     };
   };
 
-  config = let
-    generated = l.toFile "policy.hujson" (l.toJSON {
-      groups = l.mapAttrs' (k: v: l.nameValuePair "group:${k}" v) cfg.groups;
-      tagOwners = l.mapAttrs' (k: v: l.nameValuePair "tag:${k}" v) cfg.tagOwners;
-      hosts = cfg.hosts;
-      acls = l.map
-        (rule:
-          if rule.proto == null
-          then l.removeAttrs rule ["proto"]
-          else rule
-        )
-        cfg.rules;
-    });
-  in {
-    services.headscale.settings.policy = {
-      mode = "file";
-      path = generated;
+  config =
+    let
+      generated = l.toFile "policy.hujson" (
+        l.toJSON {
+          groups = l.mapAttrs' (k: v: l.nameValuePair "group:${k}" v) cfg.groups;
+          tagOwners = l.mapAttrs' (k: v: l.nameValuePair "tag:${k}" v) cfg.tagOwners;
+          hosts = cfg.hosts;
+          acls = l.map (rule: if rule.proto == null then l.removeAttrs rule [ "proto" ] else rule) cfg.rules;
+        }
+      );
+    in
+    {
+      services.headscale.settings.policy = {
+        mode = "file";
+        path = generated;
+      };
     };
-  };
 }

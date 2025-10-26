@@ -41,7 +41,7 @@ in
     };
   };
 
-  security.acme.certs."gaze.systems".extraDomainNames = [spindleCfg.server.hostname];
+  security.acme.certs."gaze.systems".extraDomainNames = [ spindleCfg.server.hostname ];
 
   services.nginx.virtualHosts.${spindleCfg.server.hostname} = {
     useACMEHost = "gaze.systems";

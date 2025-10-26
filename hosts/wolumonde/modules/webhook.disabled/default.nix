@@ -1,6 +1,8 @@
-{ config, tlib, ... }: let
+{ config, tlib, ... }:
+let
   domain = "webhook.gaze.systems";
-in {
+in
+{
   imports = tlib.importFolder ./.;
 
   services.webhook = {
@@ -15,7 +17,7 @@ in {
     group = "nginx";
   };
 
-  security.acme.certs."gaze.systems".extraDomainNames = [domain];
+  security.acme.certs."gaze.systems".extraDomainNames = [ domain ];
   services.nginx.virtualHosts.${domain} = {
     useACMEHost = "gaze.systems";
     forceSSL = true;

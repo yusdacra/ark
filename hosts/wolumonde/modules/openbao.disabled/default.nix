@@ -1,10 +1,12 @@
-{lib, config, ...}: let
+{ lib, config, ... }:
+let
   port = 5394;
   domain = "bao.${config.services.headscale.settings.dns.base_domain}";
   cfg = config.services.openbao.settings;
   apiAddress = "127.0.0.1:${toString port}";
-in {
-  imports = [./spindle-proxy];
+in
+{
+  imports = [ ./spindle-proxy ];
 
   services.openbao = {
     enable = true;
