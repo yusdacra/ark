@@ -2,6 +2,7 @@ var DSP_CLOUDFLARE = NewDnsProvider("cloudflare");
 var REG_NONE = NewRegistrar("none");
 
 var WOLUMONDE_IP = "23.88.101.188";
+var DZWONEK_IP = "94.237.26.47";
 
 D(
     "gaze.systems",
@@ -13,13 +14,13 @@ D(
     A("git", WOLUMONDE_IP, CF_PROXY_OFF),
     A("limbus", WOLUMONDE_IP, CF_PROXY_OFF),
     A("pmart", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("webhook", WOLUMONDE_IP, CF_PROXY_OFF),
+    // A("webhook", WOLUMONDE_IP, CF_PROXY_OFF),
     A("dash", WOLUMONDE_IP, CF_PROXY_OFF), // perses
     A("knot", WOLUMONDE_IP, CF_PROXY_OFF),
     A("spindle", WOLUMONDE_IP, CF_PROXY_OFF),
     A("skeetdeck", WOLUMONDE_IP, CF_PROXY_OFF),
     A("likes", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("vpn", WOLUMONDE_IP, CF_PROXY_OFF),
+    A("vpn", DZWONEK_IP, CF_PROXY_OFF),
     A("id", WOLUMONDE_IP, CF_PROXY_OFF),
     A("test", WOLUMONDE_IP, CF_PROXY_OFF),
     // atp handles

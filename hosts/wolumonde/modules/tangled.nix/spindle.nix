@@ -20,10 +20,11 @@ in
       listenAddr = "0.0.0.0:7391";
       hostname = "spindle.gaze.systems";
       owner = "did:plc:dfl62fgb7wtjj3fcbb72naae";
-      secrets = {
-        provider = "openbao";
-        openbao.proxyAddr = "http://spindle.bao.lan.gaze.systems";
-      };
+      # secrets = {
+      #   provider = "openbao";
+      #   openbao.proxyAddr = "http://spindle.bao.lan.gaze.systems";
+      # };
+      secrets.provider = "sqlite";
     };
   };
   users.users.spindle = {
@@ -33,7 +34,7 @@ in
   users.groups.spindle = { };
   users.groups.podman.members = [ "spindle" ];
   systemd.services.spindle = {
-    after = lib.mkForce [ "network.target" "openbao-proxy-spindle.service" ];
+    # after = lib.mkForce [ "network.target" "openbao-proxy-spindle.service" ];
     serviceConfig = {
       User = "spindle";
       Group = "spindle";

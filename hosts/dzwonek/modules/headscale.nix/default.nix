@@ -67,7 +67,7 @@ in
         ];
       };
       oidc = {
-        issuer = config.services.pocket-id.settings.APP_URL;
+        issuer = "https://id.gaze.systems";
         client_id = "ba2c2024-f75f-49a2-a156-8593becfba28";
         client_secret_path = config.age.secrets.headscaleOidcSecret.path;
         pkce.enabled = true;
@@ -76,9 +76,10 @@ in
     };
   };
 
-  security.acme.certs."gaze.systems".extraDomainNames = [domain];
+  
+  # security.acme.certs.${rootDomain}.extraDomainNames = [domain];
   services.nginx.virtualHosts.${domain} = {
-    useACMEHost = rootDomain;
+    useACMEHost = domain;
     forceSSL = true;
     quic = true;
     kTLS = true;
