@@ -2,6 +2,7 @@
   config,
   inputs,
   tlib,
+  terra,
   ...
 }:
 {
@@ -44,7 +45,7 @@
     )
   ];
   home-manager.extraSpecialArgs = {
-    inherit inputs tlib;
+    inherit terra inputs tlib;
     nixosConfig = config;
   };
 }

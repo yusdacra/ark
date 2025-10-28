@@ -10,6 +10,8 @@ let user_colors = {
     kirara: {start: "0xFF407D", end: "0xEE99C2"},
     root: {start: "0xC5172E", end: "0xBF3131"},
     dusk: {start: "0x640D5F", end: "0xD91656"},
+    dawn: {start: "0x640D5F", end: "0xD91656"},
+    mayer: {start: "0x640D5F", end: "0xD91656"},
 }
 
 def create_left_prompt [] {

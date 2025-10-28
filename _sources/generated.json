@@ -1,7 +1,7 @@
 {
     "agenix": {
         "cargoLocks": null,
-        "date": "2025-10-18",
+        "date": "2025-10-28",
         "extract": null,
         "name": "agenix",
         "passthru": null,
@@ -13,12 +13,12 @@
             "name": null,
             "owner": "ryantm",
             "repo": "agenix",
-            "rev": "2f0f812f69f3eb4140157fe15e12739adf82e32a",
-            "sha256": "sha256-wyT7Pl6tMFbFrs8Lk/TlEs81N6L+VSybPfiIgzU8lbQ=",
+            "rev": "9ba0d85de3eaa7afeab493fed622008b6e4924f5",
+            "sha256": "sha256-lsNWuj4Z+pE7s0bd2OKicOFq9bK86JE0ZGeKJbNqb94=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "2f0f812f69f3eb4140157fe15e12739adf82e32a"
+        "version": "9ba0d85de3eaa7afeab493fed622008b6e4924f5"
     },
     "blog": {
         "cargoLocks": null,
@@ -104,7 +104,7 @@
     },
     "home": {
         "cargoLocks": null,
-        "date": "2025-10-21",
+        "date": "2025-10-28",
         "extract": null,
         "name": "home",
         "passthru": null,
@@ -116,12 +116,12 @@
             "name": null,
             "owner": "nix-community",
             "repo": "home-manager",
-            "rev": "9b4a2a7c4fbd75b422f00794af02d6edb4d9d315",
-            "sha256": "sha256-IwpfaKg5c/WWQiy8b5QGaVPMvoEQ2J6kpwRFdpVpBNQ=",
+            "rev": "ca2ab1d877a24d5a437dad62f56b8b2c02e964e9",
+            "sha256": "sha256-fHr+tIYBJccNF8QWqgowfRmEAtAMSt1deZIRNKL8A7c=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "9b4a2a7c4fbd75b422f00794af02d6edb4d9d315"
+        "version": "ca2ab1d877a24d5a437dad62f56b8b2c02e964e9"
     },
     "limbusart": {
         "cargoLocks": null,
@@ -143,19 +143,26 @@
         },
         "version": "7f29ab57b73eb8a4db7163fc7d19a71cf89c3d8b"
     },
-    "lix-module": {
+    "moonlight": {
         "cargoLocks": null,
-        "date": null,
+        "date": "2025-10-23",
         "extract": null,
-        "name": "lix-module",
+        "name": "moonlight",
         "passthru": null,
         "pinned": false,
         "src": {
-            "sha256": "sha256-KYMUrTV7H/RR5/HRnjV5R3rRIuBXMemyJzTLi50NFTs=",
-            "type": "tarball",
-            "url": "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-1.tar.gz"
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "moonlight-mod",
+            "repo": "moonlight",
+            "rev": "0b927a86a447a145f20bb5ee43fac79a724640f2",
+            "sha256": "sha256-lQpl6ecQfQ7KzEIytH3k4hLtvq+KkTL+3IR2ZukdZWM=",
+            "sparseCheckout": [],
+            "type": "github"
         },
-        "version": "2.93.3-1"
+        "version": "0b927a86a447a145f20bb5ee43fac79a724640f2"
     },
     "ncr": {
         "cargoLocks": null,
@@ -177,11 +184,11 @@
         },
         "version": "4660aa9cd9b24bef569696eee46dbe7e8df3e237"
     },
-    "nixos-wsl": {
+    "nixos-hardware": {
         "cargoLocks": null,
-        "date": "2025-10-15",
+        "date": "2025-10-20",
         "extract": null,
-        "name": "nixos-wsl",
+        "name": "nixos-hardware",
         "passthru": null,
         "pinned": false,
         "src": {
@@ -189,14 +196,14 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "owner": "nix-community",
-            "repo": "NixOS-WSL",
-            "rev": "f98ee1de1fa36eca63c67b600f5d617e184e82ea",
-            "sha256": "sha256-wfWqt+igns/VazjPLkyb4Z/wpn4v+XIjUeI3xY/1ENg=",
+            "owner": "NixOS",
+            "repo": "nixos-hardware",
+            "rev": "d6645c340ef7d821602fd2cd199e8d1eed10afbc",
+            "sha256": "sha256-2m1S4jl+GEDtlt2QqeHil8Ny456dcGSKJAM7q3j/BFU=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "f98ee1de1fa36eca63c67b600f5d617e184e82ea"
+        "version": "d6645c340ef7d821602fd2cd199e8d1eed10afbc"
     },
     "nsid-tracker": {
         "cargoLocks": null,
@@ -218,9 +225,30 @@
         },
         "version": "2683e619932808b8aa78ec7100de6324c8216daf"
     },
+    "stylix": {
+        "cargoLocks": null,
+        "date": "2025-10-28",
+        "extract": null,
+        "name": "stylix",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "nix-community",
+            "repo": "stylix",
+            "rev": "f8f4e3c3658ee962f8f332a56720c8dfc2836f7a",
+            "sha256": "sha256-nKOOPeblDcebtYfBjHo+PHXHKNSNKuifn1EGcBEgKWs=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "f8f4e3c3658ee962f8f332a56720c8dfc2836f7a"
+    },
     "tangled": {
         "cargoLocks": null,
-        "date": "2025-10-22",
+        "date": "2025-10-28",
         "extract": null,
         "name": "tangled",
         "passthru": null,
@@ -230,13 +258,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "0a2ae70c248e8b880b6c109e3af8eddc0d69212b",
-            "sha256": "sha256-CEIJqCphXGAt1zzc/Q316G+sfYmpCtJ9ZVWNoXa1mk4=",
+            "rev": "7949848c82215f1fffa948bf5e61f7e8eff94a71",
+            "sha256": "sha256-yng1Usbmcwrcz3H214CF9Xp/zr58qr2578yw26YrTGk=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.org/@tangled.org/core"
         },
-        "version": "0a2ae70c248e8b880b6c109e3af8eddc0d69212b"
+        "version": "7949848c82215f1fffa948bf5e61f7e8eff94a71"
     },
     "tangled-sqlite-lib": {
         "cargoLocks": null,
@@ -251,5 +279,26 @@
             "url": "https://sqlite.org/2024/sqlite-amalgamation-3450100.zip"
         },
         "version": "3450100"
+    },
+    "zen-browser": {
+        "cargoLocks": null,
+        "date": "2025-10-27",
+        "extract": null,
+        "name": "zen-browser",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "0xc000022070",
+            "repo": "zen-browser-flake",
+            "rev": "79a94872a3e6993a051c4e22a2dcb02c1d088acf",
+            "sha256": "sha256-E1PobJMiFmVUX2YdqYk/MpKb0LXavOYvlg8DCBBzlHc=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "79a94872a3e6993a051c4e22a2dcb02c1d088acf"
     }
 }

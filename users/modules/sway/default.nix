@@ -15,6 +15,7 @@
     ../rofi
     # ./swayidle.nix
   ];
+
   wayland.windowManager = {
     sway =
       let
@@ -25,23 +26,16 @@
       in
       {
         enable = true;
-        extraSessionCommands = ''
-          export QT_QPA_PLATFORM=wayland
-        '';
         wrapperFeatures.gtk = true;
-        extraConfig = ''
-          exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-          exec xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
-        '';
         config = {
           bars = [ ];
           gaps.smartBorders = "on";
-          menu = mkRofiCmd [
-            "-show"
-            "drun"
-          ];
+          menu = mkRofiCmd ["-show" "drun"];
           modifier = "Mod4";
           terminal = config.settings.terminal.binary;
+          startup = [
+            {command = "mkdir -p ${config.home.homeDirectory}/shots";}
+          ];
           keybindings =
             let
               mod = config.wayland.windowManager.sway.config.modifier;
@@ -64,20 +58,20 @@
               "${mod}+q" = "kill";
               "${mod}+Shift+e" = "exit";
               "${mod}+Shift+r" = "reload";
-              # Screenshot and copy it to clipboard
+              # screenshot and copy it to clipboard
               "Mod1+s" = ''
                 exec export SFILE="${shotFile}.png" && mkdir -p ${shotDir} && ${grim} "$SFILE" && ${cat} "$SFILE" | ${wl-copy} -t image/png
               '';
-              # Save selected area as a picture and copy it to clipboard
+              # save selected area as a picture and copy it to clipboard
               "Mod1+Shift+s" = ''
                 exec export SFILE="${shotFile}.png" && mkdir -p ${shotDir} && ${grim} -g "$(${slurp})" "$SFILE" && ${cat} "$SFILE" | ${wl-copy} -t image/png
               '';
-              # Record screen
+              # record screen
               "Mod1+r" = ''exec mkdir -p ${shotDir} && ${wf-recorder} -x yuv420p -f "${shotFile}.mp4"'';
-              # Record an area
+              # record an area
               "Mod1+Shift+r" =
                 ''exec mkdir -p ${shotDir} && ${wf-recorder} -x yuv420p -g "$(${slurp})" -f "${shotFile}.mp4"'';
-              # Stop recording
+              # stop recording
               "Mod1+c" = "exec pkill -INT wf-recorder";
               "XF86AudioRaiseVolume" = "exec ${pactl} set-sink-volume 0 +5%";
               "XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume 0 -5%";
@@ -114,6 +108,9 @@
             "eDP-1" = {
               scale = "2";
               adaptive_sync = "on";
+            };
+            "DP-1" = {
+              mode = "1920x1080@165Hz";
             };
             "HDMI-A-1" = {
               mode = "1920x1080@74.973Hz";

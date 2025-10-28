@@ -1,0 +1,262 @@
+{
+  "extensions": {
+    "moonbase": true,
+    "disableSentry": true,
+    "noTrack": true,
+    "noHideToken": true,
+    "alwaysShowForwardTime": {
+      "enabled": true
+    },
+    "betterCodeblocks": {
+      "enabled": true
+    },
+    "ownerCrown": {
+      "enabled": true
+    },
+    "betterEmbedsYT": {
+      "enabled": true
+    },
+    "callTimer": {
+      "enabled": true
+    },
+    "clearUrls": {
+      "enabled": true
+    },
+    "cloneExpressions": {
+      "enabled": true
+    },
+    "copyAvatarUrl": {
+      "enabled": true
+    },
+    "copyWebp": {
+      "enabled": true
+    },
+    "dmFavorites": {
+      "enabled": true
+    },
+    "domOptimizer": {
+      "enabled": true
+    },
+    "experiments": {
+      "enabled": true,
+      "config": {
+        "devtools": true
+      }
+    },
+    "inAppNotifications": {
+      "enabled": true
+    },
+    "nativeFixes": {
+      "enabled": true,
+      "config": {
+        "vulkan": false
+      }
+    },
+    "noJoinMessageWave": {
+      "enabled": true
+    },
+    "noReplyPing": {
+      "enabled": true
+    },
+    "noSmoothScrolling": {
+      "enabled": true
+    },
+    "oneko": {
+      "enabled": true
+    },
+    "osuTyping": {
+      "enabled": false
+    },
+    "platformIcons": {
+      "enabled": false
+    },
+    "pronouns": {
+      "enabled": true
+    },
+    "quietLoggers": {
+      "enabled": true
+    },
+    "remind-me": {
+      "enabled": true
+    },
+    "reverseImageSearch": {
+      "enabled": true
+    },
+    "sendTimestamps": {
+      "enabled": true
+    },
+    "showReplySelf": {
+      "enabled": true
+    },
+    "showVoiceMemberCount": {
+      "enabled": true
+    },
+    "translateText": {
+      "enabled": true
+    },
+    "unindent": {
+      "enabled": true
+    },
+    "moonlight-css": {
+      "enabled": true,
+      "config": {
+        "paths": [
+          "https://gist.githubusercontent.com/90-008/67ee4f4090a6892b760bb242dee7d34d/raw/5ae2efc2ab08e42f1966d2f5b0e0a4163b1e7433/dickcord.css",
+          "https://gist.githubusercontent.com/90-008/d47b927184ae485456956840692edca0/raw/90d40509c67fd4068d133662b7320842fd1e4772/gistfile1.txt",
+          "https://gist.githubusercontent.com/90-008/b031ebeb852bda832c1ba6258b4bdfa1/raw/ae1a3077a7edc8db2511b868eb8ac44f66f98905/hide.css",
+          "https://gist.githubusercontent.com/90-008/b5e835890e263bf1eec4a9d83b4a8dbe/raw/3780220391742455c2e9fd0230af45e3c6091829/gistfile1.css",
+          "https://ukriu.github.io/cssCord/Other/noDistractions.css",
+          "https://raw.githubusercontent.com/Bonkeyzz/Discord-Remove-useless-chat-buttons/main/RemoveChatButtons.theme.css"
+        ],
+        "themeAttributes": true
+      }
+    },
+    "selectivelyReduceMotion": {
+      "enabled": true,
+      "config": {
+        "avatarDecorations": false,
+        "profileEffects": false,
+        "scrolling": true
+      }
+    },
+    "mediaTweaks": {
+      "enabled": true,
+      "config": {
+        "noThumbnailSize": false,
+        "noWebp": false,
+        "noGifAutosend": false,
+        "imageUrls": false
+      }
+    },
+    "allActivities": {
+      "enabled": true
+    },
+    "betterTags": {
+      "enabled": true
+    },
+    "noHelp": {
+      "enabled": true
+    },
+    "noReplyChainNag": {
+      "enabled": true
+    },
+    "onePingPerDM": {
+      "enabled": true,
+      "config": {
+        "allowMentionsBypass": true
+      }
+    },
+    "silenceTyping": {
+      "enabled": true
+    },
+    "betterUploadButton": {
+      "enabled": true
+    },
+    "customSearchEngine": {
+      "enabled": true
+    },
+    "dmDates": {
+      "enabled": true
+    },
+    "doubleClickActions": {
+      "enabled": false
+    },
+    "imgTitle": {
+      "enabled": true,
+      "config": {
+        "showFullUrl": true
+      }
+    },
+    "imageViewer": {
+      "enabled": true
+    },
+    "inviteToNowhere": {
+      "enabled": true
+    },
+    "markdown": {
+      "enabled": true
+    },
+    "mentionAvatars": {
+      "enabled": true
+    },
+    "noInlineLinks": {
+      "enabled": true
+    },
+    "noMaskedLinkPaste": {
+      "enabled": true
+    },
+    "openExternally": {
+      "enabled": true
+    },
+    "resolver": {
+      "enabled": true
+    },
+    "alwaysFocus": false,
+    "callIdling": true,
+    "colorConsistency": true,
+    "freeScreenShare": true,
+    "highlight": {
+      "enabled": false,
+      "config": {
+        "ignoreFocusMode": true,
+        "keywords": []
+      }
+    },
+    "spacepack": {
+      "config": {
+        "addToGlobalScope": true
+      }
+    },
+    "muteGuildOnJoin": true,
+    "antiDelete": {
+      "enabled": true,
+      "config": {
+        "ignoreBots": false,
+        "ignoreSelf": true,
+        "ignorePluralKit": false,
+        "ignoredUsers": [
+          "647368715742216193",
+          "798918994987188276"
+        ]
+      }
+    },
+    "nameColor": {
+      "enabled": true,
+      "config": {
+        "colorize": "All"
+      }
+    },
+    "freeMoji": true,
+    "freeStickers": true,
+    "meow": {
+      "enabled": true,
+      "config": {
+        "woof": true
+      }
+    },
+    "doubleClickToJoin": true,
+    "linkRedirect": false,
+    "manuallyJoinVoice": true,
+    "popoutDates": true,
+    "removeTopBar": true,
+    "streamQualityWorkaround": true,
+    "whosWatching": false,
+    "cleanChatBar": {
+      "enabled": true,
+      "config": {
+        "removedButtons": [
+          "gift",
+          "activity",
+          "sticker"
+        ]
+      }
+    },
+    "favouriteGifSearch": true,
+    "noOnboardingDelay": true
+  },
+  "repositories": [
+    "https://moonlight-mod.github.io/extensions-dist/repo.json",
+    "https://cynosphere.github.io/schirra/repo.json",
+    "https://lare354.github.io/moonlight-plugins/repo.json"
+  ]
+}

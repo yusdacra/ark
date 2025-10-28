@@ -3,15 +3,15 @@
 {
   agenix = {
     pname = "agenix";
-    version = "2f0f812f69f3eb4140157fe15e12739adf82e32a";
+    version = "9ba0d85de3eaa7afeab493fed622008b6e4924f5";
     src = fetchFromGitHub {
       owner = "ryantm";
       repo = "agenix";
-      rev = "2f0f812f69f3eb4140157fe15e12739adf82e32a";
+      rev = "9ba0d85de3eaa7afeab493fed622008b6e4924f5";
       fetchSubmodules = false;
-      sha256 = "sha256-wyT7Pl6tMFbFrs8Lk/TlEs81N6L+VSybPfiIgzU8lbQ=";
+      sha256 = "sha256-lsNWuj4Z+pE7s0bd2OKicOFq9bK86JE0ZGeKJbNqb94=";
     };
-    date = "2025-10-18";
+    date = "2025-10-28";
   };
   blog = {
     pname = "blog";
@@ -67,15 +67,15 @@
   };
   home = {
     pname = "home";
-    version = "9b4a2a7c4fbd75b422f00794af02d6edb4d9d315";
+    version = "ca2ab1d877a24d5a437dad62f56b8b2c02e964e9";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "home-manager";
-      rev = "9b4a2a7c4fbd75b422f00794af02d6edb4d9d315";
+      rev = "ca2ab1d877a24d5a437dad62f56b8b2c02e964e9";
       fetchSubmodules = false;
-      sha256 = "sha256-IwpfaKg5c/WWQiy8b5QGaVPMvoEQ2J6kpwRFdpVpBNQ=";
+      sha256 = "sha256-fHr+tIYBJccNF8QWqgowfRmEAtAMSt1deZIRNKL8A7c=";
     };
-    date = "2025-10-21";
+    date = "2025-10-28";
   };
   limbusart = {
     pname = "limbusart";
@@ -91,13 +91,17 @@
     };
     date = "2025-07-22";
   };
-  lix-module = {
-    pname = "lix-module";
-    version = "2.93.3-1";
-    src = fetchTarball {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-1.tar.gz";
-      sha256 = "sha256-KYMUrTV7H/RR5/HRnjV5R3rRIuBXMemyJzTLi50NFTs=";
+  moonlight = {
+    pname = "moonlight";
+    version = "0b927a86a447a145f20bb5ee43fac79a724640f2";
+    src = fetchFromGitHub {
+      owner = "moonlight-mod";
+      repo = "moonlight";
+      rev = "0b927a86a447a145f20bb5ee43fac79a724640f2";
+      fetchSubmodules = false;
+      sha256 = "sha256-lQpl6ecQfQ7KzEIytH3k4hLtvq+KkTL+3IR2ZukdZWM=";
     };
+    date = "2025-10-23";
   };
   ncr = {
     pname = "ncr";
@@ -113,17 +117,17 @@
     };
     date = "2025-07-18";
   };
-  nixos-wsl = {
-    pname = "nixos-wsl";
-    version = "f98ee1de1fa36eca63c67b600f5d617e184e82ea";
+  nixos-hardware = {
+    pname = "nixos-hardware";
+    version = "d6645c340ef7d821602fd2cd199e8d1eed10afbc";
     src = fetchFromGitHub {
-      owner = "nix-community";
-      repo = "NixOS-WSL";
-      rev = "f98ee1de1fa36eca63c67b600f5d617e184e82ea";
+      owner = "NixOS";
+      repo = "nixos-hardware";
+      rev = "d6645c340ef7d821602fd2cd199e8d1eed10afbc";
       fetchSubmodules = false;
-      sha256 = "sha256-wfWqt+igns/VazjPLkyb4Z/wpn4v+XIjUeI3xY/1ENg=";
+      sha256 = "sha256-2m1S4jl+GEDtlt2QqeHil8Ny456dcGSKJAM7q3j/BFU=";
     };
-    date = "2025-10-15";
+    date = "2025-10-20";
   };
   nsid-tracker = {
     pname = "nsid-tracker";
@@ -139,19 +143,31 @@
     };
     date = "2025-09-11";
   };
+  stylix = {
+    pname = "stylix";
+    version = "f8f4e3c3658ee962f8f332a56720c8dfc2836f7a";
+    src = fetchFromGitHub {
+      owner = "nix-community";
+      repo = "stylix";
+      rev = "f8f4e3c3658ee962f8f332a56720c8dfc2836f7a";
+      fetchSubmodules = false;
+      sha256 = "sha256-nKOOPeblDcebtYfBjHo+PHXHKNSNKuifn1EGcBEgKWs=";
+    };
+    date = "2025-10-28";
+  };
   tangled = {
     pname = "tangled";
-    version = "0a2ae70c248e8b880b6c109e3af8eddc0d69212b";
+    version = "7949848c82215f1fffa948bf5e61f7e8eff94a71";
     src = fetchgit {
       url = "https://tangled.org/@tangled.org/core";
-      rev = "0a2ae70c248e8b880b6c109e3af8eddc0d69212b";
+      rev = "7949848c82215f1fffa948bf5e61f7e8eff94a71";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-CEIJqCphXGAt1zzc/Q316G+sfYmpCtJ9ZVWNoXa1mk4=";
+      sha256 = "sha256-yng1Usbmcwrcz3H214CF9Xp/zr58qr2578yw26YrTGk=";
     };
-    date = "2025-10-22";
+    date = "2025-10-28";
   };
   tangled-sqlite-lib = {
     pname = "tangled-sqlite-lib";
@@ -160,5 +176,17 @@
       url = "https://sqlite.org/2024/sqlite-amalgamation-3450100.zip";
       sha256 = "sha256-bJoMjirsBjm2Qk9KPiy3yV3+8b/POlYe76/FQbciHro=";
     };
+  };
+  zen-browser = {
+    pname = "zen-browser";
+    version = "79a94872a3e6993a051c4e22a2dcb02c1d088acf";
+    src = fetchFromGitHub {
+      owner = "0xc000022070";
+      repo = "zen-browser-flake";
+      rev = "79a94872a3e6993a051c4e22a2dcb02c1d088acf";
+      fetchSubmodules = false;
+      sha256 = "sha256-E1PobJMiFmVUX2YdqYk/MpKb0LXavOYvlg8DCBBzlHc=";
+    };
+    date = "2025-10-27";
   };
 }
