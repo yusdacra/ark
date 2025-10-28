@@ -1,3 +1,4 @@
-{terra, ...}: {
-  home.packages = [terra.zen-browser];
+{ terra, ... }:
+{
+  home.packages = [ terra.zen-browser ];
 }

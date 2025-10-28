@@ -30,11 +30,14 @@
         config = {
           bars = [ ];
           gaps.smartBorders = "on";
-          menu = mkRofiCmd ["-show" "drun"];
+          menu = mkRofiCmd [
+            "-show"
+            "drun"
+          ];
           modifier = "Mod4";
           terminal = config.settings.terminal.binary;
           startup = [
-            {command = "mkdir -p ${config.home.homeDirectory}/shots";}
+            { command = "mkdir -p ${config.home.homeDirectory}/shots"; }
           ];
           keybindings =
             let

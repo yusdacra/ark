@@ -1,1 +1,1 @@
-{ pkgs, inputs, ... }: (import inputs.zen-browser {inherit pkgs;}).twilight
+{ pkgs, inputs, ... }: (import inputs.zen-browser { inherit pkgs; }).twilight

@@ -10,7 +10,7 @@ let
 
   nixosConfig = globalAttrs.config;
 in
-{  
+{
   users.users.mayer = {
     isNormalUser = true;
     createHome = true;
