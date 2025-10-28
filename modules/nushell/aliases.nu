@@ -1,10 +1,3 @@
-alias l = ls
-alias ll = ls -l
-alias la = ls -a
-
-alias cat = bat
-alias c = bat
-
 alias g = git
 
 alias n = nix
