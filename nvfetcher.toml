@@ -1,5 +1,9 @@
 # nvfetcher configuration for Nix flake inputs
 
+[facter]
+src.git = "https://github.com/nix-community/nixos-facter-modules"
+fetch.github = "nix-community/nixos-facter-modules"
+
 [nixos-hardware]
 src.git = "https://github.com/NixOS/nixos-hardware"
 fetch.github = "NixOS/nixos-hardware"

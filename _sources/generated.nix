@@ -53,6 +53,18 @@
     };
     date = "2025-10-17";
   };
+  facter = {
+    pname = "facter";
+    version = "70bcd64225d167c7af9b475c4df7b5abba5c7de8";
+    src = fetchFromGitHub {
+      owner = "nix-community";
+      repo = "nixos-facter-modules";
+      rev = "70bcd64225d167c7af9b475c4df7b5abba5c7de8";
+      fetchSubmodules = false;
+      sha256 = "sha256-4lDjGnWRBLwqKQ4UWSUq6Mvxu9r8DSqCCydodW/Jsi8=";
+    };
+    date = "2025-10-22";
+  };
   gomod2nix = {
     pname = "gomod2nix";
     version = "7f8d7438f5870eb167abaf2c39eea3d2302019d1";

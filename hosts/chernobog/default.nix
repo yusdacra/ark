@@ -10,6 +10,7 @@
   imports =
     with inputs;
     [
+      "${inputs.facter}/modules/nixos/facter.nix"
       "${inputs.disko}/module.nix"
       "${inputs.home}/nixos"
       "${inputs.nixos-hardware}/common/pc"
@@ -23,6 +24,8 @@
       ../../modules/base
     ]
     ++ (tlib.importFolder (toString ./modules));
+
+  facter.reportPath = ./facter.json;
 
   security = {
     pam.loginLimits = [

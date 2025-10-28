@@ -81,6 +81,27 @@
         },
         "version": "3a9450b26e69dcb6f8de6e2b07b3fc1c288d85f5"
     },
+    "facter": {
+        "cargoLocks": null,
+        "date": "2025-10-22",
+        "extract": null,
+        "name": "facter",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "nix-community",
+            "repo": "nixos-facter-modules",
+            "rev": "70bcd64225d167c7af9b475c4df7b5abba5c7de8",
+            "sha256": "sha256-4lDjGnWRBLwqKQ4UWSUq6Mvxu9r8DSqCCydodW/Jsi8=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "70bcd64225d167c7af9b475c4df7b5abba5c7de8"
+    },
     "gomod2nix": {
         "cargoLocks": null,
         "date": "2025-10-09",
