@@ -22,6 +22,7 @@
       ../../users/root
       ../../users/mayer
       ../../modules/base
+      ../../locale/default.nix
     ]
     ++ (tlib.importFolder (toString ./modules));
 
@@ -55,7 +56,24 @@
 
   fonts = {
     enableDefaultPackages = true;
-    packages = [ pkgs.dejavu_fonts ];
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk-serif
+      noto-fonts-cjk-sans
+      noto-fonts-emoji
+      font-awesome
+      source-han-serif
+      source-han-sans
+      source-han-sans-japanese
+      source-han-serif-japanese
+      comic-mono
+      comic-relief
+    ];
+    fontconfig.defaultFonts = {
+      serif = ["Comic Relief" "Noto Serif" "Source Han Serif"];
+      sansSerif = ["Comic Relief" "Noto Sans" "Source Han Sans"];
+      monospace = ["Comic Mono"];
+    };
   };
 
   services.earlyoom.enable = true;

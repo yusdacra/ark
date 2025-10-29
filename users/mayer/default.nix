@@ -47,6 +47,13 @@ in
     };
   };
 
+  services.gnome.gnome-keyring.enable = true;
+  security.polkit.enable = true;
+
+  security.pam.loginLimits = [
+    { domain = "@users"; item = "rtprio"; type = "-"; value = 1; }
+  ];
+
   home-manager.users.mayer =
     {
       config,
@@ -65,6 +72,8 @@ in
         let
           modulesToEnable = l.flatten [
             [
+              "settings"
+              "sway"
               "wayland"
               "foot"
             ]
@@ -82,6 +91,7 @@ in
             ]
             [
               "zen"
+              "discord"
             ]
           ];
         in

@@ -27,9 +27,13 @@
       {
         enable = true;
         wrapperFeatures.gtk = true;
+        systemd.variables = ["--all"];
         config = {
           bars = [ ];
-          gaps.smartBorders = "on";
+          window = {
+            border = 0;
+            titlebar = false;
+          };
           menu = mkRofiCmd [
             "-show"
             "drun"
@@ -56,7 +60,9 @@
               shotFile = config.home.homeDirectory + "/shots/shot_$(date '+%Y_%m_%d_%H_%M')";
               shotDir = config.home.homeDirectory + "/shots";
             in
-            lib.mkOptionDefault {
+            {
+              "${mod}+d" = "exec ${config.wayland.windowManager.sway.config.menu}";
+              "${mod}+Return" = "exec ${config.wayland.windowManager.sway.config.terminal}";
               "${mod}+Escape" = "exec ${wlogout} -p layer-shell";
               "${mod}+q" = "kill";
               "${mod}+Shift+e" = "exit";
@@ -113,9 +119,9 @@
               adaptive_sync = "on";
             };
             "DP-1" = {
-              mode = "1920x1080@165Hz";
+              mode = "1920x1080@165.009Hz";
             };
-            "HDMI-A-1" = {
+            "HDMI-A-2" = {
               mode = "1920x1080@74.973Hz";
             };
           };

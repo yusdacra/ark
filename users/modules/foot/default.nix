@@ -5,14 +5,18 @@
 }:
 {
   settings.terminal.name = "foot";
-  settings.terminal.binary = "${pkgs.foot}/bin/foot";
+  settings.terminal.binary = "${pkgs.foot}/bin/footclient";
   programs.foot = {
     enable = true;
     package = pkgs.foot;
-    server.enable = false;
+    server.enable = true;
     settings = {
+      colors = {
+        alpha = 0.7;
+        background = "000000";
+      };
       main = {
-        login-shell = "yes";
+        # login-shell = "yes";
         dpi-aware = lib.mkForce "yes";
         font = "Comic Mono:size=12";
       };

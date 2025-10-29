@@ -17,7 +17,7 @@ let user_colors = {
 def create_left_prompt [] {
     let hostname = sys host | get hostname
     # str replace handles whoami output on windows
-    let username = ^whoami | str replace $"($hostname)\\" ""
+    let username = whoami | str replace $"($hostname)\\" ""
 
     let c = $host_colors | get $hostname
     let hostname_fmt = $hostname | ansi gradient --fgstart $c.start --fgend $c.end
