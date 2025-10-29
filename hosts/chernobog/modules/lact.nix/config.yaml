@@ -42,5 +42,30 @@ profiles:
         max_core_clock: 3200
         max_memory_clock: 1250
         voltage_offset: -50
+  helldivers:
+    gpus:
+      1002:7480-1DA2:E482-0000:07:00.0:
+        fan_control_enabled: false
+        fan_control_settings:
+          mode: static
+          static_speed: 1.0
+          temperature_key: edge
+          interval_ms: 500
+          curve:
+            40: 0.3
+            50: 0.35
+            60: 0.5
+            70: 0.75
+            80: 1.0
+        pmfw_options:
+          minimum_pwm: 15
+          target_temperature: 88
+          zero_rpm: false
+          zero_rpm_threshold: 40
+        power_cap: 198.0
+        performance_level: auto
+        max_core_clock: 3200
+        max_memory_clock: 1250
+        voltage_offset: -25
 current_profile: oc
 auto_switch_profiles: false

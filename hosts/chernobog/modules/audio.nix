@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   rate = 48000;
-  quant = 256;
+  quant = 512;
   quantRateMax = "${toString quant}/${toString rate}";
   quantRateMin = "${toString (quant / 2)}/${toString rate}";
 in
