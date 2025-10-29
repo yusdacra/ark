@@ -11,8 +11,13 @@ let
       inherit lib;
       system = null;
       modules = [
+        # set.inputs.nixpkgs.nixosModules.readOnlyPkgs
         { networking.hostName = name; }
-        { nixpkgs.pkgs = set.pkgs; }
+        {
+          nixpkgs.pkgs = set.pkgs;
+          chaotic.nyx.overlay.enable = false;
+        }
+        set.inputs.chaotic.nixosModules.default
         (import (./. + "/${name}/default.nix"))
       ];
       specialArgs = {

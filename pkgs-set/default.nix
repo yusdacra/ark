@@ -22,20 +22,19 @@ let
       ;
   };
   inputs = (l.mapAttrs (_: inp: inp // { __toString = s: toString s.src; }) _inputs) // flakeInputs;
-  pkgs = _pkgs.appendOverlays (
-    l.flatten (
-      l.mapAttrsToList (
-        name: _:
-        if name != "disabled" then
-          let
-            o = import "${./overlays}/${name}";
-          in
-          if (l.functionArgs o) ? inputs then o { inherit inputs; } else o
-        else
-          [ ]
-      ) (l.readDir ./overlays)
-    )
+  overlays = l.flatten (
+    l.mapAttrsToList (
+      name: _:
+      if name != "disabled" then
+        let
+          o = import "${./overlays}/${name}";
+        in
+        if (l.functionArgs o) ? inputs then o { inherit inputs; } else o
+      else
+        [ ]
+    ) (l.readDir ./overlays)
   );
+  pkgs = _pkgs.appendOverlays (overlays ++ [ flakeInputs.chaotic.overlays.cache-friendly ]);
   terraPkgs = pkgs.lib.makeScope pkgs.newScope (
     self:
     l.genAttrs (l.map (l.removeSuffix ".nix") (l.attrNames (l.readDir ./pkgs))) (

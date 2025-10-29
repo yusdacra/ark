@@ -10,9 +10,10 @@
   imports = [
     ../wayland
     ../swaylock
+    ../swayidle
     ../wlsunset
     ../mako
-    ../rofi
+    ../tofi
     # ./swayidle.nix
   ];
 
@@ -20,9 +21,6 @@
   wayland.windowManager = {
     sway =
       let
-        mkRofiCmd =
-          args:
-          "${config.programs.rofi.package}/bin/rofi ${lib.concatStringsSep " " args} | ${pkgs.sway}/bin/swaymsg --";
         inherit (tlib) pkgBin;
       in
       {
@@ -35,10 +33,7 @@
             border = 0;
             titlebar = false;
           };
-          menu = mkRofiCmd [
-            "-show"
-            "drun"
-          ];
+          menu = "${config.programs.tofi.package}/bin/tofi-drun";
           modifier = "Mod4";
           terminal = config.settings.terminal.binary;
           startup = [
@@ -61,7 +56,7 @@
               shotFile = config.home.homeDirectory + "/shots/shot_$(date '+%Y_%m_%d_%H_%M')";
               shotDir = config.home.homeDirectory + "/shots";
             in
-            {
+            lib.mkOptionDefault {
               "${mod}+d" = "exec ${config.wayland.windowManager.sway.config.menu}";
               "${mod}+Return" = "exec ${config.wayland.windowManager.sway.config.terminal}";
               "${mod}+Escape" = "exec ${wlogout} -p layer-shell";
@@ -77,10 +72,11 @@
                 exec export SFILE="${shotFile}.png" && mkdir -p ${shotDir} && ${grim} -g "$(${slurp})" "$SFILE" && ${cat} "$SFILE" | ${wl-copy} -t image/png
               '';
               # record screen
-              "Mod1+r" = ''exec mkdir -p ${shotDir} && ${wf-recorder} -x yuv420p -f "${shotFile}.mp4"'';
+              "Mod1+r" =
+                ''exec mkdir -p ${shotDir} && ${wf-recorder} --audio-backend=pipewire --audio=alsa_output.pci-0000_09_00.4.pro-output-0.monitor -f "${shotFile}.mp4"'';
               # record an area
               "Mod1+Shift+r" =
-                ''exec mkdir -p ${shotDir} && ${wf-recorder} -x yuv420p -g "$(${slurp})" -f "${shotFile}.mp4"'';
+                ''exec mkdir -p ${shotDir} && ${wf-recorder} --audio-backend=pipewire --audio=alsa_output.pci-0000_09_00.4.pro-output-0.monitor -g "$(${slurp})" -f "${shotFile}.mp4"'';
               # stop recording
               "Mod1+c" = "exec pkill -INT wf-recorder";
               "XF86AudioRaiseVolume" = "exec ${pactl} set-sink-volume 0 +5%";

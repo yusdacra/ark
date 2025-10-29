@@ -2,12 +2,12 @@
   description = "config!!!";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/42060c40fd43c114af7010980168f8dcba734d3b";
-  inputs.nixpkgs.flake = false;
+  inputs.chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
   outputs =
     flakeInputs:
     let
-      lib = import "${flakeInputs.nixpkgs}/lib";
+      lib = flakeInputs.nixpkgs.lib;
       tlib = import ./lib lib;
       l = lib;
 

@@ -4,6 +4,10 @@
 
   # age.secrets.tailscaleAuthKey.file = ../../../secrets/tailscaleAuthKey.age;
   # services.tailscale.authKeyFile = config.age.secrets.tailscaleAuthKey.path;
+  services.tailscale = {
+    extraSetFlags = [ "--advertise-exit-node" ];
+    useRoutingFeatures = "both";
+  };
 
   networking.firewall.public.tailscale.allowedUDPPorts = [
     config.services.tailscale.port
