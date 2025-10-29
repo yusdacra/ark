@@ -2,6 +2,7 @@
 {
   home.shell.enableNushellIntegration = true;
 
+  stylix.targets.nushell.enable = true;
   programs.carapace.enable = true;
   programs.nushell = {
     enable = true;

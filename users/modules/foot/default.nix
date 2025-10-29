@@ -11,14 +11,13 @@
     package = pkgs.foot;
     server.enable = true;
     settings = {
-      colors = {
-        alpha = 0.7;
-        background = "000000";
-      };
+      # colors = {
+      #   alpha = 0.7;
+      #   background = "000000";
+      # };
       main = {
         # login-shell = "yes";
         dpi-aware = lib.mkForce "yes";
-        font = "Comic Mono:size=12";
       };
       csd = {
         preferred = "client";
@@ -29,4 +28,5 @@
       bell.system = "no";
     };
   };
+  stylix.targets.foot.enable = true;
 }

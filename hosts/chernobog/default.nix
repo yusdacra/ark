@@ -70,9 +70,17 @@
       comic-relief
     ];
     fontconfig.defaultFonts = {
-      serif = ["Comic Relief" "Noto Serif" "Source Han Serif"];
-      sansSerif = ["Comic Relief" "Noto Sans" "Source Han Sans"];
-      monospace = ["Comic Mono"];
+      serif = [
+        "Comic Relief"
+        "Noto Serif"
+        "Source Han Serif"
+      ];
+      sansSerif = [
+        "Comic Relief"
+        "Noto Sans"
+        "Source Han Sans"
+      ];
+      monospace = [ "Comic Mono" ];
     };
   };
 

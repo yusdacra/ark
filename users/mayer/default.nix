@@ -11,6 +11,8 @@ let
   nixosConfig = globalAttrs.config;
 in
 {
+  imports = [ ./stylix.nix ];
+
   users.users.mayer = {
     isNormalUser = true;
     createHome = true;
@@ -51,7 +53,12 @@ in
   security.polkit.enable = true;
 
   security.pam.loginLimits = [
-    { domain = "@users"; item = "rtprio"; type = "-"; value = 1; }
+    {
+      domain = "@users";
+      item = "rtprio";
+      type = "-";
+      value = 1;
+    }
   ];
 
   home-manager.users.mayer =
@@ -85,6 +92,7 @@ in
             ]
             # dev stuff
             [
+              "zed"
               "helix"
               "git"
               "ssh"
@@ -97,7 +105,6 @@ in
         in
         l.flatten [
           (tlib.prefixStrings "${inputs.self}/users/modules/" modulesToEnable)
-          ./stylix.nix
         ];
 
       home = {
@@ -121,22 +128,6 @@ in
       };
 
       fonts.fontconfig.enable = l.mkForce true;
-
-      settings.iconTheme = {
-        name = "Yaru-dark";
-        package = pkgs.yaru-theme;
-      };
-
-      home.pointerCursor = {
-        package = pkgs.bibata-cursors;
-        name = "Bibata-Modern-Classic";
-        size = 24;
-        gtk.enable = true;
-        x11.enable = true;
-      };
-      gtk.enable = true;
-      gtk.theme.package = pkgs.yaru-theme;
-      gtk.theme.name = "Yaru-dark";
 
       programs.git.includes = [
         {

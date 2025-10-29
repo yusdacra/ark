@@ -14,14 +14,6 @@ in
       type = t.bool;
       default = true;
     };
-    settings.iconTheme = {
-      name = l.mkOption {
-        type = t.str;
-      };
-      package = l.mkOption {
-        type = t.package;
-      };
-    };
     settings.terminal = {
       name = l.mkOption {
         type = t.str;
@@ -30,9 +22,5 @@ in
         type = t.path;
       };
     };
-  };
-
-  config = l.mkIf cfg.enable {
-    gtk.iconTheme = cfg.iconTheme;
   };
 }

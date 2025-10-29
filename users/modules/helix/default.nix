@@ -1,5 +1,5 @@
 {
-  # stylix.targets.helix.enable = false;
+  stylix.targets.helix.enable = true;
   programs.helix = {
     enable = true;
     languages.language = [
@@ -18,7 +18,6 @@
       }
     ];
     settings = {
-      theme = "ferra";
       editor = {
         soft-wrap.enable = true;
         line-number = "relative";

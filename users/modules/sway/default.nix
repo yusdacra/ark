@@ -11,11 +11,12 @@
     ../wayland
     ../swaylock
     ../wlsunset
-    ../dunst
+    ../mako
     ../rofi
     # ./swayidle.nix
   ];
 
+  stylix.targets.sway.enable = true;
   wayland.windowManager = {
     sway =
       let
@@ -27,7 +28,7 @@
       {
         enable = true;
         wrapperFeatures.gtk = true;
-        systemd.variables = ["--all"];
+        systemd.variables = [ "--all" ];
         config = {
           bars = [ ];
           window = {
@@ -94,7 +95,7 @@
             };
           input = {
             "13364:832:Keychron_Keychron_V4_Keyboard" = {
-              xkb_layout = nixosConfig.services.xserver.layout;
+              xkb_layout = nixosConfig.services.xserver.xkb.layout;
             };
             "1:1:AT_Translated_Set_2_keyboard" = {
               xkb_layout = "tr";

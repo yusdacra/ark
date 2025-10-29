@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+  stylix.targets.swaylock.enable = true;
   programs.swaylock = {
     package = pkgs.swaylock-effects;
     settings = {

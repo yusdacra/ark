@@ -1,8 +1,12 @@
 { ... }:
 {
-  programs.mako = {
+  stylix.targets.mako.enable = true;
+  services.mako = {
     enable = true;
-    anchor = "top-center";
-    borderRadius = 16;
+    settings = {
+      anchor = "top-right";
+      border-radius = 2;
+      default-timeout = 4000;
+    };
   };
 }

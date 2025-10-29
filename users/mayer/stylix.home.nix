@@ -4,7 +4,7 @@
 }:
 {
   imports = [
-    (import inputs.stylix).nixosModules.stylix
+    (import inputs.stylix).homeModules.stylix
     ./stylix.conf.nix
   ];
 }
