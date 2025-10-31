@@ -19,6 +19,12 @@
   stylix.image = ./wallpaper.png;
   stylix.polarity = "dark";
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+  stylix.override = {
+    base00 = "#000000";
+    base01 = "#11111b";
+    base0D = "#cba6f7";
+    base0E = "#89b4fa";
+  };
 
   stylix.cursor = {
     package = pkgs.bibata-cursors;
