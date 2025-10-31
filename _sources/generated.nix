@@ -155,6 +155,20 @@
     };
     date = "2025-09-11";
   };
+  nucleus = {
+    pname = "nucleus";
+    version = "424bd6cfb7aaa5f178dc32e79a997d229c7bd823";
+    src = fetchgit {
+      url = "https://tangled.org/@ptr.pet/nucleus";
+      rev = "424bd6cfb7aaa5f178dc32e79a997d229c7bd823";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sparseCheckout = [ ];
+      sha256 = "sha256-jK+4I2WT60bFQaq6ItlPFzvDj9P3pu386m1AtrzUmc4=";
+    };
+    date = "2025-10-31";
+  };
   stylix = {
     pname = "stylix";
     version = "f8f4e3c3658ee962f8f332a56720c8dfc2836f7a";

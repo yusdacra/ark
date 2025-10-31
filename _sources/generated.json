@@ -246,6 +246,26 @@
         },
         "version": "2683e619932808b8aa78ec7100de6324c8216daf"
     },
+    "nucleus": {
+        "cargoLocks": null,
+        "date": "2025-10-31",
+        "extract": null,
+        "name": "nucleus",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "424bd6cfb7aaa5f178dc32e79a997d229c7bd823",
+            "sha256": "sha256-jK+4I2WT60bFQaq6ItlPFzvDj9P3pu386m1AtrzUmc4=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://tangled.org/@ptr.pet/nucleus"
+        },
+        "version": "424bd6cfb7aaa5f178dc32e79a997d229c7bd823"
+    },
     "stylix": {
         "cargoLocks": null,
         "date": "2025-10-28",

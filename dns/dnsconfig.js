@@ -20,13 +20,14 @@ D(
     A("spindle", WOLUMONDE_IP, CF_PROXY_OFF),
     A("skeetdeck", WOLUMONDE_IP, CF_PROXY_OFF),
     A("likes", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("vpn", DZWONEK_IP, CF_PROXY_OFF),
     A("id", WOLUMONDE_IP, CF_PROXY_OFF),
     A("test", WOLUMONDE_IP, CF_PROXY_OFF),
     // atp handles
     A("dawn", WOLUMONDE_IP, CF_PROXY_OFF),
     A("guestbook", WOLUMONDE_IP, CF_PROXY_OFF),
     A("drew", WOLUMONDE_IP, CF_PROXY_OFF),
+    // dzwonek
+    A("vpn", DZWONEK_IP, CF_PROXY_OFF),
     // A("meow", WOLUMONDE_IP, CF_PROXY_OFF),
     // thing
     // TXT("id", "a data endpoint for entity with serial id /90008/."),
@@ -97,6 +98,7 @@ D(
     DefaultTTL(1),
     A("@", WOLUMONDE_IP, CF_PROXY_OFF),
     A("test", WOLUMONDE_IP, CF_PROXY_OFF),
+    A("nucleus", DZWONEK_IP, CF_PROXY_OFF),
     // atproto
     TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae"),
     A("nil", WOLUMONDE_IP, CF_PROXY_OFF),

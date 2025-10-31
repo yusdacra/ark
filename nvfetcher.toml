@@ -40,6 +40,10 @@ fetch.git = "https://tangled.org/@ptr.pet/clickee-proxy"
 src.git = "https://tangled.org/@ptr.pet/nsid-tracker"
 fetch.git = "https://tangled.org/@ptr.pet/nsid-tracker"
 
+[nucleus]
+src.git = "https://tangled.org/@ptr.pet/nucleus"
+fetch.git = "https://tangled.org/@ptr.pet/nucleus"
+
 ## TANGLED ##
 
 [tangled]

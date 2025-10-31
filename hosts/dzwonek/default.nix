@@ -11,6 +11,7 @@
     "${inputs.home}/nixos"
     "${inputs.disko}/module.nix"
     ../../modules
+    ../../modules/stylix-null.nix
     ../../users/root
     ./disk-config.nix
   ]
