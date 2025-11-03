@@ -20,6 +20,12 @@ in
         # higher prio just to make sure
         priority = 100;
       };
+      "/xrpc/app.bsky.unspecced.getAgeAssuranceState".extraConfig = ''
+    		default_type application/json;
+    		add_header access-control-allow-headers "authorization,dpop,atproto-accept-labelers,atproto-proxy" always;
+    		add_header access-control-allow-origin "*" always;
+    		return 200 '{"lastInitiatedAt":"2025-07-14T14:22:43.912Z","status":"assured"}';
+      '';
     }
     # others
     // (lib.genAttrs

@@ -50,6 +50,7 @@ in
     guestbookDid
     "drew.gaze.systems"
     "test.gaze.systems"
+    "eris.gaze.systems"
   ];
   services.nginx.virtualHosts = {
     "test.gaze.systems" = mkHandleCfg "gaze.systems" "did:web:dawn.gaze.systems";
@@ -58,6 +59,7 @@ in
     "nil.ptr.pet" = mkHandleCfg "ptr.pet" "did:web:dawn.gaze.systems";
     "june.ptr.pet" = mkHandleCfg "ptr.pet" "did:plc:y3z2rr7q5rywu4fjn3fmfyop";
     "drew.gaze.systems" = mkHandleCfg "gaze.systems" "did:plc:vo6ie3kd6xvpjlof4pnb2zzp";
+    "eris.gaze.systems" = mkHandleCfg "gaze.systems" "did:plc:bxjnsrfzozl365rsdo5yvuz5";
   }
   // (mkDidWebCfg dawnDid)
   // (mkDidWebCfg guestbookDid);

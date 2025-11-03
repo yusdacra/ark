@@ -26,6 +26,7 @@ D(
     A("dawn", WOLUMONDE_IP, CF_PROXY_OFF),
     A("guestbook", WOLUMONDE_IP, CF_PROXY_OFF),
     A("drew", WOLUMONDE_IP, CF_PROXY_OFF),
+    A("eris", WOLUMONDE_IP, CF_PROXY_OFF),
     // dzwonek
     A("vpn", DZWONEK_IP, CF_PROXY_OFF),
     // A("meow", WOLUMONDE_IP, CF_PROXY_OFF),
@@ -52,6 +53,7 @@ D(
     ),
     TXT("send.poke", "v=spf1 include:amazonses.com ~all"),
     // atproto
+    TXT("_atproto.eris", "did=did:plc:bxjnsrfzozl365rsdo5yvuz5", TTL(60)),
     // TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae", TTL(60)),
     // TXT("_atproto.dusk", "did=did:plc:dfl62fgb7wtjj3fcbb72naae", TTL(60)),
 );
