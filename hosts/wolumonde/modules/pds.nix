@@ -1,9 +1,9 @@
 { lib, config, ... }:
 let
-  pdsLocalhost = "http://localhost:${toString config.services.pds.settings.PDS_PORT}";
+  pdsLocalhost = "http://localhost:${toString config.services.bluesky-pds.settings.PDS_PORT}";
 in
 {
-  services.nginx.virtualHosts.${config.services.pds.settings.PDS_HOSTNAME} = {
+  services.nginx.virtualHosts.${config.services.bluesky-pds.settings.PDS_HOSTNAME} = {
     useACMEHost = "gaze.systems";
     forceSSL = true;
     locations = {
@@ -38,7 +38,7 @@ in
     );
   };
   # setup pds stuff
-  services.pds = {
+  services.bluesky-pds = {
     enable = true;
     settings = {
       PDS_HOSTNAME = "gaze.systems";
@@ -74,7 +74,7 @@ in
         {
           name = "systemd";
           tag = "logs.pds";
-          systemd_filter = "_SYSTEMD_UNIT=pds.service";
+          systemd_filter = "_SYSTEMD_UNIT=bluesky-pds.service";
         }
       ];
       filters = [

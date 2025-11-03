@@ -7,6 +7,7 @@
 {
   imports = [
     ../../modules
+    ../../modules/stylix-null.nix
     ../../locale
     "${inputs.home}/nixos"
     ../../users/root

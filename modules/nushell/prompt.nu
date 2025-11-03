@@ -27,12 +27,12 @@ def create_left_prompt [] {
     let dir = match (do -i { $env.PWD | path relative-to $nu.home-path }) {
         null => $env.PWD
         '' => '~'
-        $relative_pwd => ([~ $relative_pwd] | path join)
+        $relative_pwd => ([~ $relative_pwd] | path join | path split | last 2 | path join)
     }
 
-    let separator_color = ansi light_cyan
-    let string_color = ansi light_yellow
-    $"($separator_color)//($hostname_fmt)($separator_color)/($username_fmt)($separator_color)/($string_color)cwd=\"($dir)\""
+    let separator_color = ansi magenta
+    let string_color = ansi yellow
+    $"($separator_color)//($hostname_fmt)($separator_color)/($username_fmt)($separator_color)/($string_color)cwd=\"($dir)\"($separator_color)/\n"
 }
 
 def create_right_prompt [] {
@@ -46,7 +46,7 @@ $env.PROMPT_COMMAND_RIGHT = {|| create_right_prompt }
 
 # The prompt indicators are environmental variables that represent
 # the state of the prompt
-$env.PROMPT_INDICATOR = {|| "/ " }
-$env.PROMPT_INDICATOR_VI_INSERT = {|| "/: " }
-$env.PROMPT_INDICATOR_VI_NORMAL = {|| "/ " }
-$env.PROMPT_MULTILINE_INDICATOR = {|| "/::: " }
+$env.PROMPT_INDICATOR = {|| $"(ansi magenta)//" }
+$env.PROMPT_INDICATOR_VI_INSERT = {|| "//:" }
+$env.PROMPT_INDICATOR_VI_NORMAL = {|| "//" }
+$env.PROMPT_MULTILINE_INDICATOR = {|| "//:::" }
