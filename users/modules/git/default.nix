@@ -1,8 +1,23 @@
 { pkgs, ... }:
+let
+  personal = import ../../../personal.nix;
+  name = personal.name;
+  email = personal.emails.primary;
+in
 {
   programs.git = {
     enable = true;
     includes = [
+      {
+        contents = {
+          gpg.format = "ssh";
+          commit.gpgsign = true;
+          user = {
+            inherit name email;
+            signingkey = builtins.readFile ../../../secrets/yusdacra.key.pub;
+          };
+        };
+      }
       {
         contents = {
 

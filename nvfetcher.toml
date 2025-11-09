@@ -71,3 +71,7 @@ fetch.github = "0xc000022070/zen-browser-flake"
 [stylix]
 src.git = "https://github.com/nix-community/stylix"
 fetch.github = "nix-community/stylix"
+
+[nixpkgs-xr]
+src.git = "https://github.com/nix-community/nixpkgs-xr"
+fetch.github = "nix-community/nixpkgs-xr"

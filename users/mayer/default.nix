@@ -63,17 +63,10 @@ in
 
   home-manager.users.mayer =
     {
-      config,
       pkgs,
       inputs,
-      secrets,
       ...
     }:
-    let
-      personal = import ../../personal.nix;
-      name = personal.name;
-      email = personal.emails.primary;
-    in
     {
       imports =
         let
@@ -124,22 +117,10 @@ in
           prismlauncher
           gearlever
           signal-desktop
+          bs-manager
         ];
       };
 
       fonts.fontconfig.enable = l.mkForce true;
-
-      programs.git.includes = [
-        {
-          contents = {
-            gpg.format = "ssh";
-            commit.gpgsign = true;
-            user = {
-              inherit name email;
-              signingkey = builtins.readFile ../../secrets/yusdacra.key.pub;
-            };
-          };
-        }
-      ];
     };
 }

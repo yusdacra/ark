@@ -2,7 +2,6 @@
   inputs,
   tlib,
   pkgs,
-  modulesPath,
   ...
 }:
 {
@@ -11,7 +10,9 @@
     "${inputs.home}/nixos"
     "${inputs.disko}/module.nix"
     ../../modules
+    ../../modules/stylix-null.nix
     ../../users/root
+    ../../users/dawn
     ./disk-config.nix
   ]
   ++ (tlib.importFolder (toString ./modules));

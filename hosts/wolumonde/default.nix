@@ -5,15 +5,15 @@
   ...
 }:
 {
-  imports = [
+  imports = with inputs; [
     ../../modules
     ../../modules/stylix-null.nix
     ../../locale
-    "${inputs.home}/nixos"
     ../../users/root
-    "${inputs.agenix}/modules/age.nix"
-    "${inputs.ncr}/firewall"
-    "${inputs.ncr}/firewall/hetzner"
+    "${home}/nixos"
+    "${agenix}/modules/age.nix"
+    "${ncr}/firewall"
+    "${ncr}/firewall/hetzner"
   ]
   ++ (tlib.importFolder (toString ./modules));
 

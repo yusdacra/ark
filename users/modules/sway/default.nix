@@ -10,7 +10,7 @@
   imports = [
     ../wayland
     ../swaylock
-    ../swayidle
+    # ../swayidle
     ../wlsunset
     ../mako
     ../tofi

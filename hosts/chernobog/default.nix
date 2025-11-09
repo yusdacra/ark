@@ -1,6 +1,4 @@
 {
-  config,
-  lib,
   tlib,
   pkgs,
   inputs,
@@ -10,18 +8,18 @@
   imports =
     with inputs;
     [
-      "${inputs.facter}/modules/nixos/facter.nix"
-      "${inputs.disko}/module.nix"
-      "${inputs.home}/nixos"
-      "${inputs.nixos-hardware}/common/pc"
-      "${inputs.nixos-hardware}/common/pc/ssd"
-      "${inputs.nixos-hardware}/common/cpu/amd"
-      "${inputs.nixos-hardware}/common/cpu/amd/pstate.nix"
-      "${inputs.nixos-hardware}/common/cpu/amd/zenpower.nix"
-      "${inputs.nixos-hardware}/common/gpu/amd"
+      "${facter}/modules/nixos/facter.nix"
+      "${disko}/module.nix"
+      "${home}/nixos"
+      "${nixos-hardware}/common/pc"
+      "${nixos-hardware}/common/pc/ssd"
+      "${nixos-hardware}/common/cpu/amd"
+      "${nixos-hardware}/common/cpu/amd/pstate.nix"
+      "${nixos-hardware}/common/cpu/amd/zenpower.nix"
+      "${nixos-hardware}/common/gpu/amd"
       ../../users/root
       ../../users/mayer
-      ../../modules/base
+      ../../modules
       ../../locale/default.nix
     ]
     ++ (tlib.importFolder (toString ./modules));

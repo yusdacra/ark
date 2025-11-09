@@ -24,7 +24,7 @@ in
         other-infra = [ "group:admin" ];
       };
       hosts = {
-        chernobog = "100.64.0.9";
+        chernobog = "100.64.0.8";
         wolumonde = "100.64.0.2";
         higashi = "100.64.0.5";
       };
