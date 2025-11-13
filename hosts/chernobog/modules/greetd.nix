@@ -5,7 +5,7 @@
     settings = {
       terminal.vt = 1;
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --issue --time --cmd sway";
+        command = "${pkgs.tuigreet}/bin/tuigreet --issue --time --cmd niri-session";
         user = "greeter";
       };
     };

@@ -62,10 +62,10 @@ profiles:
           target_temperature: 88
           zero_rpm: false
           zero_rpm_threshold: 40
-        power_cap: 198.0
+        power_cap: 190.0
         performance_level: auto
-        max_core_clock: 3200
+        max_core_clock: 2600
         max_memory_clock: 1250
-        voltage_offset: -25
+        voltage_offset: -10
 current_profile: oc
 auto_switch_profiles: false

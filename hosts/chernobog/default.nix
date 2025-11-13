@@ -71,6 +71,8 @@
       ];
       monospace = [ "Comic Mono" ];
     };
+    # fontconfig.hinting.style = "full";
+    # fontconfig.subpixel.rgba = "rgb";
   };
 
   services.earlyoom.enable = true;

@@ -56,7 +56,7 @@ in
     "test.gaze.systems" = mkHandleCfg "gaze.systems" "did:web:dawn.gaze.systems";
     "poor.dog" = mkHandleCfg "poor.dog" "did:plc:dfl62fgb7wtjj3fcbb72naae";
     "ptr.pet" = mkHandleCfg "ptr.pet" "did:plc:dfl62fgb7wtjj3fcbb72naae";
-    "nil.ptr.pet" = mkHandleCfg "ptr.pet" "did:plc:dumbmutttrskde4ibwbnbike";
+    "nil.ptr.pet" = mkHandleCfg "ptr.pet" "did:plc:dumbmutt4po52ept2tczimje";
     "june.ptr.pet" = mkHandleCfg "ptr.pet" "did:plc:y3z2rr7q5rywu4fjn3fmfyop";
     "drew.gaze.systems" = mkHandleCfg "gaze.systems" "did:plc:vo6ie3kd6xvpjlof4pnb2zzp";
     "eris.gaze.systems" = mkHandleCfg "gaze.systems" "did:plc:bxjnsrfzozl365rsdo5yvuz5";

@@ -39,7 +39,7 @@ in
       enable = true;
       binfmt = true;
     };
-    sway.enable = true;
+    niri.enable = true;
   };
   systemd = {
     targets.network-online.enable = false;
@@ -73,8 +73,7 @@ in
           modulesToEnable = l.flatten [
             [
               "settings"
-              "sway"
-              "wayland"
+              "niri"
               "foot"
             ]
             # cli stuff
@@ -115,6 +114,7 @@ in
           xdg-utils
           transmission_4-gtk
           prismlauncher
+          lutris
           gearlever
           signal-desktop
           bs-manager

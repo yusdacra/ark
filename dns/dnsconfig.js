@@ -104,7 +104,7 @@ D(
     // atproto
     TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae"),
     A("nil", WOLUMONDE_IP, CF_PROXY_OFF),
-    TXT("_atproto.nil", "did=did:plc:dumbmutttrskde4ibwbnbike"),
+    TXT("_atproto.nil", "did=did:plc:dumbmutt4po52ept2tczimje"),
     TXT("_atproto.june", "did=did:plc:y3z2rr7q5rywu4fjn3fmfyop"),
     // june
     CNAME("june", "girlboss.ceo."),
