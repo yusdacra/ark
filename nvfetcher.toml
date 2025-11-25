@@ -44,6 +44,10 @@ fetch.git = "https://tangled.org/@ptr.pet/nsid-tracker"
 src.git = "https://tangled.org/@ptr.pet/nucleus"
 fetch.git = "https://tangled.org/@ptr.pet/nucleus"
 
+[trill]
+src.git = "https://tangled.org/@ptr.pet/trill"
+fetch.git = "https://tangled.org/@ptr.pet/trill"
+
 ## TANGLED ##
 
 [tangled]

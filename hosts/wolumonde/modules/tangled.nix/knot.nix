@@ -5,14 +5,14 @@
   ...
 }:
 let
-  knotCfg = config.services.tangled-knot;
+  knotCfg = config.services.tangled.knot;
 in
 {
   imports = [
     "${inputs.tangled}/nix/modules/knot.nix"
   ];
 
-  services.tangled-knot = {
+  services.tangled.knot = {
     enable = true;
     package = terra.tangled-knot;
     gitUser = "git";

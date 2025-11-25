@@ -60,7 +60,7 @@ input {
     }
 
     warp-mouse-to-focus
-    focus-follows-mouse
+    focus-follows-mouse max-scroll-amount="0%"
 
     mod-key "Super"
     mod-key-nested "Alt"
@@ -113,7 +113,7 @@ layout {
     struts { }
 }
 
-spawn-at-startup "swaybg" "-c" "000000"
+spawn-at-startup "swaybg" "-i" "%%wallpaper%%"
 
 hotkey-overlay {
     // skip-at-startup
@@ -140,7 +140,6 @@ window-rule {
     // - host Firefox (app-id is "firefox")
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-    match app-id=r#"^tofi"#
 
     open-floating true
 }
@@ -151,6 +150,11 @@ window-rule {
     // match namespace="^notifications$"
 
     block-out-from "screen-capture"
+}
+
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    default-floating-position x=10 y=10 relative-to="bottom-right"
 }
 
 window-rule {

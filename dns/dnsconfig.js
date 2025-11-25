@@ -101,6 +101,7 @@ D(
     A("@", WOLUMONDE_IP, CF_PROXY_OFF),
     A("test", WOLUMONDE_IP, CF_PROXY_OFF),
     A("nucleus", DZWONEK_IP, CF_PROXY_OFF),
+    A("trill", DZWONEK_IP, CF_PROXY_OFF),
     // atproto
     TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae"),
     A("nil", WOLUMONDE_IP, CF_PROXY_OFF),

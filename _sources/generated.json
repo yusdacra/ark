@@ -228,7 +228,7 @@
     },
     "nixpkgs-xr": {
         "cargoLocks": null,
-        "date": "2025-11-06",
+        "date": "2025-11-16",
         "extract": null,
         "name": "nixpkgs-xr",
         "passthru": null,
@@ -240,12 +240,12 @@
             "name": null,
             "owner": "nix-community",
             "repo": "nixpkgs-xr",
-            "rev": "08cdeeabf5fcb0e44d2be5540e6dfa52f70f0401",
-            "sha256": "sha256-/SzIdw3HiKb9C66MyiQFuuX5ExVASm0M3abav9ypZPo=",
+            "rev": "d80a797b330a98df365cd25fd8350afbe5a5da83",
+            "sha256": "sha256-L7hobkC7G7rxNatvxgz5RbMQaIVwObj7l1Pz3utx4Pk=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "08cdeeabf5fcb0e44d2be5540e6dfa52f70f0401"
+        "version": "d80a797b330a98df365cd25fd8350afbe5a5da83"
     },
     "nsid-tracker": {
         "cargoLocks": null,
@@ -310,7 +310,7 @@
     },
     "tangled": {
         "cargoLocks": null,
-        "date": "2025-11-05",
+        "date": "2025-11-20",
         "extract": null,
         "name": "tangled",
         "passthru": null,
@@ -320,13 +320,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "dd1bcee8c99bf799130645f32c94d1693f812f0d",
-            "sha256": "sha256-1PGiDLrx1hNGNoUCnmc1Np2t48r7nIxxiTO8JHvaTws=",
+            "rev": "12ef7f8f63ee4a14a552ebed603802c79e4d72f8",
+            "sha256": "sha256-t8UQ85/bPXrbFs3V/paFtQvv4lSrr2lszrdcgspuAaA=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.org/@tangled.org/core"
         },
-        "version": "dd1bcee8c99bf799130645f32c94d1693f812f0d"
+        "version": "12ef7f8f63ee4a14a552ebed603802c79e4d72f8"
     },
     "tangled-sqlite-lib": {
         "cargoLocks": null,
@@ -341,6 +341,26 @@
             "url": "https://sqlite.org/2024/sqlite-amalgamation-3450100.zip"
         },
         "version": "3450100"
+    },
+    "trill": {
+        "cargoLocks": null,
+        "date": "2025-11-25",
+        "extract": null,
+        "name": "trill",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "c9604685156e009cebd0ddc3b31672455f635387",
+            "sha256": "sha256-so9EHN0GQ7rFSmnLnpRap2RqRcklhe3C1HdyAKeR6No=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://tangled.org/@ptr.pet/trill"
+        },
+        "version": "c9604685156e009cebd0ddc3b31672455f635387"
     },
     "zen-browser": {
         "cargoLocks": null,

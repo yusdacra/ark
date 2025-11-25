@@ -143,15 +143,15 @@
   };
   nixpkgs-xr = {
     pname = "nixpkgs-xr";
-    version = "08cdeeabf5fcb0e44d2be5540e6dfa52f70f0401";
+    version = "d80a797b330a98df365cd25fd8350afbe5a5da83";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "nixpkgs-xr";
-      rev = "08cdeeabf5fcb0e44d2be5540e6dfa52f70f0401";
+      rev = "d80a797b330a98df365cd25fd8350afbe5a5da83";
       fetchSubmodules = false;
-      sha256 = "sha256-/SzIdw3HiKb9C66MyiQFuuX5ExVASm0M3abav9ypZPo=";
+      sha256 = "sha256-L7hobkC7G7rxNatvxgz5RbMQaIVwObj7l1Pz3utx4Pk=";
     };
-    date = "2025-11-06";
+    date = "2025-11-16";
   };
   nsid-tracker = {
     pname = "nsid-tracker";
@@ -195,17 +195,17 @@
   };
   tangled = {
     pname = "tangled";
-    version = "dd1bcee8c99bf799130645f32c94d1693f812f0d";
+    version = "12ef7f8f63ee4a14a552ebed603802c79e4d72f8";
     src = fetchgit {
       url = "https://tangled.org/@tangled.org/core";
-      rev = "dd1bcee8c99bf799130645f32c94d1693f812f0d";
+      rev = "12ef7f8f63ee4a14a552ebed603802c79e4d72f8";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-1PGiDLrx1hNGNoUCnmc1Np2t48r7nIxxiTO8JHvaTws=";
+      sha256 = "sha256-t8UQ85/bPXrbFs3V/paFtQvv4lSrr2lszrdcgspuAaA=";
     };
-    date = "2025-11-05";
+    date = "2025-11-20";
   };
   tangled-sqlite-lib = {
     pname = "tangled-sqlite-lib";
@@ -214,6 +214,20 @@
       url = "https://sqlite.org/2024/sqlite-amalgamation-3450100.zip";
       sha256 = "sha256-bJoMjirsBjm2Qk9KPiy3yV3+8b/POlYe76/FQbciHro=";
     };
+  };
+  trill = {
+    pname = "trill";
+    version = "c9604685156e009cebd0ddc3b31672455f635387";
+    src = fetchgit {
+      url = "https://tangled.org/@ptr.pet/trill";
+      rev = "c9604685156e009cebd0ddc3b31672455f635387";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sparseCheckout = [ ];
+      sha256 = "sha256-so9EHN0GQ7rFSmnLnpRap2RqRcklhe3C1HdyAKeR6No=";
+    };
+    date = "2025-11-25";
   };
   zen-browser = {
     pname = "zen-browser";

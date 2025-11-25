@@ -6,14 +6,14 @@
   ...
 }:
 let
-  spindleCfg = config.services.tangled-spindle;
+  spindleCfg = config.services.tangled.spindle;
 in
 {
   imports = [
     "${inputs.tangled}/nix/modules/spindle.nix"
   ];
 
-  services.tangled-spindle = {
+  services.tangled.spindle = {
     enable = true;
     package = terra.tangled-spindle;
     server = {

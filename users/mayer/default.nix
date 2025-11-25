@@ -3,6 +3,7 @@
   lib,
   tlib,
   config,
+  terra,
   ...
 }@globalAttrs:
 let
@@ -22,6 +23,7 @@ in
       "adbusers"
       "dialout"
       "video"
+      "input"
     ];
     shell = pkgs.nushell;
     hashedPassword = "$6$spzqhAyJfhHy$iHgLBlhjGn1l8PnbjJdWTn1GPvcjMqYNKUzdCe/7IrX6sHNgETSr/Nfpdmq9FCXLhrAfwHOd/q/8SvfeIeNX4/";
@@ -60,6 +62,14 @@ in
       value = 1;
     }
   ];
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    xdgOpenUsePortal = true;
+  };
+
+  services.joycond.enable = true;
 
   home-manager.users.mayer =
     {
@@ -101,7 +111,7 @@ in
 
       home = {
         homeDirectory = nixosConfig.users.users.mayer.home;
-        packages = with pkgs; [
+        packages = (with pkgs; [
           # Font stuff
           noto-fonts-cjk-sans
           font-awesome
@@ -118,7 +128,8 @@ in
           gearlever
           signal-desktop
           bs-manager
-        ];
+          cemu
+        ]) ++ [terra.helium];
       };
 
       fonts.fontconfig.enable = l.mkForce true;
