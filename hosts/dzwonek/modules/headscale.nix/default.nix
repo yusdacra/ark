@@ -41,6 +41,10 @@ in
           dst = [ "tag:other-infra:*" ];
         }
         {
+          src = [ "tag:private-infra" ];
+          dst = [ "tag:private-infra:*" ];
+        }
+        {
           src = [ "wolumonde" ];
           dst = [ "chernobog:*" ];
         }
@@ -54,10 +58,6 @@ in
             "tag:private-infra"
           ];
           dst = [ "autogroup:internet:*" ];
-        }
-        {
-          src = [ "ellite@ellite.dev" ];
-          dst = [ "chernobog:8463" ];
         }
       ];
     };

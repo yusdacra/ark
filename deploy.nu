@@ -60,6 +60,11 @@ let hosts = {
     user: "root",
     addr: "199.71.188.53",
   },
+  trimounts: {
+    type: "nixos",
+    user: "root",
+    addr: "159.195.58.28",
+  },
   "dusk@devel.mobi": {
     type: "home",
     user: "dusk",

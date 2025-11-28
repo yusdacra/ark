@@ -46,8 +46,8 @@
       nixosConfigurations = import ./hosts { inherit lib tlib allPkgsSets; };
       homeConfigurations = import ./users { inherit lib tlib allPkgsSets; };
 
-      legacyPackages = l.mapAttrs (_: set: set.pkgs // { inherit (set) inputs; }) allPkgsSets;
-      packages = l.mapAttrs (_: set: set.exported) allPkgsSets;
+      # legacyPackages = l.mapAttrs (_: set: set.pkgs // { inherit (set) inputs; }) allPkgsSets;
+      # packages = l.mapAttrs (_: set: set.exported) allPkgsSets;
       apps = miscApps;
 
       # topology = lib.mapAttrs (_: pkgs:

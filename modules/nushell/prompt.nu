@@ -5,6 +5,7 @@ let host_colors = {
     "sd-148036": {start: "0x595CFF", end: "0xC6F8FF"},
     dzwonek: {start: "0x595CFF", end: "0xC6F8FF"},
     volsinii: {start: "0x595CFF", end: "0xC6F8FF"},
+    trimounts: {start: "0x533A71", end: "0xFE5F55"},
 }
 let user_colors = {
     kirara: {start: "0xFF407D", end: "0xEE99C2"},
