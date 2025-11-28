@@ -129,6 +129,7 @@ in
           signal-desktop
           bs-manager
           cemu
+          tor-browser
         ]) ++ [terra.helium];
       };
 

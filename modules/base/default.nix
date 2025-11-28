@@ -42,13 +42,11 @@ in
     shellAliases =
       let
         ifSudo = string: mkIf config.security.sudo.enable string;
-        inherit (pkgs)
-          du-dust
-          ;
+        inherit (pkgs) dust;
       in
       {
         g = pkgBin config.programs.git.package;
-        du = "${pkgBin du-dust}";
+        du = "${pkgBin dust}";
         df = "${coreBin "df"} -h";
         free = "${pkgs.procps}/bin/free -h";
         n = nixBin;
