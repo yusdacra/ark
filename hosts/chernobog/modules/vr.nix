@@ -25,7 +25,27 @@
     };
   };
 
-  # programs.envision.enable = true;
+  environment.systemPackages = with pkgs; [ wlx-overlay-s eepyxr wayvr-dashboard xrizer ];
 
-  environment.systemPackages = with pkgs; [ wlx-overlay-s eepyxr wayvr-dashboard ];
+  home-manager.sharedModules = [{
+    xdg.configFile."openvr/openvrpaths.vrpath".text = ''
+      {
+        "config" :
+        [
+          "/home/mayer/.local/share/Steam/config"
+        ],
+        "external_drivers" : null,
+        "jsonid" : "vrpathreg",
+        "log" :
+        [
+          "/home/mayer/.local/share/Steam/logs"
+        ],
+        "runtime" :
+        [
+          ${pkgs.xrizer}/lib/xrizer"
+        ],
+        "version" : 1
+      }
+    '';
+  }];
 }

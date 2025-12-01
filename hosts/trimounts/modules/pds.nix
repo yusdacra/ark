@@ -1,0 +1,121 @@
+{ lib, config, ... }:
+let
+  pdsLocalhost = "http://localhost:${toString config.services.bluesky-pds.settings.PDS_PORT}";
+in
+{
+  age.secrets.pdsConfig.file = ../../../secrets/pdsConfig.age;
+  
+  services.nginx.virtualHosts.${config.services.bluesky-pds.settings.PDS_HOSTNAME} = {
+    useACMEHost = "gaze.systems";
+    forceSSL = true;
+    locations = {
+      # we need to proxy /xrpc for pds to work
+      # silly but i want root domain >:3
+      "/xrpc" = {
+        proxyPass = pdsLocalhost;
+        proxyWebsockets = true;
+        # pass ws headers so we can actually proxy the ws
+        extraConfig = ''
+          proxy_set_header id $request_id;
+          client_max_body_size 100M;
+        '';
+        # higher prio just to make sure
+        priority = 100;
+      };
+      "/xrpc/app.bsky.unspecced.getAgeAssuranceState".extraConfig = ''
+    		default_type application/json;
+    		add_header access-control-allow-headers "authorization,dpop,atproto-accept-labelers,atproto-proxy" always;
+    		add_header access-control-allow-origin "*" always;
+    		return 200 '{"lastInitiatedAt":"2025-07-14T14:22:43.912Z","status":"assured"}';
+      '';
+    }
+    # others
+    // (lib.genAttrs
+      [
+        "/account"
+        "/@atproto"
+        "/oauth"
+        "=/.well-known/oauth-protected-resource"
+        "=/.well-known/oauth-authorization-server"
+      ]
+      (_: {
+        proxyPass = pdsLocalhost;
+        # higher prio just to make sure
+        priority = 100;
+      })
+    );
+  };
+  # setup pds stuff
+  services.bluesky-pds = {
+    enable = true;
+    settings = {
+      PDS_HOSTNAME = "gaze.systems";
+      PDS_PORT = 1334;
+
+      PDS_SERVICE_NAME = ''"gazing at the sky"'';
+      PDS_LOGO_URL = "https://gaze.systems/icons/gaze_site.webp";
+
+      PDS_RATE_LIMITS_ENABLED = "true";
+      PDS_INVITE_REQUIRED = "true";
+
+      PDS_DID_PLC_URL = "https://plc.directory";
+      PDS_BSKY_APP_VIEW_URL = "https://api.bsky.app";
+      PDS_BSKY_APP_VIEW_DID = "did:web:api.bsky.app";
+      PDS_REPORT_SERVICE_URL = "https://mod.bsky.app";
+      PDS_REPORT_SERVICE_DID = "did:plc:ar7c4by46qjdydhdevvrndac";
+      PDS_CRAWLERS = "https://bsky.network";
+    };
+    environmentFiles = [ config.age.secrets.pdsConfig.path ];
+  };
+
+  services.fluent-bit.settings = {
+    parsers = [
+      {
+        name = "pds_json";
+        format = "json";
+        time_key = "time";
+        time_strict = false;
+      }
+    ];
+    pipeline = {
+      inputs = [
+        {
+          name = "systemd";
+          tag = "logs.pds";
+          systemd_filter = "_SYSTEMD_UNIT=bluesky-pds.service";
+        }
+      ];
+      filters = [
+        {
+          name = "parser";
+          match = "logs.pds";
+          key_name = "MESSAGE";
+          parser = "pds_json";
+        }
+        {
+          name = "modify";
+          match = "logs.pds";
+          Rename = [ "msg _msg" ];
+        }
+      ];
+    };
+  };
+
+  services.vmalert.instances."".rules.groups = [
+    {
+      name = "pds-logs";
+      type = "vlogs";
+      interval = "1m";
+      rules = [
+        {
+          record = "pds_request_count";
+          expr = "name:pds | stats (res.statusCode) count() as total_requests";
+        }
+        {
+          record = "pds_response_latency";
+          expr = "name:pds | stats avg(responseTime) avg, quantile(0.5, responseTime) p50, quantile(0.9, responseTime) p90, quantile(0.99, responseTime) p99";
+        }
+      ];
+    }
+  ];
+}

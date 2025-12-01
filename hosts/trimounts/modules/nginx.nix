@@ -1,0 +1,134 @@
+{
+  config,
+  lib,
+  inputs,
+  ...
+}:
+{
+  services.nginx = {
+    enable = true;
+    recommendedTlsSettings = true;
+    recommendedOptimisation = true;
+    recommendedGzipSettings = true;
+    recommendedProxySettings = true;
+    # /nginx_status
+    statusPage = true;
+  };
+
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
+
+  # output json logs so we can consume them more easily
+  services.nginx.appendHttpConfig = ''
+    log_format json_logs escape=json '{'
+      '"_msg":"request completed",'
+      '"time":"$time_local",'
+      '"req.remoteAddr":"$remote_addr",'
+      '"req.method":"$request_method",'
+      '"req.url":"$uri",'
+      '"req.httpVersion":"$server_protocol",'
+      '"res.statusCode":$status,'
+      '"res.bodySize":$body_bytes_sent,'
+      '"req.headers.id":"$request_id",'
+      '"req.headers.referer":"$http_referer",'
+      '"req.headers.user-agent":"$http_user_agent",'
+      '"requestTime":$request_time'
+    '}';
+    access_log /var/log/nginx/access.log json_logs;
+  '';
+
+  users.users.nginx.extraGroups = [ "acme" ];
+
+  age.secrets.cfDnsEditToken.file = ../../../secrets/cloudflareDnsEdit.age;
+  security.acme = {
+    acceptTerms = true;
+    defaults = {
+      group = "nginx";
+      email = (import "${inputs.self}/personal.nix").emails.primary;
+      dnsProvider = "cloudflare";
+      credentialFiles = {
+        CF_DNS_API_TOKEN_FILE = config.age.secrets.cfDnsEditToken.path;
+      };
+    };
+    certs."poor.dog" = { };
+    certs."ptr.pet" = { };
+    certs."gaze.systems" = { };
+  };
+  services.nginx.virtualHosts."gaze.systems" = {
+    quic = true;
+    kTLS = true;
+    useACMEHost = "gaze.systems";
+    forceSSL = true;
+  };
+  services.nginx.virtualHosts."poor.dog" = {
+    quic = true;
+    kTLS = true;
+    useACMEHost = "poor.dog";
+    forceSSL = true;
+  };
+  services.nginx.virtualHosts."ptr.pet" = {
+    quic = true;
+    kTLS = true;
+    useACMEHost = "ptr.pet";
+    forceSSL = true;
+  };
+
+  services.fluent-bit.settings = {
+    parsers = [
+      {
+        name = "nginx_json";
+        format = "json";
+        time_key = "time";
+        time_format = "%d/%b/%Y:%H:%M:%S %z";
+      }
+    ];
+    pipeline = {
+      inputs = [
+        {
+          name = "nginx_metrics";
+          tag = "metrics.nginx";
+          status_url = "/nginx_status";
+          nginx_plus = false;
+        }
+        {
+          name = "tail";
+          tag = "logs.nginx";
+          path = "/var/log/nginx/*.log";
+          db = "/var/lib/fluent-bit/nginx-access.db";
+          "db.locking" = true;
+          buffer_chunk_size = "4m";
+          buffer_max_size = "32m";
+          parser = "nginx_json";
+        }
+      ];
+      filters = [
+        {
+          name = "modify";
+          match = "logs.nginx";
+          Add = [ "name nginx" ];
+        }
+      ];
+    };
+  };
+
+  # need so fluent-bit can access nginx
+  systemd.services.fluent-bit.serviceConfig.SupplementaryGroups = lib.mkForce "systemd-journal nginx";
+
+  services.vmalert.instances."".rules.groups = [
+    {
+      name = "nginx-logs";
+      type = "vlogs";
+      interval = "1m";
+      rules = [
+        {
+          record = "nginx_request_count";
+          expr = "name:nginx | stats (res.statusCode) count() as total_requests";
+        }
+        {
+          record = "nginx_request_latency";
+          # filter out subscribeRepos requests because they are long polling http L
+          expr = "name:nginx | filter req.url:!/xrpc/com.atproto.sync.subscribeRepos | stats avg(requestTime) avg, quantile(0.5, requestTime) p50, quantile(0.9, requestTime) p90, quantile(0.99, requestTime) p99";
+        }
+      ];
+    }
+  ];
+}

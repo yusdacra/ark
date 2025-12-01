@@ -49,12 +49,10 @@
       noto-fonts
       noto-fonts-cjk-serif
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       font-awesome
       source-han-serif
       source-han-sans
-      source-han-sans-japanese
-      source-han-serif-japanese
       comic-mono
       comic-relief
     ];

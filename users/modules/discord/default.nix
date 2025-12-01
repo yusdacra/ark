@@ -39,7 +39,7 @@ in
 
     Service = {
       Type = "simple";
-      ExecStart = "${pkgs.openssh}/bin/ssh -N -D 127.0.0.1:1337 root@wolumonde";
+      ExecStart = "${pkgs.openssh}/bin/ssh -N -D 127.0.0.1:1337 root@trimounts";
       Restart = "on-failure";
       RestartSec = "3s";
     };

@@ -22,6 +22,8 @@ in
   };
   users.groups.website = { };
 
+  age.secrets.websiteConfig.file = ../../../secrets/websiteConfig.age;
+
   systemd.services.website = {
     description = "website";
     wantedBy = [ "multi-user.target" ];

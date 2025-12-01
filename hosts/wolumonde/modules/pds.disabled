@@ -66,56 +66,56 @@ in
     environmentFiles = [ config.age.secrets.pdsConfig.path ];
   };
 
-  services.fluent-bit.settings = {
-    parsers = [
-      {
-        name = "pds_json";
-        format = "json";
-        time_key = "time";
-        time_strict = false;
-      }
-    ];
-    pipeline = {
-      inputs = [
-        {
-          name = "systemd";
-          tag = "logs.pds";
-          systemd_filter = "_SYSTEMD_UNIT=bluesky-pds.service";
-        }
-      ];
-      filters = [
-        {
-          name = "parser";
-          match = "logs.pds";
-          key_name = "MESSAGE";
-          parser = "pds_json";
-        }
-        {
-          name = "modify";
-          match = "logs.pds";
-          Rename = [ "msg _msg" ];
-        }
-      ];
-    };
-  };
+  # services.fluent-bit.settings = {
+  #   parsers = [
+  #     {
+  #       name = "pds_json";
+  #       format = "json";
+  #       time_key = "time";
+  #       time_strict = false;
+  #     }
+  #   ];
+  #   pipeline = {
+  #     inputs = [
+  #       {
+  #         name = "systemd";
+  #         tag = "logs.pds";
+  #         systemd_filter = "_SYSTEMD_UNIT=bluesky-pds.service";
+  #       }
+  #     ];
+  #     filters = [
+  #       {
+  #         name = "parser";
+  #         match = "logs.pds";
+  #         key_name = "MESSAGE";
+  #         parser = "pds_json";
+  #       }
+  #       {
+  #         name = "modify";
+  #         match = "logs.pds";
+  #         Rename = [ "msg _msg" ];
+  #       }
+  #     ];
+  #   };
+  # };
 
-  services.vmalert.instances."".rules.groups = [
-    {
-      name = "pds-logs";
-      type = "vlogs";
-      interval = "1m";
-      rules = [
-        {
-          record = "pds_request_count";
-          expr = "name:pds | stats (res.statusCode) count() as total_requests";
-        }
-        {
-          record = "pds_response_latency";
-          expr = "name:pds | stats avg(responseTime) avg, quantile(0.5, responseTime) p50, quantile(0.9, responseTime) p90, quantile(0.99, responseTime) p99";
-        }
-      ];
-    }
-  ];
+  # services.vmalert.instances."".rules.groups = [
+  #   {
+  #     name = "pds-logs";
+  #     type = "vlogs";
+  #     interval = "1m";
+  #     rules = [
+  #       {
+  #         record = "pds_request_count";
+  #         expr = "name:pds | stats (res.statusCode) count() as total_requests";
+  #       }
+  #       {
+  #         record = "pds_response_latency";
+  #         expr = "name:pds | stats avg(responseTime) avg, quantile(0.5, responseTime) p50, quantile(0.9, responseTime) p90, quantile(0.99, responseTime) p99";
+  #       }
+  #     ];
+  #   }
+  # ];
 
   # virtualisation = {
   #   podman = {

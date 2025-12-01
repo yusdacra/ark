@@ -3,30 +3,23 @@ var REG_NONE = NewRegistrar("none");
 
 var WOLUMONDE_IP = "23.88.101.188";
 var DZWONEK_IP = "94.237.26.47";
+var TRIMOUNTS_IP = "159.195.58.28";
 
 D(
     "gaze.systems",
     REG_NONE,
     DnsProvider(DSP_CLOUDFLARE),
     DefaultTTL(1),
-    A("@", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("doc", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("git", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("limbus", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("pmart", WOLUMONDE_IP, CF_PROXY_OFF),
+    A("@", TRIMOUNTS_IP, CF_PROXY_OFF, TTL(60)),
+    A("doc", TRIMOUNTS_IP, CF_PROXY_OFF),
+    A("pmart", TRIMOUNTS_IP, CF_PROXY_OFF),
     // A("webhook", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("dash", WOLUMONDE_IP, CF_PROXY_OFF), // perses
-    A("knot", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("spindle", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("skeetdeck", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("likes", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("id", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("test", WOLUMONDE_IP, CF_PROXY_OFF),
-    // atp handles
-    A("dawn", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("guestbook", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("drew", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("eris", WOLUMONDE_IP, CF_PROXY_OFF),
+    A("dash", TRIMOUNTS_IP, CF_PROXY_OFF), // perses
+    A("knot", TRIMOUNTS_IP, CF_PROXY_OFF, TTL(60)),
+    A("spindle", TRIMOUNTS_IP, CF_PROXY_OFF, TTL(60)),
+    A("id", TRIMOUNTS_IP, CF_PROXY_OFF),
+    // atp
+    A("guestbook", TRIMOUNTS_IP, CF_PROXY_OFF),
     // dzwonek
     A("vpn", DZWONEK_IP, CF_PROXY_OFF),
     // A("meow", WOLUMONDE_IP, CF_PROXY_OFF),
@@ -54,8 +47,7 @@ D(
     TXT("send.poke", "v=spf1 include:amazonses.com ~all"),
     // atproto
     TXT("_atproto.eris", "did=did:plc:bxjnsrfzozl365rsdo5yvuz5", TTL(60)),
-    // TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae", TTL(60)),
-    // TXT("_atproto.dusk", "did=did:plc:dfl62fgb7wtjj3fcbb72naae", TTL(60)),
+    TXT("_atproto.drew", "did=did:plc:vo6ie3kd6xvpjlof4pnb2zzp", TTL(60)),
 );
 
 D(
@@ -63,7 +55,7 @@ D(
     REG_NONE,
     DnsProvider(DSP_CLOUDFLARE),
     DefaultTTL(1),
-    A("@", WOLUMONDE_IP, CF_PROXY_ON),
+    A("@", TRIMOUNTS_IP, CF_PROXY_ON),
     TXT("@", "a data endpoint for entity with serial id /90008/."),
     TXT(
         "@",
@@ -79,6 +71,7 @@ D(
     ),
     // atproto
     // TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae"),
+    IGNORE_NAME("_acme-challenge"),
 );
 
 D(
@@ -86,9 +79,11 @@ D(
     REG_NONE,
     DnsProvider(DSP_CLOUDFLARE),
     DefaultTTL(1),
-    A("@", WOLUMONDE_IP, CF_PROXY_OFF),
+    A("@", TRIMOUNTS_IP, CF_PROXY_OFF),
     TXT("@", "v=spf1 -all"),
     TXT("_dmarc", "v=DMARC1; p=reject;"),
+    TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae", TTL(60)),
+    IGNORE_NAME("_acme-challenge"),
 );
 
 var EMAIL_TTL = 86400;
@@ -98,13 +93,11 @@ D(
     REG_NONE,
     DnsProvider(DSP_CLOUDFLARE),
     DefaultTTL(1),
-    A("@", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("test", WOLUMONDE_IP, CF_PROXY_OFF),
+    A("@", TRIMOUNTS_IP, CF_PROXY_OFF),
     A("nucleus", DZWONEK_IP, CF_PROXY_OFF),
     A("trill", DZWONEK_IP, CF_PROXY_OFF),
     // atproto
     TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae"),
-    A("nil", WOLUMONDE_IP, CF_PROXY_OFF),
     TXT("_atproto.nil", "did=did:plc:dumbmutt4po52ept2tczimje"),
     TXT("_atproto.june", "did=did:plc:y3z2rr7q5rywu4fjn3fmfyop"),
     // june
@@ -159,12 +152,12 @@ D(
     ),
 
     // mta-sts
-    A("mta-sts", WOLUMONDE_IP, CF_PROXY_OFF),
+    A("mta-sts", TRIMOUNTS_IP, CF_PROXY_OFF),
     TXT("_mta-sts", "v=STSv1; id=20250930T1945", TTL(EMAIL_TTL)),
 
     // autoconfig
-    A("autoconfig", WOLUMONDE_IP, CF_PROXY_OFF),
-    A("autodiscover", WOLUMONDE_IP, CF_PROXY_OFF),
+    A("autoconfig", TRIMOUNTS_IP, CF_PROXY_OFF),
+    A("autodiscover", TRIMOUNTS_IP, CF_PROXY_OFF),
 
     // autodiscovery
     SRV(
@@ -178,4 +171,6 @@ D(
     SRV("_submissions._tcp", 0, 1, 465, "smtp.migadu.com.", TTL(EMAIL_TTL)),
     SRV("_imaps._tcp", 0, 1, 993, "imap.migadu.com.", TTL(EMAIL_TTL)),
     SRV("_pop3s._tcp", 0, 1, 995, "pop.migadu.com.", TTL(EMAIL_TTL)),
+
+    IGNORE_NAME("_acme-challenge"),
 );

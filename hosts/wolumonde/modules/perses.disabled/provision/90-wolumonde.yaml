@@ -1,0 +1,454 @@
+kind: Dashboard
+metadata:
+    name: wolumonde
+    createdAt: 0001-01-01T00:00:00Z
+    updatedAt: 0001-01-01T00:00:00Z
+    version: 0
+    project: private-infra
+spec:
+    panels:
+        "0_0":
+            kind: Panel
+            spec:
+                display:
+                    name: load over 5 min
+                plugin:
+                    kind: GaugeChart
+                    spec:
+                        calculation: mean
+                        format:
+                            unit: percent
+                        max: 100
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: node_load5 * 100 / count(count(node_cpu_seconds_total) by (cpu))
+                                seriesNameFormat: load %
+        "0_1":
+            kind: Panel
+            spec:
+                display:
+                    name: cpu usage
+                plugin:
+                    kind: GaugeChart
+                    spec:
+                        calculation: mean
+                        format:
+                            unit: percent
+                        max: 100
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: sum by (cpu) (rate(node_cpu_seconds_total{mode=~"user|system"}[1m])) * 100
+                                seriesNameFormat: cpu {{cpu}}
+        "0_2":
+            kind: Panel
+            spec:
+                display:
+                    name: memory usage
+                plugin:
+                    kind: GaugeChart
+                    spec:
+                        calculation: mean
+                        format:
+                            unit: percent
+                        max: 100
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) * 100 / node_memory_MemTotal_bytes
+                                seriesNameFormat: memory usage %
+        "0_3":
+            kind: Panel
+            spec:
+                display:
+                    name: disk usage /
+                plugin:
+                    kind: GaugeChart
+                    spec:
+                        calculation: last
+                        format:
+                            unit: percent
+                        max: 100
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: (node_filesystem_size_bytes{mountpoint="/"} - node_filesystem_free_bytes{mountpoint="/"}) * 100 / node_filesystem_size_bytes{mountpoint="/"}
+                                seriesNameFormat: disk usage %
+        "0_4":
+            kind: Panel
+            spec:
+                display:
+                    name: load over 5 min
+                plugin:
+                    kind: TimeSeriesChart
+                    spec:
+                        yAxis:
+                            max: 2
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: node_load5
+                                seriesNameFormat: load
+        "0_5":
+            kind: Panel
+            spec:
+                display:
+                    name: cpu usage
+                plugin:
+                    kind: TimeSeriesChart
+                    spec:
+                        yAxis:
+                            format:
+                                unit: percent
+                            max: 100
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: sum by (cpu) (rate(node_cpu_seconds_total{mode=~"user|system"}[1m])) * 100
+                                seriesNameFormat: cpu {{cpu}}
+        "0_6":
+            kind: Panel
+            spec:
+                display:
+                    name: memory usage
+                plugin:
+                    kind: TimeSeriesChart
+                    spec:
+                        yAxis:
+                            format:
+                                unit: bytes
+                            max: 4e+09
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes
+                                seriesNameFormat: current memory usage
+        "0_7":
+            kind: Panel
+            spec:
+                display:
+                    name: disk usage /
+                plugin:
+                    kind: TimeSeriesChart
+                    spec:
+                        yAxis:
+                            format:
+                                unit: bytes
+                            max: 3.8e+10
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: node_filesystem_size_bytes{mountpoint="/"} - node_filesystem_free_bytes{mountpoint="/"}
+                                seriesNameFormat: disk usage
+        "1_0":
+            kind: Panel
+            spec:
+                display:
+                    name: nginx requests / min
+                plugin:
+                    kind: TimeSeriesChart
+                    spec:
+                        legend:
+                            position: bottom
+                            size: small
+                        yAxis:
+                            format:
+                                unit: decimal
+                        visual:
+                            display: bar
+                            palette:
+                                mode: categorical
+                            stack: all
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: nginx_request_count
+                                seriesNameFormat: '{{res.statusCode}}'
+        "1_1":
+            kind: Panel
+            spec:
+                display:
+                    name: nginx latency / min
+                plugin:
+                    kind: TimeSeriesChart
+                    spec:
+                        yAxis:
+                            format:
+                                unit: seconds
+                            max: 0.5
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: nginx_request_latency
+                                seriesNameFormat: '{{stats_result}}'
+        "2_0":
+            kind: Panel
+            spec:
+                display:
+                    name: pds requests / min
+                plugin:
+                    kind: TimeSeriesChart
+                    spec:
+                        legend:
+                            position: bottom
+                            size: small
+                        yAxis:
+                            format:
+                                unit: decimal
+                        visual:
+                            display: bar
+                            palette:
+                                mode: categorical
+                            stack: all
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: pds_request_count
+                                seriesNameFormat: '{{res.statusCode}}'
+        "2_1":
+            kind: Panel
+            spec:
+                display:
+                    name: pds latency / min
+                plugin:
+                    kind: TimeSeriesChart
+                    spec:
+                        yAxis:
+                            format:
+                                unit: milliseconds
+                            max: 500
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: pds_response_latency
+                                seriesNameFormat: '{{stats_result}}'
+        "3_0":
+            kind: Panel
+            spec:
+                display:
+                    name: gazesys visits
+                plugin:
+                    kind: BarChart
+                    spec:
+                        calculation: last
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: gazesys_visit_real_total + gazesys_visit_fake_total
+                                seriesNameFormat: total visits
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: gazesys_visit_fake_total
+                                seriesNameFormat: (ai) bot visits
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: gazesys_visit_real_total
+                                seriesNameFormat: real visits
+        "3_1":
+            kind: Panel
+            spec:
+                display:
+                    name: gazesys pet
+                plugin:
+                    kind: StatChart
+                    spec:
+                        calculation: last
+                        format:
+                            unit: decimal
+                            shortValues: true
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: gazesys_pet_bounce_total
+                                seriesNameFormat: bounce count
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: gazesys_pet_distance_total
+                                seriesNameFormat: distance travelled
+        "4_0":
+            kind: Panel
+            spec:
+                display:
+                    name: anubis policy actions
+                plugin:
+                    kind: BarChart
+                    spec:
+                        calculation: last
+                queries:
+                    - kind: TimeSeriesQuery
+                      spec:
+                        plugin:
+                            kind: PrometheusTimeSeriesQuery
+                            spec:
+                                query: anubis_policy_results
+                                seriesNameFormat: '{{action}}: {{rule}}'
+    layouts:
+        - kind: Grid
+          spec:
+            display:
+                title: resource usage
+            items:
+                - x: 0
+                  "y": 0
+                  width: 6
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/0_0'
+                - x: 6
+                  "y": 0
+                  width: 6
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/0_1'
+                - x: 12
+                  "y": 0
+                  width: 6
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/0_2'
+                - x: 18
+                  "y": 0
+                  width: 6
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/0_3'
+                - x: 0
+                  "y": 6
+                  width: 6
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/0_4'
+                - x: 6
+                  "y": 6
+                  width: 6
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/0_5'
+                - x: 12
+                  "y": 6
+                  width: 6
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/0_6'
+                - x: 18
+                  "y": 6
+                  width: 6
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/0_7'
+        - kind: Grid
+          spec:
+            display:
+                title: nginx metrics
+            items:
+                - x: 0
+                  "y": 0
+                  width: 8
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/1_0'
+                - x: 8
+                  "y": 0
+                  width: 8
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/1_1'
+        - kind: Grid
+          spec:
+            display:
+                title: pds metrics
+            items:
+                - x: 0
+                  "y": 0
+                  width: 8
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/2_0'
+                - x: 8
+                  "y": 0
+                  width: 8
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/2_1'
+        - kind: Grid
+          spec:
+            display:
+                title: gazesys
+            items:
+                - x: 0
+                  "y": 0
+                  width: 8
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/3_0'
+                - x: 8
+                  "y": 0
+                  width: 8
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/3_1'
+        - kind: Grid
+          spec:
+            display:
+                title: forgejo
+            items:
+                - x: 0
+                  "y": 0
+                  width: 8
+                  height: 6
+                  content:
+                    $ref: '#/spec/panels/4_0'
+    duration: 30m
+    refreshInterval: 1m
