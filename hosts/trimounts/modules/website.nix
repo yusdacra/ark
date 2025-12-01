@@ -7,7 +7,7 @@
 let
   PUBLIC_BASE_URL = "https://gaze.systems";
   modules = (pkgs.callPackage "${inputs.blog}/nix/modules.nix" { }).overrideAttrs (_: {
-    outputHash = "sha256-rzfSfiK8FSNFR+1QTwM/ltLZBprG9BoQsPmOt6IdXFc=";
+    # outputHash = "sha256-rzfSfiK8FSNFR+1QTwM/ltLZBprG9BoQsPmOt6IdXFc=";
   });
   pkg = pkgs.callPackage "${inputs.blog}/nix" {
     inherit PUBLIC_BASE_URL;
