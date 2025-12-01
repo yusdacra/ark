@@ -32,13 +32,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "f79ac2a83647e8535511e33feb32fe5525f3ea74",
-            "sha256": "sha256-6WHoN48jfXJy95E/NHCBD6QdHLEXE6dsxtGAWsz3s4w=",
+            "rev": "00bc18c0a7c74fcf3a8f0ede70e5ee3f3f7d7797",
+            "sha256": "sha256-4TbxOa4V13/WspjKyfKDguKoIDVKRogOa+Rl0bSg2/U=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.org/@ptr.pet/endpoint"
         },
-        "version": "f79ac2a83647e8535511e33feb32fe5525f3ea74"
+        "version": "00bc18c0a7c74fcf3a8f0ede70e5ee3f3f7d7797"
     },
     "clickee-proxy": {
         "cargoLocks": null,
