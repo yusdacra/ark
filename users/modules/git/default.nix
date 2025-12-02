@@ -1,8 +1,7 @@
 { pkgs, ... }:
 let
-  personal = import ../../../personal.nix;
-  name = personal.name;
-  email = personal.emails.primary;
+  name = "dawn";
+  email = "90008@gaze.systems";
 in
 {
   programs.git = {

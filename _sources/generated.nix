@@ -15,15 +15,15 @@
   };
   blog = {
     pname = "blog";
-    version = "00bc18c0a7c74fcf3a8f0ede70e5ee3f3f7d7797";
+    version = "b42a0251ec0648d7f9dc0b3033811a5fa4168d39";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/endpoint";
-      rev = "00bc18c0a7c74fcf3a8f0ede70e5ee3f3f7d7797";
+      rev = "b42a0251ec0648d7f9dc0b3033811a5fa4168d39";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-4TbxOa4V13/WspjKyfKDguKoIDVKRogOa+Rl0bSg2/U=";
+      sha256 = "sha256-uPNpQxAYAwXHrWCo2VncbjT6OJbAX80jFdcslu8q7dQ=";
     };
     date = "2025-12-01";
   };
