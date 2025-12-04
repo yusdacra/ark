@@ -34,8 +34,33 @@ in
     nushell
   ];
   programs = {
-    steam.enable = true;
-    gamescope.enable = true;
+    steam = {
+      enable = true;
+      package = pkgs.steam.override {
+        extraPkgs = pkgs': with pkgs'; [
+          vulkan-loader
+          wayland
+          wayland-protocols
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXinerama
+          xorg.libXScrnSaver
+          libpng
+          libpulseaudio
+          libvorbis
+          stdenv.cc.cc.lib # Provides libstdc++.so.6
+          libkrb5
+          keyutils
+        ];
+      };
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
+    };
+    gamescope = {
+      enable = true;
+      capSysNice = true;
+    };
     gamemode.enable = true;
     appimage = {
       enable = true;

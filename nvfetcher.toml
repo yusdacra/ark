@@ -29,8 +29,8 @@ src.git = "https://tangled.org/@ptr.pet/nixos-cloud-resources"
 fetch.git = "https://tangled.org/@ptr.pet/nixos-cloud-resources"
 
 [limbusart]
-src.git = "https://git.gaze.systems/90008/limbusart.git"
-fetch.git = "https://git.gaze.systems/90008/limbusart.git"
+src.git = "https://github.com/90-008/limbusart.git"
+fetch.git = "https://github.com/90-008/limbusart.git"
 
 [clickee-proxy]
 src.git = "https://tangled.org/@ptr.pet/clickee-proxy"

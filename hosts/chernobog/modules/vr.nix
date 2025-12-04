@@ -42,7 +42,7 @@
         ],
         "runtime" :
         [
-          ${pkgs.xrizer}/lib/xrizer"
+          "${pkgs.xrizer}/lib/xrizer"
         ],
         "version" : 1
       }
