@@ -155,6 +155,7 @@ in
           bs-manager
           cemu
           tor-browser
+          supersonic-wayland
         ]) ++ [terra.helium];
       };
 
