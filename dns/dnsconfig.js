@@ -1,4 +1,5 @@
 var DSP_CLOUDFLARE = NewDnsProvider("cloudflare");
+var DSP_BUNNY = NewDnsProvider("bunny_dns");
 var REG_NONE = NewRegistrar("none");
 
 var DZWONEK_IP4 = "94.237.26.47";
@@ -9,10 +10,16 @@ var TRIMOUNTS_IP6 = "2a0a:4cc0:c1:e83d::b00b";
 var TRIMOUNTS_IPS = [TRIMOUNTS_IP4, TRIMOUNTS_IP6];
 
 function host(name, ips, opts) {
-    return [
-        A(name, ips[0], opts),
-        AAAA(name, ips[1], opts),
-    ];
+    if (opts)
+        return [
+            A(name, ips[0], opts),
+            AAAA(name, ips[1], opts),
+        ];
+    else
+        return [
+            A(name, ips[0]),
+            AAAA(name, ips[1]),
+        ];
 }
 
 function hosts(_names, ips, opts) {
@@ -45,7 +52,7 @@ function IGNORE_ACME() {
 D(
     "gaze.systems",
     REG_NONE,
-    DnsProvider(DSP_CLOUDFLARE),
+    DnsProvider(DSP_BUNNY),
     DefaultTTL(1),
     TRIMOUNTS(
         [
@@ -104,7 +111,7 @@ D(
 D(
     "poor.dog",
     REG_NONE,
-    DnsProvider(DSP_CLOUDFLARE),
+    DnsProvider(DSP_BUNNY),
     DefaultTTL(1),
     TRIMOUNTS("@", CF_PROXY_OFF),
     TXT("@", "v=spf1 -all"),
@@ -118,7 +125,7 @@ var EMAIL_TTL = 86400;
 D(
     "ptr.pet",
     REG_NONE,
-    DnsProvider(DSP_CLOUDFLARE),
+    DnsProvider(DSP_BUNNY),
     DefaultTTL(1),
     TRIMOUNTS("@", CF_PROXY_OFF),
     DZWONEK(["nucleus", "trill"], CF_PROXY_OFF),

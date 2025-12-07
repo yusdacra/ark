@@ -38,15 +38,15 @@
 
   users.users.nginx.extraGroups = [ "acme" ];
 
-  age.secrets.cfDnsEditToken.file = ../../../secrets/cloudflareDnsEdit.age;
+  age.secrets.bunnyApiKey.file = ../../../secrets/bunnyApiKey.age;
   security.acme = {
     acceptTerms = true;
     defaults = {
       group = "nginx";
       email = (import "${inputs.self}/personal.nix").emails.primary;
-      dnsProvider = "cloudflare";
+      dnsProvider = "bunny";
       credentialFiles = {
-        CF_DNS_API_TOKEN_FILE = config.age.secrets.cfDnsEditToken.path;
+        BUNNY_API_KEY_FILE = config.age.secrets.bunnyApiKey.path;
       };
     };
     certs."poor.dog" = { };
