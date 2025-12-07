@@ -59,7 +59,7 @@ D(
     TXT("@", "a data endpoint for entity with serial id /90008/."),
     TXT(
         "@",
-        "entity linked here uses it/they pronouns. it can be referred to as /dusk/ or /dawn/.",
+        "entity linked here uses it/that pronouns. it can also be referred to as /dawn/.",
     ),
     TXT(
         "@",

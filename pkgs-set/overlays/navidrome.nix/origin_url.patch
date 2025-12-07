@@ -1,0 +1,85 @@
+diff --git a/core/agents/listenbrainz/agent.go b/core/agents/listenbrainz/agent.go
+index 769b0f5..758eb85 100644
+--- a/core/agents/listenbrainz/agent.go
++++ b/core/agents/listenbrainz/agent.go
+@@ -3,6 +3,7 @@ package listenbrainz
+ import (
+ 	"context"
+ 	"errors"
++	"fmt"
+ 	"net/http"
+ 
+ 	"github.com/navidrome/navidrome/conf"
+@@ -52,6 +53,10 @@ func (l *listenBrainzAgent) formatListen(track *model.MediaFile) listenInfo {
+ 	artistNames := slice.Map(track.Participants[model.RoleArtist], func(p model.Participant) string {
+ 		return p.Name
+ 	})
++	var originURL string
++	if v := track.Tags.Values(model.TagSource); len(v) > 0 {
++		originURL = v[0]
++	}
+ 	li := listenInfo{
+ 		TrackMetadata: trackMetadata{
+ 			ArtistName:  track.Artist,
+@@ -67,9 +72,12 @@ func (l *listenBrainzAgent) formatListen(track *model.MediaFile) listenInfo {
+ 				ReleaseMBID:             track.MbzAlbumID,
+ 				ReleaseGroupMBID:        track.MbzReleaseGroupID,
+ 				DurationMs:              int(track.Duration * 1000),
++				OriginURL:               originURL,
+ 			},
+ 		},
+ 	}
++	fmt.Printf("listen info: %+v\n", li)
++	fmt.Printf("track tags: %+v\n", track.Tags)
+ 	return li
+ }
+ 
+diff --git a/core/agents/listenbrainz/agent_test.go b/core/agents/listenbrainz/agent_test.go
+index e99b442..11e7b3c 100644
+--- a/core/agents/listenbrainz/agent_test.go
++++ b/core/agents/listenbrainz/agent_test.go
+@@ -69,6 +69,7 @@ var _ = Describe("listenBrainzAgent", func() {
+ 						"ArtistNames":             ConsistOf("Artist 1", "Artist 2"),
+ 						"ArtistMBIDs":             ConsistOf("mbz-111", "mbz-222"),
+ 						"DurationMs":              Equal(142200),
++						"OriginURL":               Ignore(),
+ 					}),
+ 				}),
+ 			}))
+diff --git a/core/agents/listenbrainz/client.go b/core/agents/listenbrainz/client.go
+index 168aad5..807bdef 100644
+--- a/core/agents/listenbrainz/client.go
++++ b/core/agents/listenbrainz/client.go
+@@ -82,6 +82,7 @@ type additionalInfo struct {
+ 	ReleaseMBID             string   `json:"release_mbid,omitempty"`
+ 	ReleaseGroupMBID        string   `json:"release_group_mbid,omitempty"`
+ 	DurationMs              int      `json:"duration_ms,omitempty"`
++	OriginURL               string   `json:"origin_url,omitempty"`
+ }
+ 
+ func (c *client) validateToken(ctx context.Context, apiKey string) (*listenBrainzResponse, error) {
+diff --git a/model/tag.go b/model/tag.go
+index 674f688..ecd1a12 100644
+--- a/model/tag.go
++++ b/model/tag.go
+@@ -194,6 +194,7 @@ const (
+ 	TagISRC           TagName = "isrc"
+ 	TagBPM            TagName = "bpm"
+ 	TagExplicitStatus TagName = "explicitstatus"
++	TagSource         TagName = "source"
+ 
+ 	// Dates and years
+ 
+diff --git a/resources/mappings.yaml b/resources/mappings.yaml
+index d1da5c6..905ad01 100644
+--- a/resources/mappings.yaml
++++ b/resources/mappings.yaml
+@@ -251,6 +251,8 @@ additional:
+     aliases: [ txxx:script, script, ----:com.apple.itunes:script, wm/script ]
+   subtitle:
+     aliases: [ tit3, subtitle, ----:com.apple.itunes:subtitle, wm/subtitle ]
++  source:
++    aliases: [ source, woas, audio source, txxx:source, ----:com.apple.itunes:source ]
+   website:
+     aliases: [ woar, website, weblink, wm/authorurl ]
+   work:
