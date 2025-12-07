@@ -28,7 +28,5 @@
     pkgs.gitMinimal
   ];
 
-  networking.firewall.enable = true;
-
   system.stateVersion = "25.11";
 }
