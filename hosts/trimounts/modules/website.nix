@@ -11,7 +11,7 @@ let
   });
   pkg = pkgs.callPackage "${inputs.blog}/nix" {
     inherit PUBLIC_BASE_URL;
-    gazesys-modules = modules;
+    eunomia-modules = modules;
   };
   port = 3003;
   vhostConfig = {
