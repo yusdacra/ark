@@ -48,6 +48,10 @@ fetch.git = "https://tangled.org/@ptr.pet/nucleus"
 src.git = "https://tangled.org/@ptr.pet/trill"
 fetch.git = "https://tangled.org/@ptr.pet/trill"
 
+[faunu]
+src.git = "https://tangled.org/@ptr.pet/faunu"
+fetch.git = "https://tangled.org/@ptr.pet/faunu"
+
 ## TANGLED ##
 
 [tangled]

@@ -65,6 +65,20 @@
     };
     date = "2025-11-27";
   };
+  faunu = {
+    pname = "faunu";
+    version = "b7bacebec9faeef6f6adfb8e030d9d335a64152a";
+    src = fetchgit {
+      url = "https://tangled.org/@ptr.pet/faunu";
+      rev = "b7bacebec9faeef6f6adfb8e030d9d335a64152a";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sparseCheckout = [ ];
+      sha256 = "sha256-6ZyeHzgOM/sbZyywimqvpM52fnnhXu3PsixU+0l+hXo=";
+    };
+    date = "2025-12-17";
+  };
   gomod2nix = {
     pname = "gomod2nix";
     version = "02e63a239d6eabd595db56852535992c898eba72";

@@ -128,7 +128,7 @@ D(
     DnsProvider(DSP_BUNNY),
     DefaultTTL(1),
     TRIMOUNTS("@", CF_PROXY_OFF),
-    DZWONEK(["nucleus", "trill"], CF_PROXY_OFF),
+    DZWONEK(["nucleus", "trill", "dysnomia"], CF_PROXY_OFF),
     // atproto
     TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae"),
     TXT("_atproto.nil", "did=did:plc:dumbmutt4po52ept2tczimje"),

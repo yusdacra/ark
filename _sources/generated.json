@@ -102,6 +102,26 @@
         },
         "version": "5ea68886d95218646d11d3551a476d458df00778"
     },
+    "faunu": {
+        "cargoLocks": null,
+        "date": "2025-12-17",
+        "extract": null,
+        "name": "faunu",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "b7bacebec9faeef6f6adfb8e030d9d335a64152a",
+            "sha256": "sha256-6ZyeHzgOM/sbZyywimqvpM52fnnhXu3PsixU+0l+hXo=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://tangled.org/@ptr.pet/faunu"
+        },
+        "version": "b7bacebec9faeef6f6adfb8e030d9d335a64152a"
+    },
     "gomod2nix": {
         "cargoLocks": null,
         "date": "2025-11-24",
