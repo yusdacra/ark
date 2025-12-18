@@ -26,4 +26,7 @@ in
   services.nginx.virtualHosts."poor.dog" = {
     locations."/click".proxyPass = "http://localhost:${toString port}";
   };
+  services.nginx.virtualHosts."ptr.pet" = {
+    locations."/click".proxyPass = "http://localhost:${toString port}";
+  };
 }

@@ -27,6 +27,20 @@
     };
     date = "2025-12-10";
   };
+  clickee = {
+    pname = "clickee";
+    version = "ca379a35ac60cc80fa4bf68a27ee0c30724ad324";
+    src = fetchgit {
+      url = "https://tangled.org/@ptr.pet/clickee";
+      rev = "ca379a35ac60cc80fa4bf68a27ee0c30724ad324";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sparseCheckout = [ ];
+      sha256 = "sha256-NuXYKiCzicWJxwHg4mQYYMUhOd83o+cYjqrUiSKjDEs=";
+    };
+    date = "2025-09-14";
+  };
   clickee-proxy = {
     pname = "clickee-proxy";
     version = "a60247a8d92e1802298fc197034d0b7b54cd90b7";

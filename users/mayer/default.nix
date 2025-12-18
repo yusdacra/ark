@@ -127,6 +127,7 @@ in
             [
               "zen"
               "discord"
+              "clickee"
             ]
           ];
         in

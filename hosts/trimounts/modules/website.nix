@@ -54,7 +54,7 @@ in
     };
     serviceConfig = {
       User = "website";
-      ExecStart = "${pkg}/bin/website";
+      ExecStart = "${pkg}/bin/eunomia";
       Restart = "on-failure";
       RestartSec = 5;
       WorkingDirectory = "/var/lib/website";

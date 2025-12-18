@@ -40,6 +40,26 @@
         },
         "version": "16d0e0320c98e26c0f8fb6d1304cdb91edabd7ab"
     },
+    "clickee": {
+        "cargoLocks": null,
+        "date": "2025-09-14",
+        "extract": null,
+        "name": "clickee",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "ca379a35ac60cc80fa4bf68a27ee0c30724ad324",
+            "sha256": "sha256-NuXYKiCzicWJxwHg4mQYYMUhOd83o+cYjqrUiSKjDEs=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://tangled.org/@ptr.pet/clickee"
+        },
+        "version": "ca379a35ac60cc80fa4bf68a27ee0c30724ad324"
+    },
     "clickee-proxy": {
         "cargoLocks": null,
         "date": "2025-09-15",
