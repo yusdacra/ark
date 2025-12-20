@@ -44,10 +44,7 @@
     defaults = {
       group = "nginx";
       email = (import "${inputs.self}/personal.nix").emails.primary;
-      dnsProvider = "bunny";
-      credentialFiles = {
-        BUNNY_API_KEY_FILE = config.age.secrets.bunnyApiKey.path;
-      };
+      webroot = "/var/lib/acme/acme-challenge";
     };
     certs."poor.dog" = { };
     certs."ptr.pet" = { };

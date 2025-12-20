@@ -1,5 +1,5 @@
 var DSP_CLOUDFLARE = NewDnsProvider("cloudflare");
-var DSP_BUNNY = NewDnsProvider("bunny_dns");
+var DSP_PRIMARY = NewDnsProvider("hedns");
 var REG_NONE = NewRegistrar("none");
 
 var DZWONEK_IP4 = "94.237.26.47";
@@ -52,8 +52,7 @@ function IGNORE_ACME() {
 D(
     "gaze.systems",
     REG_NONE,
-    DnsProvider(DSP_BUNNY),
-    DefaultTTL(1),
+    DnsProvider(DSP_PRIMARY),
     TRIMOUNTS(
         [
             "@", "doc", "pmart", "dash", "id",
@@ -90,7 +89,6 @@ D(
     "9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa",
     REG_NONE,
     DnsProvider(DSP_CLOUDFLARE),
-    DefaultTTL(1),
     TRIMOUNTS("@", CF_PROXY_ON),
     TXT("@", "a data endpoint for entity with serial id /90008/."),
     TXT(
@@ -111,8 +109,7 @@ D(
 D(
     "poor.dog",
     REG_NONE,
-    DnsProvider(DSP_BUNNY),
-    DefaultTTL(1),
+    DnsProvider(DSP_PRIMARY),
     TRIMOUNTS("@", CF_PROXY_OFF),
     TXT("@", "v=spf1 -all"),
     TXT("_dmarc", "v=DMARC1; p=reject;"),
@@ -120,13 +117,12 @@ D(
     IGNORE_ACME(),
 );
 
-var EMAIL_TTL = 86400;
+var EMAIL_TTL = function () { return TTL(86400); };
 
 D(
     "ptr.pet",
     REG_NONE,
-    DnsProvider(DSP_BUNNY),
-    DefaultTTL(1),
+    DnsProvider(DSP_PRIMARY),
     TRIMOUNTS("@", CF_PROXY_OFF),
     DZWONEK(["nucleus", "trill", "dysnomia"], CF_PROXY_OFF),
     // atproto
@@ -138,55 +134,55 @@ D(
     CNAME("*.june", "girlboss.ceo."),
     // email
     // verification
-    TXT("@", "hosted-email-verify=zr04ylon", TTL(EMAIL_TTL)),
+    TXT("@", "hosted-email-verify=zr04ylon", EMAIL_TTL()),
 
-    MX("@", 10, "aspmx1.migadu.com.", TTL(EMAIL_TTL)),
-    MX("@", 20, "aspmx2.migadu.com.", TTL(EMAIL_TTL)),
+    MX("@", 10, "aspmx1.migadu.com.", EMAIL_TTL()),
+    MX("@", 20, "aspmx2.migadu.com.", EMAIL_TTL()),
 
     // DKIM
     CNAME(
         "key1._domainkey",
         "key1.ptr.pet._domainkey.migadu.com.",
-        TTL(EMAIL_TTL),
+        EMAIL_TTL(),
     ),
     CNAME(
         "key2._domainkey",
         "key2.ptr.pet._domainkey.migadu.com.",
-        TTL(EMAIL_TTL),
+        EMAIL_TTL(),
     ),
     CNAME(
         "key3._domainkey",
         "key3.ptr.pet._domainkey.migadu.com.",
-        TTL(EMAIL_TTL),
+        EMAIL_TTL(),
     ),
 
     // SPF
-    TXT("@", "v=spf1 include:spf.migadu.com -all", TTL(EMAIL_TTL)),
+    TXT("@", "v=spf1 include:spf.migadu.com -all", EMAIL_TTL()),
 
     // DMARC
     TXT(
         "_dmarc",
         "v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s; fo=1; pct=100; rua=mailto:infrastructure@ptr.pet; ruf=mailto:infrastructure@ptr.pet",
-        TTL(EMAIL_TTL),
+        EMAIL_TTL(),
     ),
 
     // configuration
     TXT(
         "@",
         "mailconf=https://autoconfig.migadu.com/mail/config-v1.1.xml",
-        TTL(EMAIL_TTL),
+        EMAIL_TTL(),
     ),
 
     // TLS reporting
     TXT(
         "_smtp._tls",
         "v=TLSRPTv1; rua=mailto:infrastructure@ptr.pet",
-        TTL(EMAIL_TTL),
+        EMAIL_TTL(),
     ),
 
     // mta-sts
     TRIMOUNTS("mta-sts", CF_PROXY_OFF),
-    TXT("_mta-sts", "v=STSv1; id=20250930T1945", TTL(EMAIL_TTL)),
+    TXT("_mta-sts", "v=STSv1; id=20250930T1945", EMAIL_TTL()),
 
     // autoconfig
     TRIMOUNTS(["autoconfig", "autodiscover"], CF_PROXY_OFF),
@@ -198,11 +194,11 @@ D(
         1,
         443,
         "autodiscover.migadu.com.",
-        TTL(EMAIL_TTL),
+        EMAIL_TTL(),
     ),
-    SRV("_submissions._tcp", 0, 1, 465, "smtp.migadu.com.", TTL(EMAIL_TTL)),
-    SRV("_imaps._tcp", 0, 1, 993, "imap.migadu.com.", TTL(EMAIL_TTL)),
-    SRV("_pop3s._tcp", 0, 1, 995, "pop.migadu.com.", TTL(EMAIL_TTL)),
+    SRV("_submissions._tcp", 0, 1, 465, "smtp.migadu.com.", EMAIL_TTL()),
+    SRV("_imaps._tcp", 0, 1, 993, "imap.migadu.com.", EMAIL_TTL()),
+    SRV("_pop3s._tcp", 0, 1, 995, "pop.migadu.com.", EMAIL_TTL()),
 
     IGNORE_ACME(),
 );
