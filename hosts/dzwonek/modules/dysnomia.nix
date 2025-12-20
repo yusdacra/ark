@@ -11,7 +11,7 @@ in
     quic = true;
     kTLS = true;
     locations."/" = {
-      root = terra.faunu;
+      root = terra.dysnomia;
       tryFiles = "$uri $uri/ /index.html";
       extraConfig = ''
         add_header Cross-Origin-Embedder-Policy "require-corp";
