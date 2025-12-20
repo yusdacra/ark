@@ -59,8 +59,8 @@ fetch.git = "https://tangled.org/@ptr.pet/dysnomia"
 ## TANGLED ##
 
 [tangled]
-src.git = "https://tangled.org/@tangled.org/core"
-fetch.git = "https://tangled.org/@tangled.org/core"
+src.git = "https://tangled.org/ptr.pet/core"
+fetch.git = "https://tangled.org/ptr.pet/core"
 
 [tangled-sqlite-lib]
 src.manual = "3450100"

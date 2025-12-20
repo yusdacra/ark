@@ -57,15 +57,15 @@
   };
   disko = {
     pname = "disko";
-    version = "7194cfe5b7a3660726b0fe7296070eaef601cae9";
+    version = "916506443ecd0d0b4a0f4cf9d40a3c22ce39b378";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "disko";
-      rev = "7194cfe5b7a3660726b0fe7296070eaef601cae9";
+      rev = "916506443ecd0d0b4a0f4cf9d40a3c22ce39b378";
       fetchSubmodules = false;
-      sha256 = "sha256-YD5QWlGnusNbZCqR3pxG8tRxx9yUXayLZfAJRWspq2s=";
+      sha256 = "sha256-P0kM+5o+DKnB6raXgFEk3azw8Wqg5FL6wyl9jD+G5a4=";
     };
-    date = "2025-12-15";
+    date = "2025-12-19";
   };
   dysnomia = {
     pname = "dysnomia";
@@ -107,15 +107,15 @@
   };
   home = {
     pname = "home";
-    version = "89c9508bbe9b40d36b3dc206c2483ef176f15173";
+    version = "bb35f07cc95a73aacbaf1f7f46bb8a3f40f265b5";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "home-manager";
-      rev = "89c9508bbe9b40d36b3dc206c2483ef176f15173";
+      rev = "bb35f07cc95a73aacbaf1f7f46bb8a3f40f265b5";
       fetchSubmodules = false;
-      sha256 = "sha256-rB45jv4uwC90vM9UZ70plfvY/2Kdygs+zlQ07dGQFk4=";
+      sha256 = "sha256-47Ee0bTidhF/3/sHuYnWRuxcCrrm0mBNDxBkOTd3wWQ=";
     };
-    date = "2025-12-17";
+    date = "2025-12-19";
   };
   limbusart = {
     pname = "limbusart";
@@ -171,15 +171,15 @@
   };
   nixpkgs-xr = {
     pname = "nixpkgs-xr";
-    version = "cefcf3998f426c7b3d956ac7bd8360dddd724e33";
+    version = "22697a0c10b5c368ce55a84f99daa6aef57d4d15";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "nixpkgs-xr";
-      rev = "cefcf3998f426c7b3d956ac7bd8360dddd724e33";
+      rev = "22697a0c10b5c368ce55a84f99daa6aef57d4d15";
       fetchSubmodules = false;
-      sha256 = "sha256-nppx66CXo7GpJnvpjrlNdNBvi/bFhVpc8sk09rtysfA=";
+      sha256 = "sha256-jiP171U1n5pfU4lhWz5TgyDsAqc2ksE5coHP3Hmk32w=";
     };
-    date = "2025-12-17";
+    date = "2025-12-20";
   };
   nsid-tracker = {
     pname = "nsid-tracker";
@@ -223,17 +223,17 @@
   };
   tangled = {
     pname = "tangled";
-    version = "8fc9d5f1d68b85028f197e5d44e13591e1489ddf";
+    version = "716a5bc0dafb96bbf72fb6e07d20e251f97c9f4e";
     src = fetchgit {
-      url = "https://tangled.org/@tangled.org/core";
-      rev = "8fc9d5f1d68b85028f197e5d44e13591e1489ddf";
+      url = "https://tangled.org/ptr.pet/core";
+      rev = "716a5bc0dafb96bbf72fb6e07d20e251f97c9f4e";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-FVapTOSBdmhkgnrcA84f2gb1FGBe26+GtMV4pkkIKhA=";
+      sha256 = "sha256-SGG97w/bvffP6zuJwbnFHK6tdfuWEzKNOfjGbh2PIj0=";
     };
-    date = "2025-12-18";
+    date = "2025-12-20";
   };
   tangled-sqlite-lib = {
     pname = "tangled-sqlite-lib";
@@ -259,14 +259,14 @@
   };
   zen-browser = {
     pname = "zen-browser";
-    version = "a7f58a9e3481804915d75a9c86527bca6d9dafb3";
+    version = "4563d0ffdf586368f1bec1a39cc20c9b12b73884";
     src = fetchFromGitHub {
       owner = "0xc000022070";
       repo = "zen-browser-flake";
-      rev = "a7f58a9e3481804915d75a9c86527bca6d9dafb3";
+      rev = "4563d0ffdf586368f1bec1a39cc20c9b12b73884";
       fetchSubmodules = false;
-      sha256 = "sha256-7MHR94mOoa5/s4NBrpsXWaNNzrZyRC0OwRwEobp1wzI=";
+      sha256 = "sha256-NccmxYNOUHLLehsBLaeZ3QtVlDfIW1FDBe3W/kIDwa0=";
     };
-    date = "2025-12-18";
+    date = "2025-12-20";
   };
 }
