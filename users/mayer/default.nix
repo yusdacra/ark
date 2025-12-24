@@ -133,6 +133,7 @@ in
         in
         l.flatten [
           (tlib.prefixStrings "${inputs.self}/users/modules/" modulesToEnable)
+          ../modules/discord/service.nix
         ];
 
       home = {
