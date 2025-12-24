@@ -22,7 +22,7 @@
     },
     "blog": {
         "cargoLocks": null,
-        "date": "2025-12-15",
+        "date": "2025-12-24",
         "extract": null,
         "name": "blog",
         "passthru": null,
@@ -32,13 +32,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "79ec1f7c30198c7406271c92a3a522849a23c6ff",
-            "sha256": "sha256-uF2W+YaZmJOIXTclraoc69MmqRxNXcmBFBB41o8DTGE=",
+            "rev": "38bc6dce3cf463ccda4ddfbeb835176c37c86777",
+            "sha256": "sha256-jMZaXprvuSYd7jhGz9D6S6wFz1TTAPtkTwEENcp8NiY=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.org/@ptr.pet/endpoint"
         },
-        "version": "79ec1f7c30198c7406271c92a3a522849a23c6ff"
+        "version": "38bc6dce3cf463ccda4ddfbeb835176c37c86777"
     },
     "clickee": {
         "cargoLocks": null,
@@ -103,7 +103,7 @@
     },
     "dysnomia": {
         "cargoLocks": null,
-        "date": "2025-12-20",
+        "date": "2025-12-22",
         "extract": null,
         "name": "dysnomia",
         "passthru": null,
@@ -113,13 +113,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "d1855bfba2ef14c1d612cbe9611c1811e870384c",
-            "sha256": "sha256-0aPQH8tfSYdYlc8EKiHifWXW7iJlBg+tjdfFBxjjsSY=",
+            "rev": "1f371223d2ffe80385c63119b325d8da7a4c7e7e",
+            "sha256": "sha256-hUFMvmKEO65yw8Igkf4323t6uvKukaojQMNm+8tN4rc=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.org/@ptr.pet/dysnomia"
         },
-        "version": "d1855bfba2ef14c1d612cbe9611c1811e870384c"
+        "version": "1f371223d2ffe80385c63119b325d8da7a4c7e7e"
     },
     "facter": {
         "cargoLocks": null,
@@ -384,7 +384,7 @@
     },
     "trill": {
         "cargoLocks": null,
-        "date": "2025-11-25",
+        "date": "2025-12-24",
         "extract": null,
         "name": "trill",
         "passthru": null,
@@ -394,13 +394,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "c9604685156e009cebd0ddc3b31672455f635387",
-            "sha256": "sha256-so9EHN0GQ7rFSmnLnpRap2RqRcklhe3C1HdyAKeR6No=",
+            "rev": "78885a9a25b70326934ab5edb28b293b4930b07a",
+            "sha256": "sha256-iRRdcYOT+1XQesG+hG71wbdS/T7+nD6elsRrP78h34o=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.org/@ptr.pet/trill"
         },
-        "version": "c9604685156e009cebd0ddc3b31672455f635387"
+        "version": "78885a9a25b70326934ab5edb28b293b4930b07a"
     },
     "zen-browser": {
         "cargoLocks": null,

@@ -15,17 +15,17 @@
   };
   blog = {
     pname = "blog";
-    version = "79ec1f7c30198c7406271c92a3a522849a23c6ff";
+    version = "38bc6dce3cf463ccda4ddfbeb835176c37c86777";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/endpoint";
-      rev = "79ec1f7c30198c7406271c92a3a522849a23c6ff";
+      rev = "38bc6dce3cf463ccda4ddfbeb835176c37c86777";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-uF2W+YaZmJOIXTclraoc69MmqRxNXcmBFBB41o8DTGE=";
+      sha256 = "sha256-jMZaXprvuSYd7jhGz9D6S6wFz1TTAPtkTwEENcp8NiY=";
     };
-    date = "2025-12-15";
+    date = "2025-12-24";
   };
   clickee = {
     pname = "clickee";
@@ -69,17 +69,17 @@
   };
   dysnomia = {
     pname = "dysnomia";
-    version = "d1855bfba2ef14c1d612cbe9611c1811e870384c";
+    version = "1f371223d2ffe80385c63119b325d8da7a4c7e7e";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/dysnomia";
-      rev = "d1855bfba2ef14c1d612cbe9611c1811e870384c";
+      rev = "1f371223d2ffe80385c63119b325d8da7a4c7e7e";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-0aPQH8tfSYdYlc8EKiHifWXW7iJlBg+tjdfFBxjjsSY=";
+      sha256 = "sha256-hUFMvmKEO65yw8Igkf4323t6uvKukaojQMNm+8tN4rc=";
     };
-    date = "2025-12-20";
+    date = "2025-12-22";
   };
   facter = {
     pname = "facter";
@@ -245,17 +245,17 @@
   };
   trill = {
     pname = "trill";
-    version = "c9604685156e009cebd0ddc3b31672455f635387";
+    version = "78885a9a25b70326934ab5edb28b293b4930b07a";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/trill";
-      rev = "c9604685156e009cebd0ddc3b31672455f635387";
+      rev = "78885a9a25b70326934ab5edb28b293b4930b07a";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-so9EHN0GQ7rFSmnLnpRap2RqRcklhe3C1HdyAKeR6No=";
+      sha256 = "sha256-iRRdcYOT+1XQesG+hG71wbdS/T7+nD6elsRrP78h34o=";
     };
-    date = "2025-11-25";
+    date = "2025-12-24";
   };
   zen-browser = {
     pname = "zen-browser";
