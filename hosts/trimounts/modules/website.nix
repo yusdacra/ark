@@ -30,6 +30,11 @@ let
         rewrite ^/annoy/ws(.*) /$1 break;
       '';
     };
+    extraConfig = ''
+      if ($http_user_agent ~* "Synapse") {
+        return 403;
+      }
+    '';
   };
 in
 {
