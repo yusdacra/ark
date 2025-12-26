@@ -15,15 +15,15 @@
   };
   blog = {
     pname = "blog";
-    version = "38bc6dce3cf463ccda4ddfbeb835176c37c86777";
+    version = "6e5130b26da06ae6d31ae814b9536ec0c0cd2748";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/endpoint";
-      rev = "38bc6dce3cf463ccda4ddfbeb835176c37c86777";
+      rev = "6e5130b26da06ae6d31ae814b9536ec0c0cd2748";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-jMZaXprvuSYd7jhGz9D6S6wFz1TTAPtkTwEENcp8NiY=";
+      sha256 = "sha256-p0mq8E7uHrKtjVcLT76eebwnCUul11G31CQ5u/C0+c8=";
     };
     date = "2025-12-24";
   };
@@ -245,17 +245,17 @@
   };
   trill = {
     pname = "trill";
-    version = "78885a9a25b70326934ab5edb28b293b4930b07a";
+    version = "d395ba493b4735f82db9ce99c7e7e8b671b38225";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/trill";
-      rev = "78885a9a25b70326934ab5edb28b293b4930b07a";
+      rev = "d395ba493b4735f82db9ce99c7e7e8b671b38225";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-iRRdcYOT+1XQesG+hG71wbdS/T7+nD6elsRrP78h34o=";
+      sha256 = "sha256-mxV02sfP7H2lv/xD9MkVHfp6F8dnYQly7rhTRpMEeiw=";
     };
-    date = "2025-12-24";
+    date = "2025-12-25";
   };
   zen-browser = {
     pname = "zen-browser";

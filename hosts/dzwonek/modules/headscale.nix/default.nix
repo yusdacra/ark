@@ -25,8 +25,8 @@ in
       };
       hosts = {
         chernobog = "100.64.0.8";
-        wolumonde = "100.64.0.2";
         higashi = "100.64.0.5";
+        trimounts = "100.64.0.7";
       };
       rules = lib.mkBefore [
         {
@@ -45,7 +45,7 @@ in
           dst = [ "tag:private-infra:*" ];
         }
         {
-          src = [ "wolumonde" ];
+          src = [ "trimounts" ];
           dst = [ "chernobog:*" ];
         }
         {
