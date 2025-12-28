@@ -22,7 +22,7 @@
     },
     "blog": {
         "cargoLocks": null,
-        "date": "2025-12-24",
+        "date": "2025-12-26",
         "extract": null,
         "name": "blog",
         "passthru": null,
@@ -32,13 +32,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "6e5130b26da06ae6d31ae814b9536ec0c0cd2748",
-            "sha256": "sha256-p0mq8E7uHrKtjVcLT76eebwnCUul11G31CQ5u/C0+c8=",
+            "rev": "95c18d69c811a6483df1a2c6b727f696db39858e",
+            "sha256": "sha256-VeX7C0PQdhQu14xxeCftFUFWO7MhssvulC319s82Jt4=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.org/@ptr.pet/endpoint"
         },
-        "version": "6e5130b26da06ae6d31ae814b9536ec0c0cd2748"
+        "version": "95c18d69c811a6483df1a2c6b727f696db39858e"
     },
     "clickee": {
         "cargoLocks": null,
@@ -123,7 +123,7 @@
     },
     "facter": {
         "cargoLocks": null,
-        "date": "2025-12-11",
+        "date": "2025-12-24",
         "extract": null,
         "name": "facter",
         "passthru": null,
@@ -135,12 +135,12 @@
             "name": null,
             "owner": "nix-community",
             "repo": "nixos-facter-modules",
-            "rev": "9dd775ee92de63f14edd021d59416e18ac2c00f1",
-            "sha256": "sha256-k3lYQ+A1F7aTz8HnlU++bd9t/x/NP2A4v9+x6opcVg0=",
+            "rev": "e796d536e3d83de74267069e179dc620a608ed7d",
+            "sha256": "sha256-Ud9v49ZPsoDBFuyJSQ2Mpw1ZgAH/aMwUwwzrVoetNus=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "9dd775ee92de63f14edd021d59416e18ac2c00f1"
+        "version": "e796d536e3d83de74267069e179dc620a608ed7d"
     },
     "gomod2nix": {
         "cargoLocks": null,
@@ -165,7 +165,7 @@
     },
     "home": {
         "cargoLocks": null,
-        "date": "2025-12-19",
+        "date": "2025-12-27",
         "extract": null,
         "name": "home",
         "passthru": null,
@@ -177,12 +177,12 @@
             "name": null,
             "owner": "nix-community",
             "repo": "home-manager",
-            "rev": "bb35f07cc95a73aacbaf1f7f46bb8a3f40f265b5",
-            "sha256": "sha256-47Ee0bTidhF/3/sHuYnWRuxcCrrm0mBNDxBkOTd3wWQ=",
+            "rev": "4067ca1ffb6425b8597eafb63a84b171e0192d2b",
+            "sha256": "sha256-Ok0jocJ82JriaMDtYEytR8oWcxADlX5WcWXULrN4czA=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "bb35f07cc95a73aacbaf1f7f46bb8a3f40f265b5"
+        "version": "4067ca1ffb6425b8597eafb63a84b171e0192d2b"
     },
     "limbusart": {
         "cargoLocks": null,
@@ -247,7 +247,7 @@
     },
     "nixos-hardware": {
         "cargoLocks": null,
-        "date": "2025-11-29",
+        "date": "2025-12-24",
         "extract": null,
         "name": "nixos-hardware",
         "passthru": null,
@@ -259,16 +259,16 @@
             "name": null,
             "owner": "NixOS",
             "repo": "nixos-hardware",
-            "rev": "9154f4569b6cdfd3c595851a6ba51bfaa472d9f3",
-            "sha256": "sha256-ZlJTNLUKQRANlLDomuRWLBCH5792x+6XUJ4YdFRjtO4=",
+            "rev": "c5db9569ac9cc70929c268ac461f4003e3e5ca80",
+            "sha256": "sha256-UXVtN77D7pzKmzOotFTStgZBqpOcf8cO95FcupWp4Zo=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "9154f4569b6cdfd3c595851a6ba51bfaa472d9f3"
+        "version": "c5db9569ac9cc70929c268ac461f4003e3e5ca80"
     },
     "nixpkgs-xr": {
         "cargoLocks": null,
-        "date": "2025-12-20",
+        "date": "2025-12-24",
         "extract": null,
         "name": "nixpkgs-xr",
         "passthru": null,
@@ -280,12 +280,12 @@
             "name": null,
             "owner": "nix-community",
             "repo": "nixpkgs-xr",
-            "rev": "22697a0c10b5c368ce55a84f99daa6aef57d4d15",
-            "sha256": "sha256-jiP171U1n5pfU4lhWz5TgyDsAqc2ksE5coHP3Hmk32w=",
+            "rev": "9e8efcd2c4ea906772dea99204a9819284a29b81",
+            "sha256": "sha256-biwvZsCGC4vCXS6rzs3tUkELqqEXPko0E3R9IhYKavE=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "22697a0c10b5c368ce55a84f99daa6aef57d4d15"
+        "version": "9e8efcd2c4ea906772dea99204a9819284a29b81"
     },
     "nsid-tracker": {
         "cargoLocks": null,
@@ -309,7 +309,7 @@
     },
     "nucleus": {
         "cargoLocks": null,
-        "date": "2025-11-11",
+        "date": "2025-12-27",
         "extract": null,
         "name": "nucleus",
         "passthru": null,
@@ -319,17 +319,17 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "a4f73517c1a76ed20b55f21618148b8afe0fa838",
-            "sha256": "sha256-8WrGAr+aCIFCFuixtH1BSB5lMn+d/FqXsEFAmXY3HkU=",
+            "rev": "2ad7bd0b2710896cdf31638c32ceacc02a226726",
+            "sha256": "sha256-AXZhPcOvCCwFhntqLoZZtyaNTV6RQeS7I74RFzmFeiM=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.org/@ptr.pet/nucleus"
         },
-        "version": "a4f73517c1a76ed20b55f21618148b8afe0fa838"
+        "version": "2ad7bd0b2710896cdf31638c32ceacc02a226726"
     },
     "stylix": {
         "cargoLocks": null,
-        "date": "2025-12-16",
+        "date": "2025-12-24",
         "extract": null,
         "name": "stylix",
         "passthru": null,
@@ -341,12 +341,12 @@
             "name": null,
             "owner": "nix-community",
             "repo": "stylix",
-            "rev": "e6829552d4bb659ebab00f08c61d8c62754763f3",
-            "sha256": "sha256-NgTRxiEC5y96zrhdBygnY+mSzk5FWMML39PcRGVJmxg=",
+            "rev": "551df12ee3ebac52c5712058bd97fd9faa4c3430",
+            "sha256": "sha256-J2DDdRqSU4w9NNgkMfmMeaLIof5PXtS9RG7y6ckDvQE=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "e6829552d4bb659ebab00f08c61d8c62754763f3"
+        "version": "551df12ee3ebac52c5712058bd97fd9faa4c3430"
     },
     "tangled": {
         "cargoLocks": null,
@@ -404,7 +404,7 @@
     },
     "zen-browser": {
         "cargoLocks": null,
-        "date": "2025-12-20",
+        "date": "2025-12-25",
         "extract": null,
         "name": "zen-browser",
         "passthru": null,
@@ -416,11 +416,11 @@
             "name": null,
             "owner": "0xc000022070",
             "repo": "zen-browser-flake",
-            "rev": "4563d0ffdf586368f1bec1a39cc20c9b12b73884",
-            "sha256": "sha256-NccmxYNOUHLLehsBLaeZ3QtVlDfIW1FDBe3W/kIDwa0=",
+            "rev": "98d8f48ba80a4b6e3b56addad850d57132301075",
+            "sha256": "sha256-mGZBEN67mxeOsBhplBRLm6L+y++8jU46EEUYgemG1aQ=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "4563d0ffdf586368f1bec1a39cc20c9b12b73884"
+        "version": "98d8f48ba80a4b6e3b56addad850d57132301075"
     }
 }

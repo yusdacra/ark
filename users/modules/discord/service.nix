@@ -8,7 +8,7 @@
 
     Service = {
       Type = "simple";
-      ExecStart = "${pkgs.openssh}/bin/ssh -N -D 127.0.0.1:1337 root@dzwonek";
+      ExecStart = "${pkgs.openssh}/bin/ssh -N -D 127.0.0.1:1338 root@dzwonek";
       Restart = "on-failure";
       RestartSec = "3s";
     };

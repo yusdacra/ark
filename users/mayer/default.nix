@@ -128,6 +128,7 @@ in
               "zen"
               # "discord"
               "clickee"
+              "arrpc"
             ]
           ];
         in
@@ -158,6 +159,7 @@ in
           cemu
           tor-browser
           supersonic-wayland
+          feishin
         ]) ++ [terra.helium];
       };
 
