@@ -1,9 +1,6 @@
 {
-  config,
-  nixosConfig,
   pkgs,
   lib,
-  tlib,
   ...
 }:
 let
@@ -15,13 +12,16 @@ in
     ../wlsunset
     ../mako
     ../tofi
+    ../clipman
   ];
 
-  home.packages = with pkgs; [niri xwayland-satellite brightnessctl swaybg];
+  home.packages = with pkgs; [file libnotify clipman niri xwayland-satellite brightnessctl swaybg];
   xdg.configFile."niri/config.kdl".text =
     let
       replace = {
         wallpaper = toString ../../mayer/wallpaper.png;
+        clipboard-upload = toString ./uploader.nu;
+        clipboard-select = toString ./clipboard.nu;
       };
     in
     l.replaceStrings

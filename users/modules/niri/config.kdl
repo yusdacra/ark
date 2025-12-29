@@ -179,6 +179,9 @@ binds {
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
+    Ctrl+Shift+U { spawn-sh "nu %%clipboard-upload%%"; }
+    Ctrl+Shift+S { spawn-sh "nu %%clipboard-select%%"; }
+
     Mod+O repeat=false { toggle-overview; }
     Mod+Q cooldown-ms=50 { close-window; }
 

@@ -2,7 +2,6 @@
   pkgs,
   lib,
   tlib,
-  config,
   terra,
   ...
 }@globalAttrs:
@@ -98,6 +97,7 @@ in
 
   home-manager.users.mayer =
     {
+      config,
       pkgs,
       inputs,
       ...
@@ -135,6 +135,7 @@ in
         l.flatten [
           (tlib.prefixStrings "${inputs.self}/users/modules/" modulesToEnable)
           ../modules/discord/service.nix
+          "${inputs.agenix}/modules/age-home.nix"
         ];
 
       home = {
@@ -158,9 +159,19 @@ in
           bs-manager
           cemu
           tor-browser
-          supersonic-wayland
+          # supersonic-wayland
           feishin
-        ]) ++ [terra.helium];
+        ]) ++ [
+          terra.helium
+          (terra.pds-upload.override {
+            secretsFile = config.age.secrets.atfileCfg.path;
+          })
+        ];
+      };
+
+      age.secrets.atfileCfg = {
+        file = ../../secrets/atfileCfg.age;
+        mode = "600";
       };
 
       fonts.fontconfig.enable = l.mkForce true;

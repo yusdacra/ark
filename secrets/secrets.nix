@@ -2,7 +2,6 @@ let
   yusdacra = builtins.readFile ./yusdacra.key.pub;
   dzwonek = builtins.readFile ./dzwonek.key.pub;
   trimounts = builtins.readFile ./trimounts.key.pub;
-  develMobi = builtins.readFile ./develMobi.key.pub;
 in
 {
   "nixGithubAccessToken.age".publicKeys = [ yusdacra ];
@@ -26,10 +25,6 @@ in
     yusdacra
     dzwonek
   ];
-  "develMobiTailscaleAuthKey.age".publicKeys = [
-    yusdacra
-    develMobi
-  ];
   "cloudflareDnsEdit.age".publicKeys = [
     yusdacra
     dzwonek
@@ -40,4 +35,5 @@ in
     dzwonek
     trimounts
   ];
+  "atfileCfg.age".publicKeys = [yusdacra];
 }
