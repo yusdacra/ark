@@ -36,4 +36,5 @@ in
     trimounts
   ];
   "atfileCfg.age".publicKeys = [yusdacra];
+  "ziplineCfg.age".publicKeys = [yusdacra trimounts];
 }

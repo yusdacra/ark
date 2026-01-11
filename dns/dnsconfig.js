@@ -123,7 +123,7 @@ D(
     "ptr.pet",
     REG_NONE,
     DnsProvider(DSP_PRIMARY),
-    TRIMOUNTS(["@", "tunes"], CF_PROXY_OFF),
+    TRIMOUNTS(["@", "tunes", "x"], CF_PROXY_OFF),
     DZWONEK(["nucleus", "trill", "dysnomia"], CF_PROXY_OFF),
     // atproto
     TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae"),

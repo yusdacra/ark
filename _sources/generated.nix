@@ -15,17 +15,17 @@
   };
   blog = {
     pname = "blog";
-    version = "95c18d69c811a6483df1a2c6b727f696db39858e";
+    version = "ebcd9b9d5234d7b68cc280b1ed5fadf46148ac28";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/endpoint";
-      rev = "95c18d69c811a6483df1a2c6b727f696db39858e";
+      rev = "ebcd9b9d5234d7b68cc280b1ed5fadf46148ac28";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-VeX7C0PQdhQu14xxeCftFUFWO7MhssvulC319s82Jt4=";
+      sha256 = "sha256-zI8oVPkBnUHw5ce15gM3hYLUpzOphaLIsp0Agb+Yg8g=";
     };
-    date = "2025-12-26";
+    date = "2026-01-02";
   };
   clickee = {
     pname = "clickee";
@@ -197,17 +197,17 @@
   };
   nucleus = {
     pname = "nucleus";
-    version = "a006a151d45bd8a6947e4c1f01fcf4e91b238148";
+    version = "8e9b9b08068d2732ca01a8b45d75a4db6d445ec6";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/nucleus";
-      rev = "a006a151d45bd8a6947e4c1f01fcf4e91b238148";
+      rev = "8e9b9b08068d2732ca01a8b45d75a4db6d445ec6";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-O06LWhgRAXROVZY5OnavN7R44Mh5et8safKJ9TyaAFI=";
+      sha256 = "sha256-PowSI4NiBj/zwkStSzhYJ1P2Yx6xFDGUArwRWQ3zujA=";
     };
-    date = "2025-12-29";
+    date = "2026-01-08";
   };
   stylix = {
     pname = "stylix";
