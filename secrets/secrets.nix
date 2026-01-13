@@ -37,4 +37,5 @@ in
   ];
   "atfileCfg.age".publicKeys = [yusdacra];
   "ziplineCfg.age".publicKeys = [yusdacra trimounts];
+  "callieMusic.age".publicKeys = [yusdacra trimounts];
 }

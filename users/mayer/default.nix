@@ -161,6 +161,7 @@ in
           tor-browser
           # supersonic-wayland
           feishin
+          antigravity-fhs
         ]) ++ [
           terra.helium
           (terra.pds-upload.override {

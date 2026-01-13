@@ -82,6 +82,7 @@ D(
     // atproto
     TXT("_atproto.eris", "did=did:plc:bxjnsrfzozl365rsdo5yvuz5", TTL(60)),
     TXT("_atproto.drew", "did=did:plc:vo6ie3kd6xvpjlof4pnb2zzp", TTL(60)),
+    TXT("_kicya", "3853739a3802a077d62e83494b4603bbdb36332662c5cb58865084bcf0dc87a8"),
     IGNORE_ACME(),
 );
 
@@ -125,6 +126,7 @@ D(
     DnsProvider(DSP_PRIMARY),
     TRIMOUNTS(["@", "tunes", "x"], CF_PROXY_OFF),
     DZWONEK(["nucleus", "trill", "dysnomia"], CF_PROXY_OFF),
+    TXT("_kicya", "3b11cb74243eea1fc84e62ffefd7e246279c2f203e1cae42e19d0454dc8d2172"),
     // atproto
     TXT("_atproto", "did=did:plc:dfl62fgb7wtjj3fcbb72naae"),
     TXT("_atproto.nil", "did=did:plc:dumbmutt4po52ept2tczimje"),

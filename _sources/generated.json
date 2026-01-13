@@ -350,7 +350,7 @@
     },
     "tangled": {
         "cargoLocks": null,
-        "date": "2025-12-20",
+        "date": "2026-01-11",
         "extract": null,
         "name": "tangled",
         "passthru": null,
@@ -360,13 +360,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "716a5bc0dafb96bbf72fb6e07d20e251f97c9f4e",
-            "sha256": "sha256-SGG97w/bvffP6zuJwbnFHK6tdfuWEzKNOfjGbh2PIj0=",
+            "rev": "1cb2fb5cdd0ddfb30575af85d2d3fcf337ac4c4b",
+            "sha256": "sha256-JZgqPGYaNxFcj4gl4U4eXctDtPv6YHyu3KuHtMNEyZk=",
             "sparseCheckout": [],
             "type": "git",
-            "url": "https://tangled.org/ptr.pet/core"
+            "url": "https://tangled.org/tangled.org/core"
         },
-        "version": "716a5bc0dafb96bbf72fb6e07d20e251f97c9f4e"
+        "version": "1cb2fb5cdd0ddfb30575af85d2d3fcf337ac4c4b"
     },
     "tangled-sqlite-lib": {
         "cargoLocks": null,

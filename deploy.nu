@@ -45,11 +45,6 @@ def time-block [block]: nothing -> record {
 }
 
 let hosts = {
-  wolumonde: {
-    type: "nixos",
-    user: "root",
-    addr: "23.88.101.188",
-  },
   dzwonek: {
     type: "nixos",
     user: "root",
@@ -64,11 +59,6 @@ let hosts = {
     type: "nixos",
     user: "root",
     addr: "159.195.58.28",
-  },
-  "dusk@devel.mobi": {
-    type: "home",
-    user: "dusk",
-    addr: "devel.mobi",
   },
 }
 
