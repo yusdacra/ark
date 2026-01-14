@@ -51,20 +51,24 @@ in {
       ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p ${callieMount}";
       ExecStart = ''
         ${pkgs.geesefs}/bin/geesefs \
-          --endpoint https://s3.nematodes.net \
+          --endpoint http://homura-v:9000 \
           --region us-east-1 \
           --shared-config ${config.age.secrets.callieMusic.path} \
           --cache %C/geesefs-callie \
-          --stat-cache-ttl 3600s \
-          --http-timeout 2m0s \
-          --read-retry-interval 30s \
-          --read-retry-max-interval 2m0s \
-          --read-ahead-large 20000 \
-          --max-parallel-parts 2 \
-          --max-parallel-copy 2 \
-          --ignore-fsync \
-          --disable-xattr \
-          --no-specials \
+          --stat-cache-ttl 1h \
+          --http-timeout 5m \
+          --read-retry-interval 2s \
+          --read-retry-max-interval 30s \
+          --read-retry-attempts 5 \
+          --read-ahead 10240 \
+          --read-ahead-small 512 \
+          --read-ahead-large 51200 \
+          --read-ahead-parallel 10240 \
+          --small-read-count 8 \
+          --read-merge 2048 \
+          --max-flushers 4 \
+          --max-parallel-parts 3 \
+          --max-parallel-copy 3 \
           -o allow_other \
           -o ro \
           musica ${callieMount}

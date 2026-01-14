@@ -55,7 +55,7 @@ D(
     DnsProvider(DSP_PRIMARY),
     TRIMOUNTS(
         [
-            "@", "doc", "pmart", "dash", "id",
+            "@", "pmart", "dash", "id",
             "knot", "spindle",
             "guestbook",
         ],
