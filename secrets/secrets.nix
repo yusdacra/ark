@@ -30,11 +30,6 @@ in
     dzwonek
     trimounts
   ];
-  "bunnyApiKey.age".publicKeys = [
-    yusdacra
-    dzwonek
-    trimounts
-  ];
   "atfileCfg.age".publicKeys = [yusdacra];
   "ziplineCfg.age".publicKeys = [yusdacra trimounts];
   "callieMusic.age".publicKeys = [yusdacra trimounts];

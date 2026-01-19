@@ -32,6 +32,7 @@
     address = [ "199.71.188.53/29" ];
     gateway = [ "199.71.188.49" ];
   };
+  networking.interfaces."enX0".mtu = 1370;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

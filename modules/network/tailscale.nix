@@ -6,6 +6,7 @@
     # extraUpFlags = [ "--ssh" ];
     extraDaemonFlags = [ "--no-logs-no-support" ];
     openFirewall = true;
+    useRoutingFeatures = "client";
   };
 
   networking.interfaces.tailscale0.useDHCP = lib.mkForce false;

@@ -38,7 +38,6 @@
 
   users.users.nginx.extraGroups = [ "acme" ];
 
-  age.secrets.bunnyApiKey.file = ../../../secrets/bunnyApiKey.age;
   security.acme = {
     acceptTerms = true;
     defaults = {

@@ -1,0 +1,24 @@
+{config, ...}:
+let
+  rootDomain = "ptr.pet";
+  domain = "corpus.${rootDomain}";
+  cfg = config.services.trilium-server;
+in {
+  services.trilium-server = {
+    enable = true;
+    instanceName = "corpus";
+    port = 7788;
+  };
+
+  security.acme.certs.${rootDomain}.extraDomainNames = [domain];
+  services.nginx.virtualHosts.${domain} = {
+    useACMEHost = "ptr.pet";
+    forceSSL = true;
+    quic = true;
+    kTLS = true;
+    locations."/" = {
+      proxyPass = "http://${cfg.host}:${toString cfg.port}";
+      proxyWebsockets = true;
+    };
+  };
+}
