@@ -8,18 +8,20 @@ var DZWONEK_IPS = [DZWONEK_IP4, DZWONEK_IP6];
 var TRIMOUNTS_IP4 = "159.195.58.28";
 var TRIMOUNTS_IP6 = "2a0a:4cc0:c1:e83d::b00b";
 var TRIMOUNTS_IPS = [TRIMOUNTS_IP4, TRIMOUNTS_IP6];
+var VOLSINII_IP4 = "199.71.188.53";
+var VOLSINII_IP6 = ""; // no ipv6 for now
+var VOLSINII_IPS = [VOLSINII_IP4];
 
 function host(name, ips, opts) {
-    if (opts)
-        return [
-            A(name, ips[0], opts),
-            AAAA(name, ips[1], opts),
-        ];
-    else
-        return [
-            A(name, ips[0]),
-            AAAA(name, ips[1]),
-        ];
+    var records = [];
+    if (opts) {
+        records.push(A(name, ips[0], opts));
+        if (ips[1]) records.push(AAAA(name, ips[1], opts));
+    } else {
+        records.push(A(name, ips[0]));
+        if (ips[1]) records.push(AAAA(name, ips[1]));
+    }
+    return records;
 }
 
 function hosts(_names, ips, opts) {
@@ -44,6 +46,9 @@ function TRIMOUNTS(names, opts) {
 function DZWONEK(names, opts) {
     return hosts(names, DZWONEK_IPS, opts);
 }
+function VOLSINII(names, opts) {
+    return hosts(names, VOLSINII_IPS, opts);
+}
 
 function IGNORE_ACME() {
     return IGNORE_NAME("_acme-challenge");
@@ -62,6 +67,7 @@ D(
         CF_PROXY_OFF,
     ),
     DZWONEK("vpn", CF_PROXY_OFF),
+    VOLSINII("tap", CF_PROXY_OFF),
     // github pages
     CNAME("dev", "90-008.github.io."),
     // fastmail

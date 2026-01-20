@@ -33,7 +33,7 @@
                 extraArgs = [ "-f" ]; # Override existing partition
                 mountpoint = "/";
                 mountOptions = [
-                  "compress=zstd"
+                  "compress-force=zstd:5"
                   "noatime"
                 ];
               };
