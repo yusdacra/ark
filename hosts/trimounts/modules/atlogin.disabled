@@ -1,0 +1,77 @@
+{ config, pkgs, terra, ... }:
+let
+  rootDomain = "ptr.pet";
+  domain = "id.${rootDomain}";
+  
+  cfg = {
+    host = "127.0.0.1";
+    port = 9411;
+    stateDir = "/var/lib/atlogin";
+  };
+in {
+  environment.systemPackages = [(
+    pkgs.writeShellScriptBin "atlogin" ''${terra.atlogin}/bin/atlogin -state-dir=${cfg.stateDir} "$@"''
+  )];
+
+  # ensure state directory exists
+  systemd.tmpfiles.rules = [
+    "d ${cfg.stateDir} 0700 atlogin atlogin -"
+  ];
+
+  users.users.atlogin = {
+    isSystemUser = true;
+    group = "atlogin";
+    home = cfg.stateDir;
+  };
+  users.groups.atlogin = {};
+
+  age.secrets.atloginCfg = {
+    file = ../../../secrets/atloginCfg.age;
+    owner = "atlogin";
+    mode = "0600";
+  };
+
+  # systemd service
+  systemd.services.atlogin = {
+    description = "atlogin oidc identity provider";
+    wantedBy = ["multi-user.target"];
+    after = ["network.target"];
+
+    preStart = ''
+      ${pkgs.coreutils}/bin/cp -f ${config.age.secrets.atloginCfg.path} ${cfg.stateDir}/config.json
+    '';
+    
+    serviceConfig = {
+      Type = "simple";
+      User = "atlogin";
+      Group = "atlogin";
+      ExecStart = "${terra.atlogin}/bin/atlogin -state-dir=${cfg.stateDir}";
+      Restart = "on-failure";
+      RestartSec = "5s";
+      # harden
+      NoNewPrivileges = true;
+      PrivateTmp = true;
+      ProtectSystem = "strict";
+      ProtectHome = true;
+      ReadWritePaths = [cfg.stateDir];
+    };
+  };
+
+  security.acme.certs.${rootDomain}.extraDomainNames = [domain];
+  services.nginx.virtualHosts.${domain} = {
+    useACMEHost = rootDomain;
+    forceSSL = true;
+    quic = true;
+    kTLS = true;
+    
+    locations."/" = {
+      proxyPass = "http://${cfg.host}:${toString cfg.port}";
+      proxyWebsockets = true;
+    };
+    
+    # webfinger endpoint helper (as mentioned in the code comments)
+    locations."/.well-known/webfinger" = {
+      proxyPass = "http://${cfg.host}:${toString cfg.port}/helpers/webfinger";
+    };
+  };
+}

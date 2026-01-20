@@ -73,11 +73,11 @@ in
         ];
       };
       oidc = {
-        issuer = "https://id.gaze.systems";
-        client_id = "ba2c2024-f75f-49a2-a156-8593becfba28";
-        client_secret_path = config.age.secrets.headscaleOidcSecret.path;
-        pkce.enabled = true;
-        only_start_if_oidc_is_available = true;
+        # issuer = "https://atlogin.net";
+        # client_id = "ptr-pet-at-atlogin-net-headscale-v1";
+        # client_secret_path = config.age.secrets.headscaleOidcSecret.path;
+        # pkce.enabled = true;
+        only_start_if_oidc_is_available = false;
       };
     };
   };

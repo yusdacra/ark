@@ -55,7 +55,7 @@ D(
     DnsProvider(DSP_PRIMARY),
     TRIMOUNTS(
         [
-            "@", "pmart", "dash", "id",
+            "@", "pmart", "dash",
             "knot", "spindle",
             "guestbook",
         ],
@@ -124,7 +124,7 @@ D(
     "ptr.pet",
     REG_NONE,
     DnsProvider(DSP_PRIMARY),
-    TRIMOUNTS(["@", "tunes", "corpus", "x"], CF_PROXY_OFF),
+    TRIMOUNTS(["@", "tunes", "corpus", "x", "id"], CF_PROXY_OFF),
     DZWONEK(["nucleus", "trill", "dysnomia"], CF_PROXY_OFF),
     TXT("_kicya", "3b11cb74243eea1fc84e62ffefd7e246279c2f203e1cae42e19d0454dc8d2172"),
     // atproto
