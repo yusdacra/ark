@@ -13,6 +13,20 @@
     };
     date = "2025-11-08";
   };
+  aturlist = {
+    pname = "aturlist";
+    version = "7d1ad7f32d651ea9a52be7393c0cb7a6ae76ae82";
+    src = fetchgit {
+      url = "https://tangled.org/@ptr.pet/aturlist";
+      rev = "7d1ad7f32d651ea9a52be7393c0cb7a6ae76ae82";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sparseCheckout = [ ];
+      sha256 = "sha256-wdraXLiT6qda8FvQy9xwjz03z7ahYTNEC2kItGg6UAU=";
+    };
+    date = "2026-01-20";
+  };
   blog = {
     pname = "blog";
     version = "459433f993ae47a8cdf50812f3388c8a47cfab19";
@@ -197,17 +211,17 @@
   };
   nucleus = {
     pname = "nucleus";
-    version = "8e9b9b08068d2732ca01a8b45d75a4db6d445ec6";
+    version = "2a633c6695fca04a872dcc5cd3ab4917d2553aa0";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/nucleus";
-      rev = "8e9b9b08068d2732ca01a8b45d75a4db6d445ec6";
+      rev = "2a633c6695fca04a872dcc5cd3ab4917d2553aa0";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-PowSI4NiBj/zwkStSzhYJ1P2Yx6xFDGUArwRWQ3zujA=";
+      sha256 = "sha256-fT1ZICkQ7+thrko0Efu9tJVmOrojQUde3KPKj1iA5a4=";
     };
-    date = "2026-01-08";
+    date = "2026-01-22";
   };
   stylix = {
     pname = "stylix";

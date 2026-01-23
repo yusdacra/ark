@@ -25,7 +25,7 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [ wlx-overlay-s eepyxr wayvr-dashboard xrizer ];
+  environment.systemPackages = with pkgs; [ eepyxr wayvr xrizer ];
 
   home-manager.sharedModules = [{
     xdg.configFile."openvr/openvrpaths.vrpath".text = ''

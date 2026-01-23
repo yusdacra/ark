@@ -20,6 +20,26 @@
         },
         "version": "fcdea223397448d35d9b31f798479227e80183f6"
     },
+    "aturlist": {
+        "cargoLocks": null,
+        "date": "2026-01-20",
+        "extract": null,
+        "name": "aturlist",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "7d1ad7f32d651ea9a52be7393c0cb7a6ae76ae82",
+            "sha256": "sha256-wdraXLiT6qda8FvQy9xwjz03z7ahYTNEC2kItGg6UAU=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://tangled.org/@ptr.pet/aturlist"
+        },
+        "version": "7d1ad7f32d651ea9a52be7393c0cb7a6ae76ae82"
+    },
     "blog": {
         "cargoLocks": null,
         "date": "2026-01-20",
@@ -309,7 +329,7 @@
     },
     "nucleus": {
         "cargoLocks": null,
-        "date": "2026-01-08",
+        "date": "2026-01-22",
         "extract": null,
         "name": "nucleus",
         "passthru": null,
@@ -319,13 +339,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "8e9b9b08068d2732ca01a8b45d75a4db6d445ec6",
-            "sha256": "sha256-PowSI4NiBj/zwkStSzhYJ1P2Yx6xFDGUArwRWQ3zujA=",
+            "rev": "2a633c6695fca04a872dcc5cd3ab4917d2553aa0",
+            "sha256": "sha256-fT1ZICkQ7+thrko0Efu9tJVmOrojQUde3KPKj1iA5a4=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.org/@ptr.pet/nucleus"
         },
-        "version": "8e9b9b08068d2732ca01a8b45d75a4db6d445ec6"
+        "version": "2a633c6695fca04a872dcc5cd3ab4917d2553aa0"
     },
     "stylix": {
         "cargoLocks": null,
