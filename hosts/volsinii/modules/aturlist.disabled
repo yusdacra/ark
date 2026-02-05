@@ -10,6 +10,7 @@
     description = "aturlist ATURI indexer";
     wantedBy = ["multi-user.target"];
     after = ["network.target"];
+    environment = { TAP_CONCURRENCY = "20"; };
     serviceConfig = {
       Type = "simple";
       ExecStart = "${terra.aturlist}/bin/aturlist";

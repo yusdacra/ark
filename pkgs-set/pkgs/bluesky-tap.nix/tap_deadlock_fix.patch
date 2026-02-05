@@ -1,0 +1,36 @@
+diff --git a/cmd/tap/outbox.go b/cmd/tap/outbox.go
+index d308eee5..b8e0f200 100644
+--- a/cmd/tap/outbox.go
++++ b/cmd/tap/outbox.go
+@@ -199,12 +199,16 @@ type DIDWorker struct {
+ }
+ 
+ func (w *DIDWorker) run() {
++	shouldSkipSelect := false
+ 	for {
+-		select {
+-		case <-w.ctx.Done():
+-			return
+-		case <-w.notifChan:
++		if !shouldSkipSelect {
++			select {
++			case <-w.ctx.Done():
++				return
++			case <-w.notifChan:
++			}
+ 		}
++		shouldSkipSelect = false
+ 
+ 		w.processPendingEvts()
+ 
+@@ -222,6 +226,10 @@ func (w *DIDWorker) run() {
+ 			w.mu.Unlock()
+ 			return
+ 		}
++
++		if !queueEmpty && noInFlight {
++			shouldSkipSelect = true
++		}
+ 		w.mu.Unlock()
+ 	}
+ }

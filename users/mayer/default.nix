@@ -125,7 +125,7 @@ in
               "ssh"
             ]
             [
-              "zen"
+              # "zen"
               # "discord"
               "clickee"
               "arrpc"

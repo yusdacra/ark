@@ -25,7 +25,7 @@ in
     
     relayUrl = lib.mkOption {
       type = lib.types.str;
-      default = "https://relay1.us-east.bsky.network";
+      default = "https://relay.fire.hose.cam";
       description = "AT Protocol relay URL";
     };
     
@@ -54,7 +54,7 @@ in
     
     metricsListen = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
-      default = ":8765";
+      default = null;
       description = "address for metrics/pprof server (disabled if null)";
     };
     

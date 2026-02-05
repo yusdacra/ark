@@ -27,27 +27,40 @@
             };
             root = {
               priority = 3;
-              end = "-8G";
+              end = "-908G";
               content = {
                 type = "btrfs";
-                extraArgs = [ "-f" ]; # Override existing partition
-                mountpoint = "/";
-                mountOptions = [
-                  "compress-force=zstd:5"
-                  "noatime"
-                ];
+                extraArgs = [ "-f" ];
               };
             };
             plainSwap = {
               priority = 4;
-              size = "100%";
+              size = "8G";
               content = {
                 type = "swap";
                 discardPolicy = "both";
               };
             };
+            storage = {
+              priority = 5;
+              size = "100%";
+              content = {
+                type = "btrfs";
+                extraArgs = [ "-f" ];
+              };
+            };
           };
         };
+      };
+    };
+    nodev = {
+      "/" = {
+        fsType = "btrfs";
+        device = "/dev/disk/by-uuid/c09ff0d5-7fe7-4cdd-8cad-42c475be8d99";
+        mountOptions = [
+          "compress-force=zstd:9"
+          "noatime"
+        ];
       };
     };
   };

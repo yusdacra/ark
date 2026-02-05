@@ -12,8 +12,18 @@ in
     fullNetwork = true;
     databaseUrl = "postgresql://bluesky-tap@/bluesky-tap";
     bind = "127.0.0.1:2480";
-    metricsListen = "127.0.0.1:8765";
-    logLevel = "info";
+    # metricsListen = "127.0.0.1:8765";
+    # logLevel = "debug";
+    # disableAcks = true;
+  };
+  systemd.services.bluesky-tap.environment = {
+    TAP_OUTBOX_PARALLELISM = "20";
+    TAP_RESYNC_PARALLELISM = "32";
+    TAP_FIREHOSE_PARALLELISM = "32";
+    TAP_MAX_DB_CONNS = "64";
+    # TAP_OUTBOX_CAPACITY = "70000";
+    # TAP_OUTBOX_ONLY = "true";
+    TAP_RETRY_TIMEOUT = "10s";
   };
 
   # setup postgres

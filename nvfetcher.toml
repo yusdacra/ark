@@ -56,9 +56,9 @@ fetch.git = "https://tangled.org/@ptr.pet/trill"
 src.git = "https://tangled.org/@ptr.pet/dysnomia"
 fetch.git = "https://tangled.org/@ptr.pet/dysnomia"
 
-[aturlist]
-src.git = "https://tangled.org/@ptr.pet/aturlist"
-fetch.git = "https://tangled.org/@ptr.pet/aturlist"
+[hydrant]
+src.git = "https://tangled.org/@ptr.pet/hydrant"
+fetch.git = "https://tangled.org/@ptr.pet/hydrant"
 
 ## TANGLED ##
 
