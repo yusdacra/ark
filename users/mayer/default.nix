@@ -94,6 +94,7 @@ in
   };
 
   services.joycond.enable = true;
+  services.udev.packages = [pkgs.libimobiledevice];
 
   home-manager.users.mayer =
     {
@@ -135,6 +136,7 @@ in
         l.flatten [
           (tlib.prefixStrings "${inputs.self}/users/modules/" modulesToEnable)
           ../modules/discord/service.nix
+          ../modules/discord/default.nix
           "${inputs.agenix}/modules/age-home.nix"
         ];
 

@@ -12,9 +12,11 @@
     after = ["network.target"];
     environment = {
       HYDRANT_FULL_NETWORK = "true";
-      HYDRANT_CACHE_SIZE = "1024";
-      HYDRANT_BACKFILL_CONCURRENCY_LIMIT = "128";
-      HYDRANT_NO_LZ4_COMPRESSION = "true";
+      HYDRANT_FIREHOSE_WORKERS = "128";
+      HYDRANT_BACKFILL_CONCURRENCY_LIMIT = "256";
+      HYDRANT_DB_WORKER_THREADS = "16";
+      HYDRANT_CRAWLER_MAX_PENDING_REPOS = "10000";
+      HYDRANT_PLC_URL = "https://plc.wtf,https://plc.directory";
     };
     serviceConfig = {
       Type = "simple";
@@ -30,6 +32,22 @@
       ProtectSystem = "strict";
       ProtectHome = true;
       ReadWritePaths = ["/var/lib/hydrant"];
+      LimitNOFILE = 1048576;
     };
   };
+
+  security.pam.loginLimits = [
+    {
+      domain = "*";
+      type = "soft";
+      item = "nofile";
+      value = "1048576";
+    }
+    {
+      domain = "*";
+      type = "hard";
+      item = "nofile";
+      value = "1048576";
+    }
+  ];
 }
