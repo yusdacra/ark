@@ -156,19 +156,19 @@ in
           transmission_4-gtk
           prismlauncher
           lutris
-          gearlever
           signal-desktop
           bs-manager
           cemu
           tor-browser
           # supersonic-wayland
           feishin
-          antigravity-fhs
+          opencode
         ]) ++ [
           terra.helium
-          (terra.pds-upload.override {
-            secretsFile = config.age.secrets.atfileCfg.path;
-          })
+          terra.antigravity
+          # (terra.pds-upload.override {
+          #   secretsFile = config.age.secrets.atfileCfg.path;
+          # })
         ];
       };
 

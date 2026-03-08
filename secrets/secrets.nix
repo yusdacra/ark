@@ -34,4 +34,5 @@ in
   "ziplineCfg.age".publicKeys = [yusdacra trimounts];
   "callieMusic.age".publicKeys = [yusdacra trimounts];
   "atloginCfg.age".publicKeys = [yusdacra trimounts];
+  "navidrome.age".publicKeys = [yusdacra trimounts];
 }

@@ -3,9 +3,15 @@ let
   domain = "tunes.ptr.pet";
   callieMount = "/music/callie";
 in {
+  age.secrets.navidrome = {
+    file = ../../../secrets/navidrome.age;
+    mode = "0600";
+  };
+
   services.navidrome = {
     enable = true;
     openFirewall = false;
+    environmentFile = config.age.secrets.navidrome.path;
     settings = {
       MusicFolder = "/music";
       Port = 9999;

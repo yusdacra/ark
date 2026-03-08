@@ -5,7 +5,7 @@
 }:
 pkgs.appimageTools.wrapType2 rec {
   pname = "helium";
-  version = "0.9.1.1";
+  version = "0.9.4.1";
 
   src = let
     platformMap = {
@@ -16,7 +16,7 @@ pkgs.appimageTools.wrapType2 rec {
     platform = platformMap.${pkgs.system};
 
     hashes = {
-      "x86_64-linux" = "sha256-0Kw8Ko41Gdz4xLn62riYAny99Hd0s7/75h8bz4LUuCE=";
+      "x86_64-linux" = "sha256-N5gdWuxOrIudJx/4nYo4/SKSxakpTFvL4zzByv6Cnug=";
       "aarch64-linux" = "sha256-B63tvOtSRlMRJozvzC7lqG2LM0ZgLIq2G/AHABl+Qqg=";
     };
 
@@ -35,7 +35,7 @@ pkgs.appimageTools.wrapType2 rec {
     cp -r ${contents}/opt/helium/locales "$out/share/lib/helium"
     cp -r ${contents}/usr/share/* "$out/share"
     cp "${contents}/${pname}.desktop" "$out/share/applications/"
-    substituteInPlace $out/share/applications/${pname}.desktop --replace-fail 'Exec=AppRun' 'Exec=${meta.mainProgram}'
+    substituteInPlace $out/share/applications/${pname}.desktop --replace-fail 'Exec=helium' 'Exec=${meta.mainProgram}'
   '';
 
   meta = {

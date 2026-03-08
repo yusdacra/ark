@@ -1,7 +1,7 @@
-diff --git a/core/agents/listenbrainz/agent.go b/core/agents/listenbrainz/agent.go
+diff --git a/adapters/listenbrainz/agent.go b/adapters/listenbrainz/agent.go
 index 769b0f5..758eb85 100644
---- a/core/agents/listenbrainz/agent.go
-+++ b/core/agents/listenbrainz/agent.go
+--- a/adapters/listenbrainz/agent.go
++++ b/adapters/listenbrainz/agent.go
 @@ -3,6 +3,7 @@ package listenbrainz
  import (
  	"context"
@@ -34,10 +34,10 @@ index 769b0f5..758eb85 100644
  	return li
  }
  
-diff --git a/core/agents/listenbrainz/agent_test.go b/core/agents/listenbrainz/agent_test.go
+diff --git a/adapters/listenbrainz/agent_test.go b/adapters/listenbrainz/agent_test.go
 index e99b442..11e7b3c 100644
---- a/core/agents/listenbrainz/agent_test.go
-+++ b/core/agents/listenbrainz/agent_test.go
+--- a/adapters/listenbrainz/agent_test.go
++++ b/adapters/listenbrainz/agent_test.go
 @@ -69,6 +69,7 @@ var _ = Describe("listenBrainzAgent", func() {
  						"ArtistNames":             ConsistOf("Artist 1", "Artist 2"),
  						"ArtistMBIDs":             ConsistOf("mbz-111", "mbz-222"),
@@ -46,10 +46,10 @@ index e99b442..11e7b3c 100644
  					}),
  				}),
  			}))
-diff --git a/core/agents/listenbrainz/client.go b/core/agents/listenbrainz/client.go
+diff --git a/adapters/listenbrainz/client.go b/adapters/listenbrainz/client.go
 index 168aad5..807bdef 100644
---- a/core/agents/listenbrainz/client.go
-+++ b/core/agents/listenbrainz/client.go
+--- a/adapters/listenbrainz/client.go
++++ b/adapters/listenbrainz/client.go
 @@ -82,6 +82,7 @@ type additionalInfo struct {
  	ReleaseMBID             string   `json:"release_mbid,omitempty"`
  	ReleaseGroupMBID        string   `json:"release_group_mbid,omitempty"`
