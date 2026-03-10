@@ -160,12 +160,16 @@ in
           bs-manager
           cemu
           tor-browser
-          # supersonic-wayland
           feishin
-          opencode
+          nodejs
+          gcc
+          gnumake
+          python3
         ]) ++ [
           terra.helium
           terra.antigravity
+          terra.pi-coding-agent
+          # terra.gitnexus
           # (terra.pds-upload.override {
           #   secretsFile = config.age.secrets.atfileCfg.path;
           # })
