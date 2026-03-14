@@ -21,9 +21,9 @@ in
       buildInputs = [ pkgs.makeWrapper ];
       postBuild = ''
         wrapProgram $out/bin/discord \
-          --add-flags "--proxy-server=socks5://127.0.0.1:1337"
+          --add-flags "--proxy-server=socks5://127.0.0.1:1338"
         wrapProgram $out/bin/Discord \
-          --add-flags "--proxy-server=socks5://127.0.0.1:1337"
+          --add-flags "--proxy-server=socks5://127.0.0.1:1338"
       '';
     })
   ];

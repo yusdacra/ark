@@ -127,7 +127,7 @@ in
             ]
             [
               # "zen"
-              # "discord"
+              "discord"
               "clickee"
               "arrpc"
             ]
@@ -161,14 +161,17 @@ in
           cemu
           tor-browser
           feishin
+          # these are for gitnexus
           nodejs
           gcc
           gnumake
           python3
+          # sidelaoding
         ]) ++ [
           terra.helium
           terra.antigravity
           terra.pi-coding-agent
+          terra.iloader
           # terra.gitnexus
           # (terra.pds-upload.override {
           #   secretsFile = config.age.secrets.atfileCfg.path;
