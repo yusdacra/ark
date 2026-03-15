@@ -86,4 +86,35 @@ in {
       CacheDirectory = "geesefs-callie";
     };
   };
+
+  users.users.music = {
+    isSystemUser = true;
+    group = "music";
+    shell = pkgs.shadow;
+    openssh.authorizedKeys.keys = [
+      # ana
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCS9VBRE13jojnqVjuUZWTcOK8GokDDlk2U0i61vEJizVzNowGnIAbwq0cOaFEBX4JBkOa4I8Ku2Pw7fODuoehSK/t7FrfXExk2PBT3k0mfzqQYxfq5bzae7AWr7n/sKUBTtvHSACfidxzQpV7VSgW68jqdOt6h7FHSeS2jac7wUNPobL0uCkFB4FiEQOnIqlRGSSabVemL7bC9H9lUyOODSTthiq9S3pPYknyHDRKUtSCSw4pfpasr4bxDVSW99h3GBcW0hZbpw5bwlxQlwbclxQDnn7XJhWpq6zL/2ScVGJgd94z7FshKoF5IFTk6e7a/Ouv4Ato4hRLxEe5u70CH"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILUIHFy8lBU8Iy5253Lglw0v67k9ozxjLWprjTjwTsrm dusk@devel.mobi"
+    ];
+  };
+  users.groups.music = {};
+
+  systemd.tmpfiles.rules = [
+    "d /music-chroot 0755 root root -"
+    "d /music-chroot/music 0755 music music -"
+  ];
+
+  fileSystems."/music-chroot/music" = {
+    device = "/music/uploads";
+    fsType = "none";
+    options = ["bind"];
+  };
+
+  services.openssh.extraConfig = ''
+    Match User music
+      ChrootDirectory /music-chroot
+      ForceCommand internal-sftp
+      AllowTcpForwarding no
+  '';
+  services.openssh.allowSFTP = true;
 }
