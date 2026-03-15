@@ -9,7 +9,7 @@ in
   imports = [ ../../../modules/audio/desktop-audio.nix ];
 
   environment.systemPackages = with pkgs; [
-    helvum
+    crosspipe
     pwvucontrol
   ];
 
