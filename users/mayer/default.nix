@@ -32,7 +32,9 @@ in
     bashInteractive
     nushell
   ];
+  services.flatpak.enable = true;
   programs = {
+    droidcam.enable = true;
     steam = {
       enable = true;
       package = pkgs.steam.override {
@@ -154,7 +156,9 @@ in
           mupdf
           xdg-utils
           transmission_4-gtk
-          prismlauncher
+          (prismlauncher.override {
+            additionalLibs = with pkgs; [libXtst libxkbcommon libXt];
+          })
           lutris
           signal-desktop
           bs-manager

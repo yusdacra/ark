@@ -22,7 +22,7 @@
     },
     "blog": {
         "cargoLock": null,
-        "date": "2026-01-20",
+        "date": "2026-03-15",
         "extract": null,
         "name": "blog",
         "passthru": null,
@@ -32,13 +32,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "459433f993ae47a8cdf50812f3388c8a47cfab19",
-            "sha256": "sha256-C9iJbcv6Zlvo8jhZoJcmxzS2JBtlsmZw4hF9Jvq6OLg=",
+            "rev": "8c75080abe6c733b20a81722252bb4b8062b8b9e",
+            "sha256": "sha256-WpIEhnAPhqAp5Ln/08UNTVvwH/lGueOckciDbP6QVFI=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.org/@ptr.pet/endpoint"
         },
-        "version": "459433f993ae47a8cdf50812f3388c8a47cfab19"
+        "version": "8c75080abe6c733b20a81722252bb4b8062b8b9e"
     },
     "clickee": {
         "cargoLock": null,
