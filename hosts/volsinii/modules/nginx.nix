@@ -41,8 +41,11 @@
 
   security.acme = {
     acceptTerms = true;
-    defaults.email = (import "${inputs.self}/personal.nix").emails.primary;
-    defaults.webroot = "/var/lib/acme/acme-challenge";
+    defaults = {
+      group = "nginx";
+      email = (import "${inputs.self}/personal.nix").emails.primary;
+      webroot = "/var/lib/acme/acme-challenge";
+    };
     certs."plc.gaze.systems" = { };
   };
 

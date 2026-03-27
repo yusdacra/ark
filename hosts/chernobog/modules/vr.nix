@@ -10,17 +10,19 @@
     openFirewall = true;
     defaultRuntime = true;
     autoStart = true;
+    highPriority = true;
     config = {
       enable = true;
       json = {
         scale = 1.0;
         bitrate = 60000000;
-        encoders = [
+        encoder =
           {
             encoder = "vaapi";
             codec = "h265";
+            bit-depth = 8;
           }
-        ];
+        ;
       };
     };
   };

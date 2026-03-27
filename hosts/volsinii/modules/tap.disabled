@@ -1,51 +1,32 @@
-{ terra, config, ... }:
-let
-  domain = "tap.gaze.systems";
-  cfg = config.services.bluesky-tap;
-in
+{ terra, ... }:
 {
   imports = [../../../modules/bluesky-tap.nix];
 
-  services.bluesky-tap = {
-    enable = true;
-    package = terra.bluesky-tap;
-    fullNetwork = true;
-    databaseUrl = "postgresql://bluesky-tap@/bluesky-tap";
-    bind = "127.0.0.1:2480";
-    # metricsListen = "127.0.0.1:8765";
-    # logLevel = "debug";
-    disableAcks = true;
-  };
-  systemd.services.bluesky-tap.environment = {
-    TAP_OUTBOX_PARALLELISM = "8";
-    TAP_RESYNC_PARALLELISM = "16";
-    TAP_FIREHOSE_PARALLELISM = "16";
-    TAP_MAX_DB_CONNS = "64";
-    # TAP_OUTBOX_CAPACITY = "70000";
-    # TAP_OUTBOX_ONLY = "true";
-    # TAP_RETRY_TIMEOUT = "10s";
-  };
+  # services.bluesky-tap = {
+  #   enable = true;
+  #   package = terra.bluesky-tap;
+  #   fullNetwork = true;
+  #   databaseUrl = "postgresql://bluesky-tap@/bluesky-tap";
+  #   bind = "127.0.0.1:2480";
+  #   # metricsListen = "127.0.0.1:8765";
+  #   # logLevel = "debug";
+  #   disableAcks = true;
+  # };
+  # systemd.services.bluesky-tap.environment = {
+  #   TAP_OUTBOX_PARALLELISM = "4";
+  #   TAP_RESYNC_PARALLELISM = "64";
+  #   TAP_FIREHOSE_PARALLELISM = "24";
+  #   TAP_MAX_DB_CONNS = "64";
+  #   TAP_RELAY_URL = "https://relay.fire.hose.cam";
+  # };
 
   # setup postgres
   services.postgresql = {
     enable = true;
-    ensureDatabases = ["bluesky-tap"];
+    ensureDatabases = ["claudey"];
     ensureUsers = [{
-      name = "bluesky-tap";
+      name = "claudey";
       ensureDBOwnership = true;
     }];
   };
-
-  # # nginx reverse proxy
-  # services.nginx.virtualHosts.${domain} = {
-  #   useACMEHost = domain;
-  #   forceSSL = true;
-  #   quic = true;
-  #   kTLS = true;
-    
-  #   # locations."/" = {
-  #   #   proxyPass = "http://${cfg.bind}";
-  #   #   proxyWebsockets = true;
-  #   # };
-  # };
 }

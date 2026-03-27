@@ -67,7 +67,7 @@ D(
         CF_PROXY_OFF,
     ),
     DZWONEK("vpn", CF_PROXY_OFF),
-    VOLSINII("plc", CF_PROXY_OFF),
+    VOLSINII(["plc", "hydrant"], CF_PROXY_OFF),
     // github pages
     CNAME("dev", "90-008.github.io."),
     // fastmail

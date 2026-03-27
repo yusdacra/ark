@@ -12,11 +12,12 @@
     after = ["network.target"];
     environment = {
       HYDRANT_FULL_NETWORK = "true";
-      HYDRANT_FIREHOSE_WORKERS = "128";
-      HYDRANT_BACKFILL_CONCURRENCY_LIMIT = "256";
-      HYDRANT_DB_WORKER_THREADS = "16";
-      HYDRANT_CRAWLER_MAX_PENDING_REPOS = "10000";
-      HYDRANT_PLC_URL = "https://plc.wtf,https://plc.directory";
+      HYDRANT_CRAWLER_MAX_PENDING_REPOS = "5000";
+      HYDRANT_CRAWLER_RESUME_PENDING_REPOS = "2000";
+      HYDRANT_CURSOR_SAVE_INTERVAL = "1";
+      HYDRANT_PLC_URL = "https://plc.directory,http://localhost:8000";
+      HYDRANT_DATA_COMPRESSION = "zstd";
+      HYDRANT_JOURNAL_COMPRESSION = "lz4";
     };
     serviceConfig = {
       Type = "simple";

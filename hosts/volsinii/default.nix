@@ -13,6 +13,7 @@
     ../../modules/stylix-null.nix
     ../../users/root
     ../../users/dawn
+    ../../users/claudey
     ./disk-config.nix
   ]
   ++ (tlib.importFolder (toString ./modules));

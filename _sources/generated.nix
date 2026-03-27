@@ -20,17 +20,17 @@
   };
   blog = {
     pname = "blog";
-    version = "8c75080abe6c733b20a81722252bb4b8062b8b9e";
+    version = "0eeab661f0d3fa0de317ea9556ecc94e81955b40";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/endpoint";
-      rev = "8c75080abe6c733b20a81722252bb4b8062b8b9e";
+      rev = "0eeab661f0d3fa0de317ea9556ecc94e81955b40";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-WpIEhnAPhqAp5Ln/08UNTVvwH/lGueOckciDbP6QVFI=";
+      sha256 = "sha256-m5bS5lMvGF4TER3eXElENZcl43XKsgLSHsCznctITxA=";
     };
-    date = "2026-03-15";
+    date = "2026-03-18";
   };
   clickee = {
     pname = "clickee";
@@ -124,17 +124,17 @@
   };
   hydrant = {
     pname = "hydrant";
-    version = "4e6272671e7dc90a820deadb1abf6e284e80d1d0";
+    version = "6d735f195277af2f8d6ed6e86590a2027db2c7d4";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/hydrant";
-      rev = "4e6272671e7dc90a820deadb1abf6e284e80d1d0";
+      rev = "6d735f195277af2f8d6ed6e86590a2027db2c7d4";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-nM+e9e2GYsGGZRzVuKDgberDMVIpKt9DskXUcb86dms=";
+      sha256 = "sha256-aJAVAtXy5QII/GmXQwAvT/g9K4TogTUNXoY8PgyBgJI=";
     };
-    date = "2026-03-13";
+    date = "2026-03-20";
   };
   limbusart = {
     pname = "limbusart";
@@ -190,15 +190,15 @@
   };
   nixpkgs-xr = {
     pname = "nixpkgs-xr";
-    version = "b661b4f69e9dd0ef7fc243e4abc281620dfba76b";
+    version = "82adacd2ac84b353b98e9462be1e8af969a5c1f7";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "nixpkgs-xr";
-      rev = "b661b4f69e9dd0ef7fc243e4abc281620dfba76b";
+      rev = "82adacd2ac84b353b98e9462be1e8af969a5c1f7";
       fetchSubmodules = false;
-      sha256 = "sha256-3ewc8BXQ7mcvc2OhcPFfWTvMwQedZ+EUkDk3yGO8LIc=";
+      sha256 = "sha256-/figgEf9bJgifAotR2z+KqAUSKriOL17DGkgwJqlI6w=";
     };
-    date = "2026-03-14";
+    date = "2026-03-23";
   };
   nsid-tracker = {
     pname = "nsid-tracker";

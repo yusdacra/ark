@@ -4,7 +4,7 @@
   ...
 }:
 let
-  rev = "1286ca7a7cb25ece0e7d49648b7655cc285aee0f";
+  rev = "9cf6b7ee3c3a8a8d768b76bc957ef953fa897486";
 in
 buildGoModule {
   pname = "bluesky-tap";
@@ -14,12 +14,12 @@ buildGoModule {
     owner = "bluesky-social";
     repo = "indigo";
     inherit rev;
-    hash = "sha256-yksMw5ommI+ewvfudlpfMpSWUtpP3GC4XwnmmSYT7ks=";
+    hash = "sha256-f5CK4dyyMRfTi54y8maVpKbpJMfkc/0JVlu48lQ7UjQ=";
   };
 
   # patches = [./tap_deadlock_fix.patch];
 
-  vendorHash = "sha256-KRR+8icVuMGBQlR8h4KE6rpWWj9lrkNOJlxbFLyFsUI=";
+  vendorHash = "sha256-s1S+b+QbptqJ2mxqkvsn7M5VWfLrlwpWgRjg6lq2WVE=";
 
   subPackages = [ "cmd/tap" ];
 

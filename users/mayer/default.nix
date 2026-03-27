@@ -159,6 +159,7 @@ in
           (prismlauncher.override {
             additionalLibs = with pkgs; [libXtst libxkbcommon libXt];
           })
+          xivlauncher
           lutris
           signal-desktop
           bs-manager
@@ -170,6 +171,7 @@ in
           gcc
           gnumake
           python3
+          gh
           # sidelaoding
         ]) ++ [
           terra.helium
