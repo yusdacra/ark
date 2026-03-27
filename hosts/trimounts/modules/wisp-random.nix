@@ -25,7 +25,7 @@ in {
       PORT = toString port;
       WISP_API_URL = "https://wisp.place";
       HYDRANT_BIN = "${terra.hydrant}/bin/hydrant";
-      CURSOR = "0";
+      # CURSOR = "0";
     };
 
     serviceConfig = rec {
