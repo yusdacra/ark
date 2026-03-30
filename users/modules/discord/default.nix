@@ -7,7 +7,7 @@ let
   pkg = pkgs.discord.override {
     withMoonlight = true;
     inherit (terra) moonlight;
-    withOpenASAR = true;
+    withOpenASAR = false;
     withTTS = false;
   };
 in

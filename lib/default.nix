@@ -19,7 +19,7 @@ lib.makeExtensible (self: {
       files = b.readDir modules;
       fileNames = b.attrNames files;
       filesToImport = b.map (name: "${modules}/${name}") (
-        b.filter (name: (b.match ".*\.nix" name != null) && (name != "default.nix")) fileNames
+        b.filter (name: (b.match ".*.nix" name != null) && (name != "default.nix")) fileNames
       );
     in
     filesToImport;

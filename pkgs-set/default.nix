@@ -11,7 +11,7 @@ let
     inherit system;
     config.allowUnfree = true;
     # config.allowBroken = true;
-    # config.permittedInsecurePackages = ["electron-25.9.0"];
+    config.permittedInsecurePackages = ["electron-38.8.4"];
   };
   _inputs = import ../_sources/generated.nix {
     inherit (_pkgs)
