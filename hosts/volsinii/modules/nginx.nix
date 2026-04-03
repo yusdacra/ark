@@ -46,7 +46,9 @@
       email = (import "${inputs.self}/personal.nix").emails.primary;
       webroot = "/var/lib/acme/acme-challenge";
     };
-    certs."plc.gaze.systems" = { };
+    certs."plc.gaze.systems" = {
+      extraDomainNames = ["relay.gaze.systems"];
+    };
   };
 
   services.nginx.virtualHosts."plc.gaze.systems" = {
@@ -70,6 +72,17 @@
       ExecStart = "/root/allegedly2/target/release/allegedly mirror --wrap-fjall /root/plc3";
       Restart = "on-failure";
       RestartSec = "5s";
+    };
+  };
+
+  services.nginx.virtualHosts."relay.gaze.systems" = {
+    useACMEHost = "plc.gaze.systems";
+    forceSSL = true;
+    quic = true;
+    kTLS = true;
+    locations."/xrpc/" = {
+      proxyPass = "http://localhost:3000/xrpc/";
+      proxyWebsockets = true;
     };
   };
 }

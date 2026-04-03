@@ -48,6 +48,7 @@
     certs."poor.dog" = { };
     certs."ptr.pet" = { };
     certs."gaze.systems" = { };
+    certs."klbr.net" = { };
   };
   services.nginx.virtualHosts."gaze.systems" = {
     quic = true;
@@ -65,6 +66,12 @@
     quic = true;
     kTLS = true;
     useACMEHost = "ptr.pet";
+    forceSSL = true;
+  };
+  services.nginx.virtualHosts."klbr.net" = {
+    quic = true;
+    kTLS = true;
+    useACMEHost = "klbr.net";
     forceSSL = true;
   };
 

@@ -67,7 +67,7 @@ D(
         CF_PROXY_OFF,
     ),
     DZWONEK("vpn", CF_PROXY_OFF),
-    VOLSINII(["plc", "hydrant"], CF_PROXY_OFF),
+    VOLSINII(["plc", "hydrant", "relay"], CF_PROXY_OFF),
     // github pages
     CNAME("dev", "90-008.github.io."),
     // fastmail
@@ -94,14 +94,14 @@ D(
 );
 
 D(
-    "9.0.0.0.8.e.f.1.5.0.7.4.0.1.0.0.2.ip6.arpa",
+    "klbr.net",
     REG_NONE,
-    DnsProvider(DSP_CLOUDFLARE),
-    TRIMOUNTS("@", CF_PROXY_ON),
+    DnsProvider(DSP_PRIMARY),
+    TRIMOUNTS("@"),
     TXT("@", "a data endpoint for entity with serial id /90008/."),
     TXT(
         "@",
-        "entity linked here uses it/that pronouns. it can also be referred to as /dawn/.",
+        "entity linked here uses it/she pronouns. it can also be referred to as /dawn/.",
     ),
     TXT(
         "@",
@@ -109,8 +109,16 @@ D(
     ),
     TXT(
         "@",
-        "try connecting to https://gaze.systems/about for more information.",
+        "try connecting to https://ptr.pet/about for more information.",
     ),
+    // fastmail
+    CNAME("fm1._domainkey", "fm1.klbr.net.dkim.fmhosted.com."),
+    CNAME("fm2._domainkey", "fm2.klbr.net.dkim.fmhosted.com."),
+    CNAME("fm3._domainkey", "fm3.klbr.net.dkim.fmhosted.com."),
+    MX("@", 10, "in1-smtp.messagingengine.com."),
+    MX("@", 20, "in2-smtp.messagingengine.com."),
+    TXT("@", "v=spf1 include:spf.messagingengine.com ?all"),
+    TXT("_dmarc", "v=DMARC1; p=reject;"),
     IGNORE_ACME(),
 );
 

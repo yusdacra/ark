@@ -191,5 +191,13 @@ in
       };
 
       fonts.fontconfig.enable = l.mkForce true;
+
+      programs.ssh.extraConfig = ''
+      Host nixos-shell
+        Hostname localhost
+        Port 2222
+        User git
+        IdentityFile ~/.ssh/tangled-dev
+      '';
     };
 }
