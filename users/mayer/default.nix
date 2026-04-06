@@ -178,6 +178,7 @@ in
           terra.antigravity
           terra.pi-coding-agent
           terra.iloader
+          terra.lmstudio
           # terra.gitnexus
           # (terra.pds-upload.override {
           #   secretsFile = config.age.secrets.atfileCfg.path;

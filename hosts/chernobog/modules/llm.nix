@@ -1,13 +1,37 @@
-{pkgs, ...}:
+{terra, pkgs, ...}:
 let
-  llama = (pkgs.llama-cpp.overrideAttrs (prev: {
-    cmakeFlags = prev.cmakeFlags ++ [ "-DAMDGPU_TARGETS=gfx1102" ]; # rx 7600 xt
-  })).override {
-    rocmSupport = true;
+  llama = (terra.llama-cpp.override {
+    rocmSupport = false;
     cudaSupport = false;
     openclSupport = false;
-    vulkanSupport = false;
-  };
+    blasSupport = false;
+    vulkanSupport = true;
+    native = true;
+  }).overrideAttrs (old: {
+    doCheck = false;
+  });
+  # llama = pkgs.stdenv.mkDerivation {
+  #   name = "llamacpp-rocm-b1229";
+
+  #   src = pkgs.fetchurl {
+  #     url = "https://github.com/lemonade-sdk/llamacpp-rocm/releases/download/b1229/llama-b1229-ubuntu-rocm-gfx110X-x64.zip";
+  #     hash = "sha256-RGKGfZ3HBssBhFaskb8IAQYMng+K4Fol7J0H5rCmgwA=";
+  #   };
+  #   sourceRoot = ".";
+
+  #   nativeBuildInputs = [ pkgs.autoPatchelfHook pkgs.makeBinaryWrapper pkgs.unzip ];
+  #   buildInputs = [ pkgs.stdenv.cc.cc.lib ]; # just glibc/libstdc++
+
+  #   installPhase = ''
+  #     mkdir -p $out/bin $out/lib/rocblas
+  #     cp *.so* $out/lib || true
+  #     cp llama-* $out/bin
+  #     chmod +x $out/bin/*
+  #     ln -sf ${pkgs.rocmPackages.rocblas}/lib/rocblas/library $out/lib/rocblas/library
+  #   '';
+
+  #   autoPatchelfIgnoreMissingDeps = true;
+  # };
 in {
   # services.ollama = {
   #   enable = true;
