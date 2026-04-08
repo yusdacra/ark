@@ -22,6 +22,7 @@ in
         wallpaper = toString ../../mayer/wallpaper.png;
         clipboard-upload = toString ./uploader.nu;
         clipboard-select = toString ./clipboard.nu;
+        gsr-replay-save = toString ../gsr/save-replay.sh;
       };
     in
     l.replaceStrings

@@ -112,6 +112,7 @@ in
             [
               "settings"
               "niri"
+              "gsr"
               "foot"
             ]
             # cli stuff
