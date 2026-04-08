@@ -60,9 +60,8 @@ D(
     DnsProvider(DSP_PRIMARY),
     TRIMOUNTS(
         [
-            "@", "pmart", "dash",
-            "knot", "spindle",
-            "guestbook",
+            "@",
+            "knot", "spindle", "guestbook",
         ],
         CF_PROXY_OFF,
     ),
