@@ -1,12 +1,12 @@
 { ... }:
 let
-  domain = "hydrant.gaze.systems";
+  rootDomain = "klbr.net";
+  domain = "hydrant.${rootDomain}";
 in
 {
-  security.acme.certs."plc.gaze.systems".extraDomainNames = [domain];
-
+  security.acme.certs."plc.${rootDomain}".extraDomainNames = [domain];
   services.nginx.virtualHosts.${domain} = {
-    useACMEHost = "plc.gaze.systems";
+    useACMEHost = "plc.${rootDomain}";
     forceSSL = true;
     quic = true;
     kTLS = true;

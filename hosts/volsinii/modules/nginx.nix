@@ -47,42 +47,9 @@
       webroot = "/var/lib/acme/acme-challenge";
     };
     certs."plc.gaze.systems" = {
-      extraDomainNames = ["relay.gaze.systems"];
+      # extraDomainNames = ["relay.gaze.systems"];
     };
-  };
-
-  services.nginx.virtualHosts."plc.gaze.systems" = {
-    useACMEHost = "plc.gaze.systems";
-    forceSSL = true;
-    quic = true;
-    kTLS = true;
-    locations."/" = {
-      proxyPass = "http://localhost:8000";
-      proxyWebsockets = true;
-    };
-  };
-
-  systemd.services.allegedly = {
-    description = "allegedly mirror service";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "simple";
-      WorkingDirectory = "/root/allegedly2";
-      ExecStart = "/root/allegedly2/target/release/allegedly mirror --wrap-fjall /root/plc3";
-      Restart = "on-failure";
-      RestartSec = "5s";
-    };
-  };
-
-  services.nginx.virtualHosts."relay.gaze.systems" = {
-    useACMEHost = "plc.gaze.systems";
-    forceSSL = true;
-    quic = true;
-    kTLS = true;
-    locations."/xrpc/" = {
-      proxyPass = "http://localhost:3000/xrpc/";
-      proxyWebsockets = true;
+    certs."plc.klbr.net" = {
     };
   };
 }

@@ -67,7 +67,7 @@ D(
         CF_PROXY_OFF,
     ),
     DZWONEK("vpn", CF_PROXY_OFF),
-    VOLSINII(["plc", "hydrant", "relay"], CF_PROXY_OFF),
+    VOLSINII(["plc"], CF_PROXY_OFF),
     // github pages
     CNAME("dev", "90-008.github.io."),
     // fastmail
@@ -98,6 +98,7 @@ D(
     REG_NONE,
     DnsProvider(DSP_PRIMARY),
     TRIMOUNTS("@"),
+    VOLSINII(["plc", "hydrant"]),
     TXT("@", "a data endpoint for entity with serial id /90008/."),
     TXT(
         "@",
