@@ -43,6 +43,6 @@
     acceptTerms = true;
     defaults.email = (import "${inputs.self}/personal.nix").emails.primary;
     defaults.webroot = "/var/lib/acme/acme-challenge";
-    certs."vpn.gaze.systems" = { };
+    certs."vpn.klbr.net" = { };
   };
 }

@@ -1,6 +1,6 @@
 { lib, config, ... }:
 let
-  rootDomain = "gaze.systems";
+  rootDomain = "klbr.net";
   domain = "vpn.${rootDomain}";
 in
 {
@@ -17,16 +17,17 @@ in
     enable = true;
     address = "0.0.0.0";
     port = 1111;
-    acl = {
-      groups.admin = [ "90008@gaze.systems" ];
+    acl = let
+      admin = "90008@klbr.net";
+    in {
+      groups.admin = [admin];
       tagOwners = {
         private-infra = [ "group:admin" ];
         other-infra = [ "group:admin" ];
       };
       hosts = {
-        chernobog = "100.64.0.8";
-        higashi = "100.64.0.5";
-        trimounts = "100.64.0.7";
+        chernobog = "100.64.0.6";
+        trimounts = "100.64.0.1";
       };
       rules = lib.mkBefore [
         {
@@ -49,12 +50,12 @@ in
           dst = [ "chernobog:*" ];
         }
         {
-          src = [ "90008@gaze.systems" ];
-          dst = [ "90008@gaze.systems:*" ];
+          src = [ admin ];
+          dst = [ "${admin}:*" ];
         }
         {
           src = [
-            "90008@gaze.systems"
+            admin
             "tag:private-infra"
           ];
           dst = [ "autogroup:internet:*" ];

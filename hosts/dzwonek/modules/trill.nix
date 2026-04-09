@@ -1,6 +1,6 @@
 {pkgs, inputs, ...}:
 let
-  rootDomain = "vpn.gaze.systems";
+  rootDomain = "vpn.klbr.net";
   domain = "trill.ptr.pet";
   pkg = pkgs.callPackage "${inputs.trill}/nix" rec {
     memos-modules = pkgs.callPackage "${inputs.trill}/nix/modules.nix" {};

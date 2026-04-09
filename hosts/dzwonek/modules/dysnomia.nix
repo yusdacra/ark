@@ -1,6 +1,6 @@
 {terra, ...}:
 let
-  rootDomain = "vpn.gaze.systems";
+  rootDomain = "vpn.klbr.net";
   domain = "dysnomia.ptr.pet";
 in
 {
