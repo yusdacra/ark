@@ -77,5 +77,7 @@
 
   hardware.enableRedistributableFirmware = true;
 
+  virtualisation.podman.enable = true;
+
   system.stateVersion = "25.05";
 }

@@ -57,7 +57,7 @@ in {
       ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p ${callieMount}";
       ExecStart = ''
         ${pkgs.geesefs}/bin/geesefs \
-          --endpoint http://homura-v:9000 \
+          --endpoint http://homura:9000 \
           --region us-east-1 \
           --shared-config ${config.age.secrets.callieMusic.path} \
           --cache %C/geesefs-callie \
