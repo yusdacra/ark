@@ -127,6 +127,7 @@ in
               "helix"
               "git"
               "ssh"
+              "atcr"
             ]
             [
               # "zen"
@@ -193,6 +194,8 @@ in
       };
 
       fonts.fontconfig.enable = l.mkForce true;
+
+      programs.atcr.enable = true;
 
       programs.ssh.extraConfig = ''
       Host nixos-shell
