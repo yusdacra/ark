@@ -14,13 +14,10 @@
     config = {
       enable = true;
       json = {
-        scale = 1.0;
-        bitrate = 60000000;
         encoder =
           {
             encoder = "vaapi";
             codec = "h265";
-            bit-depth = 8;
           }
         ;
       };

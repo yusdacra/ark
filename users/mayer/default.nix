@@ -23,6 +23,7 @@ in
       "dialout"
       "video"
       "input"
+      "lp"
     ];
     shell = pkgs.nushell;
     hashedPassword = "$6$spzqhAyJfhHy$iHgLBlhjGn1l8PnbjJdWTn1GPvcjMqYNKUzdCe/7IrX6sHNgETSr/Nfpdmq9FCXLhrAfwHOd/q/8SvfeIeNX4/";
