@@ -20,6 +20,26 @@
         },
         "version": "b027ee29d959fda4b60b57566d64c98a202e0feb"
     },
+    "atspool": {
+        "cargoLock": null,
+        "date": "2026-04-14",
+        "extract": null,
+        "name": "atspool",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "f222d83aadd1d881e9224fc90474d79d835a6593",
+            "sha256": "sha256-vg/+iCL9yqmNqz3Ldmm5d4xWxOYculRHgP2Q/8jbyjo=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://tangled.org/@ptr.pet/atspool"
+        },
+        "version": "f222d83aadd1d881e9224fc90474d79d835a6593"
+    },
     "blog": {
         "cargoLock": null,
         "date": "2026-04-04",

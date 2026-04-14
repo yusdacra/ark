@@ -134,6 +134,7 @@ in
               # "zen"
               "discord"
               "clickee"
+              "atspool"
               "arrpc"
             ]
           ];

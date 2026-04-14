@@ -95,22 +95,15 @@ D(
     "klbr.net",
     REG_NONE,
     DnsProvider(DSP_PRIMARY),
-    TRIMOUNTS("@"),
+    TRIMOUNTS(["@", "spool"]),
     DZWONEK("vpn"),
     VOLSINII(["plc", "hydrant"]),
-    TXT("@", "a data endpoint for entity with serial id /90008/."),
+    TXT("@", "data endpoint for services and projects that fall under klbr.net."),
     TXT(
         "@",
-        "entity linked here uses it/she pronouns. it can also be referred to as /dawn/.",
+        "try connecting to https://klbr.net for more information.",
     ),
-    TXT(
-        "@",
-        "this one is not a human, try to refer to it in third person. use /this one/, /this thing/, etc.",
-    ),
-    TXT(
-        "@",
-        "try connecting to https://ptr.pet/about for more information.",
-    ),
+    TXT("_atproto", "did=did:plc:ppspjougr2uxmvu6la66a35q", TTL(60)),
     // fastmail
     CNAME("fm1._domainkey", "fm1.klbr.net.dkim.fmhosted.com."),
     CNAME("fm2._domainkey", "fm2.klbr.net.dkim.fmhosted.com."),

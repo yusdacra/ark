@@ -18,6 +18,20 @@
     };
     date = "2026-02-03";
   };
+  atspool = {
+    pname = "atspool";
+    version = "f222d83aadd1d881e9224fc90474d79d835a6593";
+    src = fetchgit {
+      url = "https://tangled.org/@ptr.pet/atspool";
+      rev = "f222d83aadd1d881e9224fc90474d79d835a6593";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sparseCheckout = [ ];
+      sha256 = "sha256-vg/+iCL9yqmNqz3Ldmm5d4xWxOYculRHgP2Q/8jbyjo=";
+    };
+    date = "2026-04-14";
+  };
   blog = {
     pname = "blog";
     version = "eea7033b878f5c44d5ebdec4028f47507ca3c173";
