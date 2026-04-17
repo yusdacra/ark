@@ -18,8 +18,9 @@ let
     we hope they will be of help to you ^^;
 
     //make use of/
-    /did:plc mirror:   plc.klbr.net/
-    /atproto spool:  spool.klbr.net/
+    /did:plc mirror:    plc.klbr.net/
+    /atproto relay:   relay.klbr.net/
+    /atproto spool:   spool.klbr.net/
 
     //reach out/
     /bsky           @klbr.net/
