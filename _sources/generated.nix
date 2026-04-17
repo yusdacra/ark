@@ -20,31 +20,31 @@
   };
   atspool = {
     pname = "atspool";
-    version = "f222d83aadd1d881e9224fc90474d79d835a6593";
+    version = "3457b34e3cd0131873b78b2e0b756ad9081075d1";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/atspool";
-      rev = "f222d83aadd1d881e9224fc90474d79d835a6593";
+      rev = "3457b34e3cd0131873b78b2e0b756ad9081075d1";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-vg/+iCL9yqmNqz3Ldmm5d4xWxOYculRHgP2Q/8jbyjo=";
+      sha256 = "sha256-CYyKm6EtbnPHbdxZIMQppIjBMhkl34AyKkYNjd8mPTM=";
     };
     date = "2026-04-14";
   };
   blog = {
     pname = "blog";
-    version = "eea7033b878f5c44d5ebdec4028f47507ca3c173";
+    version = "07d745fb33cf580b79ff6d29631188eecd471357";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/endpoint";
-      rev = "eea7033b878f5c44d5ebdec4028f47507ca3c173";
+      rev = "07d745fb33cf580b79ff6d29631188eecd471357";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-hYQ4QOLNjK0/1soSssuPOZc5zZBRoNVxJzWIE4ot8K0=";
+      sha256 = "sha256-2ThCN55JV1b4YbMaOtc7oFVNNSU/IC8wx6F7Ybj1+z4=";
     };
-    date = "2026-04-04";
+    date = "2026-04-17";
   };
   clickee = {
     pname = "clickee";
@@ -138,17 +138,17 @@
   };
   hydrant = {
     pname = "hydrant";
-    version = "064ef9141748928490d27ff0e749c7c75a67387b";
+    version = "73c0f00899788fce68908d81a1faadb2b47d2517";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/hydrant";
-      rev = "064ef9141748928490d27ff0e749c7c75a67387b";
+      rev = "73c0f00899788fce68908d81a1faadb2b47d2517";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-FzikJ1vRuFLktK2To91LKs7EZgik/CWIfHft0jkN2U0=";
+      sha256 = "sha256-auipRcz8kEtG38g77IATavm/wZWvinsGIDhouwJYA8c=";
     };
-    date = "2026-04-02";
+    date = "2026-04-15";
   };
   limbusart = {
     pname = "limbusart";

@@ -1,4 +1,13 @@
-{terra, ...}: {
+{terra, ...}:
+let
+  port = "13579";
+  pkg = terra.hydrant.overrideAttrs (old: {
+    cargoBuildNoDefaultFeatures = true;
+    cargoBuildFeatures = ["relay"];
+    doCheck = false;
+  });
+in
+{
   users.users.hydrant = {
     isSystemUser = true;
     group = "hydrant";
@@ -7,21 +16,20 @@
   users.groups.hydrant = {};
 
   systemd.services.hydrant = {
-    description = "hydrant ATURI indexer";
+    description = "hydrant atproto relay";
     wantedBy = ["multi-user.target"];
     after = ["network.target"];
     environment = {
-      HYDRANT_FULL_NETWORK = "true";
-      HYDRANT_CRAWLER_MAX_PENDING_REPOS = "5000";
-      HYDRANT_CRAWLER_RESUME_PENDING_REPOS = "2000";
+      HYDRANT_API_PORT = port;
       HYDRANT_CURSOR_SAVE_INTERVAL = "1";
-      HYDRANT_PLC_URL = "https://plc.directory,http://localhost:8000";
+      HYDRANT_PLC_URL = "http://localhost:8000";
       HYDRANT_DATA_COMPRESSION = "zstd";
-      HYDRANT_JOURNAL_COMPRESSION = "lz4";
+      HYDRANT_JOURNAL_COMPRESSION = "zstd";
+      HYDRANT_RATE_TIERS = "default:5000/10.0/18000000/432000000/10000000";
     };
     serviceConfig = {
       Type = "simple";
-      ExecStart = "${terra.hydrant}/bin/hydrant";
+      ExecStart = "${pkg}/bin/hydrant";
       Restart = "on-failure";
       RestartSec = "10s";
       StateDirectory = "hydrant";
@@ -51,4 +59,18 @@
       value = "1048576";
     }
   ];
+
+  security.acme.certs."plc.klbr.net".extraDomainNames = ["relay.klbr.net"];
+  services.nginx.virtualHosts."relay.klbr.net" = {
+    useACMEHost = "plc.klbr.net";
+    forceSSL = true;
+    quic = true;
+    kTLS = true;
+    locations."=/".proxyPass = "http://localhost:${port}";
+    locations."/xrpc" = {
+      proxyPass = "http://localhost:${port}";
+      proxyWebsockets = true;
+    };
+    locations."/_health".proxyPass = "http://localhost:${port}";
+  };
 }

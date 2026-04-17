@@ -97,7 +97,7 @@ D(
     DnsProvider(DSP_PRIMARY),
     TRIMOUNTS(["@", "spool"]),
     DZWONEK("vpn"),
-    VOLSINII(["plc", "hydrant"]),
+    VOLSINII(["plc", "relay", "hydrant"]),
     TXT("@", "data endpoint for services and projects that fall under klbr.net."),
     TXT(
         "@",
