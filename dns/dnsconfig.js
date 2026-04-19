@@ -95,7 +95,7 @@ D(
     "klbr.net",
     REG_NONE,
     DnsProvider(DSP_PRIMARY),
-    TRIMOUNTS(["@", "spool"]),
+    TRIMOUNTS(["api.compare.plc"]),
     DZWONEK("vpn"),
     VOLSINII(["plc", "relay", "hydrant"]),
     TXT("@", "data endpoint for services and projects that fall under klbr.net."),
@@ -104,6 +104,15 @@ D(
         "try connecting to https://klbr.net for more information.",
     ),
     TXT("_atproto", "did=did:plc:ppspjougr2uxmvu6la66a35q", TTL(60)),
+    // @
+    TXT("_wisp", "did:plc:ppspjougr2uxmvu6la66a35q"),
+    A("@", "152.53.121.97"),
+    // spool
+    TXT("_wisp.spool", "did:plc:ppspjougr2uxmvu6la66a35q"),
+    CNAME("spool.klbr.net.", "903e6b98761b85f2.dns.wisp.place."),
+    // compare plc
+    TXT("_wisp.compare.plc", "did:plc:dfl62fgb7wtjj3fcbb72naae"),
+    CNAME("compare.plc.klbr.net.", "9602ca6bb742000c.dns.wisp.place."),
     // fastmail
     CNAME("fm1._domainkey", "fm1.klbr.net.dkim.fmhosted.com."),
     CNAME("fm2._domainkey", "fm2.klbr.net.dkim.fmhosted.com."),

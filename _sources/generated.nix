@@ -74,6 +74,20 @@
     };
     date = "2025-09-15";
   };
+  compare-plc = {
+    pname = "compare-plc";
+    version = "ffdc2ac48839352630ef3fdbeb1053ee53f0fb6e";
+    src = fetchgit {
+      url = "https://tangled.org/@ptr.pet/compare-plc";
+      rev = "ffdc2ac48839352630ef3fdbeb1053ee53f0fb6e";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sparseCheckout = [ ];
+      sha256 = "sha256-yCO8prigt/88IZoBejIbmsqlR6cVfpZPfMy4aHbvG2s=";
+    };
+    date = "2026-04-19";
+  };
   disko = {
     pname = "disko";
     version = "5ad85c82cc52264f4beddc934ba57f3789f28347";
@@ -138,17 +152,17 @@
   };
   hydrant = {
     pname = "hydrant";
-    version = "73c0f00899788fce68908d81a1faadb2b47d2517";
+    version = "d6d967340cae71ec31f5e054dc6b9212c8e45425";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/hydrant";
-      rev = "73c0f00899788fce68908d81a1faadb2b47d2517";
+      rev = "d6d967340cae71ec31f5e054dc6b9212c8e45425";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-auipRcz8kEtG38g77IATavm/wZWvinsGIDhouwJYA8c=";
+      sha256 = "sha256-DYz+G6UOMHFrt/wp6jYXhnMLMonvHSsHBeotoZIPhNs=";
     };
-    date = "2026-04-15";
+    date = "2026-04-18";
   };
   limbusart = {
     pname = "limbusart";

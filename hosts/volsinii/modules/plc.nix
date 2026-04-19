@@ -25,6 +25,7 @@
     description = "allegedly mirror service";
     after = ["network.target"];
     wantedBy = ["multi-user.target"];
+    environment = { RUST_LOG="allegedly=debug"; };
     serviceConfig = {
       Type = "simple";
       WorkingDirectory = "/root/allegedly2";
