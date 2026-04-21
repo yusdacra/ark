@@ -29,9 +29,9 @@
     };
   };
 
-  security.acme.certs."klbr.net".extraDomainNames = ["api.compare.plc.klbr.net"];
+  security.acme.certs."api.compare.plc.klbr.net" = {};
   services.nginx.virtualHosts."api.compare.plc.klbr.net" = {
-    useACMEHost = "klbr.net";
+    useACMEHost = "api.compare.plc.klbr.net";
     forceSSL = true;
     quic = true;
     kTLS = true;

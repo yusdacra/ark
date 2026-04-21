@@ -35,4 +35,5 @@ in
   "callieMusic.age".publicKeys = [yusdacra trimounts];
   "atloginCfg.age".publicKeys = [yusdacra trimounts];
   "navidrome.age".publicKeys = [yusdacra trimounts];
+  "atspool.age".publicKeys = [yusdacra];
 }

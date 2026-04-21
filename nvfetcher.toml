@@ -66,6 +66,9 @@ fetch.git = "https://tangled.org/@ptr.pet/hydrant"
 src.git = "https://tangled.org/@ptr.pet/compare-plc"
 fetch.git = "https://tangled.org/@ptr.pet/compare-plc"
 
+[random-wisp-place]
+src.git = "https://tangled.org/@ptr.pet/random.wisp.place"
+fetch.git = "https://tangled.org/@ptr.pet/random.wisp.place"
 
 ## TANGLED ##
 

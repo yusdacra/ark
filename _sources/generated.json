@@ -22,7 +22,7 @@
     },
     "atspool": {
         "cargoLock": null,
-        "date": "2026-04-14",
+        "date": "2026-04-19",
         "extract": null,
         "name": "atspool",
         "passthru": null,
@@ -32,13 +32,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "3457b34e3cd0131873b78b2e0b756ad9081075d1",
-            "sha256": "sha256-CYyKm6EtbnPHbdxZIMQppIjBMhkl34AyKkYNjd8mPTM=",
+            "rev": "e144c3cfadbb9360d06d61f5255b98eaa132e303",
+            "sha256": "sha256-MRT/rpHRdEz+flu7btC9HTuh65OAQBL7Gu2HxkE1q7w=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.org/@ptr.pet/atspool"
         },
-        "version": "3457b34e3cd0131873b78b2e0b756ad9081075d1"
+        "version": "e144c3cfadbb9360d06d61f5255b98eaa132e303"
     },
     "blog": {
         "cargoLock": null,
@@ -226,7 +226,7 @@
     },
     "hydrant": {
         "cargoLock": null,
-        "date": "2026-04-18",
+        "date": "2026-04-20",
         "extract": null,
         "name": "hydrant",
         "passthru": null,
@@ -236,13 +236,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "d6d967340cae71ec31f5e054dc6b9212c8e45425",
-            "sha256": "sha256-DYz+G6UOMHFrt/wp6jYXhnMLMonvHSsHBeotoZIPhNs=",
+            "rev": "db9caf450fe52a4e352abcb09af5087437fa9da5",
+            "sha256": "sha256-DiPNg61hAzwr9pnunD1n5hSmprfxWcIeCLtwEIuyXj0=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.org/@ptr.pet/hydrant"
         },
-        "version": "d6d967340cae71ec31f5e054dc6b9212c8e45425"
+        "version": "db9caf450fe52a4e352abcb09af5087437fa9da5"
     },
     "limbusart": {
         "cargoLock": null,
@@ -386,6 +386,26 @@
             "url": "https://tangled.org/@ptr.pet/nucleus"
         },
         "version": "a2b7593bf236c4268fb45e7ebe57407014fc839f"
+    },
+    "random-wisp-place": {
+        "cargoLock": null,
+        "date": "2026-04-20",
+        "extract": null,
+        "name": "random-wisp-place",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "1be6c3bde64da46d4c369135479118e62690d3d5",
+            "sha256": "sha256-z54L8Iks5wMbxkiD4oabTMpguXtVuq9rZizo7zRhhAY=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://tangled.org/@ptr.pet/random.wisp.place"
+        },
+        "version": "1be6c3bde64da46d4c369135479118e62690d3d5"
     },
     "stylix": {
         "cargoLock": null,

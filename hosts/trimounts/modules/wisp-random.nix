@@ -1,10 +1,6 @@
-{ pkgs, terra, ... }:
+{ pkgs, terra, inputs, ... }:
 let
-  random-wisp-place = pkgs.fetchgit {
-    url = "https://tangled.org/did:plc:dfl62fgb7wtjj3fcbb72naae/random.wisp.place";
-    rev = "refs/heads/main";
-    hash = "sha256-h6yUVqVVtJOmxvf6xutP3EotIdzDGfRHnMgAEK2bnng=";
-  };
+  random-wisp-place = inputs.random-wisp-place;
   port = 14553;
 
   rootDomain = "ptr.pet";
@@ -25,7 +21,7 @@ in {
       PORT = toString port;
       WISP_API_URL = "https://wisp.place";
       HYDRANT_BIN = "${terra.hydrant}/bin/hydrant";
-      CURSOR = "0";
+      # CURSOR = "0";
     };
 
     serviceConfig = rec {

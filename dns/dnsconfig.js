@@ -95,9 +95,9 @@ D(
     "klbr.net",
     REG_NONE,
     DnsProvider(DSP_PRIMARY),
-    TRIMOUNTS(["api.compare.plc"]),
+    TRIMOUNTS(["api.compare.plc", "api.spool"]),
     DZWONEK("vpn"),
-    VOLSINII(["plc", "relay", "hydrant"]),
+    VOLSINII(["plc", "relay"]),
     TXT("@", "data endpoint for services and projects that fall under klbr.net."),
     TXT(
         "@",
@@ -107,6 +107,9 @@ D(
     // @
     TXT("_wisp", "did:plc:ppspjougr2uxmvu6la66a35q"),
     A("@", "152.53.121.97"),
+    // hydrant
+    TXT("_wisp.hydrant", "did:plc:dfl62fgb7wtjj3fcbb72naae"),
+    CNAME("hydrant.klbr.net.", "61d703a0357bad0e.dns.wisp.place."),
     // spool
     TXT("_wisp.spool", "did:plc:ppspjougr2uxmvu6la66a35q"),
     CNAME("spool.klbr.net.", "903e6b98761b85f2.dns.wisp.place."),

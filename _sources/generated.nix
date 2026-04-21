@@ -20,17 +20,17 @@
   };
   atspool = {
     pname = "atspool";
-    version = "3457b34e3cd0131873b78b2e0b756ad9081075d1";
+    version = "e144c3cfadbb9360d06d61f5255b98eaa132e303";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/atspool";
-      rev = "3457b34e3cd0131873b78b2e0b756ad9081075d1";
+      rev = "e144c3cfadbb9360d06d61f5255b98eaa132e303";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-CYyKm6EtbnPHbdxZIMQppIjBMhkl34AyKkYNjd8mPTM=";
+      sha256 = "sha256-MRT/rpHRdEz+flu7btC9HTuh65OAQBL7Gu2HxkE1q7w=";
     };
-    date = "2026-04-14";
+    date = "2026-04-19";
   };
   blog = {
     pname = "blog";
@@ -152,17 +152,17 @@
   };
   hydrant = {
     pname = "hydrant";
-    version = "d6d967340cae71ec31f5e054dc6b9212c8e45425";
+    version = "db9caf450fe52a4e352abcb09af5087437fa9da5";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/hydrant";
-      rev = "d6d967340cae71ec31f5e054dc6b9212c8e45425";
+      rev = "db9caf450fe52a4e352abcb09af5087437fa9da5";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-DYz+G6UOMHFrt/wp6jYXhnMLMonvHSsHBeotoZIPhNs=";
+      sha256 = "sha256-DiPNg61hAzwr9pnunD1n5hSmprfxWcIeCLtwEIuyXj0=";
     };
-    date = "2026-04-18";
+    date = "2026-04-20";
   };
   limbusart = {
     pname = "limbusart";
@@ -255,6 +255,20 @@
       sha256 = "sha256-wtEJcrOxFJz2GrzqRy+e+KMdTKjFAn1B7wJCZumtNDA=";
     };
     date = "2026-01-24";
+  };
+  random-wisp-place = {
+    pname = "random-wisp-place";
+    version = "1be6c3bde64da46d4c369135479118e62690d3d5";
+    src = fetchgit {
+      url = "https://tangled.org/@ptr.pet/random.wisp.place";
+      rev = "1be6c3bde64da46d4c369135479118e62690d3d5";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sparseCheckout = [ ];
+      sha256 = "sha256-z54L8Iks5wMbxkiD4oabTMpguXtVuq9rZizo7zRhhAY=";
+    };
+    date = "2026-04-20";
   };
   stylix = {
     pname = "stylix";
