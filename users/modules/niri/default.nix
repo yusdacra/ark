@@ -15,7 +15,7 @@ in
     ../clipman
   ];
 
-  home.packages = with pkgs; [file libnotify clipman niri xwayland-satellite brightnessctl swaybg];
+  home.packages = with pkgs; [file libnotify clipman niri xwayland-satellite brightnessctl swaybg slurp jq];
   xdg.configFile."niri/config.kdl".text =
     let
       replace = {
@@ -23,6 +23,8 @@ in
         clipboard-upload = toString ./uploader.nu;
         clipboard-select = toString ./clipboard.nu;
         gsr-replay-save = toString ../gsr/save-replay.sh;
+        gsr-record-screen = toString ../gsr/record-screen.sh;
+        gsr-record-area = toString ../gsr/record-area.sh;
       };
     in
     l.replaceStrings

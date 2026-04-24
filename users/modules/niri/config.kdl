@@ -114,7 +114,7 @@ layout {
 }
 
 spawn-at-startup "swaybg" "-i" "%%wallpaper%%"
-spawn-at-startup "systemctl" "--user" "start" "gsr-replay.service"
+// spawn-at-startup "systemctl" "--user" "start" "gsr-replay.service"
 
 hotkey-overlay {
     // skip-at-startup
@@ -171,7 +171,9 @@ binds {
 
     Alt+S hotkey-overlay-title="screenshot screen" { screenshot-screen; }
     Alt+Shift+S hotkey-overlay-title="screenshot" { screenshot; }
-    Alt+Shift+R hotkey-overlay-title="save replay" { spawn-sh "sh %%gsr-replay-save%%"; }
+    // Alt+Shift+R hotkey-overlay-title="save replay" { spawn-sh "sh %%gsr-replay-save%%"; }
+    Alt+R hotkey-overlay-title="record screen" { spawn-sh "sh %%gsr-record-screen%%"; }
+    Alt+Shift+R hotkey-overlay-title="record area"   { spawn-sh "sh %%gsr-record-area%%"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
