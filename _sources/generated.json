@@ -226,7 +226,7 @@
     },
     "hydrant": {
         "cargoLock": null,
-        "date": "2026-04-20",
+        "date": "2026-04-24",
         "extract": null,
         "name": "hydrant",
         "passthru": null,
@@ -236,13 +236,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "db9caf450fe52a4e352abcb09af5087437fa9da5",
-            "sha256": "sha256-DiPNg61hAzwr9pnunD1n5hSmprfxWcIeCLtwEIuyXj0=",
+            "rev": "c93a1abc6cd03cdccdc412974f622424fe3f0253",
+            "sha256": "sha256-Uk96t1USqX5ARGMjHcxnFcuXL054NkPUytwA+dU54W8=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.org/@ptr.pet/hydrant"
         },
-        "version": "db9caf450fe52a4e352abcb09af5087437fa9da5"
+        "version": "c93a1abc6cd03cdccdc412974f622424fe3f0253"
     },
     "limbusart": {
         "cargoLock": null,

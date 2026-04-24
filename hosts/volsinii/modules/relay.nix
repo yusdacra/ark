@@ -21,12 +21,14 @@ in
     after = ["network.target"];
     environment = {
       HYDRANT_API_PORT = port;
-      HYDRANT_CURSOR_SAVE_INTERVAL = "1";
+      HYDRANT_CURSOR_SAVE_INTERVAL = "1sec";
       HYDRANT_SEED_HOSTS= "https://bsky.network,https://relay.bas.sh";
-      HYDRANT_PLC_URL = "https://plc.directory";
+      HYDRANT_PLC_URL = "http://localhost:8000";
       HYDRANT_DATA_COMPRESSION = "zstd";
       HYDRANT_JOURNAL_COMPRESSION = "zstd";
       HYDRANT_RATE_TIERS = "default:5000/10.0/18000000/432000000/10000000";
+      HYDRANT_EPHEMERAL = "true";
+      HYDRANT_EPHEMERAL_TTL = "1d";
     };
     serviceConfig = {
       Type = "simple";

@@ -163,7 +163,7 @@ in
           (prismlauncher.override {
             additionalLibs = with pkgs; [libXtst libxkbcommon libXt];
           })
-          xivlauncher
+          # xivlauncher
           lutris
           signal-desktop
           bs-manager
@@ -176,11 +176,13 @@ in
           gnumake
           python3
           gh
+          codex
+          codex-acp
           # sidelaoding
         ]) ++ [
           terra.helium
           terra.antigravity
-          terra.pi-coding-agent
+          # terra.pi-coding-agent
           terra.iloader
           terra.lmstudio
           # terra.gitnexus

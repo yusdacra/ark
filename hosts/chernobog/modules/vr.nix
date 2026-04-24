@@ -8,7 +8,7 @@
   services.wivrn = {
     enable = true;
     openFirewall = true;
-    defaultRuntime = true;
+    # defaultRuntime = true;
     autoStart = true;
     highPriority = true;
     config = {
