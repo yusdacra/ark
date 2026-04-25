@@ -5,13 +5,13 @@
   ...
 }:
 let
-  PUBLIC_BASE_URL = "https://gaze.systems";
+  PUBLIC_BASE_URL = "https://ptr.pet";
   modules = (pkgs.callPackage "${inputs.blog}/nix/modules.nix" { }).overrideAttrs (_: {
     # outputHash = "sha256-rzfSfiK8FSNFR+1QTwM/ltLZBprG9BoQsPmOt6IdXFc=";
   });
   pkg = pkgs.callPackage "${inputs.blog}/nix" {
     inherit PUBLIC_BASE_URL;
-    eunomia-modules = modules;
+    endpoint-modules = modules;
   };
   port = 3003;
   vhostConfig = {
@@ -59,7 +59,7 @@ in
     };
     serviceConfig = {
       User = "website";
-      ExecStart = "${pkg}/bin/eunomia";
+      ExecStart = "${pkg}/bin/endpoint";
       Restart = "on-failure";
       RestartSec = 5;
       WorkingDirectory = "/var/lib/website";
