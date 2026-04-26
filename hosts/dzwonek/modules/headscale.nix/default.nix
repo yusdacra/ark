@@ -29,6 +29,13 @@ in
         chernobog = "100.64.0.6";
         trimounts = "100.64.0.1";
       };
+      sshRules = [
+        {
+          src = ["autogroup:member"];
+          dst = ["autogroup:self"];
+          users = ["autogroup:nonroot"];
+        }
+      ];
       rules = lib.mkBefore [
         {
           src = [ "group:admin" ];
@@ -50,8 +57,8 @@ in
           dst = [ "chernobog:*" ];
         }
         {
-          src = [ admin ];
-          dst = [ "${admin}:*" ];
+          src = ["autogroup:member"];
+          dst = ["autogroup:self:*"];
         }
         {
           src = [

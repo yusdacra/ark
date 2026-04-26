@@ -407,6 +407,26 @@
         },
         "version": "1be6c3bde64da46d4c369135479118e62690d3d5"
     },
+    "slopview": {
+        "cargoLock": null,
+        "date": "2026-04-25",
+        "extract": null,
+        "name": "slopview",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "0966b6b0488d9ec48af788ac6a9f7cf1bc968305",
+            "sha256": "sha256-rritHO9NbZAiO2X8gN1nVqK085KoswgrIPbt+WvyqR8=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://tangled.org/@ptr.pet/slopview"
+        },
+        "version": "0966b6b0488d9ec48af788ac6a9f7cf1bc968305"
+    },
     "stylix": {
         "cargoLock": null,
         "date": "2026-04-03",

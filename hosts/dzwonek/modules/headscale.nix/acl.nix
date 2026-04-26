@@ -27,6 +27,23 @@ let
       };
     };
   };
+  sshRuleType = t.submodule {
+    options = {
+      action = l.mkOption {
+        type = t.enum [ "accept" ];
+        default = "accept";
+      };
+      users = l.mkOption {
+        type = t.listOf t.str;
+      };
+      src = l.mkOption {
+        type = t.listOf t.str;
+      };
+      dst = l.mkOption {
+        type = t.listOf t.str;
+      };
+    };
+  };
 in
 {
   options = {
@@ -47,6 +64,10 @@ in
         type = t.listOf ruleType;
         default = [ ];
       };
+      sshRules = l.mkOption {
+        type = t.listOf sshRuleType;
+        default = [];
+      };
     };
   };
 
@@ -58,6 +79,7 @@ in
           tagOwners = l.mapAttrs' (k: v: l.nameValuePair "tag:${k}" v) cfg.tagOwners;
           hosts = cfg.hosts;
           acls = l.map (rule: if rule.proto == null then l.removeAttrs rule [ "proto" ] else rule) cfg.rules;
+          ssh = cfg.sshRules;
         }
       );
     in

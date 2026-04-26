@@ -270,6 +270,20 @@
     };
     date = "2026-04-20";
   };
+  slopview = {
+    pname = "slopview";
+    version = "0966b6b0488d9ec48af788ac6a9f7cf1bc968305";
+    src = fetchgit {
+      url = "https://tangled.org/@ptr.pet/slopview";
+      rev = "0966b6b0488d9ec48af788ac6a9f7cf1bc968305";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sparseCheckout = [ ];
+      sha256 = "sha256-rritHO9NbZAiO2X8gN1nVqK085KoswgrIPbt+WvyqR8=";
+    };
+    date = "2026-04-25";
+  };
   stylix = {
     pname = "stylix";
     version = "6d0502ef7447090abf8b00362b5cda8ac64595b4";

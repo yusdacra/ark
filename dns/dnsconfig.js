@@ -95,7 +95,7 @@ D(
     "klbr.net",
     REG_NONE,
     DnsProvider(DSP_PRIMARY),
-    TRIMOUNTS(["api.compare.plc", "api.spool"]),
+    TRIMOUNTS(["api.compare.plc", "api.spool", "bsky"]),
     DZWONEK("vpn"),
     VOLSINII(["plc", "relay"]),
     TXT("@", "data endpoint for services and projects that fall under klbr.net."),
