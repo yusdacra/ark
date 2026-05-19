@@ -148,7 +148,12 @@ window-rule {
 window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
-    // match namespace="^notifications$"
+
+    block-out-from "screen-capture"
+}
+
+layer-rule {
+    match namespace=r#"^notifications$"#
 
     block-out-from "screen-capture"
 }

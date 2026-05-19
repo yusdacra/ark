@@ -3,6 +3,7 @@
   autoAddDriverRunpath,
   cmake,
   fetchFromGitHub,
+  fetchpatch,
   installShellFiles,
   nix-update-script,
   stdenv,
@@ -82,8 +83,8 @@ let
   ];
 in
 effectiveStdenv.mkDerivation (finalAttrs: {
-  pname = "llama-cpp";
-  version = "9095";
+  pname = "llama-cpp-mtp";
+  version = "9020";
 
   outputs = [
     "out"
@@ -94,8 +95,7 @@ effectiveStdenv.mkDerivation (finalAttrs: {
     owner = "ggml-org";
     repo = "llama.cpp";
     tag = "b${finalAttrs.version}";
-    # rev = "b8635075ffe27b135c49afb9a8b5c434bd42c502";
-    hash = "sha256-BVRp+T4eKZYS0aT4SGx/M/k9HJ7V74M1z5OTOasFl8E=";
+    hash = "sha256-DBCOGzWN8uQaePikwE5XrsK3uDg4qWCvY4tT3zQeQpY=";
     leaveDotGit = true;
     postFetch = ''
       git -C "$out" rev-parse --short HEAD > $out/COMMIT
@@ -103,7 +103,12 @@ effectiveStdenv.mkDerivation (finalAttrs: {
     '';
   };
 
-  patches = [ ];
+  patches = [
+    (fetchpatch {
+      url = "https://github.com/ggml-org/llama.cpp/pull/22673.patch";
+      hash = "sha256-/m0hAQHljt3EpdhLKLED1je/aV8JrzD8pyeh7k4Nvuk=";
+    })
+  ];
 
   postPatch = ''
     find tools/server/public -type f -not -name loading.html -delete
@@ -131,7 +136,7 @@ effectiveStdenv.mkDerivation (finalAttrs: {
     ++ [ openssl ];
 
   npmRoot = "tools/server/webui";
-  npmDepsHash = "sha256-RAFtsbBGBjteCt5yXhrmHL39rIDJMCFBETgzId2eRRk=";
+  npmDepsHash = "sha256-k62LIbyY2DXvs7XXbX0lNPiYxuYzeJUyQtS4eA+68f8=";
   npmDeps = fetchNpmDeps {
     name = "${finalAttrs.pname}-${finalAttrs.version}-npm-deps";
     inherit (finalAttrs) src patches;
@@ -204,7 +209,7 @@ effectiveStdenv.mkDerivation (finalAttrs: {
       metal = llama-cpp.override { metalSupport = true; };
     };
     updateScript = nix-update-script {
-      attrPath = "llama-cpp";
+      attrPath = "llama-cpp-mtp";
       extraArgs = [
         "--version-regex"
         "b(.*)"
@@ -213,7 +218,7 @@ effectiveStdenv.mkDerivation (finalAttrs: {
   };
 
   meta = {
-    description = "Inference of Meta's LLaMA model (and others) in pure C/C++";
+    description = "Inference of Meta's LLaMA model (and others) in pure C/C++ (MTP Support)";
     homepage = "https://github.com/ggml-org/llama.cpp";
     license = lib.licenses.mit;
     mainProgram = "llama";

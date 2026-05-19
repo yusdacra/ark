@@ -164,7 +164,7 @@ in
             additionalLibs = with pkgs; [libXtst libxkbcommon libXt];
           })
           # xivlauncher
-          lutris
+          # lutris
           signal-desktop
           bs-manager
           cemu
@@ -178,8 +178,10 @@ in
           gh
           codex
           codex-acp
-          # sidelaoding
+          rtk
+          pi-coding-agent
         ]) ++ [
+          terra.headroom-ai
           terra.helium
           terra.antigravity
           # terra.pi-coding-agent

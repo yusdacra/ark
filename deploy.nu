@@ -62,7 +62,7 @@ let hosts = {
   },
 }
 
-def deploy [hostname: string] {
+def deploy [hostname: string, boot: bool] {
   log info $"start deploy host ($hostname)"
   let hooktitle = $"/($hostname)/deploy"
   let hostcfg = $hosts | get $hostname
@@ -70,13 +70,15 @@ def deploy [hostname: string] {
   webhook $hooktitle $"=== deploy for ($hostname): started ===\n\n(sys disks | to text)\n\n(sys mem | to text)"
 
   def run_step [action: string, block]: nothing -> bool {
-    webhook $"($hooktitle)/($action)" $"=== ($action) ($hostname) started ==="
-    let result = time-block { do $block | tee -e {print -r} | tee {print -r} | complete }
-    let failed = $result.result.exit_code != 0
-    webhook $"($hooktitle)/($action)" $"=== ($action) ($hostname) is done ===\n\ntook ($result.elapsed)\n\nlog: ($result.result | upload-paste)" $result.result.exit_code $failed
-    return $failed
+      webhook $"($hooktitle)/($action)" $"=== ($action) ($hostname) started ==="
+      let start = date now
+      do $block
+      let exit_code = $env.LAST_EXIT_CODE
+      let elapsed = (date now) - $start
+      let failed = $exit_code != 0
+      webhook $"($hooktitle)/($action)" $"=== ($action) ($hostname) is done ===\n\ntook ($elapsed)" $exit_code $failed
+      return $failed
   }
-
   let result_dir = mktemp -d | path join "result"
   let build_cmd = {
     match $hostcfg.type {
@@ -96,11 +98,16 @@ def deploy [hostname: string] {
   }
 
   let activate_cmd = {
+    let action = if $boot { "boot" } else { "switch" }
     let cmd = match $hostcfg.type {
-      "nixos" => $"sudo '($result_link)/bin/switch-to-configuration' 'switch'",
+      "nixos" => $"sudo '($result_link)/bin/switch-to-configuration' '($action)'",
       "home" => $"($result_link)/activate",
     }
     ssh $target $cmd
+    if $boot {
+      log info "rebooting target..."
+      ssh $target "sudo reboot"
+    }
   }
   if (run_step "activate" $activate_cmd) {
     return
@@ -143,7 +150,7 @@ def update-inputs []: list<string> -> bool {
   $is_ok
 }
 
-def main [hostname: string = "wolumonde", --only-deploy (-d)] {
+def main [hostname: string = "wolumonde", --only-deploy (-d), --boot (-b)] {
   webhook "deploy" "=== started deploying ==="
 
   mut inputs_updated = false
@@ -158,9 +165,9 @@ def main [hostname: string = "wolumonde", --only-deploy (-d)] {
   }
 
   if $hostname == "all" {
-    $hosts | columns | each {|host| deploy $host}
+    $hosts | columns | each {|host| deploy $host $boot}
   } else {
-    deploy $hostname
+    deploy $hostname $boot
   }
 
   if $inputs_updated {

@@ -8,12 +8,12 @@
   stdenv,
 
   config,
-  cudaSupport ? config.cudaSupport,
+  cudaSupport ? config.cudaSupport or false,
   cudaPackages ? { },
 
-  rocmSupport ? config.rocmSupport,
+  rocmSupport ? config.rocmSupport or false,
   rocmPackages ? { },
-  rocmGpuTargets ? rocmPackages.clr.localGpuTargets or rocmPackages.clr.gpuTargets,
+  rocmGpuTargets ? rocmPackages.clr.localGpuTargets or rocmPackages.clr.gpuTargets or [],
 
   openclSupport ? false,
   clblast,
@@ -36,7 +36,6 @@
   vulkanSupport ? false,
   rpcSupport ? false,
   openssl,
-  llama-cpp,
   shaderc,
   vulkan-headers,
   vulkan-loader,
@@ -82,8 +81,8 @@ let
   ];
 in
 effectiveStdenv.mkDerivation (finalAttrs: {
-  pname = "llama-cpp";
-  version = "9095";
+  pname = "ik-llama-cpp";
+  version = "1744-pr";
 
   outputs = [
     "out"
@@ -91,11 +90,10 @@ effectiveStdenv.mkDerivation (finalAttrs: {
   ];
 
   src = fetchFromGitHub {
-    owner = "ggml-org";
-    repo = "llama.cpp";
-    tag = "b${finalAttrs.version}";
-    # rev = "b8635075ffe27b135c49afb9a8b5c434bd42c502";
-    hash = "sha256-BVRp+T4eKZYS0aT4SGx/M/k9HJ7V74M1z5OTOasFl8E=";
+    owner = "SamuelOliveirads";
+    repo = "ik_llama.cpp";
+    rev = "a703033607ed3edbeab0205d8c9ad75cc1b5759f";
+    hash = "sha256-737rn0o8pnFYMZuhWFvs0TE4JfPlU4ueTKj67JUO5nE=";
     leaveDotGit = true;
     postFetch = ''
       git -C "$out" rev-parse --short HEAD > $out/COMMIT
@@ -106,15 +104,16 @@ effectiveStdenv.mkDerivation (finalAttrs: {
   patches = [ ];
 
   postPatch = ''
-    find tools/server/public -type f -not -name loading.html -delete
+    # We will try building without webui for now since sass-embedded is a pain in Nix
+    # and users usually want the server binary for API access anyway.
+    # If they really want the UI, we can try more hacks later.
+    rm -rf examples/server/webui
   '';
 
   nativeBuildInputs = [
     cmake
     installShellFiles
     ninja
-    nodejs
-    npmHooks.npmConfigHook
     pkg-config
   ]
   ++ optionals cudaSupport [
@@ -130,27 +129,13 @@ effectiveStdenv.mkDerivation (finalAttrs: {
     ++ optionals vulkanSupport vulkanBuildInputs
     ++ [ openssl ];
 
-  npmRoot = "tools/server/webui";
-  npmDepsHash = "sha256-RAFtsbBGBjteCt5yXhrmHL39rIDJMCFBETgzId2eRRk=";
-  npmDeps = fetchNpmDeps {
-    name = "${finalAttrs.pname}-${finalAttrs.version}-npm-deps";
-    inherit (finalAttrs) src patches;
-    preBuild = ''
-      pushd ${finalAttrs.npmRoot}
-    '';
-    hash = finalAttrs.npmDepsHash;
-  };
-
   preConfigure = ''
     prependToVar cmakeFlags "-DLLAMA_BUILD_COMMIT:STRING=$(cat COMMIT)"
-    pushd ${finalAttrs.npmRoot}
-    npm run build
-    popd
   '';
 
   cmakeFlags = [
     (cmakeBool "GGML_NATIVE" native)
-    (cmakeBool "LLAMA_BUILD_EXAMPLES" false)
+    (cmakeBool "LLAMA_BUILD_EXAMPLES" true)
     (cmakeBool "LLAMA_BUILD_SERVER" true)
     (cmakeBool "LLAMA_BUILD_TESTS" (finalAttrs.finalPackage.doCheck or false))
     (cmakeBool "LLAMA_OPENSSL" true)
@@ -168,7 +153,7 @@ effectiveStdenv.mkDerivation (finalAttrs: {
     (cmakeFeature "CMAKE_CUDA_ARCHITECTURES" cudaPackages.flags.cmakeCudaArchitecturesString)
   ]
   ++ optionals rocmSupport [
-    (cmakeFeature "CMAKE_HIP_COMPILER" "${rocmPackages.clr.hipClangPath}/clang++")
+    (cmakeFeature "CMAKE_HIP_COMPILER" "''${rocmPackages.clr.hipClangPath}/clang++")
     (cmakeFeature "CMAKE_HIP_ARCHITECTURES" (builtins.concatStringsSep ";" rocmGpuTargets))
   ]
   ++ optionals metalSupport [
@@ -185,45 +170,26 @@ effectiveStdenv.mkDerivation (finalAttrs: {
   # additional steps after that
   postInstall = ''
     # Match previous binary name for this package
-    ln -sf $out/bin/llama-cli $out/bin/llama
+    # In ik_llama.cpp fork, the server binary might be named llama-server
+    # Let's check if it exists before symlinking
+    if [ -f $out/bin/llama-server ]; then
+      ln -sf $out/bin/llama-server $out/bin/llama
+    fi
 
     mkdir -p $out/include
     cp $src/include/llama.h $out/include/
 
-  ''
-  + lib.optionalString (stdenv.buildPlatform.canExecute stdenv.hostPlatform) ''
-    installShellCompletion --cmd llama-server --bash <($out/bin/llama-server --completion-bash)
   ''
   + optionalString rpcSupport "cp bin/rpc-server $out/bin/llama-rpc-server";
 
   # the tests are failing as of 2025-08
   doCheck = false;
 
-  passthru = {
-    tests = lib.optionalAttrs stdenv.hostPlatform.isDarwin {
-      metal = llama-cpp.override { metalSupport = true; };
-    };
-    updateScript = nix-update-script {
-      attrPath = "llama-cpp";
-      extraArgs = [
-        "--version-regex"
-        "b(.*)"
-      ];
-    };
-  };
-
   meta = {
-    description = "Inference of Meta's LLaMA model (and others) in pure C/C++";
-    homepage = "https://github.com/ggml-org/llama.cpp";
+    description = "Inference of Meta's LLaMA model (and others) in pure C/C++ (ikawrakow fork, PR 1744)";
+    homepage = "https://github.com/SamuelOliveirads/ik_llama.cpp";
     license = lib.licenses.mit;
     mainProgram = "llama";
-    maintainers = with lib.maintainers; [
-      booxter
-      dit7ya
-      philiptaron
-      xddxdd
-      yuannan
-    ];
     platforms = lib.platforms.unix;
     badPlatforms = optionals (cudaSupport || openclSupport) lib.platforms.darwin;
     broken = metalSupport && !effectiveStdenv.hostPlatform.isDarwin;
