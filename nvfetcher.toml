@@ -75,8 +75,12 @@ src.git = "https://tangled.org/@ptr.pet/slopview"
 fetch.git = "https://tangled.org/@ptr.pet/slopview"
 
 [drop]
-src.git = "https://tangled.org/ptr.pet/drop"
-fetch.git = "https://tangled.org/ptr.pet/drop"
+src.git = "https://tangled.org/juliet.paris/drop"
+fetch.git = "https://tangled.org/juliet.paris/drop"
+
+[bobbin]
+src.git = "https://tangled.org/oyster.cafe/bobbin"
+fetch.git = "https://tangled.org/oyster.cafe/bobbin"
 
 ## TANGLED ##
 

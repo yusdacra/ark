@@ -2,19 +2,14 @@
   lib,
   inputs,
   rustPlatform,
-  fetchzip,
   ...
 }:
 
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage {
   pname = "bobbin";
-  version = "05df522f1fd2babc3540e2652c6ed348221612dd";
+  version = "main";
 
-  src = fetchzip {
-    url = "https://tangled.org/oyster.cafe/bobbin/archive/${version}.tar.gz";
-    hash = "sha256-ly9q9gVXfzvl1FRhGYFK7XYkybUdH4PLccqHqXQwcHk=";
-    stripRoot = false;
-  };
+  src = inputs.bobbin;
 
   cargoHash = "sha256-Ojy5LZvyM3J+0zwMn96G/K2XXpj5ASM7ho5Y3Xj8Apg=";
 

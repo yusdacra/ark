@@ -22,8 +22,8 @@ in
     environment = {
       HYDRANT_API_BIND = "0.0.0.0:${port},[::]:${port}";
       HYDRANT_CURSOR_SAVE_INTERVAL = "1sec";
-      HYDRANT_SEED_HOSTS = "https://bsky.network,https://relay.bas.sh";
-      HYDRANT_PLC_URL = "http://127.0.0.1:8000";
+      HYDRANT_SEED_HOSTS = "https://relay.bas.sh,https://bsky.network";
+      HYDRANT_PLC_URL = "https://plc.directory";
       HYDRANT_DATA_COMPRESSION = "zstd";
       HYDRANT_JOURNAL_COMPRESSION = "zstd";
       HYDRANT_RATE_TIERS = "default:5000/10.0/18000000/432000000/10000000";

@@ -46,6 +46,20 @@
     };
     date = "2026-04-24";
   };
+  bobbin = {
+    pname = "bobbin";
+    version = "692b862ff683ff7689006549883f0a360b1ff80a";
+    src = fetchgit {
+      url = "https://tangled.org/oyster.cafe/bobbin";
+      rev = "692b862ff683ff7689006549883f0a360b1ff80a";
+      fetchSubmodules = false;
+      deepClone = false;
+      leaveDotGit = false;
+      sparseCheckout = [ ];
+      sha256 = "sha256-EJpsS1Hn1g03ewLToIlOONcCvsf8pmsrQtiEhNp7DvM=";
+    };
+    date = "2026-05-20";
+  };
   clickee = {
     pname = "clickee";
     version = "ca379a35ac60cc80fa4bf68a27ee0c30724ad324";
@@ -102,17 +116,17 @@
   };
   drop = {
     pname = "drop";
-    version = "b184c0e959acb960f9b9500babf85abe94080f10";
+    version = "f85215b1674c55d6885f55b6b2a9e1174a2e9313";
     src = fetchgit {
-      url = "https://tangled.org/ptr.pet/drop";
-      rev = "b184c0e959acb960f9b9500babf85abe94080f10";
+      url = "https://tangled.org/juliet.paris/drop";
+      rev = "f85215b1674c55d6885f55b6b2a9e1174a2e9313";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-00084BVoJb6Jp3kFbt/iAuK7Vs5RLigZD+KwmWkUx98=";
+      sha256 = "sha256-TUDehZwQIVy0NQvZxYnhXaG28dJesie1u9yFG53tUkg=";
     };
-    date = "2026-05-19";
+    date = "2026-05-20";
   };
   dysnomia = {
     pname = "dysnomia";

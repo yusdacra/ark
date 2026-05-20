@@ -60,6 +60,26 @@
         },
         "version": "9a31eccc91322536b4278f5b037f3c78e184abb3"
     },
+    "bobbin": {
+        "cargoLock": null,
+        "date": "2026-05-20",
+        "extract": null,
+        "name": "bobbin",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "692b862ff683ff7689006549883f0a360b1ff80a",
+            "sha256": "sha256-EJpsS1Hn1g03ewLToIlOONcCvsf8pmsrQtiEhNp7DvM=",
+            "sparseCheckout": [],
+            "type": "git",
+            "url": "https://tangled.org/oyster.cafe/bobbin"
+        },
+        "version": "692b862ff683ff7689006549883f0a360b1ff80a"
+    },
     "clickee": {
         "cargoLock": null,
         "date": "2025-09-14",
@@ -143,7 +163,7 @@
     },
     "drop": {
         "cargoLock": null,
-        "date": "2026-05-19",
+        "date": "2026-05-20",
         "extract": null,
         "name": "drop",
         "passthru": null,
@@ -153,13 +173,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "b184c0e959acb960f9b9500babf85abe94080f10",
-            "sha256": "sha256-00084BVoJb6Jp3kFbt/iAuK7Vs5RLigZD+KwmWkUx98=",
+            "rev": "f85215b1674c55d6885f55b6b2a9e1174a2e9313",
+            "sha256": "sha256-TUDehZwQIVy0NQvZxYnhXaG28dJesie1u9yFG53tUkg=",
             "sparseCheckout": [],
             "type": "git",
-            "url": "https://tangled.org/ptr.pet/drop"
+            "url": "https://tangled.org/juliet.paris/drop"
         },
-        "version": "b184c0e959acb960f9b9500babf85abe94080f10"
+        "version": "f85215b1674c55d6885f55b6b2a9e1174a2e9313"
     },
     "dysnomia": {
         "cargoLock": null,

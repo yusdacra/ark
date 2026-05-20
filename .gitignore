@@ -11,3 +11,4 @@ creds.json
 
 # deploy resources
 .hetzner
+AGENTS.md
