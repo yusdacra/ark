@@ -183,7 +183,6 @@ in
         ]) ++ [
           terra.headroom-ai
           terra.helium
-          terra.antigravity
           # terra.pi-coding-agent
           terra.iloader
           terra.lmstudio

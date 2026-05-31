@@ -1,23 +1,17 @@
 {
   lib,
-  inputs,
   rustPlatform,
+  inputs,
   ...
 }:
-
 rustPlatform.buildRustPackage {
   pname = "bobbin";
   version = "main";
-
-  src = inputs.bobbin;
-
-  cargoHash = "sha256-Ojy5LZvyM3J+0zwMn96G/K2XXpj5ASM7ho5Y3Xj8Apg=";
-
-  postPatch = ''
-    substituteInPlace Cargo.toml \
-      --replace-fail 'rust-version = "1.95"' 'rust-version = "1.94"'
-  '';
-
+ 
+  src = inputs.tangled;
+ 
+  cargoHash = "sha256-uiD2U7MqfufoBJZa3oKsyhnBk4mCXo42lc18aVSLJiM=";
+ 
   cargoBuildFlags = [
     "--bin"
     "bobbin"
@@ -25,14 +19,19 @@ rustPlatform.buildRustPackage {
     "bobbin"
   ];
 
+  postUnpack = ''
+    substituteInPlace $sourceRoot/Cargo.toml \
+      --replace-fail 'rust-version = "1.96"' 'rust-version = "1.95"'
+  '';
+ 
   preBuild = ''
     export BOBBIN_LEXICONS_DIR=${inputs.tangled}/lexicons
   '';
-
+ 
   doCheck = false;
-
+ 
   meta = {
-    description = "Tangled graph edge index and XRPC service";
+    description = "tangled appview";
     homepage = "https://tangled.org/oyster.cafe/bobbin";
     license = lib.licenses.mit;
     mainProgram = "bobbin";

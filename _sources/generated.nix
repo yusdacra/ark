@@ -34,31 +34,17 @@
   };
   blog = {
     pname = "blog";
-    version = "9a31eccc91322536b4278f5b037f3c78e184abb3";
+    version = "6dc394fe9d71f8849e97ffae6c61edc2956420b6";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/endpoint";
-      rev = "9a31eccc91322536b4278f5b037f3c78e184abb3";
+      rev = "6dc394fe9d71f8849e97ffae6c61edc2956420b6";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-9G10HuIkLvWL2dzwA2FVdq/q17XWGcL+wlMZXyMKkJk=";
+      sha256 = "sha256-feVwvbOv72QUzViI/XQqm+1QOUrMJoBGjPYAVz5P5yI=";
     };
-    date = "2026-04-24";
-  };
-  bobbin = {
-    pname = "bobbin";
-    version = "692b862ff683ff7689006549883f0a360b1ff80a";
-    src = fetchgit {
-      url = "https://tangled.org/oyster.cafe/bobbin";
-      rev = "692b862ff683ff7689006549883f0a360b1ff80a";
-      fetchSubmodules = false;
-      deepClone = false;
-      leaveDotGit = false;
-      sparseCheckout = [ ];
-      sha256 = "sha256-EJpsS1Hn1g03ewLToIlOONcCvsf8pmsrQtiEhNp7DvM=";
-    };
-    date = "2026-05-20";
+    date = "2026-05-25";
   };
   clickee = {
     pname = "clickee";
@@ -104,27 +90,27 @@
   };
   disko = {
     pname = "disko";
-    version = "63b4e7e6cf75307c1d26ac3762b886b5b0247267";
+    version = "65fb947964bd44fc0008faf77d1fcb7a9f40bb32";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "disko";
-      rev = "63b4e7e6cf75307c1d26ac3762b886b5b0247267";
+      rev = "65fb947964bd44fc0008faf77d1fcb7a9f40bb32";
       fetchSubmodules = false;
-      sha256 = "sha256-8GzXDOXckDWwST8TY5DbwYFjdvQLlP7K9CLSVx6iTTo=";
+      sha256 = "sha256-wuOkjI6pRiN4sEn/EPBRnNW5cmcpvd7xtIM8y5LooAs=";
     };
-    date = "2026-05-02";
+    date = "2026-05-19";
   };
   drop = {
     pname = "drop";
-    version = "f85215b1674c55d6885f55b6b2a9e1174a2e9313";
+    version = "2b5466012d716bdd4ba399644e223559a5452eee";
     src = fetchgit {
       url = "https://tangled.org/juliet.paris/drop";
-      rev = "f85215b1674c55d6885f55b6b2a9e1174a2e9313";
+      rev = "2b5466012d716bdd4ba399644e223559a5452eee";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-TUDehZwQIVy0NQvZxYnhXaG28dJesie1u9yFG53tUkg=";
+      sha256 = "sha256-SYXY3ZvwnyQSNwP10YmuSn5/ucakSmoBLXpfK+jtcrQ=";
     };
     date = "2026-05-20";
   };
@@ -168,29 +154,29 @@
   };
   home = {
     pname = "home";
-    version = "c68d2a24376da3860ef161373d91348b1542356b";
+    version = "509ed3c603349a9d43de9e2ae6613baea6bd5b34";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "home-manager";
-      rev = "c68d2a24376da3860ef161373d91348b1542356b";
+      rev = "509ed3c603349a9d43de9e2ae6613baea6bd5b34";
       fetchSubmodules = false;
-      sha256 = "sha256-t7GW8f4So0b+ATPACjTkCy9UesbSidDW3X9w3utVC1A=";
+      sha256 = "sha256-7wOwi8B6D0BYsieZCnHZZj2sNUzgJhLoIVSfkwB7lxQ=";
     };
-    date = "2026-05-14";
+    date = "2026-05-22";
   };
   hydrant = {
     pname = "hydrant";
-    version = "a9d29ed76de8ebfdec653081f1d325ea4c1adf56";
+    version = "0fd0b621ef7bf4e5bf2636c67f96e84fa3926295";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/hydrant";
-      rev = "a9d29ed76de8ebfdec653081f1d325ea4c1adf56";
+      rev = "0fd0b621ef7bf4e5bf2636c67f96e84fa3926295";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-eTdVSI5yt/XsEefY5Jj/QldXv4XalwfUT5loQLHsHMc=";
+      sha256 = "sha256-nVgbZByDrhyFU0NB/gfHkG8ZW/da1ZwQ/sVtAFHQguI=";
     };
-    date = "2026-05-12";
+    date = "2026-05-30";
   };
   limbusart = {
     pname = "limbusart";
@@ -208,15 +194,15 @@
   };
   moonlight = {
     pname = "moonlight";
-    version = "2db8e1ac40abf13298e81f093b40a460276b064c";
+    version = "e01464ab9e0bcd42c1550e74a64f2574c14d2d27";
     src = fetchFromGitHub {
       owner = "moonlight-mod";
       repo = "moonlight";
-      rev = "2db8e1ac40abf13298e81f093b40a460276b064c";
+      rev = "e01464ab9e0bcd42c1550e74a64f2574c14d2d27";
       fetchSubmodules = false;
-      sha256 = "sha256-jSg8y1wkTLdzZscf3HgXCPoIBfg/aSmTOKdbbJvyfrM=";
+      sha256 = "sha256-eTya6Y7dw/otqohgYZudkqrcI50740jFUTe4Lyd6GKc=";
     };
-    date = "2026-05-13";
+    date = "2026-05-21";
   };
   ncr = {
     pname = "ncr";
@@ -234,27 +220,27 @@
   };
   nixos-hardware = {
     pname = "nixos-hardware";
-    version = "9bd7c80d43e258aaa607d83b43661df11444d808";
+    version = "c97bc4d15bd3473dd095e8e8ba57330ab1943a77";
     src = fetchFromGitHub {
       owner = "NixOS";
       repo = "nixos-hardware";
-      rev = "9bd7c80d43e258aaa607d83b43661df11444d808";
+      rev = "c97bc4d15bd3473dd095e8e8ba57330ab1943a77";
       fetchSubmodules = false;
-      sha256 = "sha256-xYGrSg6354UK2K4WSQd4+TfyvfqmvFbSY+ZtGQUXK0c=";
+      sha256 = "sha256-j1iZsLy6oFApqR1oiDmHhvkwxXqcNi0aoSJj643LuwU=";
     };
-    date = "2026-05-12";
+    date = "2026-05-20";
   };
   nixpkgs-xr = {
     pname = "nixpkgs-xr";
-    version = "c6af4789d7801fa243205a8ce9b8e3feffbf42b4";
+    version = "8e2ce138c168499500f209a39c618cc4aef45e53";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "nixpkgs-xr";
-      rev = "c6af4789d7801fa243205a8ce9b8e3feffbf42b4";
+      rev = "8e2ce138c168499500f209a39c618cc4aef45e53";
       fetchSubmodules = false;
-      sha256 = "sha256-PFtYr0cCf7sKE275o5FF/JkA7YonFLZwu1vVvpbVtEo=";
+      sha256 = "sha256-yePAKD3X68ExEk+rZDOEXCH1y0bUSTbtOzPaiZfhT+4=";
     };
-    date = "2026-05-14";
+    date = "2026-05-23";
   };
   nsid-tracker = {
     pname = "nsid-tracker";
@@ -314,29 +300,29 @@
   };
   stylix = {
     pname = "stylix";
-    version = "e8ea85b4f7dddda9603e0f1ac86cd92cee3b2819";
+    version = "c1456cc4ba3c9485e7b4158c909eeca5a752cd59";
     src = fetchFromGitHub {
       owner = "nix-community";
       repo = "stylix";
-      rev = "e8ea85b4f7dddda9603e0f1ac86cd92cee3b2819";
+      rev = "c1456cc4ba3c9485e7b4158c909eeca5a752cd59";
       fetchSubmodules = false;
-      sha256 = "sha256-YhnEcpiY6+l3RFA+cPmdTaeODGvNRuqE8B7VBjPVIxo=";
+      sha256 = "sha256-IsDb9erotvx9npI94UDosvMeYQK17p7/vmU2v9batrY=";
     };
-    date = "2026-05-14";
+    date = "2026-05-21";
   };
   tangled = {
     pname = "tangled";
-    version = "f165a3ee87200a7704723aabb440251a4d8533a7";
+    version = "f73a82beea33daa6e8a94e32f85a02e8a98f195e";
     src = fetchgit {
-      url = "https://tangled.org/tangled.org/core";
-      rev = "f165a3ee87200a7704723aabb440251a4d8533a7";
+      url = "https://tangled.org/did:plc:j5hmlfdrwkvtxm7cjmu7j2is";
+      rev = "f73a82beea33daa6e8a94e32f85a02e8a98f195e";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-cbVRx2vdKcNMEsmiu6u3Ao6OkJ03FnqmlX8h2TH4r7s=";
+      sha256 = "sha256-DQ4d7fyOMLmkn2jqOovUMajKLKJI16gEXiVYBvRnyak=";
     };
-    date = "2026-05-18";
+    date = "2026-05-31";
   };
   tangled-sqlite-lib = {
     pname = "tangled-sqlite-lib";
@@ -362,14 +348,14 @@
   };
   zen-browser = {
     pname = "zen-browser";
-    version = "42f41abcef13dc81c85407b57aa1fd1bde46e46c";
+    version = "5bcdfcef664bf62831dcb4b947004d9c5fbf7201";
     src = fetchFromGitHub {
       owner = "0xc000022070";
       repo = "zen-browser-flake";
-      rev = "42f41abcef13dc81c85407b57aa1fd1bde46e46c";
+      rev = "5bcdfcef664bf62831dcb4b947004d9c5fbf7201";
       fetchSubmodules = false;
-      sha256 = "sha256-yfxy9aTlIgU2Z36H8cJURgYLgjT4qvFeOzoAC/HXcKM=";
+      sha256 = "sha256-svU6Ro4xiMxMA1KJGwQ/nfKwz3yXE/SONCw2Z1qTXHA=";
     };
-    date = "2026-05-12";
+    date = "2026-05-22";
   };
 }

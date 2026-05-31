@@ -15,7 +15,7 @@ in
     ../clipman
   ];
 
-  home.packages = with pkgs; [file libnotify clipman niri xwayland-satellite brightnessctl swaybg slurp jq];
+  home.packages = with pkgs; [file libnotify clipman niri xwayland-satellite brightnessctl swaybg slurp jq mpvpaper];
   xdg.configFile."niri/config.kdl".text =
     let
       replace = {

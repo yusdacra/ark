@@ -5,6 +5,10 @@ let
 
   rootDomain = "ptr.pet";
   domain = "wisp-random.${rootDomain}";
+
+  hydrantPkg = terra.hydrant.overrideAttrs (old: {
+    doCheck = false;
+  });
 in {
   users.users.random-wisp-place = {
     isSystemUser = true;
@@ -20,7 +24,7 @@ in {
     environment = {
       PORT = toString port;
       WISP_API_URL = "https://wisp.place";
-      HYDRANT_BIN = "${terra.hydrant}/bin/hydrant";
+      HYDRANT_BIN = "${hydrantPkg}/bin/hydrant";
       # CURSOR = "0";
     };
 

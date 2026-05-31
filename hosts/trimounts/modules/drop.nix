@@ -14,6 +14,7 @@
     after = ["network.target"];
     environment = {
       PORT = "8663";
+      MAX_FILE_SIZE = "200000000";
     };
     serviceConfig = {
       Type = "simple";
@@ -39,6 +40,6 @@
     quic = true;
     kTLS = true;
     locations."/".proxyPass = "http://127.0.0.1:8663";
-    extraConfig = "client_max_body_size 100M;";
+    extraConfig = "client_max_body_size 200M;";
   };
 }

@@ -3,7 +3,7 @@ let
   port = "13579";
   pkg = terra.hydrant.overrideAttrs (old: {
     cargoBuildNoDefaultFeatures = true;
-    cargoBuildFeatures = [ "relay" ];
+    cargoBuildFeatures = ["relay" "jetstream"];
     doCheck = false;
   });
 in
@@ -70,6 +70,10 @@ in
     quic = true;
     kTLS = true;
     locations."=/".proxyPass = "http://localhost:${port}";
+    locations."/subscribe" = {
+      proxyPass = "http://localhost:${port}";
+      proxyWebsockets = true;
+    };
     locations."/xrpc" = {
       proxyPass = "http://localhost:${port}";
       proxyWebsockets = true;

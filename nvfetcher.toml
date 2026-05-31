@@ -78,15 +78,11 @@ fetch.git = "https://tangled.org/@ptr.pet/slopview"
 src.git = "https://tangled.org/juliet.paris/drop"
 fetch.git = "https://tangled.org/juliet.paris/drop"
 
-[bobbin]
-src.git = "https://tangled.org/oyster.cafe/bobbin"
-fetch.git = "https://tangled.org/oyster.cafe/bobbin"
-
 ## TANGLED ##
 
 [tangled]
-src.git = "https://tangled.org/tangled.org/core"
-fetch.git = "https://tangled.org/tangled.org/core"
+src.git = "https://tangled.org/did:plc:j5hmlfdrwkvtxm7cjmu7j2is"
+fetch.git = "https://tangled.org/did:plc:j5hmlfdrwkvtxm7cjmu7j2is"
 
 [tangled-sqlite-lib]
 src.manual = "3450100"

@@ -71,7 +71,7 @@ in
 
   systemd.services.bobbin = {
     description = "bobbin tangled graph index";
-    wantedBy = [ "multi-user.target" ];
+    wantedBy = ["multi-user.target"];
     after = [
       "network-online.target"
       "hydrant-bobbin.service"

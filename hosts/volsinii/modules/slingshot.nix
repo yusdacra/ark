@@ -6,6 +6,7 @@
 let
   domain = "sl.klbr.net";
   port = 8081;
+  relayPort = 13579;
 in
 {
   users.users.slingshot = {
@@ -28,7 +29,7 @@ in
       Type = "simple";
       ExecStart = ''
         ${terra.slingshot}/bin/slingshot \
-          --jetstream wss://jetstream1.us-east.fire.hose.cam/subscribe \
+          --jetstream ws://127.0.0.1:${toString relayPort}/subscribe \
           --cache-dir /var/lib/slingshot/cache \
           --bind 127.0.0.1:${toString port} \
           --record-cache-memory-mb 1024 \

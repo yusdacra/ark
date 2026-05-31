@@ -113,7 +113,8 @@ layout {
     struts { }
 }
 
-spawn-at-startup "swaybg" "-i" "%%wallpaper%%"
+spawn-at-startup "mpvpaper" "-o" "'--loop'" "-p" "all" "~/wallpaper.mp4"
+// spawn-at-startup "swaybg" "-i" "%%wallpaper%%"
 // spawn-at-startup "systemctl" "--user" "start" "gsr-replay.service"
 
 hotkey-overlay {

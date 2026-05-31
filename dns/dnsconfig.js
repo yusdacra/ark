@@ -138,6 +138,17 @@ D(
     IGNORE_ACME(),
 );
 
+D(
+    "rapeable.dog",
+    REG_NONE,
+    DnsProvider(DSP_PRIMARY),
+    // TRIMOUNTS("@"),
+    TXT("@", "v=spf1 -all"),
+    TXT("_dmarc", "v=DMARC1; p=reject;"),
+    TXT("_atproto", "did=did:plc:dumbmutt4po52ept2tczimje", TTL(60)),
+    IGNORE_ACME(),
+);
+
 var EMAIL_TTL = function () { return TTL(86400); };
 
 D(
