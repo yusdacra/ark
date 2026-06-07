@@ -129,6 +129,7 @@ in
               "git"
               "ssh"
               "atcr"
+              "tailscale"
             ]
             [
               # "zen"
@@ -209,5 +210,13 @@ in
         User git
         IdentityFile ~/.ssh/tangled-dev
       '';
+
+      services.tailscale = {
+        ana = {
+          enable = true;
+          controlServer = "https://headscale.nekomimi.pet";
+          port = 1056;
+        };
+      };
     };
 }

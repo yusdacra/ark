@@ -18,9 +18,10 @@ in
     address = "0.0.0.0";
     port = 1111;
     acl = let
-      admin = "90008@klbr.net";
+      me = "90008@klbr.net";
+      owner = "ana@nekomimi.pet";
     in {
-      groups.admin = [admin];
+      groups.admin = [me];
       tagOwners = {
         private-infra = [ "group:admin" ];
         other-infra = [ "group:admin" ];
@@ -45,6 +46,14 @@ in
           ];
         }
         {
+          src = [ owner ];
+          dst = ["${me}:*" "tag:private-infra:*"];
+        }
+        {
+          src = [ me ];
+          dst = [ "${owner}:*" ];
+        }
+        {
           src = [ "tag:private-infra" ];
           dst = [ "tag:other-infra:*" ];
         }
@@ -62,7 +71,7 @@ in
         }
         {
           src = [
-            admin
+            me owner
             "tag:private-infra"
           ];
           dst = [ "autogroup:internet:*" ];
