@@ -1,15 +1,5 @@
 {
-  services.nginx.virtualHosts."plc.gaze.systems" = {
-    useACMEHost = "plc.gaze.systems";
-    forceSSL = true;
-    quic = true;
-    kTLS = true;
-    locations."/" = {
-      proxyPass = "http://localhost:8000";
-      proxyWebsockets = true;
-    };
-  };
-
+  security.acme.certs."plc.klbr.net" = {};
   services.nginx.virtualHosts."plc.klbr.net" = {
     useACMEHost = "plc.klbr.net";
     forceSSL = true;
@@ -28,8 +18,8 @@
     environment = { RUST_LOG="allegedly=debug"; };
     serviceConfig = {
       Type = "simple";
-      WorkingDirectory = "/root/allegedly2";
-      ExecStart = "/root/allegedly2/target/release/allegedly mirror --wrap-fjall /root/plc3";
+      WorkingDirectory = "/root/allegedly";
+      ExecStart = "/root/allegedly/target/release/allegedly mirror --wrap-fjall /root/plc3";
       Restart = "on-failure";
       RestartSec = "5s";
     };

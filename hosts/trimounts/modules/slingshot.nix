@@ -33,7 +33,7 @@ in
           --cache-dir /var/lib/slingshot/cache \
           --bind 127.0.0.1:${toString port} \
           --record-cache-memory-mb 1024 \
-          --record-cache-disk-gb 72 \
+          --record-cache-disk-gb 8 \
           --identity-cache-memory-mb 1024 \
           --identity-cache-disk-gb 8 \
           --collect-metrics \

@@ -16,20 +16,20 @@ let
   port = 3003;
   vhostConfig = {
     locations."/".proxyPass = "http://localhost:${toString port}";
-    locations."/annoy/ws/" = {
-      proxyWebsockets = true;
-      proxyPass = "http://100.64.0.9:3111/";
-      extraConfig = ''
-        rewrite ^/annoy/ws/(.*) /$1 break;
-      '';
-    };
-    locations."/annoy/ws" = {
-      proxyWebsockets = true;
-      proxyPass = "http://100.64.0.9:3111/";
-      extraConfig = ''
-        rewrite ^/annoy/ws(.*) /$1 break;
-      '';
-    };
+    # locations."/annoy/ws/" = {
+    #   proxyWebsockets = true;
+    #   proxyPass = "http://100.64.0.9:3111/";
+    #   extraConfig = ''
+    #     rewrite ^/annoy/ws/(.*) /$1 break;
+    #   '';
+    # };
+    # locations."/annoy/ws" = {
+    #   proxyWebsockets = true;
+    #   proxyPass = "http://100.64.0.9:3111/";
+    #   extraConfig = ''
+    #     rewrite ^/annoy/ws(.*) /$1 break;
+    #   '';
+    # };
     extraConfig = ''
       if ($http_user_agent ~* "Synapse") {
         return 403;
@@ -83,14 +83,8 @@ in
   #   Unit = "annoy-keep-alive.service";
   # };
 
-  services.nginx.virtualHosts."gaze.systems" = vhostConfig;
   services.nginx.virtualHosts."ptr.pet" = vhostConfig;
-  services.nginx.virtualHosts."poor.dog" = vhostConfig;
-
-  # services.nginx.virtualHosts."poor.dog" = {
-  #   locations."=/".return = "301 https://gaze.systems$request_uri";
-  # };
-  # services.nginx.virtualHosts."ptr.pet" = {
-  #   locations."=/".return = "301 https://gaze.systems$request_uri";
-  # };
+  services.nginx.virtualHosts."gaze.systems" = {
+    locations."=/".return = "301 https://ptr.pet$request_uri";
+  };
 }

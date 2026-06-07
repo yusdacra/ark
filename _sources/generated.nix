@@ -166,17 +166,17 @@
   };
   hydrant = {
     pname = "hydrant";
-    version = "0fd0b621ef7bf4e5bf2636c67f96e84fa3926295";
+    version = "fce50c7782152ac36dd12a4121f92c5eae819f0c";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/hydrant";
-      rev = "0fd0b621ef7bf4e5bf2636c67f96e84fa3926295";
+      rev = "fce50c7782152ac36dd12a4121f92c5eae819f0c";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-nVgbZByDrhyFU0NB/gfHkG8ZW/da1ZwQ/sVtAFHQguI=";
+      sha256 = "sha256-TSoHRcAB4Lca7ieRxqtWEHoSptSW19kPb36mRLzZxsk=";
     };
-    date = "2026-05-30";
+    date = "2026-06-07";
   };
   limbusart = {
     pname = "limbusart";

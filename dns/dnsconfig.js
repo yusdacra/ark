@@ -95,9 +95,9 @@ D(
     "klbr.net",
     REG_NONE,
     DnsProvider(DSP_PRIMARY),
-    TRIMOUNTS(["api.compare.plc", "api.spool", "bsky", "drop"]),
+    TRIMOUNTS(["api.compare.plc", "api.spool", "bsky", "drop", "bobbin", "plc", "relay", "sl"]),
     DZWONEK("vpn"),
-    VOLSINII(["bobbin", "plc", "relay", "sl"]),
+    // VOLSINII(["bobbin", "plc", "relay", "sl"]),
     TXT("@", "data endpoint for services and projects that fall under klbr.net."),
     TXT(
         "@",
@@ -146,6 +146,7 @@ D(
     TXT("@", "v=spf1 -all"),
     TXT("_dmarc", "v=DMARC1; p=reject;"),
     TXT("_atproto", "did=did:plc:dumbmutt4po52ept2tczimje", TTL(60)),
+    TXT("_atproto.a", "did=did:plc:dumbmutt4po52ept2tczimje", TTL(60)),
     IGNORE_ACME(),
 );
 
