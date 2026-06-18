@@ -21,8 +21,11 @@ in
     after = [ "network.target" ];
     environment = {
       HYDRANT_API_BIND = "0.0.0.0:${port},[::]:${port}";
-      HYDRANT_CURSOR_SAVE_INTERVAL = "3sec";
-      HYDRANT_SEED_HOSTS = "https://relay.bas.sh";
+      HYDRANT_FULL_NETWORK = "true";
+      HYDRANT_FIREHOSE_WORKERS = "64";
+      HYDRANT_CURSOR_SAVE_INTERVAL = "5sec";
+      HYDRANT_IDENTITY_CACHE_SIZE = "1000000";
+      HYDRANT_SEED_HOSTS = "https://relay.bas.sh,https://relay.bsky.network,https://relay3.fr.hose.cam";
       # HYDRANT_PLC_URL = "http://127.0.0.1:8000";
       HYDRANT_PLC_URL = "https://plc.directory";
       HYDRANT_DATA_COMPRESSION = "zstd";

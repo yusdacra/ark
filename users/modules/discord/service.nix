@@ -7,7 +7,7 @@ let
     [ProxyList]
     socks5 127.0.0.1 ${port}
   '';
-  wrappedProxychains = pkgs.writers.writeBashBin "proxy" ''
+  wrappedProxychains = pkgs.writers.writeBashBin "discord-proxy" ''
     ${pkgs.proxychains-ng}/bin/proxychains4 -f "${proxychainsCfg}" $@
   '';
 in

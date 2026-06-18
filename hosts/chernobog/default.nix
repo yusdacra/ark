@@ -78,6 +78,8 @@
   hardware.enableRedistributableFirmware = true;
 
   virtualisation.podman.enable = true;
+  environment.systemPackages = [pkgs.docker-compose];
+  virtualisation.spiceUSBRedirection.enable = true;
 
   programs.nix-ld = {
     enable = true;

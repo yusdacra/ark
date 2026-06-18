@@ -46,10 +46,10 @@
       email = (import "${inputs.self}/personal.nix").emails.primary;
       webroot = "/var/lib/acme/acme-challenge";
     };
-    certs."plc.gaze.systems" = {
-      # extraDomainNames = ["relay.gaze.systems"];
-    };
-    certs."plc.klbr.net" = {
-    };
+    # certs."plc.gaze.systems" = {
+    #   # extraDomainNames = ["relay.gaze.systems"];
+    # };
+    # certs."plc.klbr.net" = {
+    # };
   };
 }

@@ -29,6 +29,7 @@ in
       hosts = {
         chernobog = "100.64.0.6";
         trimounts = "100.64.0.1";
+        volsinii = "100.64.0.3";
       };
       sshRules = [
         {
@@ -62,7 +63,7 @@ in
           dst = [ "tag:private-infra:*" ];
         }
         {
-          src = [ "trimounts" ];
+          src = [ "trimounts" "volsinii" ];
           dst = [ "chernobog:*" ];
         }
         {

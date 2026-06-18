@@ -97,7 +97,7 @@ in
   };
 
   services.joycond.enable = true;
-  services.udev.packages = [pkgs.libimobiledevice];
+  services.udev.packages = [pkgs.libimobiledevice pkgs.yubikey-personalization];
 
   home-manager.users.mayer =
     {
@@ -155,6 +155,7 @@ in
           font-awesome
           dejavu_fonts
           # Programs
+          quickemu
           imv
           mpv
           ffmpeg
@@ -171,15 +172,17 @@ in
           cemu
           tor-browser
           feishin
+          jujutsu
           # these are for gitnexus
           nodejs
           gcc
           gnumake
-          python3
+          (python3.withPackages (ps: [ ps.aiohttp-socks ]))
           gh
           codex
           codex-acp
           rtk
+          flyctl
           pi-coding-agent
         ]) ++ [
           terra.headroom-ai
@@ -209,13 +212,20 @@ in
         Port 2222
         User git
         IdentityFile ~/.ssh/tangled-dev
+      Host knot.tngl.boltless.dev
+        Port 2222
       '';
+      # services.yubikey-agent.enable = true;
 
       services.tailscale = {
         ana = {
           enable = true;
           controlServer = "https://headscale.nekomimi.pet";
           port = 1056;
+        };
+        work = {
+          enable = true;
+          port = 1057;
         };
       };
     };

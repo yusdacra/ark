@@ -65,7 +65,6 @@ D(
         ],
         CF_PROXY_OFF,
     ),
-    VOLSINII(["plc"], CF_PROXY_OFF),
     // github pages
     CNAME("dev", "90-008.github.io."),
     // fastmail
@@ -95,7 +94,8 @@ D(
     "klbr.net",
     REG_NONE,
     DnsProvider(DSP_PRIMARY),
-    TRIMOUNTS(["api.compare.plc", "api.spool", "bsky", "drop", "bobbin", "plc", "relay", "sl"]),
+    VOLSINII(["ci", "relay", "sl", "bobbin"]),
+    TRIMOUNTS(["api.compare.plc", "api.spool", "bsky", "drop", "plc"]),
     DZWONEK("vpn"),
     // VOLSINII(["bobbin", "plc", "relay", "sl"]),
     TXT("@", "data endpoint for services and projects that fall under klbr.net."),

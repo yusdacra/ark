@@ -3,6 +3,10 @@
 
   inputs.nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
   inputs.chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+  inputs.microvm-spindle = {
+    url = "git+https://tangled.org/did:plc:j5hmlfdrwkvtxm7cjmu7j2is?ref=dwn/spindle-microvm";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
   outputs =
     flakeInputs:

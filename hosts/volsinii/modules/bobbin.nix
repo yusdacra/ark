@@ -42,15 +42,16 @@ in
     environment = {
       HYDRANT_API_BIND = "127.0.0.1:${toString hydrantPort}";
       # HYDRANT_RELAY_HOSTS = "http://127.0.0.1:13579";
-      HYDRANT_RELAY_HOSTS = "https://bsky.network";
       # HYDRANT_PLC_URL = "http://127.0.0.1:8000";
+      HYDRANT_RELAY_HOSTS = "https://relay1.us-east.bsky.network";
       HYDRANT_PLC_URL = "https://plc.directory";
-      HYDRANT_FILTER_SIGNALS = "sh.tangled.actor.profile,sh.tangled.feed.reaction,sh.tangled.feed.star,sh.tangled.git.refUpdate,sh.tangled.graph.follow,sh.tangled.graph.vouch,sh.tangled.knot,sh.tangled.knot.member,sh.tangled.label.definition,sh.tangled.label.op,sh.tangled.pipeline,sh.tangled.pipeline.status,sh.tangled.publicKey,sh.tangled.repo,sh.tangled.repo.artifact,sh.tangled.repo.collaborator,sh.tangled.repo.issue,sh.tangled.repo.issue.comment,sh.tangled.repo.issue.state,sh.tangled.repo.pull,sh.tangled.repo.pull.comment,sh.tangled.repo.pull.status,sh.tangled.spindle,sh.tangled.spindle.member,sh.tangled.string";
+      HYDRANT_FILTER_SIGNALS = "sh.tangled.actor.profile,sh.tangled.feed.comment,sh.tangled.feed.reaction,sh.tangled.feed.star,sh.tangled.git.refUpdate,sh.tangled.graph.follow,sh.tangled.graph.vouch,sh.tangled.knot,sh.tangled.knot.member,sh.tangled.label.definition,sh.tangled.label.op,sh.tangled.pipeline,sh.tangled.pipeline.status,sh.tangled.publicKey,sh.tangled.repo,sh.tangled.repo.artifact,sh.tangled.repo.collaborator,sh.tangled.repo.issue,sh.tangled.repo.issue.comment,sh.tangled.repo.issue.state,sh.tangled.repo.pull,sh.tangled.repo.pull.comment,sh.tangled.repo.pull.status,sh.tangled.spindle,sh.tangled.spindle.member,sh.tangled.string";
       HYDRANT_FILTER_COLLECTIONS = "sh.tangled.*";
       HYDRANT_VERIFY_SIGNATURES = "none";
-      HYDRANT_REPO_FETCH_TIMEOUT = "1h";
-      HYDRANT_FIREHOSE_WORKERS = "8";
-      HYDRANT_BACKFILL_CONCURRENCY_LIMIT = "32";
+      HYDRANT_REPO_FETCH_TIMEOUT = "1m";
+      HYDRANT_FIREHOSE_WORKERS = "16";
+      HYDRANT_BACKFILL_CONCURRENCY_LIMIT = "64";
+      HYDRANT_BACKFILL_STRATEGY = "sparse-filter";
     };
     serviceConfig = {
       Type = "simple";
