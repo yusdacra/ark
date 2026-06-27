@@ -50,7 +50,7 @@
   };
 
   stylix.opacity = {
-    terminal = 0.7;
+    terminal = 0.85;
     applications = 0.9;
     desktop = 0.9;
     popups = 0.9;

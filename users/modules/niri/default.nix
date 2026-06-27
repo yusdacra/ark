@@ -19,7 +19,7 @@ in
   xdg.configFile."niri/config.kdl".text =
     let
       replace = {
-        wallpaper = toString ../../mayer/wallpaper.png;
+        wallpaper = toString ../../mayer/wallpaper.webp;
         clipboard-upload = toString ./uploader.nu;
         clipboard-select = toString ./clipboard.nu;
         gsr-replay-save = toString ../gsr/save-replay.sh;

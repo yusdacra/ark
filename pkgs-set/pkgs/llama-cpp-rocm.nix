@@ -8,9 +8,9 @@
   stdenvNoCC,
   unzip,
 
-  releaseTag ? "b1291",
+  releaseTag ? "b1294",
   gpuVariant ? "gfx110X",
-  assetHash ? "sha256-BrzJZ0tU0bnrwnR6X8lVu+OimX5JBqbihKkCeDO+YcE=",
+  assetHash ? "sha256-pmmvDoZ0RRsgpNM0oWf3XPAolmqhzZ+UvhAgWGtoBY0=",
   ...
 }:
 

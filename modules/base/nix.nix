@@ -6,7 +6,7 @@
 }:
 {
   nix = {
-    package = pkgs.lixPackageSets.git.lix;
+    package = pkgs.nixVersions.latest;
     registry = builtins.mapAttrs (_: v: { flake = v; }) (lib.filterAttrs (_: v: v ? outputs) inputs);
     gc.automatic = false;
     optimise.automatic = true;

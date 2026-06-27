@@ -246,7 +246,7 @@
     },
     "hydrant": {
         "cargoLock": null,
-        "date": "2026-06-18",
+        "date": "2026-06-22",
         "extract": null,
         "name": "hydrant",
         "passthru": null,
@@ -256,13 +256,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "7c0b1c54007c8c9ac108d7132c19463e5bc0f731",
-            "sha256": "sha256-g3vGi9+IdBF2oOF46uTqLXx+2PB7RMwmoaW70UMbnnc=",
+            "rev": "03c32adb9fdf741055aa11ebafaf8915db92f014",
+            "sha256": "sha256-X8H6sNMw0xNfAdpkKF8OwnDdIkPhP+H7iw2cv0a0mKs=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.org/@ptr.pet/hydrant"
         },
-        "version": "7c0b1c54007c8c9ac108d7132c19463e5bc0f731"
+        "version": "03c32adb9fdf741055aa11ebafaf8915db92f014"
     },
     "limbusart": {
         "cargoLock": null,
@@ -470,7 +470,7 @@
     },
     "tangled": {
         "cargoLock": null,
-        "date": "2026-06-18",
+        "date": "2026-06-26",
         "extract": null,
         "name": "tangled",
         "passthru": null,
@@ -480,13 +480,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "831803198d7c6a2557fba215ed011e9db4fabf98",
-            "sha256": "sha256-eTalLQIOzv5xuqbPy+ZB/qVWWoQUuEXe+Uck/3Bp798=",
+            "rev": "cd3e67f0320142726f5c029b54bbedba871b6f86",
+            "sha256": "sha256-qoo9C79IyHOYSqiFELH/aBUQdCOrx/Eyh833UK915ew=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.org/did:plc:j5hmlfdrwkvtxm7cjmu7j2is"
         },
-        "version": "831803198d7c6a2557fba215ed011e9db4fabf98"
+        "version": "cd3e67f0320142726f5c029b54bbedba871b6f86"
     },
     "tangled-sqlite-lib": {
         "cargoLock": null,

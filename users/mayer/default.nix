@@ -173,6 +173,7 @@ in
           tor-browser
           feishin
           jujutsu
+          umu-launcher
           # these are for gitnexus
           nodejs
           gcc
@@ -185,6 +186,7 @@ in
           flyctl
           pi-coding-agent
         ]) ++ [
+          terra.beads
           terra.headroom-ai
           terra.helium
           # terra.pi-coding-agent
@@ -206,6 +208,21 @@ in
 
       programs.atcr.enable = true;
 
+      programs.ssh.matchBlocks."*".addKeysToAgent = l.mkForce "no";
+      systemd.user.services.ssh-add-default-keys = {
+        Unit = {
+          Description = "load default ssh keys into ssh-agent";
+          After = [ "ssh-agent.service" ];
+          Requires = [ "ssh-agent.service" ];
+        };
+        Service = {
+          Type = "oneshot";
+          Environment = [ "SSH_AUTH_SOCK=%t/ssh-agent" ];
+          ExecStart = "${pkgs.bash}/bin/bash -lc '${pkgs.openssh}/bin/ssh-add /home/mayer/.ssh/id_rsa /home/mayer/.ssh/id_ed25519'";
+        };
+        Install.WantedBy = [ "default.target" ];
+      };
+
       programs.ssh.extraConfig = ''
       Host nixos-shell
         Hostname localhost
@@ -226,6 +243,10 @@ in
         work = {
           enable = true;
           port = 1057;
+        };
+        moonwitch = {
+          enable = true;
+          port = 1058;
         };
       };
     };

@@ -84,18 +84,18 @@ in
       l.nameValuePair "tailscaled-${name}" {
         Unit = {
           Description = "tailscaled (${name})";
-          After = [ "network.target" ];
         };
         Service =
           {
-            ExecStart = "${pkgs.tailscale}/bin/tailscaled --tun=userspace-networking --socks5-server=localhost:${toString icfg.port} --outbound-http-proxy-listen=localhost:${toString icfg.port} --socket %t/tailscaled-${name}.sock";
+            StateDirectory = "tailscale-${name}";
+            ExecStart = "${pkgs.tailscale}/bin/tailscaled --tun=userspace-networking --state=%S/tailscale-${name}/tailscaled.state --socks5-server=localhost:${toString icfg.port} --outbound-http-proxy-listen=localhost:${toString icfg.port} --socket %t/tailscaled-${name}.sock";
             Restart = "on-failure";
             RestartSec = "5s";
           }
           // l.optionalAttrs (icfg.authKeyFile != null) {
             ExecStartPost = "${icfg.cli}/bin/tailscale-${name} up --reset --login-server=${icfg.controlServer} --auth-key=file:${icfg.authKeyFile} ${l.concatStringsSep " " icfg.extraUpFlags}";
           };
-        Install.WantedBy = [ "network.target" ];
+        Install.WantedBy = [ "default.target" ];
       }
     ) enabled;
   };

@@ -32,11 +32,12 @@ in
       microvm = {
         enableKVM = true;
         limits.total.memoryMiB = 6200;
+        cgroup.enable = true;
       };
-    };
-    cache = {
-      readUrls = ["https://cache.nixos.org"];
-      trustedPublicKeys = ["cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="];
+      nixCache = {
+        readUrls = ["https://cache.nixos.org"];
+        trustedPublicKeys = ["cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="];
+      };
     };
   };
   systemd.tmpfiles.rules = [
