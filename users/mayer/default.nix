@@ -142,6 +142,7 @@ in
         in
         l.flatten [
           (tlib.prefixStrings "${inputs.self}/users/modules/" modulesToEnable)
+          inputs.meowtd.homeManagerModules.default
           ../modules/discord/service.nix
           ../modules/discord/default.nix
           "${inputs.agenix}/modules/age-home.nix"
@@ -207,6 +208,9 @@ in
       fonts.fontconfig.enable = l.mkForce true;
 
       programs.atcr.enable = true;
+      programs.meowtd = {
+        enable = true;
+      };
 
       programs.ssh.matchBlocks."*".addKeysToAgent = l.mkForce "no";
       systemd.user.services.ssh-add-default-keys = {

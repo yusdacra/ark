@@ -83,6 +83,24 @@
         "type": "github"
       }
     },
+    "meowtd": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1782478908,
+        "narHash": "sha256-kpj3O/csMalbPcAuojzTxEjbC+2Bbmjuc/uLfXJQ7BU=",
+        "ref": "refs/heads/main",
+        "rev": "afb9ec39c8d2ffc3228601f9fa37bbbf58cde541",
+        "revCount": 39,
+        "type": "git",
+        "url": "https://git.koi.rip/koi/meowtd"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.koi.rip/koi/meowtd"
+      }
+    },
     "niks3": {
       "inputs": {
         "nixpkgs": [
@@ -126,6 +144,21 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1781074563,
+        "narHash": "sha256-md8WlXOlfnIeHeOScMTTHFyf2d6iaTwPl2apR5EQ3P4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-unstable",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1781577229,
         "narHash": "sha256-rcUHdUtJEvMdNEl2Wq+YpHraHKfcer3KsBscpZEF2Yg=",
         "rev": "567a49d1913ce81ac6e9582e3553dd90a955875f",
@@ -140,7 +173,8 @@
     "root": {
       "inputs": {
         "chaotic": "chaotic",
-        "nixpkgs": "nixpkgs_2"
+        "meowtd": "meowtd",
+        "nixpkgs": "nixpkgs_3"
       }
     },
     "rust-overlay": {

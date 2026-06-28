@@ -3,6 +3,7 @@
 
   inputs.nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
   inputs.chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+  inputs.meowtd.url = "git+https://git.koi.rip/koi/meowtd";
 
   outputs =
     flakeInputs:
