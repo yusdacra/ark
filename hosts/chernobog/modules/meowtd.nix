@@ -77,20 +77,37 @@ in
     ++ mapAttrsToList (name: motd: "f ${motd.file} 0664 root ${name} -") motds;
 
   home-manager.users.mayer.programs.nushell.extraConfig = lib.mkAfter ''
+    let cache_dir = ($env.HOME | path join ".cache")
+    if (not ($cache_dir | path exists)) {
+      mkdir $cache_dir
+    }
+    let cache_path = ($cache_dir | path join "meowtd.json")
+    let seen_motds = (try { open $cache_path } catch { {} } | default {})
+
     let motds = [
       { label: "my owner <3", path: "/var/lib/meowtd/ana" }
       { label: "niri", path: "/var/lib/meowtd/niri" }
     ]
 
-    for motd_entry in $motds {
-      if (not ($motd_entry.path | path exists)) {
-        continue
+    let new_seen = ($motds | reduce --fold $seen_motds {|entry, acc|
+      if (not ($entry.path | path exists)) {
+        $acc
+      } else {
+        let motd = (open --raw $entry.path | str trim)
+        if ($motd | is-empty) {
+          $acc
+        } else {
+          let last_seen = ($seen_motds | get -o $entry.label)
+          if ($last_seen != $motd) {
+            print $"($entry.label): ($motd)"
+          } else {
+            print $"(ansi default_dimmed)($entry.label): ($motd)(ansi reset)"
+          }
+          $acc | upsert $entry.label $motd
+        }
       }
+    })
 
-      let motd = (open --raw $motd_entry.path | str trim)
-      if (not ($motd | str trim | is-empty)) {
-        print $"(ansi default_dimmed)($motd_entry.label): ($motd)(ansi reset)"
-      }
-    }
+    $new_seen | save -f $cache_path
   '';
 }

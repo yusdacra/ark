@@ -1,9 +1,15 @@
 {
   description = "config!!!";
 
+  nixConfig = {
+    extra-substituters = [ "https://cache.numtide.com" ];
+    extra-trusted-public-keys = [ "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" ];
+  };
+
   inputs.nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
   inputs.chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   inputs.meowtd.url = "git+https://git.koi.rip/koi/meowtd";
+  inputs.llm-agents.url = "github:numtide/llm-agents.nix";
 
   outputs =
     flakeInputs:

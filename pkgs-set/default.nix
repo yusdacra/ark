@@ -34,7 +34,12 @@ let
         [ ]
     ) (l.readDir ./overlays)
   );
-  pkgs = _pkgs.appendOverlays (overlays ++ [ flakeInputs.chaotic.overlays.cache-friendly ]);
+  pkgs = _pkgs.appendOverlays (
+    overlays ++ [
+      flakeInputs.chaotic.overlays.cache-friendly
+      flakeInputs.llm-agents.overlays.shared-nixpkgs
+    ]
+  );
   terraPkgs = pkgs.lib.makeScope pkgs.newScope (
     self:
     l.genAttrs (l.map (l.removeSuffix ".nix") (l.attrNames (l.readDir ./pkgs))) (

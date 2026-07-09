@@ -1,4 +1,4 @@
-{lib, tlib, inputs, pkgs, ...}@nixosArgs:
+{lib, tlib, inputs, pkgs, terra, ...}@nixosArgs:
 let
   l = lib;
   nixosConfig = nixosArgs.config;
@@ -45,7 +45,7 @@ in
 
       home = {
         homeDirectory = nixosConfig.users.users.dawn.home;
-        packages = with pkgs; [omnisharp-roslyn rustup gcc gnumake cmake dotnet-sdk_8];
+        packages = with pkgs; [omnisharp-roslyn rustup gcc gnumake cmake dotnet-sdk_8 terra.oh-my-pi];
       };
   };
 }

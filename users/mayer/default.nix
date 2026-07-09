@@ -185,10 +185,12 @@ in
           codex-acp
           rtk
           flyctl
-          pi-coding-agent
+          blender
+          bun
+          easyeffects
         ]) ++ [
+          terra.oh-my-pi
           terra.beads
-          terra.headroom-ai
           terra.helium
           # terra.pi-coding-agent
           terra.iloader
@@ -237,6 +239,9 @@ in
         Port 2222
       '';
       # services.yubikey-agent.enable = true;
+      #
+
+      services.easyeffects.enable = true;
 
       services.tailscale = {
         ana = {

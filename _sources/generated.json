@@ -82,7 +82,7 @@
     },
     "clickee-proxy": {
         "cargoLock": null,
-        "date": "2025-09-15",
+        "date": "2026-06-28",
         "extract": null,
         "name": "clickee-proxy",
         "passthru": null,
@@ -92,13 +92,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "a60247a8d92e1802298fc197034d0b7b54cd90b7",
-            "sha256": "sha256-sMLvbvnhGGt+LpKmD3e/iPcEtUd6Yu+92DTlEwHxZCI=",
+            "rev": "d75da2d26f9861b086caeff5a739371473824200",
+            "sha256": "sha256-Im3P1+1WusGuiMdQq7jRljwiq2HqoueROFG8zgowTIM=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.org/@ptr.pet/clickee-proxy"
         },
-        "version": "a60247a8d92e1802298fc197034d0b7b54cd90b7"
+        "version": "d75da2d26f9861b086caeff5a739371473824200"
     },
     "compare-plc": {
         "cargoLock": null,
@@ -470,7 +470,7 @@
     },
     "tangled": {
         "cargoLock": null,
-        "date": "2026-06-26",
+        "date": "2026-07-07",
         "extract": null,
         "name": "tangled",
         "passthru": null,
@@ -480,13 +480,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "cd3e67f0320142726f5c029b54bbedba871b6f86",
-            "sha256": "sha256-qoo9C79IyHOYSqiFELH/aBUQdCOrx/Eyh833UK915ew=",
+            "rev": "3fc289e529a5909ed73304772c7b54df477c0177",
+            "sha256": "sha256-s4EUKXfoz1ij7ZRPjMQ0Q4amiTEBCffT4WewXLlS8WQ=",
             "sparseCheckout": [],
             "type": "git",
             "url": "https://tangled.org/did:plc:j5hmlfdrwkvtxm7cjmu7j2is"
         },
-        "version": "cd3e67f0320142726f5c029b54bbedba871b6f86"
+        "version": "3fc289e529a5909ed73304772c7b54df477c0177"
     },
     "tangled-sqlite-lib": {
         "cargoLock": null,

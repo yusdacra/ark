@@ -62,17 +62,17 @@
   };
   clickee-proxy = {
     pname = "clickee-proxy";
-    version = "a60247a8d92e1802298fc197034d0b7b54cd90b7";
+    version = "d75da2d26f9861b086caeff5a739371473824200";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/clickee-proxy";
-      rev = "a60247a8d92e1802298fc197034d0b7b54cd90b7";
+      rev = "d75da2d26f9861b086caeff5a739371473824200";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-sMLvbvnhGGt+LpKmD3e/iPcEtUd6Yu+92DTlEwHxZCI=";
+      sha256 = "sha256-Im3P1+1WusGuiMdQq7jRljwiq2HqoueROFG8zgowTIM=";
     };
-    date = "2025-09-15";
+    date = "2026-06-28";
   };
   compare-plc = {
     pname = "compare-plc";
@@ -312,17 +312,17 @@
   };
   tangled = {
     pname = "tangled";
-    version = "cd3e67f0320142726f5c029b54bbedba871b6f86";
+    version = "3fc289e529a5909ed73304772c7b54df477c0177";
     src = fetchgit {
       url = "https://tangled.org/did:plc:j5hmlfdrwkvtxm7cjmu7j2is";
-      rev = "cd3e67f0320142726f5c029b54bbedba871b6f86";
+      rev = "3fc289e529a5909ed73304772c7b54df477c0177";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-qoo9C79IyHOYSqiFELH/aBUQdCOrx/Eyh833UK915ew=";
+      sha256 = "sha256-s4EUKXfoz1ij7ZRPjMQ0Q4amiTEBCffT4WewXLlS8WQ=";
     };
-    date = "2026-06-26";
+    date = "2026-07-07";
   };
   tangled-sqlite-lib = {
     pname = "tangled-sqlite-lib";

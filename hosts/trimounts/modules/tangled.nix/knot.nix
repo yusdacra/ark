@@ -21,6 +21,7 @@ in
       listenAddr = "0.0.0.0:7777";
       hostname = "knot.gaze.systems";
       owner = "did:plc:dfl62fgb7wtjj3fcbb72naae";
+      maxResponseKB = 1024 * 100;
     };
   };
 
@@ -34,6 +35,9 @@ in
     locations."/" = {
       proxyPass = "http://${knotCfg.server.listenAddr}";
       proxyWebsockets = true;
+      extraConfig = ''
+        client_max_body_size 100M;
+      '';
     };
   };
 }
