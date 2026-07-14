@@ -1,0 +1,32 @@
+[package]
+name = "inverter"
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+description = "Durable AT Protocol PDS-to-relay event inverter"
+
+[dependencies]
+anyhow = "1.0"
+axum = { version = "0.8", features = ["ws"] }
+bytes = "1.10"
+futures-util = "0.3"
+http = "1.3"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls", "stream"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_cbor = "0.11"
+serde_json = "1.0"
+sha2 = "0.10"
+sqlx = { version = "0.8", default-features = false, features = ["runtime-tokio", "sqlite", "macros", "migrate"] }
+subtle = "2.6"
+tokio = { version = "1.45", features = ["macros", "rt-multi-thread", "signal", "sync", "time"] }
+tokio-stream = "0.1"
+tower-http = { version = "0.6", features = ["trace"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+url = "2.5"
+
+[dev-dependencies]
+tokio-tungstenite = { version = "0.26", features = ["rustls-tls-webpki-roots"] }
+tower = { version = "0.5", features = ["util"] }
+
+tempfile = "3.20"
