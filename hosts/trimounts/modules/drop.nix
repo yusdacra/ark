@@ -13,8 +13,10 @@
     wantedBy = ["multi-user.target"];
     after = ["network.target"];
     environment = {
+      DATA_DIR = "/var/lib/drop";
       PORT = "8663";
       MAX_FILE_SIZE = "200000000";
+      PUBLIC_ORIGIN = "https://drop.klbr.net";
     };
     serviceConfig = {
       Type = "simple";

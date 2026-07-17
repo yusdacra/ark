@@ -4,7 +4,7 @@ let
   domain = "nucleus.ptr.pet";
   pkg = pkgs.callPackage "${inputs.nucleus}/nix" {
     nucleus-modules = (pkgs.callPackage "${inputs.nucleus}/nix/modules.nix" {}).overrideAttrs (old: {
-      outputHash = "sha256-RbH5PfV4wa2lva49SbrDX5SI870nmY1IbgQjho6U2/0=";
+      outputHash = "sha256-pg+Oen1RvLxOvteR31jwUIVaDcK+L8n1EwpS31xnVrM=";
     });
     PUBLIC_DOMAIN = "https://${domain}";
   };

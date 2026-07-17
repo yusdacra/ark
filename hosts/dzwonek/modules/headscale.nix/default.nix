@@ -40,6 +40,11 @@ in
       ];
       rules = lib.mkBefore [
         {
+          proto = "tcp";
+          src = [ "tag:private-infra" ];
+          dst = [ "${me}:8668" ];
+        }
+        {
           src = [ "group:admin" ];
           dst = [
             "tag:private-infra:*"

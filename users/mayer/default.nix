@@ -25,7 +25,7 @@ in
       "input"
       "lp"
     ];
-    shell = pkgs.nushell;
+    shell = pkgs.bashInteractive;
     hashedPassword = "$6$spzqhAyJfhHy$iHgLBlhjGn1l8PnbjJdWTn1GPvcjMqYNKUzdCe/7IrX6sHNgETSr/Nfpdmq9FCXLhrAfwHOd/q/8SvfeIeNX4/";
   };
 
@@ -148,6 +148,17 @@ in
           "${inputs.agenix}/modules/age-home.nix"
         ];
 
+      # local logins hand off to nushell; ssh sessions stay in bash
+      programs.bash = {
+        enable = true;
+        initExtra = ''
+          if [[ $- == *i* && -z "$SSH_CONNECTION" && -z "$SSH_TTY" && -z "$BASH_EXECUTION_STRING" && -z "$__HANDED_TO_NU" ]]; then
+            export __HANDED_TO_NU=1
+            exec ${pkgs.nushell}/bin/nu
+          fi
+        '';
+      };
+
       home = {
         homeDirectory = nixosConfig.users.users.mayer.home;
         packages = (with pkgs; [
@@ -181,7 +192,6 @@ in
           gnumake
           (python3.withPackages (ps: [ ps.aiohttp-socks ]))
           gh
-          codex
           codex-acp
           rtk
           flyctl
@@ -189,6 +199,7 @@ in
           bun
           easyeffects
         ]) ++ [
+          terra.codex
           terra.oh-my-pi
           terra.beads
           terra.helium

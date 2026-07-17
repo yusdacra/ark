@@ -11,7 +11,7 @@ let
     inherit system;
     config.allowUnfree = true;
     # config.allowBroken = true;
-    config.permittedInsecurePackages = ["electron-38.8.4"];
+    config.permittedInsecurePackages = ["electron-38.8.4" "pnpm-9.15.9"];
   };
   _inputs = import ../_sources/generated.nix {
     inherit (_pkgs)
@@ -37,7 +37,7 @@ let
   pkgs = _pkgs.appendOverlays (
     overlays ++ [
       flakeInputs.chaotic.overlays.cache-friendly
-      flakeInputs.llm-agents.overlays.shared-nixpkgs
+      (final: prev: { llm-agents = flakeInputs.llm-agents.packages.${system}; })
     ]
   );
   terraPkgs = pkgs.lib.makeScope pkgs.newScope (
