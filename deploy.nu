@@ -63,7 +63,7 @@ let hosts = {
   pupos: {
     type: "nixos",
     user: "dawn",
-    addr: "pupos",
+    addr: "100.64.0.53",
   },
 }
 
