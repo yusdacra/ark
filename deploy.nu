@@ -60,6 +60,11 @@ let hosts = {
     user: "root",
     addr: "159.195.58.28",
   },
+  pupos: {
+    type: "nixos",
+    user: "dawn",
+    addr: "pupos",
+  },
 }
 
 def deploy [hostname: string, boot: bool] {

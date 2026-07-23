@@ -35,6 +35,7 @@ let
     volsinii = allPkgsSets.x86_64-linux;
     chernobog = allPkgsSets.x86_64-linux;
     trimounts = allPkgsSets.x86_64-linux;
+    pupos = allPkgsSets.x86_64-linux;
   };
 in
 lib.mapAttrs mkSystem systems
