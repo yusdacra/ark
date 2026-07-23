@@ -40,6 +40,16 @@
     ];
   };
 
+  home-manager.users.dawn = {
+    imports = [ ../../users/modules/tailscale ];
+    services.tailscale.ours = {
+      enable = true;
+      controlServer = "https://headscale.nekomimi.pet";
+      authKeyFile = "/home/dawn/.config/tailscale/ours-authkey";
+      port = 1059;
+    };
+  };
+
   environment.systemPackages = [ ];
   system.stateVersion = "25.11";
 }
