@@ -24,6 +24,7 @@ in
       "video"
       "input"
       "lp"
+      "render"
     ];
     shell = pkgs.bashInteractive;
     hashedPassword = "$6$spzqhAyJfhHy$iHgLBlhjGn1l8PnbjJdWTn1GPvcjMqYNKUzdCe/7IrX6sHNgETSr/Nfpdmq9FCXLhrAfwHOd/q/8SvfeIeNX4/";
@@ -206,6 +207,12 @@ in
           # terra.pi-coding-agent
           terra.iloader
           terra.lmstudio
+          (terra.llama-cpp-nanbeige.override {
+            vulkanSupport = true;
+            blasSupport = true;
+            rocmSupport = false;
+            cudaSupport = false;
+          })
           # terra.gitnexus
           # (terra.pds-upload.override {
           #   secretsFile = config.age.secrets.atfileCfg.path;

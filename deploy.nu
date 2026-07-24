@@ -97,7 +97,7 @@ def deploy [hostname: string, boot: bool] {
   let result_link = readlink $result_dir
 
   let target = $"($hostcfg.user)@($hostcfg.addr)"
-  let copy_cmd = {nix copy -s --to $"ssh://($target)" $result_link}
+  let copy_cmd = {nix copy --no-check-sigs -s --to $"ssh://($target)" $result_link}
   if (run_step "copy to" $copy_cmd) {
     return
   }

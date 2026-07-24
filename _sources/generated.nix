@@ -166,17 +166,17 @@
   };
   hydrant = {
     pname = "hydrant";
-    version = "a8f59ecf32a10d61fcf5e6f6c8f7c47ff252baf9";
+    version = "e022b826e62f1ff188ac793a97801a5e6e0fffa5";
     src = fetchgit {
       url = "https://tangled.org/@ptr.pet/hydrant";
-      rev = "a8f59ecf32a10d61fcf5e6f6c8f7c47ff252baf9";
+      rev = "e022b826e62f1ff188ac793a97801a5e6e0fffa5";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-lLBGTuL/ESP2DeWxzoasZpfCBqWN/NS9gk5yF1flp74=";
+      sha256 = "sha256-50K3vX//6Y3XOZCXvqwDe0T6owF1c2fjuBU70iGyXeg=";
     };
-    date = "2026-07-11";
+    date = "2026-07-23";
   };
   limbusart = {
     pname = "limbusart";
@@ -312,17 +312,17 @@
   };
   tangled = {
     pname = "tangled";
-    version = "1ee613c4a5b640d94f07173d5f288d40ade6d6e4";
+    version = "9693256d63945eb70c72c2d0361da3adc8719532";
     src = fetchgit {
       url = "https://tangled.org/did:plc:j5hmlfdrwkvtxm7cjmu7j2is";
-      rev = "1ee613c4a5b640d94f07173d5f288d40ade6d6e4";
+      rev = "9693256d63945eb70c72c2d0361da3adc8719532";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-lysZpJbfQcN6vmVjAGUYc/fn3sc+yd0TtvOFu+NbSYk=";
+      sha256 = "sha256-STWAwbRVGNlOZ0JvrOTN77Lmjzob49MmYCOBwEElwLc=";
     };
-    date = "2026-07-17";
+    date = "2026-07-19";
   };
   tangled-sqlite-lib = {
     pname = "tangled-sqlite-lib";

@@ -3,7 +3,7 @@ let
   port = "13579";
   pkg = terra.hydrant.overrideAttrs (old: {
     cargoBuildNoDefaultFeatures = true;
-    cargoBuildFeatures = ["relay" "jetstream" "firehose-diagnostics"];
+    cargoBuildFeatures = ["relay" "jetstream" "firehose-diagnostics" "alloc-jemalloc"];
     doCheck = false;
   });
 in
