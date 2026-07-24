@@ -12,6 +12,7 @@
 
   networking.networkmanager.enable = true;
   time.timeZone = "UTC";
+  nix.settings.trusted-users = [ "root" "dawn" ];
 
   users.users.dawn = {
     isNormalUser = true;
